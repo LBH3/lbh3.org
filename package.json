@@ -1,0 +1,17 @@
+{
+  "name": "lbh3.org",
+  "version": "0.0.1",
+  "description": "LBH3 website",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LBH3/lbh3.org.git"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LBH3/lbh3.org/issues"
+  },
+  "homepage": "https://github.com/LBH3/lbh3.org#readme",
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.6"
+  }
+}

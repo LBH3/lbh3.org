@@ -1,0 +1,63 @@
+h1 {
+  border-bottom: 1px solid gray;
+  font-size: 1.15rem;
+  line-height: 3.75rem;
+  margin: 0;
+  text-align: center;
+}
+
+h1 img {
+  display: none;
+}
+@media (min-width: 321px) {
+  h1 img {
+    display: inline;
+    vertical-align: middle;
+  }
+}
+
+nav {
+  border-bottom: 1px solid black;
+  float: left;
+  margin: 0 0 .5rem;
+  text-align: center;
+  width: 100%;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+nav ul li {
+  float: left;
+  width: 25%;
+}
+
+nav ul li.active {
+  background: black;
+  color: white;
+}
+
+nav ul li a {
+  color: inherit;
+  line-height: 3rem;
+  text-decoration: none;
+}
+
+#announcement {
+  border-bottom: 1px solid gray;
+  border-top: 1px solid gray;
+  text-align: center;
+}
+#announcement a {
+  line-height: 2.5rem;
+}
+
+h2 {
+  font-size: 1.25rem;
+}
+
+footer {
+  border-top: 1px solid black;
+}
