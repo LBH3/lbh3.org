@@ -12,6 +12,7 @@
   },
   "homepage": "https://github.com/LBH3/lbh3.org#readme",
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.6"
+    "bootstrap": "^4.0.0-alpha.6",
+    "font-awesome": "^4.7.0"
   }
 }

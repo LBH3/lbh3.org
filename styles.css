@@ -26,34 +26,42 @@ h1 img {
   }
 }
 
-nav {
+header nav {
   border-bottom: 1px solid black;
   margin: 0 0 .5rem;
   text-align: center;
 }
 
-.nav {
+header .nav {
   padding: 0;
 }
 
-.nav .nav-item {
+header .nav .nav-item {
   width: 25%;
 }
 
-.nav .nav-item.active .nav-link {
+header .nav .nav-item.active .nav-link {
   background: black;
   color: white;
 }
 
-.nav .nav-item .nav-link {
+header .nav .nav-item .nav-link {
   color: inherit;
   padding-left: 0;
   padding-right: 0;
 }
 
-.nav .nav-item .nav-link:hover {
+header .nav .nav-item .nav-link:hover {
   background: #d02d33;
   color: white;
+}
+
+main .nav-pills {
+  margin: 1rem 0;
+}
+
+main .nav-pills .nav-link.active {
+  background: #d02d33;
 }
 
 #announcement {
