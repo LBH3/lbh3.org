@@ -1,7 +1,7 @@
 h1 {
   border-bottom: 1px solid black;
   font-size: 1.15rem;
-  line-height: 3.75rem;
+  line-height: 1.725em;
   margin: 0;
   text-align: center;
 }
@@ -19,10 +19,18 @@ h1 a:hover {
 h1 img {
   display: none;
 }
-@media (min-width: 321px) {
+@media (min-width: 350px) {
+  h1 {
+    line-height: 3.75rem;
+  }
   h1 img {
     display: inline;
     vertical-align: middle;
+  }
+}
+@media (min-width: 414px) {
+  h1 {
+    font-size: 1.40rem;
   }
 }
 
