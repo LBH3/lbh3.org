@@ -1,0 +1,6 @@
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^lbh3\.org$ [OR]
+RewriteCond %{HTTP_HOST} ^www\.lbh3\.org$
+RewriteRule ^index\.html$ "http\:\/\/www\.lbh3\.org\/index\.php" [R=301,L]
+

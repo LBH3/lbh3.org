@@ -1,0 +1,351 @@
+body {
+	font-family: 'Oswald', sans-serif;
+	margin: 0;
+	padding: 0;
+	width: 960px;
+	margin: 0 auto;
+}
+
+.clear {
+	clear: both;
+}
+
+a {
+	color: #000;
+}
+
+a:hover {
+	color: #cc0000;
+}
+
+#header {
+	height: 120px;
+	background:#fff;
+}
+
+#header img {
+	float: left;
+}
+
+#header h1 {
+	margin: 0;
+	padding: 0;
+	font-size: 3.5em;
+	line-height: 120px;
+	padding: 0px 30px;
+	float: left;
+}
+
+#wrapper {
+	margin: 0 auto;
+	background: url(../images/side_bg_960_new.png) repeat-y;
+	background-position: left top;
+}
+
+#nav {
+	font: 1em;
+}
+
+#nav ul {
+	list-style-type: none;
+	margin: 0px;
+	padding: 0px;
+	background:#fff;
+	text-transform: uppercase;
+	border-bottom:2px solid #000;
+	border-top:1px solid #ccc;
+}
+
+#nav li {
+	display:inline-block;
+	padding: 5px 15px 4px 15px;
+}
+
+#nav li a {
+	color: #000;
+	line-height:1.6em;
+	text-decoration: none;
+}
+
+#nav li a:hover {
+	color: #cc0000;
+}
+
+#nav li.selected {
+	background:#000;
+}
+
+#nav li.selected a {
+	color:#fff;
+}
+
+#news {
+	float: right;
+	width: 260px;
+	color: #fff;
+}
+
+#news h2 {
+	font-size: 1.2em;
+	background: #aaa;
+	padding: 5px;
+	margin: 0;	
+	border-bottom: 1px solid #000;
+	text-align: center;
+
+}
+
+#news_content h3 {
+	font-size: 1.15em;
+	text-align: center;	
+}
+
+#news_content {
+	margin: 10px;
+	font-size: 0.8em;
+}
+
+#news_content ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+#news_content a {
+	color: #fff;
+}
+
+#news_content li a {
+	color: #fff;
+}
+
+#content {
+	background-color: #FFF;
+	margin-left: 10px;
+	margin-right: 270px;
+
+}
+
+#content h2 {
+	margin: 5px 0px;
+}
+
+#content h3 {
+	margin: 2px 0px;
+}
+
+#content p {
+	font-size: 0.8em;
+	margin: 5px 0px;
+}
+
+#map {
+	padding: 20px;
+}
+
+#map iframe {
+	display: block;
+	margin: auto;
+}
+
+#run {
+	margin: 5px 0px;
+}
+#run p {
+	font-size: 1.17em;
+	margin: 5px 0px;
+}
+
+.run_info {
+	color: #666666;
+}
+
+.red {
+	color: #cc0000;
+}
+
+#footer {
+	display: inline-block;
+	font-size: 0.8em;
+	margin-left: 10px;
+	padding-top: 8px;
+	border-top: 1px solid #ccc;
+	height: 30px;
+	width: 100%;
+	margin: 0;
+}
+
+.wbm {
+	float:left;
+}
+
+.lastupdate {
+	float:right;
+}
+
+/* past run, hareline, photo table */
+
+.hareline {
+	font-size: 0.8em;
+	width: 680px;
+	border-collapse: collapse;
+	margin-bottom: 10px;
+}
+
+.hareline td, th {
+	vertical-align: top;
+	padding: 2px;
+	border: 1px solid #A0A0A0;
+}
+
+.tdate {
+	width: 70px;
+}
+
+.thash {
+	width: 40px;
+}
+
+.thares {
+	width: 260px;
+}
+
+.tloc {
+	width: 145px;
+}
+
+.tnotes {
+	width: 165px;
+}
+
+.tcenter {
+	text-align: center;
+}
+
+.phares {
+	width: 238px;
+}
+
+.ploc {
+	width: 134px;
+}
+
+.pnotes {
+	width: 154px;
+}
+
+.picon {
+	width: 22px;
+}
+
+.hareline th {
+	background: #CCCCCC;
+	text-align: left;
+}
+
+.hopen {
+	color: #cc0000;
+}
+
+.icon {
+	text-align:center;
+	font-family: 'entyporegular';
+	font-size: 2em;
+}
+
+.icon a {
+	text-decoration: none;
+	color: #000;
+}
+
+.icon a:hover {
+	color: #cc0000;
+}
+
+#hmonths {
+	padding: 8px 0px 8px 0px;
+	font-size: 0.8em;
+}
+
+#legend {
+	font-size: 0.8em;
+	margin: 3px 0px;
+}
+
+.right { 
+	float: right 
+}
+
+
+/* mismanagement */
+
+.mm_role {
+	margin-top: 15px;
+}
+
+.mm_role_last {
+	margin-top: 15px;
+	margin-bottom: 10px;
+}
+
+.mm_role ul {
+	margin: 10px 0 0 0;
+}
+
+.mm_title {			
+	font-size: 1.1em;
+	color: #cc0000;;
+	padding: 5px 0px 5px 15px;
+	border-bottom: 1px solid #cc0000;;
+	
+}
+
+.mm_members {
+	font-size: 1em;
+	margin: 0px;
+	padding: 2px 0px 0px 15px;
+	list-style-type: none;
+}
+
+/* archive pages */
+
+#archive_links a {
+	display: block;
+	padding: 5px 25px;
+	font-size: 1em;
+
+}
+
+/* archive snooze */
+
+.smonth {
+	width: 100px;
+}
+
+.sdate {
+	width: 120px;
+}
+
+.snooze {
+	border-collapse: collapse;
+	margin: 10px 0;
+}
+.snooze td {
+	border-bottom: 1px solid #ccc;
+	text-align: center;
+}
+
+.snooze th {
+	border: 0;
+	border-bottom: 1px solid #000;
+}
+
+#snoozecal h3 {
+	margin-top: 18px;
+	border-bottom: 2px solid #cc0000;
+}
+
+.unicorn {
+	margins: auto;
+}
+
