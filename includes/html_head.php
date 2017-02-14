@@ -7,7 +7,7 @@
 	<meta http-equiv="Content-Language" content="en-us" />
 	<link href="/css/master_new.css" rel="stylesheet" type="text/css" />
 	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
+	<link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
