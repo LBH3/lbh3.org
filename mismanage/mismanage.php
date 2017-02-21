@@ -30,6 +30,7 @@
 			<div class="mm_title">Brewmeisters</div>
 			<ul>
 				<li class="mm_members"><a href="mailto: <?php echo bm1_email;?>"><?php echo bm1_name;?></a></li>
+				<li class="mm_members"><a href="mailto: <?php echo bm2_email;?>"><?php echo bm2_name;?></a></li>
 			</ul>
 		</div>
 		<div class="mm_role">
