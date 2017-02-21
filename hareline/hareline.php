@@ -107,8 +107,8 @@
 				<tr>
 					<td class="tcenter">02/26/2017</td>
 					<td class="tcenter">1794</td>
-					<td>I Don’t Swallow</td>
-					<td></td>
+					<td>I Don’t Swallow &amp; Dr. Strange Glove</td>
+					<td>Lakewood</td>
 					<td></td>
 				</tr>
 			</tbody>
