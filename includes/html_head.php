@@ -2,12 +2,23 @@
 	$title = 'Long Beach Hash House Harriers';
 ?>
 <head>
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
 	<title><?php echo $title ?></title>
-	<meta http-equiv="Content-Language" content="en-us" />
-	<link href="<?php echo getenv('ROOT_PATH'); ?>css/master_new.css" rel="stylesheet" type="text/css" />
-	<link href="<?php echo getenv('ROOT_PATH'); ?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
-	<link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
+
+	<link rel="apple-touch-icon" href="<?php echo getenv('ROOT_PATH'); ?>images/lbh3_rabbit_logo.png">
+	<link rel="stylesheet" type="text/css" href="<?php echo getenv('ROOT_PATH'); ?>node_modules/bootstrap/dist/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo getenv('ROOT_PATH'); ?>node_modules/font-awesome/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo getenv('ROOT_PATH'); ?>css/styles.css" />
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-title" content="LBH3">
+
+	<meta name="msapplication-TileColor" content="#d02d33">
+	<meta name="msapplication-TileImage" content="<?php echo getenv('ROOT_PATH'); ?>images/lbh3_rabbit_logo.png">
+
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
 	  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
