@@ -1,6 +1,6 @@
 <?php
 
-$IS_HEROKU = strpos($_SERVER['SERVER_NAME'], 'heroku') !== false;
+$IS_HEROKU = strpos($_SERVER['SERVER_NAME'], 'heroku') !== false || strpos($_SERVER['SERVER_NAME'], 'lbh3.org') !== false;
 if ($IS_HEROKU) {
   $ROOT_PATH = '/';
 } else {
