@@ -91,3 +91,10 @@ footer {
 footer p {
   margin: 1rem 0;
 }
+
+/* Workaround for https://github.com/twbs/bootstrap/issues/21577 */
+@media (min-width: 1024px) {
+  .table-responsive {
+    display: table;
+  }
+}

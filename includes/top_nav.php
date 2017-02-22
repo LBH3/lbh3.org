@@ -1,33 +1,32 @@
 <?php
-$index_selected = "";
-$past_selected = "";
-$mismanage_selected = "";
-$hareline_selected = "";
-$about_selected = "";
+$index_active = "";
+$past_active = "";
+$hareline_active = "";
+$about_active = "";
 $script = $_SERVER['SCRIPT_NAME'];
 if (strpos($script, 'index') != false) {
-	$index_selected = ' class="selected"';
+	$index_active = 'active';
 } else if (strpos($script, 'pastruns') != false) {
-	$past_selected = ' class="selected"';
-} else if (strpos($script, 'pics') != false) {
-	$past_selected = ' class="selected"';
-} else if (strpos($script, 'snooze') != false) {
-	$past_selected = ' class="selected"';
-} else if (strpos($script, 'mismanage') != false) {
-	$mismanage_selected = ' class="selected"';
+	$past_active = 'active';
 } else if (strpos($script, 'hareline') != false) {
-	$hareline_selected = ' class="selected"';
+	$hareline_active = 'active';
 } else if (strpos($script, 'about') != false) {
-	$about_selected = ' class="selected"';
+	$about_active = 'active';
 }
 ?>
-		<div id="nav">
-			<ul>
-				<li<?php echo $index_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>index.php">Home</a></li>
-				<li<?php echo $past_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>pastruns/pasthash.php">Past Runs</a></li>
-				<li<?php echo $mismanage_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>mismanage/mismanage.php">Mismanagement</a></li>
-				<li<?php echo $hareline_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>hareline/hareline.php">Hareline</a></li>
-				<li<?php echo $about_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>about/aboutus.php">About LBH3</a></li>
-				<li><a href="http://www.hash.org/">So Cal Hash Calendar</a></li>
-			</ul>
-		</div>
+<nav>
+	<ul class="container nav">
+		<li class="<?php echo $index_active; ?> nav-item">
+			<a class="nav-link" href="<?php echo getenv('ROOT_PATH'); ?>index.php">Home</a>
+		</li>
+		<li class="<?php echo $hareline_active; ?> nav-item">
+			<a class="nav-link" href="<?php echo getenv('ROOT_PATH'); ?>hareline/hareline.php">Hareline</a>
+		</li>
+		<li class="<?php echo $past_active; ?> nav-item">
+			<a class="nav-link" href="<?php echo getenv('ROOT_PATH'); ?>pastruns/pasthash.php">Past Runs</a>
+		</li>
+		<li class="<?php echo $about_active; ?> nav-item">
+			<a class="nav-link" href="<?php echo getenv('ROOT_PATH'); ?>about/aboutus.php">About</a>
+		</li>
+	</ul>
+</nav>
