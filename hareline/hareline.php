@@ -162,6 +162,46 @@
 			</tbody>
 			</table>
 			<h3><a name="apr2017">April 2017</a></h3>
+			<table class="hareline">
+				<col class="tdate">
+				<col class="thash">
+				<col class="thares">
+				<col class="tloc">
+				<col class="tnotes">
+				<thead>
+					<tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
+				</thead>
+				<tbody>
+				<tr class="red">
+					<td class="tcenter">04/06/2017</td>
+					<td class="tcenter">1800</td>
+					<td> OPEN!!</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="red">
+					<td class="tcenter">04/13/2017</td>
+					<td class="tcenter">1801</td>
+					<td> OPEN!!</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr>
+					<td class="tcenter">04/20/2017</td>
+					<td class="tcenter">1802</td>
+					<td>Hokey Tokey &amp; J.A.K.O.B</td>
+					<td></td>
+					<td>Safety Committee Trail</td>
+				</tr>
+				<tr class="red">
+					<td class="tcenter">04/27/2017</td>
+					<td class="tcenter">1803</td>
+					<td> OPEN!!</td>
+					<td></td>
+					<td></td>
+				</tr>
+				</tbody>
+				</table>
 			<h3><a name="may2017">May 2017</a></h3>
 			<h3><a name="jun2017">June 2017</a></h3>
 			<h3><a name="jul2017">July 2017</a></h3>
