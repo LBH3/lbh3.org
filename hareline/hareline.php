@@ -203,6 +203,46 @@
 				</tbody>
 				</table>
 			<h3><a name="may2017">May 2017</a></h3>
+			<table class="hareline">
+				<col class="tdate">
+				<col class="thash">
+				<col class="thares">
+				<col class="tloc">
+				<col class="tnotes">
+				<thead>
+					<tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
+				</thead>
+				<tbody>
+				<tr class="red">
+					<td class="tcenter">05/04/2017</td>
+					<td class="tcenter">1804</td>
+					<td></td>
+					<td></td>
+					<td>CHINKO De Mayo</td>
+				</tr>
+				<tr class="red">
+					<td class="tcenter">05/11/2017</td>
+					<td class="tcenter">1805</td>
+					<td> OPEN!!</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="red">
+					<td class="tcenter">05/18/2017</td>
+					<td class="tcenter">1806</td>
+					<td> OPEN!!</td>
+					<td></td>
+					<td></td>
+				</tr>
+				<tr class="red">
+					<td class="tcenter">05/25/2017</td>
+					<td class="tcenter">1807</td>
+					<td> OPEN!!</td>
+					<td></td>
+					<td></td>
+				</tr>
+				</tbody>
+				</table>
 			<h3><a name="jun2017">June 2017</a></h3>
 			<h3><a name="jul2017">July 2017</a></h3>
 			<h3><a name="aug2017">August 2017</a></h3>
