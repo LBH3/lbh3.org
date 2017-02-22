@@ -1,4 +1,15 @@
 <?php
+
+$IS_HEROKU = strpos($_SERVER['SERVER_NAME'], 'heroku') !== false;
+if ($IS_HEROKU) {
+  $ROOT_PATH = '/';
+} else {
+  $base = 'lbh3.org/';
+  $php_self_exploded = explode($base, $_SERVER['PHP_SELF']);
+  $ROOT_PATH = $php_self_exploded[0] . $base;
+}
+putenv("ROOT_PATH=$ROOT_PATH");
+
 // some site constants that change year to year
 
 //mismanagement info

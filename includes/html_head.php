@@ -5,8 +5,8 @@
 	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
 	<title><?php echo $title ?></title>
 	<meta http-equiv="Content-Language" content="en-us" />
-	<link href="/css/master_new.css" rel="stylesheet" type="text/css" />
-	<link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo getenv('ROOT_PATH'); ?>css/master_new.css" rel="stylesheet" type="text/css" />
+	<link href="<?php echo getenv('ROOT_PATH'); ?>font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 	<link href='//fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css' />
 	<script>
 	  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

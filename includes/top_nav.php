@@ -23,11 +23,11 @@ if (strpos($script, 'index') != false) {
 ?>
 		<div id="nav">
 			<ul>
-				<li<?php echo $index_selected; ?>><a href="/index.php">Home</a></li>
-				<li<?php echo $past_selected; ?>><a href="/pastruns/pasthash.php">Past Runs</a></li>
-				<li<?php echo $mismanage_selected; ?>><a href="/mismanage/mismanage.php">Mismanagement</a></li>
-				<li<?php echo $hareline_selected; ?>><a href="/hareline/hareline.php">Hareline</a></li>
-				<li<?php echo $about_selected; ?>><a href="/about/aboutus.php">About LBH3</a></li>
+				<li<?php echo $index_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>index.php">Home</a></li>
+				<li<?php echo $past_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>pastruns/pasthash.php">Past Runs</a></li>
+				<li<?php echo $mismanage_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>mismanage/mismanage.php">Mismanagement</a></li>
+				<li<?php echo $hareline_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>hareline/hareline.php">Hareline</a></li>
+				<li<?php echo $about_selected; ?>><a href="<?php echo getenv('ROOT_PATH'); ?>about/aboutus.php">About LBH3</a></li>
 				<li><a href="http://www.hash.org/">So Cal Hash Calendar</a></li>
 			</ul>
 		</div>
