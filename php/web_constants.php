@@ -67,7 +67,7 @@ define('tm1_phone','323-742-5086');
 
 define('tm2_name','Victoria’s Secretion');
 define('tm2_email','vic.lbh3@gmail.com');
-define('tm2_phone','562-381-5592');
+define('tm2_phone','562-999-4842');
 
 define('os1_name','Broomhilda');
 define('os1_email','broomh3@aol.com');
