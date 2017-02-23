@@ -124,10 +124,10 @@
 						<td></td>
 						<td></td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td class="tcenter">3/12</td>
 						<td class="tcenter">1796</td>
-						<td> OPEN!!</td>
+						<td>Mr. Rat’s Ass &amp; friends</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -163,28 +163,42 @@
 				<tbody>
 					<tr class="table-danger">
 						<td class="tcenter">4/6</td>
-						<td class="tcenter">1800</td>
+						<td class="tcenter">1801</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr class="table-danger">
 						<td class="tcenter">4/13</td>
-						<td class="tcenter">1801</td>
+						<td class="tcenter">1802</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
+						<td class="tcenter">4/14</td>
+						<td class="tcenter">1803</td>
+						<td></td>
+						<td>Long Beach</td>
+						<td>1800<sup>th</sup> Pre-Lube</td>
+					</tr>
+					<tr>
+						<td class="tcenter">4/15</td>
+						<td class="tcenter">1800</td>
+						<td></td>
+						<td>Palos Verdes</td>
+						<td>Jesus Cuervo 1800<sup>th</sup> Trail</td>
+					</tr>
+					<tr>
 						<td class="tcenter">4/20</td>
-						<td class="tcenter">1802</td>
+						<td class="tcenter">1804</td>
 						<td>Hokey Tokey &amp; J.A.K.O.B</td>
 						<td></td>
 						<td>Safety Committee Trail</td>
 					</tr>
 					<tr class="table-danger">
 						<td class="tcenter">4/27</td>
-						<td class="tcenter">1803</td>
+						<td class="tcenter">1805</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
@@ -198,30 +212,30 @@
 					<tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
 				</thead>
 				<tbody>
-					<tr class="table-danger">
+					<tr>
 						<td class="tcenter">5/4</td>
-						<td class="tcenter">1804</td>
-						<td></td>
+						<td class="tcenter">1806</td>
+						<td>I Chink So &amp; Victoria’s Secretion</td>
 						<td></td>
 						<td>CHINKO De Mayo</td>
 					</tr>
 					<tr class="table-danger">
 						<td class="tcenter">5/11</td>
-						<td class="tcenter">1805</td>
+						<td class="tcenter">1807</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr class="table-danger">
 						<td class="tcenter">5/18</td>
-						<td class="tcenter">1806</td>
+						<td class="tcenter">1808</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr class="table-danger">
 						<td class="tcenter">5/25</td>
-						<td class="tcenter">1807</td>
+						<td class="tcenter">1809</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
