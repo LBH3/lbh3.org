@@ -7,7 +7,7 @@
       <?php include 'includes/header.html'; ?>
       <?php include 'includes/top_nav.php'; ?>
     </header>
-    <main class="container">
+    <main class="container home">
       <p>
         <small>
           The Long Beach kennel was founded over 30 years ago.
