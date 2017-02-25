@@ -120,8 +120,8 @@
 					<tr>
 						<td class="tcenter">3/5</td>
 						<td class="tcenter">1795</td>
-						<td>Passing Wind</td>
-						<td></td>
+						<td>Passing Wind &amp; Hard in the Saddle</td>
+						<td>Rancho Palos Verdes</td>
 						<td></td>
 					</tr>
 					<tr>
