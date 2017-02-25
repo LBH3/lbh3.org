@@ -1,9 +1,10 @@
 h1 {
   border-bottom: 1px solid black;
-  font-size: 1.15rem;
-  line-height: 1.725em;
   margin: 0;
   text-align: center;
+}
+h1 a {
+  line-height: 60px;
 }
 
 a {
@@ -16,21 +17,20 @@ a:hover {
 h1 a:hover {
   text-decoration: none;
 }
-h1 img {
-  display: none;
-}
-@media (min-width: 350px) {
-  h1 {
-    line-height: 3.75rem;
-  }
-  h1 img {
-    display: inline;
-    vertical-align: middle;
-  }
-}
-@media (min-width: 414px) {
+@media (max-width: 799px) {
   h1 {
     font-size: 1.40rem;
+  }
+}
+@media (max-width: 414px) {
+  h1 {
+    font-size: 1.15rem;
+    line-height: 1.725em;
+  }
+}
+@media (max-width: 349px) {
+  h1 img {
+    display: none;
   }
 }
 
