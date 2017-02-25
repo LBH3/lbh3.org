@@ -12,19 +12,19 @@
     <main class="container">
 			<h2>2017 Hareline</h2>
 
-			<nav class="flex-column flex-sm-row nav nav-pills">
-				<a class="flex-sm-fill nav-link text-sm-center" href="#jan2017">Jan</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#feb2017">Feb</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#mar2017">Mar</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#apr2017">Apr</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#may2017">May</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#jun2017">Jun</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#jul2017">Jul</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#aug2017">Aug</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#sep2017">Sep</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#oct2017">Oct</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#nov2017">Nov</a>
-				<a class="flex-sm-fill nav-link text-sm-center" href="#dec2017">Dec</a>
+			<nav class="flex-wrap nav nav-pills">
+				<a class="nav-link p-2" href="#jan2017">January</a>
+				<a class="nav-link p-2" href="#feb2017">February</a>
+				<a class="nav-link p-2" href="#mar2017">March</a>
+				<a class="nav-link p-2" href="#apr2017">April</a>
+				<a class="nav-link p-2" href="#may2017">May</a>
+				<a class="nav-link p-2" href="#jun2017">June</a>
+				<a class="nav-link p-2" href="#jul2017">July</a>
+				<a class="nav-link p-2" href="#aug2017">August</a>
+				<a class="nav-link p-2" href="#sep2017">September</a>
+				<a class="nav-link p-2" href="#oct2017">October</a>
+				<a class="nav-link p-2" href="#nov2017">November</a>
+				<a class="nav-link p-2" href="#dec2017">December</a>
 			</nav>
 
 			<p>For questions or to sign up for a run, contact our Trail Master(s), <a href="mailto:<?php echo tm1_email;?>"><?php echo tm1_name;?></a> or <a href="mailto:<?php echo tm2_email;?>"><?php echo tm2_name;?></a>.</p>
