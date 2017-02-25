@@ -47,8 +47,34 @@
         <dt class="col-md-3 text-md-right">D'Erections:</dt>
         <dd class="col-md-9">
           <p>
-						From Long Beach — get on I-405 N and follow I-405 N to the  I-110 S. Take the exit toward Gaffey St/San Pedro. Turn left onto N Gaffey St then Turn right onto W 1st St proceed for about a mile and turn left onto S Western Ave. Then turn right onto W 25th St continue until it turns into Palos Verdes Dr S then turn right onto Forrestal Dr to reach your destination.
+						From Long Beach:
           </p>
+					<ol>
+						<li>
+							Get on I-405 N and follow I-405 N to the I-110 S.
+						</li>
+						<li>
+							Take the exit toward Gaffey St/San Pedro.
+						</li>
+						<li>
+							Turn left onto N Gaffey St.
+						</li>
+						<li>
+							Turn right onto W 1st St.
+						</li>
+						<li>
+							Proceed for about a mile and turn left onto S Western Ave.
+						</li>
+						<li>
+							Turn right onto W 25th St.
+						</li>
+						<li>
+							Continue until it turns into Palos Verdes Dr S.
+						</li>
+						<li>
+							Turn right onto Forrestal Dr to reach your destination.
+						</li>
+					</ol>
         </dd>
       </dl>
     </main>
