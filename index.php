@@ -23,7 +23,7 @@
 
 			<hr>
 
-      <h2>Run #1795 — Passing Wind &amp; Hard in the Saddle</h2>
+      <h2>Run #1795</h2>
       <dl class="row">
         <dt class="col-sm-3 text-sm-right">Date:</dt>
         <dd class="col-sm-9">Sunday 3/5 ~ 10:00 a.m.</dd>
