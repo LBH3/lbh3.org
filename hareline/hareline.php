@@ -37,36 +37,36 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td class="tcenter">1/1</td>
-						<td class="tcenter">1786</td>
+						<td>1/1</td>
+						<td>1786</td>
 						<td>Shitter Splitter</td>
 						<td></td>
 						<td>New Years Run</td>
 					</tr>
 					<tr>
-						<td class="tcenter">1/8</td>
-						<td class="tcenter">1787</td>
+						<td>1/8</td>
+						<td>1787</td>
 						<td>Soaked Wood</td>
 						<td></td>
 						<td>Lingerie Run</td>
 					</tr>
 					<tr>
-						<td class="tcenter">1/15</td>
-						<td class="tcenter">1788</td>
+						<td>1/15</td>
+						<td>1788</td>
 						<td>Designer Stud</td>
 						<td></td>
 						<td>10Th Analversary Run</td>
 					</tr>
 					<tr>
-						<td class="tcenter">1/22</td>
-						<td class="tcenter">1789</td>
+						<td>1/22</td>
+						<td>1789</td>
 						<td>Kowpaddy Kowboy</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class="tcenter">1/29</td>
-						<td class="tcenter">1790</td>
+						<td>1/29</td>
+						<td>1790</td>
 						<td>Whaleboner, Swayze Both Ways, &amp; Dr. Strangeglove</td>
 						<td>Santa Ana</td>
 						<td>Running Scared in Santa Ana</td>
@@ -81,29 +81,29 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td class="tcenter">2/5</td>
-						<td class="tcenter">1791</td>
+						<td>2/5</td>
+						<td>1791</td>
 						<td>Poor Aim and Take A #</td>
 						<td>Fullerton</td>
 						<td>Stuporbowl</td>
 					</tr>
 					<tr>
-						<td class="tcenter">2/12</td>
-						<td class="tcenter">1792</td>
+						<td>2/12</td>
+						<td>1792</td>
 						<td>Hairy Twatter &amp; Tranny</td>
 						<td>Hawaiian Gardens</td>
 						<td>Outgoing GM Trail</td>
 					</tr>
 					<tr>
-						<td class="tcenter">2/19</td>
-						<td class="tcenter">1793</td>
+						<td>2/19</td>
+						<td>1793</td>
 						<td>Splitting Adams, Soaked Wood &amp; Hokey Tokey</td>
 						<td>Bellflower</td>
 						<td>That 70’s Sh*t Show</td>
 					</tr>
 					<tr>
-						<td class="tcenter">2/26</td>
-						<td class="tcenter">1794</td>
+						<td>2/26</td>
+						<td>1794</td>
 						<td>I Don’t Swallow &amp; Dr. Strange Glove</td>
 						<td>Lakewood</td>
 						<td></td>
@@ -118,36 +118,36 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td class="tcenter">3/5</td>
-						<td class="tcenter">1795</td>
+						<td>3/5</td>
+						<td>1795</td>
 						<td>Passing Wind &amp; Hard in the Saddle</td>
 						<td>Rancho Palos Verdes</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class="tcenter">3/12</td>
-						<td class="tcenter">1796</td>
+						<td>3/12</td>
+						<td>1796</td>
 						<td>Mr. Rat’s Ass &amp; friends</td>
-						<td></td>
-						<td></td>
+						<td>Rowland Heights</td>
+						<td>Last Sunday!</td>
 					</tr>
 					<tr>
-						<td class="tcenter">3/16</td>
-						<td class="tcenter">1797</td>
+						<td>3/16</td>
+						<td>1797</td>
 						<td>Kow Paddy Kowboy</td>
 						<td></td>
-						<td></td>
+						<td>First Thursday!</td>
 					</tr>
 					<tr>
-						<td class="tcenter">3/23</td>
-						<td class="tcenter">1798</td>
+						<td>3/23</td>
+						<td>1798</td>
 						<td>Sad Bastard</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr class="table-danger">
-						<td class="tcenter">3/30</td>
-						<td class="tcenter">1799</td>
+						<td>3/30</td>
+						<td>1799</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
@@ -162,43 +162,43 @@
 				</thead>
 				<tbody>
 					<tr class="table-danger">
-						<td class="tcenter">4/6</td>
-						<td class="tcenter">1801</td>
+						<td>4/6</td>
+						<td>1801</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr class="table-danger">
-						<td class="tcenter">4/13</td>
-						<td class="tcenter">1802</td>
+						<td>4/13</td>
+						<td>1802</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class="tcenter">4/14</td>
-						<td class="tcenter">1803</td>
+						<td>4/14</td>
+						<td>1803</td>
 						<td>Hairy Twatter</td>
 						<td>Long Beach</td>
 						<td>Zombie Pub Crawl</td>
 					</tr>
 					<tr>
-						<td class="tcenter">4/15</td>
-						<td class="tcenter">1800</td>
+						<td>4/15</td>
+						<td>1800</td>
 						<td></td>
 						<td>Palos Verdes</td>
 						<td>Jesus Cuervo 1800<sup>th</sup> Trail</td>
 					</tr>
 					<tr>
-						<td class="tcenter">4/20</td>
-						<td class="tcenter">1804</td>
+						<td>4/20</td>
+						<td>1804</td>
 						<td>Hokey Tokey &amp; J.A.K.O.B</td>
 						<td></td>
 						<td>Safety Committee Trail</td>
 					</tr>
 					<tr class="table-danger">
-						<td class="tcenter">4/27</td>
-						<td class="tcenter">1805</td>
+						<td>4/27</td>
+						<td>1805</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
@@ -213,29 +213,29 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td class="tcenter">5/4</td>
-						<td class="tcenter">1806</td>
+						<td>5/4</td>
+						<td>1806</td>
 						<td>I Chink So &amp; Victoria’s Secretion</td>
 						<td></td>
 						<td>Chinko De Mayo</td>
 					</tr>
 					<tr class="table-danger">
-						<td class="tcenter">5/11</td>
-						<td class="tcenter">1807</td>
+						<td>5/11</td>
+						<td>1807</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr class="table-danger">
-						<td class="tcenter">5/18</td>
-						<td class="tcenter">1808</td>
+						<td>5/18</td>
+						<td>1808</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr class="table-danger">
-						<td class="tcenter">5/25</td>
-						<td class="tcenter">1809</td>
+						<td>5/25</td>
+						<td>1809</td>
 						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
