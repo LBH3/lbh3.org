@@ -10,6 +10,8 @@ If you don’t already have a GitHub account, you’ll need to [create a new one
 
 ### 2. Click the **Upload files** button and you’ll be able to select the file:
 
+Make sure the file’s name is the date, e.g. `03-05.pdf` for the March 5th Snooze.
+
 ![Screenshot of the folder upload screen on GitHub](CONTRIBUTING/snooze/2.png)
 
 ### 3. After uploading the file, scroll down and click **Commit changes**:
@@ -29,6 +31,8 @@ You may optionally add a commit message, such as _Add 2017-03-05 Snooze_.
 ![Screenshot of the 2017 This Week in Hash History folder on GitHub](CONTRIBUTING/this-week-in-hash-history/1.png)
 
 ### 2. Click the **Upload files** button and you’ll be able to select the file:
+
+Make sure the file’s name is the date, e.g. `03-05.pdf` for the March 5th This Week in Hash History.
 
 ![Screenshot of the folder upload screen on GitHub](CONTRIBUTING/this-week-in-hash-history/2.png)
 
