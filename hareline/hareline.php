@@ -138,10 +138,10 @@
 						<td></td>
 						<td></td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td class="tcenter">3/23</td>
 						<td class="tcenter">1798</td>
-						<td> OPEN!!</td>
+						<td>Sad Bastard</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -178,9 +178,9 @@
 					<tr>
 						<td class="tcenter">4/14</td>
 						<td class="tcenter">1803</td>
-						<td></td>
+						<td>Hairy Twatter</td>
 						<td>Long Beach</td>
-						<td>1800<sup>th</sup> Pre-Lube</td>
+						<td>Zombie Pub Crawl</td>
 					</tr>
 					<tr>
 						<td class="tcenter">4/15</td>
@@ -217,7 +217,7 @@
 						<td class="tcenter">1806</td>
 						<td>I Chink So &amp; Victoria’s Secretion</td>
 						<td></td>
-						<td>CHINKO De Mayo</td>
+						<td>Chinko De Mayo</td>
 					</tr>
 					<tr class="table-danger">
 						<td class="tcenter">5/11</td>
