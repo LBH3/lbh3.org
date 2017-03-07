@@ -2,7 +2,7 @@
 
 require "../php/web_constants.php";
 
-$hash_history_directory = 'this-week-in-hash-history/';
+$hash_history_directory = 'this-week-in-hash-history/2017/';
 $files = scandir($hash_history_directory);
 $latest_hash_history_pdf = $hash_history_directory . array_pop($files);
 
