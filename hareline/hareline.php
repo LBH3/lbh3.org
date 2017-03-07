@@ -127,7 +127,7 @@
 					<tr>
 						<td>3/12</td>
 						<td>1796</td>
-						<td>Mr. Rat’s Ass &amp; friends</td>
+						<td>Mr. Rat’s Ass &amp; amigos</td>
 						<td>Rowland Heights</td>
 						<td>Last Sunday!</td>
 					</tr>
