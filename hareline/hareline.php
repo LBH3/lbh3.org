@@ -135,7 +135,7 @@
 						<td>3/16</td>
 						<td>1797</td>
 						<td>Kow Paddy Kowboy</td>
-						<td></td>
+						<td>Cerritos</td>
 						<td>First Thursday!</td>
 					</tr>
 					<tr>
@@ -161,10 +161,10 @@
 					<tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
 				</thead>
 				<tbody>
-					<tr class="table-danger">
+					<tr>
 						<td>4/6</td>
 						<td>1801</td>
-						<td> OPEN!!</td>
+						<td>Ben Dover, Satan, &amp; Rosie Cheeks</td>
 						<td></td>
 						<td></td>
 					</tr>
