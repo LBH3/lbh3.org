@@ -1,0 +1,62 @@
+<?php
+	require "../../php/web_constants.php";
+?>
+<!DOCTYPE HTML>
+<html>
+	<?php include '../../includes/html_head.php'; ?>
+  <body>
+    <header>
+      <?php include '../../includes/header.html'; ?>
+      <?php include '../../includes/top_nav.php'; ?>
+		</header>
+		<main class="container">
+      <h2>Jesus Cuervo 1800 Trail!</h2>
+			<p>Join us for three days of hashing for our 1800<sup>th</sup> run!</p>
+			<p>We’ll have our regular Thursday evening trail at 6:30 p.m. on April 13<sup>th</sup>, then a pre-lube on Friday the 14<sup>th</sup>, leading up to the main event on Saturday, April 15<sup>th</sup>!</p>
+
+			<hr>
+
+			<p class="text-center">
+				<a href="https://docs.google.com/forms/d/e/1FAIpQLScvDdbN1wpYrp-D9Wum9JlDbeccCVJo6dq8kZpUlJz1VmC1zw/viewform">
+					Register now for Saturday’s trail!
+				</a>
+			</p>
+
+			<hr>
+
+			<h3>Pre-lube</h3>
+      <dl class="row">
+        <dt class="col-sm-3 text-sm-right">Date:</dt>
+        <dd class="col-sm-9">Friday 4/14 ~ 6:30 p.m.</dd>
+        <dt class="col-sm-3 text-sm-right">Start:</dt>
+        <dd class="col-sm-9">5000 E Ocean Blvd, Long Beach, CA 90803</dd>
+        <dt class="col-sm-3 text-sm-right">Hares:</dt>
+        <dd class="col-sm-9">Bicunninglingual &amp; Hairy Twatter</dd>
+        <dt class="col-sm-3 text-sm-right">Donation:</dt>
+        <dd class="col-sm-9">$10 for run</dd>
+      </dl>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3317.2021796615873!2d-118.14188568479271!3d33.75544098068765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd30489bd87857%3A0x48469c4f1cd33641!2s5000+E+Ocean+Blvd%2C+Long+Beach%2C+CA+90803!5e0!3m2!1sen!2sus!4v1489636960459" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+			<hr>
+
+			<h3>Jesus Cuervo 1800 Trail</h3>
+      <dl class="row">
+        <dt class="col-sm-3 text-sm-right">Date:</dt>
+        <dd class="col-sm-9">Saturday 4/15 ~ 10:00 a.m.</dd>
+        <dt class="col-sm-3 text-sm-right">Start:</dt>
+        <dd class="col-sm-9">30940 Hawthorne Blvd, Rancho Palos Verdes, CA 90275</dd>
+        <dt class="col-sm-3 text-sm-right">Hares:</dt>
+        <dd class="col-sm-9">Spitty Spitty Gang Bang &amp; Shitter Splitter</dd>
+        <dt class="col-sm-3 text-sm-right">Donation:</dt>
+        <dd class="col-sm-9">$20 for run</dd>
+      </dl>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3317.6251563742726!2d-118.40564618479303!3d33.744507780690704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd4c0357d0b3cd%3A0xd2638a4109d274e5!2s30940+Hawthorne+Blvd%2C+Rancho+Palos+Verdes%2C+CA+90275!5e0!3m2!1sen!2sus!4v1489637016525" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>
+
+		</main>
+		<footer>
+			<p class="container text-muted">
+				For website issues, <a href="mailto:<?php echo wbm_email;?>">email <?php echo wbm_name;?></a>
+			</p>
+		</footer>
+	</body>
+</html>
