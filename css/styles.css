@@ -75,15 +75,6 @@ main .nav-pills .nav-link.active {
   background: #d02d33;
 }
 
-#announcement {
-  border-bottom: 1px solid gray;
-  border-top: 1px solid gray;
-  text-align: center;
-}
-#announcement a {
-  line-height: 2.5rem;
-}
-
 .home h2, .home iframe {
   margin-bottom: 1rem;
 }
