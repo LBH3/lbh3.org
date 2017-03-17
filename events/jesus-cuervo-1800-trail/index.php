@@ -44,13 +44,12 @@
         <dt class="col-sm-3 text-sm-right">Date:</dt>
         <dd class="col-sm-9">Saturday 4/15 ~ 10:00 a.m.</dd>
         <dt class="col-sm-3 text-sm-right">Start:</dt>
-        <dd class="col-sm-9">30940 Hawthorne Blvd, Rancho Palos Verdes, CA 90275</dd>
+        <dd class="col-sm-9">Palos Verdes, CA 90275</dd>
         <dt class="col-sm-3 text-sm-right">Hares:</dt>
-        <dd class="col-sm-9">Spitty Spitty Gang Bang &amp; Shitter Splitter</dd>
+        <dd class="col-sm-9">Spitty Spitty Gang Bang &amp; Hokey Tokey</dd>
         <dt class="col-sm-3 text-sm-right">Donation:</dt>
-        <dd class="col-sm-9">$20 for run</dd>
+        <dd class="col-sm-9">$15 for run</dd>
       </dl>
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3317.6251563742726!2d-118.40564618479303!3d33.744507780690704!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd4c0357d0b3cd%3A0xd2638a4109d274e5!2s30940+Hawthorne+Blvd%2C+Rancho+Palos+Verdes%2C+CA+90275!5e0!3m2!1sen!2sus!4v1489637016525" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 		</main>
 		<footer>
