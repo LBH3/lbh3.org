@@ -145,10 +145,10 @@
 						<td></td>
 						<td></td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td>3/30</td>
 						<td>1799</td>
-						<td> OPEN!!</td>
+						<td>Victoria’s Secretion</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -185,7 +185,7 @@
 					<tr>
 						<td>4/15</td>
 						<td>1800</td>
-						<td></td>
+						<td>Spitty Spitty Gang Bang &amp; Hokey Tokey</td>
 						<td>Palos Verdes</td>
 						<td>Jesus Cuervo 1800<sup>th</sup> Trail</td>
 					</tr>
@@ -196,10 +196,10 @@
 						<td></td>
 						<td>Safety Committee Trail</td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td>4/27</td>
 						<td>1805</td>
-						<td> OPEN!!</td>
+						<td>The Dork Knight</td>
 						<td></td>
 						<td></td>
 					</tr>
