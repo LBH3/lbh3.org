@@ -149,7 +149,7 @@
 						<td>3/30</td>
 						<td>1799</td>
 						<td>Victoria’s Secretion</td>
-						<td></td>
+						<td>Manhattan Beach</td>
 						<td></td>
 					</tr>
 				</tbody>
