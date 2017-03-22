@@ -142,7 +142,7 @@
 						<td>3/23</td>
 						<td>1798</td>
 						<td>Sad Bastard</td>
-						<td></td>
+						<td>Long Beach</td>
 						<td></td>
 					</tr>
 					<tr>
