@@ -165,13 +165,13 @@
 						<td>4/6</td>
 						<td>1801</td>
 						<td>Ben Dover, Satan, &amp; Rosie Cheeks</td>
-						<td></td>
+						<td>Long Beach</td>
 						<td></td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td>4/13</td>
 						<td>1802</td>
-						<td> OPEN!!</td>
+						<td>Pillsbury Blow Boy</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -219,10 +219,10 @@
 						<td></td>
 						<td>Chinko De Mayo</td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td>5/11</td>
 						<td>1807</td>
-						<td> OPEN!!</td>
+						<td>Sad Bastard</td>
 						<td></td>
 						<td></td>
 					</tr>
