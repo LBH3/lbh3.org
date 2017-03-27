@@ -12,12 +12,13 @@
 		<main class="container">
       <h2>Jesus Cuervo 1800 Trail!</h2>
 			<p>Join us for three days of hashing for our 1800<sup>th</sup> run!</p>
-			<p>We’ll have our regular Thursday evening trail at 6:30 p.m. on April 13<sup>th</sup>, then a pre-lube on Friday the 14<sup>th</sup>, leading up to the main event on Saturday, April 15<sup>th</sup>!</p>
+			<p>We’ll have our regular Thursday evening trail at 6:30 p.m. on April 13<sup>th</sup>, then a pre-lube on Friday the 14<sup>th</sup> before the main event on Saturday April 15<sup>th</sup>!</p>
+			<p>Saturday will include an awesome trail, lunch, and ALL THE BEER! 🍻</p>
 
 			<hr>
 
 			<p class="text-center">
-				<a href="https://docs.google.com/forms/d/e/1FAIpQLScvDdbN1wpYrp-D9Wum9JlDbeccCVJo6dq8kZpUlJz1VmC1zw/viewform">
+				<a href="https://goo.gl/forms/BZrhlNjZL4KIJQMG2">
 					Register now for Saturday’s trail!
 				</a>
 			</p>

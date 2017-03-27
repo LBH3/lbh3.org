@@ -23,6 +23,14 @@
 
 			<hr>
 
+			<p class="text-center">
+				<a href="events/jesus-cuervo-1800-trail/">
+					Register for our Jesus Cuervo 1800 trail!
+				</a>
+			</p>
+
+			<hr>
+
       <h2>Run #1799</h2>
 
       <dl class="row">
