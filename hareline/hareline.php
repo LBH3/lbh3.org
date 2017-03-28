@@ -226,12 +226,12 @@
 						<td></td>
 						<td></td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td>5/18</td>
 						<td>1808</td>
-						<td> OPEN!!</td>
 						<td></td>
 						<td></td>
+						<td>Giant Hash</td>
 					</tr>
 					<tr class="table-danger">
 						<td>5/25</td>
