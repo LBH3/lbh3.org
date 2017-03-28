@@ -13,7 +13,7 @@
       <h2>Jesus Cuervo 1800 Trail!</h2>
 			<p>Join us for three days of hashing for our 1800<sup>th</sup> run!</p>
 			<p>We’ll have our regular Thursday evening trail at 6:30 p.m. on April 13<sup>th</sup>, then a pre-lube on Friday the 14<sup>th</sup> before the main event on Saturday April 15<sup>th</sup>!</p>
-			<p>Saturday will include an awesome trail, lunch, and ALL THE BEER! 🍻</p>
+			<p>Saturday will include an awesome trail and lunch!</p>
 
 			<hr>
 
@@ -45,7 +45,7 @@
         <dt class="col-sm-3 text-sm-right">Date:</dt>
         <dd class="col-sm-9">Saturday 4/15 ~ 10:00 a.m.</dd>
         <dt class="col-sm-3 text-sm-right">Start:</dt>
-        <dd class="col-sm-9">Palos Verdes, CA 90275</dd>
+        <dd class="col-sm-9">To be announced!</dd>
         <dt class="col-sm-3 text-sm-right">Hares:</dt>
         <dd class="col-sm-9">Spitty Spitty Gang Bang &amp; Hokey Tokey</dd>
         <dt class="col-sm-3 text-sm-right">Donation:</dt>
