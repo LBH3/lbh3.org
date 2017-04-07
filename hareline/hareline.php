@@ -171,8 +171,8 @@
 					<tr>
 						<td>4/13</td>
 						<td>1802</td>
-						<td>Pillsbury Blow Boy</td>
-						<td></td>
+						<td>Pillsbury Blow Boy, Snowblower, &amp; Hit Her in the Shitter</td>
+						<td>Long Beach</td>
 						<td></td>
 					</tr>
 					<tr>
