@@ -13,7 +13,14 @@
       <h2>Jesus Cuervo 1800 Trail!</h2>
 			<p>Join us for three days of hashing for our 1800<sup>th</sup> run!</p>
 			<p>We’ll have our regular Thursday evening trail at 6:30 p.m. on April 13<sup>th</sup>, then a pre-lube on Friday the 14<sup>th</sup> before the main event on Saturday April 15<sup>th</sup>!</p>
-			<p>Saturday will include an awesome trail and lunch!</p>
+			<p>Saturday will include:</p>
+			<ul>
+				<li>Mimosa &amp; bagel or muffin breakfast</li>
+				<li>An AWESOME trail</li>
+				<li>Lunch</li>
+				<li>A custom patch made for the event!</li>
+			</ul>
+			<p>Saturday’s trail is dog and stroller friendly. Bring shiggy socks!</p>
 
 			<hr>
 
@@ -25,14 +32,14 @@
 
 			<hr>
 
-			<h3>Pre-lube</h3>
+			<h3>Zombie Bunny Pub Crawl and Drinking Practice</h3>
       <dl class="row">
         <dt class="col-sm-3 text-sm-right">Date:</dt>
-        <dd class="col-sm-9">Friday 4/14 ~ 6:30 p.m.</dd>
+        <dd class="col-sm-9">Friday 4/14 ~ 6:00 p.m. drinking practice (bring rare songs!), 6:30 hares off, 6:45 pack away</dd>
         <dt class="col-sm-3 text-sm-right">Start:</dt>
         <dd class="col-sm-9">5000 E Ocean Blvd, Long Beach, CA 90803</dd>
         <dt class="col-sm-3 text-sm-right">Hares:</dt>
-        <dd class="col-sm-9">Bicunninglingual &amp; Hairy Twatter</dd>
+        <dd class="col-sm-9">Bicunninglingual and Hairy Twatter</dd>
         <dt class="col-sm-3 text-sm-right">Donation:</dt>
         <dd class="col-sm-9">$10 for run</dd>
       </dl>
@@ -43,14 +50,19 @@
 			<h3>Jesus Cuervo 1800 Trail</h3>
       <dl class="row">
         <dt class="col-sm-3 text-sm-right">Date:</dt>
-        <dd class="col-sm-9">Saturday 4/15 ~ 10:00 a.m.</dd>
+        <dd class="col-sm-9">Saturday 4/15 ~ 10:00 a.m. breakfast, 10:15 hares off, pack away at 10:30</dd>
         <dt class="col-sm-3 text-sm-right">Start:</dt>
-        <dd class="col-sm-9">To be announced!</dd>
+        <dd class="col-sm-9">532 Paseo Del Mar, Palos Verdes Estates, CA 90274</dd>
         <dt class="col-sm-3 text-sm-right">Hares:</dt>
-        <dd class="col-sm-9">Spitty Spitty Gang Bang &amp; Hokey Tokey</dd>
+        <dd class="col-sm-9">Spitty Spitty Gang Bang, Shitter Splitter, and Hokey Tokey</dd>
         <dt class="col-sm-3 text-sm-right">Donation:</dt>
-        <dd class="col-sm-9">$15 for run</dd>
+        <dd class="col-sm-9">
+					<a href="https://goo.gl/forms/BZrhlNjZL4KIJQMG2">
+						$15 for run (rego!)
+					</a>
+				</dd>
       </dl>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.4808874799787!2d-118.40555518479165!3d33.799901180675356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd4c9836adf071%3A0x7890dbb1bf713a47!2s532+Paseo+Del+Mar%2C+Palos+Verdes+Estates%2C+CA+90274!5e0!3m2!1sen!2sus!4v1491963000461" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 		</main>
 		<footer>
