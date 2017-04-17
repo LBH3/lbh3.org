@@ -193,14 +193,14 @@
 						<td>4/20</td>
 						<td>1804</td>
 						<td>Hokey Tokey &amp; J.A.K.O.B</td>
-						<td></td>
+						<td>Long Beach</td>
 						<td>Safety Committee Trail</td>
 					</tr>
 					<tr>
 						<td>4/27</td>
 						<td>1805</td>
 						<td>The Dork Knight</td>
-						<td></td>
+						<td>Seal Beach</td>
 						<td></td>
 					</tr>
 				</tbody>
@@ -233,10 +233,10 @@
 						<td></td>
 						<td>Giant Hash</td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td>5/25</td>
 						<td>1809</td>
-						<td> OPEN!!</td>
+						<td>Mystery Hare</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -244,6 +244,49 @@
 			</table>
 
 			<h3><a name="jun2017">June 2017</a></h3>
+			<table class="table table-bordered table-responsive table-sm">
+				<thead>
+					<tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
+				</thead>
+				<tbody>
+					<tr class="table-danger">
+						<td>6/1</td>
+						<td>1810</td>
+						<td>OPEN!</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="table-danger">
+						<td>6/8</td>
+						<td>1811</td>
+						<td>OPEN!</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>6/15</td>
+						<td>1812</td>
+						<td>Kowpaddy Kowboy</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>6/22</td>
+						<td>1813</td>
+						<td>Yoko Anal</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr class="table-danger">
+						<td>6/29</td>
+						<td>1814</td>
+						<td>OPEN!</td>
+						<td></td>
+						<td></td>
+					</tr>
+				</tbody>
+			</table>
+
 			<h3><a name="jul2017">July 2017</a></h3>
 			<h3><a name="aug2017">August 2017</a></h3>
 			<h3><a name="sep2017">September 2017</a></h3>
