@@ -23,47 +23,46 @@
 
 			<hr>
 
-      <h2 style="color: green">
-				Safety Committee Trail
+      <h2>
+				The Dork Knight Returns
 				<br>
-				<small class="text-muted">Run #1804</small>
+				<small class="text-muted">Run #1805</small>
 			</h2>
 
       <dl class="row">
         <dt class="col-sm-3 text-sm-right">Date:</dt>
-        <dd class="col-sm-9">Thursday 4/20 ~ 6:30 p.m.</dd>
+        <dd class="col-sm-9">Thursday 4/27 ~ 6:30 p.m.</dd>
         <dt class="col-sm-3 text-sm-right">Start:</dt>
-        <dd class="col-sm-9">2910 E 55th Way, Long Beach, CA 90805</dd>
+        <dd class="col-sm-9">551 Balboa Dr, Seal Beach, CA 90740</dd>
         <dt class="col-sm-3 text-sm-right">Hares:</dt>
-        <dd class="col-sm-9">Safety Committee</dd>
+        <dd class="col-sm-9">Dork Knight &amp; Designer Stud</dd>
+				<!--
         <dt class="col-sm-3 text-sm-right">Bring:</dt>
         <dd class="col-sm-9">Money, I.D, Lights, and <span style="color: green">Green Shiggy Socks</span></dd>
+				-->
         <dt class="col-sm-3 text-sm-right">Donation:</dt>
         <dd class="col-sm-9">$5 for run</dd>
       </dl>
 
-			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3313.274808027482!2d-118.15889168479019!3d33.85680798065966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd32e24fd54a0d%3A0x3ee8fcc33a2a14b2!2s2910+E+55th+Way%2C+Long+Beach%2C+CA+90805!5e0!3m2!1sen!2sus!4v1492404189707" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
+			<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3317.6220231417597!2d-118.10158208479304!3d33.74458878069077!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd2fefe692c225%3A0x8d9cd9a39c768de7!2s551+Balboa+Dr%2C+Seal+Beach%2C+CA+90740!5e0!3m2!1sen!2sus!4v1492958131625" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
 
       <dl class="row">
         <dt class="col-md-3 text-md-right">Directions:</dt>
         <dd class="col-md-9">
 					<p>
-						The start is at the end of "E 55th Way"
+						Start will be at the cross roads of Balboa and Bolsa, the back of the Pavillion's parking lot
           </p>
         </dd>
         <dt class="col-md-3 text-md-right">From the hares:</dt>
         <dd class="col-md-9">
 					<p>
-						Ok Hashers and Harriets. 420 lands on a Thursday and The Safety Committee is keeping the pack safe and high as we go hash in North Long Beach. So cum and Joint The Safety Committee as we take you on some fresh green trail.
-					</p>
-					<p style="color: green">
-						MUST WEAR GREEN!!!
+						Fanatics, join Designer stud and I for a rompin' good time through seal beach. Prepare to get sloppy as we avoid pavement like it's going out of style. Turkey trails! Eagle Trails! SUPER EAGLES TRAILS! The wise among you will bring shiggy socks extra shoes, flashlights and most importantly mosquito repellant. Don't doddle at circle, the On On will be at Ballast Point Brewery!
           </p>
         </dd>
         <dt class="col-md-3 text-md-right">On-on:</dt>
         <dd class="col-md-9">
 					<p>
-						Coopers House Of Brew Masters. 4823 Paramount Blvd, Lakewood, CA 90712
+						Ballast Point Brewery: 110 N Marina Dr, Long Beach, CA 90803
           </p>
         </dd>
       </dl>
