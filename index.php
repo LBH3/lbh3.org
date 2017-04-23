@@ -35,7 +35,7 @@
         <dt class="col-sm-3 text-sm-right">Start:</dt>
         <dd class="col-sm-9">551 Balboa Dr, Seal Beach, CA 90740</dd>
         <dt class="col-sm-3 text-sm-right">Hares:</dt>
-        <dd class="col-sm-9">Dork Knight &amp; Designer Stud</dd>
+        <dd class="col-sm-9">The Dork Knight &amp; Designer Stud</dd>
 				<!--
         <dt class="col-sm-3 text-sm-right">Bring:</dt>
         <dd class="col-sm-9">Money, I.D, Lights, and <span style="color: green">Green Shiggy Socks</span></dd>
@@ -50,13 +50,13 @@
         <dt class="col-md-3 text-md-right">Directions:</dt>
         <dd class="col-md-9">
 					<p>
-						Start will be at the cross roads of Balboa and Bolsa, the back of the Pavillion's parking lot
+						Start will be at the cross roads of Balboa and Bolsa, the back of the Pavillion’s parking lot.
           </p>
         </dd>
         <dt class="col-md-3 text-md-right">From the hares:</dt>
         <dd class="col-md-9">
 					<p>
-						Fanatics, join Designer stud and I for a rompin' good time through seal beach. Prepare to get sloppy as we avoid pavement like it's going out of style. Turkey trails! Eagle Trails! SUPER EAGLES TRAILS! The wise among you will bring shiggy socks extra shoes, flashlights and most importantly mosquito repellant. Don't doddle at circle, the On On will be at Ballast Point Brewery!
+						Fanatics, join Designer stud and I for a rompin’ good time through Seal Beach. Prepare to get sloppy as we avoid pavement like it’s going out of style. Turkey trails! Eagle Trails! SUPER EAGLES TRAILS! The wise among you will bring shiggy socks extra shoes, flashlights and most importantly mosquito repellant. Don’t doddle at circle, the On On will be at Ballast Point Brewery!
           </p>
         </dd>
         <dt class="col-md-3 text-md-right">On-on:</dt>
