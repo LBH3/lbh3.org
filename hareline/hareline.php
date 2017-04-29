@@ -216,7 +216,7 @@
 						<td>5/4</td>
 						<td>1806</td>
 						<td>I Chink So &amp; Victoria’s Secretion</td>
-						<td></td>
+						<td>Cypress</td>
 						<td>Chinko De Mayo</td>
 					</tr>
 					<tr>
@@ -256,10 +256,10 @@
 						<td></td>
 						<td></td>
 					</tr>
-					<tr class="table-danger">
+					<tr>
 						<td>6/8</td>
 						<td>1811</td>
-						<td>OPEN!</td>
+						<td>Koo Koo 4 Cock &amp; Lazer Snatch</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -275,7 +275,7 @@
 						<td>1813</td>
 						<td>Yoko Anal</td>
 						<td></td>
-						<td></td>
+						<td>BBQ</td>
 					</tr>
 					<tr class="table-danger">
 						<td>6/29</td>
