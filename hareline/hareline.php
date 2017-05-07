@@ -223,15 +223,15 @@
 						<td>5/11</td>
 						<td>1807</td>
 						<td>Sad Bastard</td>
-						<td></td>
+						<td>Huntington Beach</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td>5/18</td>
 						<td>1808</td>
-						<td></td>
-						<td></td>
-						<td>Giant Hash</td>
+						<td>A bunch of tall hashers</td>
+						<td>Long Beach</td>
+						<td>The Giant Hash</td>
 					</tr>
 					<tr>
 						<td>5/25</td>
