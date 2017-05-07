@@ -249,10 +249,10 @@
 					<tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
 				</thead>
 				<tbody>
-					<tr class="table-danger">
+					<tr>
 						<td>6/1</td>
 						<td>1810</td>
-						<td>OPEN!</td>
+						<td>Camol Toe Hoe</td>
 						<td></td>
 						<td></td>
 					</tr>
@@ -273,21 +273,57 @@
 					<tr>
 						<td>6/22</td>
 						<td>1813</td>
+						<td>Passing Wind</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>6/29</td>
+						<td>1814</td>
 						<td>Yoko Anal</td>
 						<td></td>
 						<td>BBQ</td>
 					</tr>
+				</tbody>
+			</table>
+
+			<h3><a name="jul2017">July 2017</a></h3>
+			<table class="table table-bordered table-responsive table-sm">
+				<thead>
+					<tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>7/6</td>
+						<td>1815</td>
+						<td>Candy Apple Heroes</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>6/13</td>
+						<td>1816</td>
+						<td>Bleeding Hash Hole</td>
+						<td></td>
+						<td></td>
+					</tr>
 					<tr class="table-danger">
-						<td>6/29</td>
-						<td>1814</td>
-						<td>OPEN!</td>
+						<td>6/20</td>
+						<td>1817</td>
+						<td>Open!</td>
+						<td></td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>6/27</td>
+						<td>1818</td>
+						<td>Chicken Legs, Hokey Tokey, &amp; Koo Koo 4 Cock</td>
 						<td></td>
 						<td></td>
 					</tr>
 				</tbody>
 			</table>
 
-			<h3><a name="jul2017">July 2017</a></h3>
 			<h3><a name="aug2017">August 2017</a></h3>
 			<h3><a name="sep2017">September 2017</a></h3>
 			<h3><a name="oct2017">October 2017</a></h3>
