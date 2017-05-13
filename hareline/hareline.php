@@ -237,8 +237,8 @@
 						<td>5/25</td>
 						<td>1809</td>
 						<td>Mystery Hare</td>
-						<td></td>
-						<td></td>
+						<td>Torrance</td>
+						<td>Red Nose Hash</td>
 					</tr>
 				</tbody>
 			</table>
@@ -252,7 +252,7 @@
 					<tr>
 						<td>6/1</td>
 						<td>1810</td>
-						<td>Camol Toe Hoe</td>
+						<td>Camel Toe Hoe</td>
 						<td></td>
 						<td></td>
 					</tr>
