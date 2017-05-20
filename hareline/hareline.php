@@ -301,21 +301,21 @@
 						<td></td>
 					</tr>
 					<tr>
-						<td>6/13</td>
+						<td>7/13</td>
 						<td>1816</td>
 						<td>Bleeding Hash Hole</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr class="table-danger">
-						<td>6/20</td>
+						<td>7/20</td>
 						<td>1817</td>
 						<td>Open!</td>
 						<td></td>
 						<td></td>
 					</tr>
 					<tr>
-						<td>6/27</td>
+						<td>7/27</td>
 						<td>1818</td>
 						<td>Chicken Legs, Hokey Tokey, &amp; Koo Koo 4 Cock</td>
 						<td></td>
