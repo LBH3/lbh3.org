@@ -10,6 +10,13 @@ if ($IS_HEROKU) {
 }
 putenv("ROOT_PATH=$ROOT_PATH");
 
+header('strict-transport-security: max-age=31536000; includeSubDomains');
+header('Content-Security-Policy: default-src https:');
+header('x-frame-options: SAMEORIGIN');
+header('X-XSS-Protection: 1; mode=block');
+header('X-Content-Type-Options: nosniff');
+header('Referrer-Policy: same-origin');
+
 // some site constants that change year to year
 
 //mismanagement info
