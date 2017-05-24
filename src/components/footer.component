@@ -1,18 +1,35 @@
 <can-component tag="lbh3-footer">
   <style type="less">
-    display: block;
-
-    p { font-weight: bold; }
+    footer {
+      border-top: 1px solid black;
+    }
+    footer p {
+      margin: 1rem 0;
+      text-align: center;
+    }
+    @media (max-width: 400px) {
+      footer p a {
+        clear: left;
+        display: block;
+      }
+    }
   </style>
   <view>
-    <p>{{message}}</p>
+    <footer>
+      <p class="container text-muted">
+        For website issues, <a href="mailto:{{emailAddress}}">email {{name}}</a>
+      </p>
+    </footer>
   </view>
   <script type="view-model">
     import DefineMap from 'can-define/map/';
 
     export default DefineMap.extend({
-      message: {
-        value: 'This is the lbh3-footer component'
+      emailAddress: {
+        value: 'ifmd@chasenlehara.com'
+      },
+      name: {
+        value: 'I’m Fucking Matt Damon'
       }
     });
   </script>
