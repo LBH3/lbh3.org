@@ -1,0 +1,2 @@
+<can-import from="font-awesome/css/font-awesome.css" />
+<p>{{message}}</p>
