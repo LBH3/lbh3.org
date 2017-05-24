@@ -1,6 +1,78 @@
-@import "../css/styles.css";
+h2 {
+  text-align: center;
+}
 
-body {
-  font-family: "Helvetica Neue-Light","Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
-  font-weight: 300;
+a {
+  color: #d02d33;
+}
+a:hover {
+  color: #a62b24;
+}
+
+header nav {
+  border-bottom: 1px solid black;
+  margin: 0 0 .5rem;
+  text-align: center;
+}
+
+header .nav {
+  padding: 0;
+}
+
+header .nav .nav-item {
+  width: 25%;
+}
+
+header .nav .nav-item.active .nav-link {
+  background: black;
+  color: white;
+}
+
+header .nav .nav-item .nav-link {
+  color: inherit;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+header .nav .nav-item .nav-link:hover {
+  background: #d02d33;
+  color: white;
+}
+
+main .nav-pills {
+  margin: 1rem 0;
+}
+
+main .nav-pills .nav-link.active {
+  background: #d02d33;
+}
+
+.home h2, .home iframe {
+  margin-bottom: 1rem;
+}
+@media (max-width: 375px) {
+  .home h2 {
+    font-size: 1.5rem;
+  }
+}
+
+footer {
+  border-top: 1px solid black;
+}
+footer p {
+  margin: 1rem 0;
+  text-align: center;
+}
+@media (max-width: 400px) {
+  footer p a {
+    clear: left;
+    display: block;
+  }
+}
+
+/* Workaround for https://github.com/twbs/bootstrap/issues/21577 */
+@media (min-width: 1024px) {
+  .table-responsive {
+    display: table;
+  }
 }

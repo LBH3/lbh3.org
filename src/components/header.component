@@ -1,19 +1,40 @@
 <can-component tag="lbh3-header">
   <style type="less">
-    display: block;
-
-    p { font-weight: bold; }
+    h1 {
+      border-bottom: 1px solid black;
+      margin: 0;
+      text-align: center;
+    }
+    h1 a {
+      line-height: 60px;
+    }
+    h1 a:hover {
+      text-decoration: none;
+    }
+    @media (max-width: 799px) {
+      h1 {
+        font-size: 1.40rem;
+      }
+    }
+    @media (max-width: 414px) {
+      h1 {
+        font-size: 1.15rem;
+        line-height: 1.725em;
+      }
+    }
+    @media (max-width: 349px) {
+      h1 img {
+        display: none;
+      }
+    }
   </style>
   <view>
-    <p>{{message}}</p>
+    <can-import from="can-stache/helpers/route" />
+    <h1>
+      <a class="align-bottom" href="{{routeUrl page='home'}}">
+        <img alt="LBH3 logo" height="60" src="{{joinBase 'images/lbh3_rabbit_logo.png'}}" width="70" />
+        Long Beach Hash House Harriers
+      </a>
+    </h1>
   </view>
-  <script type="view-model">
-    import DefineMap from 'can-define/map/';
-
-    export default DefineMap.extend({
-      message: {
-        value: 'This is the lbh3-header component'
-      }
-    });
-  </script>
 </can-component>
