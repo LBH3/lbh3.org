@@ -10,7 +10,7 @@
       <?php include '../../includes/top_nav.php'; ?>
     </header>
 		<main class="container">
-			<?php include 'pics2013.html'; ?>
+			<?php include '../../src/html/photos/2013.html'; ?>
 		</main>
 		<footer>
 			<p class="container text-muted">

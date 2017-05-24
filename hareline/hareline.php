@@ -13,7 +13,7 @@
 			<p>For questions or to sign up for a run, contact our Trail Master(s), <a href="mailto:<?php echo tm1_email;?>"><?php echo tm1_name;?></a> or <a href="mailto:<?php echo tm2_email;?>"><?php echo tm2_name;?></a>.</p>
 			<p>LBH3 <a href="../pdfs/LBH3HaringGuidelines69.pdf">Haring Guidelines</a></p>
 
-			<?php include '2017.html'; ?>
+			<?php include '../src/html/hareline/2017.html'; ?>
 		</main>
 		<footer>
 			<p class="container text-muted">
