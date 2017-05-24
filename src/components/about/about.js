@@ -4,8 +4,9 @@ import './about.less';
 import view from './about.stache';
 
 export const ViewModel = DefineMap.extend({
-  message: {
-    value: 'This is the lbh3-about component'
+  secondaryPage: {
+    type: 'string',
+    value: ''
   }
 });
 
