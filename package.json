@@ -27,6 +27,9 @@
     "directories": {
       "lib": "src"
     },
+    "ext": {
+      "html": "steal-stache"
+    },
     "configDependencies": [
       "live-reload",
       "node_modules/can-zone/register"
