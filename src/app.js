@@ -1,3 +1,5 @@
+import './models/fixtures/';
+
 import DefineMap from 'can-define/map/';
 import route from 'can-route';
 import 'can-route-pushstate';
