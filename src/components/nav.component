@@ -1,19 +1,52 @@
 <can-component tag="lbh3-nav">
   <style type="less">
-    display: block;
+    .nav {
+      padding: 0;
+    }
 
-    p { font-weight: bold; }
+    .nav .nav-item {
+      width: 25%;
+    }
+
+    .nav .nav-item.active .nav-link {
+      background: black;
+      color: white;
+    }
+
+    .nav .nav-item .nav-link {
+      color: inherit;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .nav .nav-item .nav-link:hover {
+      background: #d02d33;
+      color: white;
+    }
   </style>
   <view>
-    <p>{{message}}</p>
+    <nav>
+      <ul class="container nav">
+        <li class="{{#is page 'home'}}active{{/is}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='home'}}">Home</a>
+        </li>
+        <li class="{{#is page 'hareline'}}active{{/is}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='hareline'}}">Hareline</a>
+        </li>
+        <li class="{{#is page 'past-runs'}}active{{/is}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='past-runs'}}">Past Runs</a>
+        </li>
+        <li class="{{#is page 'about'}}active{{/is}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='about'}}">About</a>
+        </li>
+      </ul>
+    </nav>
   </view>
   <script type="view-model">
     import DefineMap from 'can-define/map/';
 
     export default DefineMap.extend({
-      message: {
-        value: 'This is the lbh3-nav component'
-      }
+      page: 'string'
     });
   </script>
 </can-component>
