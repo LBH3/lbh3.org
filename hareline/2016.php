@@ -10,7 +10,7 @@
       <?php include '../includes/top_nav.php'; ?>
     </header>
     <main class="container">
-			<?php include '2016.html'; ?>
+			<?php include '../src/html/hareline/2016.html'; ?>
 		</main>
 		<footer>
 			<p class="container text-muted">
