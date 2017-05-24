@@ -1,0 +1,10 @@
+<h2>2017 Mismanagement</h2>
+
+{{#each positions as position}}
+  <h3>{{position.name}}</h3>
+  <ul>
+    {{#each position.people as person}}
+      <li><a href="mailto:{{person.email}}">{{person.name}}</a></li>
+    {{/each}}
+  </ul>
+{{/each}}

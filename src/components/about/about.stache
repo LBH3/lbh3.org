@@ -1,4 +1,13 @@
 {{#switch secondaryPage}}
+  {{#case "mismanagement"}}
+    <can-import from="lbh3/components/about/mismanagement/">
+      {{#if isPending}}
+        Loading Mismanagement…
+      {{else}}
+        <lbh3-about-mismanagement />
+      {{/if}}
+    </can-import>
+  {{/case}}
   {{#default}}
     <h2>The History of The Hash House Harriers &amp; The Founding of LBH3</h2>
 
@@ -9,6 +18,7 @@
 
     <p><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">How LBH3 Started</a></p>
     <!-- <p><a href="{{hashHistoryPDF}}">This Week in LBH3 Hash History</a></p> -->
+    <p><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">Mismanagement</a></p>
     <p><a href="{{routeUrl page='about'}}/FounderSkit.pdf">Found'ers Skit</a></p>
     <p><a href="{{routeUrl page='about'}}/Whosleptwithbigpink.pdf">Who Slept With Big Pink</a></p>
     <p><a href="{{routeUrl page='about'}}/HotLips.pdf">Hot Lips Adventures</a></p>
