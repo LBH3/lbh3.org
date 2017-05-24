@@ -4,7 +4,7 @@ import { ViewModel } from './home';
 // ViewModel unit tests
 QUnit.module('lbh3/components/home');
 
-QUnit.test('Has message', function(){
+QUnit.test('Has currentTrail', function(){
   var vm = new ViewModel();
-  QUnit.equal(vm.message, 'This is the lbh3-home component');
+  QUnit.ok(vm.currentTrail, 'okay');
 });

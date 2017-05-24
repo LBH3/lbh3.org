@@ -1,11 +1,12 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './home.less';
+import currentTrail from '~/html/past-runs/lbh3_1809_20170525.html';
 import view from './home.stache';
 
 export const ViewModel = DefineMap.extend({
-  message: {
-    value: 'This is the lbh3-home component'
+  currentTrail: {
+    value: currentTrail
   }
 });
 
