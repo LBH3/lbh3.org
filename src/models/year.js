@@ -20,7 +20,7 @@ Year.List = DefineList.extend({
 });
 
 Year.connection = superMap({
-  url: loader.serviceBaseURL + '/years',
+  url: loader.serviceBaseURL + '/api/years',
   Map: Year,
   List: Year.List,
   name: 'year',
