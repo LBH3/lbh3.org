@@ -35,7 +35,7 @@
           <a class="nav-link" href="{{routeUrl page='hareline'}}">Hareline</a>
         </li>
         <li class="{{#is page 'past-runs'}}active{{/is}} nav-item">
-          <a class="nav-link" href="{{routeUrl page='past-runs'}}">Past Runs</a>
+          <a class="nav-link" href="{{routeUrl page='past-runs' year=year}}">Past Runs</a>
         </li>
         <li class="{{#is page 'about'}}active{{/is}} nav-item">
           <a class="nav-link" href="{{routeUrl page='about'}}">About</a>
@@ -47,7 +47,8 @@
     import DefineMap from 'can-define/map/';
 
     export default DefineMap.extend({
-      page: 'string'
+      page: 'string',
+      year: 'number'
     });
   </script>
 </can-component>

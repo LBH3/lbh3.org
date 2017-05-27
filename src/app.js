@@ -15,6 +15,12 @@ const AppViewModel = DefineMap.extend({
   title: {
     value: 'Long Beach Hash House Harriers',
     serialize: false
+  },
+  year: {
+    type: 'number',
+    value: () => {
+      return (new Date()).getFullYear();
+    }
   }
 });
 
@@ -23,8 +29,7 @@ route('/about/', { page: 'about' });
 route('/admin/{secondaryPage}/', { page: 'admin' });
 route('/admin/', { page: 'admin' });
 route('/hareline/', { page: 'hareline' });
-route('/past-runs/{runNumber}-{date}/', { page: 'past-runs', secondaryPage: 'past-run', runNumber: 0, date: '' });
-route('/past-runs/', { page: 'past-runs' });
+route('/past-runs/{year}/', { page: 'past-runs', year: 0});
 route('/{page}', { page: defaultPage });
 
 

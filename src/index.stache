@@ -41,7 +41,7 @@
         {{#if isPending}}
           Loading navigation…
         {{else}}
-          <lbh3-nav {page}="page" />
+          <lbh3-nav {page}="page" {year}="year" />
         {{/if}}
       </can-import>
     </header>
@@ -89,7 +89,7 @@
             {{#if isPending}}
               Loading Past Runs…
             {{else}}
-              <lbh3-past-runs {secondary-page}="secondaryPage" />
+              <lbh3-past-runs {year}="year" />
             {{/if}}
           </can-import>
         {{/case}}
