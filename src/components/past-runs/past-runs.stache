@@ -18,7 +18,7 @@
   {{#each years as yearObject}}
     <a
       class="{{#is yearObject.id year}}active{{/is}} flex-sm-fill nav-link text-sm-center"
-      href="{{routeUrl page='past-runs' year=yearObject.id}}"
+      href="{{routeForYear(yearObject.id)}}"
     >
       {{yearObject.id}}
     </a>

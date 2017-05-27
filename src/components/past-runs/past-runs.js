@@ -3,9 +3,12 @@ import DefineMap from 'can-define/map/';
 import Position from '~/models/position';
 import Year from '~/models/year';
 import './past-runs.less';
+import route from 'can-route';
 import view from './past-runs.stache';
 
 import '~/components/year/';
+
+const currentYear = (new Date()).getFullYear();
 
 export const ViewModel = DefineMap.extend({
   get latestPhotosUrl () {
@@ -27,8 +30,18 @@ export const ViewModel = DefineMap.extend({
       return Position.getList({});
     }
   },
+  routeForYear: function(year) {
+    const routeParams = {page: 'past-runs'};
+    if (currentYear !== year) {
+      routeParams.year = year;
+    }
+    return route.url(routeParams);
+  },
   year: {
-    type: 'number'
+    type: 'number',
+    get: function(year) {
+      return year || currentYear;
+    }
   },
   years: {
     get: function(lastValue, setValue) {

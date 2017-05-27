@@ -4,6 +4,7 @@ import DefineMap from 'can-define/map/';
 import route from 'can-route';
 import 'can-route-pushstate';
 
+const currentYear = (new Date()).getFullYear();
 const defaultPage = 'home';
 
 const AppViewModel = DefineMap.extend({
@@ -17,19 +18,14 @@ const AppViewModel = DefineMap.extend({
     serialize: false
   },
   year: {
-    type: 'number',
-    value: () => {
-      return (new Date()).getFullYear();
-    }
+    type: 'number'
   }
 });
 
-route('/about/{secondaryPage}/', { page: 'about' });
-route('/about/', { page: 'about' });
-route('/admin/{secondaryPage}/', { page: 'admin' });
-route('/admin/', { page: 'admin' });
-route('/hareline/', { page: 'hareline' });
-route('/past-runs/{year}/', { page: 'past-runs', year: 0});
+route('/about/{secondaryPage}', { page: 'about' });
+route('/admin/{secondaryPage}', { page: 'admin' });
+route('/hareline', { page: 'hareline' });
+route('/past-runs/{year}', { page: 'past-runs', year: currentYear});
 route('/{page}', { page: defaultPage });
 
 
