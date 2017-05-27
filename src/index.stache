@@ -84,7 +84,7 @@
             {{/if}}
           </can-import>
         {{/case}}
-        {{#case "past-runs"}}
+        {{#case "events"}}
           <can-import from="lbh3/components/past-runs/">
             {{#if isPending}}
               Loading Past Runs…

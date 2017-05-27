@@ -25,7 +25,7 @@ const AppViewModel = DefineMap.extend({
 route('/about/{secondaryPage}', { page: 'about' });
 route('/admin/{secondaryPage}', { page: 'admin' });
 route('/hareline', { page: 'hareline' });
-route('/past-runs/{year}', { page: 'past-runs', year: currentYear});
+route('/events/{year}', { page: 'events', year: currentYear});
 route('/{page}', { page: defaultPage });
 
 

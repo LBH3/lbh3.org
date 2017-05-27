@@ -31,7 +31,7 @@ export const ViewModel = DefineMap.extend({
     }
   },
   routeForYear: function(year) {
-    const routeParams = {page: 'past-runs'};
+    const routeParams = {page: 'events'};
     if (currentYear !== year) {
       routeParams.year = year;
     }
