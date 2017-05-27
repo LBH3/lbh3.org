@@ -17,16 +17,16 @@ const AppViewModel = DefineMap.extend({
     value: 'Long Beach Hash House Harriers',
     serialize: false
   },
-  year: {
-    type: 'number'
-  }
+  year: 'number'
 });
 
-route('/about/{secondaryPage}', { page: 'about' });
-route('/admin/{secondaryPage}', { page: 'admin' });
-route('/hareline', { page: 'hareline' });
-route('/events/{year}', { page: 'events', year: currentYear});
+route('/about/{secondaryPage}/', { page: 'about' });
+route('/about/', { page: 'about' });
+route('/admin/{secondaryPage}/', { page: 'admin' });
+route('/admin/', { page: 'admin' });
+route('/events/{year}/', { page: 'events', year: 0});
+route('/events/', { page: 'events' });
+route('/hareline/', { page: 'hareline' });
 route('/{page}', { page: defaultPage });
-
 
 export default AppViewModel;
