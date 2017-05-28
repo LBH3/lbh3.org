@@ -6,12 +6,14 @@
   <p>
     <span class="fa fa-camera"></span> for Photos and <span class="fa fa-newspaper-o"></span> for Snooze
   </p>
+  <!--
   <p>
     Most Current:
     <a href="{{latestPhotosUrl}}">Photos</a>
     and
     <a href="{{latestSnoozeUrl}}">Snooze</a>
   </p>
+  -->
 </div>
 
 <nav class="flex-column flex-sm-row nav nav-pills">
@@ -27,5 +29,4 @@
 
 <lbh3-year {year}="year" />
 
-<p><a href="{{photoArchiveUrl}}">Photo Archive</a> and <a href="{{snoozeArchiveUrl}}">Snooze Archive</a></p>
-<p>If you see a picture you'd like removed, send an email to <a href="mailto:{{webmaster.email}}">{{webmaster.name}}</a></p>
+<p>If you see a picture you’d like removed, send an email to <a href="mailto:{{webmaster.email}}">{{webmaster.name}}</a></p>
