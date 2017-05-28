@@ -8,6 +8,7 @@ import 'lbh3/components/about/mismanagement/mismanagement-test';
 import 'lbh3/components/admin/admin-test';
 import 'lbh3/components/hareline/hareline-test';
 import 'lbh3/components/home/home-test';
+import 'lbh3/components/past-run/past-run-test';
 import 'lbh3/components/past-runs/past-runs-test';
 import 'lbh3/components/year/year-test';
 
