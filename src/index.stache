@@ -85,13 +85,28 @@
           </can-import>
         {{/case}}
         {{#case "events"}}
-          <can-import from="lbh3/components/past-runs/">
-            {{#if isPending}}
-              Loading Past Runs…
-            {{else}}
-              <lbh3-past-runs {year}="year" />
-            {{/if}}
-          </can-import>
+          {{#if trailNumber}}
+            <can-import from="lbh3/components/past-run/">
+              {{#if isPending}}
+                Loading trail #{{trailNumber}}…
+              {{else}}
+                <lbh3-past-run
+                  {day}="day"
+                  {month}="month"
+                  {trail-number}="trailNumber"
+                  {year}="year"
+                />
+              {{/if}}
+            </can-import>
+          {{else}}
+            <can-import from="lbh3/components/past-runs/">
+              {{#if isPending}}
+                Loading Past Runs…
+              {{else}}
+                <lbh3-past-runs {year}="year" />
+              {{/if}}
+            </can-import>
+          {{/if}}
         {{/case}}
       {{/switch}}
     </main>
