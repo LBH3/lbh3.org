@@ -6,4 +6,24 @@ RewriteRule ^ https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 RewriteCond %{HTTP:X-Forwarded-Proto} !https
 RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 
+Redirect 301 /index.php /
+Redirect 301 /about/aboutus.php /about/
+Redirect 301 /mismanage/ /about/mismanagement/
+Redirect 301 /mismanage/index.html /about/mismanagement/
+Redirect 301 /mismanage/mismanage.php /about/mismanagement/
+Redirect 301 /pastruns/ /events/
+Redirect 301 /pastruns/2015.php /events/2015/
+Redirect 301 /pastruns/2016.php /events/2016/
+Redirect 301 /pastruns/pasthash.php /events/
+Redirect 301 /pastruns/runs/ /events/
+RewriteRule ^?$ lbh3.php?runNumber=$1&date=$2
+Redirect 301 /pastruns/runs/lbh3_([0-9]+)_(\d{4})(\d{2})(\d{2}).php /events/$2/$3/$4/trail-$1/
 Redirect 301 /pics/ /events/
+Redirect 301 /pics/index.html /events/
+Redirect 301 /pics/archives/archives.php /events/
+Redirect 301 /pics/archives/pics2014.php /events/2014/
+Redirect 301 /pics/archives/pics2013.php /events/2013/
+Redirect 301 /snooze/ /events/
+Redirect 301 /snooze/index.html /events/
+Redirect 301 /snooze/snoozearchive.php /events/
+Redirect 301 /snooze/snoozehome.htm /events/
