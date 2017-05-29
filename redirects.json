@@ -1,0 +1,21 @@
+{
+  "/index.php": "/",
+  "/about/aboutus.php": "/about/",
+  "/mismanage/": "/about/mismanagement/",
+  "/mismanage/index.html": "/about/mismanagement/",
+  "/mismanage/mismanage.php": "/about/mismanagement/",
+  "/pastruns/": "/events/",
+  "/pastruns/2015.php": "/events/2015/",
+  "/pastruns/2016.php": "/events/2016/",
+  "/pastruns/pasthash.php": "/events/",
+  "/pastruns/runs/": "/events/",
+  "/pics/": "/events/",
+  "/pics/index.html": "/events/",
+  "/pics/archives/archives.php": "/events/",
+  "/pics/archives/pics2014.php": "/events/2014/",
+  "/pics/archives/pics2013.php": "/events/2013/",
+  "/snooze/": "/events/",
+  "/snooze/index.html": "/events/",
+  "/snooze/snoozearchive.php": "/events/",
+  "/snooze/snoozehome.htm": "/events/"
+}
