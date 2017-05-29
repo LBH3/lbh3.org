@@ -1,7 +1,6 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Position from '~/models/position';
-import './hareline.less';
 import currentHareline from '~/html/hareline/2017.html';
 import view from './hareline.stache';
 

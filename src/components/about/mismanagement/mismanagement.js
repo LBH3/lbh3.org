@@ -1,7 +1,6 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Position from '~/models/position';
-import './mismanagement.less';
 import view from './mismanagement.stache';
 
 export const ViewModel = DefineMap.extend({

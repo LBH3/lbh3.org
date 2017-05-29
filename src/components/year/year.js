@@ -1,6 +1,5 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
-import './year.less';
 import view from './year.stache';
 import year2013 from '~/html/years/2013.html';
 import year2014 from '~/html/years/2014.html';
