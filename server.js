@@ -4,6 +4,16 @@ const server = require('done-serve');
 const app = server({
   path: __dirname,
   configure: function(app) {
+    app.get('*', function(req, res,  next) {
+      const httpHost = req.get('Host');
+      const needsSSLRedirect = req.headers['x-forwarded-proto'] !== 'https';
+      if (needsSSLRedirect) {
+        res.redirect(`https://${httpHost}${req.url}`);
+      } else {
+        next();
+      }
+    });
+
     app.get('/pastruns/runs/lbh3_:trailNumber\\_:date.php', function(req, res) {
       const params = req.params;
 
