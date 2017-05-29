@@ -14,9 +14,9 @@
   "private": true,
   "scripts": {
     "test": "testee test.html --browsers firefox --reporter Spec",
-    "start": "done-serve --port 8080",
+    "start": "node server --port 8080",
     "heroku-postbuild": "npm run build",
-    "develop": "done-serve --develop --port 8080",
+    "develop": "node server --develop --port 8080",
     "build": "node build"
   },
   "main": "lbh3/index.stache!done-autorender",
