@@ -68,6 +68,44 @@
             {{/if}}
           </can-import>
         {{/case}}
+        {{#case "events"}}
+          {{#if secondaryPage}}
+            {{#switch secondaryPage}}
+              {{#case "jesus-cuervo-1800-trail"}}
+                <can-import from="lbh3/components/jesus-cuervo/">
+                  {{#if isPending}}
+                    Loading…
+                  {{else}}
+                    <lbh3-jesus-cuervo />
+                  {{/if}}
+                </can-import>
+              {{/case}}
+            {{/switch}}
+          {{else}}
+            {{#if trailNumber}}
+              <can-import from="lbh3/components/past-run/">
+                {{#if isPending}}
+                  Loading trail #{{trailNumber}}…
+                {{else}}
+                  <lbh3-past-run
+                    {day}="day"
+                    {month}="month"
+                    {trail-number}="trailNumber"
+                    {year}="year"
+                  />
+                {{/if}}
+              </can-import>
+            {{else}}
+              <can-import from="lbh3/components/past-runs/">
+                {{#if isPending}}
+                  Loading Past Runs…
+                {{else}}
+                  <lbh3-past-runs {year}="year" />
+                {{/if}}
+              </can-import>
+            {{/if}}
+          {{/if}}
+        {{/case}}
         {{#case "hareline"}}
           <can-import from="lbh3/components/hareline/">
             {{#if isPending}}
@@ -85,30 +123,6 @@
               <lbh3-home />
             {{/if}}
           </can-import>
-        {{/case}}
-        {{#case "events"}}
-          {{#if trailNumber}}
-            <can-import from="lbh3/components/past-run/">
-              {{#if isPending}}
-                Loading trail #{{trailNumber}}…
-              {{else}}
-                <lbh3-past-run
-                  {day}="day"
-                  {month}="month"
-                  {trail-number}="trailNumber"
-                  {year}="year"
-                />
-              {{/if}}
-            </can-import>
-          {{else}}
-            <can-import from="lbh3/components/past-runs/">
-              {{#if isPending}}
-                Loading Past Runs…
-              {{else}}
-                <lbh3-past-runs {year}="year" />
-              {{/if}}
-            </can-import>
-          {{/if}}
         {{/case}}
       {{/switch}}
     </main>
