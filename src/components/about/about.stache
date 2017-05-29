@@ -1,30 +1,17 @@
-{{#switch secondaryPage}}
-  {{#case "mismanagement"}}
-    <can-import from="lbh3/components/about/mismanagement/">
-      {{#if isPending}}
-        Loading Mismanagement…
-      {{else}}
-        <lbh3-about-mismanagement />
-      {{/if}}
-    </can-import>
-  {{/case}}
-  {{#default}}
-    <can-import from="can-stache/helpers/route" />
+<can-import from="can-stache/helpers/route" />
 
-    <h2>The History of The Hash House Harriers &amp; The Founding of LBH3</h2>
+<h2>The History of The Hash House Harriers &amp; The Founding of LBH3</h2>
 
-    <p>Established January 6 1985</p>
-    <p>Founded by: Dal “Jock” Trader</p>
-    <p>Jerry “Eject” Templeman</p>
-    <p>Andy “Zapata” Limon</p>
+<p>Established January 6 1985</p>
+<p>Founded by: Dal “Jock” Trader</p>
+<p>Jerry “Eject” Templeman</p>
+<p>Andy “Zapata” Limon</p>
 
-    <p><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">How LBH3 Started</a></p>
-    <!-- <p><a href="{{hashHistoryPDF}}">This Week in LBH3 Hash History</a></p> -->
-    <p><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">Mismanagement</a></p>
-    <p><a href="{{routeUrl page='about'}}/FounderSkit.pdf">Found'ers Skit</a></p>
-    <p><a href="{{routeUrl page='about'}}/Whosleptwithbigpink.pdf">Who Slept With Big Pink</a></p>
-    <p><a href="{{routeUrl page='about'}}/HotLips.pdf">Hot Lips Adventures</a></p>
-    <p><a href="{{routeUrl page='about'}}/LBH3SongBook.pdf">LBH3 Song Book</a></p>
-    <p><a href="{{routeUrl page='about'}}/LBH3HaringGuidelines.pdf">LBH3 Haring Guidelines</a></p>
-  {{/default}}
-{{/switch}}
+<p><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">How LBH3 Started</a></p>
+<!-- <p><a href="{{hashHistoryPDF}}">This Week in LBH3 Hash History</a></p> -->
+<p><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">Mismanagement</a></p>
+<p><a href="{{routeUrl page='about'}}/FounderSkit.pdf">Found'ers Skit</a></p>
+<p><a href="{{routeUrl page='about'}}/Whosleptwithbigpink.pdf">Who Slept With Big Pink</a></p>
+<p><a href="{{routeUrl page='about'}}/HotLips.pdf">Hot Lips Adventures</a></p>
+<p><a href="{{routeUrl page='about'}}/LBH3SongBook.pdf">LBH3 Song Book</a></p>
+<p><a href="{{routeUrl page='about'}}/LBH3HaringGuidelines.pdf">LBH3 Haring Guidelines</a></p>

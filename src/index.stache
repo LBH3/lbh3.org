@@ -51,13 +51,26 @@
     <main class="container {{page}}">
       {{#switch page}}
         {{#case "about"}}
-          <can-import from="lbh3/components/about/">
-            {{#if isPending}}
-              Loading about page…
-            {{else}}
-              <lbh3-about {secondary-page}="secondaryPage" />
-            {{/if}}
-          </can-import>
+          {{#switch secondaryPage}}
+            {{#case "mismanagement"}}
+              <can-import from="lbh3/components/about/mismanagement/">
+                {{#if isPending}}
+                  Loading Mismanagement…
+                {{else}}
+                  <lbh3-about-mismanagement />
+                {{/if}}
+              </can-import>
+            {{/case}}
+            {{#default}}
+              <can-import from="lbh3/components/about/">
+                {{#if isPending}}
+                  Loading about page…
+                {{else}}
+                  <lbh3-about {secondary-page}="secondaryPage" />
+                {{/if}}
+              </can-import>
+            {{/default}}
+          {{/switch}}
         {{/case}}
         {{#case "admin"}}
           <can-import from="lbh3/components/admin/">
