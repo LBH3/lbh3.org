@@ -1,6 +1,5 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
-import './jesus-cuervo.less';
 import view from './jesus-cuervo.stache';
 
 export const ViewModel = DefineMap.extend({

@@ -1,6 +1,5 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
-import './past-run.less';
 import ajax from 'can-util/dom/ajax/';
 import view from './past-run.stache';
 

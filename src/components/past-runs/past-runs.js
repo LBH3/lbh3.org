@@ -2,7 +2,6 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Position from '~/models/position';
 import Year from '~/models/year';
-import './past-runs.less';
 import route from 'can-route';
 import view from './past-runs.stache';
 
