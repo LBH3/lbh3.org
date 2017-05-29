@@ -27,9 +27,10 @@ route('/about/{secondaryPage}/', { page: 'about' });
 route('/about/', { page: 'about' });
 route('/admin/{secondaryPage}/', { page: 'admin' });
 route('/admin/', { page: 'admin' });
+route('/events/', { page: 'events' });
+route('/events/jesus-cuervo-1800-trail/', { page: 'events', secondaryPage: 'jesus-cuervo-1800-trail'});
 route('/events/{year}/{month}/{day}/trail-{trailNumber}/', { page: 'events', year: 0, month: 0, day: 0, trailNumber: 0});
 route('/events/{year}/', { page: 'events', year: 0});
-route('/events/', { page: 'events' });
 route('/hareline/', { page: 'hareline' });
 route('/{page}', { page: defaultPage });
 
