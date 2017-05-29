@@ -7,8 +7,11 @@ const app = server({
     app.get('*', function(req, res,  next) {
       const httpHost = req.get('Host');
       const needsSSLRedirect = req.headers['x-forwarded-proto'] !== 'https';
+      const needsWWWRedirect = httpHost === 'lbh3.org';
       if (needsSSLRedirect) {
         res.redirect(`https://${httpHost}${req.url}`);
+      } else if (needsWWWRedirect) {
+        res.redirect(`https://www.${httpHost}${req.url}`);
       } else {
         next();
       }
