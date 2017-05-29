@@ -11,15 +11,24 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.templatePromise.then(setValue);
+      const templatePromise = this.templatePromise;
+      if (templatePromise) {
+        templatePromise.then(setValue);
+      }
     }
   },
   templatePromise: {
     get: function() {
-      return ajax({
-        dataType: 'text/html',
-        url: `/src/html/past-runs/lbh3_${this.trailNumber}_${this.year}${this.month}${this.day}.html`
-      });
+      const day = this.day;
+      const month = this.month;
+      const trailNumber = this.trailNumber;
+      const year = this.year;
+      if (day && month && trailNumber && year) {
+        return ajax({
+          dataType: 'text/html',
+          url: `/src/html/past-runs/lbh3_${trailNumber}_${year}${month}${day}.html`
+        });
+      }
     }
   },
   trailNumber: 'number',
