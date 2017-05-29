@@ -32,14 +32,14 @@
     <can-import from="lbh3/app" export-as="viewModel" />
 
     <header>
-      <can-import from="lbh3/components/header.component">
+      <can-import from="lbh3/components/header/">
         {{#if isPending}}
           Loading header…
         {{else}}
           <lbh3-header />
         {{/if}}
       </can-import>
-      <can-import from="lbh3/components/nav.component">
+      <can-import from="lbh3/components/nav/">
         {{#if isPending}}
           Loading navigation…
         {{else}}
@@ -113,7 +113,7 @@
       {{/switch}}
     </main>
 
-    <can-import from="lbh3/components/footer.component">
+    <can-import from="lbh3/components/footer/">
       {{#if isPending}}
         Loading footer…
       {{else}}

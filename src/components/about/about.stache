@@ -9,6 +9,8 @@
     </can-import>
   {{/case}}
   {{#default}}
+    <can-import from="can-stache/helpers/route" />
+
     <h2>The History of The Hash House Harriers &amp; The Founding of LBH3</h2>
 
     <p>Established January 6 1985</p>

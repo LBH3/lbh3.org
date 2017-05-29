@@ -1,0 +1,18 @@
+<can-import from="can-stache/helpers/route" />
+
+<nav>
+  <ul class="container nav">
+    <li class="{{#is page 'home'}}active{{/is}} nav-item">
+      <a class="nav-link" href="{{routeUrl page='home'}}">Home</a>
+    </li>
+    <li class="{{#is page 'hareline'}}active{{/is}} nav-item">
+      <a class="nav-link" href="{{routeUrl page='hareline'}}">Hareline</a>
+    </li>
+    <li class="{{#is page 'events'}}active{{/is}} nav-item">
+      <a class="nav-link" href="{{routeUrl page='events'}}">Past Runs</a>
+    </li>
+    <li class="{{#is page 'about'}}active{{/is}} nav-item">
+      <a class="nav-link" href="{{routeUrl page='about'}}">About</a>
+    </li>
+  </ul>
+</nav>
