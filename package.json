@@ -19,6 +19,9 @@
     "build": "node build"
   },
   "main": "lbh3/index.stache!done-autorender",
+  "engines": {
+    "node": "7.x"
+  },
   "files": [
     "src"
   ],
