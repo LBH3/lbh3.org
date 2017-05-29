@@ -1,1 +1,1 @@
-web: node_modules/.bin/done-serve
+web: node server.js
