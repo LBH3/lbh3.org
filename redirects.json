@@ -1,4 +1,5 @@
 {
+  "/index.html": "/",
   "/index.php": "/",
   "/about/aboutus.php": "/about/",
   "/mismanage/": "/about/mismanagement/",
