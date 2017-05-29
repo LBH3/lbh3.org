@@ -15,6 +15,7 @@
   "scripts": {
     "test": "testee test.html --browsers firefox --reporter Spec",
     "start": "done-serve --port 8080",
+    "heroku-postbuild": "npm run build",
     "develop": "done-serve --develop --port 8080",
     "build": "node build"
   },
