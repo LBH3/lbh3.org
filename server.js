@@ -5,7 +5,6 @@ const app = server({
   path: __dirname,
   configure: function(app) {
     app.use(function(req, res, next) {
-      res.header('Content-Security-Policy', 'default-src https:');
       res.header('Referrer-Policy', 'same-origin');
       res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
       res.header('X-Content-Type-Options', 'nosniff');
