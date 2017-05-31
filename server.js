@@ -6,7 +6,7 @@ const app = server({
   configure: function(app) {
     app.get('*', function(req, res,  next) {
       const httpHost = req.get('Host');
-      const needsSSLRedirect = req.headers['x-forwarded-proto'] !== 'https';
+      const needsSSLRedirect = req.headers['x-forwarded-proto'] !== 'https' && !httpHost.includes('localhost');
       const needsWWWRedirect = httpHost === 'lbh3.org';
       if (needsSSLRedirect) {
         res.redirect(`https://${httpHost}${req.url}`);
