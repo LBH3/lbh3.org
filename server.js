@@ -4,7 +4,17 @@ const server = require('done-serve');
 const app = server({
   path: __dirname,
   configure: function(app) {
-    app.get('*', function(req, res,  next) {
+    app.use(function(req, res, next) {
+      res.header('Content-Security-Policy', 'default-src https:');
+      res.header('Referrer-Policy', 'same-origin');
+      res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+      res.header('X-Content-Type-Options', 'nosniff');
+      res.header('X-Frame-Options', 'SAMEORIGIN');
+      res.header('X-XSS-Protection', '1; mode=block');
+      next();
+    });
+
+    app.get('*', function(req, res, next) {
       const httpHost = req.get('Host');
       const needsSSLRedirect = req.headers['x-forwarded-proto'] !== 'https' && !httpHost.includes('localhost');
       const needsWWWRedirect = httpHost === 'lbh3.org';
