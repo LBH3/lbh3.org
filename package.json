@@ -21,7 +21,7 @@
   },
   "main": "lbh3/index.stache!done-autorender",
   "engines": {
-    "node": "7.x"
+    "node": "8.x"
   },
   "files": [
     "src"
