@@ -2,6 +2,7 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Position from '~/models/position';
 import currentHareline from '~/html/hareline/current.html';
+import loader from '@loader';
 import view from './hareline.stache';
 
 const trailmasterEmailLink = function(trailmaster) {
@@ -11,6 +12,9 @@ const trailmasterEmailLink = function(trailmaster) {
 export const ViewModel = DefineMap.extend({
   currentHareline: {
     value: currentHareline
+  },
+  get isDevelopment() {
+    return loader.env === 'window-development';
   },
   positions: {
     get: function(lastValue, setValue) {

@@ -2,3 +2,10 @@
 <p><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">LBH3 Haring Guidelines</a></p>
 
 {{currentHareline}}
+
+{{#if isDevelopment}}
+  <can-import from="can-stache/helpers/route" />
+  <a class="btn btn-primary" href="{{routeUrl page='hareline' secondaryPage='add'}}">
+    Add trail
+  </a>
+{{/if}}
