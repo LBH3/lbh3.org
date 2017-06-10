@@ -1,0 +1,31 @@
+<h2>Add a new trail</h2>
+
+<form ($submit)="createTrail(%event)">
+  <div class="form-group row">
+    <label class="col-1 col-form-label" for="run-number">
+      Run #
+    </label>
+    <div class="col-11">
+      <input autofocus class="form-control" id="run-number" type="number" {($value)}="runNumber">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-1 col-form-label" for="trail-date">
+      Date
+    </label>
+    <div class="col-11">
+      <input class="form-control" id="trail-date" type="date" {($value)}="trailDate">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-1 col-form-label" for="start-time">
+      Time
+    </label>
+    <div class="col-11">
+      <input class="form-control" id="start-time" type="time" {($value)}="startTime">
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">
+    Create trail
+  </button>
+</form>
