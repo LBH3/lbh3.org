@@ -1,5 +1,21 @@
 <h2>Add a new trail</h2>
 
+{{#if creatingTrailPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Saving trail…</strong>
+  </div>
+{{/if}}
+{{#if creatingTrailPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Uh oh!</strong> The new trail failed to save. Check the console for more details.
+  </div>
+{{/if}}
+{{#if creatingTrailPromise.isResolved}}
+  <div class="alert alert-success" role="alert">
+    <strong>Well done!</strong> You successfully created trail #{{createdTrail.runNumber}}.
+  </div>
+{{/if}}
+
 <form ($submit)="createTrail()">
   <div class="form-group row">
     <label class="col-1 col-form-label" for="run-number">
