@@ -12,7 +12,7 @@ QUnit.test('createTrail resets the form', function(done) {
   });
   QUnit.equal(vm.runNumber, 1800);
   vm.createTrail().then(function() {
-    QUnit.equal(vm.runNumber, 0);
+    QUnit.equal(vm.runNumber, 1801);
     done();
   });
 });
