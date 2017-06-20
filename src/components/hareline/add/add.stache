@@ -1,6 +1,6 @@
 <h2>Add a new trail</h2>
 
-<form ($submit)="createTrail(%event)">
+<form ($submit)="createTrail()">
   <div class="form-group row">
     <label class="col-1 col-form-label" for="run-number">
       Run #

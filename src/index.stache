@@ -84,6 +84,20 @@
         {{#case "events"}}
           {{#if secondaryPage}}
             {{#switch secondaryPage}}
+              {{#case "edit"}}
+                <can-import from="lbh3/components/past-run/edit/">
+                  {{#if isPending}}
+                    Loading page to edit past run…
+                  {{else}}
+                    <lbh3-past-run-edit
+                      {day}="day"
+                      {month}="month"
+                      {trail-number}="trailNumber"
+                      {year}="year"
+                    />
+                  {{/if}}
+                </can-import>
+              {{/case}}
               {{#case "jesus-cuervo-1800-trail"}}
                 <can-import from="lbh3/components/jesus-cuervo/">
                   {{#if isPending}}
@@ -100,6 +114,12 @@
                 {{#if isPending}}
                   Loading trail #{{trailNumber}}…
                 {{else}}
+                  {{#if isDevelopment}}
+                    <can-import from="can-stache/helpers/route" />
+                    <a class="btn btn-primary" href="{{routeUrl page='events' year=year month=month day=day trailNumber=trailNumber secondaryPage='edit'}}">
+                      Edit trail
+                    </a>
+                  {{/if}}
                   <lbh3-past-run
                     {day}="day"
                     {month}="month"
