@@ -120,13 +120,26 @@
           {{/if}}
         {{/case}}
         {{#case "hareline"}}
-          <can-import from="lbh3/components/hareline/">
-            {{#if isPending}}
-              Loading Hareline…
-            {{else}}
-              <lbh3-hareline />
-            {{/if}}
-          </can-import>
+          {{#switch secondaryPage}}
+            {{#case "guidelines"}}
+              <can-import from="lbh3/components/hareline/guidelines/">
+                {{#if isPending}}
+                  Loading haring guidelines…
+                {{else}}
+                  <lbh3-hareline-guidelines />
+                {{/if}}
+              </can-import>
+            {{/case}}
+            {{#default}}
+              <can-import from="lbh3/components/hareline/">
+                {{#if isPending}}
+                  Loading Hareline…
+                {{else}}
+                  <lbh3-hareline />
+                {{/if}}
+              </can-import>
+            {{/default}}
+          {{/switch}}
         {{/case}}
         {{#case "home"}}
           <can-import from="lbh3/components/home/">
