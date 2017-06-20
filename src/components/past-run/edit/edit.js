@@ -1,6 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './edit.less';
+import platform from 'steal-platform';
 import view from './edit.stache';
 
 export const ViewModel = DefineMap.extend({
@@ -13,6 +14,7 @@ export const ViewModel = DefineMap.extend({
   month: 'string',
   onOn: 'string',
   photosURL: 'string',
+  place: 'any',
   snoozeURL: 'string',
   title: 'string',
   trailNumber: 'number',
@@ -26,6 +28,7 @@ export const ViewModel = DefineMap.extend({
     this.location = '';
     this.onOn = '';
     this.photosURL = '';
+    this.place = null;
     this.snoozeURL = '';
     this.title = '';
   }
@@ -36,6 +39,22 @@ export default Component.extend({
   ViewModel,
   view,
   events: {
+    inserted: function() {
+      if (platform.isNode) {
+        return;
+      }
+      const mapsScript = document.createElement('script');
+      mapsScript.onload = () => {
+        const locationInput = document.getElementById('location');
+        const autocomplete = new google.maps.places.Autocomplete(locationInput);
+        autocomplete.addListener('place_changed', () => {
+          this.viewModel.place = autocomplete.getPlace();
+        });
+      };
+      mapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAEED9iCwz71U-gtb7Ulk3pb7SfAS-gtTQ&libraries=places';
+      mapsScript.type = 'text/javascript';
+      document.getElementsByTagName('head')[0].appendChild(mapsScript);
+    },
     '{element} submit': function(element, event) {
       event.preventDefault();
     }

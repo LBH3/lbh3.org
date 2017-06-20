@@ -14,7 +14,7 @@
       Location
     </label>
     <div class="col-md-10">
-      <input class="form-control" id="location" type="text" {($value)}="location">
+      <input class="form-control" id="location" placeholder="" type="text" {($value)}="location">
     </div>
   </div>
   <div class="form-group row">
