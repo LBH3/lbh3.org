@@ -1,1 +1,7 @@
-{{{template}}}
+{{#if template}}
+  {{{template}}}
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Run not found</strong> 😢
+  </div>
+{{/if}}
