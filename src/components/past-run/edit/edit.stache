@@ -1,0 +1,79 @@
+<h2>Edit Run #{{trailNumber}}</h2>
+
+<form ($submit)="editRun()">
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="hares">
+      Hares
+    </label>
+    <div class="col-md-10">
+      <input autofocus class="form-control" id="hares" type="text" {($value)}="hares">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="location">
+      Location
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="location" type="text" {($value)}="location">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="title">
+      Title
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="title" type="text" {($value)}="title">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="bring">
+      Bring
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="bring" type="text" {($value)}="bring">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="directions">
+      Directions
+    </label>
+    <div class="col-md-10">
+      <textarea class="form-control" id="directions" {($value)}="directions"></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="from-the-hares">
+      From the Hares
+    </label>
+    <div class="col-md-10">
+      <textarea class="form-control" id="from-the-hares" {($value)}="fromTheHares"></textarea>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="on-on">
+      On-On
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="on-on" type="text" {($value)}="onOn">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="photos-url">
+      Photos URL
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="photos-url" type="text" {($value)}="photosURL">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-md-2 col-form-label" for="snooze-url">
+      Snooze URL
+    </label>
+    <div class="col-md-10">
+      <input class="form-control" id="snooze-url" type="text" {($value)}="snoozeURL">
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">
+    Edit run
+  </button>
+</form>
