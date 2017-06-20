@@ -7,6 +7,7 @@ import 'lbh3/components/about/about-test';
 import 'lbh3/components/about/mismanagement/mismanagement-test';
 import 'lbh3/components/admin/admin-test';
 import 'lbh3/components/footer/footer-test';
+import 'lbh3/components/hareline/guidelines/guidelines-test';
 import 'lbh3/components/hareline/hareline-test';
 import 'lbh3/components/header/header-test';
 import 'lbh3/components/home/home-test';
