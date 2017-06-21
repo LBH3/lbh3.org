@@ -1,7 +1,15 @@
-{{#if template}}
-  {{{template}}}
-{{else}}
-  <div class="alert alert-danger" role="alert">
-    <strong>Run not found</strong> 😢
+{{#if templatePromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching run…</strong>
   </div>
+{{/if}}
+
+{{#if templatePromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Uh oh!</strong> The run couldn’t be retrieved.
+  </div>
+{{/if}}
+
+{{#if templatePromise.isResolved}}
+  {{{template}}}
 {{/if}}

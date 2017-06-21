@@ -1,5 +1,7 @@
-<footer>
-  <p class="container text-muted">
-    For website issues, <a href="mailto:{{webmaster.email}}">email {{webmaster.name}}</a>
-  </p>
-</footer>
+{{#if webmaster}}
+  <footer>
+    <p class="container text-muted">
+      For website issues, <a href="mailto:{{webmaster.email}}">email {{webmaster.name}}</a>
+    </p>
+  </footer>
+{{/if}}
