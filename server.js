@@ -1,4 +1,6 @@
+const exec = require('child_process').exec;
 const fs = require('fs');
+const path = require('path');
 const server = require('done-serve');
 
 const app = server({
@@ -48,5 +50,14 @@ const app = server({
     }
   }
 });
+
+if (process.argv.indexOf('--develop') > -1) {
+  const liveReload = path.join('node_modules', '.bin', 'steal-tools live-reload');
+  const childProcess = exec(liveReload, {
+    cwd: process.cwd()
+  });
+  childProcess.stdout.pipe(process.stdout);
+  childProcess.stderr.pipe(process.stderr);
+}
 
 app.listen(process.env.PORT || 8080);
