@@ -14,4 +14,4 @@
 <p><a href="{{routeUrl page='about'}}/Whosleptwithbigpink.pdf">Who Slept With Big Pink</a></p>
 <p><a href="{{routeUrl page='about'}}/HotLips.pdf">Hot Lips Adventures</a></p>
 <p><a href="{{routeUrl page='about'}}/LBH3SongBook.pdf">LBH3 Song Book</a></p>
-<p><a href="{{routeUrl page='about'}}/LBH3HaringGuidelines.pdf">LBH3 Haring Guidelines</a></p>
+<p><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">LBH3 Haring Guidelines</a></p>
