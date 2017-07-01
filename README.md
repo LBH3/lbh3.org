@@ -11,11 +11,53 @@ Check out the [contribution guide](CONTRIBUTING.md).
 
 ## Getting started
 
+### npm
+
 To install all dependencies, (e.g. after cloning it from a Git repository) run
 
 ```
 npm install donejs -g
 npm install
+```
+
+### PostgreSQL
+
+To install [Homebrew](https://brew.sh) & PostgreSQL, run
+
+```shell
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+brew install postgresql
+```
+
+After installing PostgreSQL, something similar to the following should be shown:
+
+```
+To have launchd start postgresql now and restart at login:
+  brew services start postgresql
+
+Or, if you don't want/need a background service you can just run:
+  pg_ctl -D /usr/local/var/postgres start
+```
+
+You may need to create a symbolic link from the script that actually allows Postgres to run to the LaunchAgents directory and tell `launchctl` to load it:
+
+```shell
+ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents
+launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist
+```
+
+If upgrading from a previous version of PostgreSQL, you might need to run the following:
+
+```shell
+rm -rf /usr/local/var/postgres
+initdb /usr/local/var/postgres -E utf8
+```
+
+After running that command, something similar to the following should be shown:
+
+```shell
+You can now start the database server using:
+    pg_ctl -D /usr/local/var/postgres -l logfile start
 ```
 
 ## Running tests
