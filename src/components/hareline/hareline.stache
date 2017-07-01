@@ -6,7 +6,88 @@
 
 <p><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">LBH3 Haring Guidelines</a></p>
 
-{{currentHareline}}
+<h2>2017 Hareline</h2>
+
+<h3>July 2017</h3>
+<table class="table table-bordered table-responsive table-sm">
+  <thead>
+    <tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>7/6</td>
+      <td>1815</td>
+      <td>Candy Apple Heroes</td>
+      <td>Cypress</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>7/13</td>
+      <td>1816</td>
+      <td>Bleeding Hash Hole</td>
+      <td>Long Beach</td>
+      <td></td>
+    </tr>
+    <tr style="color: #3a3a79">
+      <td>7/20</td>
+      <td>1817</td>
+      <td>Pillsbury Blow Boy &amp; Iggy</td>
+      <td></td>
+      <td>Blew Dress Run</td>
+    </tr>
+    <tr>
+      <td>7/27</td>
+      <td>1818</td>
+      <td>Chicken Legs, Hokey Tokey, &amp; Koo Koo 4 Cock</td>
+      <td>Long Beach</td>
+      <td>Nerd Run</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3>August 2017</h3>
+<table class="table table-bordered table-responsive table-sm">
+  <thead>
+    <tr><th>Date</th><th>Hash#</th><th>Hares</th><th>Location</th><th>Notes</th></tr>
+  </thead>
+  <tbody>
+    <tr class="table-danger">
+      <td>8/3</td>
+      <td>1819</td>
+      <td>Available!</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>8/10</td>
+      <td>1820</td>
+      <td>Stumbelina &amp; Harry Palmer</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>8/17</td>
+      <td>1821</td>
+      <td>Alouette</td>
+      <td></td>
+      <td>Lingerie Run</td>
+    </tr>
+    <tr class="table-danger">
+      <td>8/24</td>
+      <td>1822</td>
+      <td>Available!</td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>8/31</td>
+      <td>1823</td>
+      <td>Yoko, Satan, and Gag</td>
+      <td></td>
+      <td></td>
+    </tr>
+  </tbody>
+</table>
 
 {{#if isDevelopment}}
   <a class="btn btn-primary" href="{{routeUrl page='hareline' secondaryPage='add'}}">
