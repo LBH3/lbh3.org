@@ -1,6 +1,6 @@
 # lbh3.org
 
-[![Build Status](https://travis-ci.org/<your-username>/place-my-order.png?branch=master)](https://travis-ci.org/<your-username>/place-my-order)
+[![Build Status](https://travis-ci.org/LBH3/lbh3.org.svg?branch=master)](https://travis-ci.org/LBH3/lbh3.org)
 
 
 LBH3 website
