@@ -1,3 +1,5 @@
+<can-import from="can-stache/helpers/route" />
+
 {{#if trailmasters.length}}
   <p>For questions or to sign up for a run, contact our Trail Master{{^is trailmasters.length 1}}s{{/is}}: {{{trailmasterEmailLinks}}}.</p>
 {{/if}}
@@ -7,7 +9,6 @@
 {{currentHareline}}
 
 {{#if isDevelopment}}
-  <can-import from="can-stache/helpers/route" />
   <a class="btn btn-primary" href="{{routeUrl page='hareline' secondaryPage='add'}}">
     Add trail
   </a>
