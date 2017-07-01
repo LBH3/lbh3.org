@@ -79,7 +79,7 @@
     "funcunit": "^3.2.0",
     "steal-qunit": "^1.0.1",
     "steal-tools": "^1.2.0",
-    "testee": "^0.3.0",
+    "testee": "^0.6.1",
     "can-fixture": "^1.0.13"
   }
 }
