@@ -36,6 +36,7 @@ route('/events/jesus-cuervo-1800-trail/', { page: 'events', secondaryPage: 'jesu
 route('/events/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
 route('/events/{year}/{month}/{day}/trail-{trailNumber}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0});
 route('/events/{year}/', { page: 'events', year: 0});
+route('/hareline/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'hareline', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
 route('/hareline/{secondaryPage}/', { page: 'hareline' });
 route('/hareline/', { page: 'hareline' });
 route('/{page}', { page: defaultPage });

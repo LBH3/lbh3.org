@@ -150,6 +150,20 @@
                 {{/if}}
               </can-import>
             {{/case}}
+            {{#case "edit"}}
+              <can-import from="lbh3/components/past-run/edit/">
+                {{#if isPending}}
+                  Loading edit run page…
+                {{else}}
+                  <lbh3-past-run-edit
+                    {day}="day"
+                    {month}="month"
+                    {trail-number}="trailNumber"
+                    {year}="year"
+                  />
+                {{/if}}
+              </can-import>
+            {{/case}}
             {{#case "guidelines"}}
               <can-import from="lbh3/components/hareline/guidelines/">
                 {{#if isPending}}
