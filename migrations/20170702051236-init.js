@@ -32,7 +32,7 @@ exports.up = function(db) {
     on_on_google_place_id: textType,
     on_on_md: textType,
     photos_url: textType,
-    scribes: textArrayType,
+    scribes_md: textType,
     start_datetime: 'timestamptz',
     snooze_title_md: textType,
     snooze_url: textType,

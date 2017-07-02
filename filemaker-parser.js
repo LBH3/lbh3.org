@@ -51,7 +51,7 @@ fs.readFile(`${__dirname}/filemaker/list-of-members.xml`, function(readError, da
       if (parseError) {
         console.error('Error while parsing list-of-members.xml:', parseError);
       } else {
-        writeDataToFile(result, 'list-of-members.json');
+        // writeDataToFile(result, 'list-of-members.json');
 
         const data = result.FMPXMLRESULT;
 
@@ -116,7 +116,7 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
       if (parseError) {
         console.error('Error while parsing the XML file:', parseError);
       } else {
-        writeDataToFile(result, 'run-list-all.json');
+        // writeDataToFile(result, 'run-list-all.json');
 
         const data = result.FMPXMLRESULT;
 
@@ -137,17 +137,23 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
           'ON ON': 'on_on_md',
           'Run Comments': 'trail_comments_md',
           'Run.Id.pk': 'trail_number',
-          'Scribe': 'scribes',
+          'Scribe': 'scribes_md',
           'Run Date': 'start_datetime'
         };
         const events = runs.map(function(run) {
-          const event = {};
+          const event = {
+            snooze_title_md: ''
+          };
           for (let key in run) {
             const dataKey = runToEventFields[key];
             if (dataKey) {
               let dataValue = run[key];
               if (dataKey === 'hashit_reason_md') {
                 dataValue = dataValue || run['Hashit.Id'];
+              } else if (dataKey === 'scribes_md' && dataValue) {
+                const scribeSplit = dataValue.split('--');
+                dataValue = scribeSplit.shift();
+                event.snooze_title_md = scribeSplit.join('—');
               } else if (dataKey === 'start_datetime') {
                 if (run.zct_dayofweek === 'Saturday' || run.zct_dayofweek === 'Sunday') {
                   dataValue += ' 10:00 am';
@@ -162,19 +168,11 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
                 }
               }
               if (dataValue && dataValue.replace) {
+                // Replace null bytes
                 dataValue = dataValue.replace(/\0/g, '');
               }
               event[dataKey] = dataValue || ((dataKey === 'hashit_id' || dataKey === 'trail_number') ? 0 : '');
             }
-          }
-          event.snooze_title_md = '';
-          if (event.scribes) {
-            const scribeSplit = event.scribes.split('--');
-            const scribes = scribeSplit.shift().replace(/"/g, "'");
-            event.scribes = `{'${scribes}'}`;
-            event.snooze_title_md = scribeSplit.join('—');
-          } else {
-            event.scribes = '{}';
           }
           return event;
         });
