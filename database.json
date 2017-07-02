@@ -1,0 +1,6 @@
+{
+  "dev": {
+    "database": "lbh3",
+    "driver": "pg"
+  }
+}
