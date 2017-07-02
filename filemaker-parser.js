@@ -58,11 +58,50 @@ fs.readFile(`${__dirname}/filemaker/list-of-members.xml`, function(readError, da
         const fields = getFieldsFromMetadata(data.METADATA);
         console.info('Fields in list-of-members.xml:', fields);
 
-        const hashers = parseResultSetWithFields(data.RESULTSET, fields);
-        hashers.forEach(function(hasher) {
-          console.info('Hasher:', hasher);
+        const members = parseResultSetWithFields(data.RESULTSET, fields);
+        members.forEach(function(member) {
+          console.info('Hasher:', member);
         });
-        console.info('Total number of hashers:', hashers.length);
+        console.info('Total number of hashers:', members.length);
+
+        const hasherToDatabaseFields = {
+          'Address': 'external_address_street',
+          'City': 'external_address_city',
+          'Country': 'external_address_country',
+          'First Name:': 'given_name',
+          'First Run #:': 'external_first_trail_number',
+          'First Run Date:': 'external_first_trail_date',
+          'Hares #:': 'external_hare_count_2',
+          'Hares No.': 'external_hare_count_1',
+          'Hash Name:': 'hash_name',
+          'Last Name:': 'family_name',
+          'RECORDID': 'external_id',
+          'zct_Runs': 'external_run_count'
+        };
+        const hashers = members.map(function(member) {
+          const hasher = {};
+          for (let key in member) {
+            const dataKey = hasherToDatabaseFields[key];
+            if (dataKey) {
+              let dataValue = member[key];
+              if (dataKey === 'external_first_trail_date' && dataValue) {
+                dataValue = dataValue.replace('012/', '12/');
+              }
+              const dataShouldBeDate = (dataKey === 'external_first_trail_date');
+              const dataShouldBeNumber = (
+                dataKey === 'external_hare_count_1' ||
+                dataKey === 'external_hare_count_2' ||
+                dataKey === 'external_run_count'
+              );
+              if (dataValue && dataShouldBeNumber) {
+                dataValue = parseInt(dataKey, 10);
+              }
+              hasher[dataKey] = dataValue || (dataShouldBeNumber ? 0 : '');
+            }
+          }
+          return hasher;
+        });
+        writeDataToFile(hashers, 'hashers.json');
       }
     });
   }
@@ -102,7 +141,7 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
           'Run Date': 'start_datetime'
         };
         const events = runs.map(function(run) {
-          let event = {};
+          const event = {};
           for (let key in run) {
             const dataKey = runToEventFields[key];
             if (dataKey) {
@@ -139,7 +178,6 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
           }
           return event;
         });
-
         writeDataToFile(events, 'events.json');
       }
     });
