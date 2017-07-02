@@ -60,6 +60,44 @@ You can now start the database server using:
     pg_ctl -D /usr/local/var/postgres -l logfile start
 ```
 
+## Database
+
+To create the `lbh3` database:
+
+```shell
+createdb lbh3
+```
+
+To create a new migration with [db-migrate](https://www.npmjs.com/package/db-migrate):
+
+```shell
+npm run db-migrate:create migration-name
+```
+
+As you’re developing, you might want to migrate down and then back up, which you can do with the following:
+
+```shell
+npm run db-migrate:rerun
+```
+
+To just migrate the database up:
+
+```shell
+npm run db-migrate:up
+```
+
+To just migrate the database down:
+
+```shell
+npm run db-migrate:down
+```
+
+To reset the database:
+
+```shell
+npm run db-migrate:reset
+```
+
 ## Running tests
 
 Tests can be run with
