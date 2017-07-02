@@ -91,7 +91,64 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
             runs.push(run);
           });
         });
+        const runToEventFields = {
+          'RECORDID': 'external_id',
+          'Hare.id.fk': 'hares_md',
+          'Hashit_Comment': 'hashit_reason_md',
+          'Place': 'location_md',
+          'ON ON': 'on_on_md',
+          'Run Comments': 'trail_comments_md',
+          'Run.Id.pk': 'trail_number',
+          'Scribe': 'scribes',
+          'Run Date': 'start_datetime'
+        };
         console.info('Total number of runs:', runs.length);
+        const events = runs.map(function(run) {
+          let event = {};
+          for (let key in run) {
+            const dataKey = runToEventFields[key];
+            if (dataKey) {
+              let dataValue = run[key];
+              if (dataKey === 'hashit_reason_md') {
+                dataValue = dataValue || run['Hashit.Id'];
+              } else if (dataKey === 'start_datetime') {
+                if (run.zct_dayofweek === 'Saturday' || run.zct_dayofweek === 'Sunday') {
+                  dataValue += ' 10:00 am';
+                } else {
+                  dataValue += ' 6:30 pm';
+                }
+                dataValue += ' America/Los_Angeles';
+              } else if (dataKey === 'trail_number') {
+                dataValue = parseInt(dataValue, 10);
+                if (isNaN(dataValue) || dataValue < 1 || dataValue > 2000) {
+                  dataValue = 0;
+                }
+              }
+              if (dataValue && dataValue.replace) {
+                dataValue = dataValue.replace(/\0/g, '');
+              }
+              event[dataKey] = dataValue || ((dataKey === 'hashit_id' || dataKey === 'trail_number') ? 0 : '');
+            }
+          }
+          event.snooze_title_md = '';
+          if (event.scribes) {
+            const scribeSplit = event.scribes.split('--');
+            const scribes = scribeSplit.shift().replace(/"/g, "'");
+            event.scribes = `{'${scribes}'}`;
+            event.snooze_title_md = scribeSplit.join('—');
+          } else {
+            event.scribes = '{}';
+          }
+          return event;
+        });
+        const eventsJSON = JSON.stringify(events);
+        fs.writeFile(`${__dirname}/filemaker/events.json`, eventsJSON, function(writeError, data) {
+          if (parseError) {
+            console.error('Error while writing events.json:', writeError);
+          } else {
+            console.info('Successfully wrote events.json');
+          }
+        });
       }
     });
   }
