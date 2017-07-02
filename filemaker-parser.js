@@ -94,7 +94,7 @@ fs.readFile(`${__dirname}/filemaker/list-of-members.xml`, function(readError, da
                 dataKey === 'external_run_count'
               );
               if (dataValue && dataShouldBeNumber) {
-                dataValue = parseInt(dataKey, 10);
+                dataValue = parseInt(dataValue, 10);
               }
               hasher[dataKey] = dataValue || (dataShouldBeNumber ? 0 : '');
             }
