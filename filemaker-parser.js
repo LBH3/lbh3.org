@@ -1,5 +1,46 @@
 const fs = require('fs');
+const path = require('path');
 const xml2js = require('xml2js');
+
+const getFieldsFromMetadata = function(metadata) {
+  let fields;
+  metadata.forEach(function(parsedFields) {
+    fields = parsedFields.FIELD.map(function(field) {
+      return field.$.NAME;
+    });
+  });
+  return fields;
+};
+
+const parseResultSetWithFields = function(resultSet, fields) {
+  const items = [];
+  resultSet.forEach(function(rows) {
+    rows.ROW.forEach(function(row) {
+      const item = {};
+      row.COL.forEach(function(column, i) {
+        const filteredData = column.DATA.filter(function(data) {
+          return data;
+        });
+        item[fields[i]] = (filteredData.length > 1) ? filteredData.join('; ') : filteredData[0];
+      });
+      item.RECORDID = row.$.RECORDID;
+      items.push(item);
+    });
+  });
+  return items;
+};
+
+const writeDataToFile = function(data, filename) {
+  const json = JSON.stringify(data);
+  const filePath = path.join(__dirname, 'filemaker', filename);
+  fs.writeFile(filePath, json, function(error, data) {
+    if (error) {
+      console.error(`Error while writing ${filename}:`, error);
+    } else {
+      console.info(`Successfully wrote ${filename}`);
+    }
+  });
+};
 
 fs.readFile(`${__dirname}/filemaker/list-of-members.xml`, function(readError, data) {
   if (readError) {
@@ -10,38 +51,16 @@ fs.readFile(`${__dirname}/filemaker/list-of-members.xml`, function(readError, da
       if (parseError) {
         console.error('Error while parsing list-of-members.xml:', parseError);
       } else {
-        const json = JSON.stringify(result);
-        fs.writeFile(`${__dirname}/filemaker/list-of-members.json`, json, function(writeError, data) {
-          if (parseError) {
-            console.error('Error while writing list-of-members.json:', writeError);
-          } else {
-            console.info('Successfully wrote list-of-members.json');
-          }
-        });
+        writeDataToFile(result, 'list-of-members.json');
 
         const data = result.FMPXMLRESULT;
-        const metadata = data.METADATA;
-        let fields;
-        const hashers = [];
-        metadata.forEach(function(parsedFields) {
-          fields = parsedFields.FIELD.map(function(field) {
-            return field.$.NAME;
-          });
-        });
+
+        const fields = getFieldsFromMetadata(data.METADATA);
         console.info('Fields in list-of-members.xml:', fields);
-        data.RESULTSET.forEach(function(rows) {
-          rows.ROW.forEach(function(row) {
-            const hasher = {};
-            row.COL.forEach(function(column, i) {
-              const filteredData = column.DATA.filter(function(data) {
-                return data;
-              });
-              hasher[fields[i]] = (filteredData.length > 1) ? filteredData.join('; ') : filteredData[0];
-            });
-            hasher.RECORDID = row.$.RECORDID;
-            console.info('Hasher:', hasher);
-            hashers.push(hasher);
-          });
+
+        const hashers = parseResultSetWithFields(data.RESULTSET, fields);
+        hashers.forEach(function(hasher) {
+          console.info('Hasher:', hasher);
         });
         console.info('Total number of hashers:', hashers.length);
       }
@@ -58,39 +77,19 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
       if (parseError) {
         console.error('Error while parsing the XML file:', parseError);
       } else {
-        const json = JSON.stringify(result);
-        fs.writeFile(`${__dirname}/filemaker/run-list-all.json`, json, function(writeError, data) {
-          if (parseError) {
-            console.error('Error while writing the JSON file:', writeError);
-          } else {
-            console.info('Successfully wrote the JSON file');
-          }
-        });
+        writeDataToFile(result, 'run-list-all.json');
 
         const data = result.FMPXMLRESULT;
-        const metadata = data.METADATA;
-        let fields;
-        const runs = [];
-        metadata.forEach(function(parsedFields) {
-          fields = parsedFields.FIELD.map(function(field) {
-            return field.$.NAME;
-          });
-        });
+
+        const fields = getFieldsFromMetadata(data.METADATA);
         console.info('Fields in the file:', fields);
-        data.RESULTSET.forEach(function(rows) {
-          rows.ROW.forEach(function(row) {
-            const run = {};
-            row.COL.forEach(function(column, i) {
-              const filteredData = column.DATA.filter(function(data) {
-                return data;
-              });
-              run[fields[i]] = (filteredData.length > 1) ? filteredData.join('; ') : filteredData[0];
-            });
-            run.RECORDID = row.$.RECORDID;
-            console.info('Run:', run);
-            runs.push(run);
-          });
+
+        const runs = parseResultSetWithFields(data.RESULTSET, fields);
+        runs.forEach(function(run) {
+          console.info('Run:', run);
         });
+        console.info('Total number of runs:', runs.length);
+
         const runToEventFields = {
           'RECORDID': 'external_id',
           'Hare.id.fk': 'hares_md',
@@ -102,7 +101,6 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
           'Scribe': 'scribes',
           'Run Date': 'start_datetime'
         };
-        console.info('Total number of runs:', runs.length);
         const events = runs.map(function(run) {
           let event = {};
           for (let key in run) {
@@ -141,14 +139,8 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
           }
           return event;
         });
-        const eventsJSON = JSON.stringify(events);
-        fs.writeFile(`${__dirname}/filemaker/events.json`, eventsJSON, function(writeError, data) {
-          if (parseError) {
-            console.error('Error while writing events.json:', writeError);
-          } else {
-            console.info('Successfully wrote events.json');
-          }
-        });
+
+        writeDataToFile(events, 'events.json');
       }
     });
   }
