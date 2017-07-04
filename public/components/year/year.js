@@ -32,5 +32,19 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'lbh3-year',
   ViewModel,
-  view
+  view,
+  events: {
+    inserted: 'updateView',
+    '{viewModel} template': 'updateView',
+    updateView: function() {
+      const element = this.element;
+      const template = this.viewModel.template;
+      while (element.firstChild) {
+        element.removeChild(element.firstChild);
+      }
+      if (template) {
+        element.appendChild(template());
+      }
+    }
+  }
 });
