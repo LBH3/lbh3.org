@@ -65,18 +65,18 @@ fs.readFile(`${__dirname}/filemaker/list-of-members.xml`, function(readError, da
         console.info('Total number of hashers:', members.length);
 
         const hasherToDatabaseFields = {
-          'Address': 'external_address_street',
-          'City': 'external_address_city',
-          'Country': 'external_address_country',
-          'First Name:': 'given_name',
-          'First Run #:': 'external_first_trail_number',
-          'First Run Date:': 'external_first_trail_date',
-          'Hares #:': 'external_hare_count_2',
-          'Hares No.': 'external_hare_count_1',
-          'Hash Name:': 'hash_name',
-          'Last Name:': 'family_name',
-          'RECORDID': 'external_id',
-          'zct_Runs': 'external_run_count'
+          'Address': 'externalAddressStreet',
+          'City': 'externalAddressCity',
+          'Country': 'externalAddressCountry',
+          'First Name:': 'givenName',
+          'First Run #:': 'externalFirstTrailNumber',
+          'First Run Date:': 'externalFirstTrailDate',
+          'Hares #:': 'externalHareCount2',
+          'Hares No.': 'externalHareCount1',
+          'Hash Name:': 'hashName',
+          'Last Name:': 'familyName',
+          'RECORDID': 'externalId',
+          'zct_Runs': 'externalRunCount'
         };
         const hashers = members.map(function(member) {
           const hasher = {};
@@ -84,14 +84,14 @@ fs.readFile(`${__dirname}/filemaker/list-of-members.xml`, function(readError, da
             const dataKey = hasherToDatabaseFields[key];
             if (dataKey) {
               let dataValue = member[key];
-              if (dataKey === 'external_first_trail_date' && dataValue) {
+              if (dataKey === 'externalFirstTrailDate' && dataValue) {
                 dataValue = dataValue.replace('012/', '12/');
               }
-              const dataShouldBeDate = (dataKey === 'external_first_trail_date');
+              const dataShouldBeDate = (dataKey === 'externalFirstTrailDate');
               const dataShouldBeNumber = (
-                dataKey === 'external_hare_count_1' ||
-                dataKey === 'external_hare_count_2' ||
-                dataKey === 'external_run_count'
+                dataKey === 'externalHareCount1' ||
+                dataKey === 'externalHareCount2' ||
+                dataKey === 'externalRunCount'
               );
               if (dataValue && dataShouldBeNumber) {
                 dataValue = parseInt(dataValue, 10);
@@ -130,38 +130,38 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
         console.info('Total number of runs:', runs.length);
 
         const runToEventFields = {
-          'RECORDID': 'external_id',
-          'Hare.id.fk': 'hares_md',
-          'Hashit_Comment': 'hashit_reason_md',
-          'Place': 'location_md',
-          'ON ON': 'on_on_md',
-          'Run Comments': 'trail_comments_md',
-          'Run.Id.pk': 'trail_number',
-          'Scribe': 'scribes_md',
-          'Run Date': 'start_datetime'
+          'RECORDID': 'externalId',
+          'Hare.id.fk': 'haresMd',
+          'Hashit_Comment': 'hashitReasonMd',
+          'Place': 'locationMd',
+          'ON ON': 'onOnMd',
+          'Run Comments': 'trailCommentsMd',
+          'Run.Id.pk': 'trailNumber',
+          'Scribe': 'scribesMd',
+          'Run Date': 'startDatetime'
         };
         const events = runs.map(function(run) {
           const event = {
-            snooze_title_md: ''
+            snoozeTitleMd: ''
           };
           for (let key in run) {
             const dataKey = runToEventFields[key];
             if (dataKey) {
               let dataValue = run[key];
-              if (dataKey === 'hashit_reason_md') {
+              if (dataKey === 'hashitReasonMd') {
                 dataValue = dataValue || run['Hashit.Id'];
-              } else if (dataKey === 'scribes_md' && dataValue) {
+              } else if (dataKey === 'scribesMd' && dataValue) {
                 const scribeSplit = dataValue.split('--');
                 dataValue = scribeSplit.shift();
-                event.snooze_title_md = scribeSplit.join('—');
-              } else if (dataKey === 'start_datetime') {
+                event.snoozeTitleMd = scribeSplit.join('—');
+              } else if (dataKey === 'startDatetime') {
                 if (run.zct_dayofweek === 'Saturday' || run.zct_dayofweek === 'Sunday') {
                   dataValue += ' 10:00 am';
                 } else {
                   dataValue += ' 6:30 pm';
                 }
                 dataValue += ' America/Los_Angeles';
-              } else if (dataKey === 'trail_number') {
+              } else if (dataKey === 'trailNumber') {
                 dataValue = parseInt(dataValue, 10);
                 if (isNaN(dataValue) || dataValue < 1 || dataValue > 2000) {
                   dataValue = 0;
@@ -171,7 +171,7 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
                 // Replace null bytes
                 dataValue = dataValue.replace(/\0/g, '');
               }
-              event[dataKey] = dataValue || ((dataKey === 'hashit_id' || dataKey === 'trail_number') ? 0 : '');
+              event[dataKey] = dataValue || (dataKey === 'trailNumber' ? 0 : '');
             }
           }
           return event;

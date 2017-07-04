@@ -11,6 +11,7 @@ exports.setup = function(options) {
 };
 
 exports.up = function(db) {
+  const currentTimestampType = {type: 'timestamp with time zone', notNull: true, defaultValue: 'now()'};
   const intType = {type: types.INTEGER, notNull: true, defaultValue: 0};
   const primaryIntType = {type: types.INTEGER, primaryKey: true, notNull: true, autoIncrement: true};
   const primaryTextType = {type: types.TEXT, primaryKey: true, notNull: true};
@@ -19,52 +20,58 @@ exports.up = function(db) {
 
   return db.createTable('events', {
     id: primaryIntType,
-    bring_md: textType,
-    directions_md: textType,
-    external_id: textType,
-    google_place_id: textType,
-    from_the_hares_md: textType,
-    hares_md: textType,
-    hashit_reason_md: textType,
-    location_google_place_id: textType,
-    location_md: textType,
-    name_md: textType,
-    on_on_google_place_id: textType,
-    on_on_md: textType,
-    photos_url: textType,
-    scribes_md: textType,
-    start_datetime: 'timestamptz',
-    snooze_title_md: textType,
-    snooze_url: textType,
-    trail_comments_md: textType,
-    trail_number: intType
+    createdAt: currentTimestampType,
+    updatedAt: currentTimestampType,
+    bringMd: textType,
+    directionsMd: textType,
+    externalId: textType,
+    googlePlaceId: textType,
+    FromTheHaresMd: textType,
+    haresMd: textType,
+    hashitReasonMd: textType,
+    locationGooglePlaceId: textType,
+    locationMd: textType,
+    nameMd: textType,
+    onOnGooglePlaceId: textType,
+    onOnMd: textType,
+    photosUrl: textType,
+    scribesMd: textType,
+    startDatetime: 'timestamptz',
+    snoozeTitleMd: textType,
+    snoozeUrl: textType,
+    trailCommentsMd: textType,
+    trailNumber: intType
   }).then(function() {
     return db.createTable('hashers', {
       id: primaryIntType,
-      external_address_country: textType,
-      external_address_city: textType,
-      external_address_street: textType,
-      external_first_trail_date: types.DATE,
-      external_first_trail_number: textType,
-      external_hare_count_1: intType,
-      external_hare_count_2: intType,
-      external_id: textType,
-      external_run_count: intType,
-      family_name: textType,
-      given_name: textType,
-      hash_name: textType
+      createdAt: currentTimestampType,
+      updatedAt: currentTimestampType,
+      externalAddressCountry: textType,
+      externalAddressCity: textType,
+      externalAddressStreet: textType,
+      externalFirstTrailDate: types.DATE,
+      externalFirstTrailNumber: textType,
+      externalHareCount1: intType,
+      externalHareCount2: intType,
+      externalId: textType,
+      externalRunCount: intType,
+      familyName: textType,
+      givenName: textType,
+      hashName: textType
     });
   }, errorHandler).then(function() {
     return db.createTable('google_places', {
       id: primaryTextType,
-      formatted_address: textType,
-      formatted_phone_number: textType,
-      geometry_location: 'point',
-      geometry_viewport: 'box',
+      createdAt: currentTimestampType,
+      updatedAt: currentTimestampType,
+      formattedAddress: textType,
+      formattedPhoneNumber: textType,
+      geometryLocation: 'point',
+      geometryViewport: 'box',
       icon: textType,
-      international_phone_number: textType,
+      internationalPhoneNumber: textType,
       name: textType,
-      place_id: textType,
+      placeId: textType,
       reference: textType,
       scope: textType,
       types: textArrayType,
@@ -75,8 +82,10 @@ exports.up = function(db) {
   }, errorHandler).then(function() {
     return db.createTable('google_places_address_components', {
       id: primaryIntType,
-      long_name: textType,
-      short_name: textType,
+      createdAt: currentTimestampType,
+      updatedAt: currentTimestampType,
+      longName: textType,
+      shortName: textType,
       types: textArrayType
     });
   }, errorHandler);
