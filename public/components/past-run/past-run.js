@@ -26,7 +26,7 @@ export const ViewModel = DefineMap.extend({
       if (day && month && trailNumber && year) {
         return ajax({
           dataType: 'text/html',
-          url: `/src/html/past-runs/lbh3_${trailNumber}_${year}${month}${day}.html`
+          url: `/html/past-runs/lbh3_${trailNumber}_${year}${month}${day}.html`
         });
       }
     }

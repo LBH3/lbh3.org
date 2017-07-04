@@ -1,44 +1,62 @@
-import './models/fixtures/';
+const path = require('path');
+const favicon = require('serve-favicon');
+const compress = require('compression');
+const cors = require('cors');
+const helmet = require('helmet');
+const bodyParser = require('body-parser');
 
-import DefineMap from 'can-define/map/';
-import loader from '@loader';
-import route from 'can-route';
-import 'can-route-pushstate';
+const feathers = require('feathers');
+const configuration = require('feathers-configuration');
+const hooks = require('feathers-hooks');
+const rest = require('feathers-rest');
+const socketio = require('feathers-socketio');
 
-const currentYear = (new Date()).getFullYear();
-const defaultPage = 'home';
+const handler = require('feathers-errors/handler');
+const notFound = require('feathers-errors/not-found');
 
-const AppViewModel = DefineMap.extend({
-  day: 'string',
-  get isDevelopment() {
-    return loader.env.indexOf('development') > -1;
-  },
-  month: 'string',
-  page: {
-    type: 'string',
-    value: defaultPage
-  },
-  secondaryPage: 'string',
-  title: {
-    value: 'Long Beach Hash House Harriers',
-    serialize: false
-  },
-  trailNumber: 'number',
-  year: 'number'
-});
+const middleware = require('./middleware');
+const services = require('./services');
+const appHooks = require('./app.hooks');
 
-route('/about/{secondaryPage}/', { page: 'about' });
-route('/about/', { page: 'about' });
-route('/admin/{secondaryPage}/', { page: 'admin' });
-route('/admin/', { page: 'admin' });
-route('/events/', { page: 'events' });
-route('/events/jesus-cuervo-1800-trail/', { page: 'events', secondaryPage: 'jesus-cuervo-1800-trail'});
-route('/events/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
-route('/events/{year}/{month}/{day}/trail-{trailNumber}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0});
-route('/events/{year}/', { page: 'events', year: 0});
-route('/hareline/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'hareline', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
-route('/hareline/{secondaryPage}/', { page: 'hareline' });
-route('/hareline/', { page: 'hareline' });
-route('/{page}', { page: defaultPage });
+// const authentication = require('./authentication');
 
-export default AppViewModel;
+const sequelize = require('./sequelize');
+
+const app = feathers();
+
+// Load app configuration
+app.configure(configuration());
+
+// Enable CORS, security, compression, favicon and body parsing
+app.use(cors());
+app.use(helmet());
+app.use(compress());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(favicon(path.join(app.get('public'), 'images', 'favicon.ico')));
+
+// Host the public folder
+app.use('/', feathers.static(app.get('public')));
+
+// Set up Plugins and providers
+app.configure(hooks());
+app.configure(sequelize);
+app.configure(rest());
+app.configure(socketio());
+
+// Configure authentication
+// app.configure(authentication);
+
+// Set up our services (see `services/index.js`)
+app.configure(services);
+
+// Configure other middleware (see `middleware/index.js`)
+app.configure(middleware);
+
+// Configure a middleware for 404s and the error handler
+app.use(notFound());
+app.use(handler());
+
+app.hooks(appHooks);
+
+module.exports = app;

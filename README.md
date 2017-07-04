@@ -3,12 +3,6 @@
 [![Build Status](https://travis-ci.org/LBH3/lbh3.org.svg?branch=master)](https://travis-ci.org/LBH3/lbh3.org)
 [![Greenkeeper badge](https://badges.greenkeeper.io/LBH3/lbh3.org.svg)](https://greenkeeper.io/)
 
-LBH3 website
-
-## Contributing
-
-Check out the [contribution guide](CONTRIBUTING.md).
-
 ## Getting started
 
 ### npm
@@ -98,32 +92,18 @@ To reset the database:
 npm run db-migrate:reset
 ```
 
-## Running tests
-
-Tests can be run with
-
-```
-donejs test
-```
-
 ## Development mode
 
 Development mode can be started with
 
 ```
-donejs develop
+npm run start:development
 ```
 
-## Build and production mode
+## Production mode
 
-To build the application into a production bundle run
-
-```
-donejs build
-```
-
-In Unix environment the production application can be started like this:
+In Unix environment, the production application can be started like this:
 
 ```
-NODE_ENV=production npm start
+npm run start:production
 ```
