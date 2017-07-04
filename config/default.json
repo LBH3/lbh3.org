@@ -1,0 +1,55 @@
+{
+  "host": "localhost",
+  "port": 8080,
+  "public": "../public/",
+  "paginate": {
+    "default": 10,
+    "max": 50
+  },
+  "authentication": {
+    "secret": "7a21d4d5134003bfc2b17a1f4e7241e92ae1a6c047066f8756697ca717dbf6b8f40a14121f22327333ba7c330361fb2764ae45d4d0b52f7965bb3fb6c461a88aeaad361f7075e2d9638dd7be2f2672a69d4421f7677064f21f53192effb4f3b10a455945d6ea13be9d2615ba1e09314ed83c406682c2ea6f4d4d5fa44256695993ff6578656dcbdca24461968bd6dfdd79f23c4dc39c47fdd09cc9c7acdfc18f7c8430cb42702af38b8e4d70e5662fbd710fcd38cc1ee4d92214c0b087a9f759a0f35609a0b7bd25671729ad8ba702bd40a632884d5d3db585e95a6e927f9cbaa5965aab6e3053200c89f917f8218d1971b714a85899f3252ae6e3769593a03d",
+    "strategies": [
+      "jwt"
+    ],
+    "path": "/authentication",
+    "service": "users",
+    "jwt": {
+      "header": {
+        "type": "access"
+      },
+      "audience": "https://www.lbh3.org",
+      "subject": "anonymous",
+      "issuer": "feathers",
+      "algorithm": "HS256",
+      "expiresIn": "1d"
+    },
+    "facebook": {
+      "clientID": "your facebook client id",
+      "clientSecret": "your facebook client secret",
+      "successRedirect": "/",
+      "scope": [
+        "public_profile",
+        "email"
+      ],
+      "profileFields": [
+        "id",
+        "displayName",
+        "first_name",
+        "last_name",
+        "email",
+        "gender",
+        "profileUrl",
+        "birthday",
+        "picture",
+        "permissions"
+      ]
+    },
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt",
+      "httpOnly": false,
+      "secure": false
+    }
+  },
+  "postgres": "postgres://chasen:@localhost:5432/lbh3"
+}

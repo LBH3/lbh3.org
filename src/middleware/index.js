@@ -1,0 +1,61 @@
+const fs = require('fs');
+const ssr = require('done-ssr-middleware');
+
+module.exports = function () {
+  const app = this;
+
+  app.use(function(req, res, next) {
+    // res.header('Referrer-Policy', 'same-origin');
+    res.header('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
+    res.header('X-Content-Type-Options', 'nosniff');
+    res.header('X-Frame-Options', 'SAMEORIGIN');
+    res.header('X-XSS-Protection', '1; mode=block');
+    next();
+  });
+
+  app.get('*', function(req, res, next) {
+    const httpHost = req.get('Host');
+    const needsSSLRedirect = req.headers['x-forwarded-proto'] !== 'https' && !httpHost.includes('localhost');
+    const needsWWWRedirect = httpHost === 'lbh3.org';
+    if (needsSSLRedirect) {
+      res.redirect(`https://${httpHost}${req.url}`);
+    } else if (needsWWWRedirect) {
+      res.redirect(`https://www.${httpHost}${req.url}`);
+    } else {
+      next();
+    }
+  });
+
+  app.get('/pastruns/runs/lbh3_:trailNumber\\_:date.php', function(req, res) {
+    const params = req.params;
+
+    const date = params.date;
+    const day = date.slice(6, 8);
+    const month = date.slice(4, 6);
+    const trailNumber = params.trailNumber;
+    const year = date.slice(0, 4);
+
+    res.redirect(`/events/${year}/${month}/${day}/trail-${trailNumber}/`);
+  });
+
+  const redirectConfig = JSON.parse(fs.readFileSync('./redirects.json', 'utf8'));
+  for (let from in redirectConfig) {
+    (function(to) {
+      app.get(from, function(req, res) {
+        res.redirect(301, to);
+      });
+    })(redirectConfig[from]);
+  }
+
+  app.use(ssr({
+    config: `${__dirname}/../../public/package.json!npm`,
+    main: 'lbh3/index.stache!done-autorender',
+    liveReload: true,
+    auth: {
+      cookie: 'feathers-jwt',
+      domains: [
+        'localhost'
+      ]
+    }
+  }));
+};
