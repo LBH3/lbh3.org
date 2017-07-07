@@ -1,7 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './home.less';
-import currentTrail from '~/html/past-runs/lbh3_1815_20170706.html';
+import currentTrail from '~/html/past-runs/lbh3_1816_20170713.html';
 import view from './home.stache';
 
 export const ViewModel = DefineMap.extend({
