@@ -56,40 +56,40 @@ You can now start the database server using:
 
 ## Database
 
+You will want to start by installing [sequelize](https://www.npmjs.com/package/sequelize) globally:
+
+```shell
+npm install -g sequelize
+```
+
 To create the `lbh3` database:
 
 ```shell
 createdb lbh3
 ```
 
-To create a new migration with [db-migrate](https://www.npmjs.com/package/db-migrate):
+To create a new migration:
 
 ```shell
-npm run db-migrate:create migration-name
+sequelize migration:create --name="migration-name"
 ```
 
 As you’re developing, you might want to migrate down and then back up, which you can do with the following:
 
 ```shell
-npm run db-migrate:rerun
+npm run sequelize:migrate:rerun
 ```
 
 To just migrate the database up:
 
 ```shell
-npm run db-migrate:up
+npm run sequelize:migrate
 ```
 
 To just migrate the database down:
 
 ```shell
-npm run db-migrate:down
-```
-
-To reset the database:
-
-```shell
-npm run db-migrate:reset
+npm run sequelize:migrate:undo
 ```
 
 ## Development mode
