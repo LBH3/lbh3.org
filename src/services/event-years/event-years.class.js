@@ -10,20 +10,20 @@ class Service {
       query: {
         $limit: 1,
         $sort: {
-          start_datetime: 1
+          startDatetime: 1
         },
-        start_datetime: {
+        startDatetime: {
           $lte: new Date()
         }
       }
     };
     return eventsService.find(params).then(function(results) {
       const firstResult = results.data[0];
-      params.query.$sort.start_datetime = -1;
+      params.query.$sort.startDatetime = -1;
       return eventsService.find(params).then(function(results) {
         const lastResult = results.data[0];
-        const firstYear = firstResult.start_datetime.getFullYear();
-        const lastYear = lastResult.start_datetime.getFullYear();
+        const firstYear = firstResult.startDatetime.getFullYear();
+        const lastYear = lastResult.startDatetime.getFullYear();
         const years = [];
         for (var i = firstYear; i <= lastYear; i++) {
           years.push({
