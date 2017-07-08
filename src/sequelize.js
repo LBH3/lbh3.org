@@ -7,7 +7,8 @@ module.exports = function () {
     dialect: 'postgres',
     logging: false,
     define: {
-      freezeTableName: true
+      freezeTableName: true,
+      underscored: true
     }
   });
   const oldSetup = app.setup;
