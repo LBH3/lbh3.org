@@ -23,7 +23,7 @@ fs.readFile(`${__dirname}/filemaker/events.json`, function(readError, data) {
     for (let key in events[0]) {
       fields.push(key);
     }
-    const insertQuery = '"' + fields.join('", "') + '"';
+    const insertQuery = fields.join(', ');
     const insertValues = fields.map(function(field, index) {
       return '$' + (index + 1);
     });
@@ -38,7 +38,7 @@ fs.readFile(`${__dirname}/filemaker/events.json`, function(readError, data) {
     };
     events.forEach(function(event) {
       const eventValues = Object.values(event);
-      const whereClause = `WHERE externalId = '${event.externalId}'`;
+      const whereClause = `WHERE external_id = '${event.external_id}'`;
       client.query(`SELECT id FROM events ${whereClause}`, (error, response) => {
         if ((error && error.code === '42703') || (response && response.rowCount === 0)) {
           client.query(`INSERT INTO events (${insertQuery}) VALUES (${insertValues})`, eventValues, (error, response) => {
@@ -75,7 +75,7 @@ fs.readFile(`${__dirname}/filemaker/hashers.json`, function(readError, data) {
     for (let key in hashers[0]) {
       fields.push(key);
     }
-    const insertQuery = '"' + fields.join('", "') + '"';
+    const insertQuery = fields.join(', ');
     const insertValues = fields.map(function(field, index) {
       return '$' + (index + 1);
     });
@@ -89,9 +89,9 @@ fs.readFile(`${__dirname}/filemaker/hashers.json`, function(readError, data) {
       }
     };
     hashers.forEach(function(hasher) {
-      hasher.externalFirstTrailDate = hasher.externalFirstTrailDate || null;
+      hasher.external_first_trail_date = hasher.external_first_trail_date || null;
       const hasherValues = Object.values(hasher);
-      const whereClause = `WHERE externalId = '${hasher.externalId}'`;
+      const whereClause = `WHERE external_id = '${hasher.external_id}'`;
       client.query(`SELECT id FROM hashers ${whereClause}`, (error, response) => {
         if ((error && error.code === '42703') || (response && response.rowCount === 0)) {
           client.query(`INSERT INTO hashers (${insertQuery}) VALUES (${insertValues})`, hasherValues, (error, response) => {
