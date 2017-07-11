@@ -12,7 +12,7 @@
 {{/if}}
 {{#if creatingTrailPromise.isResolved}}
   <div class="alert alert-success" role="alert">
-    <strong>Well done!</strong> You successfully created trail #{{createdTrail.runNumber}}.
+    <strong>Well done!</strong> You successfully created trail #{{createdTrail.trailNumber}}.
   </div>
 {{/if}}
 
@@ -22,7 +22,7 @@
       Run #
     </label>
     <div class="col-11">
-      <input autofocus class="form-control" id="run-number" type="number" {($value)}="runNumber">
+      <input autofocus class="form-control" id="run-number" type="number" {($value)}="trailNumber">
     </div>
   </div>
   <div class="form-group row">

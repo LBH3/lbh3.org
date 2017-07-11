@@ -1,0 +1,61 @@
+<can-import from="can-stache/helpers/route" />
+
+{{#if eventsPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching runs…</strong>
+  </div>
+{{/if}}
+
+{{#if eventsPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Uh oh!</strong> The runs couldn’t be retrieved.
+  </div>
+{{/if}}
+
+{{#if eventsByMonth}}
+  {{#each eventsByMonth as month}}
+    <h3>{{month.name}} {{year}}</h3>
+    <table class="table table-bordered table-responsive table-sm">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Hash#</th>
+          <th>Hares</th>
+          <th>Location</th>
+          <th>Notes</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each month.events as event}}
+          <tr>
+            <td>
+              <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
+                {{event.startDateString}}
+              </a>
+            </td>
+            <td>
+              {{#if event.trailNumber}}
+                {{event.trailNumber}}
+              {{/if}}
+            </td>
+            <td>{{{event.haresHtml}}}</td>
+            <td>{{event.locationMd}}</td>
+            <td>{{event.nameMd}}</td>
+            <td class="text-center">
+              {{#if event.photosUrl}}
+                <a href="{{event.photosUrl}}" target="_blank"><span class="fa fa-camera"></span></a>
+              {{/if}}
+            </td>
+            <td class="text-center">
+              {{#if event.snoozeUrl}}
+                <a href="{{event.snoozeUrl}}" target="_blank"><span class="fa fa-newspaper-o"></span></a>
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/each}}
+{{/if}}
