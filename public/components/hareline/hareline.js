@@ -1,5 +1,7 @@
 import Component from 'can-component';
+import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
+import Event from '~/models/event';
 import Position from '~/models/position';
 import loader from '@loader';
 import view from './hareline.stache';
@@ -9,6 +11,24 @@ const trailmasterEmailLink = function(trailmaster) {
 };
 
 export const ViewModel = DefineMap.extend({
+  eventsByMonth: DefineList,
+  eventsPromise: {
+    get: function() {
+      const currentDate = new Date();
+      const startOfTheMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+      return Event.connection.getList({
+        $sort: {
+          startDatetime: 1
+        },
+        startDatetime: {
+          $gte: startOfTheMonth
+        }
+      }).then(events => {
+        this.eventsByMonth = Event.groupByMonth(events);
+        return events;
+      });
+    }
+  },
   get isDevelopment() {
     return loader.env === 'window-development';
   },
