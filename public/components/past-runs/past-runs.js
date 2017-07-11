@@ -5,6 +5,7 @@ import Year from '~/models/year';
 import route from 'can-route';
 import view from './past-runs.stache';
 
+import './past-runs.less';
 import '~/components/year/';
 
 const currentYear = (new Date()).getFullYear();
@@ -53,7 +54,9 @@ export const ViewModel = DefineMap.extend({
   yearsPromise: {
     value: () => {
       return Year.getList({
-        sort: 'id desc'
+        $sort: {
+          id: -1
+        }
       });
     }
   },

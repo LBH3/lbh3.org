@@ -10,23 +10,23 @@ export const ViewModel = DefineMap.extend({
     set: function(creatingTrailPromise) {
       return creatingTrailPromise.then((createdTrail) => {
         this.createdTrail = createdTrail;
-        this.runNumber = createdTrail.runNumber + 1;
         this.startTime = '';
         this.trailDate = '';
+        this.trailNumber = createdTrail.trailNumber + 1;
       }, (error) => {
         console.error('Failed to create trail with error:', error);
       });
     }
   },
-  runNumber: 'number',
   startTime: 'string',
   trailDate: 'string',
+  trailNumber: 'number',
 
   createTrail: function() {
     const newTrailData = {
-      runNumber: this.runNumber,
       startTime: this.startTime,
       trailDate: this.trailDate,
+      trailNumber: this.trailNumber
     };
     return this.creatingTrailPromise = new Event(newTrailData).save();
   }

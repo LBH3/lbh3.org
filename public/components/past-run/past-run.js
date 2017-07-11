@@ -1,36 +1,24 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
-import ajax from 'can-util/dom/ajax/';
+import Event from '~/models/event';
 import view from './past-run.stache';
 
 export const ViewModel = DefineMap.extend({
   day: 'string',
-  month: 'string',
-  template: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
-      }
-      const templatePromise = this.templatePromise;
-      if (templatePromise) {
-        templatePromise.then(setValue);
-      }
-    }
-  },
-  templatePromise: {
+  event: Event,
+  eventPromise: {
     get: function() {
-      const day = this.day;
-      const month = this.month;
       const trailNumber = this.trailNumber;
-      const year = this.year;
-      if (day && month && trailNumber && year) {
-        return ajax({
-          dataType: 'text/html',
-          url: `/html/past-runs/lbh3_${trailNumber}_${year}${month}${day}.html`
+      if (trailNumber) {
+        return Event.connection.getList({
+          trailNumber
+        }).then((events) => {
+          this.event = events[0];
         });
       }
     }
   },
+  month: 'string',
   trailNumber: 'number',
   year: 'number'
 });

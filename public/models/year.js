@@ -1,3 +1,4 @@
+import algebra from './algebra';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import set from 'can-set';
@@ -10,17 +11,12 @@ const Year = DefineMap.extend({
   id: 'number'
 });
 
-const algebra = new set.Algebra(
-  set.props.id('id'),
-  set.props.sort('sort')
-);
-
 Year.List = DefineList.extend({
   '#': Year
 });
 
 Year.connection = superMap({
-  url: loader.serviceBaseURL + '/api/years',
+  url: loader.serviceBaseURL + '/api/event-years',
   Map: Year,
   List: Year.List,
   name: 'year',

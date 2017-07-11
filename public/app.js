@@ -1,4 +1,4 @@
-import './models/fixtures/';
+import './models/fixtures/positions';
 
 import DefineMap from 'can-define/map/';
 import loader from '@loader';

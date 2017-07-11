@@ -13,6 +13,6 @@ const store = fixture.store([{
   id: 2017
 }], Year.connection.algebra);
 
-fixture('/api/years/{id}', store);
+fixture('/api/event-years/{id}', store);
 
 export default store;

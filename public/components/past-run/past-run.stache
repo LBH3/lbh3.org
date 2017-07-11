@@ -1,15 +1,52 @@
-{{#if templatePromise.isPending}}
+{{#if eventPromise.isPending}}
   <div class="alert alert-info" role="alert">
     <strong>Fetching run…</strong>
   </div>
 {{/if}}
 
-{{#if templatePromise.isRejected}}
+{{#if eventPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
     <strong>Uh oh!</strong> The run couldn’t be retrieved.
   </div>
 {{/if}}
 
-{{#if templatePromise.isResolved}}
-  {{{template}}}
+{{#if event}}
+  <h2>
+    {{#if event.name}}
+      {{event.name}}
+      <br>
+      <small class="text-muted">Run #{{event.trailNumber}}</small>
+    {{else}}
+      Run #{{event.trailNumber}}
+    {{/if}}
+  </h2>
+
+  <dl class="row">
+    <dt class="col-sm-3 text-sm-right">Date:</dt>
+    <dd class="col-sm-9">{{event.startDateTimeString}}</dd>
+    {{#if event.locationMd}}
+      <dt class="col-sm-3 text-sm-right">Start:</dt>
+      <dd class="col-sm-9">{{event.locationMd}}</dd>
+    {{/if}}
+    {{#if event.haresHtml}}
+      <dt class="col-sm-3 text-sm-right">Hares:</dt>
+      <dd class="col-sm-9">{{{event.haresHtml}}}</dd>
+    {{/if}}
+    {{#if event.hashitReasonMd}}
+      <dt class="col-sm-3 text-sm-right">Hashit:</dt>
+      <dd class="col-sm-9">{{event.hashitReasonMd}}</dd>
+    {{/if}}
+    {{#if event.onOnMd}}
+      <dt class="col-sm-3 text-sm-right">On-on:</dt>
+      <dd class="col-sm-9">{{event.onOnMd}}</dd>
+    {{/if}}
+    {{#if event.trailCommentsMd}}
+      <dt class="col-sm-3 text-sm-right">Run Notes:</dt>
+      <dd class="col-sm-9">{{event.trailCommentsMd}}</dd>
+    {{/if}}
+    {{#if event.scribesMd}}
+      <dt class="col-sm-3 text-sm-right">Scribe:</dt>
+      <dd class="col-sm-9">{{event.scribesMd}}</dd>
+    {{/if}}
+  </dl>
 {{/if}}

@@ -4,7 +4,7 @@ class Service {
     this.options = options || {};
   }
 
-  find () {
+  find (requestParams) {
     const eventsService = this.options.app.service('api/events');
     const params = {
       query: {
@@ -30,8 +30,9 @@ class Service {
             id: i
           });
         }
+        const sortDescending = (requestParams.query.$sort && requestParams.query.$sort.id === '-1');
         return {
-          data: years
+          data: (sortDescending) ? years.reverse() : years
         };
       });
     });
