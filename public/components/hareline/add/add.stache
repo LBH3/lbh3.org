@@ -26,11 +26,11 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-1 col-form-label" for="trail-date">
+    <label class="col-1 col-form-label" for="start-date">
       Date
     </label>
     <div class="col-11">
-      <input class="form-control" id="trail-date" type="date" {($value)}="trailDate">
+      <input class="form-control" id="start-date" type="date" {($value)}="startDate">
     </div>
   </div>
   <div class="form-group row">
