@@ -9,167 +9,69 @@
 
 <h2>2017 Hareline</h2>
 
-<h3>July</h3>
-<table class="table table-bordered table-responsive table-sm">
-  <thead>
-    <tr>
-      {{#if isDevelopment}}
-        <th></th>
-      {{/if}}
-      <th>Date</th>
-      <th>Hash#</th>
-      <th>Hares</th>
-      <th>Location</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='07' day='06' trailNumber=1815 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>7/6</td>
-      <td>1815</td>
-      <td>Candy Apple Heroes</td>
-      <td>Cypress</td>
-      <td></td>
-    </tr>
-    <tr>
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='07' day='13' trailNumber=1816 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>7/13</td>
-      <td>1816</td>
-      <td>Bleeding Hash Hole</td>
-      <td>Long Beach</td>
-      <td></td>
-    </tr>
-    <tr style="color: #3a3a79">
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='07' day='20' trailNumber=1817 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>7/20</td>
-      <td>1817</td>
-      <td>Pillsbury Blow Boy &amp; Iggy</td>
-      <td></td>
-      <td>Blew Dress Run</td>
-    </tr>
-    <tr>
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='07' day='27' trailNumber=1818 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>7/27</td>
-      <td>1818</td>
-      <td>Chicken Legs, Hokey Tokey, &amp; Koo Koo 4 Cock</td>
-      <td>Long Beach</td>
-      <td>Nerd Run</td>
-    </tr>
-  </tbody>
-</table>
+{{#if eventsPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching runs…</strong>
+  </div>
+{{/if}}
 
-<h3>August</h3>
-<table class="table table-bordered table-responsive table-sm">
-  <thead>
-    <tr>
-      {{#if isDevelopment}}
-        <th></th>
-      {{/if}}
-      <th>Date</th>
-      <th>Hash#</th>
-      <th>Hares</th>
-      <th>Location</th>
-      <th>Notes</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="table-danger">
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='08' day='06' trailNumber=1819 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>8/3</td>
-      <td>1819</td>
-      <td>Available!</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='08' day='06' trailNumber=1820 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>8/10</td>
-      <td>1820</td>
-      <td>Stumbelina &amp; Harry Palmer</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='08' day='06' trailNumber=1821 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>8/17</td>
-      <td>1821</td>
-      <td>Alouette</td>
-      <td></td>
-      <td>Lingerie Run</td>
-    </tr>
-    <tr class="table-danger">
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='08' day='06' trailNumber=1822 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>8/24</td>
-      <td>1822</td>
-      <td>Available!</td>
-      <td></td>
-      <td></td>
-    </tr>
-    <tr>
-      {{#if isDevelopment}}
-        <td class="text-center">
-          <a href="{{routeUrl page='hareline' year=2017 month='08' day='06' trailNumber=1823 secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
-          </a>
-        </td>
-      {{/if}}
-      <td>8/31</td>
-      <td>1823</td>
-      <td>Yoko, Satan, and Gag</td>
-      <td></td>
-      <td></td>
-    </tr>
-  </tbody>
-</table>
+{{#if eventsPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Uh oh!</strong> The runs couldn’t be retrieved.
+  </div>
+{{/if}}
+
+{{#if eventsByMonth}}
+  {{#each eventsByMonth as month}}
+    <h3>{{month.name}}</h3>
+    <table class="table table-bordered table-responsive table-sm">
+      <thead>
+        <tr>
+          {{#if isDevelopment}}
+            <th></th>
+          {{/if}}
+          <th>Date</th>
+          <th>Hash#</th>
+          <th>Hares</th>
+          <th>Location</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each month.events as event}}
+          <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
+            {{#if isDevelopment}}
+              <td class="text-center">
+                <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
+                  <span class="fa fa-edit"></span>
+                </a>
+              </td>
+            {{/if}}
+            <td>
+              <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
+                {{event.startDateString}}
+              </a>
+            </td>
+            <td>
+              {{#if event.trailNumber}}
+                {{event.trailNumber}}
+              {{/if}}
+            </td>
+            <td>
+              {{#if event.haresHtml}}
+                {{{event.haresHtml}}}
+              {{else}}
+                Available!
+              {{/if}}
+            </td>
+            <td>{{event.locationMd}}</td>
+            <td>{{trail.name}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/each}}
+{{/if}}
 
 {{#if isDevelopment}}
   <a class="btn btn-primary" href="{{routeUrl page='hareline' secondaryPage='add'}}">
