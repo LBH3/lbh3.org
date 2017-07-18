@@ -30,6 +30,7 @@
         "renderingBaseURL": "/dist"
       }
     },
+    "googleMapsKey": "AIzaSyAEED9iCwz71U-gtb7Ulk3pb7SfAS-gtTQ",
     "serviceBaseURL": ""
   },
   "dependencies": {
