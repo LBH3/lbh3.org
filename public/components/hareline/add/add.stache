@@ -7,7 +7,7 @@
 {{/if}}
 {{#if creatingTrailPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Uh oh!</strong> The new trail failed to save. Check the console for more details.
+    <strong>Uh oh!</strong> The new trail failed to save.
   </div>
 {{/if}}
 {{#if creatingTrailPromise.isResolved}}

@@ -65,7 +65,7 @@
               {{/if}}
             </td>
             <td>{{event.locationMd}}</td>
-            <td>{{trail.name}}</td>
+            <td>{{event.nameMd}}</td>
           </tr>
         {{/each}}
       </tbody>

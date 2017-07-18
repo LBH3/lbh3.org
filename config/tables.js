@@ -1,13 +1,14 @@
 'use strict';
 
 exports.getDefinitionsWithSequelize = function (Sequelize) {
-  const boxType = field => ({type: 'box', field});
+  const boxType = field => ({type: Sequelize.GEOMETRY('POLYGON'), field});
   const currentTimestampType = field => ({type: 'timestamp with time zone', notNull: true, field, defaultValue: 'now()'});
   const dateType = field => ({type: Sequelize.DATE, field});
   const intType = field => ({type: Sequelize.INTEGER, notNull: true, field, defaultValue: 0});
-  const pointType = field => ({type: 'point', field});
+  const jsonType = field => ({type: Sequelize.JSON, field});
+  const pointType = field => ({type: Sequelize.GEOMETRY('POINT'), field});
   const primaryIntType = {type: Sequelize.INTEGER, primaryKey: true, notNull: true, field: 'id', autoIncrement: true};
-  const primaryTextType = {type: Sequelize.TEXT, primaryKey: true, notNull: true, field: 'id'};
+  const primaryStringType = {type: Sequelize.STRING, primaryKey: true, notNull: true, field: 'id'};
   const stringType = field => ({type: Sequelize.STRING, notNull: true, field, defaultValue: ''});
   const textArrayType = field => ({type: 'text[]', notNull: true, field, defaultValue: '{}'});
   const textType = field => ({type: Sequelize.TEXT, notNull: true, field, defaultValue: ''});
@@ -21,8 +22,7 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       bringMd: textType('bring_md'),
       directionsMd: textType('directions_md'),
       externalId: stringType('external_id'),
-      FromTheHaresMd: textType('from_the_hares_md'),
-      googlePlaceId: stringType('google_place_id'),
+      fromTheHaresMd: textType('from_the_hares_md'),
       haresMd: textType('hares_md'),
       hashitReasonMd: textType('hashit_reason_md'),
       locationGooglePlaceId: stringType('location_google_place_id'),
@@ -39,11 +39,12 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       trailNumber: intType('trail_number')
     },
     google_places: {
-      id: primaryTextType,
+      id: primaryStringType,
+      addressComponents: jsonType('address_components'),
       createdAt: currentTimestampType('created_at'),
       updatedAt: currentTimestampType('updated_at'),
       formattedAddress: textType('formatted_address'),
-      formattedPhoneNumber: stringType('formatted_phoneNumber'),
+      formattedPhoneNumber: stringType('formatted_phone_number'),
       geometryLocation: pointType('geometry_location'),
       geometryViewport: boxType('geometry_viewport'),
       icon: textType('icon'),
@@ -56,14 +57,6 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       url: textType('url'),
       vicinity: stringType('vicinity'),
       website: textType('website')
-    },
-    google_places_address_components: {
-      id: primaryIntType,
-      createdAt: currentTimestampType('created_at'),
-      updatedAt: currentTimestampType('updated_at'),
-      longName: textType('long_name'),
-      shortName: stringType('short_name'),
-      types: textArrayType('types')
     },
     hashers: {
       id: primaryIntType,

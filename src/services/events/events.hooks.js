@@ -1,4 +1,4 @@
-
+const makeRaw = require('../../utils/make-raw');
 
 module.exports = {
   before: {
@@ -6,7 +6,7 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [],
+    update: [makeRaw],
     patch: [],
     remove: []
   },

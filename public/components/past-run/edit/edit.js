@@ -1,38 +1,43 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
+import Event from '~/models/event';
+import Place from '~/models/place';
 import './edit.less';
 import platform from 'steal-platform';
 import view from './edit.stache';
 
 export const ViewModel = DefineMap.extend({
-  bring: 'string',
   day: 'string',
-  directions: 'string',
-  fromTheHares: 'string',
-  hares: 'string',
-  location: 'string',
-  locationData: 'any',
+  event: Event,
+  eventPromise: {
+    get: function() {
+      const trailNumber = this.trailNumber;
+      if (trailNumber) {
+        return Event.connection.getList({
+          trailNumber
+        }).then(events => {
+          this.event = events[0];
+        });
+      }
+    }
+  },
+  locationGooglePlace: Place,
   month: 'string',
-  onOn: 'string',
-  onOnData: 'any',
-  photosURL: 'string',
-  snoozeURL: 'string',
-  title: 'string',
+  onOnGooglePlace: Place,
   trailNumber: 'number',
   year: 'number',
 
+  editingEventPromise: {
+    set: function(editingEventPromise) {
+      return editingEventPromise.then(editedEvent => {
+        this.locationGooglePlace = null;
+        this.onOnGooglePlace = null;
+      });
+    }
+  },
+
   editRun: function() {
-    this.bring = '';
-    this.directions = '';
-    this.fromTheHares = '';
-    this.hares = '';
-    this.location = '';
-    this.locationData = null;
-    this.onOn = '';
-    this.onOnData = null;
-    this.photosURL = '';
-    this.snoozeURL = '';
-    this.title = '';
+    return this.editingEventPromise = this.event.save();
   }
 });
 
@@ -53,8 +58,8 @@ export default Component.extend({
             new google.maps.LatLng(34.1, -117.7)
           )
         };
-        this.enableAutocompleteForInput('location', 'locationData', options);
-        this.enableAutocompleteForInput('on-on', 'onOnData', options);
+        this.enableAutocompleteForInput('location', 'location', options);
+        this.enableAutocompleteForInput('on-on', 'onOn', options);
       };
       mapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAEED9iCwz71U-gtb7Ulk3pb7SfAS-gtTQ&libraries=places';
       mapsScript.type = 'text/javascript';
@@ -64,7 +69,16 @@ export default Component.extend({
       const locationInput = document.getElementById(id);
       const autocomplete = new google.maps.places.Autocomplete(locationInput, options);
       autocomplete.addListener('place_changed', () => {
-        this.viewModel[vmProperty] = autocomplete.getPlace();
+        const vmPropertyGP = `${vmProperty}GooglePlace`;
+        const place = this.viewModel[vmPropertyGP] = Place.fromGoogle(autocomplete.getPlace());
+        place.save().then(savedPlace => {
+          const vmPropertyGPId = `${vmPropertyGP}Id`;
+          const vmPropertyMd = `${vmProperty}Md`;
+          this.viewModel.event[vmPropertyGPId] = savedPlace.id;
+          this.viewModel.event[vmPropertyMd] = savedPlace.name || savedPlace.formattedAddress;
+        }, error => {
+          console.error('Error while saving place:', error);
+        });
       });
     },
     '{element} submit': function(element, event) {

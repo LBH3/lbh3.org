@@ -18,6 +18,28 @@ const Event = DefineMap.extend({
   seal: false
 }, {
   id: 'number',
+  createdAt: 'any',
+  updatedAt: 'any',
+  bringMd: 'string',
+  directionsMd: 'string',
+  externalId: 'string',
+  fromTheHaresMd: 'string',
+  haresMd: 'string',
+  hashitReasonMd: 'string',
+  locationGooglePlaceId: 'string',
+  locationMd: 'string',
+  nameMd: 'string',
+  onOnGooglePlaceId: 'string',
+  onOnMd: 'string',
+  photosUrl: 'string',
+  scribesMd: 'string',
+  startDatetime: 'any',
+  snoozeTitleMd: 'string',
+  snoozeUrl: 'string',
+  trailCommentsMd: 'string',
+  trailDate: 'string',
+  trailNumber: 'number',
+
   haresHtml: {
     get: function() {
       return marked(this.haresMd);
@@ -60,9 +82,7 @@ const Event = DefineMap.extend({
       return this.startDate.toLocaleDateString(undefined, options);
     },
     serialize: false
-  },
-  trailDate: 'string',
-  trailNumber: 'number'
+  }
 });
 
 Event.List = DefineList.extend({
