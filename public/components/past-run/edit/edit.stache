@@ -1,89 +1,117 @@
 <h2>Edit Run #{{trailNumber}}</h2>
 
-<form ($submit)="editRun()">
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="hares">
-      Hares
-    </label>
-    <div class="col-md-10">
-      <input autofocus class="form-control" id="hares" type="text" {($value)}="hares">
-    </div>
+{{#if editingEventPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Saving trail…</strong>
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="location">
-      Location
-    </label>
-    <div class="col-md-10">
-      <input class="form-control" id="location" placeholder="" type="text" {($value)}="location">
-      {{#if locationData}}
-        <small>
-          {{{locationData.adr_address}}}
-        </small>
-      {{/if}}
-    </div>
+{{/if}}
+{{#if editingEventPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Uh oh!</strong> The new trail failed to save.
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="title">
-      Title
-    </label>
-    <div class="col-md-10">
-      <input class="form-control" id="title" type="text" {($value)}="title">
-    </div>
+{{/if}}
+{{#if editingEventPromise.isResolved}}
+  <div class="alert alert-success" role="alert">
+    <strong>Well done!</strong> You successfully edited this trail.
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="bring">
-      Bring
-    </label>
-    <div class="col-md-10">
-      <input class="form-control" id="bring" type="text" {($value)}="bring">
-    </div>
+{{/if}}
+
+{{#if eventPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Loading trail…</strong>
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="directions">
-      Directions
-    </label>
-    <div class="col-md-10">
-      <textarea class="form-control" id="directions" {($value)}="directions"></textarea>
-    </div>
+{{/if}}
+{{#if eventPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Uh oh!</strong> The trail failed to load.
   </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="from-the-hares">
-      From the Hares
-    </label>
-    <div class="col-md-10">
-      <textarea class="form-control" id="from-the-hares" {($value)}="fromTheHares"></textarea>
+{{/if}}
+{{#if event}}
+  <form ($submit)="editRun()">
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="hares">
+        Hares
+      </label>
+      <div class="col-md-10">
+        <input autofocus class="form-control" id="hares" type="text" {($value)}="event.haresMd">
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="on-on">
-      On-On
-    </label>
-    <div class="col-md-10">
-      <input class="form-control" id="on-on" placeholder="" type="text" {($value)}="onOn">
-      {{#if onOnData}}
-        <small>
-          {{{onOnData.adr_address}}}
-        </small>
-      {{/if}}
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="location">
+        Location
+      </label>
+      <div class="col-md-10">
+        <input class="form-control" id="location" placeholder="" type="text" {($value)}="event.locationMd">
+        {{#if locationGooglePlace}}
+          <small>
+            {{{locationGooglePlace.formattedAddress}}}
+          </small>
+        {{/if}}
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="photos-url">
-      Photos URL
-    </label>
-    <div class="col-md-10">
-      <input class="form-control" id="photos-url" type="text" {($value)}="photosURL">
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="name">
+        Name
+      </label>
+      <div class="col-md-10">
+        <input class="form-control" id="name" type="text" {($value)}="event.nameMd">
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-md-2 col-form-label" for="snooze-url">
-      Snooze URL
-    </label>
-    <div class="col-md-10">
-      <input class="form-control" id="snooze-url" type="text" {($value)}="snoozeURL">
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="bring">
+        Bring
+      </label>
+      <div class="col-md-10">
+        <input class="form-control" id="bring" type="text" {($value)}="event.bringMd">
+      </div>
     </div>
-  </div>
-  <button class="btn btn-primary" type="submit">
-    Edit run
-  </button>
-</form>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="directions">
+        Directions
+      </label>
+      <div class="col-md-10">
+        <textarea class="form-control" id="directions" {($value)}="event.directionsMd"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="from-the-hares">
+        From the Hares
+      </label>
+      <div class="col-md-10">
+        <textarea class="form-control" id="from-the-hares" {($value)}="event.fromTheHaresMd"></textarea>
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="on-on">
+        On-On
+      </label>
+      <div class="col-md-10">
+        <input class="form-control" id="on-on" placeholder="" type="text" {($value)}="event.onOnMd">
+        {{#if onOnGooglePlace}}
+          <small>
+            {{{onOnGooglePlace.formattedAddress}}}
+          </small>
+        {{/if}}
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="photos-url">
+        Photos URL
+      </label>
+      <div class="col-md-10">
+        <input class="form-control" id="photos-url" type="text" {($value)}="event.photosUrl">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-md-2 col-form-label" for="snooze-url">
+        Snooze URL
+      </label>
+      <div class="col-md-10">
+        <input class="form-control" id="snooze-url" type="text" {($value)}="event.snoozeUrl">
+      </div>
+    </div>
+    <button class="btn btn-primary" type="submit">
+      Edit run
+    </button>
+  </form>
+{{/if}}

@@ -21,6 +21,7 @@ To install [Homebrew](https://brew.sh) & PostgreSQL, run
 ```shell
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 brew install postgresql
+brew install postgis
 ```
 
 After installing PostgreSQL, something similar to the following should be shown:
@@ -66,6 +67,13 @@ To create the `lbh3` database:
 
 ```shell
 createdb lbh3
+```
+
+To enable PostGIS in the database:
+
+```shell
+psql lbh3
+CREATE EXTENSION postgis;
 ```
 
 To create a new migration:

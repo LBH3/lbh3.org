@@ -11,7 +11,8 @@ module.exports = function (app) {
       beforeCount(options) {
         options.raw = true;
       }
-    }
+    },
+    underscored: true
   });
 
   users.associate = function (models) { // eslint-disable-line no-unused-vars
