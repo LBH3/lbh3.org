@@ -40,9 +40,39 @@ const Event = DefineMap.extend({
   trailDate: 'string',
   trailNumber: 'number',
 
+  bringHtml: {
+    get: function() {
+      return marked(this.bringMd);
+    },
+    serialize: false
+  },
+  directionsHtml: {
+    get: function() {
+      return marked(this.directionsMd);
+    },
+    serialize: false
+  },
+  fromTheHaresHtml: {
+    get: function() {
+      return marked(this.fromTheHaresMd);
+    },
+    serialize: false
+  },
   haresHtml: {
     get: function() {
       return marked(this.haresMd);
+    },
+    serialize: false
+  },
+  nameHtml: {
+    get: function() {
+      return marked(this.nameMd);
+    },
+    serialize: false
+  },
+  onOnHtml: {
+    get: function() {
+      return marked(this.onOnMd);
     },
     serialize: false
   },

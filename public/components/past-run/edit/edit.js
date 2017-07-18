@@ -3,6 +3,7 @@ import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
 import Place from '~/models/place';
 import './edit.less';
+import loader from '@loader';
 import platform from 'steal-platform';
 import view from './edit.stache';
 
@@ -20,6 +21,9 @@ export const ViewModel = DefineMap.extend({
         });
       }
     }
+  },
+  get googleMapsKey() {
+    return loader.googleMapsKey;
   },
   locationGooglePlace: Place,
   month: 'string',
@@ -61,7 +65,7 @@ export default Component.extend({
         this.enableAutocompleteForInput('location', 'location', options);
         this.enableAutocompleteForInput('on-on', 'onOn', options);
       };
-      mapsScript.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyAEED9iCwz71U-gtb7Ulk3pb7SfAS-gtTQ&libraries=places';
+      mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${this.viewModel.googleMapsKey}&libraries=places`;
       mapsScript.type = 'text/javascript';
       document.getElementsByTagName('head')[0].appendChild(mapsScript);
     },
