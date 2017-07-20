@@ -7,6 +7,14 @@
 
 <p><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">LBH3 Haring Guidelines</a></p>
 
+{{#if session.user.canAddTrails}}
+  <div class="clearfix">
+    <a class="btn btn-primary float-right" href="{{routeUrl page='hareline' secondaryPage='add'}}">
+      Add trail
+    </a>
+  </div>
+{{/if}}
+
 <h2>2017 Hareline</h2>
 
 {{#if eventsPromise.isPending}}
@@ -27,7 +35,7 @@
     <table class="table table-bordered table-responsive table-sm">
       <thead>
         <tr>
-          {{#if isDevelopment}}
+          {{#if session.user.canEditTrails}}
             <th></th>
           {{/if}}
           <th>Date</th>
@@ -40,7 +48,7 @@
       <tbody>
         {{#each month.events as event}}
           <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
-            {{#if isDevelopment}}
+            {{#if session.user.canEditTrails}}
               <td class="text-center">
                 <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
                   <span class="fa fa-edit"></span>
@@ -71,10 +79,4 @@
       </tbody>
     </table>
   {{/each}}
-{{/if}}
-
-{{#if isDevelopment}}
-  <a class="btn btn-primary" href="{{routeUrl page='hareline' secondaryPage='add'}}">
-    Add trail
-  </a>
 {{/if}}

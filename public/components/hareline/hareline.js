@@ -3,6 +3,7 @@ import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
 import Position from '~/models/position';
+import Session from '~/models/session';
 import loader from '@loader';
 import view from './hareline.stache';
 
@@ -45,6 +46,16 @@ export const ViewModel = DefineMap.extend({
       return Position.getList({});
     }
   },
+
+  /**
+   * Session.current is provided by the can-connect-feathers session behavior.
+   * It will automatically populate when `new Session().save()` occurs in the app
+   * or on refresh after login.
+   */
+  get session() {
+    return Session.current;
+  },
+
   trailmasterEmailLinks: {
     get() {
       const trailmasters = this.trailmasters;
