@@ -79,7 +79,10 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       id: primaryIntType,
       createdAt: currentTimestampType('created_at'),
       updatedAt: currentTimestampType('updated_at'),
-      facebookId: stringType('facebook_id')
+      facebookId: stringType('facebook_id'),
+      facebookProfile: jsonType('facebook_profile'),
+      googleId: stringType('google_id'),
+      googleProfile: jsonType('google_profile')
     }
   };
 };

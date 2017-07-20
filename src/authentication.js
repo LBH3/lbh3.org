@@ -2,6 +2,7 @@ const authentication = require('feathers-authentication');
 const jwt = require('feathers-authentication-jwt');
 
 const oauth2 = require('feathers-authentication-oauth2');
+const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook');
 
 module.exports = function () {
@@ -11,6 +12,11 @@ module.exports = function () {
   // Set up authentication with the secret
   app.configure(authentication(config));
   app.configure(jwt());
+
+  app.configure(oauth2(Object.assign({
+    name: 'google',
+    Strategy: GoogleStrategy
+  }, config.google)));
 
   app.configure(oauth2(Object.assign({
     name: 'facebook',

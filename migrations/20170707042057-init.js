@@ -18,8 +18,10 @@ exports.up = function (queryInterface, Sequelize) {
 
 exports.down = function (queryInterface, Sequelize) {
   return queryInterface.dropTable('events').then(function() {
+    return queryInterface.dropTable('google_places');
+  }, errorHandler).then(function() {
     return queryInterface.dropTable('hashers');
   }, errorHandler).then(function() {
-    return queryInterface.dropTable('google_places');
+    return queryInterface.dropTable('users');
   }, errorHandler);
 };

@@ -11,13 +11,26 @@ const restrict = [
   })
 ];
 
+const userInfo = function(hook) {
+  if (hook.data && hook.data.google) {
+    const googleProfile = hook.data.google.profile;
+    const profileData = {};
+    for (var key in googleProfile) {
+      if (googleProfile.hasOwnProperty(key) && key[0] !== '_') {
+        profileData[key] = googleProfile[key];
+      }
+    }
+    hook.data.googleProfile = profileData;
+  }
+};
+
 module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
     get: [ ...restrict ],
-    create: [  ],
-    update: [ ...restrict ],
+    create: [ userInfo ],
+    update: [ ...restrict, userInfo ],
     patch: [ ...restrict ],
     remove: [ ...restrict ]
   },

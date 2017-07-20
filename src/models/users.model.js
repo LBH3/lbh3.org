@@ -6,7 +6,7 @@ const tables = require('../../config/tables');
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const tableColumns = tables.getDefinitionsWithSequelize(Sequelize);
-  const users = sequelizeClient.define('users', tableColumns.tables, {
+  const users = sequelizeClient.define('users', tableColumns.users, {
     hooks: {
       beforeCount(options) {
         options.raw = true;
