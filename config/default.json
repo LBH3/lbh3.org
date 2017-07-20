@@ -12,7 +12,7 @@
       "jwt"
     ],
     "path": "/authentication",
-    "service": "users",
+    "service": "api/users",
     "jwt": {
       "header": {
         "type": "access"
@@ -23,9 +23,17 @@
       "algorithm": "HS256",
       "expiresIn": "1d"
     },
+    "google": {
+      "clientID": "GOOGLE_CLIENT_ID",
+      "clientSecret": "GOOGLE_CLIENT_SECRET",
+      "successRedirect": "/",
+      "scope": [
+        "profile openid email"
+      ]
+    },
     "facebook": {
-      "clientID": "your facebook client id",
-      "clientSecret": "your facebook client secret",
+      "clientID": "FACEBOOK_CLIENT_ID",
+      "clientSecret": "FACEBOOK_CLIENT_SECRET",
       "successRedirect": "/",
       "scope": [
         "public_profile",

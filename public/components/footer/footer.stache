@@ -1,7 +1,16 @@
-{{#if webmaster}}
-  <footer>
-    <p class="container text-muted">
+<footer class="container text-muted">
+  {{#if webmaster}}
+    <p class="float-sm-left">
       For website issues, <a href="mailto:{{webmaster.email}}">email {{webmaster.name}}</a>
     </p>
-  </footer>
-{{/if}}
+  {{/if}}
+  <p class="float-sm-right">
+    {{#if session.user}}
+      <button class="btn btn-link" type="button" ($click)="session.destroy()">
+        Sign out
+      </button>
+    {{else}}
+      <a href="/auth/google">Sign in</a>
+    {{/if}}
+  </p>
+</footer>
