@@ -114,12 +114,6 @@
                 {{#if isPending}}
                   Loading trail #{{trailNumber}}…
                 {{else}}
-                  {{#if isDevelopment}}
-                    <can-import from="can-stache/helpers/route" />
-                    <a class="btn btn-primary" href="{{routeUrl page='events' year=year month=month day=day trailNumber=trailNumber secondaryPage='edit'}}">
-                      Edit trail
-                    </a>
-                  {{/if}}
                   <lbh3-past-run
                     {day}="day"
                     {month}="month"

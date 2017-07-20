@@ -1,3 +1,5 @@
+<can-import from="can-stache/helpers/route" />
+
 {{#if eventPromise.isPending}}
   <div class="alert alert-info" role="alert">
     <strong>Fetching run…</strong>
@@ -11,6 +13,14 @@
 {{/if}}
 
 {{#if event}}
+  {{#if session.user.canEditTrails}}
+    <div class="clearfix">
+      <a class="btn btn-primary float-right" href="{{routeUrl page='events' year=year month=month day=day trailNumber=trailNumber secondaryPage='edit'}}">
+        Edit trail
+      </a>
+    </div>
+  {{/if}}
+
   <h2>
     {{#if event.name}}
       {{event.name}}

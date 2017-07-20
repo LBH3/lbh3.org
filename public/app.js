@@ -10,9 +10,6 @@ const defaultPage = 'home';
 
 const AppViewModel = DefineMap.extend({
   day: 'string',
-  get isDevelopment() {
-    return loader.env.indexOf('development') > -1;
-  },
   month: 'string',
   page: {
     type: 'string',
