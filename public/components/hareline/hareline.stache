@@ -15,7 +15,7 @@
   </div>
 {{/if}}
 
-<h2>2017 Hareline</h2>
+<h2>Hareline</h2>
 
 {{#if eventsPromise.isPending}}
   <div class="alert alert-info" role="alert">
@@ -31,7 +31,7 @@
 
 {{#if eventsByMonth}}
   {{#each eventsByMonth as month}}
-    <h3>{{month.name}}</h3>
+    <h3>{{month.name}} {{month.year}}</h3>
     <table class="table table-bordered table-responsive table-sm">
       <thead>
         <tr>
