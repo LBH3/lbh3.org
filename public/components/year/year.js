@@ -2,16 +2,17 @@ import Component from 'can-component';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
+import moment from 'moment';
 import view from './year.stache';
 
 export const ViewModel = DefineMap.extend({
   eventsByMonth: DefineList,
   eventsPromise: {
     get: function() {
-      const currentDate = new Date();
-      const currentYear = currentDate.getFullYear();
-      const endDate = (currentYear === this.year) ? currentDate : new Date(this.year + 1, 0, 0);
-      const startDate = new Date(this.year, 0, 0);
+      const currentDate = moment();
+      const currentYear = currentDate.year();
+      const endDate = (currentYear === this.year) ? currentDate.toDate() : moment().year(this.year).endOf('year').toDate();
+      const startDate = moment().year(this.year).startOf('year').toDate();
       return Event.connection.getList({
         $limit: 100,
         $sort: {
