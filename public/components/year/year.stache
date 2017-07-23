@@ -42,7 +42,7 @@
             </td>
             <td>{{{event.haresHtml}}}</td>
             <td>{{event.locationMd}}</td>
-            <td>{{event.nameMd}}</td>
+            <td>{{{event.nameHtml}}}</td>
             <td class="text-center">
               {{#if event.photosUrl}}
                 <a href="{{event.photosUrl}}" target="_blank"><span class="fa fa-camera"></span></a>
