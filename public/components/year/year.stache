@@ -31,9 +31,13 @@
         {{#each month.events as event}}
           <tr>
             <td>
-              <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
+              {{#if event.trailNumber}}
+                <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
+                  {{event.startDateString}}
+                </a>
+              {{else}}
                 {{event.startDateString}}
-              </a>
+              {{/if}}
             </td>
             <td>
               {{#if event.trailNumber}}
