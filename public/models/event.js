@@ -154,7 +154,8 @@ Event.groupByMonth = function(events) {
       currentMonth = {
         events: [],
         name: monthNames[month],
-        number: month
+        number: month,
+        year: event.startDate.getFullYear()
       };
       eventsByMonth.push(currentMonth);
     }
