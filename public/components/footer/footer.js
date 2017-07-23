@@ -3,9 +3,13 @@ import DefineMap from 'can-define/map/';
 import Position from '~/models/position';
 import Session from '~/models/session';
 import './footer.less';
+import platform from 'steal-platform';
 import view from './footer.stache';
 
 export const ViewModel = DefineMap.extend({
+  platform: {
+    value: platform
+  },
   positions: {
     get: function(lastValue, setValue) {
       if (lastValue) {

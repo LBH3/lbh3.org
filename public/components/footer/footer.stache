@@ -10,7 +10,9 @@
         Sign out
       </button>
     {{else}}
-      <a href="/auth/google">Sign in</a>
+      {{^eq platform.isNode true}}
+        <a href="/auth/google">Sign in</a>
+      {{/eq}}
     {{/if}}
   </p>
 </footer>
