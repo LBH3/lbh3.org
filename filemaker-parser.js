@@ -150,6 +150,11 @@ fs.readFile(`${__dirname}/filemaker/run-list-all.xml`, function(readError, data)
               let dataValue = run[key];
               if (dataKey === 'hashit_reason_md') {
                 dataValue = dataValue || run['Hashit.Id'];
+                if (dataValue) {
+                  dataValue = dataValue.replace(new RegExp('--', 'g'), '—');
+                }
+              } else if ((dataKey === 'location_md' || dataKey === 'on_on_md' || dataKey === 'trail_comments_md') && dataValue) {
+                dataValue = dataValue.replace(new RegExp('--', 'g'), '—');
               } else if (dataKey === 'scribes_md' && dataValue) {
                 const scribeSplit = dataValue.split('--');
                 dataValue = scribeSplit.shift();
