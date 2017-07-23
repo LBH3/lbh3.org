@@ -9,7 +9,6 @@ const feathersClient = feathers()
   .configure(rest(loader.serviceBaseURL).fetch(fetch.bind(window)))
   .configure(hooks())
   .configure(auth({
-    storage: window.localStorage
   }));
 
 export default feathersClient;
