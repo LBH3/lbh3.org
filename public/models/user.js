@@ -16,7 +16,13 @@ var User = DefineMap.extend('User', {
     },
     serialize: false
   },
-  canEditTrails: {
+  canEditPostTrailInfo: {
+    get: function() {
+      return this.email === 'chasen@chasenlehara.com';
+    },
+    serialize: false
+  },
+  canEditPreTrailInfo: {
     get: function() {
       const emails = [
         'chasen@chasenlehara.com',

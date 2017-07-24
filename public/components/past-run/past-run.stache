@@ -13,7 +13,7 @@
 {{/if}}
 
 {{#if event}}
-  {{#if session.user.canEditTrails}}
+  {{#if session.user.canEditPostTrailInfo}}
     <div class="clearfix">
       <a class="btn btn-primary float-right" href="{{routeUrl page='events' year=year month=month day=day trailNumber=trailNumber secondaryPage='edit'}}">
         Edit trail
