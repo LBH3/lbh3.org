@@ -2,6 +2,7 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
 import Place from '~/models/place';
+import Session from '~/models/session';
 import './edit.less';
 import loader from '@loader';
 import platform from 'steal-platform';
@@ -9,7 +10,9 @@ import view from './edit.stache';
 
 export const ViewModel = DefineMap.extend({
   day: 'string',
+
   event: Event,
+
   eventPromise: {
     get: function() {
       const trailNumber = this.trailNumber;
@@ -22,13 +25,28 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
+
   get googleMapsKey() {
     return loader.googleMapsKey;
   },
+
   locationGooglePlace: Place,
+
   month: 'string',
+
   onOnGooglePlace: Place,
+
+  /**
+   * Session.current is provided by the can-connect-feathers session behavior.
+   * It will automatically populate when `new Session().save()` occurs in the app
+   * or on refresh after login.
+   */
+  get session() {
+    return Session.current;
+  },
+
   trailNumber: 'number',
+
   year: 'number',
 
   editingEventPromise: {
