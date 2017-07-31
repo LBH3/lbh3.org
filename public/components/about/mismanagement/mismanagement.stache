@@ -8,7 +8,7 @@
 
 {{#if positionsPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Uh oh!</strong> The Mismanagement list couldn’t be retrieved.
+    <strong>Fuck!</strong> The Mismanagement list couldn’t be retrieved.
   </div>
 {{/if}}
 

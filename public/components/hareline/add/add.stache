@@ -7,12 +7,12 @@
 {{/if}}
 {{#if creatingTrailPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Uh oh!</strong> The new trail failed to save.
+    <strong>Fuck!</strong> The new trail failed to save.
   </div>
 {{/if}}
 {{#if creatingTrailPromise.isResolved}}
   <div class="alert alert-success" role="alert">
-    <strong>Well done!</strong> You successfully created trail #{{createdTrail.trailNumber}}.
+    <strong>On on!</strong> You successfully created trail #{{createdTrail.trailNumber}}.
   </div>
 {{/if}}
 
