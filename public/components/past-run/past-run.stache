@@ -8,7 +8,7 @@
 
 {{#if eventPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Uh oh!</strong> The run couldn’t be retrieved.
+    <strong>Fuck!</strong> The run couldn’t be retrieved.
   </div>
 {{/if}}
 

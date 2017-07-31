@@ -21,7 +21,7 @@
 
 {{#if eventPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Uh oh!</strong> The trail failed to load.
+    <strong>Fuck!</strong> The trail failed to load.
   </div>
 {{/if}}
 
