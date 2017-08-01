@@ -37,6 +37,7 @@
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec"
   },
   "dependencies": {
+    "aws-sdk": "^2.92.0",
     "body-parser": "^1.17.2",
     "compression": "^1.6.2",
     "cors": "^2.8.3",

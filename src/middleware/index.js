@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+const aws = require('aws-sdk');
 const fs = require('fs');
 const ssr = require('done-ssr-middleware');
 
@@ -46,6 +48,36 @@ module.exports = function () {
       });
     })(redirectConfig[from]);
   }
+
+  app.get('/sign-s3', (req, res) => {
+    const awsConfig = app.get('aws');
+    const bucketName = awsConfig.snoozeBucketName;
+    const fileName = req.query['file-name'];
+    const fileType = req.query['file-type'];
+    const s3 = new aws.S3();
+    const s3Params = {
+      Bucket: bucketName,
+      Key: fileName,
+      Expires: 60,
+      ContentType: fileType,
+      ACL: 'public-read'
+    };
+
+    s3.getSignedUrl('putObject', s3Params, (error, data) => {
+      if (error) {
+        console.error('Error getting signed URL:', error);
+        res.status(500);
+        res.write(JSON.stringify(error));
+      } else {
+        const returnData = {
+          signedRequest: data,
+          url: `https://${bucketName}.s3.amazonaws.com/${fileName}`
+        };
+        res.write(JSON.stringify(returnData));
+      }
+      res.end();
+    });
+  });
 
   app.use(ssr({
     config: `${__dirname}/../../public/package.json!npm`,
