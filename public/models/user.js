@@ -10,6 +10,17 @@ var User = DefineMap.extend('User', {
   seal: false
 }, {
   id: 'any',
+  canAddSnoozes: {
+    get: function() {
+      const emails = [
+        'broomhf3@gmail.com',
+        'chasen@chasenlehara.com',
+        'transc.ntinental@gmail.com'
+      ];
+      return emails.indexOf(this.email) > -1;
+    },
+    serialize: false
+  },
   canAddTrails: {
     get: function() {
       return this.email === 'chasen@chasenlehara.com';

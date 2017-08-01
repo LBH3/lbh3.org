@@ -59,5 +59,10 @@
       "secure": false
     }
   },
-  "postgres": "DATABASE_URL"
+  "postgres": "DATABASE_URL",
+  "aws": {
+    "accessKey": "AWS_ACCESS_KEY_ID",
+    "accessSecret": "AWS_SECRET_ACCESS_KEY",
+    "snoozeBucketName": "lbh3-snooze-test"
+  }
 }

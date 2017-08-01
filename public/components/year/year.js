@@ -5,6 +5,8 @@ import Event from '~/models/event';
 import moment from 'moment';
 import view from './year.stache';
 
+import '~/components/snooze-button/';
+
 export const ViewModel = DefineMap.extend({
   eventsByMonth: DefineList,
   eventsPromise: {

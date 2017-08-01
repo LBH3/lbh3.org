@@ -53,9 +53,7 @@
               {{/if}}
             </td>
             <td class="text-center">
-              {{#if event.snoozeUrl}}
-                <a href="{{event.snoozeUrl}}" target="_blank"><span class="fa fa-newspaper-o"></span></a>
-              {{/if}}
+              <lbh3-snooze-button {event}="event" />
             </td>
           </tr>
         {{/each}}

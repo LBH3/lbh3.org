@@ -1,4 +1,7 @@
 {
   "host": "www.lbh3.org",
-  "port": "PORT"
+  "port": "PORT",
+  "aws": {
+    "snoozeBucketName": "lbh3-snooze"
+  }
 }

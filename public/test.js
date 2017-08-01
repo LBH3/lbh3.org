@@ -17,6 +17,7 @@ import 'lbh3/components/nav/nav-test';
 import 'lbh3/components/past-run/edit/edit-test';
 import 'lbh3/components/past-run/past-run-test';
 import 'lbh3/components/past-runs/past-runs-test';
+import 'lbh3/components/snooze-button/snooze-button-test';
 import 'lbh3/components/year/year-test';
 
 F.attach(QUnit);
