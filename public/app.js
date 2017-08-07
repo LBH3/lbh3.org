@@ -1,4 +1,5 @@
 import './models/fixtures/positions';
+import '~/components/no-ssr/';
 
 import DefineMap from 'can-define/map/';
 import loader from '@loader';

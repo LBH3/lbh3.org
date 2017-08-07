@@ -85,18 +85,20 @@
           {{#if secondaryPage}}
             {{#switch secondaryPage}}
               {{#case "edit"}}
-                <can-import from="lbh3/components/past-run/edit/">
-                  {{#if isPending}}
-                    Loading page to edit past run…
-                  {{else}}
-                    <lbh3-past-run-edit
-                      {day}="day"
-                      {month}="month"
-                      {trail-number}="trailNumber"
-                      {year}="year"
-                    />
-                  {{/if}}
-                </can-import>
+                <lbh3-no-ssr>
+                  <can-import from="lbh3/components/past-run/edit/">
+                    {{#if isPending}}
+                      Loading page to edit past run…
+                    {{else}}
+                      <lbh3-past-run-edit
+                        {day}="day"
+                        {month}="month"
+                        {trail-number}="trailNumber"
+                        {year}="year"
+                      />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
               {{/case}}
               {{#case "jesus-cuervo-1800-trail"}}
                 <can-import from="lbh3/components/jesus-cuervo/">
@@ -145,18 +147,20 @@
               </can-import>
             {{/case}}
             {{#case "edit"}}
-              <can-import from="lbh3/components/past-run/edit/">
-                {{#if isPending}}
-                  Loading edit run page…
-                {{else}}
-                  <lbh3-past-run-edit
-                    {day}="day"
-                    {month}="month"
-                    {trail-number}="trailNumber"
-                    {year}="year"
-                  />
-                {{/if}}
-              </can-import>
+              <lbh3-no-ssr>
+                <can-import from="lbh3/components/past-run/edit/">
+                  {{#if isPending}}
+                    Loading edit run page…
+                  {{else}}
+                    <lbh3-past-run-edit
+                      {day}="day"
+                      {month}="month"
+                      {trail-number}="trailNumber"
+                      {year}="year"
+                    />
+                  {{/if}}
+                </can-import>
+              </lbh3-no-ssr>
             {{/case}}
             {{#case "guidelines"}}
               <can-import from="lbh3/components/hareline/guidelines/">
