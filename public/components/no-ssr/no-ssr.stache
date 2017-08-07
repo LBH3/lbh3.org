@@ -1,0 +1,3 @@
+{{^eq platform.isNode true}}
+  <content />
+{{/eq}}
