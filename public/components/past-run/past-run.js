@@ -1,7 +1,10 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
+import Place from '~/models/place';
 import Session from '~/models/session';
+
+import loader from '@loader';
 import view from './past-run.stache';
 
 export const ViewModel = DefineMap.extend({
@@ -17,6 +20,16 @@ export const ViewModel = DefineMap.extend({
           this.event = events[0];
         });
       }
+    }
+  },
+  get googleMapsKey() {
+    return loader.googleMapsKey;
+  },
+  locationPromise: {
+    get: function() {
+      return Place.connection.get({
+        id: this.event.locationGooglePlaceId
+      });
     }
   },
   month: 'string',
