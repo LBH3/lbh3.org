@@ -1,7 +1,6 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
-import Place from '~/models/place';
 import './home.less';
 import loader from '@loader';
 import view from './home.stache';
@@ -28,13 +27,6 @@ export const ViewModel = DefineMap.extend({
   },
   get googleMapsKey() {
     return loader.googleMapsKey;
-  },
-  locationPromise: {
-    get: function() {
-      return Place.connection.get({
-        id: this.event.locationGooglePlaceId
-      });
-    }
   }
 });
 
