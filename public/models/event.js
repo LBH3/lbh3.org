@@ -7,6 +7,7 @@ import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import marked from 'marked';
 import moment from 'moment';
+import Place from './place';
 import set from 'can-set';
 
 marked.setOptions({
@@ -64,6 +65,16 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  locationPromise: {
+    get: function() {
+      const id = this.locationGooglePlaceId;
+      if (id) {
+        return Place.connection.get({
+          id
+        });
+      }
+    }
+  },
   nameHtml: {
     get: function() {
       return marked(this.nameMd);
@@ -75,6 +86,16 @@ const Event = DefineMap.extend({
       return marked(this.onOnMd);
     },
     serialize: false
+  },
+  onOnPromise: {
+    get: function() {
+      const id = this.onOnGooglePlaceId;
+      if (id) {
+        return Place.connection.get({
+          id
+        });
+      }
+    }
   },
   startDate: {
     get: function() {
