@@ -35,15 +35,7 @@
     <dt class="col-sm-3 text-sm-right">Date:</dt>
     <dd class="col-sm-9">{{event.startDateTimeString}}</dd>
     <dt class="col-sm-3 text-sm-right">Start:</dt>
-    <dd class="col-sm-9">
-      {{#if event.locationPromise.value}}
-        {{event.locationPromise.value.formattedAddress}}
-      {{else}}
-        {{#if event.locationMd}}
-          {{event.locationMd}}
-        {{/if}}
-      {{/if}}
-    </dd>
+    <dd class="col-sm-9">{{{event.longLocationHtml}}}</dd>
     {{#if event.haresHtml}}
       <dt class="col-sm-3 text-sm-right">Hares:</dt>
       <dd class="col-sm-9">{{{event.haresHtml}}}</dd>

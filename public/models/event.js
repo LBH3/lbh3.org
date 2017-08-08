@@ -65,6 +65,12 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  locationHtml: {
+    get: function() {
+      return marked(this.locationMd);
+    },
+    serialize: false
+  },
   locationPromise: {
     get: function() {
       const id = this.locationGooglePlaceId;
@@ -74,6 +80,21 @@ const Event = DefineMap.extend({
         });
       }
     }
+  },
+  longLocationHtml: {
+    get: function(lastSetValue, resolve) {
+      if (this.locationPromise) {
+        this.locationPromise.then(location => {
+          if (location.formattedAddress) {
+            resolve(location.formattedAddress);
+          } else {
+            resolve(this.shortLocationHtml);
+          }
+        });
+      }
+      return this.locationHtml;
+    },
+    serialize: false
   },
   nameHtml: {
     get: function() {
@@ -96,6 +117,26 @@ const Event = DefineMap.extend({
         });
       }
     }
+  },
+  shortLocationHtml: {
+    get: function(lastSetValue, resolve) {
+      if (this.locationPromise) {
+        this.locationPromise.then(location => {
+          const localities = location.addressComponents.filter(addressComponent => {
+            return addressComponent.types.indexOf('locality') > -1;
+          });
+          if (localities[0] && localities[0].long_name) {
+            resolve(localities[0].long_name);
+          } else if (location.vicinity) {
+            resolve(location.vicinity);
+          } else if (location.name) {
+            resolve(location.name);
+          }
+        });
+      }
+      return this.locationHtml;
+    },
+    serialize: false
   },
   startDate: {
     get: function() {
