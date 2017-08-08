@@ -45,7 +45,7 @@
               {{/if}}
             </td>
             <td>{{{event.haresHtml}}}</td>
-            <td>{{event.locationMd}}</td>
+            <td>{{{event.shortLocationHtml}}}</td>
             <td>{{{event.nameHtml}}}</td>
             <td class="text-center">
               {{#if event.photosUrl}}

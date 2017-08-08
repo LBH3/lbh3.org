@@ -72,7 +72,7 @@
                 Available!
               {{/if}}
             </td>
-            <td>{{event.locationMd}}</td>
+            <td>{{{event.shortLocationHtml}}}</td>
             <td>{{event.nameMd}}</td>
           </tr>
         {{/each}}
