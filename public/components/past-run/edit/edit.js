@@ -49,6 +49,10 @@ export const ViewModel = DefineMap.extend({
 
   editRun: function() {
     return this.editingEventPromise = this.event.save();
+  },
+
+  resetEditingEventPromise: function() {
+    this.editingEventPromise = null;
   }
 });
 
