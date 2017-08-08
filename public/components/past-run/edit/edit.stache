@@ -41,7 +41,7 @@
         Location
       </label>
       <div class="col-md-10">
-        <input class="form-control" id="location" placeholder="" type="text" {($value)}="event.locationMd">
+        <input class="form-control" disabled id="location" placeholder="" type="text" {($value)}="event.locationMd">
         {{#if locationGooglePlace}}
           <small>
             {{{locationGooglePlace.formattedAddress}}}
@@ -86,7 +86,7 @@
         On-On
       </label>
       <div class="col-md-10">
-        <input class="form-control" id="on-on" placeholder="" type="text" {($value)}="event.onOnMd">
+        <input class="form-control" disabled id="on-on" placeholder="" type="text" {($value)}="event.onOnMd">
         {{#if onOnGooglePlace}}
           <small>
             {{{onOnGooglePlace.formattedAddress}}}

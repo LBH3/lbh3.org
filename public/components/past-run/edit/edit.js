@@ -5,7 +5,6 @@ import Place from '~/models/place';
 import Session from '~/models/session';
 import './edit.less';
 import loader from '@loader';
-import platform from 'steal-platform';
 import view from './edit.stache';
 
 export const ViewModel = DefineMap.extend({
@@ -68,12 +67,8 @@ export default Component.extend({
   ViewModel,
   view,
   events: {
-    inserted: function() {
-      if (platform.isNode) {
-        return;
-      }
-      const mapsScript = document.createElement('script');
-      mapsScript.onload = () => {
+    '{viewModel} event': function() {
+      const onloadHandler = () => {
         var options = {
           bounds: new google.maps.LatLngBounds(
             new google.maps.LatLng(33.5, -118.5),
@@ -82,26 +77,39 @@ export default Component.extend({
         };
         this.enableAutocompleteForInput('location', 'location', options);
         this.enableAutocompleteForInput('on-on', 'onOn', options);
-      };
-      mapsScript.src = `https://maps.googleapis.com/maps/api/js?key=${this.viewModel.googleMapsKey}&libraries=places`;
-      mapsScript.type = 'text/javascript';
-      document.getElementsByTagName('head')[0].appendChild(mapsScript);
+      }
+
+      const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${this.viewModel.googleMapsKey}&libraries=places`;
+      const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
+
+      if (existingScript) {
+        onloadHandler();
+      } else {
+        const mapsScript = document.createElement('script');
+        mapsScript.onload = onloadHandler;
+        mapsScript.src = scriptSrc;
+        mapsScript.type = 'text/javascript';
+        document.getElementsByTagName('head')[0].appendChild(mapsScript);
+      }
     },
     enableAutocompleteForInput: function(id, vmProperty, options) {
-      const locationInput = document.getElementById(id);
-      const autocomplete = new google.maps.places.Autocomplete(locationInput, options);
-      autocomplete.addListener('place_changed', () => {
-        const vmPropertyGP = `${vmProperty}GooglePlace`;
-        const place = this.viewModel[vmPropertyGP] = Place.fromGoogle(autocomplete.getPlace());
-        place.save().then(savedPlace => {
-          const vmPropertyGPId = `${vmPropertyGP}Id`;
-          const vmPropertyMd = `${vmProperty}Md`;
-          this.viewModel.event[vmPropertyGPId] = savedPlace.id;
-          this.viewModel.event[vmPropertyMd] = savedPlace.name || savedPlace.formattedAddress;
-        }, error => {
-          console.error('Error while saving place:', error);
+      setTimeout(() => {// Make sure the element is in the DOM
+        const locationInput = document.getElementById(id);
+        locationInput.disabled = false;
+        const autocomplete = new google.maps.places.Autocomplete(locationInput, options);
+        autocomplete.addListener('place_changed', () => {
+          const vmPropertyGP = `${vmProperty}GooglePlace`;
+          const place = this.viewModel[vmPropertyGP] = Place.fromGoogle(autocomplete.getPlace());
+          place.save().then(savedPlace => {
+            const vmPropertyGPId = `${vmPropertyGP}Id`;
+            const vmPropertyMd = `${vmProperty}Md`;
+            this.viewModel.event[vmPropertyGPId] = savedPlace.id;
+            this.viewModel.event[vmPropertyMd] = savedPlace.name || savedPlace.formattedAddress;
+          }, error => {
+            console.error('Error while saving place:', error);
+          });
         });
-      });
+      }, 10);
     },
     '{element} submit': function(element, event) {
       event.preventDefault();

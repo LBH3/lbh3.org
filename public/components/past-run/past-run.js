@@ -27,9 +27,11 @@ export const ViewModel = DefineMap.extend({
   },
   locationPromise: {
     get: function() {
-      return Place.connection.get({
-        id: this.event.locationGooglePlaceId
-      });
+      if (this.event && this.event.locationGooglePlaceId) {
+        return Place.connection.get({
+          id: this.event.locationGooglePlaceId
+        });
+      }
     }
   },
   month: 'string',
