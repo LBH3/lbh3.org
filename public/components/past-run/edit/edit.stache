@@ -1,21 +1,5 @@
 <h2>Edit Run #{{trailNumber}}</h2>
 
-{{#if editingEventPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Saving trail…</strong>
-  </div>
-{{/if}}
-{{#if editingEventPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The new trail failed to save.
-  </div>
-{{/if}}
-{{#if editingEventPromise.isResolved}}
-  <div class="alert alert-success" role="alert">
-    <strong>On on!</strong> Both hash.org and lbh3.org have been updated.
-  </div>
-{{/if}}
-
 {{#if eventPromise.isPending}}
   <div class="alert alert-info" role="alert">
     <strong>Loading trail…</strong>
@@ -114,8 +98,33 @@
       </div>
     {{/if}}
 
-    <button class="btn btn-primary" type="submit">
+    <button
+      class="btn btn-primary"
+      {{#if editingEventPromise.isPending}}disabled{{/if}}
+      type="submit">
       Edit run
     </button>
   </form>
+{{/if}}
+
+{{#if editingEventPromise.isPending}}
+  <div class="alert alert-info mt-3" role="alert">
+    <strong>Saving trail…</strong>
+  </div>
+{{/if}}
+{{#if editingEventPromise.isRejected}}
+  <div class="alert alert-danger mt-3" role="alert">
+    <button aria-label="Close" class="close" type="button" ($click)="resetEditingEventPromise()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Fuck!</strong> The new trail failed to save.
+  </div>
+{{/if}}
+{{#if editingEventPromise.isResolved}}
+  <div class="alert alert-success mt-3" role="alert">
+    <button aria-label="Close" class="close" type="button" ($click)="resetEditingEventPromise()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>On on!</strong> Both hash.org and lbh3.org have been updated.
+  </div>
 {{/if}}
