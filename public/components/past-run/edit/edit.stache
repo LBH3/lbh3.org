@@ -117,7 +117,7 @@
     <button aria-label="Close" class="close" type="button" ($click)="resetEditingEventPromise()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <strong>Fuck!</strong> The new trail failed to save.
+    <strong>Fuck!</strong> The trail failed to save.
   </div>
 {{/if}}
 {{#if editingEventPromise.isResolved}}
