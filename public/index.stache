@@ -138,13 +138,15 @@
         {{#case "hareline"}}
           {{#switch secondaryPage}}
             {{#case "add"}}
-              <can-import from="lbh3/components/hareline/add/">
-                {{#if isPending}}
-                  Loading the Hareline add page…
-                {{else}}
-                  <lbh3-hareline-add />
-                {{/if}}
-              </can-import>
+              <lbh3-no-ssr>
+                <can-import from="lbh3/components/hareline/add/">
+                  {{#if isPending}}
+                    Loading the Hareline add page…
+                  {{else}}
+                    <lbh3-hareline-add />
+                  {{/if}}
+                </can-import>
+              </lbh3-no-ssr>
             {{/case}}
             {{#case "edit"}}
               <lbh3-no-ssr>

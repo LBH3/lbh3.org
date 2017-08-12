@@ -1,3 +1,5 @@
+const { authenticate } = require('feathers-authentication').hooks;
+const authHook = require('../../hooks/auth');
 const google = require('googleapis');
 const makeRaw = require('../../utils/make-raw');
 const marked = require('marked');
@@ -6,6 +8,14 @@ const striptags = require('striptags');
 const calendar = google.calendar('v3');
 const calendarEmail = 'lbh3-643@lbh3-171321.iam.gserviceaccount.com';
 const calendarId = 'hash.org_apdt0s7aam1mdl1ckc4n1rcc4k@group.calendar.google.com';
+const restrictToAdmin = [
+  authenticate('jwt'),
+  authHook.restrictToAdmin()
+];
+const restrictToBored = [
+  authenticate('jwt'),
+  authHook.restrictToBored()
+];
 
 marked.setOptions({
   breaks: true,
@@ -189,10 +199,10 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
-    update: [makeRaw],
-    patch: [],
-    remove: []
+    create: [ ...restrictToAdmin ],
+    update: [ ...restrictToBored, makeRaw ],
+    patch: [ ...restrictToBored ],
+    remove: [ ...restrictToAdmin ]
   },
 
   after: {

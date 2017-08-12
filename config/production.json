@@ -3,5 +3,8 @@
   "port": "PORT",
   "aws": {
     "snoozeBucketName": "lbh3-snooze"
+  },
+  "authentication": {
+    "secret": "JWT_AUTH_SECRET"
   }
 }
