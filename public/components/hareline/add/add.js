@@ -19,8 +19,6 @@ export const ViewModel = DefineMap.extend({
         this.createdTrail = createdTrail;
         this.startDate = oneWeekFromDate(createdTrail.startDateAsMoment);
         this.trailNumber = createdTrail.trailNumber + 1;
-      }, (error) => {
-        console.error('Failed to create trail with error:', error);
       });
     }
   },
