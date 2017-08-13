@@ -61,7 +61,7 @@ const getEvent = function(auth, trailData) {
   return new Promise(function(resolve, reject) {
     const timeMin = trailData.startDatetime;
     const timeMaxDate = new Date(timeMin);
-    timeMaxDate.setHours(timeMaxDate.getMinutes() + 15);
+    timeMaxDate.setMinutes(timeMaxDate.getMinutes() + 15);
     const timeMax = timeMaxDate.toISOString();
 
     const params = {
