@@ -55,6 +55,7 @@
     "feathers-socketio": "^2.0.0",
     "googleapis": "^20.1.0",
     "helmet": "^3.8.1",
+    "html-entities": "^1.2.1",
     "marked": "^0.3.6",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",

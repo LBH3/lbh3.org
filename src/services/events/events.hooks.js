@@ -1,6 +1,7 @@
 /*eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
 const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
+const Entities = require('html-entities').AllHtmlEntities;
 const google = require('googleapis');
 const makeRaw = require('../../utils/make-raw');
 const marked = require('marked');
@@ -9,6 +10,7 @@ const striptags = require('striptags');
 const calendar = google.calendar('v3');
 const calendarEmail = 'lbh3-643@lbh3-171321.iam.gserviceaccount.com';
 const calendarId = 'hash.org_apdt0s7aam1mdl1ckc4n1rcc4k@group.calendar.google.com';
+const entities = new Entities();
 const restrictToAdmin = [
   authenticate('jwt'),
   authHook.restrictToAdmin()
@@ -164,7 +166,7 @@ const getResourceForTrail = function(app, trailData) {
 };
 
 const markdownToPlain = function(text) {
-  return striptags(marked(text || '')).trim();
+  return entities.decode(striptags(marked(text || ''))).trim();
 };
 
 const updateEvent = function(auth, eventId, resource) {
