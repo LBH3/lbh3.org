@@ -87,22 +87,25 @@ export default Component.extend({
       }
     },
     enableAutocompleteForInput: function(id, vmProperty, options) {
-      setTimeout(() => {// Make sure the element is in the DOM
+      const interval = setInterval(() => {// Make sure the element is in the DOM
         const locationInput = document.getElementById(id);
-        locationInput.disabled = false;
-        const autocomplete = new google.maps.places.Autocomplete(locationInput, options);
-        autocomplete.addListener('place_changed', () => {
-          const place = Place.fromGoogle(autocomplete.getPlace());
-          place.save().then(savedPlace => {
-            const vmPropertyGPId = `${vmProperty}GooglePlaceId`;
-            const vmPropertyMd = `${vmProperty}Md`;
-            this.viewModel.event[vmPropertyGPId] = savedPlace.id;
-            this.viewModel.event[vmPropertyMd] = savedPlace.name || savedPlace.formattedAddress;
-          }, error => {
-            console.error('Error while saving place:', error);
+        if (locationInput) {
+          clearInterval(interval);
+          locationInput.disabled = false;
+          const autocomplete = new google.maps.places.Autocomplete(locationInput, options);
+          autocomplete.addListener('place_changed', () => {
+            const place = Place.fromGoogle(autocomplete.getPlace());
+            place.save().then(savedPlace => {
+              const vmPropertyGPId = `${vmProperty}GooglePlaceId`;
+              const vmPropertyMd = `${vmProperty}Md`;
+              this.viewModel.event[vmPropertyGPId] = savedPlace.id;
+              this.viewModel.event[vmPropertyMd] = savedPlace.name || savedPlace.formattedAddress;
+            }, error => {
+              console.error('Error while saving place:', error);
+            });
           });
-        });
-      }, 30);
+        }
+      }, 10);
     },
     '{element} submit': function(element, event) {
       event.preventDefault();
