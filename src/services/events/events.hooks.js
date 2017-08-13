@@ -1,3 +1,4 @@
+/*eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
 const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
 const google = require('googleapis');
@@ -63,7 +64,7 @@ const getEvent = function(auth, trailData) {
     timeMaxDate.setHours(timeMaxDate.getMinutes() + 15);
     const timeMax = timeMaxDate.toISOString();
 
-    calendar.events.list({
+    const params = {
       auth,
       calendarId,
       maxResults: 1,
@@ -71,7 +72,11 @@ const getEvent = function(auth, trailData) {
       singleEvents: true,
       timeMax,
       timeMin
-    }, function(error, response) {
+    };
+    console.info('Making calendar.events.list call with params:', params);
+
+    calendar.events.list(params, function(error, response) {
+      console.info('calendar.events.list callback received arguments:', error, response);
       if (error) {
         reject(error);
       } else {
