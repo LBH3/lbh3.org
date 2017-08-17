@@ -86,11 +86,11 @@
             {{#switch secondaryPage}}
               {{#case "edit"}}
                 <lbh3-no-ssr>
-                  <can-import from="lbh3/components/past-run/edit/">
+                  <can-import from="lbh3/components/run/edit/">
                     {{#if isPending}}
-                      Loading page to edit past run…
+                      Loading the edit run page…
                     {{else}}
-                      <lbh3-past-run-edit
+                      <lbh3-run-edit
                         {day}="day"
                         {month}="month"
                         {trail-number}="trailNumber"
@@ -112,11 +112,11 @@
             {{/switch}}
           {{else}}
             {{#if trailNumber}}
-              <can-import from="lbh3/components/past-run/">
+              <can-import from="lbh3/components/run/">
                 {{#if isPending}}
                   Loading trail #{{trailNumber}}…
                 {{else}}
-                  <lbh3-past-run
+                  <lbh3-run
                     {day}="day"
                     {month}="month"
                     {trail-number}="trailNumber"
@@ -150,11 +150,11 @@
             {{/case}}
             {{#case "edit"}}
               <lbh3-no-ssr>
-                <can-import from="lbh3/components/past-run/edit/">
+                <can-import from="lbh3/components/run/edit/">
                   {{#if isPending}}
-                    Loading edit run page…
+                    Loading the edit run page…
                   {{else}}
-                    <lbh3-past-run-edit
+                    <lbh3-run-edit
                       {day}="day"
                       {month}="month"
                       {trail-number}="trailNumber"

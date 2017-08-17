@@ -4,7 +4,7 @@ import Event from '~/models/event';
 import Session from '~/models/session';
 
 import loader from '@loader';
-import view from './past-run.stache';
+import view from './run.stache';
 
 export const ViewModel = DefineMap.extend({
   day: 'string',
@@ -40,7 +40,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-  tag: 'lbh3-past-run',
+  tag: 'lbh3-run',
   ViewModel,
   view
 });

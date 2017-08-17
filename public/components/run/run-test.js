@@ -1,8 +1,8 @@
 import QUnit from 'steal-qunit';
-import { ViewModel } from './past-run';
+import { ViewModel } from './run';
 
 // ViewModel unit tests
-QUnit.module('lbh3/components/past-run');
+QUnit.module('lbh3/components/run');
 
 QUnit.test('Has eventPromise', function(){
   var vm = new ViewModel();
