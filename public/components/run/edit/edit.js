@@ -57,7 +57,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-  tag: 'lbh3-past-run-edit',
+  tag: 'lbh3-run-edit',
   ViewModel,
   view,
   events: {
