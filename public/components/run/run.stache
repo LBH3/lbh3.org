@@ -1,4 +1,6 @@
 <can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="lbh3/components/snooze-button/" />
 
 {{#if eventPromise.isPending}}
   <div class="alert alert-info" role="alert">
@@ -13,23 +15,33 @@
 {{/if}}
 
 {{#if event}}
-  {{#if session.user.canEditPostTrailInfo}}
-    <div class="clearfix">
-      <a class="btn btn-primary float-right" href="{{routeUrl page='events' year=year month=month day=day trailNumber=trailNumber secondaryPage='edit'}}">
-        Edit trail
-      </a>
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-10">
+      <h2>
+        {{#if event.nameMd}}
+          {{{event.nameMd}}}
+          <br>
+          <small class="text-muted">Run #{{event.trailNumber}}</small>
+        {{else}}
+          Run #{{event.trailNumber}}
+        {{/if}}
+      </h2>
     </div>
-  {{/if}}
-
-  <h2>
-    {{#if event.nameMd}}
-      {{{event.nameMd}}}
-      <br>
-      <small class="text-muted">Run #{{event.trailNumber}}</small>
-    {{else}}
-      Run #{{event.trailNumber}}
-    {{/if}}
-  </h2>
+    <div class="col">
+      {{#if session.user.canEditPostTrailInfo}}
+        <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}" title="Edit trail">
+          <span class="fa fa-pencil-square-o"></span>
+        </a>
+      {{/if}}
+      {{#if event.photosUrl}}
+        <a href="{{event.photosUrl}}" target="_blank" title="View photos">
+          <span class="fa fa-camera"></span>
+        </a>
+      {{/if}}
+      <lbh3-snooze-button {event}="event" />
+    </div>
+  </div>
 
   <dl class="row">
     <dt class="col-sm-3 text-sm-right">Date:</dt>
