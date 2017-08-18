@@ -11,14 +11,29 @@ export const ViewModel = DefineMap.extend({
   event: Event,
   eventPromise: {
     get: function() {
+      let params;
       const trailNumber = this.trailNumber;
+
       if (trailNumber) {
-        return Event.connection.getList({
+        params = {
           trailNumber
-        }).then((events) => {
-          this.event = events[0];
-        });
+        };
+      } else {
+        const currentDate = new Date();
+        const yesterday = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+        params = {
+          $sort: {
+            startDatetime: 1
+          },
+          startDatetime: {
+            $gte: yesterday
+          }
+        };
       }
+
+      return Event.connection.getList(params).then(events => {
+        this.event = events[0];
+      });
     }
   },
   get googleMapsKey() {
@@ -35,6 +50,7 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
 
+  showDonation: 'boolean',
   trailNumber: 'number',
   year: 'number'
 });
