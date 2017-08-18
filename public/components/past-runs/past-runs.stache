@@ -16,7 +16,7 @@
   -->
 </div>
 
-<nav class="flex-column flex-sm-row nav nav-pills">
+<nav class="nav nav-pills">
   {{#each years as yearObject}}
     <a
       class="{{#is yearObject.id year}}active{{/is}} flex-sm-fill nav-link text-sm-center"
