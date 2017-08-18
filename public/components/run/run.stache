@@ -22,8 +22,8 @@
   {{/if}}
 
   <h2>
-    {{#if event.name}}
-      {{event.name}}
+    {{#if event.nameMd}}
+      {{{event.nameMd}}}
       <br>
       <small class="text-muted">Run #{{event.trailNumber}}</small>
     {{else}}
@@ -34,11 +34,23 @@
   <dl class="row">
     <dt class="col-sm-3 text-sm-right">Date:</dt>
     <dd class="col-sm-9">{{event.startDateTimeString}}</dd>
-    <dt class="col-sm-3 text-sm-right">Start:</dt>
-    <dd class="col-sm-9">{{{event.longLocationHtml}}}</dd>
-    {{#if event.haresHtml}}
+    {{#if event.longLocationHtml}}
+      <dt class="col-sm-3 text-sm-right">Start:</dt>
+      <dd class="col-sm-9">
+        {{{event.longLocationHtml}}}
+      </dd>
+    {{/if}}
+    {{#if event.haresMd}}
       <dt class="col-sm-3 text-sm-right">Hares:</dt>
-      <dd class="col-sm-9">{{{event.haresHtml}}}</dd>
+      <dd class="col-sm-9">{{{event.haresMd}}}</dd>
+    {{/if}}
+    {{#if showDonation}}
+      <dt class="col-sm-3 text-sm-right">Donation:</dt>
+      <dd class="col-sm-9">$5 for run</dd>
+    {{/if}}
+    {{#if event.bringHtml}}
+      <dt class="col-sm-3 text-sm-right">Bring:</dt>
+      <dd class="col-sm-9">{{{event.bringHtml}}}</dd>
     {{/if}}
   </dl>
 
@@ -52,13 +64,25 @@
   {{/if}}
 
   <dl class="row">
+    {{#if event.directionsHtml}}
+      <dt class="col-md-3 text-md-right">Directions:</dt>
+      <dd class="col-md-9">
+        {{{event.directionsHtml}}}
+      </dd>
+    {{/if}}
+    {{#if event.fromTheHaresHtml}}
+      <dt class="col-md-3 text-md-right">From the hares:</dt>
+      <dd class="col-md-9">
+        {{{event.fromTheHaresHtml}}}
+      </dd>
+    {{/if}}
+    {{#if event.onOnPromise.value}}
+      <dt class="col-md-3 text-md-right">On-on:</dt>
+      <dd class="col-sm-9">{{event.onOnPromise.value.formattedAddress}}</dd>
+    {{/if}}
     {{#if event.hashitReasonMd}}
       <dt class="col-sm-3 text-sm-right">Hashit:</dt>
       <dd class="col-sm-9">{{event.hashitReasonMd}}</dd>
-    {{/if}}
-    {{#if event.onOnMd}}
-      <dt class="col-sm-3 text-sm-right">On-on:</dt>
-      <dd class="col-sm-9">{{event.onOnMd}}</dd>
     {{/if}}
     {{#if event.trailCommentsMd}}
       <dt class="col-sm-3 text-sm-right">Run Notes:</dt>
