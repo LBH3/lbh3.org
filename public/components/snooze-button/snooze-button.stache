@@ -4,24 +4,24 @@
       <span class="fa fa-circle-o-notch fa-spin"></span>
     {{/if}}
     {{#if uploadPromise.isRejected}}
-      <span class="fa fa-warning"></span>
+      <span class="fa fa-warning" title="{{uploadPromise.reason.message}}"></span>
     {{/if}}
     {{#if uploadPromise.isResolved}}
       {{#if event.snoozeUrl}}
-        <a href="{{event.snoozeUrl}}" target="_blank">
+        <a href="{{event.snoozeUrl}}" target="_blank" title="View Snooze">
           <span class="fa fa-newspaper-o"></span>
         </a>
       {{else}}
-        <span class="fa fa-warning"></span>
+        <span class="fa fa-warning" title="Unknown error"></span>
       {{/if}}
     {{/if}}
   {{else}}
     {{#if event.snoozeUrl}}
-      <a href="{{event.snoozeUrl}}" target="_blank">
+      <a href="{{event.snoozeUrl}}" target="_blank" title="View Snooze">
         <span class="fa fa-newspaper-o"></span>
       </a>
     {{else}}
-      <label>
+      <label title="Upload Snooze">
         <span class="fa fa-upload"></span>
         <input accept="application/pdf" class="sr-only" type="file" />
       </label>
@@ -29,7 +29,7 @@
   {{/if}}
 {{else}}
   {{#if event.snoozeUrl}}
-    <a href="{{event.snoozeUrl}}" target="_blank">
+    <a href="{{event.snoozeUrl}}" target="_blank" title="View Snooze">
       <span class="fa fa-newspaper-o"></span>
     </a>
   {{/if}}
