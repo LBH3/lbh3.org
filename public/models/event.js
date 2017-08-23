@@ -6,9 +6,13 @@ import DefineMap from 'can-define/map/';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import marked from 'marked';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Place from './place';
+import platform from 'steal-platform';
 import set from 'can-set';
+
+const defaultLocale = (platform.isNode) ? 'en-US' : undefined;
+const timeZone = 'America/Los_Angeles';
 
 marked.setOptions({
   breaks: true,
@@ -146,14 +150,14 @@ const Event = DefineMap.extend({
   },
   startDateAsMoment: {
     get: function() {
-      return moment(this.startDatetime);
+      return moment(this.startDatetime).tz(timeZone);
     },
     serialize: false
   },
   startDateString: {
     get: function() {
-      const options = {day: 'numeric', month: 'numeric'};
-      return this.startDate.toLocaleDateString(undefined, options);
+      const options = {day: 'numeric', month: 'numeric', timeZone};
+      return this.startDate.toLocaleDateString(defaultLocale, options);
     },
     serialize: false
   },
@@ -170,8 +174,16 @@ const Event = DefineMap.extend({
   },
   startDateTimeString: {
     get: function() {
-      const options = {day: 'numeric', hour: '2-digit', minute: '2-digit', month: 'numeric', weekday: 'long', year: '2-digit'};
-      return this.startDate.toLocaleDateString(undefined, options);
+      const options = {
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        month: 'numeric',
+        timeZone,
+        weekday: 'long',
+        year: '2-digit'
+      };
+      return this.startDate.toLocaleDateString(defaultLocale, options);
     },
     serialize: false
   }
