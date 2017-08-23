@@ -59,6 +59,7 @@
     "generator-donejs": "^1.0.7",
     "marked": "^0.3.6",
     "moment": "^2.18.1",
+    "moment-timezone": "^0.5.13",
     "socket.io-client": "^2.0.3",
     "steal": "^1.5.8",
     "steal-less": "^1.2.0",
