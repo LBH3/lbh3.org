@@ -55,7 +55,7 @@
     "feathers-hooks-common": "^3.7.1",
     "feathers-sequelize": "^2.2.1",
     "feathers-socketio": "^2.0.0",
-    "googleapis": "^20.1.0",
+    "googleapis": "^21.2.0",
     "helmet": "^3.8.1",
     "html-entities": "^1.2.1",
     "marked": "^0.3.6",
