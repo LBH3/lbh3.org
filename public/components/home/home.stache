@@ -19,7 +19,7 @@
       <strong>Loading trail…</strong>
     </div>
   {{else}}
-    {{#if eventPromise.isRejected}}
+    {{#if isRejected}}
       <div class="alert alert-danger" role="alert">
         <strong>Fuck!</strong> The next trail failed to load.
         Check <a href="http://www.hash.org" target="_blank">hash.org</a> for the next run.
