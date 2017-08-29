@@ -11,6 +11,9 @@ export default new set.Algebra(
   {
     '$populate': function () {
       return true;
+    },
+    startDatetime: function () {
+      return true;
     }
   }
 );
