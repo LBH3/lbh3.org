@@ -29,7 +29,7 @@
     "sequelize:migrate": "sequelize db:migrate",
     "sequelize:migrate:rerun": "npm run sequelize:migrate:undo && npm run sequelize:migrate",
     "sequelize:migrate:undo": "sequelize db:migrate:undo",
-    "start": "node src/",
+    "start": "node --optimize_for_size --max_old_space_size=460 src/",
     "start:debug": "node --inspect src/",
     "start:development": "node src/ --develop",
     "start:production": "NODE_ENV=production PORT=8080 npm start",
