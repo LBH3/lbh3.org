@@ -16,7 +16,7 @@ export const ViewModel = DefineMap.extend({
   eventsPromise: {
     get: function() {
       const currentDate = new Date();
-      const startOfTheMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 0);
+      const startOfTheMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
       return Event.connection.getList({
         $limit: 100,
         $sort: {
