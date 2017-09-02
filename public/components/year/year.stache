@@ -1,4 +1,6 @@
 <can-import from="can-stache/helpers/route" />
+<can-import from="lbh3/components/photos-button/" />
+<can-import from="lbh3/components/snooze-button/" />
 
 {{#if eventsPromise.isPending}}
   <div class="alert alert-info" role="alert">
@@ -48,9 +50,7 @@
             <td>{{{event.shortLocationHtml}}}</td>
             <td>{{{event.nameHtml}}}</td>
             <td class="text-center">
-              {{#if event.photosUrl}}
-                <a href="{{event.photosUrl}}" target="_blank"><span class="fa fa-camera"></span></a>
-              {{/if}}
+              <lbh3-photos-button {event}="event" show-edit="true" />
             </td>
             <td class="text-center">
               <lbh3-snooze-button {event}="event" />

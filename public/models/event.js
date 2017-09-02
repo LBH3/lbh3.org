@@ -161,6 +161,13 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  startDateWithYearString: {
+    get: function() {
+      const options = {day: 'numeric', month: 'numeric', timeZone, year: '2-digit'};
+      return this.startDate.toLocaleDateString(defaultLocale, options);
+    },
+    serialize: false
+  },
   startDateParts: {
     get: function() {
       const startDateString = this.startDateAsMoment.format();

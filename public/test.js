@@ -16,6 +16,7 @@ import 'lbh3/components/jesus-cuervo/jesus-cuervo-test';
 import 'lbh3/components/nav/nav-test';
 import 'lbh3/components/no-ssr/no-ssr-test';
 import 'lbh3/components/past-runs/past-runs-test';
+import 'lbh3/components/photos-button/photos-button-test';
 import 'lbh3/components/run/edit/edit-test';
 import 'lbh3/components/run/run-test';
 import 'lbh3/components/snooze-button/snooze-button-test';

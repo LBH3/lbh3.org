@@ -1,5 +1,6 @@
 <can-import from="can-stache/helpers/route" />
 <can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="lbh3/components/photos-button/" />
 <can-import from="lbh3/components/snooze-button/" />
 
 {{#if eventPromise.isPending}}
@@ -34,11 +35,7 @@
           <span class="fa fa-pencil-square-o"></span>
         </a>
       {{/if}}
-      {{#if event.photosUrl}}
-        <a href="{{event.photosUrl}}" target="_blank" title="View photos">
-          <span class="fa fa-camera"></span>
-        </a>
-      {{/if}}
+      <lbh3-photos-button {event}="event" />
       <lbh3-snooze-button {event}="event" />
     </div>
   </div>
