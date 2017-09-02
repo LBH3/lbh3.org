@@ -30,22 +30,13 @@
     <can-import from="bootstrap/dist/css/bootstrap.css" />
     <can-import from="lbh3/styles.less" />
     <can-import from="lbh3/app" export-as="viewModel" />
+    <can-import from="lbh3/components/footer/" />
+    <can-import from="lbh3/components/header/" />
+    <can-import from="lbh3/components/nav/" />
 
     <header>
-      <can-import from="lbh3/components/header/">
-        {{#if isPending}}
-          Loading header…
-        {{else}}
-          <lbh3-header />
-        {{/if}}
-      </can-import>
-      <can-import from="lbh3/components/nav/">
-        {{#if isPending}}
-          Loading navigation…
-        {{else}}
-          <lbh3-nav {page}="page" {year}="year" />
-        {{/if}}
-      </can-import>
+      <lbh3-header />
+      <lbh3-nav {page}="page" {year}="year" />
     </header>
 
     <main class="container {{page}}">
@@ -196,13 +187,7 @@
       {{/switch}}
     </main>
 
-    <can-import from="lbh3/components/footer/">
-      {{#if isPending}}
-        Loading footer…
-      {{else}}
-        <lbh3-footer />
-      {{/if}}
-    </can-import>
+    <lbh3-footer />
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}
