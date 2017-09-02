@@ -1,0 +1,39 @@
+{{<photosLink}}
+  {{#if event.photosUrl}}
+    <a href="{{event.photosUrl}}" target="_blank" title="View photos">
+      <span class="fa fa-camera"></span>
+    </a>
+  {{/if}}
+{{/photosLink}}
+
+{{#if showEdit}}
+  {{#if session.user.canAddPhotos}}
+    {{#if savePromise}}
+      {{#if savePromise.isPending}}
+        <span class="fa fa-circle-o-notch fa-spin"></span>
+      {{/if}}
+      {{#if savePromise.isRejected}}
+        <span class="fa fa-warning" title="{{savePromise.reason.message}}"></span>
+      {{/if}}
+      {{#if savePromise.isResolved}}
+        {{#if event.photosUrl}}
+          {{>photosLink}}
+        {{else}}
+          <span class="fa fa-warning" title="Unknown error"></span>
+        {{/if}}
+      {{/if}}
+    {{else}}
+      {{#if event.photosUrl}}
+        {{>photosLink}}
+      {{else}}
+        <button class="btn btn-link" on:click="promptForUrl()" type="button">
+          <span class="fa fa-edit"></span>
+        </button>
+      {{/if}}
+    {{/if}}
+  {{else}}
+    {{>photosLink}}
+  {{/if}}
+{{else}}
+  {{>photosLink}}
+{{/if}}
