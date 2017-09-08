@@ -1,8 +1,10 @@
 const errors = require('feathers-errors');
 
 const boredEmails = [
-  'chasen@chasenlehara.com',
   'broomhf3@gmail.com',
+  'chasen@chasenlehara.com',
+  'Gogreenwzane@gmail.com',
+  'jmorga11@gmail.com',
   'santoschris92@gmail.com',
   'transc.ntinental@gmail.com',
   'vic.lbh3@gmail.com'
