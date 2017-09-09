@@ -11,13 +11,13 @@
   </div>
 {{/if}}
 {{#if event}}
-  <form ($submit)="editRun()">
+  <form on:submit="editRun()">
     <div class="form-group row">
       <label class="col-md-2 col-form-label" for="hares">
         Hares
       </label>
       <div class="col-md-10">
-        <input autofocus class="form-control" id="hares" type="text" {($value)}="event.haresMd">
+        <input autofocus class="form-control" id="hares" type="text" value:bind="event.haresMd">
       </div>
     </div>
     <div class="form-group row">
@@ -25,7 +25,7 @@
         Location
       </label>
       <div class="col-md-10">
-        <input class="form-control" disabled id="location" placeholder="" type="text" {($value)}="event.locationMd">
+        <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
         {{#if event.locationPromise.value}}
           <small>
             {{{event.locationPromise.value.formattedAddress}}}
@@ -38,7 +38,7 @@
         Name
       </label>
       <div class="col-md-10">
-        <input class="form-control" id="name" type="text" {($value)}="event.nameMd">
+        <input class="form-control" id="name" type="text" value:bind="event.nameMd">
       </div>
     </div>
     <div class="form-group row">
@@ -46,7 +46,7 @@
         Bring
       </label>
       <div class="col-md-10">
-        <input class="form-control" id="bring" type="text" {($value)}="event.bringMd">
+        <input class="form-control" id="bring" type="text" value:bind="event.bringMd">
       </div>
     </div>
     <div class="form-group row">
@@ -54,7 +54,7 @@
         Directions
       </label>
       <div class="col-md-10">
-        <textarea class="form-control" id="directions" {($value)}="event.directionsMd"></textarea>
+        <textarea class="form-control" id="directions" value:bind="event.directionsMd"></textarea>
       </div>
     </div>
     <div class="form-group row">
@@ -62,7 +62,7 @@
         From the Hares
       </label>
       <div class="col-md-10">
-        <textarea class="form-control" id="from-the-hares" {($value)}="event.fromTheHaresMd"></textarea>
+        <textarea class="form-control" id="from-the-hares" value:bind="event.fromTheHaresMd"></textarea>
       </div>
     </div>
     <div class="form-group row">
@@ -70,7 +70,7 @@
         On-On
       </label>
       <div class="col-md-10">
-        <input class="form-control" disabled id="on-on" placeholder="" type="text" {($value)}="event.onOnMd">
+        <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
         {{#if event.onOnPromise.value}}
           <small>
             {{{event.onOnPromise.value.formattedAddress}}}
@@ -85,7 +85,7 @@
           Photos URL
         </label>
         <div class="col-md-10">
-          <input class="form-control" id="photos-url" type="text" {($value)}="event.photosUrl">
+          <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
         </div>
       </div>
       <div class="form-group row">
@@ -93,7 +93,7 @@
           Snooze URL
         </label>
         <div class="col-md-10">
-          <input class="form-control" id="snooze-url" type="text" {($value)}="event.snoozeUrl">
+          <input class="form-control" id="snooze-url" type="text" value:bind="event.snoozeUrl">
         </div>
       </div>
     {{/if}}
@@ -114,7 +114,7 @@
 {{/if}}
 {{#if editingEventPromise.isRejected}}
   <div class="alert alert-danger mt-3" role="alert">
-    <button aria-label="Close" class="close" type="button" ($click)="resetEditingEventPromise()">
+    <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
       <span aria-hidden="true">&times;</span>
     </button>
     <strong>Fuck!</strong> The trail failed to save.
@@ -122,7 +122,7 @@
 {{/if}}
 {{#if editingEventPromise.isResolved}}
   <div class="alert alert-success mt-3" role="alert">
-    <button aria-label="Close" class="close" type="button" ($click)="resetEditingEventPromise()">
+    <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
       <span aria-hidden="true">&times;</span>
     </button>
     <strong>On on!</strong> Both hash.org and lbh3.org have been updated.

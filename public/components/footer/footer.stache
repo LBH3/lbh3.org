@@ -6,7 +6,7 @@
   {{/if}}
   <p class="float-sm-right">
     {{#if session.user}}
-      <button class="btn btn-link" type="button" ($click)="session.destroy()">
+      <button class="btn btn-link" type="button" on:click="session.destroy()">
         Sign out
       </button>
     {{else}}
