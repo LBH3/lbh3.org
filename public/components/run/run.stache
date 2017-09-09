@@ -37,8 +37,8 @@
         </a>
       {{/if}}
       <lbh3-no-ssr>
-        <lbh3-photos-button {event}="event" />
-        <lbh3-snooze-button {event}="event" />
+        <lbh3-photos-button event:from="event" />
+        <lbh3-snooze-button event:from="event" />
       </lbh3-no-ssr>
     </div>
   </div>

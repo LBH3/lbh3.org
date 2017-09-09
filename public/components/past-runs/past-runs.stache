@@ -27,6 +27,6 @@
   {{/each}}
 </nav>
 
-<lbh3-year {year}="year" />
+<lbh3-year year:from="year" />
 
 <p>If you see a picture you’d like removed, send an email to <a href="mailto:{{webmaster.email}}">{{webmaster.name}}</a></p>

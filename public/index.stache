@@ -36,7 +36,7 @@
 
     <header>
       <lbh3-header />
-      <lbh3-nav {page}="page" {year}="year" />
+      <lbh3-nav page:from="page" year:from="year" />
     </header>
 
     <main class="container {{page}}">
@@ -57,7 +57,7 @@
                 {{#if isPending}}
                   Loading about page…
                 {{else}}
-                  <lbh3-about {secondary-page}="secondaryPage" />
+                  <lbh3-about secondaryPage:from="secondaryPage" />
                 {{/if}}
               </can-import>
             {{/default}}
@@ -68,7 +68,7 @@
             {{#if isPending}}
               Loading admin page…
             {{else}}
-              <lbh3-admin {secondary-page}="secondaryPage" />
+              <lbh3-admin secondaryPage:from="secondaryPage" />
             {{/if}}
           </can-import>
         {{/case}}
@@ -82,10 +82,10 @@
                       Loading the edit run page…
                     {{else}}
                       <lbh3-run-edit
-                        {day}="day"
-                        {month}="month"
-                        {trail-number}="trailNumber"
-                        {year}="year"
+                        day:from="day"
+                        month:from="month"
+                        trailNumber:from="trailNumber"
+                        year:from="year"
                       />
                     {{/if}}
                   </can-import>
@@ -108,10 +108,10 @@
                   Loading trail #{{trailNumber}}…
                 {{else}}
                   <lbh3-run
-                    {day}="day"
-                    {month}="month"
-                    {trail-number}="trailNumber"
-                    {year}="year"
+                    day:from="day"
+                    month:from="month"
+                    trailNumber:from="trailNumber"
+                    year:from="year"
                   />
                 {{/if}}
               </can-import>
@@ -120,7 +120,7 @@
                 {{#if isPending}}
                   Loading Past Runs…
                 {{else}}
-                  <lbh3-past-runs {year}="year" />
+                  <lbh3-past-runs year:from="year" />
                 {{/if}}
               </can-import>
             {{/if}}
@@ -146,10 +146,10 @@
                     Loading the edit run page…
                   {{else}}
                     <lbh3-run-edit
-                      {day}="day"
-                      {month}="month"
-                      {trail-number}="trailNumber"
-                      {year}="year"
+                      day:from="day"
+                      month:from="month"
+                      trailNumber:from="trailNumber"
+                      year:from="year"
                     />
                   {{/if}}
                 </can-import>
