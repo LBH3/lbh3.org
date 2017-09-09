@@ -1,17 +1,55 @@
 <can-import from="can-stache/helpers/route" />
 
-<h2>The History of The Hash House Harriers &amp; The Founding of LBH3</h2>
+<h2>About LBH3</h2>
 
-<p>Established January 6 1985</p>
-<p>Founded by: Dal “Jock” Trader</p>
-<p>Jerry “Eject” Templeman</p>
-<p>Andy “Zapata” Limon</p>
+<p>
+  The Long Beach kennel was founded over 30 years ago on
+  <strong>January 6<sup>th</sup>, 1985</strong> by
+  <strong>Dal “Jock” Trader, Jerry “Eject” Templeman, and Andy “Zapata” Limon</strong>.
+  We run <strong>Thursday evening during Spring/Summer</strong> &amp;
+  <strong>Sunday morning in the Fall/Winter</strong>. We often have an attendance of 75+.
+  Visitors &amp; Virgins are always welcome! Your run donation covers Hare essentials,
+  pre– and post–run beer/soda/munchies. <strong>Please bring a vessel</strong> for your
+  beverage. We hope to see you at LBH3. On On!!!
+</p>
 
-<p><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">How LBH3 Started</a></p>
-<!-- <p><a href="{{hashHistoryPDF}}">This Week in LBH3 Hash History</a></p> -->
-<p><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">Mismanagement</a></p>
-<p><a href="{{routeUrl page='about'}}/FounderSkit.pdf">Found'ers Skit</a></p>
-<p><a href="{{routeUrl page='about'}}/Whosleptwithbigpink.pdf">Who Slept With Big Pink</a></p>
-<p><a href="{{routeUrl page='about'}}/HotLips.pdf">Hot Lips Adventures</a></p>
-<p><a href="{{routeUrl page='about'}}/LBH3SongBook.pdf">LBH3 Song Book</a></p>
-<p><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">LBH3 Haring Guidelines</a></p>
+<div class="no-gutters row">
+  <div class="col">
+    <h3>Helpful links</h3>
+    <ul class="list-unstyled">
+      <!-- <li><a href="{{hashHistoryPDF}}">This Week in LBH3 Hash History</a></li> -->
+      <li><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">
+        Haring Guidelines
+      </a></li>
+      <li><a href="{{routeUrl page='about'}}/LBH3SongBook.pdf">
+        Song Book
+      </a></li>
+      <li><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">
+        Mismanagement
+      </a></li>
+      <li><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">
+        How LBH3 Started
+      </a></li>
+      <li><a href="{{routeUrl page='about'}}/FounderSkit.pdf">
+        Found’ers Skit
+      </a></li>
+      <li><a href="{{routeUrl page='about'}}/Whosleptwithbigpink.pdf">
+        Who Slept With Big Pink
+      </a></li>
+      <li><a href="{{routeUrl page='about'}}/HotLips.pdf">
+        Hot Lips Adventures
+      </a></li>
+    </ul>
+  </div>
+  <div class="col">
+    <h3>Friends of LBH3</h3>
+    <ul class="list-unstyled">
+      <li><a href="http://www.hash.org" target="_blank">
+        Find other local hashes and upcumming events on hash.org
+      </a></li>
+      <li><a href="http://hashboyh3.com/" target="_blank">
+        Hash Boy—The comic hashing adventures of Hash Boy and his hash hound Foamy
+      </a></li>
+    </ul>
+  </div>
+</div>
