@@ -9,7 +9,6 @@ const striptags = require('striptags');
 
 const calendar = google.calendar('v3');
 const calendarEmail = 'lbh3-643@lbh3-171321.iam.gserviceaccount.com';
-const calendarId = 'hash.org_apdt0s7aam1mdl1ckc4n1rcc4k@group.calendar.google.com';
 const entities = new Entities();
 const restrictToAdmin = [
   authenticate('jwt'),
@@ -47,7 +46,7 @@ const createEvent = function(auth, resource) {
   return new Promise(function(resolve, reject) {
     calendar.events.insert({
       auth,
-      calendarId,
+      calendarId: process.env.GOOGLE_CALENDAR_ID,
       resource
     }, function(error, response) {
       if (error) {
@@ -68,7 +67,7 @@ const getEvent = function(auth, trailData) {
 
     const params = {
       auth,
-      calendarId,
+      calendarId: process.env.GOOGLE_CALENDAR_ID,
       maxResults: 1,
       orderBy: 'startTime',
       singleEvents: true,
@@ -173,7 +172,7 @@ const updateEvent = function(auth, eventId, resource) {
   return new Promise(function(resolve, reject) {
     calendar.events.update({
       auth,
-      calendarId,
+      calendarId: process.env.GOOGLE_CALENDAR_ID,
       eventId,
       resource
     }, function(error, response) {
