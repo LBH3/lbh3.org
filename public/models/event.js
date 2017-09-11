@@ -19,6 +19,17 @@ marked.setOptions({
   gfm: true
 });
 
+const localizedStringForDate = function(date, locales, options) {
+  if (date.toLocaleDateString) {
+    try {
+      return date.toLocaleDateString(defaultLocale, options);
+    } catch (error) {
+      return date.toLocaleDateString();
+    }
+  }
+  return date.toString();
+};
+
 const Event = DefineMap.extend({
   seal: false
 }, {
@@ -157,14 +168,14 @@ const Event = DefineMap.extend({
   startDateString: {
     get: function() {
       const options = {day: 'numeric', month: 'numeric', timeZone};
-      return this.startDate.toLocaleDateString(defaultLocale, options);
+      return localizedStringForDate(this.startDate, defaultLocale, options);
     },
     serialize: false
   },
   startDateWithYearString: {
     get: function() {
       const options = {day: 'numeric', month: 'numeric', timeZone, year: '2-digit'};
-      return this.startDate.toLocaleDateString(defaultLocale, options);
+      return localizedStringForDate(this.startDate, defaultLocale, options);
     },
     serialize: false
   },
@@ -190,7 +201,7 @@ const Event = DefineMap.extend({
         weekday: 'long',
         year: '2-digit'
       };
-      return this.startDate.toLocaleDateString(defaultLocale, options);
+      return localizedStringForDate(this.startDate, defaultLocale, options);
     },
     serialize: false
   }
