@@ -21,7 +21,7 @@
     "npm": ">= 5.0.0"
   },
   "scripts": {
-    "build": "cd public && node build",
+    "build": "cd public && node build && cd ..",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "heroku-postbuild": "npm run build",
     "install": "node install",
@@ -30,10 +30,12 @@
     "sequelize:migrate:rerun": "npm run sequelize:migrate:undo && npm run sequelize:migrate",
     "sequelize:migrate:undo": "sequelize db:migrate:undo",
     "start": "node --optimize_for_size --max_old_space_size=460 src/",
+    "start:ci": "http-server -p 3000 --silent",
     "start:debug": "node --inspect src/",
     "start:development": "node src/ --develop",
     "start:production": "NODE_ENV=production PORT=8080 npm start",
-    "test": "npm run eslint && npm run mocha && npm run testee",
+    "test": "npm run eslint && npm run build && npm run mocha && npm run testee",
+    "test:ci": "npm run test && node public/test.sauce-labs.js",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec"
   },
   "dependencies": {
@@ -68,6 +70,7 @@
   },
   "devDependencies": {
     "eslint": "^4.4.1",
+    "http-server": "^0.10.0",
     "mocha": "^3.5.0",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
