@@ -4,10 +4,6 @@ const testSauceLabs = require('test-saucelabs');
 
 testSauceLabs({
   platforms: [{
-  	browserName: 'internet explorer',
-  	platform: 'Windows 10',
-  	version: '11.0'
-  }, {
   	browserName: 'MicrosoftEdge',
   	platform: 'Windows 10'
   }, {
