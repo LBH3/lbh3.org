@@ -7,7 +7,7 @@
 {{/if}}
 {{#if eventPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The trail failed to load.
+    <strong>Fuck!</strong> The trail failed to load. {{eventPromise.reason.message}}
   </div>
 {{/if}}
 {{#if event}}
@@ -117,7 +117,7 @@
     <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <strong>Fuck!</strong> The trail failed to save.
+    <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.message}}
   </div>
 {{/if}}
 {{#if editingEventPromise.isResolved}}
