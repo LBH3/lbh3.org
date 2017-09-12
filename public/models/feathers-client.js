@@ -1,3 +1,4 @@
+import '~/polyfills';
 import auth from 'feathers-authentication-client';
 import feathers from 'feathers/client';
 import fetch from 'unfetch';

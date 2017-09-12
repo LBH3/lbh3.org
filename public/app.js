@@ -1,4 +1,3 @@
-import './polyfills';
 import './models/fixtures/positions';
 import '~/components/no-ssr/';
 
