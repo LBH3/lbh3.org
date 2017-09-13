@@ -3,11 +3,11 @@ import Year from './year';
 
 QUnit.module('models/year');
 
-QUnit.test('getList', function(){
-  stop();
+QUnit.test('getList', function(assert) {
+  var done = assert.async();
   Year.getList().then(function(items) {
-    QUnit.equal(items.length, 5);
-    QUnit.equal(items.item(0).id, 2013);
-    start();
+    assert.equal(items.length, 5);
+    assert.equal(items.item(0).id, 2013);
+    done();
   });
 });
