@@ -58,6 +58,7 @@
     "feathers-socketio": "^2.0.0",
     "font-awesome": "^4.7.0",
     "generator-donejs": "^1.0.7",
+    "jquery": "^3.2.1",
     "marked": "^0.3.6",
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
@@ -66,8 +67,7 @@
     "steal-less": "^1.2.0",
     "steal-platform": "0.0.4",
     "steal-socket.io": "^4.0.9",
-    "steal-stache": "^3.1.1",
-    "unfetch": "^3.0.0"
+    "steal-stache": "^3.1.1"
   },
   "devDependencies": {
     "can-fixture": "^1.0.13",
