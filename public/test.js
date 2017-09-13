@@ -20,7 +20,7 @@ import 'lbh3/components/photos-button/photos-button-test';
 import 'lbh3/components/run/edit/edit-test';
 import 'lbh3/components/run/run-test';
 import 'lbh3/components/snooze-button/snooze-button-test';
-import 'lbh3/components/year/year-test';
+// import 'lbh3/components/year/year-test';
 
 F.attach(QUnit);
 
