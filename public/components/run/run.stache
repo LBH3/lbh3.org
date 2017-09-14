@@ -36,10 +36,8 @@
           <span class="fa fa-pencil-square-o"></span>
         </a>
       {{/if}}
-      <lbh3-no-ssr>
-        <lbh3-photos-button event:from="event" />
-        <lbh3-snooze-button event:from="event" />
-      </lbh3-no-ssr>
+      <lbh3-photos-button event:from="event" />
+      <lbh3-snooze-button event:from="event" />
     </div>
   </div>
 
@@ -66,16 +64,14 @@
     {{/if}}
   </dl>
 
-  <lbh3-no-ssr>
-    {{#if event.locationPromise.isPending}}
-      <div class="alert alert-info" role="alert">
-        <strong>Loading map…</strong>
-      </div>
-    {{/if}}
-    {{#if event.locationPromise.value.placeId}}
-      <iframe src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q=place_id:{{event.locationPromise.value.placeId}}" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
-    {{/if}}
-  </lbh3-no-ssr>
+  {{#if event.locationPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Loading map…</strong>
+    </div>
+  {{/if}}
+  {{#if event.locationPromise.value.placeId}}
+    <iframe src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q=place_id:{{event.locationPromise.value.placeId}}" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
+  {{/if}}
 
   <dl class="row">
     {{#if event.directionsHtml}}
