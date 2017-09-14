@@ -86,9 +86,11 @@
         {{{event.fromTheHaresHtml}}}
       </dd>
     {{/if}}
-    {{#if event.onOnPromise.value}}
-      <dt class="col-md-3 text-md-right">On-on:</dt>
-      <dd class="col-sm-9">{{event.onOnPromise.value.formattedAddress}}</dd>
+    {{#if event.longOnOnHtml}}
+      <dt class="col-sm-3 text-md-right">On-on:</dt>
+      <dd class="col-sm-9">
+        {{{event.longOnOnHtml}}}
+      </dd>
     {{/if}}
     {{#if event.hashitReasonMd}}
       <dt class="col-sm-3 text-sm-right">Hashit:</dt>

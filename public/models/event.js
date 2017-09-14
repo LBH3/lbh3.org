@@ -111,6 +111,25 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  longOnOnHtml: {
+    get: function(lastSetValue, resolve) {
+      if (this.onOnPromise) {
+        this.onOnPromise.then(location => {
+          if (location.formattedAddress) {
+            if (location.name) {
+              resolve(`${location.name}, ${location.formattedAddress}`);
+            } else {
+              resolve(location.formattedAddress);
+            }
+          } else {
+            resolve(this.shortOnOnHtml);
+          }
+        });
+      }
+      return this.onOnHtml;
+    },
+    serialize: false
+  },
   nameHtml: {
     get: function() {
       return marked(this.nameMd);
@@ -150,6 +169,26 @@ const Event = DefineMap.extend({
         });
       }
       return this.locationHtml;
+    },
+    serialize: false
+  },
+  shortOnOnHtml: {
+    get: function(lastSetValue, resolve) {
+      if (this.onOnPromise) {
+        this.onOnPromise.then(location => {
+          const localities = location.addressComponents.filter(addressComponent => {
+            return addressComponent.types.indexOf('locality') > -1;
+          });
+          if (localities[0] && localities[0].long_name) {
+            resolve(localities[0].long_name);
+          } else if (location.vicinity) {
+            resolve(location.vicinity);
+          } else if (location.name) {
+            resolve(location.name);
+          }
+        });
+      }
+      return this.onOnHtml;
     },
     serialize: false
   },
