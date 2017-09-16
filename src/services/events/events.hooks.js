@@ -101,7 +101,7 @@ const getResourceForTrail = function(app, trailData) {
 
     // Description
     const descriptionParts = [];
-    if (nameText) {// If there’s a name for the trail, then we need to show the hares
+    if (nameText && haresText) {// If there’s a name for the trail, then we need to show the hares
       descriptionParts.push(`Hares: ${haresText}`);
     }
     if (fromTheHaresText) {
