@@ -53,7 +53,6 @@ const Event = DefineMap.extend({
   snoozeTitleMd: 'string',
   snoozeUrl: 'string',
   trailCommentsMd: 'string',
-  trailDate: 'string',
   trailNumber: 'number',
 
   bringHtml: {
