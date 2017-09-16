@@ -1,17 +1,12 @@
 import Event from '../event';
 import fixture from 'can-fixture';
+import trail1471 from './events-trail-1471.json';
+import trail1472 from './events-trail-1472.json';
 
-const store = fixture.store([{
-  id: 0,
-  startTime: '10:00 a.m.',
-  trailDate: '10/16/2011',
-  trailNumber: 1471
-}, {
-  id: 1,
-  startTime: '10:00 a.m.',
-  trailDate: '10/23/2011',
-  trailNumber: 1472
-}], Event.connection.algebra);
+const store = fixture.store([
+  ...trail1471.data,
+  ...trail1472.data
+], Event.connection.algebra);
 
 fixture('/api/events/{id}', store);
 
