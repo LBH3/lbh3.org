@@ -78,6 +78,12 @@ psql lbh3
 CREATE EXTENSION postgis;
 ```
 
+To import a dump:
+
+```
+pg_restore --verbose --clean --no-acl --no-owner -h localhost -U user -d lbh3 latest.dump
+```
+
 To create a new migration:
 
 ```shell
