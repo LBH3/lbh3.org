@@ -1,0 +1,64 @@
+{{#if hashersPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching Mismanagement…</strong>
+  </div>
+{{/if}}
+
+{{#if hashersPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The Mismanagement list couldn’t be retrieved. {{positionsPromise.reason.message}}
+  </div>
+{{/if}}
+
+{{#if hashersByPosition}}
+  {{#each hashersByPosition as position}}
+    {{#if position.promise.isPending}}
+      <div class="alert alert-info" role="alert">
+        <strong>Fetching position…</strong>
+      </div>
+    {{/if}}
+
+    {{#if position.promise.isRejected}}
+      <div class="alert alert-danger" role="alert">
+        <strong>Fuck!</strong> The position couldn’t be retrieved. {{position.promise.reason.message}}
+      </div>
+    {{/if}}
+
+    {{#if position.promise.isResolved}}
+      <h3>
+        {{#is position.hashers.length 1}}
+          {{position.promise.value.singularName}}
+        {{else}}
+          {{position.promise.value.pluralName}}
+        {{/is}}
+      </h3>
+      <ul>
+        {{#each position.hashers as hasherPromise}}
+          {{#if hasherPromise.isPending}}
+            Fetching hasher…
+          {{/if}}
+
+          {{#if hasherPromise.isRejected}}
+            <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.message}}
+          {{/if}}
+
+          {{#if hasherPromise.isResolved}}
+            <li>
+              {{#if hasherPromise.value.emailAddresses[0]}}
+                <a href="mailto:{{hasherPromise.value.emailAddresses[0]}}">
+                  {{hasherPromise.value.hashName}}
+                </a>
+              {{else}}
+                {{hashersPromise.value.hashName}}
+              {{/if}}
+            </li>
+          {{/if}}
+        {{/each}}
+      </ul>
+    {{/if}}
+  {{else}}
+    <div class="alert alert-info" role="alert">
+      <strong>The Mismanagement roster for this year has not been added.</strong>
+    </div>
+  {{/each}}
+{{/if}}
