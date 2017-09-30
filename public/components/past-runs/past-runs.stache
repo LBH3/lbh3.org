@@ -1,11 +1,14 @@
 <can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="lbh3/components/no-ssr/" />
 
 <h2>Past Runs</h2>
 
 <div class="d-sm-flex justify-content-between">
-  <p>
-    <span class="fa fa-camera"></span> for Photos and <span class="fa fa-newspaper-o"></span> for Snooze
-  </p>
+  <lbh3-no-ssr>
+    <p>
+      <span class="fa fa-camera"></span> for Photos and <span class="fa fa-newspaper-o"></span> for Snooze
+    </p>
+  </lbh3-no-ssr>
   <!--
   <p>
     Most Current:
