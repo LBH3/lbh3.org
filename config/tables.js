@@ -31,7 +31,8 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       createdAt: currentTimestampType('created_at'),
       updatedAt: currentTimestampType('updated_at'),
       pluralName: stringType('plural_name'),
-      singularName: stringType('singular_name')
+      singularName: stringType('singular_name'),
+      sortPosition: intType('sort_position')
     },
     bored_years: {
       id: primaryIntType,
