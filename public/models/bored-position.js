@@ -11,7 +11,8 @@ const BoredPosition = DefineMap.extend({
   createdAt: 'any',
   updatedAt: 'any',
   pluralName: 'string',
-  singularName: 'string'
+  singularName: 'string',
+  sortPosition: 'number'
 });
 
 const algebra = new set.Algebra(
