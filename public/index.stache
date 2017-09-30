@@ -48,7 +48,7 @@
                 {{#if isPending}}
                   Loading Mismanagement…
                 {{else}}
-                  <lbh3-about-mismanagement />
+                  <lbh3-about-mismanagement year:from="year" />
                 {{/if}}
               </can-import>
             {{/case}}

@@ -25,6 +25,7 @@ const AppViewModel = DefineMap.extend({
   year: 'number'
 });
 
+route('/about/mismanagement/{year}/', { page: 'about', secondaryPage: 'mismanagement', year: 0});
 route('/about/{secondaryPage}/', { page: 'about' });
 route('/about/', { page: 'about' });
 route('/admin/{secondaryPage}/', { page: 'admin' });

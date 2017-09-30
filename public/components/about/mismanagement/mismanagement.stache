@@ -1,24 +1,28 @@
-<h2>2017 Mismanagement</h2>
+<h2>Mismanagement</h2>
 
-{{#if positionsPromise.isPending}}
+{{#if yearsPromise.isPending}}
   <div class="alert alert-info" role="alert">
     <strong>Fetching Mismanagement…</strong>
   </div>
 {{/if}}
 
-{{#if positionsPromise.isRejected}}
+{{#if yearsPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The Mismanagement list couldn’t be retrieved. {{positionsPromise.reason.message}}
+    <strong>Fuck!</strong> The Mismanagement years couldn’t be retrieved. {{yearsPromise.reason.message}}
   </div>
 {{/if}}
 
-{{#if positionsPromise.isResolved}}
-  {{#each positionsPromise.value as position}}
-    <h3>{{position.name}}</h3>
-    <ul>
-      {{#each position.people as person}}
-        <li><a href="mailto:{{person.email}}">{{person.name}}</a></li>
-      {{/each}}
-    </ul>
-  {{/each}}
+{{#if yearsPromise.isResolved}}
+  <nav class="nav nav-pills">
+    {{#each yearsPromise.value as yearObject}}
+      <a
+        class="{{#is yearObject.year ../year}}active{{/is}} flex-sm-fill nav-link text-sm-center"
+        href="{{routeForYear(yearObject.year)}}"
+      >
+        {{yearObject.year}}
+      </a>
+    {{/each}}
+  </nav>
 {{/if}}
+
+<lbh3-mismanagement-year year:from="selectedYear" />
