@@ -13,6 +13,25 @@
 
 <hr>
 
+{{#if isBeforeOctober14}}
+  {{#if isBeforeOctober13}}
+    <p class="text-center">
+      <a href="events/memorial-service/">
+        Join us for our Hash Memorial Service on Friday the 13<sup>th</sup>
+      </a>
+    </p>
+  {{else}}
+    <can-import from="lbh3/components/memorial-service/">
+      {{#if isPending}}
+        Loading memorial service info…
+      {{else}}
+        <lbh3-memorial-service />
+      {{/if}}
+    </can-import>
+  {{/if}}
+  <hr>
+{{/if}}
+
 <can-import from="lbh3/components/run/">
   {{#if isPending}}
     <div class="alert alert-info" role="alert">

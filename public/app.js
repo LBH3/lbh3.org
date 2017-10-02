@@ -31,6 +31,7 @@ route('/admin/{secondaryPage}/', { page: 'admin' });
 route('/admin/', { page: 'admin' });
 route('/events/', { page: 'events' });
 route('/events/jesus-cuervo-1800-trail/', { page: 'events', secondaryPage: 'jesus-cuervo-1800-trail'});
+route('/events/memorial-service/', { page: 'events', secondaryPage: 'memorial-service'});
 route('/events/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
 route('/events/{year}/{month}/{day}/trail-{trailNumber}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0});
 route('/events/{year}/', { page: 'events', year: 0});
