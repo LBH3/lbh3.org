@@ -17,6 +17,7 @@ const AppViewModel = DefineMap.extend({
     value: defaultPage
   },
   secondaryPage: 'string',
+  skip: 'number',
   title: {
     value: 'Long Beach Hash House Harriers',
     serialize: false
@@ -40,6 +41,7 @@ route('/events/{year}/', { page: 'events', year: 0});
 route('/hareline/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'hareline', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
 route('/hareline/{secondaryPage}/', { page: 'hareline' });
 route('/hareline/', { page: 'hareline' });
+route('/hashers/', { page: 'hashers' });
 route('/{page}', { page: defaultPage });
 
 export default AppViewModel;
