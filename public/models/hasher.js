@@ -1,8 +1,8 @@
+import baseMap from 'can-connect/can/base-map/';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import loader from '@loader';
 import set from 'can-set';
-import superMap from 'can-connect/can/super-map/';
 
 const Hasher = DefineMap.extend({
   seal: false
@@ -20,7 +20,7 @@ Hasher.List = DefineList.extend({
   '#': Hasher
 });
 
-Hasher.connection = superMap({
+Hasher.connection = baseMap({
   url: loader.serviceBaseURL + '/api/hashers',
   Map: Hasher,
   List: Hasher.List,

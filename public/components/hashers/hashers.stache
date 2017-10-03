@@ -1,0 +1,51 @@
+<h2>Hashers</h2>
+
+{{#if session.user.canViewHashersList}}
+
+  {{#if pages}}
+    <nav class="nav nav-pills">
+      {{#each pages as page}}
+        <a
+          class="{{#is currentPage page}}active{{/is}} flex-sm-fill nav-link text-sm-center"
+          href="{{routeForPage(page)}}"
+        >
+          {{page}}
+        </a>
+      {{/each}}
+    </nav>
+  {{/if}}
+
+  {{#if hashersPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching hashers…</strong>
+    </div>
+  {{/if}}
+
+  {{#if hashersPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The hashers couldn’t be retrieved. {{hashersPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if hashers}}
+    <table class="table table-bordered table-responsive table-sm">
+      <thead>
+        <tr>
+          <th>Hash name</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each hashers as hasher}}
+          <tr>
+            <td>{{hasher.hashName}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}

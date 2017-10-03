@@ -55,6 +55,12 @@ var User = DefineMap.extend('User', {
     },
     serialize: false
   },
+  canViewHashersList: {
+    get: function() {
+      return this.email === 'chasen@chasenlehara.com';
+    },
+    serialize: false
+  },
   email: {
     get: function() {
       const profile = this.googleProfile || {};
