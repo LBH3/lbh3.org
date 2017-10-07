@@ -194,13 +194,23 @@
           {{/switch}}
         {{/case}}
         {{#case "hashers"}}
-          <can-import from="lbh3/components/hashers/">
-            {{#if isPending}}
-              Loading Hashers page…
-            {{else}}
-              <lbh3-hashers skip:from="skip" />
-            {{/if}}
-          </can-import>
+          {{#if id}}
+            <can-import from="lbh3/components/hasher/">
+              {{#if isPending}}
+                Loading hasher page…
+              {{else}}
+                <lbh3-hasher id:from="id" />
+              {{/if}}
+            </can-import>
+          {{else}}
+            <can-import from="lbh3/components/hashers/">
+              {{#if isPending}}
+                Loading Hashers page…
+              {{else}}
+                <lbh3-hashers skip:from="skip" />
+              {{/if}}
+            </can-import>
+          {{/if}}
         {{/case}}
         {{#case "home"}}
           <can-import from="lbh3/components/home/">

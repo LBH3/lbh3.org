@@ -1,0 +1,217 @@
+{{#if session.user.canViewHashersList}}
+
+  {{#if hasherPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching hasher…</strong>
+    </div>
+  {{/if}}
+
+  {{#if hasherPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if hasher}}
+    <h2>{{hasher.hashName}}</h2>
+
+    <dl class="row">
+      <dt class="col-sm-3 text-sm-right">Address:</dt>
+      <dd class="col-sm-9">{{hasher.formattedAddress}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Address (private):</dt>
+      <dd class="col-sm-9">{{hasher.formattedPrivateAddress}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Alerts:</dt>
+      <dd class="col-sm-9">{{hasher.alerts}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Award count:</dt>
+      <dd class="col-sm-9">{{hasher.awardCount}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Birthday:</dt>
+      <dd class="col-sm-9">{{hasher.formattedBirthday}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Cell phone:</dt>
+      <dd class="col-sm-9">{{hasher.cellPhone}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Cell phone (private):</dt>
+      <dd class="col-sm-9">{{hasher.cellPhonePrivate}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Created at:</dt>
+      <dd class="col-sm-9">{{hasher.createdAt}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Created by:</dt>
+      <dd class="col-sm-9">{{hasher.createdBy}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Died:</dt>
+      <dd class="col-sm-9">{{hasher.died}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Email addresses:</dt>
+      <dd class="col-sm-9">
+        {{#if hasher.emailAddresses}}
+          <ul>
+            {{#each hasher.emailAddresses as emailAddress}}
+              <li>
+                <a href="mailto:{{emailAddress}}">
+                  {{emailAddress}}
+                </a>
+              </li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      </dd>
+
+      <dt class="col-sm-3 text-sm-right">Email addresses (private):</dt>
+      <dd class="col-sm-9">
+        {{#if hasher.emailAddressesPrivate}}
+          <ul>
+            {{#each hasher.emailAddressesPrivate as emailAddress}}
+              <li>
+                <a href="mailto:{{emailAddress}}">
+                  {{emailAddress}}
+                </a>
+              </li>
+            {{/each}}
+          </ul>
+        {{/if}}
+      </dd>
+
+      <dt class="col-sm-3 text-sm-right">Emailing:</dt>
+      <dd class="col-sm-9">{{hasher.emailing}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">End of year:</dt>
+      <dd class="col-sm-9">{{hasher.endOfYear}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Event:</dt>
+      <dd class="col-sm-9">{{hasher.event}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Family name:</dt>
+      <dd class="col-sm-9">{{hasher.familyName}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Family name (private):</dt>
+      <dd class="col-sm-9">{{hasher.familyNamePrivate}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Fax:</dt>
+      <dd class="col-sm-9">{{hasher.fax}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">First trail date:</dt>
+      <dd class="col-sm-9">{{hasher.firstTrailDate}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">First trail number:</dt>
+      <dd class="col-sm-9">{{hasher.firstTrailNumber}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Food preference:</dt>
+      <dd class="col-sm-9">{{hasher.foodPreference}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Given name:</dt>
+      <dd class="col-sm-9">{{hasher.givenName}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Given name (private):</dt>
+      <dd class="col-sm-9">{{hasher.givenNamePrivate}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Hare count (1):</dt>
+      <dd class="col-sm-9">{{hasher.hareCount1}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Hare count (2):</dt>
+      <dd class="col-sm-9">{{hasher.hareCount2}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Hash ID:</dt>
+      <dd class="col-sm-9">{{hasher.hashId}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">History:</dt>
+      <dd class="col-sm-9">{{hasher.history}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Home phone:</dt>
+      <dd class="col-sm-9">{{hasher.homePhone}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Home phone (private):</dt>
+      <dd class="col-sm-9">{{hasher.homePhonePrivate}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">In memoriam:</dt>
+      <dd class="col-sm-9">{{hasher.inMemoriam}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Last trail date:</dt>
+      <dd class="col-sm-9">{{hasher.lastTrailDate}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Mail hash name:</dt>
+      <dd class="col-sm-9">{{hasher.mailHashName}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Mail name:</dt>
+      <dd class="col-sm-9">{{hasher.mailName}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">MIA:</dt>
+      <dd class="col-sm-9">{{hasher.mia}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Miles:</dt>
+      <dd class="col-sm-9">{{hasher.miles}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Mother hash:</dt>
+      <dd class="col-sm-9">{{hasher.motherHash}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Naming trail date:</dt>
+      <dd class="col-sm-9">{{hasher.namingTrailDate}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Naming trail number:</dt>
+      <dd class="col-sm-9">{{hasher.namingTrailNumber}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Notes:</dt>
+      <dd class="col-sm-9">{{hasher.notesMd}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Owes:</dt>
+      <dd class="col-sm-9">{{hasher.owes}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Passed:</dt>
+      <dd class="col-sm-9">{{hasher.passed}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Payment:</dt>
+      <dd class="col-sm-9">{{hasher.payment}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Punch card:</dt>
+      <dd class="col-sm-9">{{hasher.punchCard}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Run count:</dt>
+      <dd class="col-sm-9">{{hasher.runCount}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Run mileage:</dt>
+      <dd class="col-sm-9">{{hasher.runMileage}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Run patch:</dt>
+      <dd class="col-sm-9">{{hasher.runPatch}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Run sort:</dt>
+      <dd class="col-sm-9">{{hasher.runSort}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Shirt size:</dt>
+      <dd class="col-sm-9">{{hasher.shirtSize}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Shoe size:</dt>
+      <dd class="col-sm-9">{{hasher.shoeSize}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Updated at:</dt>
+      <dd class="col-sm-9">{{hasher.updatedAt}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Updated by:</dt>
+      <dd class="col-sm-9">{{hasher.updatedBy}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Waist size:</dt>
+      <dd class="col-sm-9">{{hasher.waistSize}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Waiver:</dt>
+      <dd class="col-sm-9">{{hasher.waiver}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Who made you cum:</dt>
+      <dd class="col-sm-9">{{hasher.whoMadeYouCum}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Work phone:</dt>
+      <dd class="col-sm-9">{{hasher.workPhone}}</dd>
+
+      <dt class="col-sm-3 text-sm-right">Work phone (private):</dt>
+      <dd class="col-sm-9">{{hasher.workPhonePrivate}}</dd>
+    </dl>
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}
