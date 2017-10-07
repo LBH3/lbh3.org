@@ -11,6 +11,7 @@ const defaultPage = 'home';
 
 const AppViewModel = DefineMap.extend({
   day: 'string',
+  id: 'number',
   month: 'string',
   page: {
     type: 'string',
@@ -41,6 +42,7 @@ route('/events/{year}/', { page: 'events', year: 0});
 route('/hareline/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'hareline', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
 route('/hareline/{secondaryPage}/', { page: 'hareline' });
 route('/hareline/', { page: 'hareline' });
+route('/hashers/{id}/', { page: 'hashers', id: 0 });
 route('/hashers/', { page: 'hashers' });
 route('/{page}', { page: defaultPage });
 

@@ -37,7 +37,11 @@
       <tbody>
         {{#each hashers as hasher}}
           <tr>
-            <td>{{hasher.hashName}}</td>
+            <td>
+              <a href="{{routeForHasher(hasher)}}">
+                {{hasher.hashName}}
+              </a>
+            </td>
           </tr>
         {{/each}}
       </tbody>

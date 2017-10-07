@@ -45,6 +45,13 @@ export const ViewModel = DefineMap.extend({
     }
     return pages;
   },
+  routeForHasher: function(hasher) {
+    const routeParams = {
+      id: hasher.id,
+      page: 'hashers'
+    };
+    return route.url(routeParams);
+  },
   routeForPage: function(page) {
     const routeParams = {
       page: 'hashers',
