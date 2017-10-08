@@ -38,6 +38,12 @@ var User = DefineMap.extend('User', {
     },
     serialize: false
   },
+  canEditHasherInfo: {
+    get: function() {
+      return this.email === 'chasen@chasenlehara.com';
+    },
+    serialize: false
+  },
   canEditPostTrailInfo: {
     get: function() {
       return this.email === 'chasen@chasenlehara.com';

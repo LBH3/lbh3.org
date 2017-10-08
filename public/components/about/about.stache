@@ -27,6 +27,11 @@
       <li><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">
         Mismanagement
       </a></li>
+      {{#if session.user.canViewHashersList}}
+        <li><a href="{{routeUrl page='hashers'}}">
+          Hashers Directory
+        </a></li>
+      {{/if}}
       <li><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">
         How LBH3 Started
       </a></li>

@@ -1,0 +1,539 @@
+{{#if session.user.canEditHasherInfo}}
+
+  {{#if hasherPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching hasher…</strong>
+    </div>
+  {{/if}}
+
+  {{#if hasherPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if hasher}}
+    <h2>{{hasher.hashName}}</h2>
+
+    <form on:submit="editHasher()">
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressStreet">
+          Street address
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressStreet" type="text" value:bind="hasher.addressStreet">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressCity">
+          City
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressCity" type="text" value:bind="hasher.addressCity">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressState">
+          State
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressState" type="text" value:bind="hasher.addressState">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressZipCode">
+          ZIP code
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressZipCode" type="text" value:bind="hasher.addressZipCode">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressCountry">
+          Country
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressCountry" type="text" value:bind="hasher.addressCountry">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressStreetPrivate">
+          Street address (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressStreetPrivate" type="text" value:bind="hasher.addressStreetPrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressCityPrivate">
+          City (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressCityPrivate" type="text" value:bind="hasher.addressCityPrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressStatePrivate">
+          State (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressStatePrivate" type="text" value:bind="hasher.addressStatePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressZipCodePrivate">
+          ZIP code (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressZipCodePrivate" type="text" value:bind="hasher.addressZipCodePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="addressCountryPrivate">
+          Country (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="addressCountryPrivate" type="text" value:bind="hasher.addressCountryPrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="alerts">
+          Alerts
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="alerts" type="text" value:bind="hasher.alerts">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="awardCount">
+          Award count
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="awardCount" min="0" type="number" value:bind="hasher.awardCount">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="formattedBirthday">
+          Birthday
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="formattedBirthday" type="text" value:bind="hasher.formattedBirthday">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="cellPhone">
+          Cell phone
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="cellPhone" type="text" value:bind="hasher.cellPhone">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="cellPhonePrivate">
+          Cell phone (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="cellPhonePrivate" type="text" value:bind="hasher.cellPhonePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="died">
+          Died
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="died" type="text" value:bind="hasher.died">
+        </div>
+      </div>
+      <div class="form-group justify-content-end row">
+        <label class="col-md-2 col-form-label" for="emailAddresses">
+          Email addresses
+        </label>
+        {{#each hasher.emailAddresses as emailAddress}}
+          <div class="col-md-10 mb-2">
+            <input class="form-control" type="email" value:bind="emailAddress">
+          </div>
+        {{/each}}
+        <div class="col-md-10">
+          <input class="form-control" id="emailAddresses" type="email" value:bind="additionalFields.emailAddress">
+        </div>
+      </div>
+      <div class="form-group justify-content-end row">
+        <label class="col-md-2 col-form-label" for="emailAddressesPrivate">
+          Email addresses (private)
+        </label>
+        {{#each hasher.emailAddressesPrivate as emailAddress}}
+          <div class="col-md-10 mb-2">
+            <input class="form-control" type="email" value:bind="emailAddress">
+          </div>
+        {{/each}}
+        <div class="col-md-10">
+          <input class="form-control" id="emailAddressesPrivate" type="email" value:bind="additionalFields.emailAddressPrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="emailing">
+          Emailing
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="emailing" type="text" value:bind="hasher.emailing">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="endOfYear">
+          End of year
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="endOfYear" min="0" type="number" value:bind="hasher.endOfYear">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="event">
+          Event
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="event" type="text" value:bind="hasher.event">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="familyName">
+          Family name
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="familyName" type="text" value:bind="hasher.familyName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="familyNamePrivate">
+          Family name (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="familyNamePrivate" type="text" value:bind="hasher.familyNamePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="fax">
+          Fax
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="fax" type="text" value:bind="hasher.fax">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="firstTrailDate">
+          First trail date
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="firstTrailDate" type="date" value:bind="hasher.firstTrailDate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="firstTrailNumber">
+          First trail number
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="firstTrailNumber" min="0" type="number" value:bind="hasher.firstTrailNumber">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="foodPreference">
+          Food preference
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="foodPreference" type="text" value:bind="hasher.foodPreference">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="givenName">
+          Given name
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="givenName" type="text" value:bind="hasher.givenName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="givenNamePrivate">
+          Given name (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="fax" type="givenNamePrivate" value:bind="hasher.givenNamePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="hareCount1">
+          Hare count (1)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="hareCount1" min="0" type="number" value:bind="hasher.hareCount1">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="hareCount2">
+          Hare count (2)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="hareCount2" min="0" type="number" value:bind="hasher.hareCount2">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="history">
+          History
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="history" type="text" value:bind="hasher.history">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="homePhone">
+          Home phone
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="homePhone" type="text" value:bind="hasher.homePhone">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="homePhonePrivate">
+          Home phone (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="homePhonePrivate" type="text" value:bind="hasher.homePhonePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="inMemoriam">
+          In memoriam
+        </label>
+        <div class="col-md-10">
+          <textarea class="form-control" id="inMemoriam" value:bind="hasher.inMemoriam"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="lastTrailDate">
+          Last trail date
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="lastTrailDate" type="date" value:bind="hasher.lastTrailDate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="mailHashName">
+          Mail hash name
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="mailHashName" type="text" value:bind="hasher.mailHashName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="mailName">
+          Mail name
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="mailName" type="text" value:bind="hasher.mailName">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="mia">
+          MIA
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="mia" type="text" value:bind="hasher.mia">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="miles">
+          Miles
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="miles" min="0" step="0.01" type="number" value:bind="hasher.miles">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="motherHash">
+          Mother hash
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="motherHash" type="text" value:bind="hasher.motherHash">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="namingTrailDate">
+          Naming trail date
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="namingTrailDate" type="date" value:bind="hasher.namingTrailDate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="namingTrailNumber">
+          Naming trail number
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="namingTrailNumber" min="0" type="number" value:bind="hasher.namingTrailNumber">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="notesMd">
+          Notes
+        </label>
+        <div class="col-md-10">
+          <textarea class="form-control" id="notesMd" value:bind="hasher.notesMd"></textarea>
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="owes">
+          Owes
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="owes" type="text" value:bind="hasher.owes">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="passed">
+          Passed
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="passed" type="text" value:bind="hasher.passed">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="payment">
+          Payment
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="payment" type="text" value:bind="hasher.payment">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="punchCard">
+          Punch card
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="punchCard" min="0" type="number" value:bind="hasher.punchCard">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="runCount">
+          Run count
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="runCount" min="0" type="number" value:bind="hasher.runCount">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="runMileage">
+          Run mileage
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="runMileage" min="0" step="0.01" type="number" value:bind="hasher.runMileage">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="runPatch">
+          Run patch
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="runPatch" min="0" type="number" value:bind="hasher.runPatch">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="runSort">
+          Run sort
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="runSort" min="0" type="number" value:bind="hasher.runSort">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="shirtSize">
+          Shirt size
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="shirtSize" type="text" value:bind="hasher.shirtSize">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="shoeSize">
+          Shoe size
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="shoeSize" type="text" value:bind="hasher.shoeSize">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="waistSize">
+          Waist size
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="waistSize" type="text" value:bind="hasher.waistSize">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="waiver">
+          Waiver
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="waiver" type="text" value:bind="hasher.waiver">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="whoMadeYouCum">
+          Who made you cum
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="whoMadeYouCum" type="text" value:bind="hasher.whoMadeYouCum">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="workPhone">
+          Work phone
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="workPhone" type="text" value:bind="hasher.workPhone">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-md-2 col-form-label" for="workPhonePrivate">
+          Work phone (private)
+        </label>
+        <div class="col-md-10">
+          <input class="form-control" id="workPhonePrivate" type="text" value:bind="hasher.workPhonePrivate">
+        </div>
+      </div>
+
+      <button
+        class="btn btn-primary"
+        {{#if editingHasherPromise.isPending}}disabled{{/if}}
+        type="submit">
+        Edit hasher
+      </button>
+    </form>
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}
+
+{{#if editingHasherPromise.isPending}}
+  <div class="alert alert-info mt-3" role="alert">
+    <strong>Saving hasher…</strong>
+  </div>
+{{/if}}
+
+{{#if editingHasherPromise.isRejected}}
+  <div class="alert alert-danger mt-3" role="alert">
+    <button aria-label="Close" class="close" type="button" on:click="resetEditingHasherPromise()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>Fuck!</strong> The hasher failed to save. {{editingHasherPromise.reason.message}}
+  </div>
+{{/if}}
+
+{{#if editingHasherPromise.isResolved}}
+  <div class="alert alert-success mt-3" role="alert">
+    <button aria-label="Close" class="close" type="button" on:click="resetEditingHasherPromise()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>On on!</strong> The hasher’s info has been updated.
+  </div>
+{{/if}}
