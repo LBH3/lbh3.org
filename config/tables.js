@@ -3,7 +3,7 @@
 exports.getDefinitionsWithSequelize = function (Sequelize) {
   const boxType = field => ({type: Sequelize.GEOMETRY('POLYGON'), field});
   const currentTimestampType = field => ({type: 'timestamp with time zone', notNull: true, field, defaultValue: 'now()'});
-  const dateType = field => ({type: Sequelize.DATE, field});
+  const dateType = field => ({type: Sequelize.DATEONLY, field});
   const decimalType = field => ({type: Sequelize.DECIMAL, field});
   const enumType = (field, enumValues) => ({type: Sequelize.ENUM(enumValues), field});
   const intType = field => ({type: Sequelize.INTEGER, notNull: true, field, defaultValue: 0});

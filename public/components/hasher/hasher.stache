@@ -1,3 +1,6 @@
+<can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
+
 {{#if session.user.canViewHashersList}}
 
   {{#if hasherPromise.isPending}}
@@ -13,7 +16,19 @@
   {{/if}}
 
   {{#if hasher}}
-    <h2>{{hasher.hashName}}</h2>
+    <div class="row">
+      <div class="col"></div>
+      <div class="col-10">
+        <h2>{{hasher.hashName}}</h2>
+      </div>
+      <div class="col text-right">
+        {{#if session.user.canEditHasherInfo}}
+          <a href="{{routeUrl page='hashers' id=hasher.id secondaryPage='edit'}}" title="Edit info">
+            <span class="fa fa-pencil-square-o"></span>
+          </a>
+        {{/if}}
+      </div>
+    </div>
 
     <dl class="row">
       <dt class="col-sm-3 text-sm-right">Address:</dt>

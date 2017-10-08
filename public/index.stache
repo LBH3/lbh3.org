@@ -195,13 +195,29 @@
         {{/case}}
         {{#case "hashers"}}
           {{#if id}}
-            <can-import from="lbh3/components/hasher/">
-              {{#if isPending}}
-                Loading hasher page…
-              {{else}}
-                <lbh3-hasher id:from="id" />
-              {{/if}}
-            </can-import>
+            {{#if secondaryPage}}
+              {{#switch secondaryPage}}
+                {{#case "edit"}}
+                  <lbh3-no-ssr>
+                    <can-import from="lbh3/components/hasher/edit/">
+                      {{#if isPending}}
+                        Loading the edit hasher page…
+                      {{else}}
+                        <lbh3-hasher-edit id:from="id" />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+              {{/switch}}
+            {{else}}
+              <can-import from="lbh3/components/hasher/">
+                {{#if isPending}}
+                  Loading hasher page…
+                {{else}}
+                  <lbh3-hasher id:from="id" />
+                {{/if}}
+              </can-import>
+            {{/if}}
           {{else}}
             <can-import from="lbh3/components/hashers/">
               {{#if isPending}}
