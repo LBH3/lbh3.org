@@ -28,7 +28,7 @@
         Mismanagement
       </a></li>
       {{#if session.user.canViewHashersList}}
-        <li><a href="{{routeUrl page='hashers'}}">
+        <li><a href="{{routeUrl page='hashers' secondaryPage=''}}">
           Hashers Directory
         </a></li>
       {{/if}}

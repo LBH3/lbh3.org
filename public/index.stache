@@ -194,22 +194,33 @@
           {{/switch}}
         {{/case}}
         {{#case "hashers"}}
-          {{#if id}}
-            {{#if secondaryPage}}
-              {{#switch secondaryPage}}
-                {{#case "edit"}}
-                  <lbh3-no-ssr>
-                    <can-import from="lbh3/components/hasher/edit/">
-                      {{#if isPending}}
-                        Loading the edit hasher page…
-                      {{else}}
-                        <lbh3-hasher-edit id:from="id" />
-                      {{/if}}
-                    </can-import>
-                  </lbh3-no-ssr>
-                {{/case}}
-              {{/switch}}
-            {{else}}
+          {{#if secondaryPage}}
+            {{#switch secondaryPage}}
+              {{#case "add"}}
+                <lbh3-no-ssr>
+                  <can-import from="lbh3/components/hashers/add/">
+                    {{#if isPending}}
+                      Loading the add hasher page…
+                    {{else}}
+                      <lbh3-hashers-add />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
+              {{/case}}
+              {{#case "edit"}}
+                <lbh3-no-ssr>
+                  <can-import from="lbh3/components/hasher/edit/">
+                    {{#if isPending}}
+                      Loading the edit hasher page…
+                    {{else}}
+                      <lbh3-hasher-edit id:from="id" />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
+              {{/case}}
+            {{/switch}}
+          {{else}}
+            {{#if id}}
               <can-import from="lbh3/components/hasher/">
                 {{#if isPending}}
                   Loading hasher page…
@@ -217,15 +228,15 @@
                   <lbh3-hasher id:from="id" />
                 {{/if}}
               </can-import>
+            {{else}}
+              <can-import from="lbh3/components/hashers/">
+                {{#if isPending}}
+                  Loading Hashers page…
+                {{else}}
+                  <lbh3-hashers skip:from="skip" />
+                {{/if}}
+              </can-import>
             {{/if}}
-          {{else}}
-            <can-import from="lbh3/components/hashers/">
-              {{#if isPending}}
-                Loading Hashers page…
-              {{else}}
-                <lbh3-hashers skip:from="skip" />
-              {{/if}}
-            </can-import>
           {{/if}}
         {{/case}}
         {{#case "home"}}

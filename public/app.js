@@ -42,9 +42,10 @@ route('/events/{year}/', { page: 'events', year: 0});
 route('/hareline/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'hareline', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
 route('/hareline/{secondaryPage}/', { page: 'hareline' });
 route('/hareline/', { page: 'hareline' });
+route('/hashers/add/', { page: 'hashers', secondaryPage: 'add'});
 route('/hashers/{id}/{secondaryPage}/', { page: 'hashers', id: 0, secondaryPage: ''});
 route('/hashers/{id}/', { page: 'hashers', id: 0 });
-route('/hashers/', { page: 'hashers' });
+route('/hashers/', { page: 'hashers', secondaryPage: '' });
 route('/{page}', { page: defaultPage });
 
 export default AppViewModel;

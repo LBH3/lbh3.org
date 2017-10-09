@@ -32,6 +32,7 @@ export const ViewModel = DefineMap.extend({
 
     return this.editingHasherPromise = hasher.save().then(savedHasher => {
       this.additionalFields = new AdditionalFields();
+      this.dispatch('didsave');
       return savedHasher;
     });
   },
