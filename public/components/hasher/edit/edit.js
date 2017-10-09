@@ -6,40 +6,7 @@ import view from './edit.stache';
 
 import './edit.less';
 
-const AdditionalFields = DefineMap.extend({
-  emailAddress: 'string',
-  emailAddressPrivate: 'string'
-});
-
 export const ViewModel = DefineMap.extend({
-  additionalFields: {
-    Type: AdditionalFields,
-    value: function() {
-      return new AdditionalFields();
-    }
-  },
-
-  editHasher: function() {
-    const additionalFields = this.additionalFields;
-    const hasher = this.hasher;
-
-    if (additionalFields.emailAddress) {
-      hasher.emailAddresses.push(additionalFields.emailAddress);
-    }
-    hasher.emailAddresses = hasher.emailAddresses.filter(emailAddress => emailAddress);
-    if (additionalFields.emailAddressPrivate) {
-      hasher.emailAddressesPrivate.push(additionalFields.emailAddressPrivate);
-    }
-    hasher.emailAddressesPrivate = hasher.emailAddressesPrivate.filter(emailAddress => emailAddress);
-
-    return this.editingHasherPromise = hasher.save().then(savedHasher => {
-      this.additionalFields = new AdditionalFields();
-      return savedHasher;
-    });
-  },
-
-  editingHasherPromise: {},
-
   hasher: Hasher,
 
   hasherPromise: {
@@ -60,10 +27,6 @@ export const ViewModel = DefineMap.extend({
     type: 'number'
   },
 
-  resetEditingHasherPromise: function() {
-    this.editingHasherPromise = null;
-  },
-
   /**
    * Session.current is provided by the can-connect-feathers session behavior.
    * It will automatically populate when `new Session().save()` occurs in the app
@@ -77,10 +40,5 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'lbh3-hasher-edit',
   ViewModel,
-  view,
-  events: {
-    '{element} submit': function(element, event) {
-      event.preventDefault();
-    }
-  }
+  view
 });
