@@ -1,0 +1,28 @@
+<can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="lbh3/components/hasher-edit-form/" />
+
+{{#if session.user.canAddHashers}}
+  <div class="row">
+    <div class="col">
+      <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
+        <span class="fa fa-angle-double-left"></span>
+      </a>
+    </div>
+    <div class="col-10">
+      <h2>Add a new hasher</h2>
+    </div>
+    <div class="col"></div>
+  </div>
+  <lbh3-hasher-edit-form
+    hasher:from="hasher"
+    on:didsave="didSave()"
+    saveButtonLabel="Create hasher"
+    saveSuccessMessage="The hasher has been created."
+  />
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}

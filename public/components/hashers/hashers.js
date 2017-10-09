@@ -55,6 +55,7 @@ export const ViewModel = DefineMap.extend({
   routeForPage: function(page) {
     const routeParams = {
       page: 'hashers',
+      secondaryPage: '',
       skip: $limit * (page - 1)
     };
     return route.url(routeParams);

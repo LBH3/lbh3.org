@@ -17,7 +17,11 @@
 
   {{#if hasher}}
     <div class="row">
-      <div class="col"></div>
+      <div class="col">
+        <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
+          <span class="fa fa-angle-double-left"></span>
+        </a>
+      </div>
       <div class="col-10">
         <h2>{{hasher.hashName}}</h2>
       </div>

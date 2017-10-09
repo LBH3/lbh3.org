@@ -1,3 +1,13 @@
+<can-import from="can-stache/helpers/route" />
+
+{{#if session.user.canAddHashers}}
+  <div class="clearfix">
+    <a class="btn btn-primary float-right" href="{{routeUrl page='hashers' secondaryPage='add'}}">
+      Add hasher
+    </a>
+  </div>
+{{/if}}
+
 <h2>Hashers</h2>
 
 {{#if session.user.canViewHashersList}}

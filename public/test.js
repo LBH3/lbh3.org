@@ -14,6 +14,8 @@ import 'lbh3/components/hareline/guidelines/guidelines-test';
 import 'lbh3/components/hareline/hareline-test';
 import 'lbh3/components/hasher/edit/edit-test';
 import 'lbh3/components/hasher/hasher-test';
+import 'lbh3/components/hasher-edit-form/hasher-edit-form-test';
+import 'lbh3/components/hashers/add/add-test';
 import 'lbh3/components/hashers/hashers-test';
 import 'lbh3/components/header/header-test';
 import 'lbh3/components/home/home-test';
