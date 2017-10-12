@@ -6,6 +6,8 @@ import Session from '~/models/session';
 import loader from '@loader';
 import view from './run.stache';
 
+import './run.less';
+
 export const ViewModel = DefineMap.extend({
   day: 'string',
   event: Event,

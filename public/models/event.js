@@ -55,6 +55,18 @@ const Event = DefineMap.extend({
   trailCommentsMd: 'string',
   trailNumber: 'number',
 
+  addedWriteupHtml: {
+    get: function() {
+      return marked(this.addedWriteupMd);
+    },
+    serialize: false
+  },
+  additionalWriteupHtml: {
+    get: function() {
+      return marked(this.additionalWriteupMd);
+    },
+    serialize: false
+  },
   bringHtml: {
     get: function() {
       return marked(this.bringMd);
@@ -73,9 +85,21 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  harePatchesHtml: {
+    get: function() {
+      return marked(this.harePatchesMd);
+    },
+    serialize: false
+  },
   haresHtml: {
     get: function() {
       return marked(this.haresMd);
+    },
+    serialize: false
+  },
+  hashitReasonHtml: {
+    get: function() {
+      return marked(this.hashitReasonMd);
     },
     serialize: false
   },
@@ -135,6 +159,18 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  newBootsHtml: {
+    get: function() {
+      return marked(this.newBootsMd);
+    },
+    serialize: false
+  },
+  newNamesHtml: {
+    get: function() {
+      return marked(this.newNamesMd);
+    },
+    serialize: false
+  },
   onOnHtml: {
     get: function() {
       return marked(this.onOnMd);
@@ -150,6 +186,24 @@ const Event = DefineMap.extend({
         });
       }
     }
+  },
+  patchesHtml: {
+    get: function() {
+      return marked(this.patchesMd);
+    },
+    serialize: false
+  },
+  returnersHtml: {
+    get: function() {
+      return marked(this.returnersMd);
+    },
+    serialize: false
+  },
+  scribesHtml: {
+    get: function() {
+      return marked(this.scribesMd);
+    },
+    serialize: false
   },
   shortLocationHtml: {
     get: function(lastSetValue, resolve) {
@@ -188,6 +242,12 @@ const Event = DefineMap.extend({
         });
       }
       return this.onOnHtml;
+    },
+    serialize: false
+  },
+  snoozeTitleHtml: {
+    get: function() {
+      return marked(this.snoozeTitleMd);
     },
     serialize: false
   },
@@ -240,6 +300,18 @@ const Event = DefineMap.extend({
         year: '2-digit'
       };
       return localizedStringForDate(this.startDate, defaultLocale, options);
+    },
+    serialize: false
+  },
+  trailCommentsHtml: {
+    get: function() {
+      return marked(this.trailCommentsMd);
+    },
+    serialize: false
+  },
+  visitorsHtml: {
+    get: function() {
+      return marked(this.visitorsMd);
     },
     serialize: false
   }
