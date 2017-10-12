@@ -1,6 +1,5 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
-import Position from '~/models/position';
 import Session from '~/models/session';
 import './footer.less';
 import platform from 'steal-platform';
@@ -10,20 +9,6 @@ export const ViewModel = DefineMap.extend({
   platform: {
     value: () => {
       return platform;
-    }
-  },
-  positions: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
-      }
-      this.positionsPromise.then(setValue);
-    }
-  },
-
-  positionsPromise: {
-    value: function() {
-      return Position.getList({});
     }
   },
 
@@ -37,8 +22,11 @@ export const ViewModel = DefineMap.extend({
   },
 
   get webmaster() {
-    const positions = this.positions;
-    return (positions) ? positions[positions.length - 1]['people'][0] : null;
+    return {
+      email: 'ifmd@chasenlehara.com',
+      name: 'I’m Fucking Matt Damon',
+      phone: '562-533-2821'
+    };
   }
 });
 
