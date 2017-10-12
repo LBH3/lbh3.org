@@ -26,9 +26,6 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
-  get isDevelopment() {
-    return loader.env === 'window-development';
-  },
 
   /**
    * Session.current is provided by the can-connect-feathers session behavior.
