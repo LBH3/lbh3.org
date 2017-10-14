@@ -83,7 +83,6 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       updatedAt: currentTimestampType('updated_at'),
       eventPayment: stringType('event_payment'),
       externalId: stringType('external_id'),
-      externalRunsId: intType('external_runs_id'),
       familyName: stringType('family_name'),
       foodPreference: stringType('food_preference'),
       givenName: stringType('given_name'),
@@ -93,7 +92,8 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       paymentTier: enumType('payment_tier', ['5', 'baby', 'bored', 'c', 'dues', 'hares', 'kids', 'lt', 'punch']),
       paymentType: enumType('payment_type', ['both', 'cash', 'check', 'no_charge']),
       role: stringType('role'),
-      runPatch: stringType('run_patch')
+      runPatch: stringType('run_patch'),
+      trailNumber: intType('trail_number')
     },
     google_places: {
       id: primaryStringType,

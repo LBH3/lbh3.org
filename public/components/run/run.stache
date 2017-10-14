@@ -144,4 +144,51 @@
     {{/if}}
   </dl>
 
+  {{#if session.user.canEditHasherInfo}}
+    {{#if hashersPromise.isPending}}
+      <div class="alert alert-info" role="alert">
+        <strong>Fetching attendance sheet…</strong>
+      </div>
+    {{/if}}
+
+    {{#if hashersPromise.isRejected}}
+      <div class="alert alert-danger" role="alert">
+        <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
+      </div>
+    {{/if}}
+
+    {{#if hashersPromise.isResolved}}
+      {{#if hashers.length}}
+        <table class="table table-bordered table-responsive table-sm">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Payment tier</th>
+              <th>Payment notes</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each hashers as hasher}}
+              <tr>
+                <td>
+                  {{#if hasher.hashName}}
+                    {{hasher.hashName}}
+                  {{else}}
+                    Just {{hasher.givenName}} {{hasher.familyName}}
+                  {{/if}}
+                </td>
+                <td>{{hasher.role}}</td>
+                <td>{{hasher.paymentTier}}</td>
+                <td>
+                  {{hasher.paymentNotesAndType}}
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      {{/if}}
+    {{/if}}
+  {{/if}}
+
 {{/if}}
