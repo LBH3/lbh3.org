@@ -15,7 +15,7 @@ const hashRecordToDatabaseFields = {
   'Payment Type': 'payment_type',
   'Role': 'role',
   'Run Patch': 'run_patch',
-  'Runs.id.fk': 'external_runs_id',
+  'Runs.id.fk': 'trail_number',
   'sum_5': 'payment_tier',
   'RECORDID': 'external_id'
 };
@@ -461,8 +461,8 @@ function processHasher({dbKey, dbRow, xmlKey, xmlRecord, xmlValue}) {
 }
 
 const hashRecordIntegerFields = [
-  'external_runs_id',
-  'hash_id'
+  'hash_id',
+  'trail_number'
 ];
 const paymentTierEnumMap = {
   sum_5: '5',

@@ -49,7 +49,11 @@
           <tr>
             <td>
               <a href="{{routeForHasher(hasher)}}">
-                {{hasher.hashName}}
+                {{#if hasher.hashName}}
+                  {{hasher.hashName}}
+                {{else}}
+                  Just {{hasher.givenName}} {{hasher.familyName}}
+                {{/if}}
               </a>
             </td>
           </tr>

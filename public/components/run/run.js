@@ -1,6 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
+import EventsHashers from '~/models/events-hashers';
 import Session from '~/models/session';
 
 import loader from '@loader';
@@ -40,6 +41,22 @@ export const ViewModel = DefineMap.extend({
   },
   get googleMapsKey() {
     return loader.googleMapsKey;
+  },
+  hashers: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      this.hashersPromise.then(setValue);
+    }
+  },
+  hashersPromise: {
+    get: function() {
+      return EventsHashers.connection.getList({
+        $limit: 100,
+        trailNumber: this.trailNumber
+      });
+    }
   },
   month: 'string',
 
