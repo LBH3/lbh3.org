@@ -8,7 +8,7 @@ const hashRecordToDatabaseFields = {
   'Event pay': 'event_payment',
   'First Name': 'given_name',
   'Food': 'food_preference',
-  'Hash.id.fk': 'hash_id',
+  'Hash.id.fk': 'hasher_id',
   'Hasher Name': 'hash_name',
   'Last Name': 'family_name',
   'Payment': 'payment_notes',
@@ -49,7 +49,7 @@ const hasherToDatabaseFields = {
   "Hares No.": "hare_count_1",
   "Hash Mail Name": "mail_hash_name",
   "Hash Name:": "hash_name",
-  "Hash.id_pk": "hash_id",
+  "Hash.id_pk": "id",
   "History": "history",
   "Home Phone": "home_phone",
   "Home Phone no directory": "home_phone_private",
@@ -281,11 +281,13 @@ function importFile({addRecordToDatabase, fileName, processRecord}) {
       try {
         const record = parseRowWithFields(row, fields);
         const processedRecord = processRecord(record);
-        console.info(`Adding ${processedRecord.external_id} to the database`);
-        addRecordToDatabase(processedRecord).then(function() {
-          completedCounter += 1;
-        }, reject);
-        totalCounter += 1;
+        if (processedRecord) {
+          console.info(`Adding ${processedRecord.external_id} to the database`);
+          addRecordToDatabase(processedRecord).then(function() {
+            completedCounter += 1;
+          }, reject);
+          totalCounter += 1;
+        }
       } catch (error) {
         reject(error);
       }
@@ -315,10 +317,14 @@ function importHashRecords() {
 }
 
 function importHashers() {
+  const processRecord = processXMLRecord(hasherToDatabaseFields, processHasher);
   return importFile({
     addRecordToDatabase: addHasherToDatabase,
     fileName: './filemaker/all-hash-records.xml',
-    processRecord: processXMLRecord(hasherToDatabaseFields, processHasher)
+    processRecord: function(xmlRecord) {
+      const processedRecord = processRecord(xmlRecord);
+      return (processedRecord && processedRecord.id) ? processedRecord : null;
+    }
   });
 }
 
@@ -374,7 +380,7 @@ const hasherIntegerFields = [
   'first_trail_number',
   'hare_count_1',
   'hare_count_2',
-  'hash_id',
+  'id',
   'naming_trail_number',
   'punch_card',
   'run_count',
@@ -461,7 +467,7 @@ function processHasher({dbKey, dbRow, xmlKey, xmlRecord, xmlValue}) {
 }
 
 const hashRecordIntegerFields = [
-  'hash_id',
+  'hasher_id',
   'trail_number'
 ];
 const paymentTierEnumMap = {

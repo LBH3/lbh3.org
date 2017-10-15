@@ -172,11 +172,13 @@
             {{#each hashers as hasher}}
               <tr>
                 <td>
-                  {{#if hasher.hashName}}
-                    {{hasher.hashName}}
-                  {{else}}
-                    Just {{hasher.givenName}} {{hasher.familyName}}
-                  {{/if}}
+                  <a href="{{routeForHasher(hasher)}}">
+                    {{#if hasher.hashName}}
+                      {{hasher.hashName}}
+                    {{else}}
+                      Just {{hasher.givenName}} {{hasher.familyName}}
+                    {{/if}}
+                  </a>
                 </td>
                 <td>{{hasher.role}}</td>
                 <td>{{hasher.paymentTier}}</td>
