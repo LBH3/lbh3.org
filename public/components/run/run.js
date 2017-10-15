@@ -5,6 +5,7 @@ import EventsHashers from '~/models/events-hashers';
 import Session from '~/models/session';
 
 import loader from '@loader';
+import route from 'can-route';
 import view from './run.stache';
 
 import './run.less';
@@ -59,6 +60,13 @@ export const ViewModel = DefineMap.extend({
     }
   },
   month: 'string',
+  routeForHasher: function(hasher) {
+    const routeParams = {
+      id: hasher.hasherId,
+      page: 'hashers'
+    };
+    return route.url(routeParams);
+  },
 
   /**
    * Session.current is provided by the can-connect-feathers session behavior.
