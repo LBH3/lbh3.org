@@ -10,7 +10,49 @@ import view from './run.stache';
 
 import './run.less';
 
+const paymentRates = [
+  {rate: 0, tier: 'hares', title: 'Hares (3 Run Free)'},
+  {rate: 0, tier: 'founder', title: 'Founders & Comp'},
+  {rate: 0, tier: 'lt', title: 'Brewmeister Free'},
+  {rate: 0, tier: 'baby', title: 'Babies'},
+  {rate: 5, tier: '5', title: 'Full'},
+  {rate: 3, tier: 'bored', title: 'Bored Members'},
+  {rate: 0, tier: 'punch', title: 'Punch cards'},
+  {rate: 0, tier: 'dues', title: 'Annual/Quarterly Dues'},
+  {rate: 3, tier: 'kids', title: 'Kids'}
+];
+
 export const ViewModel = DefineMap.extend({
+  cashReport: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      this.hashersPromise.then(hashers => {
+        const hashersByPaymentTier = {};
+        hashers.forEach(hasher => {
+          const paymentTier = hasher.paymentTier || (hasher.paymentNotes.toUpperCase() === 'F' ? 'founder' : '5');
+          if (!hashersByPaymentTier[paymentTier]) {
+            hashersByPaymentTier[paymentTier] = [];
+          }
+          hashersByPaymentTier[paymentTier].push(hasher);
+        });
+        const cashReport = {};
+        cashReport.records = paymentRates.map(paymentRate => {
+          const hashersInPaymentTier = hashersByPaymentTier[paymentRate.tier] || [];
+          return {
+            count: hashersInPaymentTier.length,
+            rate: paymentRate.rate,
+            title: paymentRate.title,
+            total: hashersInPaymentTier.length * paymentRate.rate
+          };
+        });
+        cashReport.totalAmount = cashReport.records.reduce((sum, record) => sum + record.total, 0);
+        cashReport.totalCount = cashReport.records.reduce((sum, record) => sum + record.count, 0);
+        setValue(cashReport);
+      });
+    }
+  },
   day: 'string',
   event: Event,
   eventPromise: {
