@@ -1,4 +1,17 @@
-<h2>Edit Run #{{trailNumber}}</h2>
+<can-import from="awesomplete/awesomplete.base.css" />
+<can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
+
+<h2>
+  Edit
+  {{#if event}}
+    <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}" title="View trail">
+      Run #{{trailNumber}}
+    </a>
+  {{else}}
+    Run #{{trailNumber}}
+  {{/if}}
+</h2>
 
 {{#if eventPromise.isPending}}
   <div class="alert alert-info" role="alert">
@@ -223,4 +236,132 @@
     </button>
     <strong>On on!</strong> Both hash.org and lbh3.org have been updated.
   </div>
+{{/if}}
+
+<h3>Attendance</h3>
+
+{{#if hashersPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching attendance sheet…</strong>
+  </div>
+{{/if}}
+
+{{#if hashersPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
+  </div>
+{{/if}}
+
+{{#if hashersPromise.isResolved}}
+  <form on:submit="addHasherToRun()">
+    <table class="table table-bordered table-responsive table-sm">
+      <thead>
+        <tr>
+          <th>
+            <label for="hasher-name">
+              Name
+            </label>
+          </th>
+          <th>
+            <label for="role">
+              Role
+            </label>
+          </th>
+          <th>
+            <label for="payment-tier">
+              Payment tier
+            </label>
+          </th>
+          <th>
+            <label for="payment-notes">
+              Payment notes
+            </label>
+          </th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each hashers as hasher}}
+          <tr>
+            <td>
+              {{hasher.hashOrJustName}}
+            </td>
+            <td>{{hasher.role}}</td>
+            <td>
+              {{hasher.paymentTier}}
+            </td>
+            <td>
+              {{hasher.paymentNotes}}
+            </td>
+            <td class="text-center">
+              <button
+                class="btn btn-danger btn-sm remove-hasher"
+                on:click="hasher.destroy()"
+              >
+                <span class="fa fa-remove"></span>
+              </button>
+            </td>
+          </tr>
+        {{/each}}
+        <tr>
+          <td>
+            <input
+              autocomplete="off"
+              class="form-control"
+              disabled
+              id="hasher-name"
+              on:input:value:to="hasherAwesompleteQuery"
+              type="text"
+            />
+          </td>
+          <td>
+            <select class="form-control" id="role" value:bind="newHasherForRun.role">
+              {{#each roles as role}}
+                <option value="{{role}}">
+                  {{role}}
+                </option>
+              {{/each}}
+            </select>
+          </td>
+          <td>
+            <select class="form-control" id="payment-tier" value:bind="newHasherForRun.paymentTier">
+              {{#each paymentRates as paymentRate}}
+                <option value="{{paymentRate.tier}}">
+                  {{paymentRate.title}}
+                </option>
+              {{/each}}
+            </select>
+          </td>
+          <td>
+            <input
+              class="form-control"
+              id="payment-notes"
+              value:bind="newHasherForRun.paymentNotes"
+              type="text"
+            />
+          </td>
+          <td class="text-center">
+            <button
+              class="btn {{#if addingHasherPromise.isRejected}}btn-warning{{else}}btn-primary{{/if}} btn-sm"
+              {{#if addingHasherPromise.isPending}}disabled{{/if}}
+              type="submit"
+            >
+              {{#if addingHasherPromise.isRejected}}
+                <span class="fa fa-warning" title="{{addingHasherPromise.reason.message}}"></span>
+              {{else}}
+                <span class="fa fa-plus"></span>
+              {{/if}}
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    {{#if session.user.canAddHashers}}
+      <div class="clearfix">
+        <a class="btn btn-primary float-right" href="{{routeUrl page='hashers' secondaryPage='add'}}">
+          Need to add a new hasher?
+        </a>
+      </div>
+    {{/if}}
+  </form>
 {{/if}}

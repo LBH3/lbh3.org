@@ -34,6 +34,7 @@
     "serviceBaseURL": ""
   },
   "dependencies": {
+    "awesomplete": "^1.1.2",
     "bootstrap": "^4.0.0-beta",
     "can-component": "^3.3.3",
     "can-connect": "^1.5.7",
