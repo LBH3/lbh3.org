@@ -95,6 +95,15 @@ const Hasher = DefineMap.extend({
   hareCount2: 'number',
   hashId: 'number',
   hashName: 'string',
+  hashOrJustName: {
+    get: function() {
+      const hashName = this.hashName;
+      if (hashName) {
+        return hashName;
+      }
+      return `Just ${this.givenName} ${this.familyName}`.trim();
+    }
+  },
   history: 'string',
   homePhone: 'string',
   homePhonePrivate: 'string',

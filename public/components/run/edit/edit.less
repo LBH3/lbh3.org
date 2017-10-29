@@ -1,6 +1,46 @@
 lbh3-run-edit {
 	display: block;
-	margin: 1em 0;
+
+	form {
+		margin: 1em 0 5rem;
+
+		table {
+			tbody {
+				tr {
+					td {
+						line-height: 2;
+					}
+				}
+			}
+		}
+
+		.awesomplete {
+			width: 100%;
+
+			ul {
+				border: 1px solid rgba(0, 0, 0, .15);
+				border-radius: .25rem;
+
+				li {
+					padding: .25rem .75rem;
+
+					&:active, &[aria-selected="true"] {
+						background-color: #007bff;
+						color: #fff;
+					}
+
+					mark {
+						padding-left: 0;
+						padding-right: 0;
+					}
+				}
+			}
+		}
+	}
+
+	h3 + form {
+		margin-bottom: 20rem;
+	}
 
 	textarea {
 		height: 6.5rem;

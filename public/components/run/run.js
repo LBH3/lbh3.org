@@ -10,18 +10,6 @@ import view from './run.stache';
 
 import './run.less';
 
-const paymentRates = [
-  {rate: 0, tier: 'hares', title: 'Hares (3 Run Free)'},
-  {rate: 0, tier: 'founder', title: 'Founders & Comp'},
-  {rate: 0, tier: 'lt', title: 'Brewmeister Free'},
-  {rate: 0, tier: 'baby', title: 'Babies'},
-  {rate: 5, tier: '5', title: 'Full'},
-  {rate: 3, tier: 'bored', title: 'Bored Members'},
-  {rate: 0, tier: 'punch', title: 'Punch cards'},
-  {rate: 0, tier: 'dues', title: 'Annual/Quarterly Dues'},
-  {rate: 3, tier: 'kids', title: 'Kids'}
-];
-
 export const ViewModel = DefineMap.extend({
   cashReport: {
     get: function(lastValue, setValue) {
@@ -38,7 +26,7 @@ export const ViewModel = DefineMap.extend({
           hashersByPaymentTier[paymentTier].push(hasher);
         });
         const cashReport = {};
-        cashReport.records = paymentRates.map(paymentRate => {
+        cashReport.records = EventsHashers.paymentRates.map(paymentRate => {
           const hashersInPaymentTier = hashersByPaymentTier[paymentRate.tier] || [];
           return {
             count: hashersInPaymentTier.length,
@@ -96,7 +84,7 @@ export const ViewModel = DefineMap.extend({
   hashersPromise: {
     get: function() {
       return EventsHashers.connection.getList({
-        $limit: 100,
+        $limit: 500,
         trailNumber: this.trailNumber
       });
     }

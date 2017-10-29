@@ -12,6 +12,26 @@ const EventsHashers = DefineMap.extend({
   seal: false
 }, {
   id: 'number',
+  createdAt: 'any',
+  updatedAt: 'any',
+  eventPayment: 'string',
+  externalId: 'string',
+  familyName: 'string',
+  foodPreference: 'string',
+  givenName: 'string',
+  hasherId: 'number',
+  hashName: 'string',
+  hashOrJustName: {
+    get: function() {
+      const hashName = this.hashName;
+      if (hashName) {
+        return hashName;
+      }
+      return `Just ${this.givenName} ${this.familyName}`.trim();
+    },
+    serialize: false
+  },
+  paymentNotes: 'string',
   paymentNotesAndType: {
     get: function() {
       const paymentNotes = this.paymentNotes;
@@ -26,7 +46,12 @@ const EventsHashers = DefineMap.extend({
       return '';
     },
     serialize: false
-  }
+  },
+  paymentTier: 'string',
+  paymentType: 'string',
+  role: 'string',
+  runPatch: 'string',
+  trailNumber: 'number'
 });
 
 EventsHashers.List = DefineList.extend({
@@ -43,5 +68,35 @@ EventsHashers.connection = connect([
   name: 'events-hashers',
   algebra
 });
+
+EventsHashers.paymentRates = [
+  {rate: 0, tier: 'hares', title: 'Hares (3 Run Free)'},
+  {rate: 0, tier: 'founder', title: 'Founders & Comp'},
+  {rate: 0, tier: 'lt', title: 'Brewmeister Free'},
+  {rate: 0, tier: 'baby', title: 'Babies'},
+  {rate: 5, tier: '5', title: 'Full'},
+  {rate: 3, tier: 'bored', title: 'Bored Members'},
+  {rate: 0, tier: 'punch', title: 'Punch cards'},
+  {rate: 0, tier: 'dues', title: 'Annual/Quarterly Dues'},
+  {rate: 3, tier: 'kids', title: 'Kids'}
+];
+
+EventsHashers.roles = [
+  'Hare',
+  'Hare/New Name',
+  'Hare/Returner',
+  'Hare/hashit',
+  'Hare/scribe',
+  'Hashit',
+  'New Boot',
+  'New Name',
+  'Returner',
+  'Runner',
+  'Scribe',
+  'Scribe/Hashit',
+  'Scribe/New Name',
+  'Visitor',
+  ''
+];
 
 export default EventsHashers;
