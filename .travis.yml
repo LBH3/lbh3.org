@@ -1,5 +1,5 @@
 language: node_js
-node_js: node
+node_js: 8
 addons:
   firefox: "53.0"
   sauce_connect: true
