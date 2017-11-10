@@ -510,6 +510,15 @@
       <span aria-hidden="true">&times;</span>
     </button>
     <strong>Fuck!</strong> The hasher’s info failed to save. {{editingHasherPromise.reason.message}}
+    {{#if editingHasherPromise.reason.errors}}
+      <ul>
+        {{#each editingHasherPromise.reason.errors as error}}
+          <li>
+            {{error.message}}
+          </li>
+        {{/each}}
+      </ul>
+    {{/if}}
   </div>
 {{/if}}
 

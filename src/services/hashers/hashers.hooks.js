@@ -7,6 +7,22 @@ const restrictToAdmin = [
   authHook.restrictToAdmin()
 ];
 
+const createAndUpdateFields = function(hook) {
+  const googleProfile = hook.params.user.googleProfile || {};
+  let displayName = googleProfile.displayName || '';
+  if (!displayName && googleProfile.emails && googleProfile.emails[0]) {
+    displayName = googleProfile.emails[0];
+  }
+
+  if (!hook.data.createdBy && !hook.data.createdByUserId) {
+    hook.data.createdBy = displayName;
+    hook.data.createdByUserId = hook.params.user.id || 0;
+  }
+
+  hook.data.updatedBy = displayName;
+  hook.data.updatedByUserId = hook.params.user.id || 0;
+};
+
 module.exports = {
   before: {
     all: [],
@@ -16,8 +32,8 @@ module.exports = {
       })
     ],
     get: [],
-    create: [ ...restrictToAdmin ],
-    update: [ ...restrictToAdmin ],
+    create: [ ...restrictToAdmin, createAndUpdateFields ],
+    update: [ ...restrictToAdmin, createAndUpdateFields ],
     patch: [ ...restrictToAdmin ],
     remove: [ ...restrictToAdmin ]
   },

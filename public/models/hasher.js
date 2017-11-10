@@ -20,7 +20,7 @@ const datePropDefinition = {
 const emailAddressesPropDefinition = {
   serialize: function(currentValue) {
     if (currentValue && currentValue.length > 0) {
-      return currentValue;
+      return (currentValue.get) ? currentValue.get() : currentValue;
     }
   },
   value: function() {
