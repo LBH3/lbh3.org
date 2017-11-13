@@ -32,4 +32,4 @@
 
 <lbh3-year year:from="year" />
 
-<p>If you see a picture you’d like removed, send an email to <a href="mailto:{{webmaster.email}}">{{webmaster.name}}</a></p>
+<p>If you see a picture you’d like removed, <a href="mailto:hashflash@lbh3.org">email our Hash Flash</a>.</p>

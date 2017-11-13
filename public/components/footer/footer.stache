@@ -1,9 +1,7 @@
 <footer class="container text-muted">
-  {{#if webmaster}}
-    <p class="float-sm-left">
-      For website issues, <a href="mailto:{{webmaster.email}}">email {{webmaster.name}}</a>
-    </p>
-  {{/if}}
+  <p class="float-sm-left">
+    <a href="mailto:contact@lbh3.org">Email us</a> with any questions, comments, or concerns.
+  </p>
   <p class="float-sm-right">
     {{#if session.user}}
       <button class="btn btn-link" type="button" on:click="session.destroy()">
