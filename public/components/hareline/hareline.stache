@@ -1,9 +1,7 @@
 <can-import from="can-stache/helpers/route" />
 <can-import from="font-awesome/css/font-awesome.css" />
 
-{{#if trailmasters.length}}
-  <p>For questions or to sign up for a run, contact our Trail Master{{^is trailmasters.length 1}}s{{/is}}: {{{trailmasterEmailLinks}}}.</p>
-{{/if}}
+<p>For questions or to sign up for a run, <a href="mailto:trailmasters@lbh3.org">email our Trail Masters</a>.</p>
 
 <p><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">LBH3 Haring Guidelines</a></p>
 
