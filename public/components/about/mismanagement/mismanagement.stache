@@ -13,16 +13,22 @@
 {{/if}}
 
 {{#if yearsPromise.isResolved}}
-  <nav class="nav nav-pills">
-    {{#each yearsPromise.value as yearObject}}
-      <a
-        class="{{#is yearObject.year ../year}}active{{/is}} flex-sm-fill nav-link text-sm-center"
-        href="{{routeForYear(yearObject.year)}}"
-      >
-        {{yearObject.year}}
-      </a>
-    {{/each}}
-  </nav>
+  {{#if yearsPromise.value.length}}
+    <nav class="nav nav-pills">
+      {{#each yearsPromise.value as yearObject}}
+        <a
+          class="{{#is yearObject.year ../year}}active{{/is}} flex-sm-fill nav-link text-sm-center"
+          href="{{routeForYear(yearObject.year)}}"
+        >
+          {{yearObject.year}}
+        </a>
+      {{/each}}
+    </nav>
+  {{else}}
+    <div class="alert alert-info" role="alert">
+      <strong>Hm, no Mismanagement found.</strong>
+    </div>
+  {{/if}}
 {{/if}}
 
 <lbh3-mismanagement-year year:from="selectedYear" />

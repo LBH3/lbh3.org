@@ -30,6 +30,7 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       id: primaryIntType,
       createdAt: currentTimestampType('created_at'),
       updatedAt: currentTimestampType('updated_at'),
+      emailAddress: stringType('email_address'),
       pluralName: stringType('plural_name'),
       singularName: stringType('singular_name'),
       sortPosition: intType('sort_position')

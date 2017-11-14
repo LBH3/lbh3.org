@@ -31,6 +31,11 @@
         {{else}}
           {{position.promise.value.pluralName}}
         {{/is}}
+        <small>
+          <a href="mailto:{{position.promise.value.emailAddress}}">
+            (email)
+          </a>
+        </small>
       </h3>
       <ul>
         {{#each position.hashers as hasherPromise}}
@@ -44,13 +49,7 @@
 
           {{#if hasherPromise.isResolved}}
             <li>
-              {{#if hasherPromise.value.emailAddresses[0]}}
-                <a href="mailto:{{hasherPromise.value.emailAddresses[0]}}">
-                  {{hasherPromise.value.hashName}}
-                </a>
-              {{else}}
-                {{hashersPromise.value.hashName}}
-              {{/if}}
+              {{hasherPromise.value.hashName}}
             </li>
           {{/if}}
         {{/each}}
