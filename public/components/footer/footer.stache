@@ -3,14 +3,14 @@
     <a href="mailto:contact@lbh3.org">Email us</a> with any questions, comments, or concerns.
   </p>
   <p class="float-sm-right">
-    {{#if session.user}}
-      <button class="btn btn-link" type="button" on:click="session.destroy()">
-        Sign out
-      </button>
-    {{else}}
-      {{^eq platform.isNode true}}
+    {{^eq platform.isNode true}}
+      {{#if session.user}}
+        <button class="btn btn-link" type="button" on:click="session.destroy()">
+          Sign out
+        </button>
+      {{else}}
         <a href="/auth/google">Sign in</a>
-      {{/eq}}
-    {{/if}}
+      {{/if}}
+    {{/eq}}
   </p>
 </footer>
