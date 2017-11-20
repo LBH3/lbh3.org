@@ -133,6 +133,12 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
 
+  showPostTrailFields: {
+    get: function() {
+      return this.event.hasStartedOrIsCloseToStarting && this.session.user.canEditPostTrailInfo;
+    }
+  },
+
   trailNumber: 'number',
 
   year: 'number',
