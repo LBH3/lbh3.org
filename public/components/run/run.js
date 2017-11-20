@@ -16,29 +16,31 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.hashersPromise.then(hashers => {
-        const hashersByPaymentTier = {};
-        hashers.forEach(hasher => {
-          const paymentTier = hasher.paymentTier || (hasher.paymentNotes.toUpperCase() === 'F' ? 'founder' : '5');
-          if (!hashersByPaymentTier[paymentTier]) {
-            hashersByPaymentTier[paymentTier] = [];
-          }
-          hashersByPaymentTier[paymentTier].push(hasher);
+      if (this.hashersPromise) {
+        this.hashersPromise.then(hashers => {
+          const hashersByPaymentTier = {};
+          hashers.forEach(hasher => {
+            const paymentTier = hasher.paymentTier || (hasher.paymentNotes.toUpperCase() === 'F' ? 'founder' : '5');
+            if (!hashersByPaymentTier[paymentTier]) {
+              hashersByPaymentTier[paymentTier] = [];
+            }
+            hashersByPaymentTier[paymentTier].push(hasher);
+          });
+          const cashReport = {};
+          cashReport.records = EventsHashers.paymentRates.map(paymentRate => {
+            const hashersInPaymentTier = hashersByPaymentTier[paymentRate.tier] || [];
+            return {
+              count: hashersInPaymentTier.length,
+              rate: paymentRate.rate,
+              title: paymentRate.title,
+              total: hashersInPaymentTier.length * paymentRate.rate
+            };
+          });
+          cashReport.totalAmount = cashReport.records.reduce((sum, record) => sum + record.total, 0);
+          cashReport.totalCount = cashReport.records.reduce((sum, record) => sum + record.count, 0);
+          setValue(cashReport);
         });
-        const cashReport = {};
-        cashReport.records = EventsHashers.paymentRates.map(paymentRate => {
-          const hashersInPaymentTier = hashersByPaymentTier[paymentRate.tier] || [];
-          return {
-            count: hashersInPaymentTier.length,
-            rate: paymentRate.rate,
-            title: paymentRate.title,
-            total: hashersInPaymentTier.length * paymentRate.rate
-          };
-        });
-        cashReport.totalAmount = cashReport.records.reduce((sum, record) => sum + record.total, 0);
-        cashReport.totalCount = cashReport.records.reduce((sum, record) => sum + record.count, 0);
-        setValue(cashReport);
-      });
+      }
     }
   },
   day: 'string',
@@ -78,15 +80,19 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.hashersPromise.then(setValue);
+      if (this.hashersPromise) {
+        this.hashersPromise.then(setValue);
+      }
     }
   },
   hashersPromise: {
     get: function() {
-      return EventsHashers.connection.getList({
-        $limit: 500,
-        trailNumber: this.trailNumber
-      });
+      if (this.event && this.event.hasStartedOrIsCloseToStarting) {
+        return EventsHashers.connection.getList({
+          $limit: 500,
+          trailNumber: this.trailNumber
+        });
+      }
     }
   },
   month: 'string',

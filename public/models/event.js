@@ -103,6 +103,14 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  hasStartedOrIsCloseToStarting: {
+    get: function() {
+      const startDateAsMoment = this.startDateAsMoment.clone();
+      // Check if the startDatetime is before now
+      return startDateAsMoment.subtract(1, 'hour').isBefore();
+    },
+    serialize: false
+  },
   locationHtml: {
     get: function() {
       return marked(this.locationMd);
