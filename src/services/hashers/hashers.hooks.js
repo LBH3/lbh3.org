@@ -1,5 +1,7 @@
 const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
+const errors = require('feathers-errors');
+const makeRaw = require('../../utils/make-raw');
 const searchHook = require('../../hooks/search');
 
 const restrictToAdmin = [
@@ -14,13 +16,30 @@ const createAndUpdateFields = function(hook) {
     displayName = googleProfile.emails[0];
   }
 
-  if (!hook.data.createdBy && !hook.data.createdByUserId) {
+  if (hook.method === 'create' && !hook.data.createdBy && !hook.data.createdByUserId) {
     hook.data.createdBy = displayName;
     hook.data.createdByUserId = hook.params.user.id || 0;
   }
 
   hook.data.updatedBy = displayName;
   hook.data.updatedByUserId = hook.params.user.id || 0;
+
+  const namingTrailNumber = hook.data.namingTrailNumber;
+  if (namingTrailNumber) {
+    return new Promise(function(resolve, reject) {
+      const findEvent = {query: {trailNumber: namingTrailNumber}};
+      hook.app.service('api/events').find(findEvent).then(events => {
+        if (events.data.length === 1) {
+          hook.data.namingTrailDate = events.data[0].startDatetime;
+          resolve(hook);
+        } else {
+          reject(new errors.NotFound(`Could not find trail #${namingTrailNumber}`));
+        }
+      }, reject);
+    });
+  } else if (hook.data.namingTrailDate) {// Reset namingTrailDate if namingTrailNumber is not set
+    hook.data.namingTrailDate = null;
+  }
 };
 
 module.exports = {
@@ -33,7 +52,7 @@ module.exports = {
     ],
     get: [],
     create: [ ...restrictToAdmin, createAndUpdateFields ],
-    update: [ ...restrictToAdmin, createAndUpdateFields ],
+    update: [ ...restrictToAdmin, createAndUpdateFields, makeRaw ],
     patch: [ ...restrictToAdmin ],
     remove: [ ...restrictToAdmin ]
   },
