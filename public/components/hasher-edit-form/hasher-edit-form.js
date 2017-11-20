@@ -21,10 +21,17 @@ export const ViewModel = DefineMap.extend({
     const additionalFields = this.additionalFields;
     const hasher = this.hasher;
 
+    if (!hasher.emailAddresses) {
+      hasher.emailAddresses = [];
+    }
     if (additionalFields.emailAddress) {
       hasher.emailAddresses.push(additionalFields.emailAddress);
     }
     hasher.emailAddresses = hasher.emailAddresses.filter(emailAddress => emailAddress);
+
+    if (!hasher.emailAddressesPrivate) {
+      hasher.emailAddressesPrivate = [];
+    }
     if (additionalFields.emailAddressPrivate) {
       hasher.emailAddressesPrivate.push(additionalFields.emailAddressPrivate);
     }
