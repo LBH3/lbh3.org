@@ -75,6 +75,22 @@
         {{#case "events"}}
           {{#if secondaryPage}}
             {{#switch secondaryPage}}
+              {{#case "attendance"}}
+                <lbh3-no-ssr>
+                  <can-import from="lbh3/components/run/attendance/">
+                    {{#if isPending}}
+                      Loading the run attendance sheet page…
+                    {{else}}
+                      <lbh3-run-attendance
+                        day:from="day"
+                        month:from="month"
+                        trailNumber:from="trailNumber"
+                        year:from="year"
+                      />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
+              {{/case}}
               {{#case "edit"}}
                 <lbh3-no-ssr>
                   <can-import from="lbh3/components/run/edit/">
