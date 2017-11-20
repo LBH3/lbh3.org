@@ -145,6 +145,15 @@
   </dl>
 
   {{#if session.user.canEditHasherInfo}}
+    {{#if showAttendancePrompt}}
+      <div class="alert alert-info text-center" role="alert">
+        <strong>No attendance data.</strong>
+        <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='attendance'}}" title="Edit trail">
+          Need to print the sheet?
+        </a>
+      </div>
+    {{/if}}
+
     {{#if hashersPromise.isPending}}
       <div class="alert alert-info" role="alert">
         <strong>Fetching attendance sheet…</strong>

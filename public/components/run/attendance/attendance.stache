@@ -1,0 +1,53 @@
+<can-import from="awesomplete/awesomplete.base.css" />
+<can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
+
+<h2>
+  {{#if event}}
+    <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}" title="View trail">
+      Run #{{trailNumber}}
+    </a>
+  {{else}}
+    Run #{{trailNumber}}
+  {{/if}}
+  Attendance Sheet
+</h2>
+
+{{#if hashersPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching attendance sheet…</strong>
+  </div>
+{{/if}}
+
+{{#if hashersPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
+  </div>
+{{/if}}
+
+{{#if hashersPromise.isResolved}}
+  <table class="table table-bordered table-responsive table-sm">
+    <thead>
+      <tr>
+        <th>Hash Name</th>
+        <th>Last Name</th>
+        <th>First Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each hashers as hasher}}
+        <tr>
+          <td>
+            {{hasher.hashName}}
+          </td>
+          <td>
+            {{hasher.familyName}}
+          </td>
+          <td>
+            {{hasher.givenName}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/if}}

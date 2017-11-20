@@ -87,7 +87,7 @@ export const ViewModel = DefineMap.extend({
   },
   hashersPromise: {
     get: function() {
-      if (this.event && this.event.hasStartedOrIsCloseToStarting) {
+      if (this.event && this.event.hasStartedOrIsCloseToStarting && this.trailNumber) {
         return EventsHashers.connection.getList({
           $limit: 500,
           trailNumber: this.trailNumber
@@ -111,6 +111,13 @@ export const ViewModel = DefineMap.extend({
    */
   get session() {
     return Session.current;
+  },
+
+  showAttendancePrompt: {
+    type: 'boolean',
+    get: function() {
+      return !this.hashersPromise || !this.hashers || this.hashers.length === 0;
+    }
   },
 
   showDonation: 'boolean',
