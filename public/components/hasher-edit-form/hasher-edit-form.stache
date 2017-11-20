@@ -10,7 +10,11 @@
       <label for="formattedBirthday">
         Birthday
       </label>
-      <input class="form-control" id="formattedBirthday" type="text" value:bind="hasher.formattedBirthday">
+      <div class="input-group">
+        <input aria-label="Birth month" class="form-control" placeholder="month" type="text" value:bind="hasher.birthMonth">
+        <input aria-label="Birth day" class="form-control" placeholder="day" type="text" value:bind="hasher.birthDay">
+        <input aria-label="Birth year" class="form-control" placeholder="year" type="text" value:bind="hasher.birthYear">
+      </div>
     </div>
     <div class="form-group col-md-2">
       <label for="waiver">
