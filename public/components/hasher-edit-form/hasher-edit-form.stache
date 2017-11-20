@@ -312,6 +312,39 @@
     {{saveButtonLabel}}
   </button>
 
+  {{#if editingHasherPromise.isPending}}
+    <div class="alert alert-info mt-3" role="alert">
+      <strong>Saving hasher…</strong>
+    </div>
+  {{/if}}
+
+  {{#if editingHasherPromise.isRejected}}
+    <div class="alert alert-danger mt-3" role="alert">
+      <button aria-label="Close" class="close" type="button" on:click="resetEditingHasherPromise()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>Fuck!</strong> The hasher’s info failed to save. {{editingHasherPromise.reason.message}}
+      {{#if editingHasherPromise.reason.errors}}
+        <ul>
+          {{#each editingHasherPromise.reason.errors as error}}
+            <li>
+              {{error.message}}
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
+    </div>
+  {{/if}}
+
+  {{#if editingHasherPromise.isResolved}}
+    <div class="alert alert-success mt-3" role="alert">
+      <button aria-label="Close" class="close" type="button" on:click="resetEditingHasherPromise()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+      <strong>On on!</strong> {{saveSuccessMessage}}
+    </div>
+  {{/if}}
+
   {{#if hasher.id}}
     <fieldset class="mt-4">
       <legend>
@@ -460,36 +493,3 @@
     </fieldset>
   {{/if}}
 </form>
-
-{{#if editingHasherPromise.isPending}}
-  <div class="alert alert-info mt-3" role="alert">
-    <strong>Saving hasher…</strong>
-  </div>
-{{/if}}
-
-{{#if editingHasherPromise.isRejected}}
-  <div class="alert alert-danger mt-3" role="alert">
-    <button aria-label="Close" class="close" type="button" on:click="resetEditingHasherPromise()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>Fuck!</strong> The hasher’s info failed to save. {{editingHasherPromise.reason.message}}
-    {{#if editingHasherPromise.reason.errors}}
-      <ul>
-        {{#each editingHasherPromise.reason.errors as error}}
-          <li>
-            {{error.message}}
-          </li>
-        {{/each}}
-      </ul>
-    {{/if}}
-  </div>
-{{/if}}
-
-{{#if editingHasherPromise.isResolved}}
-  <div class="alert alert-success mt-3" role="alert">
-    <button aria-label="Close" class="close" type="button" on:click="resetEditingHasherPromise()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>On on!</strong> {{saveSuccessMessage}}
-  </div>
-{{/if}}
