@@ -6,6 +6,7 @@ import DefineMap from 'can-define/map/';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import loader from '@loader';
+import moment from 'moment-timezone';
 import set from 'can-set';
 
 const datePropDefinition = {
@@ -77,6 +78,23 @@ const Hasher = DefineMap.extend({
       ].filter(value => value).join(', ');
     }
   },
+  formattedBirthday: {
+    type: 'string',
+    get: function() {
+      const birthdayAsMoment = moment({
+        day: this.birthDay,
+        month: this.birthMonth - 1,
+        year: this.birthYear
+      });
+      return (birthdayAsMoment.isValid()) ? birthdayAsMoment.format('LL') : '';
+    }
+  },
+  formattedCreatedAt: {
+    type: 'string',
+    get: function() {
+      return moment(this.createdAt).format('LL');
+    }
+  },
   formattedPrivateAddress: {
     type: 'string',
     get: function() {
@@ -87,6 +105,12 @@ const Hasher = DefineMap.extend({
         this.addressZipCodePrivate,
         this.addressCountryPrivate
       ].filter(value => value).join(', ');
+    }
+  },
+  formattedUpdatedAt: {
+    type: 'string',
+    get: function() {
+      return moment(this.updatedAt).format('LL');
     }
   },
   givenName: 'string',

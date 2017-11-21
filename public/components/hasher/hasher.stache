@@ -16,7 +16,7 @@
   {{/if}}
 
   {{#if hasher}}
-    <div class="row">
+    <div class="mb-3 row">
       <div class="col">
         <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
           <span class="fa fa-angle-double-left"></span> Hashers
@@ -34,199 +34,366 @@
       </div>
     </div>
 
-    <dl class="row">
-      <dt class="col-sm-3 text-sm-right">Address:</dt>
-      <dd class="col-sm-9">{{hasher.formattedAddress}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Hash name:</b>
+        <br>
+        {{hasher.hashName}}
+      </div>
+      <div class="col-sm-3">
+        <b>Who made you cum:</b>
+        <br>
+        {{hasher.whoMadeYouCum}}
+      </div>
+      <div class="col-sm-3">
+        <b>Mother hash:</b>
+        <br>
+        {{hasher.motherHash}}
+      </div>
+      <div class="col-sm-3">
+        <b>Naming trail:</b>
+        <br>
+        {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Address (private):</dt>
-      <dd class="col-sm-9">{{hasher.formattedPrivateAddress}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Payment:</b>
+        <br>
+        {{hasher.payment}}
+      </div>
+      <div class="col-sm-3">
+        <b>Punch card:</b>
+        <br>
+        {{hasher.punchCard}}
+      </div>
+      <div class="col-sm-3">
+        <b>Run patch:</b>
+        <br>
+        {{hasher.runPatch}}
+      </div>
+      <div class="col-sm-3">
+        <b>Run sort:</b>
+        <br>
+        {{hasher.runSort}}
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Alerts:</dt>
-      <dd class="col-sm-9">{{hasher.alerts}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Waiver:</b>
+        <br>
+        {{hasher.waiver}}
+      </div>
+      <div class="col-sm-3">
+        <b>Birthday:</b>
+        <br>
+        {{hasher.formattedBirthday}}
+      </div>
+      <div class="col-sm-6">
+        <b>Notes:</b>
+        <br>
+        {{hasher.notesMd}}
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Award count:</dt>
-      <dd class="col-sm-9">{{hasher.awardCount}}</dd>
+    <h3 class="mb-3 mt-5">Stats</h3>
 
-      <dt class="col-sm-3 text-sm-right">Birthday:</dt>
-      <dd class="col-sm-9">{{hasher.formattedBirthday}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>First trail:</b>
+        <br>
+        {{hasher.firstTrailDate}} (#{{hasher.firstTrailNumber}})
+      </div>
+      <div class="col-sm-3">
+        <b>Last trail date:</b>
+        <br>
+        {{hasher.lastTrailDate}}
+      </div>
+      <div class="col-sm-2">
+        <b>Hare count:</b>
+        <br>
+        {{#eq hasher.hareCount1 hasher.hareCount2}}
+          {{hasher.hareCount1}}
+        {{else}}
+          {{#if hasher.hareCount1}}
+            {{#if hasher.hareCount2}}
+              {{hasher.hareCount1}} or {{hasher.hareCount2}}
+            {{else}}
+              {{hasher.hareCount1}}
+            {{/eq}}
+          {{else}}
+            {{hasher.hareCount2}}
+          {{/if}}
+        {{/eq}}
+      </div>
+      <div class="col-sm-2">
+        <b>Miles:</b>
+        <br>
+        {{#eq hasher.miles hasher.runMileage}}
+          {{hasher.miles}}
+        {{else}}
+          {{#if hasher.miles}}
+            {{#if hasher.runMileage}}
+              {{hasher.miles}} or {{hasher.runMileage}}
+            {{else}}
+              {{hasher.miles}}
+            {{/eq}}
+          {{else}}
+            {{hasher.runMileage}}
+          {{/if}}
+        {{/eq}}
+      </div>
+      <div class="col-sm-2">
+        <b>Run count:</b>
+        <br>
+        {{hasher.runCount}}
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Cell phone:</dt>
-      <dd class="col-sm-9">{{hasher.cellPhone}}</dd>
+    <h3 class="mb-3 mt-5">Directory info</h3>
 
-      <dt class="col-sm-3 text-sm-right">Cell phone (private):</dt>
-      <dd class="col-sm-9">{{hasher.cellPhonePrivate}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-6">
+        <b>Given name:</b>
+        <br>
+        {{hasher.givenName}}
+      </div>
+      <div class="col-sm-6">
+        <b>Family name:</b>
+        <br>
+        {{hasher.familyName}}
+      </div>
+    </div>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Cell phone:</b>
+        <br>
+        {{hasher.cellPhone}}
+      </div>
+      <div class="col-sm-3">
+        <b>Work phone:</b>
+        <br>
+        {{hasher.workPhone}}
+      </div>
+      <div class="col-sm-3">
+        <b>Home phone:</b>
+        <br>
+        {{hasher.homePhone}}
+      </div>
+      <div class="col-sm-3">
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Created at:</dt>
-      <dd class="col-sm-9">{{hasher.createdAt}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Created by:</dt>
-      <dd class="col-sm-9">{{hasher.createdBy}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Died:</dt>
-      <dd class="col-sm-9">{{hasher.died}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Email addresses:</dt>
-      <dd class="col-sm-9">
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Email addresses:</b>
+      </div>
+      <div class="col-sm-9">
         {{#if hasher.emailAddresses}}
-          <ul>
-            {{#each hasher.emailAddresses as emailAddress}}
-              <li>
-                <a href="mailto:{{emailAddress}}">
-                  {{emailAddress}}
-                </a>
-              </li>
-            {{/each}}
-          </ul>
+        <ul>
+          {{#each hasher.emailAddresses as emailAddress}}
+          <li>
+            <a href="mailto:{{emailAddress}}">
+              {{emailAddress}}
+            </a>
+          </li>
+          {{/each}}
+        </ul>
         {{/if}}
-      </dd>
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Email addresses (private):</dt>
-      <dd class="col-sm-9">
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Mail hash name:</b>
+        <br>
+        {{hasher.mailHashName}}
+      </div>
+      <div class="col-sm-3">
+        <b>Mail name:</b>
+        <br>
+        {{hasher.mailName}}
+      </div>
+      <div class="col-sm-6">
+        <b>Address:</b>
+        <br>
+        {{hasher.formattedAddress}}
+      </div>
+    </div>
+
+    <h3 class="mb-3 mt-5">Private info</h3>
+    <div class="mb-4 row">
+      <div class="col-sm-6">
+        <b>Given name:</b>
+        <br>
+        {{hasher.givenNamePrivate}}
+      </div>
+      <div class="col-sm-6">
+        <b>Family name:</b>
+        <br>
+        {{hasher.familyNamePrivate}}
+      </div>
+    </div>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Cell phone:</b>
+        <br>
+        {{hasher.cellPhonePrivate}}
+      </div>
+      <div class="col-sm-3">
+        <b>Work phone:</b>
+        <br>
+        {{hasher.workPhonePrivate}}
+      </div>
+      <div class="col-sm-3">
+        <b>Home phone:</b>
+        <br>
+        {{hasher.homePhonePrivate}}
+      </div>
+    </div>
+
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Email addresses:</b>
+      </div>
+      <div class="col-sm-9">
         {{#if hasher.emailAddressesPrivate}}
-          <ul>
-            {{#each hasher.emailAddressesPrivate as emailAddress}}
-              <li>
-                <a href="mailto:{{emailAddress}}">
-                  {{emailAddress}}
-                </a>
-              </li>
-            {{/each}}
-          </ul>
+        <ul>
+          {{#each hasher.emailAddressesPrivate as emailAddress}}
+          <li>
+            <a href="mailto:{{emailAddress}}">
+              {{emailAddress}}
+            </a>
+          </li>
+          {{/each}}
+        </ul>
         {{/if}}
-      </dd>
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Emailing:</dt>
-      <dd class="col-sm-9">{{hasher.emailing}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-12">
+        <b>Address:</b>
+        <br>
+        {{hasher.formattedPrivateAddress}}
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">End of year:</dt>
-      <dd class="col-sm-9">{{hasher.endOfYear}}</dd>
+    <h3 class="mb-3 mt-5">In memoriam</h3>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Died:</b>
+        <br>
+        {{hasher.died}}
+      </div>
+      <div class="col-sm-3">
+        <b>Passed:</b>
+        <br>
+        {{hasher.passed}}
+      </div>
+      <div class="col-sm-6">
+        <b>Notes:</b>
+        <br>
+        {{hasher.inMemoriam}}
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Event:</dt>
-      <dd class="col-sm-9">{{hasher.event}}</dd>
+    <h3 class="mb-3 mt-5">Old fields</h3>
 
-      <dt class="col-sm-3 text-sm-right">Family name:</dt>
-      <dd class="col-sm-9">{{hasher.familyName}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Alerts:</b>
+        <br>
+        {{hasher.alerts}}
+      </div>
+      <div class="col-sm-3">
+        <b>Award count:</b>
+        <br>
+        {{hasher.awardCount}}
+      </div>
+      <div class="col-sm-3">
+        <b>Emailing:</b>
+        <br>
+        {{hasher.emailing}}
+      </div>
+      <div class="col-sm-3">
+        <b>End of year:</b>
+        <br>
+        {{hasher.endOfYear}}
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Family name (private):</dt>
-      <dd class="col-sm-9">{{hasher.familyNamePrivate}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Event:</b>
+        <br>
+        {{hasher.event}}
+      </div>
+      <div class="col-sm-3">
+        <b>Food preference:</b>
+        <br>
+        {{hasher.foodPreference}}
+      </div>
+      <div class="col-sm-3">
+        <b>History:</b>
+        <br>
+        {{hasher.history}}
+      </div>
+      <div class="col-sm-3">
+        <b>MIA:</b>
+        <br>
+        {{hasher.mia}}
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">Fax:</dt>
-      <dd class="col-sm-9">{{hasher.fax}}</dd>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Owes:</b>
+        <br>
+        {{hasher.owes}}
+      </div>
+      <div class="col-sm-3">
+        <b>Shirt size:</b>
+        <br>
+        {{hasher.shirtSize}}
+      </div>
+      <div class="col-sm-3">
+        <b>Shoe size:</b>
+        <br>
+        {{hasher.shoeSize}}
+      </div>
+      <div class="col-sm-3">
+        <b>Waist size:</b>
+        <br>
+        {{hasher.waistSize}}
+      </div>
+    </div>
 
-      <dt class="col-sm-3 text-sm-right">First trail date:</dt>
-      <dd class="col-sm-9">{{hasher.firstTrailDate}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">First trail number:</dt>
-      <dd class="col-sm-9">{{hasher.firstTrailNumber}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Food preference:</dt>
-      <dd class="col-sm-9">{{hasher.foodPreference}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Given name:</dt>
-      <dd class="col-sm-9">{{hasher.givenName}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Given name (private):</dt>
-      <dd class="col-sm-9">{{hasher.givenNamePrivate}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Hare count (1):</dt>
-      <dd class="col-sm-9">{{hasher.hareCount1}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Hare count (2):</dt>
-      <dd class="col-sm-9">{{hasher.hareCount2}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Hash ID:</dt>
-      <dd class="col-sm-9">{{hasher.hashId}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">History:</dt>
-      <dd class="col-sm-9">{{hasher.history}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Home phone:</dt>
-      <dd class="col-sm-9">{{hasher.homePhone}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Home phone (private):</dt>
-      <dd class="col-sm-9">{{hasher.homePhonePrivate}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">In memoriam:</dt>
-      <dd class="col-sm-9">{{hasher.inMemoriam}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Last trail date:</dt>
-      <dd class="col-sm-9">{{hasher.lastTrailDate}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Mail hash name:</dt>
-      <dd class="col-sm-9">{{hasher.mailHashName}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Mail name:</dt>
-      <dd class="col-sm-9">{{hasher.mailName}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">MIA:</dt>
-      <dd class="col-sm-9">{{hasher.mia}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Miles:</dt>
-      <dd class="col-sm-9">{{hasher.miles}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Mother hash:</dt>
-      <dd class="col-sm-9">{{hasher.motherHash}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Naming trail date:</dt>
-      <dd class="col-sm-9">{{hasher.namingTrailDate}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Naming trail number:</dt>
-      <dd class="col-sm-9">{{hasher.namingTrailNumber}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Notes:</dt>
-      <dd class="col-sm-9">{{hasher.notesMd}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Owes:</dt>
-      <dd class="col-sm-9">{{hasher.owes}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Passed:</dt>
-      <dd class="col-sm-9">{{hasher.passed}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Payment:</dt>
-      <dd class="col-sm-9">{{hasher.payment}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Punch card:</dt>
-      <dd class="col-sm-9">{{hasher.punchCard}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Run count:</dt>
-      <dd class="col-sm-9">{{hasher.runCount}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Run mileage:</dt>
-      <dd class="col-sm-9">{{hasher.runMileage}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Run patch:</dt>
-      <dd class="col-sm-9">{{hasher.runPatch}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Run sort:</dt>
-      <dd class="col-sm-9">{{hasher.runSort}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Shirt size:</dt>
-      <dd class="col-sm-9">{{hasher.shirtSize}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Shoe size:</dt>
-      <dd class="col-sm-9">{{hasher.shoeSize}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Updated at:</dt>
-      <dd class="col-sm-9">{{hasher.updatedAt}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Updated by:</dt>
-      <dd class="col-sm-9">{{hasher.updatedBy}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Waist size:</dt>
-      <dd class="col-sm-9">{{hasher.waistSize}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Waiver:</dt>
-      <dd class="col-sm-9">{{hasher.waiver}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Who made you cum:</dt>
-      <dd class="col-sm-9">{{hasher.whoMadeYouCum}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Work phone:</dt>
-      <dd class="col-sm-9">{{hasher.workPhone}}</dd>
-
-      <dt class="col-sm-3 text-sm-right">Work phone (private):</dt>
-      <dd class="col-sm-9">{{hasher.workPhonePrivate}}</dd>
-    </dl>
+    <h3 class="mb-3 mt-5">Metadata</h3>
+    <div class="mb-4 row">
+      <div class="col-sm-3">
+        <b>Created on:</b>
+        <br>
+        {{hasher.formattedCreatedAt}}
+      </div>
+      <div class="col-sm-3">
+        <b>Created by:</b>
+        <br>
+        {{hasher.createdBy}}
+      </div>
+      <div class="col-sm-3">
+        <b>Updated on:</b>
+        <br>
+        {{hasher.formattedUpdatedAt}}
+      </div>
+      <div class="col-sm-3">
+        <b>Updated by:</b>
+        <br>
+        {{hasher.updatedBy}}
+      </div>
+    </div>
   {{/if}}
 
 {{else}}
