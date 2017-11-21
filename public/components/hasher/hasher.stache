@@ -23,7 +23,7 @@
         </a>
       </div>
       <div class="col-7">
-        <h2>{{hasher.hashName}}</h2>
+        <h2>{{hasher.hashOrJustName}}</h2>
       </div>
       <div class="col text-right">
         {{#if session.user.canEditHasherInfo}}

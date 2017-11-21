@@ -64,7 +64,10 @@ export const ViewModel = DefineMap.extend({
     set: function(hasherAwesompleteQuery) {
       if (hasherAwesompleteQuery) {
         Hasher.connection.getList({
-          $search: hasherAwesompleteQuery
+          $search: hasherAwesompleteQuery,
+          $sort: {
+            lastTrailDate: -1
+          }
         }).then(results => {
           const newList = [];
           results.forEach(result => {
@@ -258,7 +261,8 @@ export default Component.extend({
             filter: () => {
               return true;
             },
-            minChars: 1
+            minChars: 1,
+            sort: false
           });
         }
       }, 10);

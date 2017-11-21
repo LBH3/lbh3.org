@@ -249,7 +249,7 @@
                 {{#if isPending}}
                   Loading Hashers page…
                 {{else}}
-                  <lbh3-hashers skip:from="skip" />
+                  <lbh3-hashers searchText:bind="search" skip:from="skip" />
                 {{/if}}
               </can-import>
             {{/if}}
