@@ -19,14 +19,6 @@ export const ViewModel = DefineMap.extend({
    */
   get session() {
     return Session.current;
-  },
-
-  get webmaster() {
-    return {
-      email: 'ifmd@chasenlehara.com',
-      name: 'I’m Fucking Matt Damon',
-      phone: '562-533-2821'
-    };
   }
 });
 
