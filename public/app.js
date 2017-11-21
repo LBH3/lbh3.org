@@ -16,6 +16,7 @@ const AppViewModel = DefineMap.extend({
     type: 'string',
     value: defaultPage
   },
+  search: 'string',
   secondaryPage: 'string',
   skip: 'number',
   title: {

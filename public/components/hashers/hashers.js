@@ -19,9 +19,14 @@ export const ViewModel = DefineMap.extend({
   },
   hashersPromise: {
     get: function() {
+      const searchText = this.searchText.trim();
       return Hasher.connection.getList({
         $limit,
-        $skip: this.skip
+        $search: searchText || undefined,
+        $skip: this.skip,
+        $sort: {
+          lastTrailDate: -1
+        }
       });
     }
   },
@@ -53,13 +58,17 @@ export const ViewModel = DefineMap.extend({
     return route.url(routeParams);
   },
   routeForPage: function(page) {
+    const searchText = this.searchText.trim();
     const routeParams = {
       page: 'hashers',
       secondaryPage: '',
+      search: searchText,
       skip: $limit * (page - 1)
     };
     return route.url(routeParams);
   },
+
+  searchText: 'string',
 
   /**
    * Session.current is provided by the can-connect-feathers session behavior.
@@ -79,5 +88,10 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'lbh3-hashers',
   ViewModel,
-  view
+  view,
+  events: {
+    '{element} submit': function(element, event) {
+      event.preventDefault();
+    }
+  }
 });

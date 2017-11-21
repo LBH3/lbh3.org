@@ -1,29 +1,36 @@
 <can-import from="can-stache/helpers/route" />
 
-{{#if session.user.canAddHashers}}
-  <div class="clearfix">
-    <a class="btn btn-primary float-right" href="{{routeUrl page='hashers' secondaryPage='add'}}">
-      Add hasher
-    </a>
-  </div>
-{{/if}}
-
-<h2>Hashers</h2>
+<h2>
+  <a href="{{routeUrl page='hashers' secondaryPage=''}}">
+    Hashers
+  </a>
+</h2>
 
 {{#if session.user.canViewHashersList}}
 
-  {{#if pages}}
-    <nav class="nav nav-pills">
-      {{#each pages as page}}
-        <a
-          class="{{#is currentPage page}}active{{/is}} flex-sm-fill nav-link text-sm-center"
-          href="{{routeForPage(page)}}"
-        >
-          {{page}}
-        </a>
-      {{/each}}
-    </nav>
-  {{/if}}
+  <form class="mb-2">
+    <div class="form-row align-items-center">
+      <div class="col-sm-3">
+        <label class="sr-only" for="searchText">Name</label>
+        <input autocomplete="off" autofocus class="form-control" id="searchText" placeholder="Name" type="text" value:bind="searchText">
+      </div>
+      <div class="col-auto">
+        <button
+          class="btn btn-primary"
+          type="submit">
+          Search
+        </button>
+      </div>
+
+      {{#if session.user.canAddHashers}}
+        <div class="col-auto ml-auto">
+          <a class="btn btn-primary" href="{{routeUrl page='hashers' secondaryPage='add'}}">
+            Add hasher
+          </a>
+        </div>
+      {{/if}}
+    </div>
+  </form>
 
   {{#if hashersPromise.isPending}}
     <div class="alert alert-info" role="alert">
@@ -60,6 +67,19 @@
         {{/each}}
       </tbody>
     </table>
+  {{/if}}
+
+  {{#if pages}}
+    <nav class="nav nav-pills">
+      {{#each pages as page}}
+        <a
+          class="{{#is currentPage page}}active{{/is}} flex-sm-fill nav-link text-sm-center"
+          href="{{routeForPage(page)}}"
+        >
+          {{page}}
+        </a>
+      {{/each}}
+    </nav>
   {{/if}}
 
 {{else}}
