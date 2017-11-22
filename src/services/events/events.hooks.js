@@ -10,14 +10,6 @@ const striptags = require('striptags');
 const calendar = google.calendar('v3');
 const calendarEmail = 'lbh3-643@lbh3-171321.iam.gserviceaccount.com';
 const entities = new Entities();
-const restrictToAdmin = [
-  authenticate('jwt'),
-  authHook.restrictToAdmin()
-];
-const restrictToBored = [
-  authenticate('jwt'),
-  authHook.restrictToBored()
-];
 
 marked.setOptions({
   breaks: true,
@@ -205,10 +197,14 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [ ...restrictToAdmin ],
-    update: [ ...restrictToBored, makeRaw ],
-    patch: [ ...restrictToBored ],
-    remove: [ ...restrictToAdmin ]
+    create: [ authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS) ],
+    update: [
+      authenticate('jwt'),
+      authHook.restrictTo(authHook.HASH_FLASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.TRAILMASTERS, authHook.WEBMASTERS),
+      makeRaw
+    ],
+    patch: [ authenticate('jwt'), authHook.restrictTo() ],
+    remove: [ authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS) ]
   },
 
   after: {

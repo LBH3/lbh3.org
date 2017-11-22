@@ -195,7 +195,8 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       facebookId: stringType('facebook_id'),
       facebookProfile: jsonType('facebook_profile'),
       googleId: stringType('google_id'),
-      googleProfile: jsonType('google_profile')
+      googleProfile: jsonType('google_profile'),
+      hasherId: intType('hasher_id')
     }
   };
 };
