@@ -1,7 +1,7 @@
 const { authenticate } = require('feathers-authentication').hooks;
+const authHook = require('../../hooks/auth');
 const commonHooks = require('feathers-hooks-common');
 const { restrictToOwner } = require('feathers-authentication-hooks');
-
 
 const restrict = [
   authenticate('jwt'),
@@ -24,6 +24,92 @@ const userInfo = function(hook) {
   }
 };
 
+const getBoredInfo = function(hook) {
+  return new Promise(function(resolve, reject) {
+    const now = new Date();
+    const boredHashersQuery = {
+      query: {
+        endDate: {
+          $gte: now
+        },
+        hasherId: hook.result.hasherId,
+        startDate: {
+          $lte: now
+        }
+      }
+    };
+    hook.app.service('api/bored-hashers').find(boredHashersQuery).then(boredHashers => {
+      const boredPositions = boredHashers.data.map(boredHasher => {
+        return boredHasher.positionId;
+      });
+      let permission = {
+        canAddHashers: false,
+        canAddPhotos: false,
+        canAddSnoozes: false,
+        canAddTrails: false,
+        canEditHasherInfo: false,
+        canEditPostTrailInfo: false,
+        canEditPreTrailInfo: false,
+        canViewHashersList: false
+      };
+      if (boredPositions.includes(authHook.HASH_CASH)) {
+        permission = Object.assign(permission, {
+          canViewHashersList: true
+        });
+      }
+      if (boredPositions.includes(authHook.HASH_FLASH)) {
+        permission = Object.assign(permission, {
+          canAddPhotos: true
+        });
+      }
+      if (boredPositions.includes(authHook.HASH_HISTORIANS)) {
+        permission = Object.assign(permission, {
+          canAddHashers: true,
+          canAddPhotos: true,
+          canAddSnoozes: true,
+          canEditHasherInfo: true,
+          canEditPostTrailInfo: true,
+          canViewHashersList: true
+        });
+      }
+      if (boredPositions.includes(authHook.ON_DISK)) {
+        permission = Object.assign(permission, {
+          canAddHashers: true,
+          canEditHasherInfo: true,
+          canEditPostTrailInfo: true,
+          canViewHashersList: true
+        });
+      }
+      if (boredPositions.includes(authHook.ON_SEC)) {
+        permission = Object.assign(permission, {
+          canAddSnoozes: true,
+          canViewHashersList: true
+        });
+      }
+      if (boredPositions.includes(authHook.TRAILMASTERS)) {
+        permission = Object.assign(permission, {
+          canEditPreTrailInfo: true,
+          canViewHashersList: true
+        });
+      }
+      if (boredPositions.includes(authHook.WEBMASTERS)) {
+        permission = Object.assign(permission, {
+          canAddHashers: true,
+          canAddPhotos: true,
+          canAddSnoozes: true,
+          canAddTrails: true,
+          canEditHasherInfo: true,
+          canEditPostTrailInfo: true,
+          canEditPreTrailInfo: true,
+          canViewHashersList: true
+        });
+      }
+      hook.result = Object.assign(hook.result, permission);
+      resolve(hook);
+    }, reject);
+  });
+};
+
 module.exports = {
   before: {
     all: [],
@@ -43,7 +129,7 @@ module.exports = {
       )
     ],
     find: [],
-    get: [],
+    get: [ getBoredInfo ],
     create: [],
     update: [],
     patch: [],
