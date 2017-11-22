@@ -20,11 +20,6 @@ const getFirstOrLastTrailForHasher = function(first, hasherId) {
   });
 };
 
-const restrictToBored = [
-  authenticate('jwt'),
-  authHook.restrictToBored()
-];
-
 const getFirstAndLastTrailData = function({event, hasher}) {
   return new Promise(function(resolve, reject) {
     getFirstOrLastTrailForHasher(true, hasher.id).then(firstTrails => {
@@ -141,13 +136,13 @@ const removeHook = function(hook) {
 
 module.exports = {
   before: {
-    all: [],
-    find: [],
-    get: [],
-    create: [ ...restrictToBored, createHook ],
-    update: [ ...restrictToBored ],
-    patch: [ ...restrictToBored ],
-    remove: [ ...restrictToBored, removeHook ]
+    all: [ authenticate('jwt') ],
+    find: [ authHook.restrictTo(authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.WEBMASTERS) ],
+    get: [ authHook.restrictTo(authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.WEBMASTERS) ],
+    create: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createHook ],
+    update: [ authHook.restrictTo() ],
+    patch: [ authHook.restrictTo() ],
+    remove: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), removeHook ]
   },
 
   after: {

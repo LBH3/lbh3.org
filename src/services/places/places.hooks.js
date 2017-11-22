@@ -2,20 +2,19 @@ const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
 const makeRaw = require('../../utils/make-raw');
 
-const restrictToBored = [
-  authenticate('jwt'),
-  authHook.restrictToBored()
-];
-
 /*eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [ ...restrictToBored ],
+    create: [
+      authenticate('jwt'),
+      authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.TRAILMASTERS, authHook.WEBMASTERS)
+    ],
     update: [
-      ...restrictToBored,
+      authenticate('jwt'),
+      authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.TRAILMASTERS, authHook.WEBMASTERS),
       makeRaw,
       function(hook) {
         return new Promise(function(resolve, reject) {
@@ -40,8 +39,8 @@ module.exports = {
         });
       }
     ],
-    patch: [ ...restrictToBored ],
-    remove: [ ...restrictToBored ]
+    patch: [ authenticate('jwt'), authHook.restrictTo() ],
+    remove: [ authenticate('jwt'), authHook.restrictTo() ]
   },
 
   after: {

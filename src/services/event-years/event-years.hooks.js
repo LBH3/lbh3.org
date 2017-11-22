@@ -1,20 +1,15 @@
 const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
 
-const restrictToAdmin = [
-  authenticate('jwt'),
-  authHook.restrictToAdmin()
-];
-
 module.exports = {
   before: {
     all: [],
     find: [],
     get: [],
-    create: [ ...restrictToAdmin ],
-    update: [ ...restrictToAdmin ],
-    patch: [ ...restrictToAdmin ],
-    remove: [ ...restrictToAdmin ]
+    create: [ authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS) ],
+    update: [ authenticate('jwt'), authHook.restrictTo() ],
+    patch: [ authenticate('jwt'), authHook.restrictTo() ],
+    remove: [ authenticate('jwt'), authHook.restrictTo() ]
   },
 
   after: {

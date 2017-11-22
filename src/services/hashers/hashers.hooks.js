@@ -4,11 +4,6 @@ const errors = require('feathers-errors');
 const makeRaw = require('../../utils/make-raw');
 const searchHook = require('../../hooks/search');
 
-const restrictToAdmin = [
-  authenticate('jwt'),
-  authHook.restrictToAdmin()
-];
-
 const createAndUpdateFields = function(hook) {
   const googleProfile = hook.params.user.googleProfile || {};
   let displayName = googleProfile.displayName || '';
@@ -44,17 +39,18 @@ const createAndUpdateFields = function(hook) {
 
 module.exports = {
   before: {
-    all: [],
+    all: [ authenticate('jwt') ],
     find: [
+      authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS),
       searchHook({
         fields: ['familyName', 'givenName', 'hashName']
       })
     ],
-    get: [],
-    create: [ ...restrictToAdmin, createAndUpdateFields ],
-    update: [ ...restrictToAdmin, createAndUpdateFields, makeRaw ],
-    patch: [ ...restrictToAdmin ],
-    remove: [ ...restrictToAdmin ]
+    get: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS) ],
+    create: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
+    update: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields, makeRaw ],
+    patch: [ authHook.restrictTo() ],
+    remove: [ authHook.restrictTo(authHook.WEBMASTERS) ]
   },
 
   after: {
