@@ -24,7 +24,7 @@
   </div>
 {{/if}}
 {{#if event}}
-  <form on:submit="editRun()">
+  <form class="mb-4 mt-2" on:submit="editRun()">
     <div class="form-row">
       <div class="form-group col-md-6">
         <label for="hares">
@@ -152,34 +152,6 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="new-boots">
-            New boots
-          </label>
-          <textarea class="form-control" id="new-boots" value:bind="event.newBootsMd"></textarea>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="new-names">
-            New names
-          </label>
-          <textarea class="form-control" id="new-names" value:bind="event.newNamesMd"></textarea>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="visitors">
-            Visitors
-          </label>
-          <textarea class="form-control" id="visitors" value:bind="event.visitorsMd"></textarea>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="returners">
-            Returners
-          </label>
-          <textarea class="form-control" id="returners" value:bind="event.returnersMd"></textarea>
-        </div>
-      </div>
-      <div class="form-row">
         {{#if session.user.canAddPhotos}}
           <div class="form-group col-md-6">
             <label for="photos-url">
@@ -200,11 +172,42 @@
     {{/if}}
 
     <button
-      class="btn btn-primary"
+      class="btn btn-primary mt-3"
       {{#if editingEventPromise.isPending}}disabled{{/if}}
       type="submit">
       Edit run
     </button>
+
+    {{#if showPostTrailFields}}
+      <div class="form-row mt-4">
+        <div class="form-group col-md-6">
+          <label for="new-boots">
+            New boots
+          </label>
+          <textarea class="form-control" disabled id="new-boots" value:bind="event.newBootsMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="new-names">
+            New names
+          </label>
+          <textarea class="form-control" disabled id="new-names" value:bind="event.newNamesMd"></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="visitors">
+            Visitors
+          </label>
+          <textarea class="form-control" disabled id="visitors" value:bind="event.visitorsMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="returners">
+            Returners
+          </label>
+          <textarea class="form-control" disabled id="returners" value:bind="event.returnersMd"></textarea>
+        </div>
+      </div>
+    {{/if}}
   </form>
 {{/if}}
 
@@ -226,7 +229,12 @@
     <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
       <span aria-hidden="true">&times;</span>
     </button>
-    <strong>On on!</strong> Both hash.org and lbh3.org have been updated.
+    <strong>On on!</strong>
+    {{#if event.hasProbablyEnded}}
+      You successfully saved trail #{{event.trailNumber}}.
+    {{else}}
+      Both hash.org and lbh3.org have been updated.
+    {{/if}}
   </div>
 {{/if}}
 
@@ -289,7 +297,7 @@
               <td class="text-center">
                 <button
                   class="btn btn-danger btn-sm remove-hasher"
-                  on:click="hasher.destroy()"
+                  on:click="removeHasher(hasher)"
                 >
                   <span class="fa fa-remove"></span>
                 </button>
