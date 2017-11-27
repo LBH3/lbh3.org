@@ -99,4 +99,19 @@ EventsHashers.roles = [
   ''
 ];
 
+EventsHashers.rolesThatUpdateRunInfo = [
+  'Hare',
+  'Hare/New Name',
+  'Hare/Returner',
+  'Hare/hashit',
+  'Hare/scribe',
+  'New Boot',
+  'New Name',
+  'Returner',
+  'Scribe',
+  'Scribe/Hashit',
+  'Scribe/New Name',
+  'Visitor'
+];
+
 export default EventsHashers;

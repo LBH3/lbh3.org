@@ -103,10 +103,21 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  hasProbablyEnded: {
+    get: function() {
+      const startDateAsMoment = this.startDateAsMoment.clone();
+      // Check if the startDatetime + a few hours is before now.
+      // If it is, then the event is in the past or it will end shortly.
+      // 3 hours matches src/services/events/events.hooks.js
+      return startDateAsMoment.add(3, 'hours').isBefore();
+    },
+    serialize: false
+  },
   hasStartedOrIsCloseToStarting: {
     get: function() {
       const startDateAsMoment = this.startDateAsMoment.clone();
-      // Check if the startDatetime is before now
+      // Check if the startDatetime - 1 hour is before now.
+      // If it is, then the event is in the past or will start shortly.
       return startDateAsMoment.subtract(1, 'hour').isBefore();
     },
     serialize: false
@@ -322,6 +333,48 @@ const Event = DefineMap.extend({
       return marked(this.visitorsMd);
     },
     serialize: false
+  },
+
+  updateWithHashers: function(hashers) {
+    let needsSaving = false;
+
+    const updateProperty = (property, searchTerm) => {
+      const newPropertyValue = hashers.filter(hasher => {
+        return hasher.role.toLowerCase().indexOf(searchTerm) > -1;
+      }).map(hasher => {
+        return hasher.hashOrJustName;
+      }).join('; ');
+      if (this[property] !== newPropertyValue) {
+        this[property] = newPropertyValue;
+        return true;
+      }
+      return false;
+    };
+
+    // Hares
+    needsSaving = updateProperty('haresMd', 'hare') || needsSaving;
+
+    // Hashit
+    if (!this.hashitReasonMd) {// Don’t override if something has already been entered
+      needsSaving = updateProperty('hashitReasonMd', 'hashit') || needsSaving;
+    }
+
+    // New boots
+    needsSaving = updateProperty('newBootsMd', 'new boot') || needsSaving;
+
+    // New names
+    needsSaving = updateProperty('newNamesMd', 'new name') || needsSaving;
+
+    // Returners
+    needsSaving = updateProperty('returnersMd', 'returner') || needsSaving;
+
+    // Scribes
+    needsSaving = updateProperty('scribesMd', 'scribe') || needsSaving;
+
+    // Visitors
+    needsSaving = updateProperty('visitorsMd', 'visitor') || needsSaving;
+
+    return needsSaving;
   }
 });
 

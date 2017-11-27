@@ -179,16 +179,25 @@ const updateEvent = function(auth, eventId, resource) {
 
 const syncWithGoogleCalendar = function(hook) {
   const trailData = hook.data;
+
   if (trailData) {
-    return authorize().then(function(auth) {
-      return getEvent(auth, trailData).then(function(matchingEvent) {
-        return getResourceForTrail(hook.app, trailData).then(function(resource) {
-          return (matchingEvent) ? updateEvent(auth, matchingEvent.id, resource) : createEvent(auth, resource);
-        }).then(function() {
-          return hook;
+    // Calculate the datetime that’s 3 hours after the start time
+    // 3 hours matches public/models/event.js
+    const aLittleWhileAfterTrailStart = new Date(trailData.startDatetime);
+    aLittleWhileAfterTrailStart.setHours(aLittleWhileAfterTrailStart.getHours() + 3);
+
+    // Only update Google Calendar if the trail is in the future
+    if (aLittleWhileAfterTrailStart > new Date()) {
+      return authorize().then(function(auth) {
+        return getEvent(auth, trailData).then(function(matchingEvent) {
+          return getResourceForTrail(hook.app, trailData).then(function(resource) {
+            return (matchingEvent) ? updateEvent(auth, matchingEvent.id, resource) : createEvent(auth, resource);
+          }).then(function() {
+            return hook;
+          });
         });
       });
-    });
+    }
   }
 };
 

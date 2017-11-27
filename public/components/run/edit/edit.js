@@ -20,6 +20,15 @@ export const ViewModel = DefineMap.extend({
       return this.addingHasherPromise = newHasherForRun.save().then(result => {
         this.addingHasherPromise = null;
         this.newHasherForRun = null;
+
+        // Update run info
+        if (EventsHashers.rolesThatUpdateRunInfo.indexOf(result.role) > -1) {
+          const needsSaving = this.event.updateWithHashers(this.hashers);
+          if (needsSaving) {
+            this.editRun();
+          }
+        }
+
         return result;
       });
     }
@@ -119,6 +128,21 @@ export const ViewModel = DefineMap.extend({
         return x.title.localeCompare(y.title);
       });
     }
+  },
+
+  removeHasher: function(hasher) {
+    return hasher.destroy().then(hasher => {
+
+      // Update run info
+      if (EventsHashers.rolesThatUpdateRunInfo.indexOf(hasher.role) > -1) {
+        const needsSaving = this.event.updateWithHashers(this.hashers);
+        if (needsSaving) {
+          this.editRun();
+        }
+      }
+
+      return hasher;
+    });
   },
 
   roles: {
