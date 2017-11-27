@@ -53,7 +53,16 @@
       <div class="col-sm-3">
         <b>Naming trail:</b>
         <br>
-        {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
+        {{#if hasher.namingTrailDateParts}}
+          <a href="{{routeUrl page='events' year=hasher.namingTrailDateParts.year month=hasher.namingTrailDateParts.month day=hasher.namingTrailDateParts.day trailNumber=hasher.namingTrailNumber}}" title="View trail">
+            {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
+          </a>
+        {{else}}
+          {{hasher.namingTrailDate}}
+          {{#if hasher.namingTrailNumber}}
+            (#{{hasher.namingTrailNumber}})
+          {{/if}}
+        {{/if}}
       </div>
     </div>
 
@@ -94,7 +103,11 @@
       <div class="col-sm-6">
         <b>Notes:</b>
         <br>
-        {{hasher.notesMd}}
+        {{#if hasher.notesHtml}}
+          {{{hasher.notesHtml}}}
+        {{else}}
+          None
+        {{/if}}
       </div>
     </div>
 
@@ -104,7 +117,16 @@
       <div class="col-sm-3">
         <b>First trail:</b>
         <br>
-        {{hasher.firstTrailDate}} (#{{hasher.firstTrailNumber}})
+        {{#if hasher.firstTrailDateParts}}
+          <a href="{{routeUrl page='events' year=hasher.firstTrailDateParts.year month=hasher.firstTrailDateParts.month day=hasher.firstTrailDateParts.day trailNumber=hasher.firstTrailNumber}}" title="View trail">
+            {{hasher.firstTrailDate}} (#{{hasher.firstTrailNumber}})
+          </a>
+        {{else}}
+          {{hasher.firstTrailDate}}
+          {{#if hasher.firstTrailNumber}}
+            (#{{hasher.firstTrailNumber}})
+          {{/if}}
+        {{/if}}
       </div>
       <div class="col-sm-3">
         <b>Last trail date:</b>
@@ -155,15 +177,20 @@
     <h3 class="mb-3 mt-5">Directory info</h3>
 
     <div class="mb-4 row">
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <b>Given name:</b>
         <br>
         {{hasher.givenName}}
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <b>Family name:</b>
         <br>
         {{hasher.familyName}}
+      </div>
+      <div class="col-sm-6">
+        <b>Email addresses:</b>
+        <br>
+        {{{hasher.emailAddressesWithLinks}}}
       </div>
     </div>
     <div class="mb-4 row">
@@ -188,25 +215,6 @@
 
     <div class="mb-4 row">
       <div class="col-sm-3">
-        <b>Email addresses:</b>
-      </div>
-      <div class="col-sm-9">
-        {{#if hasher.emailAddresses}}
-        <ul>
-          {{#each hasher.emailAddresses as emailAddress}}
-          <li>
-            <a href="mailto:{{emailAddress}}">
-              {{emailAddress}}
-            </a>
-          </li>
-          {{/each}}
-        </ul>
-        {{/if}}
-      </div>
-    </div>
-
-    <div class="mb-4 row">
-      <div class="col-sm-3">
         <b>Mail hash name:</b>
         <br>
         {{hasher.mailHashName}}
@@ -225,15 +233,20 @@
 
     <h3 class="mb-3 mt-5">Private info</h3>
     <div class="mb-4 row">
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <b>Given name:</b>
         <br>
         {{hasher.givenNamePrivate}}
       </div>
-      <div class="col-sm-6">
+      <div class="col-sm-3">
         <b>Family name:</b>
         <br>
         {{hasher.familyNamePrivate}}
+      </div>
+      <div class="col-sm-6">
+        <b>Email addresses:</b>
+        <br>
+        {{{hasher.emailAddressesPrivateWithLinks}}}
       </div>
     </div>
     <div class="mb-4 row">
@@ -255,25 +268,6 @@
     </div>
 
     <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Email addresses:</b>
-      </div>
-      <div class="col-sm-9">
-        {{#if hasher.emailAddressesPrivate}}
-        <ul>
-          {{#each hasher.emailAddressesPrivate as emailAddress}}
-          <li>
-            <a href="mailto:{{emailAddress}}">
-              {{emailAddress}}
-            </a>
-          </li>
-          {{/each}}
-        </ul>
-        {{/if}}
-      </div>
-    </div>
-
-    <div class="mb-4 row">
       <div class="col-sm-12">
         <b>Address:</b>
         <br>
@@ -281,24 +275,32 @@
       </div>
     </div>
 
-    <h3 class="mb-3 mt-5">In memoriam</h3>
-    <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Died:</b>
-        <br>
-        {{hasher.died}}
+    {{#if hasher.hasDied}}
+      <h3 class="mb-3 mt-5">In memoriam</h3>
+      <div class="mb-4 row">
+        {{#if hasher.died}}
+          <div class="col-sm-3">
+            <b>Died:</b>
+            <br>
+            {{hasher.died}}
+          </div>
+        {{/if}}
+        {{#if hasher.passed}}
+          <div class="col-sm-3">
+            <b>Passed:</b>
+            <br>
+            {{hasher.passed}}
+          </div>
+        {{/if}}
+        {{#if hasher.inMemoriam}}
+          <div class="col-sm-6">
+            <b>Notes:</b>
+            <br>
+            {{hasher.inMemoriam}}
+          </div>
+        {{/if}}
       </div>
-      <div class="col-sm-3">
-        <b>Passed:</b>
-        <br>
-        {{hasher.passed}}
-      </div>
-      <div class="col-sm-6">
-        <b>Notes:</b>
-        <br>
-        {{hasher.inMemoriam}}
-      </div>
-    </div>
+    {{/if}}
 
     <h3 class="mb-3 mt-5">Old fields</h3>
 

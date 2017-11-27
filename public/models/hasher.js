@@ -6,8 +6,14 @@ import DefineMap from 'can-define/map/';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import loader from '@loader';
+import marked from 'marked';
 import moment from 'moment-timezone';
 import set from 'can-set';
+
+marked.setOptions({
+  breaks: true,
+  gfm: true
+});
 
 const datePropDefinition = {
   serialize: function(currentValue) {
@@ -56,6 +62,24 @@ const Hasher = DefineMap.extend({
   died: 'string',
   emailAddresses: emailAddressesPropDefinition,
   emailAddressesPrivate: emailAddressesPropDefinition,
+  emailAddressesWithLinks: {
+    type: 'string',
+    get: function() {
+      const emailAddresses = this.emailAddresses || [];
+      return emailAddresses.filter(value => value).map(value => {
+        return '<a href="mailto:' + value + '">' + value + '</a>';
+      }).join(', ');
+    }
+  },
+  emailAddressesPrivateWithLinks: {
+    type: 'string',
+    get: function() {
+      const emailAddressesPrivate = this.emailAddressesPrivate || [];
+      return emailAddressesPrivate.filter(value => value).map(value => {
+        return '<a href="mailto:' + value + '">' + value + '</a>';
+      }).join(', ');
+    }
+  },
   emailing: 'string',
   endOfYear: 'number',
   event: 'string',
@@ -64,6 +88,17 @@ const Hasher = DefineMap.extend({
   familyNamePrivate: 'string',
   fax: 'string',
   firstTrailDate: datePropDefinition,
+  firstTrailDateParts: {
+    get: function() {
+      const firstTrailDate = this.firstTrailDate;
+      return (firstTrailDate) ? {
+        day: firstTrailDate.substr(8, 2),
+        month: firstTrailDate.substr(5, 2),
+        year: firstTrailDate.substr(0, 4)
+      } : null;
+    },
+    serialize: false
+  },
   firstTrailNumber: 'number',
   foodPreference: 'string',
   formattedAddress: {
@@ -117,6 +152,13 @@ const Hasher = DefineMap.extend({
   givenNamePrivate: 'string',
   hareCount1: 'number',
   hareCount2: 'number',
+  hasDied: {
+    type: 'boolean',
+    serialize: false,
+    get: function() {
+      return !!this.died || !!this.inMemoriam || !!this.passed;
+    }
+  },
   hashId: 'number',
   hashName: 'string',
   hashOrJustName: {
@@ -139,7 +181,24 @@ const Hasher = DefineMap.extend({
   miles: 'number',
   motherHash: 'string',
   namingTrailDate: datePropDefinition,
+  namingTrailDateParts: {
+    get: function() {
+      const namingTrailDate = this.namingTrailDate;
+      return (namingTrailDate) ? {
+        day: namingTrailDate.substr(8, 2),
+        month: namingTrailDate.substr(5, 2),
+        year: namingTrailDate.substr(0, 4)
+      } : null;
+    },
+    serialize: false
+  },
   namingTrailNumber: 'number',
+  notesHtml: {
+    get: function() {
+      return marked(this.notesMd);
+    },
+    serialize: false
+  },
   notesMd: 'string',
   owes: 'string',
   passed: 'string',
