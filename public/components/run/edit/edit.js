@@ -138,7 +138,7 @@ export const ViewModel = DefineMap.extend({
 
   showPostTrailFields: {
     get: function() {
-      return this.event.hasStartedOrIsCloseToStarting && this.session.user.canEditPostTrailInfo;
+      return this.event.hasStartedOrIsCloseToStarting && this.session && this.session.user.canEditPostTrailInfo;
     }
   },
 

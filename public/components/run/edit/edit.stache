@@ -25,19 +25,17 @@
 {{/if}}
 {{#if event}}
   <form on:submit="editRun()">
-    <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="hares">
-        Hares
-      </label>
-      <div class="col-md-10">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="hares">
+          Hares
+        </label>
         <input autofocus class="form-control" id="hares" type="text" value:bind="event.haresMd">
       </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="location">
-        Location
-      </label>
-      <div class="col-md-10">
+      <div class="form-group col-md-6">
+        <label for="location">
+          Location
+        </label>
         <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
         {{#if event.locationPromise.value}}
           <small>
@@ -46,43 +44,39 @@
         {{/if}}
       </div>
     </div>
-    <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="name">
-        Name
-      </label>
-      <div class="col-md-10">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="name">
+          Name
+        </label>
         <input class="form-control" id="name" type="text" value:bind="event.nameMd">
       </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="bring">
-        Bring
-      </label>
-      <div class="col-md-10">
+      <div class="form-group col-md-6">
+        <label for="bring">
+          Bring
+        </label>
         <input class="form-control" id="bring" type="text" value:bind="event.bringMd">
       </div>
     </div>
-    <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="directions">
-        Directions
-      </label>
-      <div class="col-md-10">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="directions">
+          Directions
+        </label>
         <textarea class="form-control" id="directions" value:bind="event.directionsMd"></textarea>
       </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="from-the-hares">
-        From the Hares
-      </label>
-      <div class="col-md-10">
+      <div class="form-group col-md-6">
+        <label for="from-the-hares">
+          From the Hares
+        </label>
         <textarea class="form-control" id="from-the-hares" value:bind="event.fromTheHaresMd"></textarea>
       </div>
     </div>
-    <div class="form-group row">
-      <label class="col-md-2 col-form-label" for="on-on">
-        On-On
-      </label>
-      <div class="col-md-10">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="on-on">
+          On-On
+        </label>
         <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
         {{#if event.onOnPromise.value}}
           <small>
@@ -90,30 +84,17 @@
           </small>
         {{/if}}
       </div>
-    </div>
-
-    {{#if showPostTrailFields}}
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="photos-url">
-          Photos URL
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
+      {{#if showPostTrailFields}}
+        <div class="form-group col-md-4">
+          <label for="scribe">
+            Scribe
+          </label>
+          <input class="form-control" id="scribe" type="text" value:bind="event.scribesMd">
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="snooze-url">
-          Snooze URL
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="snooze-url" type="text" value:bind="event.snoozeUrl">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="miles">
-          Miles
-        </label>
-        <div class="col-md-10">
+        <div class="form-group col-md-2">
+          <label for="miles">
+            Miles
+          </label>
           <input
             class="form-control"
             {{#if hashers.length}}disabled{{/if}}
@@ -124,94 +105,97 @@
             value:bind="event.miles"
           />
         </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="hashit-reason">
-          Hashit
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="hashit-reason" type="text" value:bind="event.hashitReasonMd">
+      {{/if}}
+    </div>
+
+    {{#if showPostTrailFields}}
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="hare-patches">
+            Hare patches
+          </label>
+          <textarea class="form-control" id="hare-patches" value:bind="event.harePatchesMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="patches">
+            Runner patches
+          </label>
+          <textarea class="form-control" id="patches" value:bind="event.patchesMd"></textarea>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="run-notes">
-          Run Notes
-        </label>
-        <div class="col-md-10">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="hashit-reason">
+            Hashit
+          </label>
+          <textarea class="form-control" id="hashit-reason" value:bind="event.hashitReasonMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="run-notes">
+            Run Notes
+          </label>
           <textarea class="form-control" id="run-notes" value:bind="event.trailCommentsMd"></textarea>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="scribe">
-          Scribe
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="scribe" type="text" value:bind="event.scribesMd">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="added-writeup">
+            Added writeup
+          </label>
+          <textarea class="form-control" id="added-writeup" value:bind="event.addedWriteupMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="additional-writeup">
+            Additional writeup
+          </label>
+          <textarea class="form-control" id="additional-writeup" value:bind="event.additionalWriteupMd"></textarea>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="added-writeup">
-          Added writeup
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="added-writeup" type="text" value:bind="event.addedWriteupMd">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="new-boots">
+            New boots
+          </label>
+          <textarea class="form-control" id="new-boots" value:bind="event.newBootsMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="new-names">
+            New names
+          </label>
+          <textarea class="form-control" id="new-names" value:bind="event.newNamesMd"></textarea>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="additional-writeup">
-          Additional writeup
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="additional-writeup" type="text" value:bind="event.additionalWriteupMd">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="visitors">
+            Visitors
+          </label>
+          <textarea class="form-control" id="visitors" value:bind="event.visitorsMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="returners">
+            Returners
+          </label>
+          <textarea class="form-control" id="returners" value:bind="event.returnersMd"></textarea>
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="new-boots">
-          New boots
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="new-boots" type="text" value:bind="event.newBootsMd">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="new-names">
-          New names
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="new-names" type="text" value:bind="event.newNamesMd">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="visitors">
-          Visitors
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="visitors" type="text" value:bind="event.visitorsMd">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="returners">
-          Returners
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="returners" type="text" value:bind="event.returnersMd">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="hare-patches">
-          Hare patches
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="hare-patches" type="text" value:bind="event.harePatchesMd">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-md-2 col-form-label" for="patches">
-          Patches
-        </label>
-        <div class="col-md-10">
-          <input class="form-control" id="patches" type="text" value:bind="event.patchesMd">
-        </div>
+      <div class="form-row">
+        {{#if session.user.canAddPhotos}}
+          <div class="form-group col-md-6">
+            <label for="photos-url">
+              Photos URL
+            </label>
+            <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
+          </div>
+        {{/if}}
+        {{#if session.user.canAddSnoozes}}
+          <div class="form-group col-md-6">
+            <label for="snooze-url">
+              Snooze URL
+            </label>
+            <input class="form-control" id="snooze-url" type="text" value:bind="event.snoozeUrl">
+          </div>
+        {{/if}}
       </div>
     {{/if}}
 
