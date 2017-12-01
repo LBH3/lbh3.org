@@ -63,6 +63,7 @@
   "aws": {
     "accessKey": "AWS_ACCESS_KEY_ID",
     "accessSecret": "AWS_SECRET_ACCESS_KEY",
+    "headshotsBucketName": "lbh3-headshots-test",
     "snoozeBucketName": "lbh3-snooze-test"
   }
 }

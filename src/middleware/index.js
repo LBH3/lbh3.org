@@ -51,7 +51,8 @@ module.exports = function () {
 
   app.get('/sign-s3', (req, res) => {
     const awsConfig = app.get('aws');
-    const bucketName = awsConfig.snoozeBucketName;
+    const getBucketName = req.query['config-bucket-name'] || 'snoozeBucketName';
+    const bucketName = awsConfig[getBucketName];
     const fileName = req.query['file-name'];
     const fileType = req.query['file-type'];
     const s3 = new aws.S3();

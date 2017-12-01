@@ -157,6 +157,7 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       hareCount1: intType('hare_count_1'),
       hareCount2: intType('hare_count_2'),
       hashName: stringType('hash_name'),
+      headshotUrl: textType('headshot_url'),
       history: stringType('history'),
       homePhone: stringType('home_phone'),
       homePhonePrivate: stringType('home_phone_private'),
