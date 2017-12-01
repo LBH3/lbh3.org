@@ -2,6 +2,7 @@
   "host": "www.lbh3.org",
   "port": "PORT",
   "aws": {
+    "headshotsBucketName": "lbh3-headshots",
     "snoozeBucketName": "lbh3-snooze"
   },
   "authentication": {

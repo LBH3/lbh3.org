@@ -35,79 +35,130 @@
     </div>
 
     <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Hash name:</b>
-        <br>
-        {{hasher.hashName}}
-      </div>
-      <div class="col-sm-3">
-        <b>Who made you cum:</b>
-        <br>
-        {{hasher.whoMadeYouCum}}
-      </div>
-      <div class="col-sm-3">
-        <b>Mother hash:</b>
-        <br>
-        {{hasher.motherHash}}
-      </div>
-      <div class="col-sm-3">
-        <b>Naming trail:</b>
-        <br>
-        {{#if hasher.namingTrailDateParts}}
-          <a href="{{routeUrl page='events' year=hasher.namingTrailDateParts.year month=hasher.namingTrailDateParts.month day=hasher.namingTrailDateParts.day trailNumber=hasher.namingTrailNumber}}" title="View trail">
-            {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
-          </a>
-        {{else}}
-          {{hasher.namingTrailDate}}
-          {{#if hasher.namingTrailNumber}}
-            (#{{hasher.namingTrailNumber}})
-          {{/if}}
-        {{/if}}
-      </div>
-    </div>
+      <div class="col-lg-9 col-sm-6">
+        <div class="row">
+          <div class="col-lg-3 mb-4">
+            <b>Hash name:</b>
+            <br>
+            {{hasher.hashName}}
+          </div>
+          <div class="col-lg-3 mb-4">
+            <b>Who made you cum:</b>
+            <br>
+            {{hasher.whoMadeYouCum}}
+          </div>
+          <div class="col-lg-3 mb-4">
+            <b>Mother hash:</b>
+            <br>
+            {{hasher.motherHash}}
+          </div>
+          <div class="col-lg-3 mb-4">
+            <b>Naming trail:</b>
+            <br>
+            {{#if hasher.namingTrailDateParts}}
+              <a href="{{routeUrl page='events' year=hasher.namingTrailDateParts.year month=hasher.namingTrailDateParts.month day=hasher.namingTrailDateParts.day trailNumber=hasher.namingTrailNumber}}" title="View trail">
+                {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
+              </a>
+            {{else}}
+              {{hasher.namingTrailDate}}
+              {{#if hasher.namingTrailNumber}}
+                (#{{hasher.namingTrailNumber}})
+              {{/if}}
+            {{/if}}
+          </div>
+        </div>
 
-    <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Payment:</b>
-        <br>
-        {{hasher.payment}}
-      </div>
-      <div class="col-sm-3">
-        <b>Punch card:</b>
-        <br>
-        {{hasher.punchCard}}
-      </div>
-      <div class="col-sm-3">
-        <b>Run patch:</b>
-        <br>
-        {{hasher.runPatch}}
-      </div>
-      <div class="col-sm-3">
-        <b>Run sort:</b>
-        <br>
-        {{hasher.runSort}}
-      </div>
-    </div>
+        <div class="row">
+          <div class="col-lg-3 mb-4">
+            <b>Payment:</b>
+            <br>
+            {{hasher.payment}}
+          </div>
+          <div class="col-lg-3 mb-4">
+            <b>Punch card:</b>
+            <br>
+            {{hasher.punchCard}}
+          </div>
+          <div class="col-lg-3 mb-4">
+            <b>Run patch:</b>
+            <br>
+            {{hasher.runPatch}}
+          </div>
+          <div class="col-lg-3 mb-4">
+            <b>Run sort:</b>
+            <br>
+            {{hasher.runSort}}
+          </div>
+        </div>
 
-    <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Waiver:</b>
-        <br>
-        {{hasher.waiver}}
+        <div class="row">
+          <div class="col-lg-3 mb-4">
+            <b>Waiver:</b>
+            <br>
+            {{hasher.waiver}}
+          </div>
+          <div class="col-lg-3 mb-4">
+            <b>Birthday:</b>
+            <br>
+            {{hasher.formattedBirthday}}
+          </div>
+          <div class="col-lg-6 mb-4">
+            <b>Notes:</b>
+            <br>
+            {{#if hasher.notesHtml}}
+              {{{hasher.notesHtml}}}
+            {{else}}
+              None
+            {{/if}}
+          </div>
+        </div>
       </div>
-      <div class="col-sm-3">
-        <b>Birthday:</b>
-        <br>
-        {{hasher.formattedBirthday}}
-      </div>
-      <div class="col-sm-6">
-        <b>Notes:</b>
-        <br>
-        {{#if hasher.notesHtml}}
-          {{{hasher.notesHtml}}}
-        {{else}}
-          None
-        {{/if}}
+      <div class="col-lg-3 col-sm-6 text-center">
+        <form>
+          <div class="form-group">
+            {{<headshotImage}}
+              {{#if hasher.headshotUrl}}
+                <img alt="" class="img-fluid" src="{{hasher.headshotUrl}}" />
+              {{/if}}
+              <br />
+              <br />
+            {{/headshotImage}}
+
+            {{<uploadInput}}
+              <label class="btn btn-primary">
+                <span class="fa fa-upload"></span>
+                Upload head shot
+                <input accept="image/*" class="sr-only" type="file" />
+              </label>
+            {{/uploadInput}}
+
+            {{>headshotImage}}
+
+            {{#if headshotPromise}}
+              {{#if headshotPromise.isPending}}
+                <span class="fa fa-circle-o-notch fa-spin"></span>
+              {{/if}}
+              {{#if headshotPromise.isRejected}}
+                <span class="fa fa-warning"></span>
+                {{#if headshotPromise.reason.message}}
+                  {{headshotPromise.reason.message}}
+                {{else}}
+                  Unknown error
+                {{/if}}
+              {{/if}}
+              {{#if headshotPromise.isResolved}}
+                {{^if hasher.headshotUrl}}
+                  <span class="fa fa-warning"></span>
+                  Unknown error
+                  <br />
+                {{/if}}
+                {{>uploadInput}}
+              {{/if}}
+            {{else}}
+              {{>uploadInput}}
+            {{/if}}
+          </div>
+        </form>
       </div>
     </div>
 
@@ -144,7 +195,7 @@
               {{hasher.hareCount1}} or {{hasher.hareCount2}}
             {{else}}
               {{hasher.hareCount1}}
-            {{/eq}}
+            {{/if}}
           {{else}}
             {{hasher.hareCount2}}
           {{/if}}
@@ -161,7 +212,7 @@
               {{hasher.miles}} or {{hasher.runMileage}}
             {{else}}
               {{hasher.miles}}
-            {{/eq}}
+            {{/if}}
           {{else}}
             {{hasher.runMileage}}
           {{/if}}
