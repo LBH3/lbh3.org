@@ -7,11 +7,8 @@ export default Component.extend({
   tag: 'lbh3-home',
   view,
   ViewModel: DefineMap.extend({
-    get isBeforeOctober13() {
-      return new Date() < new Date('Oct 13 2017 07:00:00 UTC');
-    },
-    get isBeforeOctober14() {
-      return new Date() < new Date('Oct 14 2017 07:00:00 UTC');
+    get isBeforeFebruary18() {
+      return new Date() < new Date('Feb 18 2018 08:00:00 UTC');
     }
   })
 });
