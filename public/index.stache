@@ -91,6 +91,15 @@
                   </can-import>
                 </lbh3-no-ssr>
               {{/case}}
+              {{#case "founders"}}
+                <can-import from="lbh3/components/founders-2018/">
+                  {{#if isPending}}
+                    Loading…
+                  {{else}}
+                    <lbh3-founders-2018 />
+                  {{/if}}
+                </can-import>
+              {{/case}}
               {{#case "jesus-cuervo-1800-trail"}}
                 <can-import from="lbh3/components/jesus-cuervo/">
                   {{#if isPending}}
