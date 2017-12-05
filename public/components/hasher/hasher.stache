@@ -187,19 +187,7 @@
       <div class="col-sm-2">
         <b>Hare count:</b>
         <br>
-        {{#eq hasher.hareCount1 hasher.hareCount2}}
-          {{hasher.hareCount1}}
-        {{else}}
-          {{#if hasher.hareCount1}}
-            {{#if hasher.hareCount2}}
-              {{hasher.hareCount1}} or {{hasher.hareCount2}}
-            {{else}}
-              {{hasher.hareCount1}}
-            {{/if}}
-          {{else}}
-            {{hasher.hareCount2}}
-          {{/if}}
-        {{/eq}}
+        {{hasher.hareCounts}}
       </div>
       <div class="col-sm-2">
         <b>Miles:</b>
