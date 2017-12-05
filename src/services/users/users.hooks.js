@@ -54,6 +54,7 @@ const getBoredInfo = function(hook) {
       };
       if (boredPositions.includes(authHook.HASH_CASH)) {
         permission = Object.assign(permission, {
+          canEditHasherInfo: true,
           canViewHashersList: true
         });
       }

@@ -41,14 +41,14 @@ module.exports = {
   before: {
     all: [ authenticate('jwt') ],
     find: [
-      authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS),
+      authHook.restrictTo(authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS),
       searchHook({
         fields: ['familyName', 'givenName', 'hashName']
       })
     ],
-    get: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS) ],
+    get: [ authHook.restrictTo(authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS) ],
     create: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
-    update: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields, makeRaw ],
+    update: [ authHook.restrictTo(authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields, makeRaw ],
     patch: [ authHook.restrictTo() ],
     remove: [ authHook.restrictTo(authHook.WEBMASTERS) ]
   },
