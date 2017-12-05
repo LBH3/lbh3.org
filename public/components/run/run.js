@@ -4,6 +4,8 @@ import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Session from '~/models/session';
 
+import { sortByName, sortByPayment } from '~/components/run/sort-hashers';
+
 import loader from '@loader';
 import route from 'can-route';
 import view from './run.stache';
@@ -81,7 +83,14 @@ export const ViewModel = DefineMap.extend({
         return lastValue;
       }
       if (this.hashersPromise) {
-        this.hashersPromise.then(setValue);
+        this.hashersPromise.then(hashers => {
+          const sortAttendanceBy = this.sortAttendanceBy;
+          if (sortAttendanceBy === 'name') {
+            setValue(hashers.sort(sortByName));
+          } else {
+            setValue(hashers.sort(sortByPayment));
+          }
+        });
       }
     }
   },
@@ -121,6 +130,21 @@ export const ViewModel = DefineMap.extend({
   },
 
   showDonation: 'boolean',
+  sortAttendanceBy: {
+    type: 'string',
+    value: 'name',
+    set: function(sortAttendanceBy) {
+      const hashers = this.hashers;
+      if (hashers) {
+        if (sortAttendanceBy === 'name') {
+          hashers.sort(sortByName);
+        } else {
+          hashers.sort(sortByPayment);
+        }
+      }
+      return sortAttendanceBy;
+    }
+  },
   trailNumber: 'number',
   year: 'number'
 });
