@@ -119,9 +119,9 @@
             {{<headshotImage}}
               {{#if hasher.headshotUrl}}
                 <img alt="" class="img-fluid" src="{{hasher.headshotUrl}}" />
+                <br />
+                <br />
               {{/if}}
-              <br />
-              <br />
             {{/headshotImage}}
 
             {{<uploadInput}}
