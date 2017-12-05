@@ -168,7 +168,16 @@
 
     {{#if hashersPromise.isResolved}}
       {{#if hashers.length}}
-        <h3>Attendance</h3>
+        <div class="d-flex justify-content-between mb-2">
+          <h3 class="mb-0 mt-2">Attendance</h3>
+          <div class="form-inline">
+            <label class="pr-2" for="sort-by">Sort by</label>
+            <select class="form-control" id="sort-by" value:bind="sortAttendanceBy">
+              <option value="name">Name</option>
+              <option value="payment">Payment</option>
+            </select>
+          </div>
+        </div>
         <table class="table table-bordered table-responsive table-sm">
           <thead>
             <tr>
