@@ -44,7 +44,7 @@ export const ViewModel = DefineMap.extend({
         return Hasher.connection.getList({
           $limit: 200,
           lastTrailDate: {
-            $gte: trailDate.clone().subtract(12, 'weeks').toDate()
+            $gte: trailDate.clone().subtract(5, 'weeks').toDate()
           },
           $sort: {
             lastTrailDate: -1
@@ -133,15 +133,6 @@ export const ViewModel = DefineMap.extend({
     }
 
     return patches.join('/');
-  },
-
-  returner: function(hasher) {
-    const lastTrailDate = moment(hasher.lastTrailDate);
-    const fiveWeeksBeforeTrail = this.trailDateAsMoment.clone().subtract(5, 'weeks');
-    const isReturner = lastTrailDate.isBefore(fiveWeeksBeforeTrail);
-    if (isReturner) {
-      return lastTrailDate.format('M/D');
-    }
   }
 });
 

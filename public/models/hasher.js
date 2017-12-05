@@ -152,6 +152,26 @@ const Hasher = DefineMap.extend({
   givenNamePrivate: 'string',
   hareCount1: 'number',
   hareCount2: 'number',
+  hareCounts: {
+    type: 'string',
+    serialize: false,
+    get: function() {
+      const hareCount1 = this.hareCount1;
+      const hareCount2 = this.hareCount2;
+      if (hareCount1 && hareCount2) {
+        if (hareCount1 === hareCount2) {
+          return hareCount1;
+        } else {
+          return hareCount1 + ' or ' + hareCount2
+        }
+      } else if (hareCount1) {
+        return hareCount1;
+      } else if (hareCount2) {
+        return hareCount2;
+      }
+      return 0;
+    }
+  },
   hasDied: {
     type: 'boolean',
     serialize: false,
