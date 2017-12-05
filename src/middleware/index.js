@@ -49,6 +49,28 @@ module.exports = function () {
     })(redirectConfig[from]);
   }
 
+  app.delete('/s3', (req, res) => {
+    const awsConfig = app.get('aws');
+    const bucketName = awsConfig.headshotsBucketName;
+    const fileName = req.query['file-name'];
+    const s3 = new aws.S3();
+    const s3Params = {
+      Bucket: bucketName,
+      Key: fileName
+    };
+
+    s3.deleteObject(s3Params, (error, data) => {
+      if (error) {
+        console.error('Error deleting file:', error);
+        res.status(500);
+        res.write(JSON.stringify(error));
+      } else {
+        res.write(JSON.stringify(data));
+      }
+      res.end();
+    });
+  });
+
   app.get('/sign-s3', (req, res) => {
     const awsConfig = app.get('aws');
     const getBucketName = req.query['config-bucket-name'] || 'snoozeBucketName';

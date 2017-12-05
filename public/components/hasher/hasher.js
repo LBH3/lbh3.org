@@ -10,6 +10,29 @@ const uuid = function(a) {
   return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,uuid);
 };
 
+const deleteHeadshotAtUrl = function(url) {
+  const urlSplit = url.split('/');
+  const fileName = (urlSplit.length > 0) ? urlSplit.pop() : null;
+  console.info('About to delete filename:', fileName);
+  if (fileName) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('DELETE', `/s3?file-name=${fileName}`);
+    xhr.onerror = () => {
+      console.error('Delete failed with XMLHttpRequest:', xhr);
+    };
+    xhr.onreadystatechange = () => {
+      if (xhr.readyState === 4) {
+        if (xhr.status === 200) {
+          console.info('Delete succeeded with XMLHttpRequest:', xhr);
+        } else {
+          console.error('Delete failed with XMLHttpRequest:', xhr);
+        }
+      }
+    };
+    xhr.send();
+  }
+};
+
 const getSignedRequest = function(file, hasher) {
   return new Promise((resolve, reject) => {
     const fileExtension = file.name.split('.').pop();
@@ -98,8 +121,14 @@ export default Component.extend({
         const hasher = viewModel.hasher;
         viewModel.headshotPromise = getSignedRequest(file, hasher).then(response => {
           return uploadFile(file, response.signedRequest, response.url).then(() => {
+            const previousHeadshotUrl = hasher.headshotUrl;
             hasher.headshotUrl = response.url;
-            return hasher.save();
+            return hasher.save().then(savedHasher => {
+              if (previousHeadshotUrl) {
+                deleteHeadshotAtUrl(previousHeadshotUrl);
+              }
+              return savedHasher;
+            });
           });
         });
       }
