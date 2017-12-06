@@ -16,7 +16,12 @@ const AppViewModel = DefineMap.extend({
     type: 'string',
     value: defaultPage
   },
-  search: 'string',
+  search: {
+    type: 'string',
+    serialize: function(search) {
+      return (search) ? search : undefined;
+    }
+  },
   secondaryPage: 'string',
   skip: 'number',
   title: {
