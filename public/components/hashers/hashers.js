@@ -19,7 +19,7 @@ export const ViewModel = DefineMap.extend({
   },
   hashersPromise: {
     get: function() {
-      const searchText = this.searchText.trim();
+      const searchText = (this.searchText) ? this.searchText.trim() : '';
       return Hasher.connection.getList({
         $limit,
         $search: searchText || undefined,
@@ -58,7 +58,7 @@ export const ViewModel = DefineMap.extend({
     return route.url(routeParams);
   },
   routeForPage: function(page) {
-    const searchText = this.searchText.trim();
+    const searchText = (this.searchText) ? this.searchText.trim() : '';
     const routeParams = {
       page: 'hashers',
       secondaryPage: '',
