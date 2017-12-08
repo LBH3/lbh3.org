@@ -1,8 +1,22 @@
 const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
 const errors = require('feathers-errors');
+const getBoredHasher = require('../../utils/get-bored-hasher');
+const jwtAuthentication = authenticate('jwt');
 const makeRaw = require('../../utils/make-raw');
 const searchHook = require('../../hooks/search');
+
+const attachAuthInfo = function(hook) {
+  return new Promise(function(resolve) {
+    jwtAuthentication(hook).then(() => {
+      resolve(hook);
+    }, () => {
+      resolve(hook);
+    });
+  });
+};
+
+const boredPositions = [authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS];
 
 const createAndUpdateFields = function(hook) {
   const googleProfile = hook.params.user.googleProfile || {};
@@ -37,26 +51,58 @@ const createAndUpdateFields = function(hook) {
   }
 };
 
+const filterData = function(data) {
+  const allowedFields = ['hashName', 'id'];
+  const filteredFields = {};
+  allowedFields.forEach(field => {
+    filteredFields[field] = data[field];
+  });
+  return filteredFields;
+};
+
+const filterFields = function(hook) {
+  const user = hook.params.user;
+  if (user) {
+    return new Promise(function(resolve) {
+      getBoredHasher(hook.app, user).then(boredHashers => {
+        const found = boredHashers.data.find(boredHasher => {
+          return boredPositions.includes(boredHasher.positionId);
+        });
+        if (!found) {
+          hook.result = filterData(hook.result);
+        }
+        resolve(hook);
+      }, () => {
+        hook.result = filterData(hook.result);
+        resolve(hook);
+      });
+    });
+  } else {
+    hook.result = filterData(hook.result);
+  }
+};
+
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [],
     find: [
-      authHook.restrictTo(authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS),
+      jwtAuthentication,
+      authHook.restrictTo(...boredPositions),
       searchHook({
         fields: ['familyName', 'givenName', 'hashName']
       })
     ],
-    get: [ authHook.restrictTo(authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS) ],
-    create: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
-    update: [ authHook.restrictTo(authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields, makeRaw ],
-    patch: [ authHook.restrictTo() ],
-    remove: [ authHook.restrictTo(authHook.WEBMASTERS) ]
+    get: [ attachAuthInfo ],
+    create: [ jwtAuthentication, authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
+    update: [ jwtAuthentication, authHook.restrictTo(...boredPositions), createAndUpdateFields, makeRaw ],
+    patch: [ jwtAuthentication, authHook.restrictTo() ],
+    remove: [ jwtAuthentication, authHook.restrictTo(authHook.WEBMASTERS) ]
   },
 
   after: {
     all: [],
     find: [],
-    get: [],
+    get: [ filterFields ],
     create: [],
     update: [],
     patch: [],

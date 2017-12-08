@@ -7,11 +7,25 @@ import './year.less';
 import view from './year.stache';
 
 export const ViewModel = DefineMap.extend({
-  hashersByPosition: DefineList,
+  hashers: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      const hashersPromise = this.hashersPromise;
+      if (hashersPromise) {
+        hashersPromise.then(setValue);
+      }
+    }
+  },
+  hashersByPosition: {
+    get: function() {
+      const hashers = this.hashers;
+      return (hashers) ? BoredHasher.groupByPosition(hashers) : [];
+    }
+  },
   hashersPromise: {
     get: function() {
-      this.hashersByPosition = null;
-
       const year = this.year;
       if (!year || !year.endDate || !year.startDate) {
         return;
@@ -30,9 +44,6 @@ export const ViewModel = DefineMap.extend({
           $gte: year.startDate,
           $lte: year.endDate
         }
-      }).then((hashers) => {
-        this.hashersByPosition = BoredHasher.groupByPosition(hashers);
-        return hashers;
       });
     }
   },

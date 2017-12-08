@@ -1,4 +1,5 @@
 const errors = require('feathers-errors');
+const getBoredHasher = require('../utils/get-bored-hasher');
 
 module.exports = {
   HASH_CASH: 4,
@@ -20,27 +21,15 @@ module.exports = {
         return hook;
       }
 
-      if (!hook.params.user) {
+      const user = hook.params.user;
+      if (!user) {
         throw new errors.NotAuthenticated('You are not authenticated.');
       }
 
       const error = new errors.Forbidden('You do not have valid permissions to access this.');
-      const user = hook.params.user;
 
       return new Promise(function(resolve, reject) {
-        const now = new Date();
-        const boredHashersQuery = {
-          query: {
-            endDate: {
-              $gte: now
-            },
-            hasherId: user.hasherId,
-            startDate: {
-              $lte: now
-            }
-          }
-        };
-        hook.app.service('api/bored-hashers').find(boredHashersQuery).then(boredHashers => {
+        getBoredHasher(hook.app, user).then(boredHashers => {
           const found = boredHashers.data.find(boredHasher => {
             return boredPositions.includes(boredHasher.positionId);
           });
