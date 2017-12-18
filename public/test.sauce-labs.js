@@ -10,10 +10,10 @@ testSauceLabs({
     platform: 'Android 4.4'
   }, {
     'appium-version': '1.6.3',
-    browserName: 'safari',
+    browserName: 'Safari',
     deviceName: 'iPhone 6 Simulator',
     platform: 'iOS',
-    version: '9'
+    version: '9.0'
   }, {
     browserName: 'internet explorer',
     platform: 'Windows 7',
