@@ -38,11 +38,16 @@ export const ViewModel = DefineMap.extend({
     }
   },
   yearsPromise: {
-    value: () => {
+    value: function() {
       return Year.getList({
         $sort: {
           id: -1
         }
+      }).then(years => {
+        if (this.year === currentYear && years.length > 0) {
+          this.year = years[0].id;
+        }
+        return years;
       });
     }
   }
