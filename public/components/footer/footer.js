@@ -8,7 +8,9 @@ import view from './footer.stache';
 
 export const ViewModel = DefineMap.extend({
   platform: {
-    value: platform
+    value: () => {
+      return platform;
+    }
   },
   positions: {
     get: function(lastValue, setValue) {
