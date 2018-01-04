@@ -31,4 +31,4 @@
   {{/if}}
 {{/if}}
 
-<lbh3-mismanagement-year year:from="selectedYear" />
+<lbh3-mismanagement-year showEmailLink:from="showEmailLink" year:from="selectedYear" />
