@@ -272,6 +272,7 @@ function importFile({addRecordToDatabase, fileName, processRecord}) {
     const fieldValues = {};
     const promises = [];
     xmlParser.collect('COL');
+    xmlParser.collect('DATA');
     xmlParser.on('error', function(error) {
       console.error('XML parser error:', error);
     });
@@ -335,16 +336,6 @@ function importRuns() {
     fileName: './filemaker/all-runs.xml',
     processRecord: processXMLRecord(runToEventFields, processRun)
   });
-}
-
-function parseResultSetWithFields(resultSet, fields) {
-  const items = [];
-  resultSet.forEach(function(rows) {
-    rows.ROW.forEach(function(row) {
-      items.push(parseRowWithFields(row, fields));
-    });
-  });
-  return items;
 }
 
 function parseRowWithFields(row, fields) {
