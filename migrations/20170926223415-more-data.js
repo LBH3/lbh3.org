@@ -38,6 +38,8 @@ exports.up = function (queryInterface, Sequelize) {
       promises.push(queryInterface.addColumn('events', newEventColumnNames[columnProperty], tableColumns.events[columnProperty]));
     }
     return Promise.all(promises);
+  }, errorHandler).then(function() {
+    return queryInterface.addColumn('users', 'hasher_id', tableColumns.users.hasherId);
   }, errorHandler);
 };
 
@@ -54,5 +56,7 @@ exports.down = function (queryInterface, Sequelize) {
       promises.push(queryInterface.removeColumn('events', newEventColumnNames[columnProperty]));
     }
     return Promise.all(promises);
+  }, errorHandler).then(function() {
+    return queryInterface.removeColumn('users', 'hasher_id');
   }, errorHandler);
 };
