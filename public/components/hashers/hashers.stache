@@ -48,21 +48,45 @@
     <table class="table table-bordered table-responsive table-sm">
       <thead>
         <tr>
-          <th>Hash name</th>
+          <th scope="col">Hash Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">First Name</th>
         </tr>
       </thead>
       <tbody>
         {{#each hashers as hasher}}
           <tr>
-            <td>
-              <a href="{{routeForHasher(hasher)}}">
-                {{#if hasher.hashName}}
+            {{#if hasher.hasName}}
+              <td>
+                <a href="{{routeForHasher(hasher)}}">
                   {{hasher.hashName}}
-                {{else}}
-                  Just {{hasher.givenName}} {{hasher.familyName}}
-                {{/if}}
-              </a>
-            </td>
+                </a>
+              </td>
+              <td>
+                <a href="{{routeForHasher(hasher)}}">
+                  {{#if hasher.familyName}}
+                    {{hasher.familyName}}
+                  {{else}}
+                    {{hasher.familyNamePrivate}}
+                  {{/if}}
+                </a>
+              </td>
+              <td>
+                <a href="{{routeForHasher(hasher)}}">
+                  {{#if hasher.givenName}}
+                    {{hasher.givenName}}
+                  {{else}}
+                    {{hasher.givenNamePrivate}}
+                  {{/if}}
+                </a>
+              </td>
+            {{else}}
+              <td colspan="3">
+                <a href="{{routeForHasher(hasher)}}">
+                  #{{hasher.id}}
+                </a>
+              </td>
+            {{/if}}
           </tr>
         {{/each}}
       </tbody>

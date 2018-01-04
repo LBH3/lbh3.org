@@ -190,6 +190,13 @@ const Hasher = DefineMap.extend({
       return `Just ${this.givenName} ${this.familyName}`.trim();
     }
   },
+  hasName: {
+    type: 'boolean',
+    serialize: false,
+    get: function() {
+      return !!this.hashName || !!this.givenName || !!this.givenNamePrivate || !!this.familyName || !!this.familyNamePrivate;
+    }
+  },
   history: 'string',
   homePhone: 'string',
   homePhonePrivate: 'string',
