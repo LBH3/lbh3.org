@@ -1,3 +1,5 @@
+<can-import from="font-awesome/css/font-awesome.css" />
+
 {{#if hashersPromise.isPending}}
   <div class="alert alert-info" role="alert">
     <strong>Fetching Mismanagement…</strong>
@@ -31,11 +33,13 @@
         {{else}}
           {{position.promise.value.pluralName}}
         {{/is}}
-        <small>
-          <a href="mailto:{{position.promise.value.emailAddress}}">
-            (email)
-          </a>
-        </small>
+        {{#if showEmailLink}}
+          <small>
+            <a href="mailto:{{position.promise.value.emailAddress}}" title="Send an email">
+              <span class="fa fa-envelope"></span>
+            </a>
+          </small>
+        {{/if}}
       </h3>
       <ul>
         {{#each position.hashers as hasherPromise}}
@@ -49,7 +53,13 @@
 
           {{#if hasherPromise.isResolved}}
             <li>
-              {{hasherPromise.value.hashName}}
+              {{#if session.user.canViewHashersList}}
+                <a href="{{routeForHasher(hasherPromise.value)}}">
+                  {{hasherPromise.value.hashName}}
+                </a>
+              {{else}}
+                {{hasherPromise.value.hashName}}
+              {{/if}}
             </li>
           {{/if}}
         {{/each}}

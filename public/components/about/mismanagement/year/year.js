@@ -3,7 +3,9 @@ import BoredYear from '~/models/bored-year';
 import Component from 'can-component';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
+import Session from '~/models/session';
 import './year.less';
+import route from 'can-route';
 import view from './year.stache';
 
 export const ViewModel = DefineMap.extend({
@@ -46,6 +48,20 @@ export const ViewModel = DefineMap.extend({
         }
       });
     }
+  },
+  routeForHasher: function(hasher) {
+    const routeParams = {
+      id: hasher.id,
+      page: 'hashers'
+    };
+    return route.url(routeParams);
+  },
+  get session() {
+    return Session.current;
+  },
+  showEmailLink: {
+    type: 'boolean',
+    value: false
   },
   year: {
     Type: BoredYear
