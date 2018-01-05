@@ -57,49 +57,49 @@ const Event = DefineMap.extend({
 
   addedWriteupHtml: {
     get: function() {
-      return marked(this.addedWriteupMd);
+      return marked(this.addedWriteupMd || '');
     },
     serialize: false
   },
   additionalWriteupHtml: {
     get: function() {
-      return marked(this.additionalWriteupMd);
+      return marked(this.additionalWriteupMd || '');
     },
     serialize: false
   },
   bringHtml: {
     get: function() {
-      return marked(this.bringMd);
+      return marked(this.bringMd || '');
     },
     serialize: false
   },
   directionsHtml: {
     get: function() {
-      return marked(this.directionsMd);
+      return marked(this.directionsMd || '');
     },
     serialize: false
   },
   fromTheHaresHtml: {
     get: function() {
-      return marked(this.fromTheHaresMd);
+      return marked(this.fromTheHaresMd || '');
     },
     serialize: false
   },
   harePatchesHtml: {
     get: function() {
-      return marked(this.harePatchesMd);
+      return marked(this.harePatchesMd || '');
     },
     serialize: false
   },
   haresHtml: {
     get: function() {
-      return marked(this.haresMd);
+      return marked(this.haresMd || '');
     },
     serialize: false
   },
   hashitReasonHtml: {
     get: function() {
-      return marked(this.hashitReasonMd);
+      return marked(this.hashitReasonMd || '');
     },
     serialize: false
   },
@@ -124,7 +124,7 @@ const Event = DefineMap.extend({
   },
   locationHtml: {
     get: function() {
-      return marked(this.locationMd);
+      return marked(this.locationMd || '');
     },
     serialize: false
   },
@@ -174,25 +174,25 @@ const Event = DefineMap.extend({
   },
   nameHtml: {
     get: function() {
-      return marked(this.nameMd);
+      return marked(this.nameMd || '');
     },
     serialize: false
   },
   newBootsHtml: {
     get: function() {
-      return marked(this.newBootsMd);
+      return marked(this.newBootsMd || '');
     },
     serialize: false
   },
   newNamesHtml: {
     get: function() {
-      return marked(this.newNamesMd);
+      return marked(this.newNamesMd || '');
     },
     serialize: false
   },
   onOnHtml: {
     get: function() {
-      return marked(this.onOnMd);
+      return marked(this.onOnMd || '');
     },
     serialize: false
   },
@@ -208,19 +208,19 @@ const Event = DefineMap.extend({
   },
   patchesHtml: {
     get: function() {
-      return marked(this.patchesMd);
+      return marked(this.patchesMd || '');
     },
     serialize: false
   },
   returnersHtml: {
     get: function() {
-      return marked(this.returnersMd);
+      return marked(this.returnersMd || '');
     },
     serialize: false
   },
   scribesHtml: {
     get: function() {
-      return marked(this.scribesMd);
+      return marked(this.scribesMd || '');
     },
     serialize: false
   },
@@ -266,7 +266,7 @@ const Event = DefineMap.extend({
   },
   snoozeTitleHtml: {
     get: function() {
-      return marked(this.snoozeTitleMd);
+      return marked(this.snoozeTitleMd || '');
     },
     serialize: false
   },
@@ -324,13 +324,13 @@ const Event = DefineMap.extend({
   },
   trailCommentsHtml: {
     get: function() {
-      return marked(this.trailCommentsMd);
+      return marked(this.trailCommentsMd || '');
     },
     serialize: false
   },
   visitorsHtml: {
     get: function() {
-      return marked(this.visitorsMd);
+      return marked(this.visitorsMd || '');
     },
     serialize: false
   },

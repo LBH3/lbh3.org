@@ -1,8 +1,10 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
+import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import './hasher.less';
+import route from 'can-route';
 import view from './hasher.stache';
 
 const uuid = function(a) {
@@ -80,6 +82,8 @@ const uploadFile = function(file, signedRequest, url) {
   });
 };
 
+const $limit = 100;
+
 export const ViewModel = DefineMap.extend({
   hasher: {
     get: function(lastValue, setValue) {
@@ -98,6 +102,64 @@ export const ViewModel = DefineMap.extend({
   },
   headshotPromise: Promise,
   id: 'number',
+  get currentPage() {
+    const runs = this.runs;
+    const skip = runs.skip;
+    return (skip / $limit) + 1;
+  },
+  get pages() {
+    const runs = this.runs;
+    const pages = [];
+
+    if (!runs) {
+      return pages;
+    }
+
+    const total = runs.total;
+    const numberOfPages = Math.round(total / $limit);
+    for (let i = 1; i <= numberOfPages; i++) {
+      pages.push(i);
+    }
+    return pages;
+  },
+  routeForHasher: function(hasher) {
+    const routeParams = {
+      id: this.hasher.id,
+      page: 'hashers'
+    };
+    return route.url(routeParams);
+  },
+  routeForPage: function(page) {
+    const routeParams = {
+      id: this.hasher.id,
+      page: 'hashers',
+      skip: $limit * (page - 1)
+    };
+    return route.url(routeParams);
+  },
+  runs: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      this.runsPromise.then(setValue);
+    }
+  },
+  runsPromise: {
+    get: function() {
+      const hasherId = this.hasher.id;
+      if (hasherId) {
+        return EventsHashers.connection.getList({
+          hasherId,
+          $limit,
+          $skip: this.skip,
+          $sort: {
+            trailNumber: -1
+          }
+        });
+      }
+    }
+  },
 
   /**
    * Session.current is provided by the can-connect-feathers session behavior.
@@ -106,6 +168,11 @@ export const ViewModel = DefineMap.extend({
    */
   get session() {
     return Session.current;
+  },
+
+  skip: {
+    type: 'number',
+    value: 0
   }
 });
 
