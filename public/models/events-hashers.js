@@ -3,6 +3,7 @@ import behaviors from './behaviors';
 import connect from 'can-connect';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
+import Event from './event';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import set from 'can-set';
@@ -14,7 +15,31 @@ const EventsHashers = DefineMap.extend({
   id: 'number',
   createdAt: 'any',
   updatedAt: 'any',
+  event: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      this.eventsPromise.then(events => {
+        if (events && events.length > 0) {
+          setValue(events[0]);
+        }
+      });
+    },
+    serialize: false
+  },
   eventPayment: 'string',
+  eventsPromise: {
+    get: function() {
+      const trailNumber = this.trailNumber;
+      if (trailNumber) {
+        return Event.connection.getList({
+          trailNumber
+        });
+      }
+    },
+    serialize: false
+  },
   externalId: 'string',
   familyName: 'string',
   foodPreference: 'string',
