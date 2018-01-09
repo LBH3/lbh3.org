@@ -420,6 +420,9 @@ function processHasher({dbKey, dbRow, xmlKey, xmlRecord, xmlValue}) {
   } else if (dbKey === 'email_addresses_private') {
     xmlValue = [xmlValue, xmlRecord['Email 2 No Directory']].filter(email => email);
 
+  } else if (dbKey === 'id') {
+    xmlValue = (xmlValue === '2329' && xmlRecord['Hash.id_pk'] === '7076') ? '7076' : xmlValue;
+
   } else if (dbKey === 'last_trail_date') {
     xmlValue = anyOfValues([xmlValue, xmlRecord['zcd_LastRun']]);
 
