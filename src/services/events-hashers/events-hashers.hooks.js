@@ -51,7 +51,7 @@ const getRequiredData = function(hook) {
       }
     }).then(eventHasher => {
       hook.app.service('api/events').find({query: {trailNumber: eventHasher.trailNumber}}).then(events => {
-        hook.app.service('api/hashers').get(eventHasher.hasherId).then(hasher => {
+        hook.app.service('api/hashers').get(eventHasher.hasherId, hook.params).then(hasher => {
           resolve({
             event: events.data[0],
             eventHasher,
