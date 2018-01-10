@@ -181,6 +181,7 @@
         <table class="table table-bordered table-responsive table-sm">
           <thead>
             <tr>
+              <th></th>
               <th>Role</th>
               <th>Payment</th>
               <th>Hash Name</th>
@@ -191,6 +192,7 @@
           <tbody>
             {{#each hashers as hasher}}
               <tr>
+                <td>{{plusOne(%index)}}</td>
                 <td>{{hasher.role}}</td>
                 <td>
                   {{hasher.paymentNotesAndType}}

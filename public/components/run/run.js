@@ -105,6 +105,9 @@ export const ViewModel = DefineMap.extend({
     }
   },
   month: 'string',
+  plusOne: function(number) {
+    return number + 1;
+  },
   routeForHasher: function(hasher) {
     const routeParams = {
       id: hasher.hasherId,
