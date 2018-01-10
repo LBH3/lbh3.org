@@ -15,9 +15,12 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.hashersPromise.then(hashers => {
-        setValue(hashers.sort(sortByName));
-      });
+      const hashersPromise = this.hashersPromise
+      if (hashersPromise) {
+        hashersPromise.then(hashers => {
+          setValue(hashers.sort(sortByName));
+        });
+      }
     }
   },
 
