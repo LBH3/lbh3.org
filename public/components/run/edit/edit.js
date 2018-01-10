@@ -130,6 +130,10 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  plusOne: function(number) {
+    return number + 1;
+  },
+
   removeHasher: function(hasher) {
     return hasher.destroy().then(hasher => {
 
