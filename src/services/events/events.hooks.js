@@ -2,11 +2,38 @@
 const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
 const Entities = require('html-entities').AllHtmlEntities;
+const getBoredHasher = require('../../utils/get-bored-hasher');
 const google = require('googleapis');
+const jwtAuthentication = authenticate('jwt');
 const makeRaw = require('../../utils/make-raw');
 const marked = require('marked');
 const striptags = require('striptags');
 
+const allowedFields = [
+  'bringMd',
+  'directionsMd',
+  'fromTheHaresMd',
+  'haresMd',
+  'id',
+  'locationGooglePlaceId',
+  'locationMd',
+  'miles',
+  'nameMd',
+  'onOnGooglePlaceId',
+  'onOnMd',
+  'photosUrl',
+  'startDatetime',
+  'snoozeUrl',
+  'trailNumber'
+];
+const boredPositions = [
+  authHook.GRANDMASTERS,
+  authHook.HASH_CASH,
+  authHook.HASH_HISTORIANS,
+  authHook.ON_DISK,
+  authHook.ON_SEC,
+  authHook.WEBMASTERS
+];
 const calendar = google.calendar('v3');
 const calendarEmail = 'lbh3-643@lbh3-171321.iam.gserviceaccount.com';
 const entities = new Entities();
@@ -15,6 +42,16 @@ marked.setOptions({
   breaks: true,
   gfm: true
 });
+
+const attachAuthInfo = function(hook) {
+  return new Promise(function(resolve) {
+    jwtAuthentication(hook).then(() => {
+      resolve(hook);
+    }, () => {
+      resolve(hook);
+    });
+  });
+};
 
 const authorize = function() {
   return new Promise(function(resolve, reject) {
@@ -48,6 +85,43 @@ const createEvent = function(auth, resource) {
       }
     });
   });
+};
+
+const filterData = function(data) {
+  if (data && data.data) {// Array of data
+    data.data = data.data.map(record => {
+      return filterData(record);
+    });
+    return data;
+  } else {// Single object
+    const filteredFields = {};
+    allowedFields.forEach(field => {
+      filteredFields[field] = data[field];
+    });
+    return filteredFields;
+  }
+};
+
+const filterFields = function(hook) {
+  const user = hook.params.user;
+  if (user) {
+    return new Promise(function(resolve) {
+      getBoredHasher(hook.app, user).then(boredHashers => {
+        const found = boredHashers.data.find(boredHasher => {
+          return boredPositions.includes(boredHasher.positionId);
+        });
+        if (!found) {
+          hook.result = filterData(hook.result);
+        }
+        resolve(hook);
+      }, () => {
+        hook.result = filterData(hook.result);
+        resolve(hook);
+      });
+    });
+  } else {
+    hook.result = filterData(hook.result);
+  }
 };
 
 const getEvent = function(auth, trailData) {
@@ -204,8 +278,8 @@ const syncWithGoogleCalendar = function(hook) {
 module.exports = {
   before: {
     all: [],
-    find: [],
-    get: [],
+    find: [ attachAuthInfo ],
+    get: [ attachAuthInfo ],
     create: [ authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS) ],
     update: [
       authenticate('jwt'),
@@ -218,8 +292,8 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
-    get: [],
+    find: [ filterFields ],
+    get: [ filterFields ],
     create: [syncWithGoogleCalendar],
     update: [syncWithGoogleCalendar],
     patch: [],
