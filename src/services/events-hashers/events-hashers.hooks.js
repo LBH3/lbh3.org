@@ -5,15 +5,20 @@ const authHook = require('../../hooks/auth');
 
 const getFirstOrLastTrailForHasher = function(first, hasherId) {
   const sortDirection = first ? 'ASC' : 'DESC';
+  console.info(`getFirstOrLastTrailForHasher: ${hasherId} (${sortDirection})`);
   return new Promise(function(resolve, reject) {
     const client = new Client({
       database: 'lbh3'
     });
     client.connect();
-    client.query(`SELECT events.* FROM events_hashers INNER JOIN events ON (events_hashers.trail_number = events.trail_number) WHERE hasher_id=${hasherId} ORDER BY events.start_datetime ${sortDirection} LIMIT 2`, (error, response) => {
+    const query = `SELECT events.* FROM events_hashers INNER JOIN events ON (events_hashers.trail_number = events.trail_number) WHERE hasher_id=${hasherId} ORDER BY events.start_datetime ${sortDirection} LIMIT 2`;
+    console.info(`query: ${query}`);
+    client.query(query, (error, response) => {
+      console.info('Query error:', error);
       if (error) {
         reject(error);
       } else {
+        console.info('Query response:', response);
         resolve(response && response.rows || []);
       }
       client.end();
@@ -25,11 +30,13 @@ const getFirstAndLastTrailData = function({event, hasher}) {
   return new Promise(function(resolve, reject) {
     getFirstOrLastTrailForHasher(true, hasher.id).then(firstTrails => {
       let newFirstTrail;
+      console.info(`firstTrails.length: ${firstTrails.length}`);
       if (firstTrails.length) {
         newFirstTrail = (firstTrails[0].start_datetime.getTime() === event.startDatetime.getTime()) ? firstTrails[1] : firstTrails[0];
       }
       getFirstOrLastTrailForHasher(false, hasher.id).then(lastTrails => {
         let newLastTrail;
+        console.info(`lastTrails.length: ${lastTrails.length}`);
         if (lastTrails.length) {
           newLastTrail = (lastTrails[0].start_datetime.getTime() === event.startDatetime.getTime()) ? lastTrails[1] : lastTrails[0];
         }
