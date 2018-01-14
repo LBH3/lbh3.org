@@ -42,7 +42,9 @@
     <tbody>
       {{#each hashers as hasher}}
         <tr>
-          <td></td>
+          <td class="text-center">
+            {{hasher.payment}}
+          </td>
           <td class="text-uppercase">
             {{hasher.hashName}}
           </td>
