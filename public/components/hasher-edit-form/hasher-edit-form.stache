@@ -307,13 +307,6 @@
     </fieldset>
   {{/if}}
 
-  <button
-    class="btn btn-primary"
-    {{#if editingHasherPromise.isPending}}disabled{{/if}}
-    type="submit">
-    {{saveButtonLabel}}
-  </button>
-
   {{#if editingHasherPromise.isPending}}
     <div class="alert alert-info mt-3" role="alert">
       <strong>Saving hasher…</strong>
@@ -346,6 +339,13 @@
       <strong>On on!</strong> {{saveSuccessMessage}}
     </div>
   {{/if}}
+
+  <button
+    class="btn btn-primary"
+    {{#if editingHasherPromise.isPending}}disabled{{/if}}
+    type="submit">
+    {{saveButtonLabel}}
+  </button>
 
   {{#if hasher.id}}
     <fieldset class="mt-4">
