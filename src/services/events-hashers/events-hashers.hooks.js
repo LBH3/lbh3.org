@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const { authenticate } = require('feathers-authentication').hooks;
 const { Client } = require('pg');
 const authHook = require('../../hooks/auth');
@@ -42,16 +43,21 @@ const getFirstAndLastTrailData = function({event, hasher}) {
 };
 
 const getRequiredData = function(hook) {
+  console.info('getRequiredData()');
   return new Promise(function(resolve, reject) {
     new Promise(function(resolve, reject) {
+      console.info(`hook.data.hasherId: ${hook.data.hasherId}`);
       if (hook.data.hasherId) {
         resolve(hook.data);
       } else {
         hook.service.get(hook.id).then(resolve, reject);
       }
     }).then(eventHasher => {
+      console.info(`eventHasher.trailNumber: ${eventHasher.trailNumber}`);
       hook.app.service('api/events').find({query: {trailNumber: eventHasher.trailNumber}}).then(events => {
+        console.info(`eventHasher.hasherId: ${eventHasher.hasherId}`);
         hook.app.service('api/hashers').get(eventHasher.hasherId, hook.params).then(hasher => {
+          console.info('Did get hasher');
           resolve({
             event: events.data[0],
             eventHasher,
@@ -106,11 +112,15 @@ const createHook = function(hook) {
 };
 
 const removeHook = function(hook) {
+  console.info('Inside events-hashers before hook');
   return new Promise(function(resolve, reject) {
     getRequiredData(hook).then(({event, eventHasher, hasher}) => {
+      console.info('Did getRequiredData()');
       getFirstAndLastTrailData({event, hasher}).then(({newFirstTrail, newLastTrail}) => {
         const didHare = eventHasher.role.substr(0, 4) === 'Hare';
+        console.info(`didHare: ${didHare}`);
         const eventMiles = Number(event.miles);
+        console.info(`eventMiles: ${eventMiles}`);
         const hasherPatchData = {
           firstTrailDate: (newFirstTrail) ? newFirstTrail.start_datetime : null,
           firstTrailNumber: (newFirstTrail) ? newFirstTrail.trail_number : null,
@@ -121,10 +131,12 @@ const removeHook = function(hook) {
           runCount: Number(hasher.runCount) - 1,
           runMileage: Number(hasher.runMileage) - eventMiles
         };
+        console.info('Making api/hashers patch call with data:', hasherPatchData);
         hook.app.service('api/hashers').patch(hasher.id, hasherPatchData).then(() => {
           const eventPatchData = {
             hashersTotal: Number(event.hashersTotal) - 1
           };
+          console.info('Making api/events patch call with data:', eventPatchData);
           hook.app.service('api/events').patch(event.id, eventPatchData).then(() => {
             resolve(hook);
           }, reject);
