@@ -2,6 +2,7 @@ const errors = require('feathers-errors');
 const getBoredHasher = require('../utils/get-bored-hasher');
 
 module.exports = {
+  GRANDMASTERS: 2,
   HASH_CASH: 4,
   HASH_FLASH: 5,
   HASH_HISTORIANS: 6,
