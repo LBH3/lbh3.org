@@ -171,6 +171,33 @@
       </div>
     {{/if}}
 
+    {{#if editingEventPromise.isPending}}
+      <div class="alert alert-info mt-3" role="alert">
+        <strong>Saving trail…</strong>
+      </div>
+    {{/if}}
+    {{#if editingEventPromise.isRejected}}
+      <div class="alert alert-danger mt-3" role="alert">
+        <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.message}}
+      </div>
+    {{/if}}
+    {{#if editingEventPromise.isResolved}}
+      <div class="alert alert-success mt-3" role="alert">
+        <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>On on!</strong>
+        {{#if event.hasProbablyEnded}}
+          You successfully saved trail #{{event.trailNumber}}.
+        {{else}}
+          Both hash.org and lbh3.org have been updated.
+        {{/if}}
+      </div>
+    {{/if}}
+
     <button
       class="btn btn-primary mt-3"
       {{#if editingEventPromise.isPending}}disabled{{/if}}
@@ -209,33 +236,6 @@
       </div>
     {{/if}}
   </form>
-{{/if}}
-
-{{#if editingEventPromise.isPending}}
-  <div class="alert alert-info mt-3" role="alert">
-    <strong>Saving trail…</strong>
-  </div>
-{{/if}}
-{{#if editingEventPromise.isRejected}}
-  <div class="alert alert-danger mt-3" role="alert">
-    <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.message}}
-  </div>
-{{/if}}
-{{#if editingEventPromise.isResolved}}
-  <div class="alert alert-success mt-3" role="alert">
-    <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    <strong>On on!</strong>
-    {{#if event.hasProbablyEnded}}
-      You successfully saved trail #{{event.trailNumber}}.
-    {{else}}
-      Both hash.org and lbh3.org have been updated.
-    {{/if}}
-  </div>
 {{/if}}
 
 {{#if event.hasStartedOrIsCloseToStarting}}

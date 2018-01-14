@@ -1,21 +1,5 @@
 <h2>Add a new trail</h2>
 
-{{#if creatingTrailPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Saving trail…</strong>
-  </div>
-{{/if}}
-{{#if creatingTrailPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The new trail failed to save. {{creatingTrailPromise.reason.message}}
-  </div>
-{{/if}}
-{{#if creatingTrailPromise.isResolved}}
-  <div class="alert alert-success" role="alert">
-    <strong>On on!</strong> You successfully created trail #{{createdTrail.trailNumber}}.
-  </div>
-{{/if}}
-
 <form on:submit="createTrail()">
   <div class="form-group row">
     <label class="col-1 col-form-label" for="run-number">
@@ -41,7 +25,27 @@
       <input class="form-control" id="start-time" type="time" value:bind="startTime">
     </div>
   </div>
-  <button class="btn btn-primary" type="submit">
+
+  {{#if creatingTrailPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Saving trail…</strong>
+    </div>
+  {{/if}}
+  {{#if creatingTrailPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The new trail failed to save. {{creatingTrailPromise.reason.message}}
+    </div>
+  {{/if}}
+  {{#if creatingTrailPromise.isResolved}}
+    <div class="alert alert-success" role="alert">
+      <strong>On on!</strong> You successfully created trail #{{createdTrail.trailNumber}}.
+    </div>
+  {{/if}}
+
+  <button
+    class="btn btn-primary"
+    {{#if creatingTrailPromise.isPending}}disabled{{/if}}
+    type="submit">
     Create trail
   </button>
 </form>
