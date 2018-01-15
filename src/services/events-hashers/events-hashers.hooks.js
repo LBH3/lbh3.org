@@ -1,42 +1,24 @@
-/* eslint-disable no-console */
 const { authenticate } = require('feathers-authentication').hooks;
-const { Client } = require('pg');
 const authHook = require('../../hooks/auth');
 
-const getFirstOrLastTrailForHasher = function(first, hasherId) {
+const getFirstOrLastTrailForHasher = function(sequelize, hasherId, first) {
   const sortDirection = first ? 'ASC' : 'DESC';
-  console.info(`getFirstOrLastTrailForHasher: ${hasherId} (${sortDirection})`);
-  return new Promise(function(resolve, reject) {
-    const client = new Client({
-      database: 'lbh3'
-    });
-    client.connect();
-    const query = `SELECT events.* FROM events_hashers INNER JOIN events ON (events_hashers.trail_number = events.trail_number) WHERE hasher_id=${hasherId} ORDER BY events.start_datetime ${sortDirection} LIMIT 2`;
-    console.info(`query: ${query}`);
-    client.query(query, (error, response) => {
-      console.info('Query error:', error);
-      if (error) {
-        reject(error);
-      } else {
-        console.info('Query response:', response);
-        resolve(response && response.rows || []);
-      }
-      client.end();
-    });
+  const query = `SELECT events.* FROM events_hashers INNER JOIN events ON (events_hashers.trail_number = events.trail_number) WHERE hasher_id=${hasherId} ORDER BY events.start_datetime ${sortDirection} LIMIT 2`;
+  return sequelize.query(query, {
+    type: sequelize.QueryTypes.SELECT
   });
 };
 
-const getFirstAndLastTrailData = function({event, hasher}) {
+const getFirstAndLastTrailData = function({event, hasher, hook}) {
   return new Promise(function(resolve, reject) {
-    getFirstOrLastTrailForHasher(true, hasher.id).then(firstTrails => {
+    const sequelizeClient = hook.app.get('sequelizeClient');
+    getFirstOrLastTrailForHasher(sequelizeClient, hasher.id, true).then(firstTrails => {
       let newFirstTrail;
-      console.info(`firstTrails.length: ${firstTrails.length}`);
       if (firstTrails.length) {
         newFirstTrail = (firstTrails[0].start_datetime.getTime() === event.startDatetime.getTime()) ? firstTrails[1] : firstTrails[0];
       }
-      getFirstOrLastTrailForHasher(false, hasher.id).then(lastTrails => {
+      getFirstOrLastTrailForHasher(sequelizeClient, hasher.id).then(lastTrails => {
         let newLastTrail;
-        console.info(`lastTrails.length: ${lastTrails.length}`);
         if (lastTrails.length) {
           newLastTrail = (lastTrails[0].start_datetime.getTime() === event.startDatetime.getTime()) ? lastTrails[1] : lastTrails[0];
         }
@@ -50,21 +32,21 @@ const getFirstAndLastTrailData = function({event, hasher}) {
 };
 
 const getRequiredData = function(hook) {
-  console.info('getRequiredData()');
   return new Promise(function(resolve, reject) {
     new Promise(function(resolve, reject) {
-      console.info(`hook.data.hasherId: ${hook.data.hasherId}`);
       if (hook.data.hasherId) {
         resolve(hook.data);
       } else {
         hook.service.get(hook.id).then(resolve, reject);
       }
     }).then(eventHasher => {
-      console.info(`eventHasher.trailNumber: ${eventHasher.trailNumber}`);
-      hook.app.service('api/events').find({query: {trailNumber: eventHasher.trailNumber}}).then(events => {
-        console.info(`eventHasher.hasherId: ${eventHasher.hasherId}`);
+      const findParams = Object.assign({}, hook.params, {
+        query: {
+          trailNumber: eventHasher.trailNumber
+        }
+      });
+      hook.app.service('api/events').find(findParams).then(events => {
         hook.app.service('api/hashers').get(eventHasher.hasherId, hook.params).then(hasher => {
-          console.info('Did get hasher');
           resolve({
             event: events.data[0],
             eventHasher,
@@ -119,15 +101,11 @@ const createHook = function(hook) {
 };
 
 const removeHook = function(hook) {
-  console.info('Inside events-hashers before hook');
   return new Promise(function(resolve, reject) {
     getRequiredData(hook).then(({event, eventHasher, hasher}) => {
-      console.info('Did getRequiredData()');
-      getFirstAndLastTrailData({event, hasher}).then(({newFirstTrail, newLastTrail}) => {
+      getFirstAndLastTrailData({event, hasher, hook}).then(({newFirstTrail, newLastTrail}) => {
         const didHare = eventHasher.role.substr(0, 4) === 'Hare';
-        console.info(`didHare: ${didHare}`);
         const eventMiles = Number(event.miles);
-        console.info(`eventMiles: ${eventMiles}`);
         const hasherPatchData = {
           firstTrailDate: (newFirstTrail) ? newFirstTrail.start_datetime : null,
           firstTrailNumber: (newFirstTrail) ? newFirstTrail.trail_number : null,
@@ -138,12 +116,10 @@ const removeHook = function(hook) {
           runCount: Number(hasher.runCount) - 1,
           runMileage: Number(hasher.runMileage) - eventMiles
         };
-        console.info('Making api/hashers patch call with data:', hasherPatchData);
         hook.app.service('api/hashers').patch(hasher.id, hasherPatchData).then(() => {
           const eventPatchData = {
             hashersTotal: Number(event.hashersTotal) - 1
           };
-          console.info('Making api/events patch call with data:', eventPatchData);
           hook.app.service('api/events').patch(event.id, eventPatchData).then(() => {
             resolve(hook);
           }, reject);
