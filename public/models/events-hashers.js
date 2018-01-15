@@ -95,15 +95,15 @@ EventsHashers.connection = connect([
 });
 
 EventsHashers.paymentRates = [
-  {rate: 0, tier: 'hares', title: 'Hares (3 Run Free)'},
-  {rate: 0, tier: 'founder', title: 'Founders & Comp'},
-  {rate: 0, tier: 'lt', title: 'Brewmeister Free'},
-  {rate: 0, tier: 'baby', title: 'Babies'},
-  {rate: 5, tier: '5', title: 'Full'},
-  {rate: 3, tier: 'bored', title: 'Bored Members'},
-  {rate: 0, tier: 'punch', title: 'Punch cards'},
-  {rate: 0, tier: 'dues', title: 'Annual/Quarterly Dues'},
-  {rate: 3, tier: 'kids', title: 'Kids'}
+  {abbr: 'H', rate: 0, tier: 'hares', title: 'Hares (3 Run Free)'},
+  {abbr: 'F', rate: 0, tier: 'founder', title: 'Founders & Comp'},
+  {abbr: 'LT', rate: 0, tier: 'lt', title: 'Brewmeister Free'},
+  {abbr: 'B', rate: 0, tier: 'baby', title: 'Babies'},
+  {abbr: '', rate: 5, tier: '5', title: 'Full'},
+  {abbr: 'O', rate: 3, tier: 'bored', title: 'Bored Members'},
+  {abbr: 'P', rate: 0, tier: 'punch', title: 'Punch cards'},
+  {abbr: 'D', rate: 0, tier: 'dues', title: 'Annual/Quarterly Dues'},
+  {abbr: 'K', rate: 3, tier: 'kids', title: 'Kids'}
 ];
 
 EventsHashers.roles = [

@@ -265,11 +265,6 @@
               </label>
             </th>
             <th>
-              <label for="role">
-                Role
-              </label>
-            </th>
-            <th>
               <label for="payment-tier">
                 Payment tier
               </label>
@@ -277,6 +272,11 @@
             <th>
               <label for="payment-notes">
                 Payment notes
+              </label>
+            </th>
+            <th>
+              <label for="role">
+                Role
               </label>
             </th>
             <th></th>
@@ -289,13 +289,13 @@
               <td>
                 {{hasher.hashOrJustName}}
               </td>
-              <td>{{hasher.role}}</td>
               <td>
                 {{hasher.paymentTier}}
               </td>
               <td>
                 {{hasher.paymentNotes}}
               </td>
+              <td>{{hasher.role}}</td>
               <td class="text-center">
                 <button
                   class="btn btn-danger btn-sm remove-hasher"
@@ -319,16 +319,12 @@
               />
             </td>
             <td>
-              <select class="form-control" id="role" value:bind="newHasherForRun.role">
-                {{#each roles as role}}
-                  <option value="{{role}}">
-                    {{role}}
-                  </option>
-                {{/each}}
-              </select>
-            </td>
-            <td>
-              <select class="form-control" id="payment-tier" value:bind="newHasherForRun.paymentTier">
+              <select
+                class="form-control"
+                {{^if newHasherForRun.hasherId}}disabled{{/if}}
+                id="payment-tier"
+                value:bind="newHasherForRun.paymentTier"
+              >
                 {{#each paymentRates as paymentRate}}
                   <option value="{{paymentRate.tier}}">
                     {{paymentRate.title}}
@@ -339,15 +335,31 @@
             <td>
               <input
                 class="form-control"
+                {{^if newHasherForRun.hasherId}}disabled{{/if}}
                 id="payment-notes"
                 value:bind="newHasherForRun.paymentNotes"
                 type="text"
               />
             </td>
+            <td>
+              <select
+                class="form-control"
+                {{^if newHasherForRun.hasherId}}disabled{{/if}}
+                id="role"
+                value:bind="newHasherForRun.role"
+              >
+                {{#each roles as role}}
+                  <option value="{{role}}">
+                    {{role}}
+                  </option>
+                {{/each}}
+              </select>
+            </td>
             <td class="text-center">
               <button
                 class="btn {{#if addingHasherPromise.isRejected}}btn-warning{{else}}btn-primary{{/if}} btn-sm"
                 {{#if addingHasherPromise.isPending}}disabled{{/if}}
+                {{^if newHasherForRun.hasherId}}disabled{{/if}}
                 {{^if event.miles}}disabled title="Please save the number of miles for this trail before adding hashers."{{/if}}
                 type="submit"
               >

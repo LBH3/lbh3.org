@@ -7,6 +7,7 @@ import Hasher from '~/models/hasher';
 import Place from '~/models/place';
 import Session from '~/models/session';
 import './edit.less';
+import debounce from 'lodash.debounce';
 import loader from '@loader';
 import view from './edit.stache';
 
@@ -228,33 +229,39 @@ export default Component.extend({
       }
     },
 
-    '{newHasherForRun} paymentTier': function(newHasherForRun) {
-      // Wait to give the user a chance to finish their selection
-      // before changing the focus
-      setTimeout(() => {
-        if (newHasherForRun.paymentTier === 'baby') {
-          newHasherForRun.paymentNotes = 'B';
-        } else if (newHasherForRun.paymentTier === 'bored') {
-          newHasherForRun.paymentNotes = 'O';
-        } else if (newHasherForRun.paymentTier === 'dues') {
-          newHasherForRun.paymentNotes = 'D';
-        } else if (newHasherForRun.paymentTier === 'founder') {
-          newHasherForRun.paymentNotes = 'F';
-        } else if (newHasherForRun.paymentTier === 'hares') {
-          newHasherForRun.paymentNotes = 'H';
-        } else if (newHasherForRun.paymentTier === 'kids') {
-          newHasherForRun.paymentNotes = 'K';
-        } else if (newHasherForRun.paymentTier === 'lt') {
-          newHasherForRun.paymentNotes = 'LT';
-        } else if (newHasherForRun.paymentTier === 'punch') {
-          newHasherForRun.paymentNotes = 'P';
+    '{newHasherForRun} paymentTier': debounce(function(newHasherForRun) {
+      const paymentRate = EventsHashers.paymentRates.find(paymentRate => {
+        return paymentRate.tier === newHasherForRun.paymentTier;
+      });
+      if (paymentRate) {
+        newHasherForRun.paymentNotes = paymentRate.abbr;
+
+        // Give focus to the “Role” select
+        const roleSelect = document.getElementById('role');
+        if (roleSelect) {
+          roleSelect.focus();
         }
+
+      } else {
         const paymentNotesSelect = document.getElementById('payment-notes');
         if (paymentNotesSelect) {
           paymentNotesSelect.focus();
         }
-      }, 200);
-    },
+      }
+    }, 250),
+
+    '{newHasherForRun} role': debounce(function(newHasherForRun) {
+      const role = newHasherForRun.role;
+      const didHare = role && role.substr(0, 4) === 'Hare';
+      if (didHare) {
+        const hares = this.viewModel.hashers.filter(hasher => {
+          return hasher.paymentTier === 'hares';
+        });
+        if (hares.length < 3) {
+          newHasherForRun.paymentTier = 'hares';
+        }
+      }
+    }, 250),
 
     enableAutocompleteForInput: function(id, vmProperty, options) {
       const interval = setInterval(() => {// Make sure the element is in the DOM
@@ -312,12 +319,21 @@ export default Component.extend({
       // Special case for Jock
       if (hasher.id === 1) {
         newHasherForRun.paymentTier = 'founder';
+
+      } else if (hasher.payment) {
+        const paymentRate = EventsHashers.paymentRates.find(paymentRate => {
+          return paymentRate.abbr === hasher.payment;
+        });
+        if (paymentRate) {
+          newHasherForRun.paymentTier = paymentRate.tier;
+        }
       }
 
-      // Give focus to the “Role” select
-      const roleSelect = document.getElementById('role');
-      if (roleSelect) {
-        roleSelect.focus();
+      if (!newHasherForRun.paymentTier) {// Give focus to the “Payment tier” select
+        const paymentTierSelect = document.getElementById('payment-tier');
+        if (paymentTierSelect) {
+          paymentTierSelect.focus();
+        }
       }
     },
 
