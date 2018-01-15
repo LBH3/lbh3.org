@@ -6,24 +6,18 @@ import view from './mismanagement.stache';
 
 import '~/components/about/mismanagement/year/';
 
-const currentYear = (new Date()).getFullYear();
-
 export const ViewModel = DefineMap.extend({
   mostRecentYear: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
+    get: function() {
+      const years = this.years;
+      if (years && years.length) {
+        return years[0].year;
       }
-      this.yearsPromise.then(years => {
-        if (years.length > 0) {
-          setValue(years[0].year);
-        }
-      });
     }
   },
   routeForYear: function(year) {
     const routeParams = {page: 'about', secondaryPage: 'mismanagement'};
-    if (currentYear !== year) {
+    if (this.mostRecentYear !== year) {
       routeParams.year = year;
     }
     return route.url(routeParams);
@@ -48,7 +42,7 @@ export const ViewModel = DefineMap.extend({
   year: {
     type: 'number',
     get: function(year) {
-      return year || this.mostRecentYear || currentYear;
+      return year || this.mostRecentYear || (new Date()).getFullYear();
     }
   },
   years: {

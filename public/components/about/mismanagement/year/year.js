@@ -23,7 +23,9 @@ export const ViewModel = DefineMap.extend({
   hashersByPosition: {
     get: function() {
       const hashers = this.hashers;
-      return (hashers) ? BoredHasher.groupByPosition(hashers) : [];
+      if (hashers) {
+        return BoredHasher.groupByPosition(hashers);
+      }
     }
   },
   hashersPromise: {
