@@ -43,16 +43,16 @@
       </h3>
       <ul>
         {{#each position.hashers as hasherPromise}}
-          {{#if hasherPromise.isPending}}
-            Fetching hasher…
-          {{/if}}
+          <li>
+            {{#if hasherPromise.isPending}}
+              Fetching hasher…
+            {{/if}}
 
-          {{#if hasherPromise.isRejected}}
-            <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.message}}
-          {{/if}}
+            {{#if hasherPromise.isRejected}}
+              <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.message}}
+            {{/if}}
 
-          {{#if hasherPromise.isResolved}}
-            <li>
+            {{#if hasherPromise.isResolved}}
               {{#if session.user.canViewHashersList}}
                 <a href="{{routeForHasher(hasherPromise.value)}}">
                   {{hasherPromise.value.hashName}}
@@ -60,8 +60,8 @@
               {{else}}
                 {{hasherPromise.value.hashName}}
               {{/if}}
-            </li>
-          {{/if}}
+            {{/if}}
+          </li>
         {{/each}}
       </ul>
     {{/if}}

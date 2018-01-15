@@ -1,10 +1,12 @@
+import algebra from './algebra';
+import behaviors from './behaviors';
 import BoredPosition from '~/models/bored-position';
+import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
+import feathersClient from './feathers-client';
+import feathersServiceBehavior from 'can-connect-feathers/service';
 import Hasher from '~/models/hasher';
-import loader from '@loader';
-import set from 'can-set';
-import superMap from 'can-connect/can/super-map/';
 
 const BoredHasher = DefineMap.extend({
   seal: false
@@ -18,16 +20,15 @@ const BoredHasher = DefineMap.extend({
   startDate: 'any'
 });
 
-const algebra = new set.Algebra(
-  set.props.id('id')
-);
-
 BoredHasher.List = DefineList.extend({
   '#': BoredHasher
 });
 
-BoredHasher.connection = superMap({
-  url: loader.serviceBaseURL + '/api/bored-hashers',
+BoredHasher.connection = connect([
+  feathersServiceBehavior,
+  ...behaviors
+], {
+  feathersService: feathersClient.service('/api/bored-hashers'),
   Map: BoredHasher,
   List: BoredHasher.List,
   name: 'bored-hashers',
