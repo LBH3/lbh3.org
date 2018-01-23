@@ -50,6 +50,13 @@ const EventsHashers = DefineMap.extend({
     get: function() {
       const hashName = this.hashName;
       if (hashName) {
+        const role = (this.role || '').toLowerCase();
+        if (role.indexOf('new name') > -1) {
+          const justName = `${this.givenName} ${this.familyName}`.trim();
+          if (justName) {
+            return `${hashName} (was Just ${justName})`;
+          }
+        }
         return hashName;
       }
       return `Just ${this.givenName} ${this.familyName}`.trim();
