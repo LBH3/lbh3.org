@@ -223,6 +223,17 @@
                   </can-import>
                 </lbh3-no-ssr>
               {{/case}}
+              {{#case "email"}}
+                <lbh3-no-ssr>
+                  <can-import from="lbh3/components/hashers/email/">
+                    {{#if isPending}}
+                      Loading the hashers email page…
+                    {{else}}
+                      <lbh3-hashers-email />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
+              {{/case}}
               {{#case "edit"}}
                 <lbh3-no-ssr>
                   <can-import from="lbh3/components/hasher/edit/">

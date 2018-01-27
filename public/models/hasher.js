@@ -260,4 +260,21 @@ Hasher.connection = connect([
   algebra
 });
 
+Hasher.groupByEmailing = function(hashers) {
+  let currentEmailing;
+  const hashersByEmailing = [];
+  hashers.forEach(function(hasher) {
+    const emailing = hasher.emailing;
+    if (!currentEmailing || currentEmailing.group != emailing) {
+      currentEmailing = {
+        group: emailing,
+        hashers: []
+      };
+      hashersByEmailing.push(currentEmailing);
+    }
+    currentEmailing.hashers.push(hasher);
+  });
+  return hashersByEmailing;
+};
+
 export default Hasher;

@@ -48,6 +48,7 @@ route('/hareline/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { p
 route('/hareline/{secondaryPage}/', { page: 'hareline' });
 route('/hareline/', { page: 'hareline' });
 route('/hashers/add/', { page: 'hashers', secondaryPage: 'add'});
+route('/hashers/email/', { page: 'hashers', secondaryPage: 'email'});
 route('/hashers/{id}/{secondaryPage}/', { page: 'hashers', id: 0, secondaryPage: ''});
 route('/hashers/{id}/', { page: 'hashers', id: 0 });
 route('/hashers/', { page: 'hashers', secondaryPage: '' });
