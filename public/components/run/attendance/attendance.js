@@ -29,7 +29,7 @@ export const ViewModel = DefineMap.extend({
       const trailDate = this.trailDateAsMoment;
       if (trailDate.isValid()) {
         return Hasher.connection.getList({
-          $limit: 200,
+          $limit: 500,
           lastTrailDate: {
             $gte: trailDate.clone().subtract(5, 'weeks').toDate()
           },
