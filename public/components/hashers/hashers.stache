@@ -1,10 +1,29 @@
 <can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
 
-<h2>
-  <a href="{{routeUrl page='hashers' secondaryPage=''}}">
-    Hashers
-  </a>
-</h2>
+{{#if session.user.canViewHashersEmailList}}
+  <div class="row">
+    <div class="col"></div>
+    <div class="col-10">
+      <h2>
+        <a href="{{routeUrl page='hashers' secondaryPage=''}}">
+          Hashers
+        </a>
+      </h2>
+    </div>
+      <div class="col text-right">
+        <a href="{{routeUrl page='hashers' secondaryPage='email'}}" title="Go to the email list">
+          <span class="fa fa-envelope"></span>
+        </a>
+      </div>
+  </div>
+{{else}}
+  <h2>
+    <a href="{{routeUrl page='hashers' secondaryPage=''}}">
+      Hashers
+    </a>
+  </h2>
+{{/if}}
 
 {{#if session.user.canViewHashersList}}
 

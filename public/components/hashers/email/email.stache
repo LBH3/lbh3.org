@@ -1,0 +1,39 @@
+<can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
+
+<div class="row">
+  <div class="col">
+    <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
+      <span class="fa fa-angle-double-left"></span>
+    </a>
+  </div>
+  <div class="col-10">
+    <h2>Email List</h2>
+  </div>
+  <div class="col"></div>
+</div>
+
+{{#if hashersPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching email list…</strong>
+  </div>
+{{/if}}
+
+{{#if hashersPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The email list couldn’t be retrieved. {{hashersPromise.reason.message}}
+  </div>
+{{/if}}
+
+{{#if emailGroups}}
+  {{#each emailGroups as email}}
+    <h3>{{email.group}}</h3>
+    <ul>
+      {{#each email.hashers as hasher}}
+        {{#if hasher.emailAddresses[0]}}
+          <li>{{hasher.emailAddresses[0]}}</li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  {{/each}}
+{{/if}}

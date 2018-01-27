@@ -50,6 +50,7 @@ const getBoredInfo = function(hook) {
         canEditHasherInfo: false,
         canEditPostTrailInfo: false,
         canEditPreTrailInfo: false,
+        canViewHashersEmailList: false,
         canViewHashersList: false
       };
       if (boredPositions.includes(authHook.HASH_CASH)) {
@@ -70,6 +71,7 @@ const getBoredInfo = function(hook) {
           canAddSnoozes: true,
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,
+          canViewHashersEmailList: true,
           canViewHashersList: true
         });
       }
@@ -78,6 +80,7 @@ const getBoredInfo = function(hook) {
           canAddHashers: true,
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,
+          canViewHashersEmailList: true,
           canViewHashersList: true
         });
       }
@@ -102,6 +105,7 @@ const getBoredInfo = function(hook) {
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,
           canEditPreTrailInfo: true,
+          canViewHashersEmailList: true,
           canViewHashersList: true
         });
       }
