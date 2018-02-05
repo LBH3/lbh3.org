@@ -283,7 +283,7 @@ module.exports = {
     create: [ authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS) ],
     update: [
       authenticate('jwt'),
-      authHook.restrictTo(authHook.HASH_FLASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.TRAILMASTERS, authHook.WEBMASTERS),
+      authHook.restrictTo(authHook.HASH_FLASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.TRAILMASTERS, authHook.WEBMASTERS),
       makeRaw
     ],
     patch: [ authenticate('jwt'), authHook.restrictTo() ],
