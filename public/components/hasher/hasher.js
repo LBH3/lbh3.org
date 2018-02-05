@@ -2,6 +2,7 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';
+import Patch from '~/models/patch';
 import Session from '~/models/session';
 import './hasher.less';
 import route from 'can-route';
@@ -121,6 +122,28 @@ export const ViewModel = DefineMap.extend({
       pages.push(i);
     }
     return pages;
+  },
+  patches: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      this.patchesPromise.then(setValue);
+    }
+  },
+  patchesPromise: {
+    get: function() {
+      const hasherId = this.hasher.id;
+      if (hasherId) {
+        return Patch.connection.getList({
+          hasherId,
+          $limit: 500,
+          $sort: {
+            trailNumber: -1
+          }
+        });
+      }
+    }
   },
   routeForHasher: function(hasher) {
     const routeParams = {

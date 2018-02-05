@@ -5,10 +5,9 @@ import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
-import loader from '@loader';
 import marked from 'marked';
 import moment from 'moment-timezone';
-import set from 'can-set';
+import Patch from './patch';
 
 marked.setOptions({
   breaks: true,
@@ -179,7 +178,6 @@ const Hasher = DefineMap.extend({
       return !!this.died || !!this.inMemoriam || !!this.passed;
     }
   },
-  hashId: 'number',
   hashName: 'string',
   hashOrJustName: {
     get: function() {
@@ -229,6 +227,15 @@ const Hasher = DefineMap.extend({
   notesMd: 'string',
   owes: 'string',
   passed: 'string',
+  patchesPromise: {
+    get: function() {
+      return Patch.connection.getList({
+        $limit: 500,
+        hasherId: this.id
+      });
+    },
+    serialize: false
+  },
   payment: 'string',
   punchCard: 'number',
   runCount: 'number',

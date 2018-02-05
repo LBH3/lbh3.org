@@ -17,6 +17,12 @@ export const sortByName = (a, b) => {
   return compareHashNames;
 };
 
+export const sortByHashOrJustName = (a, b) => {
+  const aName = a.hashOrJustName;
+  const bName = b.hashOrJustName;
+  return aName.localeCompare(bName);
+};
+
 export const sortByPayment = (a, b) => {
   const aPayment = a.paymentNotesAndType;
   const bPayment = b.paymentNotesAndType;

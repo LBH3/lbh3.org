@@ -111,20 +111,6 @@
     {{#if showPostTrailFields}}
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="hare-patches">
-            Hare patches
-          </label>
-          <textarea class="form-control" id="hare-patches" value:bind="event.harePatchesMd"></textarea>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="patches">
-            Runner patches
-          </label>
-          <textarea class="form-control" id="patches" value:bind="event.patchesMd"></textarea>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
           <label for="hashit-reason">
             Hashit
           </label>
@@ -232,6 +218,20 @@
             Returners
           </label>
           <textarea class="form-control" disabled id="returners" value:bind="event.returnersMd"></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="hare-patches">
+            Hare patches
+          </label>
+          <textarea class="form-control" disabled id="hare-patches" value:bind="event.harePatchesMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="patches">
+            Runner patches
+          </label>
+          <textarea class="form-control" disabled id="patches" value:bind="event.patchesMd"></textarea>
         </div>
       </div>
     {{/if}}
@@ -383,5 +383,96 @@
         </div>
       {{/if}}
     </form>
+
+    <h3>Patches</h3>
+    {{#if hashers.length}}
+      <form on:submit="addPatch()">
+        <table class="table table-bordered table-responsive table-sm">
+          <thead>
+            <tr>
+              <th></th>
+              <th><label for="patch-hasher-name">Hasher name</label></th>
+              <th><label for="patch-number">Patch number</label></th>
+              <th><label for="patch-type">Patch type</label></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td></td>
+              <td>
+                <select
+                  class="form-control"
+                  id="patch-hasher-name"
+                  value:bind="newPatch.hasherId"
+                >
+                  {{#each patchHashers as hasher}}
+                    <option value="{{hasher.hasherId}}">
+                      {{hasher.hashOrJustName}}
+                    </option>
+                  {{/each}}
+                </select>
+              </td>
+              <td>
+                <input
+                  class="form-control"
+                  {{^if newPatch.hasherId}}disabled{{/if}}
+                  id="patch-number"
+                  min="0"
+                  step="1"
+                  type="number"
+                  value:bind="newPatch.number"
+                />
+              </td>
+              <td>
+                <select
+                  class="form-control"
+                  {{^if newPatch.hasherId}}disabled{{/if}}
+                  id="patch-type"
+                  value:bind="newPatch.type"
+                >
+                  <option value="hare">hares</option>
+                  <option value="run">runs</option>
+                </select>
+              </td>
+              <td class="text-center">
+                <button
+                  class="btn {{#if addingPatchPromise.isRejected}}btn-warning{{else}}btn-primary{{/if}} btn-sm"
+                  {{#if addingPatchPromise.isPending}}disabled{{/if}}
+                  {{^if newPatch.hasherId}}disabled{{/if}}
+                  type="submit"
+                >
+                  {{#if addingPatchPromise.isRejected}}
+                    <span class="fa fa-warning" title="{{addingPatchPromise.reason.message}}"></span>
+                  {{else}}
+                    <span class="fa fa-plus"></span>
+                  {{/if}}
+                </button>
+              </td>
+            </tr>
+            {{#each patches as patch}}
+              <tr>
+                <td>{{plusOne(%index)}}</td>
+                <td>{{patch.hasher.hashOrJustName}}</td>
+                <td>{{patch.number}}</td>
+                <td>{{patch.type}}s</td>
+                <td class="text-center">
+                  <button
+                    class="btn btn-danger btn-sm remove-patch"
+                    on:click="removePatch(patch)"
+                  >
+                    <span class="fa fa-remove"></span>
+                  </button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </form>
+    {{else}}
+      <div class="alert alert-info" role="alert">
+        <strong>You can add patches after you add runners to the attendance sheet. 😊</strong>
+      </div>
+    {{/if}}
   {{/if}}
 {{/if}}
