@@ -39,22 +39,30 @@
     <div class="mb-4 row">
       <div class="col-lg-9 col-sm-6">
         <div class="row">
-          <div class="col-lg-3 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Hash name:</b>
             <br>
             {{hasher.hashName}}
           </div>
-          <div class="col-lg-3 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Who made you cum:</b>
             <br>
             {{hasher.whoMadeYouCum}}
           </div>
-          <div class="col-lg-3 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Mother hash:</b>
             <br>
             {{hasher.motherHash}}
           </div>
-          <div class="col-lg-3 mb-4">
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 mb-4">
+            <b>Emailing:</b>
+            <br>
+            {{hasher.emailing}}
+          </div>
+          <div class="col-lg-4 mb-4">
             <b>Naming trail:</b>
             <br>
             {{#if hasher.namingTrailDateParts}}
@@ -68,25 +76,25 @@
               {{/if}}
             {{/if}}
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-3 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Payment:</b>
             <br>
             {{hasher.payment}}
           </div>
-          <div class="col-lg-3 mb-4">
+        </div>
+
+        <div class="row">
+          <div class="col-lg-4 mb-4">
             <b>Punch card:</b>
             <br>
             {{hasher.punchCard}}
           </div>
-          <div class="col-lg-3 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Run patch:</b>
             <br>
             {{hasher.runPatch}}
           </div>
-          <div class="col-lg-3 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Run sort:</b>
             <br>
             {{hasher.runSort}}
@@ -94,17 +102,17 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-3 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Waiver:</b>
             <br>
             {{hasher.waiver}}
           </div>
-          <div class="col-lg-3 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Birthday:</b>
             <br>
             {{hasher.formattedBirthday}}
           </div>
-          <div class="col-lg-6 mb-4">
+          <div class="col-lg-4 mb-4">
             <b>Notes:</b>
             <br>
             {{#if hasher.notesHtml}}
@@ -357,23 +365,18 @@
         {{hasher.awardCount}}
       </div>
       <div class="col-sm-3">
-        <b>Emailing:</b>
-        <br>
-        {{hasher.emailing}}
-      </div>
-      <div class="col-sm-3">
         <b>End of year:</b>
         <br>
         {{hasher.endOfYear}}
       </div>
-    </div>
-
-    <div class="mb-4 row">
       <div class="col-sm-3">
         <b>Event:</b>
         <br>
         {{hasher.event}}
       </div>
+    </div>
+
+    <div class="mb-4 row">
       <div class="col-sm-3">
         <b>Food preference:</b>
         <br>
@@ -389,14 +392,14 @@
         <br>
         {{hasher.mia}}
       </div>
-    </div>
-
-    <div class="mb-4 row">
       <div class="col-sm-3">
         <b>Owes:</b>
         <br>
         {{hasher.owes}}
       </div>
+    </div>
+
+    <div class="mb-4 row">
       <div class="col-sm-3">
         <b>Shirt size:</b>
         <br>

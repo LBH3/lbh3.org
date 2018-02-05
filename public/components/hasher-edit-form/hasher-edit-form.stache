@@ -27,25 +27,37 @@
   </div>
 
   <div class="form-row">
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-2">
+      <label for="emailing">
+        Emailing
+      </label>
+      <input class="form-control" id="emailing" type="text" value:bind="hasher.emailing">
+    </div>
+    <div class="form-group col-md-2">
+      <label for="namingTrailNumber">
+        Naming trail #
+      </label>
+      <input class="form-control" id="namingTrailNumber" min="0" type="number" value:bind="hasher.namingTrailNumber">
+    </div>
+    <div class="form-group col-md-2">
       <label for="payment">
         Payment
       </label>
       <input class="form-control" id="payment" type="text" value:bind="hasher.payment">
     </div>
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-2">
       <label for="punchCard">
         Punch card
       </label>
       <input class="form-control" id="punchCard" min="0" type="number" value:bind="hasher.punchCard">
     </div>
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-2">
       <label for="runPatch">
         Run patch
       </label>
       <input class="form-control" id="runPatch" min="0" type="number" value:bind="hasher.runPatch">
     </div>
-    <div class="form-group col-md-3">
+    <div class="form-group col-md-2">
       <label for="runSort">
         Run sort
       </label>
@@ -65,20 +77,6 @@
         Mother hash
       </label>
       <input class="form-control" id="motherHash" type="text" value:bind="hasher.motherHash">
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="namingTrailNumber">
-        Naming trail number
-      </label>
-      <input class="form-control" id="namingTrailNumber" min="0" type="number" value:bind="hasher.namingTrailNumber">
-    </div>
-    <div class="form-group col-md-6">
-      <label for="namingTrailDate">
-        Naming trail date
-      </label>
-      <input class="form-control" disabled id="namingTrailDate" type="date" value:bind="hasher.namingTrailDate">
     </div>
   </div>
 
@@ -373,25 +371,31 @@
         </div>
       </div>
       <div class="form-row">
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="hareCount1">
             Hare count (1)
           </label>
           <input class="form-control" disabled id="hareCount1" min="0" type="number" value:bind="hasher.hareCount1">
         </div>
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="hareCount2">
             Hare count (2)
           </label>
           <input class="form-control" disabled id="hareCount2" min="0" type="number" value:bind="hasher.hareCount2">
         </div>
-      </div>
-      <div class="form-row">
         <div class="form-group col-md-4">
           <label for="miles">
             Miles
           </label>
           <input class="form-control" disabled id="miles" min="0" step="0.01" type="number" value:bind="hasher.miles">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-4">
+          <label for="namingTrailDate">
+            Naming trail date
+          </label>
+          <input class="form-control" disabled id="namingTrailDate" type="date" value:bind="hasher.namingTrailDate">
         </div>
         <div class="form-group col-md-4">
           <label for="runCount">
@@ -426,19 +430,13 @@
           <input class="form-control" disabled id="awardCount" min="0" type="number" value:bind="hasher.awardCount">
         </div>
         <div class="form-group col-md-4">
-          <label for="emailing">
-            Emailing
-          </label>
-          <input class="form-control" disabled id="emailing" type="text" value:bind="hasher.emailing">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
           <label for="endOfYear">
             End of year
           </label>
           <input class="form-control" disabled id="endOfYear" min="0" type="number" value:bind="hasher.endOfYear">
         </div>
+      </div>
+      <div class="form-row">
         <div class="form-group col-md-4">
           <label for="event">
             Event
@@ -451,14 +449,14 @@
           </label>
           <input class="form-control" disabled id="foodPreference" type="text" value:bind="hasher.foodPreference">
         </div>
-      </div>
-      <div class="form-row">
         <div class="form-group col-md-4">
           <label for="history">
             History
           </label>
           <input class="form-control" disabled id="history" type="text" value:bind="hasher.history">
         </div>
+      </div>
+      <div class="form-row">
         <div class="form-group col-md-4">
           <label for="mia">
             MIA
@@ -471,14 +469,14 @@
           </label>
           <input class="form-control" disabled id="owes" type="text" value:bind="hasher.owes">
         </div>
-      </div>
-      <div class="form-row">
         <div class="form-group col-md-4">
           <label for="shirtSize">
             Shirt size
           </label>
           <input class="form-control" disabled id="shirtSize" type="text" value:bind="hasher.shirtSize">
         </div>
+      </div>
+      <div class="form-row">
         <div class="form-group col-md-4">
           <label for="shoeSize">
             Shoe size
