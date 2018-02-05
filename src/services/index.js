@@ -7,6 +7,7 @@ const boredPositions = require('./bored-positions/bored-positions.service.js');
 const boredHashers = require('./bored-hashers/bored-hashers.service.js');
 const hashers = require('./hashers/hashers.service.js');
 const eventsHashers = require('./events-hashers/events-hashers.service.js');
+const patches = require('./patches/patches.service.js');
 module.exports = function () {
   const app = this; // eslint-disable-line no-unused-vars
   app.configure(users);
@@ -18,4 +19,5 @@ module.exports = function () {
   app.configure(boredHashers);
   app.configure(hashers);
   app.configure(eventsHashers);
+  app.configure(patches);
 };

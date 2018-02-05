@@ -6,6 +6,7 @@ import DefineList from 'can-define/list/';
 import Event from './event';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
+import Hasher from './hasher';
 import set from 'can-set';
 import loader from '@loader';
 
@@ -45,6 +46,17 @@ const EventsHashers = DefineMap.extend({
   foodPreference: 'string',
   givenName: 'string',
   hasherId: 'number',
+  hasherPromise: {
+    get: function() {
+      const id = this.hasherId;
+      if (id) {
+        return Hasher.connection.getList({
+          id
+        });
+      }
+    },
+    serialize: false
+  },
   hashName: 'string',
   hashOrJustName: {
     get: function() {

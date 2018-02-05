@@ -7,6 +7,7 @@ import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import marked from 'marked';
 import moment from 'moment-timezone';
+import Patch from './patch';
 import Place from './place';
 import platform from 'steal-platform';
 import set from 'can-set';
@@ -206,11 +207,44 @@ const Event = DefineMap.extend({
       }
     }
   },
+  patches: {
+    get: function(lastSetValue, resolve) {
+      if (lastSetValue) {
+        return lastSetValue;
+      }
+      if (this.patchesPromise) {
+        this.patchesPromise.then(resolve);
+      }
+    },
+    serialize: false
+  },
+  patchesFormatted: {
+    get: function(lastSetValue, resolve) {
+      const patches = this.patches;
+      if (patches && patches.length > 0) {
+        return patches.map(patch => {
+          return patch.formattedDescription;
+        }).join('; ');
+      }
+      return 'None';
+    },
+    serialize: false
+  },
   patchesHtml: {
     get: function() {
       return marked(this.patchesMd || '');
     },
     serialize: false
+  },
+  patchesPromise: {
+    get: function() {
+      const trailNumber = this.trailNumber;
+      if (trailNumber) {
+        return Patch.connection.getList({
+          trailNumber
+        });
+      }
+    }
   },
   returnersHtml: {
     get: function() {

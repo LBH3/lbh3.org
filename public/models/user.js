@@ -46,6 +46,10 @@ var User = DefineMap.extend('User', {
     type: 'boolean',
     serialize: false
   },
+  canViewOldData: {
+    type: 'boolean',
+    serialize: false
+  },
   email: {
     get: function() {
       const profile = this.googleProfile || {};

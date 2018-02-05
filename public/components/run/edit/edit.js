@@ -4,9 +4,11 @@ import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';
+import Patch from '~/models/patch';
 import Place from '~/models/place';
 import Session from '~/models/session';
 import './edit.less';
+import { sortByHashOrJustName } from '~/components/run/sort-hashers';
 import debounce from 'lodash.debounce';
 import loader from '@loader';
 import route from 'can-route';
@@ -37,6 +39,19 @@ export const ViewModel = DefineMap.extend({
   },
 
   addingHasherPromise: {},
+
+  addingPatchPromise: {},
+
+  addPatch: function() {
+    const newPatch = this.newPatch;
+    if (newPatch.hasherId && newPatch.number && newPatch.trailNumber && newPatch.type) {
+      return this.addingPatchPromise = newPatch.save().then(result => {
+        this.addingPatchPromise = null;
+        this.newPatch = null;
+        return result;
+      });
+    }
+  },
 
   day: 'string',
 
@@ -124,6 +139,47 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  newPatch: {
+    value: null,
+    set: function(newPatch) {
+      if (!newPatch) {
+        newPatch = new Patch({
+          trailNumber: this.trailNumber,
+          type: 'run'
+        });
+      }
+      return newPatch;
+    }
+  },
+
+  patches: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      this.patchesPromise.then(setValue);
+    }
+  },
+
+  patchesPromise: {
+    get: function() {
+      const trailNumber = this.trailNumber;
+      if (trailNumber) {
+        return Patch.connection.getList({
+          $limit: 500,
+          trailNumber
+        });
+      }
+    }
+  },
+
+  patchHashers: {
+    get: function() {
+      const hashers = this.hashers || [];
+      return hashers.sort(sortByHashOrJustName);
+    }
+  },
+
   paymentRates: {
     value: () => {
       return [...EventsHashers.paymentRates].sort((x, y) => {
@@ -149,6 +205,10 @@ export const ViewModel = DefineMap.extend({
 
       return hasher;
     });
+  },
+
+  removePatch: function(patch) {
+    return patch.destroy();
   },
 
   roles: {
@@ -235,6 +295,13 @@ export default Component.extend({
         setTimeout(() => {
           hasherInput.focus();
         }, 201);
+      }
+    },
+
+    '{viewModel} newPatch': function() {
+      const firstPatchField = document.getElementById('patch-hasher-name');
+      if (firstPatchField) {
+        firstPatchField.focus();
       }
     },
 
@@ -347,6 +414,10 @@ export default Component.extend({
     },
 
     '.remove-hasher click': function(element, event) {
+      event.preventDefault();
+    },
+
+    '.remove-patch click': function(element, event) {
       event.preventDefault();
     },
 

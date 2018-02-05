@@ -189,6 +189,15 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       workPhone: stringType('work_phone'),
       workPhonePrivate: stringType('work_phone_private')
     },
+    patches: {
+      id: primaryIntType,
+      createdAt: currentTimestampType('created_at'),
+      updatedAt: currentTimestampType('updated_at'),
+      hasherId: intType('hasher_id'),
+      number: intType('number'),
+      trailNumber: intType('trail_number'),
+      type: enumType('type', ['hare', 'run'])
+    },
     users: {
       id: primaryIntType,
       createdAt: currentTimestampType('created_at'),

@@ -87,7 +87,7 @@ pg_restore --verbose --clean --no-acl --no-owner -h localhost -U user -d lbh3 la
 To create a new migration:
 
 ```shell
-sequelize migration:create --name="migration-name"
+DATABASE_URL="" sequelize migration:create --name="migration-name"
 ```
 
 As you’re developing, you might want to migrate down and then back up, which you can do with the following:
