@@ -9,6 +9,7 @@ import Session from '~/models/session';
 import './edit.less';
 import debounce from 'lodash.debounce';
 import loader from '@loader';
+import route from 'can-route';
 import view from './edit.stache';
 
 export const ViewModel = DefineMap.extend({
@@ -154,6 +155,14 @@ export const ViewModel = DefineMap.extend({
     value: () => {
       return EventsHashers.roles;
     }
+  },
+
+  routeForHasher: function(hasher) {
+    const routeParams = {
+      id: hasher.hasherId,
+      page: 'hashers'
+    };
+    return route.url(routeParams);
   },
 
   /**

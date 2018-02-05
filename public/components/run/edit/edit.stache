@@ -287,7 +287,9 @@
             <tr>
               <td>{{plusOne(%index)}}</td>
               <td>
-                {{hasher.hashOrJustName}}
+                <a href="{{routeForHasher(hasher)}}">
+                  {{hasher.hashOrJustName}}
+                </a>
               </td>
               <td>
                 {{hasher.paymentTier}}
