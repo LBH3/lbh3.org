@@ -28,12 +28,12 @@
 {{#if emailGroups}}
   {{#each emailGroups as email}}
     <h3>{{email.group}}</h3>
-    <ul>
+    <ol>
       {{#each email.hashers as hasher}}
         {{#if hasher.emailAddresses[0]}}
           <li>{{hasher.emailAddresses[0]}}</li>
         {{/if}}
       {{/each}}
-    </ul>
+    </ol>
   {{/each}}
 {{/if}}
