@@ -303,7 +303,7 @@ const Hasher = DefineMap.extend({
           lastRunPatch = (lastRunPatch > patch.number) ? lastRunPatch : patch.number;
         }
       })
-      return patchesEligible.filter(patch => {
+      const allPatchesOwed = patchesEligible.filter(patch => {
         const receivedPatch = patchesReceivedMap[patch.number + patch.type] === true;
         if (receivedPatch) {
           return false;
@@ -314,6 +314,13 @@ const Hasher = DefineMap.extend({
           return patch.number > lastRunPatch;
         }
       });
+      const harePatchesOwed = allPatchesOwed.filter(patch => {
+        return patch.type === 'hare';
+      });
+      const runPatchesOwed = allPatchesOwed.filter(patch => {
+        return patch.type === 'run';
+      });
+      return harePatchesOwed.slice(-1).concat(runPatchesOwed.slice(-1));
     },
     serialize: false
   },
