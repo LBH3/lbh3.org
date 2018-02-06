@@ -64,7 +64,7 @@
             {{hasher.runCount}}
           </td>
           <td class="text-center">
-            {{hasher.hareCounts}}
+            {{hasher.hareCountMax}}
           </td>
         </tr>
       {{/each}}

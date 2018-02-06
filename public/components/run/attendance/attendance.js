@@ -107,16 +107,25 @@ export const ViewModel = DefineMap.extend({
   },
 
   patches: function(hasher) {
-    const patches = [];
+    const hareCount = hasher.hareCountMax;
+    const runCount = hasher.runCount;
 
-    const hareCount = Math.max(hasher.hareCount1, hasher.hareCount2) + 1;
-    if (hareCount % 5 === 0) {
-      patches.push(hareCount + ' hares');
+    // Patches they are already owed
+    const owedPatches = hasher.patchesOwed;
+    const patches = owedPatches.map(patch => {
+      return `${patch.number} ${patch.type}s`;
+    });
+
+    // Patch if they hare this run
+    const nextHareCount = hareCount + 1;
+    if (nextHareCount % 5 === 0) {
+      patches.push(nextHareCount + ' hares');
     }
 
-    const runCount = hasher.runCount + 1;
-    if (this.runPatchNumbers.indexOf(runCount) > -1) {
-      patches.push(runCount + ' runs');
+    // Patch if they attend this run
+    const nextRunCount = runCount + 1;
+    if (this.runPatchNumbers.indexOf(nextRunCount) > -1) {
+      patches.push(nextRunCount + ' runs');
     }
 
     return patches.join('/');
