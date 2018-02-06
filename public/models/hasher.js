@@ -151,6 +151,13 @@ const Hasher = DefineMap.extend({
   givenNamePrivate: 'string',
   hareCount1: 'number',
   hareCount2: 'number',
+  hareCountMax: {
+    type: 'number',
+    serialize: false,
+    get: function() {
+      return Math.max(this.hareCount1 || 0, this.hareCount2 || 0);
+    }
+  },
   hareCounts: {
     type: 'string',
     serialize: false,
@@ -227,6 +234,89 @@ const Hasher = DefineMap.extend({
   notesMd: 'string',
   owes: 'string',
   passed: 'string',
+  patches: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      this.patchesPromise.then(setValue);
+    },
+    serialize: false
+  },
+  patchesEligible: {
+    get: function() {
+      const patchesEligible = [];
+
+      const hareCount = this.hareCountMax;
+      for (let hareCounter = 5; hareCounter <= hareCount; hareCounter += 5) {
+        patchesEligible.push({
+          number: hareCounter,
+          type: 'hare'
+        });
+      }
+
+      const runCount = this.runCount;
+      for (let runCounter = 1; runCounter <= runCount; runCounter++) {
+        if (runCounter === 25 || runCounter === 50) {
+          patchesEligible.push({
+            number: runCounter,
+            type: 'run'
+          });
+          if (runCounter === 25) {
+            runCounter += 24;// Skip to 50
+          } else if (runCounter === 50) {
+            runCounter += 18;// Skip to 69
+          }
+        } else {
+          const runCounterString = runCounter.toString();
+          const lastTwoChars = runCounterString.slice(-2);
+          if (lastTwoChars === '69' || lastTwoChars === '00') {
+            patchesEligible.push({
+              number: runCounter,
+              type: 'run'
+            });
+            if (lastTwoChars === '69') {
+              runCounter += 30;// Skip to before the next 100
+            } else if (lastTwoChars === '00') {
+              runCounter += 68;// Skip to before the next 69
+            }
+          }
+        }
+      }
+
+      return patchesEligible
+    },
+    serialize: false
+  },
+  patchesOwed: {
+    get: function() {
+      const patchesEligible = this.patchesEligible;
+      const patchesReceived = this.patches || [];
+      const patchesReceivedMap = {};
+      let lastHarePatch = 0;
+      let lastRunPatch = 0;
+      patchesReceived.forEach(patch => {
+        patchesReceivedMap[patch.number + patch.type] = true;
+        if (patch.type === 'hare') {
+          lastHarePatch = (lastHarePatch > patch.number) ? lastHarePatch : patch.number;
+        } else if (patch.type === 'run') {
+          lastRunPatch = (lastRunPatch > patch.number) ? lastRunPatch : patch.number;
+        }
+      })
+      return patchesEligible.filter(patch => {
+        const receivedPatch = patchesReceivedMap[patch.number + patch.type] === true;
+        if (receivedPatch) {
+          return false;
+        }
+        if (patch.type === 'hare') {
+          return patch.number > lastHarePatch;
+        } else if (patch.type === 'run') {
+          return patch.number > lastRunPatch;
+        }
+      });
+    },
+    serialize: false
+  },
   patchesPromise: {
     get: function() {
       return Patch.connection.getList({
