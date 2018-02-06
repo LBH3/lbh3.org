@@ -406,6 +406,7 @@
                   id="patch-hasher-name"
                   value:bind="newPatch.hasherId"
                 >
+                  <option></option>
                   {{#each patchHashers as hasher}}
                     <option value="{{hasher.hasherId}}">
                       {{hasher.hashOrJustName}}
