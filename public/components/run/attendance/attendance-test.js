@@ -112,7 +112,7 @@ QUnit.test('patches helper — at 15 hares and 169 runs', function(assert) {
     runCount: 169
   });
   const patches = vm.patches(hasher);
-  assert.equal(patches, '15 hares/100 runs/169 runs');
+  assert.equal(patches, '15 hares/169 runs');
 });
 
 QUnit.test('patches helper — missing older patches', function(assert) {
@@ -132,6 +132,24 @@ QUnit.test('patches helper — missing older patches', function(assert) {
   });
   const patches = vm.patches(hasher);
   assert.equal(patches, '15 hares/169 runs');
+});
+
+QUnit.test('patches helper — owed lots of patches', function(assert) {
+  const vm = new ViewModel({
+    day: 31,
+    month: 12,
+    trailNumber: 1841,
+    year: 2017
+  });
+  const hasher = new Hasher({
+    hareCount1: 0,
+    patches: [
+      {number: 25, type: 'run'}
+    ],
+    runCount: 169
+  });
+  const patches = vm.patches(hasher);
+  assert.equal(patches, '169 runs');
 });
 
 QUnit.test('patches helper — will earn patches if they hare the next run', function(assert) {
