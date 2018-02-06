@@ -134,35 +134,37 @@
       <dt class="col-md-3 text-md-right">Returners:</dt>
       <dd class="col-md-9">{{{event.returnersHtml}}}</dd>
     {{/if}}
-    <dt class="col-md-3 text-md-right">Patches:</dt>
-    <dd class="col-md-9">
-      {{#if event.patchesPromise.isPending}}
-        Fetching patches…
-      {{/if}}
-      {{#if event.patchesPromise.isRejected}}
-        <strong>Fuck!</strong> The patches couldn’t be retrieved. {{event.patchesPromise.reason.message}}
-      {{/if}}
-      {{#if event.patchesPromise.isResolved}}
-        {{event.patchesFormatted}}
-      {{/if}}
-    </dd>
-    {{#if session.user.canViewOldData}}
-      <dt class="col-md-3 text-md-right">Old hare patch data:</dt>
+    {{#if event.hasProbablyEnded}}
+      <dt class="col-md-3 text-md-right">Patches:</dt>
       <dd class="col-md-9">
-        {{#if event.harePatchesHtml}}
-          {{{event.harePatchesHtml}}}
-        {{else}}
-          None
+        {{#if event.patchesPromise.isPending}}
+          Fetching patches…
+        {{/if}}
+        {{#if event.patchesPromise.isRejected}}
+          <strong>Fuck!</strong> The patches couldn’t be retrieved. {{event.patchesPromise.reason.message}}
+        {{/if}}
+        {{#if event.patchesPromise.isResolved}}
+          {{event.patchesFormatted}}
         {{/if}}
       </dd>
-      <dt class="col-md-3 text-md-right">Old run patch data:</dt>
-      <dd class="col-md-9">
-        {{#if event.patchesHtml}}
-          {{{event.patchesHtml}}}
-        {{else}}
-          None
-        {{/if}}
-      </dd>
+      {{#if session.user.canViewOldData}}
+        <dt class="col-md-3 text-md-right">Old hare patch data:</dt>
+        <dd class="col-md-9">
+          {{#if event.harePatchesHtml}}
+            {{{event.harePatchesHtml}}}
+          {{else}}
+            None
+          {{/if}}
+        </dd>
+        <dt class="col-md-3 text-md-right">Old run patch data:</dt>
+        <dd class="col-md-9">
+          {{#if event.patchesHtml}}
+            {{{event.patchesHtml}}}
+          {{else}}
+            None
+          {{/if}}
+        </dd>
+      {{/if}}
     {{/if}}
   </dl>
 
