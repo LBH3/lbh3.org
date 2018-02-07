@@ -46,13 +46,19 @@
             {{hasher.payment}}
           </td>
           <td class="text-uppercase">
-            {{hasher.hashName}}
+            <a href="{{routeForHasher(hasher)}}">
+              {{hasher.hashName}}
+            </a>
           </td>
           <td class="text-capitalize">
-            {{hasher.familyName}}
+            <a href="{{routeForHasher(hasher)}}">
+              {{hasher.familyName}}
+            </a>
           </td>
           <td class="text-capitalize">
-            {{hasher.givenName}}
+            <a href="{{routeForHasher(hasher)}}">
+              {{hasher.givenName}}
+            </a>
           </td>
           <td class="text-center">
             {{birthday(hasher)}}
