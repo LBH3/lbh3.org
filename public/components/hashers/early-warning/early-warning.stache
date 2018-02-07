@@ -1,0 +1,63 @@
+<can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
+
+<div class="row">
+  <div class="col">
+    <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
+      <span class="fa fa-angle-double-left"></span>
+    </a>
+  </div>
+  <div class="col-10">
+    <h2>Early Warning</h2>
+  </div>
+  <div class="col"></div>
+</div>
+
+{{#if session.user.canViewHashersList}}
+
+  {{#if hashersPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching early warning report…</strong>
+    </div>
+  {{/if}}
+
+  {{#if hashersPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The early warning report couldn’t be retrieved. {{hashersPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if upcummingPatches}}
+    <table class="table table-bordered table-responsive table-sm">
+      <thead>
+        <tr>
+          <th scope="col">Hash Name</th>
+          <th scope="col">Current Run Count</th>
+          <th scope="col">Upcumming Patch</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each upcummingPatches as upcummingPatch}}
+          <tr>
+            <td>
+              <a href="{{routeForHasher(upcummingPatch.hasher)}}">
+                {{upcummingPatch.hasher.hashName}}
+              </a>
+            </td>
+            <td>
+              {{upcummingPatch.hasher.runCount}}
+            </td>
+            <td>
+              {{upcummingPatch.patchNumber}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}
