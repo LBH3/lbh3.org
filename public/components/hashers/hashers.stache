@@ -12,6 +12,9 @@
       </h2>
     </div>
       <div class="col text-right">
+        <a href="{{routeUrl page='hashers' secondaryPage='early-warning'}}" title="Go to the early warning page">
+          <span class="fa fa-bell"></span>
+        </a>
         <a href="{{routeUrl page='hashers' secondaryPage='email'}}" title="Go to the email list">
           <span class="fa fa-envelope"></span>
         </a>

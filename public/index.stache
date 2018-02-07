@@ -223,6 +223,17 @@
                   </can-import>
                 </lbh3-no-ssr>
               {{/case}}
+              {{#case "early-warning"}}
+                <lbh3-no-ssr>
+                  <can-import from="lbh3/components/hashers/early-warning/">
+                    {{#if isPending}}
+                      Loading the early warning page…
+                    {{else}}
+                      <lbh3-hashers-early-warning />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
+              {{/case}}
               {{#case "email"}}
                 <lbh3-no-ssr>
                   <can-import from="lbh3/components/hashers/email/">
