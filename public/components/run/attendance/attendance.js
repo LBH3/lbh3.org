@@ -4,6 +4,7 @@ import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import './attendance.less';
 import moment from 'moment';
+import route from 'can-route';
 import { sortByName } from '~/components/run/sort-hashers';
 import view from './attendance.stache';
 
@@ -31,7 +32,7 @@ export const ViewModel = DefineMap.extend({
         return Hasher.connection.getList({
           $limit: 500,
           lastTrailDate: {
-            $gte: trailDate.clone().subtract(5, 'weeks').toDate()
+            $gte: trailDate.clone().subtract(6, 'weeks').toDate()
           },
           $sort: {
             lastTrailDate: -1
@@ -42,6 +43,14 @@ export const ViewModel = DefineMap.extend({
   },
 
   month: 'string',
+
+  routeForHasher: function(hasher) {
+    const routeParams = {
+      id: hasher.id,
+      page: 'hashers'
+    };
+    return route.url(routeParams);
+  },
 
   runPatchNumbers: {
     get: function() {
@@ -79,7 +88,7 @@ export const ViewModel = DefineMap.extend({
   year: 'number',
 
   birthday: function(hasher) {
-    const rangeMax = this.trailDateAsMoment.clone().endOf('week');
+    const rangeMax = this.trailDateAsMoment.clone().add(3, 'days');
     const rangeMaxMonth = rangeMax.month();
 
     let birthYear = this.year;
@@ -97,8 +106,8 @@ export const ViewModel = DefineMap.extend({
       year: birthYear
     });
 
-    if (birthdayAsMoment.isBefore(rangeMax)) {
-      const rangeMin = this.trailDateAsMoment.clone().startOf('week');
+    if (birthdayAsMoment.isSameOrBefore(rangeMax)) {
+      const rangeMin = this.trailDateAsMoment.clone().subtract(3, 'days');
       const isBirthdayWeek = birthdayAsMoment.isSameOrAfter(rangeMin);
       if (isBirthdayWeek) {
         return birthdayAsMoment.format('M/D');

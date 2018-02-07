@@ -5,56 +5,86 @@ import { ViewModel } from './attendance';
 // ViewModel unit tests
 QUnit.module('lbh3/components/run/attendance');
 
-QUnit.test('birthday helper — in range', function(assert) {
-  const vm = new ViewModel({
-    day: 17,
-    month: 3,
-    year: 2018
-  });
-  const hasher = {
-    birthDay: 16,
-    birthMonth: 3
-  };
-  assert.equal(vm.birthday(hasher), '3/16');
-});
+const birthdayTests = [
+  {
+    birthDate: {
+      birthDay: 8,
+      birthMonth: 2
+    },
+    expected: '2/8',
+    trailDate: {
+      day: 11,
+      month: 2,
+      year: 2018
+    }
+  },
+  {
+    birthDate: {
+      birthDay: 14,
+      birthMonth: 2
+    },
+    expected: '2/14',
+    trailDate: {
+      day: 11,
+      month: 2,
+      year: 2018
+    }
+  },
+  {
+    birthDate: {
+      birthDay: 7,
+      birthMonth: 2
+    },
+    expected: undefined,
+    trailDate: {
+      day: 11,
+      month: 2,
+      year: 2018
+    }
+  },
+  {
+    birthDate: {
+      birthDay: 15,
+      birthMonth: 2
+    },
+    expected: undefined,
+    trailDate: {
+      day: 11,
+      month: 2,
+      year: 2018
+    }
+  },
+  {
+    birthDate: {
+      birthDay: 31,
+      birthMonth: 12
+    },
+    expected: '12/31',
+    trailDate: {
+      day: 1,
+      month: 1,
+      year: 2018
+    }
+  },
+  {
+    birthDate: {
+      birthDay: 1,
+      birthMonth: 1
+    },
+    expected: '1/1',
+    trailDate: {
+      day: 31,
+      month: 12,
+      year: 2017
+    }
+  }
+];
 
-QUnit.test('birthday helper — out of range', function(assert) {
-  const vm = new ViewModel({
-    day: 17,
-    month: 3,
-    year: 2018
+birthdayTests.forEach(birthdayTest => {
+  QUnit.test('birthday helper — ' + JSON.stringify(birthdayTest), function(assert) {
+    const vm = new ViewModel(birthdayTest.trailDate);
+    assert.equal(vm.birthday(birthdayTest.birthDate), birthdayTest.expected);
   });
-  const hasher = {
-    birthDay: 16,
-    birthMonth: 2
-  };
-  assert.equal(vm.birthday(hasher), undefined);
-});
-
-QUnit.test('birthday helper — birthday right before the new year', function(assert) {
-  const vm = new ViewModel({
-    day: 1,
-    month: 1,
-    year: 2018
-  });
-  const hasher = {
-    birthDay: 31,
-    birthMonth: 12
-  };
-  assert.equal(vm.birthday(hasher), '12/31');
-});
-
-QUnit.test('birthday helper — birthday right after the new year', function(assert) {
-  const vm = new ViewModel({
-    day: 31,
-    month: 12,
-    year: 2017
-  });
-  const hasher = {
-    birthDay: 1,
-    birthMonth: 1
-  };
-  assert.equal(vm.birthday(hasher), '1/1');
 });
 
 QUnit.test('patches helper — at 5 hares and 25 runs', function(assert) {
