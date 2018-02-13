@@ -18,13 +18,13 @@
 
   {{#if hasher}}
     <div class="row">
-      <div class="col">
-        <a href="{{routeUrl page='hashers' id=hasher.id}}" title="Go to the hasher directory">
-          <span class="fa fa-angle-double-left"></span>
+      <div class="col pt-2">
+        <a href="{{routeUrl page='hashers' id=hasher.id}}" title="Go back to {{hasher.hashOrJustName}}’s profile">
+          <span class="fa fa-angle-double-left fa-lg"></span>
         </a>
       </div>
       <div class="col-10">
-        <h2>{{hasher.hashName}}</h2>
+        <h2>{{hasher.hashOrJustName}}</h2>
       </div>
       <div class="col"></div>
     </div>

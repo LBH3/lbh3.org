@@ -4,16 +4,18 @@
 
 {{#if session.user.canAddHashers}}
   <div class="row">
-    <div class="col">
+    <div class="col pt-2">
       <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
-        <span class="fa fa-angle-double-left"></span>
+        <span class="fa fa-angle-double-left fa-lg"></span>
+        <span class="d-none d-md-inline-block">Hashers</span>
       </a>
     </div>
-    <div class="col-10">
+    <div class="col-8">
       <h2>Add a new hasher</h2>
     </div>
     <div class="col"></div>
   </div>
+
   <lbh3-hasher-edit-form
     hasher:from="hasher"
     on:didsave="didSave()"

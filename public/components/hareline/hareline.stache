@@ -5,15 +5,19 @@
 
 <p><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">LBH3 Haring Guidelines</a></p>
 
-{{#if session.user.canAddTrails}}
-  <div class="clearfix">
-    <a class="btn btn-primary float-right" href="{{routeUrl page='hareline' secondaryPage='add'}}">
-      Add trail
-    </a>
+<div class="row">
+  <div class="col d-none d-sm-block"></div>
+  <div class="col-auto text-center">
+    <h2>Hareline</h2>
   </div>
-{{/if}}
-
-<h2>Hareline</h2>
+  <div class="col text-right">
+    {{#if session.user.canAddTrails}}
+      <a class="btn btn-primary float-right" href="{{routeUrl page='hareline' secondaryPage='add'}}">
+        Add trail
+      </a>
+    {{/if}}
+  </div>
+</div>
 
 {{#if eventsPromise.isPending}}
   <div class="alert alert-info" role="alert">
@@ -30,7 +34,7 @@
 {{#if eventsByMonth}}
   {{#each eventsByMonth as month}}
     <h3>{{month.name}} {{month.year}}</h3>
-    <table class="table table-bordered table-responsive table-sm">
+    <table class="table table-bordered table-responsive-sm table-sm">
       <thead>
         <tr>
           {{#if session.user.canEditPreTrailInfo}}

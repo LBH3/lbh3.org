@@ -18,7 +18,7 @@
 {{#if eventsByMonth}}
   {{#each eventsByMonth as month}}
     <h3>{{month.name}} {{year}}</h3>
-    <table class="table table-bordered table-responsive table-sm">
+    <table class="table table-bordered table-responsive-sm table-sm">
       <thead>
         <tr>
           <th>Date</th>

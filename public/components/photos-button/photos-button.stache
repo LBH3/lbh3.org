@@ -1,7 +1,7 @@
 {{<photosLink}}
   {{#if event.photosUrl}}
     <a href="{{event.photosUrl}}" target="_blank" title="View photos">
-      <span class="fa fa-camera"></span>
+      <span class="fa fa-lg fa-camera"></span>
     </a>
   {{/if}}
 {{/photosLink}}
@@ -10,16 +10,16 @@
   {{#if session.user.canAddPhotos}}
     {{#if savePromise}}
       {{#if savePromise.isPending}}
-        <span class="fa fa-circle-o-notch fa-spin"></span>
+        <span class="fa fa-lg fa-circle-o-notch fa-spin"></span>
       {{/if}}
       {{#if savePromise.isRejected}}
-        <span class="fa fa-warning" title="{{savePromise.reason.message}}"></span>
+        <span class="fa fa-lg fa-warning" title="{{savePromise.reason.message}}"></span>
       {{/if}}
       {{#if savePromise.isResolved}}
         {{#if event.photosUrl}}
           {{>photosLink}}
         {{else}}
-          <span class="fa fa-warning" title="Unknown error"></span>
+          <span class="fa fa-lg fa-warning" title="Unknown error"></span>
         {{/if}}
       {{/if}}
     {{else}}
@@ -27,7 +27,7 @@
         {{>photosLink}}
       {{else}}
         <button class="btn btn-link" on:click="promptForUrl()" type="button">
-          <span class="fa fa-edit"></span>
+          <span class="fa fa-lg fa-edit"></span>
         </button>
       {{/if}}
     {{/if}}
