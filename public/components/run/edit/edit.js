@@ -175,7 +175,9 @@ export const ViewModel = DefineMap.extend({
 
   patchHashers: {
     get: function() {
-      const hashers = this.hashers || [];
+      const hashers = this.hashers.map(hasher => {
+        return hasher;
+      }) || [];
       return hashers.sort(sortByHashOrJustName);
     }
   },
