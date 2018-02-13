@@ -19,7 +19,7 @@
 {{#if event}}
   <div class="row">
     <div class="col"></div>
-    <div class="col-10">
+    <div class="col-md-8">
       <h2>
         {{#if event.nameMd}}
           {{{event.nameMd}}}
@@ -30,15 +30,15 @@
         {{/if}}
       </h2>
     </div>
-    <div class="col text-right">
+    <div class="col text-center text-md-right">
       {{#if session.user.canEditPostTrailInfo}}
-        <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}" title="Edit trail">
-          <span class="fa fa-pencil-square-o"></span>
+        <a class="d-inline-block p-2 p-md-1 pt-md-2" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}" title="Edit trail">
+          <span class="fa fa-lg fa-pencil-square-o"></span>
         </a>
       {{/if}}
-      <lbh3-no-ssr>
-        <lbh3-photos-button event:from="event" />
-        <lbh3-snooze-button event:from="event" />
+      <lbh3-no-ssr class="d-inline-block">
+        <lbh3-photos-button class="d-inline-block p-2 p-md-1 pt-md-2" event:from="event" />
+        <lbh3-snooze-button class="d-inline-block p-2 p-md-1 pt-md-2" event:from="event" />
       </lbh3-no-ssr>
     </div>
   </div>
@@ -204,7 +204,7 @@
             </select>
           </div>
         </div>
-        <table class="table table-bordered table-responsive table-sm">
+        <table class="table table-bordered table-responsive-sm table-sm">
           <thead>
             <tr>
               <th></th>
@@ -245,7 +245,7 @@
       {{/if}}
       {{#if cashReport}}
         <h3>Cash Report</h3>
-        <table class="table table-bordered table-responsive table-sm">
+        <table class="table table-bordered table-responsive-sm table-sm">
           <thead>
             <tr>
               <th>Payment</th>

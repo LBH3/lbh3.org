@@ -19,18 +19,19 @@
 
   {{#if hasher}}
     <div class="mb-3 row">
-      <div class="col">
+      <div class="col pt-2">
         <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
-          <span class="fa fa-angle-double-left"></span> Hashers
+          <span class="fa fa-angle-double-left fa-lg"></span>
+          <span class="d-none d-md-inline-block">Hashers</span>
         </a>
       </div>
-      <div class="col-7">
+      <div class="col-9">
         <h2>{{hasher.hashOrJustName}}</h2>
       </div>
-      <div class="col text-right">
+      <div class="col pt-2 text-right">
         {{#if session.user.canEditHasherInfo}}
           <a href="{{routeUrl page='hashers' id=hasher.id secondaryPage='edit'}}" title="Edit info">
-            <span class="fa fa-pencil-square-o"></span>
+            <span class="fa fa-pencil-square-o fa-lg"></span>
           </a>
         {{/if}}
       </div>
@@ -457,7 +458,7 @@
 
     {{#if patchesPromise.isResolved}}
       {{#if patches.length}}
-        <table class="table table-bordered table-responsive table-sm">
+        <table class="table table-bordered table-responsive-sm table-sm">
           <thead>
             <tr>
               <th>Patch</th>
@@ -531,7 +532,7 @@
 
     {{#if runsPromise.isResolved}}
       {{#if runs.length}}
-        <table class="table table-bordered table-responsive table-sm">
+        <table class="table table-bordered table-responsive-sm table-sm">
           <thead>
             <tr>
               <th>Date</th>
