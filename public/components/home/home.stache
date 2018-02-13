@@ -15,9 +15,11 @@
 
 {{#if isBeforeFebruary18}}
   <p class="text-center">
-    <a href="events/founders/">
-      Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;17<sup>th</sup>
-    </a>
+    <strong>
+      <a href="events/founders/">
+        Join us for our annual Found&nbsp;’er&nbsp;Balls this Saturday, February&nbsp;17<sup>th</sup>
+      </a>
+    </strong>
   </p>
   <hr>
 {{/if}}
