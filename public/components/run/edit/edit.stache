@@ -89,7 +89,20 @@
           <label for="scribe">
             Scribe
           </label>
-          <input class="form-control" id="scribe" type="text" value:bind="event.scribesMd">
+          <input
+            class="form-control"
+            id="scribe"
+            type="text"
+            value:bind="event.scribesMd"
+            {{^if event.scribesMd}}
+              {{#if scribes.length}}
+                placeholder="{{scribeNames}}"
+              {{else}}
+                disabled
+                placeholder="Add the scribe under Attendance"
+              {{/if}}
+            {{/if}}
+          />
         </div>
         <div class="form-group col-md-2">
           <label for="miles">

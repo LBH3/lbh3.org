@@ -227,6 +227,24 @@ export const ViewModel = DefineMap.extend({
     return route.url(routeParams);
   },
 
+  scribeNames: {
+    get: function() {
+      const scribes = this.scribes || [];
+      return scribes.map(scribe => {
+        return scribe.hashOrJustName;
+      }).join('; ');
+    }
+  },
+
+  scribes: {
+    get: function() {
+      const hashers = this.hashers || [];
+      return hashers.filter(hasher => {
+        return hasher.role.toLowerCase().indexOf('scribe') > -1;
+      });
+    }
+  },
+
   /**
    * Session.current is provided by the can-connect-feathers session behavior.
    * It will automatically populate when `new Session().save()` occurs in the app
