@@ -64,7 +64,11 @@
             {{birthday(hasher)}}
           </td>
           <td class="text-center">
-            {{patches(hasher)}}
+            {{#if hasher.patchesPromise.isPending}}
+              <span class="fa fa-circle-o-notch fa-spin"></span>
+            {{else}}
+              {{patches(hasher)}}
+            {{/if}}
           </td>
           <td class="text-center">
             {{hasher.runCount}}

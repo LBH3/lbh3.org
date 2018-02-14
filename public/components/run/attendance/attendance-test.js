@@ -100,7 +100,7 @@ QUnit.test('patches helper — at 5 hares and 25 runs', function(assert) {
     runCount: 25
   });
   const patches = vm.patches(hasher);
-  assert.equal(patches, '5 hares/25 runs');
+  assert.equal(patches, '5 hares / 25 runs');
 });
 
 QUnit.test('patches helper — at 11 hares and 69 runs', function(assert) {
@@ -120,7 +120,7 @@ QUnit.test('patches helper — at 11 hares and 69 runs', function(assert) {
     runCount: 69
   });
   const patches = vm.patches(hasher);
-  assert.equal(patches, '10 hares/69 runs');
+  assert.equal(patches, '10 hares / 69 runs');
 });
 
 QUnit.test('patches helper — at 15 hares and 169 runs', function(assert) {
@@ -142,7 +142,7 @@ QUnit.test('patches helper — at 15 hares and 169 runs', function(assert) {
     runCount: 169
   });
   const patches = vm.patches(hasher);
-  assert.equal(patches, '15 hares/169 runs');
+  assert.equal(patches, '15 hares / 169 runs');
 });
 
 QUnit.test('patches helper — missing older patches', function(assert) {
@@ -161,7 +161,7 @@ QUnit.test('patches helper — missing older patches', function(assert) {
     runCount: 169
   });
   const patches = vm.patches(hasher);
-  assert.equal(patches, '15 hares/169 runs');
+  assert.equal(patches, '15 hares / 169 runs');
 });
 
 QUnit.test('patches helper — owed lots of patches', function(assert) {
@@ -201,5 +201,5 @@ QUnit.test('patches helper — will earn patches if they hare the next run', fun
     runCount: 99
   });
   const patches = vm.patches(hasher);
-  assert.equal(patches, '15 hares/100 runs');
+  assert.equal(patches, '15 hares / 100 runs');
 });

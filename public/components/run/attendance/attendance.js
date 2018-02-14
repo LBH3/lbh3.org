@@ -137,7 +137,7 @@ export const ViewModel = DefineMap.extend({
       patches.push(nextRunCount + ' runs');
     }
 
-    return patches.join('/');
+    return patches.join(' / ');
   }
 });
 
