@@ -27,10 +27,11 @@ const userInfo = function(hook) {
 const getBoredInfo = function(hook) {
   return new Promise(function(resolve, reject) {
     const now = new Date();
+    const oneMonthAgo = new Date((new Date()).setMonth((new Date()).getMonth() - 1));
     const boredHashersQuery = {
       query: {
         endDate: {
-          $gte: now
+          $gte: oneMonthAgo
         },
         hasherId: hook.result.hasherId,
         startDate: {
