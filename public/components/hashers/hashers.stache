@@ -5,11 +5,7 @@
   <div class="mb-2 row">
     <div class="col"></div>
     <div class="col">
-      <h2>
-        <a href="{{routeUrl page='hashers' secondaryPage=''}}">
-          Hashers
-        </a>
-      </h2>
+      <h2>Hashers</h2>
     </div>
     <div class="col text-right">
       <a class="d-inline-block p-2 p-md-1 pt-md-2" href="{{routeUrl page='hashers' secondaryPage='early-warning'}}" title="Go to the early warning page">
