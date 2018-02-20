@@ -36,10 +36,10 @@
           <span class="fa fa-lg fa-pencil-square-o"></span>
         </a>
       {{/if}}
-      <lbh3-no-ssr class="d-inline-block">
+      {{#if event.hasProbablyEnded}}
         <lbh3-photos-button class="d-inline-block p-2 p-md-1 pt-md-2" event:from="event" />
         <lbh3-snooze-button class="d-inline-block p-2 p-md-1 pt-md-2" event:from="event" />
-      </lbh3-no-ssr>
+      {{/if}}
     </div>
   </div>
 
