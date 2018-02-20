@@ -29,8 +29,8 @@
   <form class="mb-2">
     <div class="form-row align-items-center">
       <div class="col-sm-3">
-        <label class="sr-only" for="searchText">Name</label>
-        <input autocomplete="off" autofocus class="form-control" id="searchText" placeholder="Name" type="text" value:bind="searchText">
+        <label class="sr-only" for="searchText">Name or email</label>
+        <input autocomplete="off" autofocus class="form-control" id="searchText" placeholder="Name or email" type="text" value:bind="searchText">
       </div>
       <div class="col-auto">
         <button

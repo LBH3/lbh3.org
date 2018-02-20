@@ -11,7 +11,16 @@ module.exports = function (options) {
       }).reduce((queries, query) => {
         return [...queries, query];
       }, []);
-      query.$or = options.fields.map(field => {
+      const containsQueries = (options.contains) ? options.contains.map(field => {
+        return {
+          [field]: {
+            $contains: [
+              query.$search
+            ]
+          }
+        };
+      }) : [];
+      const iLikeQueries = (options.fields) ? options.fields.map(field => {
         return {
           [field]: {
             $iLike: {
@@ -19,7 +28,11 @@ module.exports = function (options) {
             }
           }
         };
-      });
+      }) : [];
+      query.$or = [
+        ...containsQueries,
+        ...iLikeQueries
+      ];
       delete query.$search;
     }
   };
