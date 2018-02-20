@@ -1,25 +1,15 @@
-<p>
-  <small>
-    The Long Beach kennel was founded over 30 years ago.
-    We run Thursday evening during Spring/Summer &amp; Sunday morning in the Fall/Winter.
-    We often have an attendance of 75+.
-    Visitors &amp; Virgins are always welcome!
-    Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies.
-    Please bring a vessel for your beverage.
-    We hope to see you at LBH3.
-    On On!!!
-  </small>
-</p>
-
-<hr>
-
-{{#if isBeforeFebruary18}}
-  <p class="text-center">
-    <strong>
-      <a href="events/founders/">
-        Join us for our annual Found&nbsp;’er&nbsp;Balls this Saturday, February&nbsp;17<sup>th</sup>
-      </a>
-    </strong>
+{{^if session.user}}
+  <p>
+    <small>
+      The Long Beach kennel was founded over 30 years ago.
+      We run Thursday evening during Spring/Summer &amp; Sunday morning in the Fall/Winter.
+      We often have an attendance of 75+.
+      Visitors &amp; Virgins are always welcome!
+      Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies.
+      Please bring a vessel for your beverage.
+      We hope to see you at LBH3.
+      On On!!!
+    </small>
   </p>
   <hr>
 {{/if}}
