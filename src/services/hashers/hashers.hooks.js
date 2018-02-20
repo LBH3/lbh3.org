@@ -89,6 +89,7 @@ module.exports = {
       jwtAuthentication,
       authHook.restrictTo(...boredPositions),
       searchHook({
+        contains: ['emailAddresses', 'emailAddressesPrivate'],
         fields: ['familyName', 'givenName', 'hashName']
       })
     ],
