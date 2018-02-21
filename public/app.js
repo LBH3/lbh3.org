@@ -35,8 +35,6 @@ const AppViewModel = DefineMap.extend({
 route('/about/mismanagement/{year}/', { page: 'about', secondaryPage: 'mismanagement', year: 0});
 route('/about/{secondaryPage}/', { page: 'about' });
 route('/about/', { page: 'about' });
-route('/admin/{secondaryPage}/', { page: 'admin' });
-route('/admin/', { page: 'admin' });
 route('/events/', { page: 'events' });
 route('/events/founders/', { page: 'events', secondaryPage: 'founders'});
 route('/events/jesus-cuervo-1800-trail/', { page: 'events', secondaryPage: 'jesus-cuervo-1800-trail'});
@@ -53,6 +51,8 @@ route('/hashers/email/', { page: 'hashers', secondaryPage: 'email'});
 route('/hashers/{id}/{secondaryPage}/', { page: 'hashers', id: 0, secondaryPage: ''});
 route('/hashers/{id}/', { page: 'hashers', id: 0 });
 route('/hashers/', { page: 'hashers', secondaryPage: '' });
+route('/users/{secondaryPage}/', { page: 'users' });
+route('/users/', { page: 'users' });
 route('/{page}', { page: defaultPage });
 
 export default AppViewModel;

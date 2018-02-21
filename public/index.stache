@@ -63,15 +63,6 @@
             {{/default}}
           {{/switch}}
         {{/case}}
-        {{#case "admin"}}
-          <can-import from="lbh3/components/admin/">
-            {{#if isPending}}
-              Loading admin page…
-            {{else}}
-              <lbh3-admin secondaryPage:from="secondaryPage" />
-            {{/if}}
-          </can-import>
-        {{/case}}
         {{#case "events"}}
           {{#if secondaryPage}}
             {{#switch secondaryPage}}
@@ -283,6 +274,15 @@
               Loading home page…
             {{else}}
               <lbh3-home />
+            {{/if}}
+          </can-import>
+        {{/case}}
+        {{#case "users"}}
+          <can-import from="lbh3/components/users/">
+            {{#if isPending}}
+              Loading users page…
+            {{else}}
+              <lbh3-users secondaryPage:from="secondaryPage" />
             {{/if}}
           </can-import>
         {{/case}}

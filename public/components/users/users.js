@@ -3,8 +3,8 @@ import DefineMap from 'can-define/map/';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import User from '~/models/user';
-import './admin.less';
-import view from './admin.stache';
+import './users.less';
+import view from './users.stache';
 
 export const ViewModel = DefineMap.extend({
   get session() {
@@ -31,7 +31,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-  tag: 'lbh3-admin',
+  tag: 'lbh3-users',
   ViewModel,
   view
 });
