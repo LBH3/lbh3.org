@@ -1,4 +1,6 @@
-{{#if session.user.canAddTrails}}
+<can-import from="can-stache/helpers/route" />
+
+{{#if session.user.canManageUsers}}
   <h2>Users</h2>
 
   {{#if usersPromise.isPending}}
@@ -20,6 +22,7 @@
           <th scope="col">Email</th>
           <th scope="col">Display Name</th>
           <th scope="col">Hash Name</th>
+          <th class="text-center" scope="col">Edit</th>
         </tr>
       </thead>
       <tbody>
@@ -34,6 +37,11 @@
               {{/if}}
             </td>
             <td>{{user.hasher.hashOrJustName}}</td>
+            <td class="text-center">
+              <a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}" title="Edit user">
+                <span class="fa fa-lg fa-pencil-square-o"></span>
+              </a>
+            </td>
           </tr>
         {{/each}}
       </tbody>
