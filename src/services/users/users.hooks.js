@@ -3,12 +3,47 @@ const authHook = require('../../hooks/auth');
 const commonHooks = require('feathers-hooks-common');
 const { restrictToOwner } = require('feathers-authentication-hooks');
 
-const restrict = [
+const restrictToUser = restrictToOwner({
+  idField: 'id',
+  ownerField: 'id'
+});
+
+const restrictToWebmaster = authHook.restrictTo(authHook.WEBMASTERS);
+
+const authHooksForUser = [
   authenticate('jwt'),
-  restrictToOwner({
-    idField: 'id',
-    ownerField: 'id'
-  })
+  restrictToUser
+];
+
+const authHookForWebmaster = function(hook) {
+  return new Promise(function(resolve, reject) {
+    const authForWebmaster = restrictToWebmaster(hook);
+    if (authForWebmaster === hook) {
+      resolve(hook);
+    } else {
+      authForWebmaster.then(resolve, reject);
+    }
+  });
+};
+
+const authHooksForUserOrWebmaster = [
+  authenticate('jwt'),
+  function(hook) {
+    return new Promise(function(resolve, reject) {
+      try {
+        const authForUser = restrictToUser(hook);
+        if (authForUser === hook) {
+          authHookForWebmaster(hook).then(resolve, reject);
+        } else {
+          authForUser.then(resolve, error => { // eslint-disable-line no-unused-vars
+            authHookForWebmaster(hook).then(resolve, reject);
+          });
+        }
+      } catch (error) { // eslint-disable-line no-unused-vars
+        authHookForWebmaster(hook).then(resolve, reject);
+      }
+    });
+  }
 ];
 
 const userInfo = function(hook) {
@@ -51,6 +86,7 @@ const getBoredInfo = function(hook) {
         canEditHasherInfo: false,
         canEditPostTrailInfo: false,
         canEditPreTrailInfo: false,
+        canManageUsers: false,
         canViewHashersEmailList: false,
         canViewHashersList: false,
         canViewOldData: false
@@ -109,6 +145,7 @@ const getBoredInfo = function(hook) {
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,
           canEditPreTrailInfo: true,
+          canManageUsers: true,
           canViewHashersEmailList: true,
           canViewHashersList: true,
           canViewOldData: true
@@ -124,11 +161,11 @@ module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
-    get: [ ...restrict ],
+    get: [ ...authHooksForUserOrWebmaster ],
     create: [ userInfo ],
-    update: [ ...restrict, userInfo ],
-    patch: [ ...restrict ],
-    remove: [ ...restrict ]
+    update: [ ...authHooksForUserOrWebmaster, userInfo ],
+    patch: [ ...authHooksForUser ],
+    remove: [ ...authHooksForUser ]
   },
 
   after: {

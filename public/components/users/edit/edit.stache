@@ -1,0 +1,109 @@
+<can-import from="awesomplete/awesomplete.base.css" />
+<can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
+
+{{#if session.user.canManageUsers}}
+
+  {{#if userPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching user…</strong>
+    </div>
+  {{/if}}
+
+  {{#if userPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The user couldn’t be retrieved. {{userPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if user}}
+    <div class="row">
+      <div class="col pt-2">
+        <a href="{{routeUrl page='users'}}" title="Go back to the users list">
+          <span class="fa fa-angle-double-left fa-lg"></span>
+        </a>
+      </div>
+      <div class="col-10">
+        <h2>{{user.email}}</h2>
+      </div>
+      <div class="col"></div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <p>
+          <b>Display name:</b>
+          {{#if user.displayName}}
+            {{user.displayName}}
+          {{else}}
+            {{user.givenName}} {{user.familyName}}
+          {{/if}}
+        </p>
+      </div>
+      <div class="col-md-6">
+        <p>
+          <b>Hash name:</b>
+          {{#if user.hasher}}
+            {{user.hasher.hashOrJustName}}
+          {{else}}
+            Unknown
+          {{/if}}
+        </p>
+      </div>
+    </div>
+
+    <form on:submit="editUser()">
+      <div class="form-group">
+        <label for="hasher-name">Hash name</label>
+        <input
+          autocomplete="off"
+          class="form-control"
+          disabled
+          id="hasher-name"
+          on:input:value:to="hasherAwesompleteQuery"
+          type="text"
+        />
+      </div>
+
+      {{#if editingUserPromise.isPending}}
+        <div class="alert alert-info mt-3" role="alert">
+          <strong>Saving user…</strong>
+        </div>
+      {{/if}}
+
+      {{#if editingUserPromise.isRejected}}
+        <div class="alert alert-danger mt-3" role="alert">
+          <button aria-label="Close" class="close" type="button" on:click="resetEditingUserPromise()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Fuck!</strong> The user’s info failed to save. {{editingUserPromise.reason.message}}
+          {{#if editingUserPromise.reason.errors}}
+            <ul>
+              {{#each editingUserPromise.reason.errors as error}}
+                <li>
+                  {{error.message}}
+                </li>
+              {{/each}}
+            </ul>
+          {{/if}}
+        </div>
+      {{/if}}
+
+      {{#if editingUserPromise.isResolved}}
+        <div class="alert alert-success mt-3" role="alert">
+          <button aria-label="Close" class="close" type="button" on:click="resetEditingUserPromise()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>The user was successfully saved!</strong>
+        </div>
+      {{/if}}
+
+      <button class="btn btn-primary" type="submit">Save</button>
+    </form>
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}

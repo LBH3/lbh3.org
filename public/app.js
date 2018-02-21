@@ -51,7 +51,7 @@ route('/hashers/email/', { page: 'hashers', secondaryPage: 'email'});
 route('/hashers/{id}/{secondaryPage}/', { page: 'hashers', id: 0, secondaryPage: ''});
 route('/hashers/{id}/', { page: 'hashers', id: 0 });
 route('/hashers/', { page: 'hashers', secondaryPage: '' });
-route('/users/{secondaryPage}/', { page: 'users' });
+route('/users/{id}/{secondaryPage}/', { page: 'users', id: 0, secondaryPage: '' });
 route('/users/', { page: 'users' });
 route('/{page}', { page: defaultPage });
 

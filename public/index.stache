@@ -278,13 +278,29 @@
           </can-import>
         {{/case}}
         {{#case "users"}}
-          <can-import from="lbh3/components/users/">
-            {{#if isPending}}
-              Loading users page…
-            {{else}}
-              <lbh3-users secondaryPage:from="secondaryPage" />
-            {{/if}}
-          </can-import>
+          {{#if secondaryPage}}
+            {{#switch secondaryPage}}
+              {{#case "edit"}}
+                <lbh3-no-ssr>
+                  <can-import from="lbh3/components/users/edit/">
+                    {{#if isPending}}
+                      Loading the edit user page…
+                    {{else}}
+                      <lbh3-user-edit id:from="id" />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
+              {{/case}}
+            {{/switch}}
+          {{else}}
+            <can-import from="lbh3/components/users/">
+              {{#if isPending}}
+                Loading users page…
+              {{else}}
+                <lbh3-users secondaryPage:from="secondaryPage" />
+              {{/if}}
+            </can-import>
+          {{/if}}
         {{/case}}
       {{/switch}}
     </main>

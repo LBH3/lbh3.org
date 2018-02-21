@@ -32,6 +32,11 @@
           Hashers Directory
         </a></li>
       {{/if}}
+      {{#if session.user.canManageUsers}}
+        <li><a href="{{routeUrl page='users'}}">
+          Users
+        </a></li>
+      {{/if}}
       <li><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">
         How LBH3 Started
       </a></li>
