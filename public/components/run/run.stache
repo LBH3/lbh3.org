@@ -88,9 +88,11 @@
       <dt class="col-sm-3 text-md-right">On-on:</dt>
       <dd class="col-sm-9">{{{event.longOnOnHtml}}}</dd>
     {{/if}}
-    {{#if event.hashersTotal}}
-      <dt class="col-md-3 text-md-right">Total hashers:</dt>
-      <dd class="col-md-9">{{event.hashersTotal}}</dd>
+    {{#if session.user.canViewHashersList}}
+      {{#if hashers.length}}
+        <dt class="col-md-3 text-md-right">Total hashers:</dt>
+        <dd class="col-md-9">{{hashers.length}}</dd>
+      {{/if}}
     {{/if}}
     {{#if event.miles}}
       <dt class="col-md-3 text-md-right">Miles:</dt>
