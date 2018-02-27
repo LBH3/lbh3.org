@@ -18,10 +18,11 @@
   },
   "engines": {
     "node": "8.x",
-    "npm": "5.x"
+    "npm": "5.7.x"
   },
   "scripts": {
     "build": "cd public && node build && cd ..",
+    "ci": "node install-ci",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "heroku-postbuild": "npm run build",
     "install": "node install",

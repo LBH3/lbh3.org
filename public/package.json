@@ -5,7 +5,8 @@
   "private": true,
   "main": "lbh3/index.stache!done-autorender",
   "engines": {
-    "node": "8.x"
+    "node": "8.x",
+    "npm": "5.7.x"
   },
   "files": [
     "."
