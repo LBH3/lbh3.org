@@ -173,7 +173,7 @@ const getResourceForTrail = function(app, trailData) {
     if (fromTheHaresText) {
       descriptionParts.push(fromTheHaresText);
     }
-    descriptionParts.push('Donation: $5 for run');
+    descriptionParts.push('Donation: $5 for the run');
     if (bringText) {
       descriptionParts.push(`Bring: ${bringText}`);
     }
