@@ -85,8 +85,7 @@ const createHook = function(hook) {
         hareCount2: (didHare) ? (hasher.hareCount2 + 1) : hasher.hareCount2,
         lastTrailDate,
         miles: Number(hasher.miles) + eventMiles,
-        runCount: Number(hasher.runCount) + 1,
-        runMileage: Number(hasher.runMileage) + eventMiles
+        runCount: Number(hasher.runCount) + 1
       };
       hook.app.service('api/hashers').patch(hasher.id, hasherPatchData).then(() => {
         resolve(hook);
@@ -108,8 +107,7 @@ const removeHook = function(hook) {
           hareCount2: (didHare) ? (hasher.hareCount2 - 1) : hasher.hareCount2,
           lastTrailDate: (newLastTrail) ? newLastTrail.start_datetime : null,
           miles: Number(hasher.miles) - eventMiles,
-          runCount: Number(hasher.runCount) - 1,
-          runMileage: Number(hasher.runMileage) - eventMiles
+          runCount: Number(hasher.runCount) - 1
         };
         hook.app.service('api/hashers').patch(hasher.id, hasherPatchData).then(() => {
           resolve(hook);
