@@ -8,6 +8,9 @@ const makeRaw = require('../../utils/make-raw');
 const searchHook = require('../../hooks/search');
 
 const afterFindHook = function(hook) {
+  if (hook) {
+    return hook;
+  }
   const hashers = hook.result.data || [];
   const sequelizeClient = hook.app.get('sequelizeClient');
   const promises = hashers.map(hasher => {
