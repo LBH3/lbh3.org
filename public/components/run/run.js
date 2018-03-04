@@ -132,7 +132,6 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  showDonation: 'boolean',
   sortAttendanceBy: {
     type: 'string',
     value: 'name',
