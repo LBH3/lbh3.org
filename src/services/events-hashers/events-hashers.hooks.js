@@ -89,12 +89,7 @@ const createHook = function(hook) {
         runMileage: Number(hasher.runMileage) + eventMiles
       };
       hook.app.service('api/hashers').patch(hasher.id, hasherPatchData).then(() => {
-        const eventPatchData = {
-          hashersTotal: Number(event.hashersTotal) + 1
-        };
-        hook.app.service('api/events').patch(event.id, eventPatchData).then(() => {
-          resolve(hook);
-        }, reject);
+        resolve(hook);
       }, reject);
     }, reject);
   });
@@ -117,12 +112,7 @@ const removeHook = function(hook) {
           runMileage: Number(hasher.runMileage) - eventMiles
         };
         hook.app.service('api/hashers').patch(hasher.id, hasherPatchData).then(() => {
-          const eventPatchData = {
-            hashersTotal: Number(event.hashersTotal) - 1
-          };
-          hook.app.service('api/events').patch(event.id, eventPatchData).then(() => {
-            resolve(hook);
-          }, reject);
+          resolve(hook);
         }, reject);
       }, reject);
     }, reject);
