@@ -1,3 +1,4 @@
+/*eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
 const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
 const errors = require('feathers-errors');
@@ -5,6 +6,20 @@ const getBoredHasher = require('../../utils/get-bored-hasher');
 const jwtAuthentication = authenticate('jwt');
 const makeRaw = require('../../utils/make-raw');
 const searchHook = require('../../hooks/search');
+
+const afterFindHook = function(hook) {
+  const hashers = hook.result.data || [];
+  const sequelizeClient = hook.app.get('sequelizeClient');
+  const promises = hashers.map(hasher => {
+    return getRunMileageForHasher(sequelizeClient, hasher.id);
+  });
+  return Promise.all(promises).then(results => {
+    results.forEach((result, index) => {
+      hashers[index].runMileage = Number(result);
+    });
+    return hook;
+  });
+};
 
 const attachAuthInfo = function(hook) {
   return new Promise(function(resolve) {
@@ -51,6 +66,15 @@ const createAndUpdateFields = function(hook) {
   }
 };
 
+const getRunMileageForHasher = function(sequelize, hasherId) {
+  const query = `SELECT SUM(events.miles) FROM events_hashers INNER JOIN events ON (events_hashers.trail_number = events.trail_number) WHERE hasher_id=${hasherId}`;
+  return sequelize.query(query, {
+    type: sequelize.QueryTypes.SELECT
+  }).then(result => {
+    return result && result[0] && result[0].sum || 0;
+  });
+};
+
 const filterData = function(data) {
   const allowedFields = ['hashName', 'id'];
   const filteredFields = {};
@@ -60,7 +84,7 @@ const filterData = function(data) {
   return filteredFields;
 };
 
-const filterFields = function(hook) {
+const afterGetHook = function(hook) {
   const user = hook.params.user;
   if (user) {
     return new Promise(function(resolve) {
@@ -68,7 +92,18 @@ const filterFields = function(hook) {
         const found = boredHashers.data.find(boredHasher => {
           return boredPositions.includes(boredHasher.positionId);
         });
-        if (!found) {
+        if (found) {
+          // Ok to not filter the data and include the hasher’s mileage
+          const hasherId = hook.result.id;
+          const sequelizeClient = hook.app.get('sequelizeClient');
+          getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
+            hook.result.runMileage = Number(runMileage);
+            resolve(hook);
+          }, error => {
+            console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
+            resolve(hook);
+          });
+        } else {
           hook.result = filterData(hook.result);
         }
         resolve(hook);
@@ -102,8 +137,8 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
-    get: [ filterFields ],
+    find: [ afterFindHook ],
+    get: [ afterGetHook ],
     create: [],
     update: [],
     patch: [],

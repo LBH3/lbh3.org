@@ -110,7 +110,6 @@
           </label>
           <input
             class="form-control"
-            {{#if hashers.length}}disabled{{/if}}
             id="miles"
             min="0"
             step="0.01"
@@ -375,7 +374,6 @@
                 class="btn {{#if addingHasherPromise.isRejected}}btn-warning{{else}}btn-primary{{/if}} btn-sm"
                 {{#if addingHasherPromise.isPending}}disabled{{/if}}
                 {{^if newHasherForRun.hasherId}}disabled{{/if}}
-                {{^if event.miles}}disabled title="Please save the number of miles for this trail before adding hashers."{{/if}}
                 type="submit"
               >
                 {{#if addingHasherPromise.isRejected}}
