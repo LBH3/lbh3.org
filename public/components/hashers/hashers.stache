@@ -62,66 +62,73 @@
     </div>
   {{/if}}
 
-  {{#if hashers}}
-    <table class="table table-bordered table-responsive-sm table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Hash Name</th>
-          <th scope="col">Last Name</th>
-          <th scope="col">First Name</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each hashers as hasher}}
+  {{#if hashersPromise.isResolved}}
+    {{#if hashers.length}}
+      <table class="table table-bordered table-responsive-sm table-sm">
+        <thead>
           <tr>
-            {{#if hasher.hasName}}
-              <td>
-                <a href="{{routeForHasher(hasher)}}">
-                  {{hasher.hashName}}
-                </a>
-              </td>
-              <td>
-                <a href="{{routeForHasher(hasher)}}">
-                  {{#if hasher.familyName}}
-                    {{hasher.familyName}}
-                  {{else}}
-                    {{hasher.familyNamePrivate}}
-                  {{/if}}
-                </a>
-              </td>
-              <td>
-                <a href="{{routeForHasher(hasher)}}">
-                  {{#if hasher.givenName}}
-                    {{hasher.givenName}}
-                  {{else}}
-                    {{hasher.givenNamePrivate}}
-                  {{/if}}
-                </a>
-              </td>
-            {{else}}
-              <td colspan="3">
-                <a href="{{routeForHasher(hasher)}}">
-                  #{{hasher.id}}
-                </a>
-              </td>
-            {{/if}}
+            <th scope="col">Hash Name</th>
+            <th scope="col">Last Name</th>
+            <th scope="col">First Name</th>
           </tr>
-        {{/each}}
-      </tbody>
-    </table>
-  {{/if}}
+        </thead>
+        <tbody>
+          {{#each hashers as hasher}}
+            <tr>
+              {{#if hasher.hasName}}
+                <td>
+                  <a href="{{routeForHasher(hasher)}}">
+                    {{hasher.hashName}}
+                  </a>
+                </td>
+                <td>
+                  <a href="{{routeForHasher(hasher)}}">
+                    {{#if hasher.familyName}}
+                      {{hasher.familyName}}
+                    {{else}}
+                      {{hasher.familyNamePrivate}}
+                    {{/if}}
+                  </a>
+                </td>
+                <td>
+                  <a href="{{routeForHasher(hasher)}}">
+                    {{#if hasher.givenName}}
+                      {{hasher.givenName}}
+                    {{else}}
+                      {{hasher.givenNamePrivate}}
+                    {{/if}}
+                  </a>
+                </td>
+              {{else}}
+                <td colspan="3">
+                  <a href="{{routeForHasher(hasher)}}">
+                    #{{hasher.id}}
+                  </a>
+                </td>
+              {{/if}}
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
 
-  {{#if pages}}
-    <nav class="nav nav-pills">
-      {{#each pages as page}}
-        <a
-          class="{{#is currentPage page}}active{{/is}} flex-sm-fill nav-link text-sm-center"
-          href="{{routeForPage(page)}}"
-        >
-          {{page}}
-        </a>
-      {{/each}}
-    </nav>
+      {{#if pages}}
+        <nav class="nav nav-pills">
+          {{#each pages as page}}
+            <a
+              class="{{#is currentPage page}}active{{/is}} flex-sm-fill nav-link text-sm-center"
+              href="{{routeForPage(page)}}"
+            >
+              {{page}}
+            </a>
+          {{/each}}
+        </nav>
+      {{/if}}
+
+    {{else}}
+      <div class="alert alert-info" role="alert">
+        <strong>No hashers found.</strong>
+      </div>
+    {{/if}}
   {{/if}}
 
 {{else}}
