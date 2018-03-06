@@ -14,7 +14,7 @@
   <hr>
 {{/if}}
 
-<can-import from="lbh3/components/run/">
+<can-import from="~/components/run/">
   {{#if isPending}}
     <div class="alert alert-info" role="alert">
       <strong>Loading trail…</strong>
