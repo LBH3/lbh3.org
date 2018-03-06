@@ -79,7 +79,7 @@
           <strong>Fuck!</strong> The user’s info failed to save. {{editingUserPromise.reason.message}}
           {{#if editingUserPromise.reason.errors}}
             <ul>
-              {{#each editingUserPromise.reason.errors as error}}
+              {{#each editingUserPromise.reason.errors error=value}}
                 <li>
                   {{error.message}}
                 </li>

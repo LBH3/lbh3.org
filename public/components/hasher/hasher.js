@@ -128,7 +128,10 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.patchesPromise.then(setValue);
+      const patchesPromise = this.patchesPromise;
+      if (patchesPromise) {
+        patchesPromise.then(setValue);
+      }
     }
   },
   patchesPromise: {

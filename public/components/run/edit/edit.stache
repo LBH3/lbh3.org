@@ -295,11 +295,11 @@
           </tr>
         </thead>
         <tbody>
-          {{#each hashers as hasher}}
+          {{#each hashers hasher=value}}
             <tr>
-              <td>{{plusOne(%index)}}</td>
+              <td>{{scope.root.plusOne(scope.index)}}</td>
               <td>
-                <a href="{{routeForHasher(hasher)}}">
+                <a href="{{scope.root.routeForHasher(hasher)}}">
                   {{hasher.hashOrJustName}}
                 </a>
               </td>
@@ -339,7 +339,7 @@
                 id="payment-tier"
                 value:bind="newHasherForRun.paymentTier"
               >
-                {{#each paymentRates as paymentRate}}
+                {{#each paymentRates paymentRate=value}}
                   <option value="{{paymentRate.tier}}">
                     {{paymentRate.title}}
                   </option>
@@ -362,7 +362,7 @@
                 id="role"
                 value:bind="newHasherForRun.role"
               >
-                {{#each roles as role}}
+                {{#each roles role=value}}
                   <option value="{{role}}">
                     {{role}}
                   </option>
@@ -418,7 +418,7 @@
                   value:bind="newPatch.hasherId"
                 >
                   <option></option>
-                  {{#each patchHashers as hasher}}
+                  {{#each patchHashers hasher=value}}
                     <option value="{{hasher.hasherId}}">
                       {{hasher.hashOrJustName}}
                     </option>
@@ -462,10 +462,14 @@
                 </button>
               </td>
             </tr>
-            {{#each patches as patch}}
+            {{#each patches patch=value}}
               <tr>
-                <td>{{plusOne(%index)}}</td>
-                <td>{{patch.hasher.hashOrJustName}}</td>
+                <td>{{scope.root.plusOne(scope.index)}}</td>
+                <td>
+                  {{#if patch.hasher}}
+                    {{patch.hasher.hashOrJustName}}
+                  {{/if}}
+                </td>
                 <td>{{patch.number}}</td>
                 <td>{{patch.type}}s</td>
                 <td class="text-center">

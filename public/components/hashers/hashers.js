@@ -14,7 +14,10 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.hashersPromise.then(setValue);
+      const hashersPromise = this.hashersPromise;
+      if (hashersPromise) {
+        hashersPromise.then(setValue);
+      }
     }
   },
   hashersPromise: {

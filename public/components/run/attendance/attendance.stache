@@ -40,23 +40,23 @@
       </tr>
     </thead>
     <tbody>
-      {{#each hashers as hasher}}
+      {{#each hashers hasher=value}}
         <tr>
           <td class="text-center">
             {{hasher.payment}}
           </td>
           <td class="text-uppercase">
-            <a href="{{routeForHasher(hasher)}}">
+            <a href="{{scope.root.routeForHasher(hasher)}}">
               {{hasher.hashName}}
             </a>
           </td>
           <td class="text-capitalize">
-            <a href="{{routeForHasher(hasher)}}">
+            <a href="{{scope.root.routeForHasher(hasher)}}">
               {{hasher.familyName}}
             </a>
           </td>
           <td class="text-capitalize">
-            <a href="{{routeForHasher(hasher)}}">
+            <a href="{{scope.root.routeForHasher(hasher)}}">
               {{hasher.givenName}}
             </a>
           </td>

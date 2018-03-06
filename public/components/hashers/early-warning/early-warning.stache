@@ -38,10 +38,10 @@
         </tr>
       </thead>
       <tbody>
-        {{#each upcummingPatches as upcummingPatch}}
+        {{#each upcummingPatches upcummingPatch=value}}
           <tr>
             <td>
-              <a href="{{routeForHasher(upcummingPatch.hasher)}}">
+              <a href="{{scope.root.routeForHasher(upcummingPatch.hasher)}}">
                 {{upcummingPatch.hasher.hashName}}
               </a>
             </td>
