@@ -271,9 +271,18 @@
         {{#case "home"}}
           <can-import from="~/components/home/">
             {{#if isPending}}
-              Loading home page…
+              <div class="alert alert-info" role="alert">
+                <strong>Fetching the next run…</strong>
+              </div>
             {{else}}
-              <lbh3-home />
+              {{#if isRejected}}
+                <div class="alert alert-danger" role="alert">
+                  <strong>Fuck!</strong> The next run failed to load.
+                  Check <a href="http://www.hash.org" target="_blank">hash.org</a> for the next run.
+                </div>
+              {{else}}
+                <lbh3-home />
+              {{/if}}
             {{/if}}
           </can-import>
         {{/case}}
