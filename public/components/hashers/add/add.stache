@@ -19,8 +19,8 @@
   <lbh3-hasher-edit-form
     hasher:from="hasher"
     on:didsave="didSave()"
-    saveButtonLabel="Create hasher"
-    saveSuccessMessage="The hasher has been created."
+    saveButtonLabel:from="'Create hasher'"
+    saveSuccessMessage:from="'The hasher has been created.'"
   />
 
 {{else}}

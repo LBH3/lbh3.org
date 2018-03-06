@@ -7,6 +7,7 @@ import './users.less';
 import view from './users.stache';
 
 export const ViewModel = DefineMap.extend({
+  secondaryPage: 'string',
   get session() {
     return Session.current;
   },

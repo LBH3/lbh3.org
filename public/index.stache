@@ -48,7 +48,7 @@
                 {{#if isPending}}
                   Loading Mismanagement…
                 {{else}}
-                  <lbh3-about-mismanagement year:from="year" />
+                  <lbh3-about-mismanagement year:from="scope.root.year" />
                 {{/if}}
               </can-import>
             {{/case}}
@@ -73,10 +73,10 @@
                       Loading the run attendance sheet page…
                     {{else}}
                       <lbh3-run-attendance
-                        day:from="day"
-                        month:from="month"
-                        trailNumber:from="trailNumber"
-                        year:from="year"
+                        day:from="scope.root.day"
+                        month:from="scope.root.month"
+                        trailNumber:from="scope.root.trailNumber"
+                        year:from="scope.root.year"
                       />
                     {{/if}}
                   </can-import>
@@ -89,10 +89,10 @@
                       Loading the edit run page…
                     {{else}}
                       <lbh3-run-edit
-                        day:from="day"
-                        month:from="month"
-                        trailNumber:from="trailNumber"
-                        year:from="year"
+                        day:from="scope.root.day"
+                        month:from="scope.root.month"
+                        trailNumber:from="scope.root.trailNumber"
+                        year:from="scope.root.year"
                       />
                     {{/if}}
                   </can-import>
@@ -130,13 +130,13 @@
             {{#if trailNumber}}
               <can-import from="lbh3/components/run/">
                 {{#if isPending}}
-                  Loading trail #{{trailNumber}}…
+                  Loading trail #{{scope.root.trailNumber}}…
                 {{else}}
                   <lbh3-run
-                    day:from="day"
-                    month:from="month"
-                    trailNumber:from="trailNumber"
-                    year:from="year"
+                    day:from="scope.root.day"
+                    month:from="scope.root.month"
+                    trailNumber:from="scope.root.trailNumber"
+                    year:from="scope.root.year"
                   />
                 {{/if}}
               </can-import>
@@ -145,7 +145,7 @@
                 {{#if isPending}}
                   Loading Past Runs…
                 {{else}}
-                  <lbh3-past-runs year:from="year" />
+                  <lbh3-past-runs year:from="scope.root.year" />
                 {{/if}}
               </can-import>
             {{/if}}
@@ -171,10 +171,10 @@
                     Loading the edit run page…
                   {{else}}
                     <lbh3-run-edit
-                      day:from="day"
-                      month:from="month"
-                      trailNumber:from="trailNumber"
-                      year:from="year"
+                      day:from="scope.root.day"
+                      month:from="scope.root.month"
+                      trailNumber:from="scope.root.trailNumber"
+                      year:from="scope.root.year"
                     />
                   {{/if}}
                 </can-import>
@@ -242,7 +242,7 @@
                     {{#if isPending}}
                       Loading the edit hasher page…
                     {{else}}
-                      <lbh3-hasher-edit id:from="id" />
+                      <lbh3-hasher-edit id:from="scope.root.id" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -254,7 +254,7 @@
                 {{#if isPending}}
                   Loading hasher page…
                 {{else}}
-                  <lbh3-hasher id:from="id" skip:from="skip" />
+                  <lbh3-hasher id:from="scope.root.id" skip:from="scope.root.skip" />
                 {{/if}}
               </can-import>
             {{else}}
@@ -262,7 +262,7 @@
                 {{#if isPending}}
                   Loading Hashers page…
                 {{else}}
-                  <lbh3-hashers searchText:bind="search" skip:from="skip" />
+                  <lbh3-hashers searchText:bind="scope.root.search" skip:from="scope.root.skip" />
                 {{/if}}
               </can-import>
             {{/if}}
@@ -286,7 +286,7 @@
                     {{#if isPending}}
                       Loading the edit user page…
                     {{else}}
-                      <lbh3-user-edit id:from="id" />
+                      <lbh3-user-edit id:from="scope.root.id" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>

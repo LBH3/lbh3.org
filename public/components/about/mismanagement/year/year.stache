@@ -13,7 +13,7 @@
 {{/if}}
 
 {{#if hashersByPosition}}
-  {{#each hashersByPosition as position}}
+  {{#each hashersByPosition position=value}}
     {{#if position.promise.isPending}}
       <div class="alert alert-info" role="alert">
         <strong>Fetching position…</strong>
@@ -33,7 +33,7 @@
         {{else}}
           {{position.promise.value.pluralName}}
         {{/is}}
-        {{#if showEmailLink}}
+        {{#if scope.root.showEmailLink}}
           <small>
             <a href="mailto:{{position.promise.value.emailAddress}}" title="Send an email">
               <span class="fa fa-envelope"></span>
@@ -42,7 +42,7 @@
         {{/if}}
       </h3>
       <ul>
-        {{#each position.hashers as hasherPromise}}
+        {{#each position.hashers hasherPromise=value}}
           <li>
             {{#if hasherPromise.isPending}}
               Fetching hasher…
@@ -54,7 +54,7 @@
 
             {{#if hasherPromise.isResolved}}
               {{#if session.user.canViewHashersList}}
-                <a href="{{routeForHasher(hasherPromise.value)}}">
+                <a href="{{scope.root.routeForHasher(hasherPromise.value)}}">
                   {{hasherPromise.value.hashName}}
                 </a>
               {{else}}

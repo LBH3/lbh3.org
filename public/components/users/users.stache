@@ -1,4 +1,5 @@
 <can-import from="can-stache/helpers/route" />
+<can-import from="font-awesome/css/font-awesome.css" />
 
 {{#if session.user.canManageUsers}}
   <h2>Users</h2>
@@ -26,7 +27,7 @@
         </tr>
       </thead>
       <tbody>
-        {{#each users as user}}
+        {{#each users user=value}}
           <tr>
             <td>{{user.email}}</td>
             <td>
@@ -36,7 +37,11 @@
                 {{user.givenName}} {{user.familyName}}
               {{/if}}
             </td>
-            <td>{{user.hasher.hashOrJustName}}</td>
+            <td>
+              {{#if user.hasher}}
+                {{user.hasher.hashOrJustName}}
+              {{/if}}
+            </td>
             <td class="text-center">
               <a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}" title="Edit user">
                 <span class="fa fa-lg fa-pencil-square-o"></span>

@@ -471,7 +471,7 @@
             </tr>
           </thead>
           <tbody>
-            {{#each patches as patch}}
+            {{#each patches patch=value}}
               <tr>
                 <td class="text-nowrap">{{patch.number}} {{patch.type}}s</td>
                 <td>
@@ -487,7 +487,7 @@
                 <td>{{{patch.event.haresHtml}}}</td>
                 <td>{{{patch.event.shortLocationHtml}}}</td>
                 <td class="text-center">
-                  <lbh3-photos-button event:from="patch.event" show-edit="true" />
+                  <lbh3-photos-button event:from="patch.event" showEdit:from="true" />
                 </td>
                 <td class="text-center">
                   <lbh3-snooze-button event:from="patch.event" />
@@ -507,10 +507,10 @@
 
     {{#if pages.length}}
       <nav class="nav nav-pills">
-        {{#each pages as page}}
+        {{#each pages page=value}}
           <a
-            class="{{#is currentPage page}}active{{/is}} flex-sm-fill nav-link text-sm-center"
-            href="{{routeForPage(page)}}"
+            class="{{#is scope.root.currentPage page}}active{{/is}} flex-sm-fill nav-link text-sm-center"
+            href="{{scope.root.routeForPage(page)}}"
           >
             {{page}}
           </a>
@@ -545,7 +545,7 @@
             </tr>
           </thead>
           <tbody>
-            {{#each runs as run}}
+            {{#each runs run=value}}
               <tr>
                 <td>
                   {{#if run.event.trailNumber}}
@@ -565,7 +565,7 @@
                 <td>{{{run.event.shortLocationHtml}}}</td>
                 <td>{{{run.event.nameHtml}}}</td>
                 <td class="text-center">
-                  <lbh3-photos-button event:from="run.event" show-edit="true" />
+                  <lbh3-photos-button event:from="run.event" showEdit:from="true" />
                 </td>
                 <td class="text-center">
                   <lbh3-snooze-button event:from="run.event" />

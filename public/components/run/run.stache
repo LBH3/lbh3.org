@@ -218,25 +218,25 @@
             </tr>
           </thead>
           <tbody>
-            {{#each hashers as hasher}}
+            {{#each hashers hasher=value}}
               <tr>
-                <td>{{plusOne(%index)}}</td>
+                <td>{{scope.root.plusOne(scope.index)}}</td>
                 <td>{{hasher.role}}</td>
                 <td>
                   {{hasher.paymentNotesAndType}}
                 </td>
                 <td>
-                  <a href="{{routeForHasher(hasher)}}">
+                  <a href="{{scope.root.routeForHasher(hasher)}}">
                     {{hasher.hashName}}
                   </a>
                 </td>
                 <td>
-                  <a href="{{routeForHasher(hasher)}}">
+                  <a href="{{scope.root.routeForHasher(hasher)}}">
                     {{hasher.familyName}}
                   </a>
                 </td>
                 <td>
-                  <a href="{{routeForHasher(hasher)}}">
+                  <a href="{{scope.root.routeForHasher(hasher)}}">
                     {{hasher.givenName}}
                   </a>
                 </td>
@@ -257,7 +257,7 @@
             </tr>
           </thead>
           <tbody>
-            {{#each cashReport.records as record}}
+            {{#each cashReport.records record=value}}
               <tr>
                 <td>{{record.title}}</td>
                 <td>

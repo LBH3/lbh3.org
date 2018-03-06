@@ -32,7 +32,7 @@
 {{/if}}
 
 {{#if eventsByMonth}}
-  {{#each eventsByMonth as month}}
+  {{#each eventsByMonth month=value}}
     <h3>{{month.name}} {{month.year}}</h3>
     <table class="table table-bordered table-responsive-sm table-sm">
       <thead>
@@ -48,7 +48,7 @@
         </tr>
       </thead>
       <tbody>
-        {{#each month.events as event}}
+        {{#each month.events event=value}}
           <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
             {{#if session.user.canEditPreTrailInfo}}
               <td class="text-center">
