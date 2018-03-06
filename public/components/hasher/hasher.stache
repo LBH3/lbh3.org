@@ -1,7 +1,7 @@
 <can-import from="can-stache/helpers/route" />
 <can-import from="font-awesome/css/font-awesome.css" />
-<can-import from="lbh3/components/photos-button/" />
-<can-import from="lbh3/components/snooze-button/" />
+<can-import from="~/components/photos-button/" />
+<can-import from="~/components/snooze-button/" />
 
 {{#if session.user.canViewHashersList}}
 

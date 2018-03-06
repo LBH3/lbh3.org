@@ -28,11 +28,11 @@
   </head>
   <body>
     <can-import from="bootstrap/dist/css/bootstrap.css" />
-    <can-import from="lbh3/styles.less" />
-    <can-import from="lbh3/app" export-as="viewModel" />
-    <can-import from="lbh3/components/footer/" />
-    <can-import from="lbh3/components/header/" />
-    <can-import from="lbh3/components/nav/" />
+    <can-import from="~/styles.less" />
+    <can-import from="~/app" export-as="viewModel" />
+    <can-import from="~/components/footer/" />
+    <can-import from="~/components/header/" />
+    <can-import from="~/components/nav/" />
 
     <header>
       <lbh3-header />
@@ -44,7 +44,7 @@
         {{#case "about"}}
           {{#switch secondaryPage}}
             {{#case "mismanagement"}}
-              <can-import from="lbh3/components/about/mismanagement/">
+              <can-import from="~/components/about/mismanagement/">
                 {{#if isPending}}
                   Loading Mismanagement…
                 {{else}}
@@ -53,7 +53,7 @@
               </can-import>
             {{/case}}
             {{#default}}
-              <can-import from="lbh3/components/about/">
+              <can-import from="~/components/about/">
                 {{#if isPending}}
                   Loading about page…
                 {{else}}
@@ -68,7 +68,7 @@
             {{#switch secondaryPage}}
               {{#case "attendance"}}
                 <lbh3-no-ssr>
-                  <can-import from="lbh3/components/run/attendance/">
+                  <can-import from="~/components/run/attendance/">
                     {{#if isPending}}
                       Loading the run attendance sheet page…
                     {{else}}
@@ -84,7 +84,7 @@
               {{/case}}
               {{#case "edit"}}
                 <lbh3-no-ssr>
-                  <can-import from="lbh3/components/run/edit/">
+                  <can-import from="~/components/run/edit/">
                     {{#if isPending}}
                       Loading the edit run page…
                     {{else}}
@@ -99,7 +99,7 @@
                 </lbh3-no-ssr>
               {{/case}}
               {{#case "founders"}}
-                <can-import from="lbh3/components/founders-2018/">
+                <can-import from="~/components/founders-2018/">
                   {{#if isPending}}
                     Loading…
                   {{else}}
@@ -108,7 +108,7 @@
                 </can-import>
               {{/case}}
               {{#case "jesus-cuervo-1800-trail"}}
-                <can-import from="lbh3/components/jesus-cuervo/">
+                <can-import from="~/components/jesus-cuervo/">
                   {{#if isPending}}
                     Loading…
                   {{else}}
@@ -117,7 +117,7 @@
                 </can-import>
               {{/case}}
               {{#case "memorial-service"}}
-                <can-import from="lbh3/components/memorial-service/">
+                <can-import from="~/components/memorial-service/">
                   {{#if isPending}}
                     Loading…
                   {{else}}
@@ -128,7 +128,7 @@
             {{/switch}}
           {{else}}
             {{#if trailNumber}}
-              <can-import from="lbh3/components/run/">
+              <can-import from="~/components/run/">
                 {{#if isPending}}
                   Loading trail #{{scope.root.trailNumber}}…
                 {{else}}
@@ -141,7 +141,7 @@
                 {{/if}}
               </can-import>
             {{else}}
-              <can-import from="lbh3/components/past-runs/">
+              <can-import from="~/components/past-runs/">
                 {{#if isPending}}
                   Loading Past Runs…
                 {{else}}
@@ -155,7 +155,7 @@
           {{#switch secondaryPage}}
             {{#case "add"}}
               <lbh3-no-ssr>
-                <can-import from="lbh3/components/hareline/add/">
+                <can-import from="~/components/hareline/add/">
                   {{#if isPending}}
                     Loading the Hareline add page…
                   {{else}}
@@ -166,7 +166,7 @@
             {{/case}}
             {{#case "edit"}}
               <lbh3-no-ssr>
-                <can-import from="lbh3/components/run/edit/">
+                <can-import from="~/components/run/edit/">
                   {{#if isPending}}
                     Loading the edit run page…
                   {{else}}
@@ -181,7 +181,7 @@
               </lbh3-no-ssr>
             {{/case}}
             {{#case "guidelines"}}
-              <can-import from="lbh3/components/hareline/guidelines/">
+              <can-import from="~/components/hareline/guidelines/">
                 {{#if isPending}}
                   Loading haring guidelines…
                 {{else}}
@@ -190,7 +190,7 @@
               </can-import>
             {{/case}}
             {{#default}}
-              <can-import from="lbh3/components/hareline/">
+              <can-import from="~/components/hareline/">
                 {{#if isPending}}
                   Loading the Hareline…
                 {{else}}
@@ -205,7 +205,7 @@
             {{#switch secondaryPage}}
               {{#case "add"}}
                 <lbh3-no-ssr>
-                  <can-import from="lbh3/components/hashers/add/">
+                  <can-import from="~/components/hashers/add/">
                     {{#if isPending}}
                       Loading the add hasher page…
                     {{else}}
@@ -216,7 +216,7 @@
               {{/case}}
               {{#case "early-warning"}}
                 <lbh3-no-ssr>
-                  <can-import from="lbh3/components/hashers/early-warning/">
+                  <can-import from="~/components/hashers/early-warning/">
                     {{#if isPending}}
                       Loading the early warning page…
                     {{else}}
@@ -227,7 +227,7 @@
               {{/case}}
               {{#case "email"}}
                 <lbh3-no-ssr>
-                  <can-import from="lbh3/components/hashers/email/">
+                  <can-import from="~/components/hashers/email/">
                     {{#if isPending}}
                       Loading the hashers email page…
                     {{else}}
@@ -238,7 +238,7 @@
               {{/case}}
               {{#case "edit"}}
                 <lbh3-no-ssr>
-                  <can-import from="lbh3/components/hasher/edit/">
+                  <can-import from="~/components/hasher/edit/">
                     {{#if isPending}}
                       Loading the edit hasher page…
                     {{else}}
@@ -250,7 +250,7 @@
             {{/switch}}
           {{else}}
             {{#if id}}
-              <can-import from="lbh3/components/hasher/">
+              <can-import from="~/components/hasher/">
                 {{#if isPending}}
                   Loading hasher page…
                 {{else}}
@@ -258,7 +258,7 @@
                 {{/if}}
               </can-import>
             {{else}}
-              <can-import from="lbh3/components/hashers/">
+              <can-import from="~/components/hashers/">
                 {{#if isPending}}
                   Loading Hashers page…
                 {{else}}
@@ -269,7 +269,7 @@
           {{/if}}
         {{/case}}
         {{#case "home"}}
-          <can-import from="lbh3/components/home/">
+          <can-import from="~/components/home/">
             {{#if isPending}}
               Loading home page…
             {{else}}
@@ -282,7 +282,7 @@
             {{#switch secondaryPage}}
               {{#case "edit"}}
                 <lbh3-no-ssr>
-                  <can-import from="lbh3/components/users/edit/">
+                  <can-import from="~/components/users/edit/">
                     {{#if isPending}}
                       Loading the edit user page…
                     {{else}}
@@ -293,7 +293,7 @@
               {{/case}}
             {{/switch}}
           {{else}}
-            <can-import from="lbh3/components/users/">
+            <can-import from="~/components/users/">
               {{#if isPending}}
                 Loading users page…
               {{else}}

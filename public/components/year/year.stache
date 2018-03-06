@@ -1,7 +1,7 @@
 <can-import from="can-stache/helpers/route" />
-<can-import from="lbh3/components/no-ssr/" />
-<can-import from="lbh3/components/photos-button/" />
-<can-import from="lbh3/components/snooze-button/" />
+<can-import from="~/components/no-ssr/" />
+<can-import from="~/components/photos-button/" />
+<can-import from="~/components/snooze-button/" />
 
 {{#if eventsPromise.isPending}}
   <div class="alert alert-info" role="alert">
