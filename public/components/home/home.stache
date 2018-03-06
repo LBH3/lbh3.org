@@ -1,3 +1,5 @@
+<can-import from="~/components/run/" />
+
 {{^if session.user}}
   <p>
     <small>
@@ -14,19 +16,4 @@
   <hr>
 {{/if}}
 
-<can-import from="~/components/run/">
-  {{#if isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Loading trail…</strong>
-    </div>
-  {{else}}
-    {{#if isRejected}}
-      <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The next trail failed to load.
-        Check <a href="http://www.hash.org" target="_blank">hash.org</a> for the next run.
-      </div>
-    {{else}}
-      <lbh3-run />
-    {{/if}}
-  {{/if}}
-</can-import>
+<lbh3-run />
