@@ -104,13 +104,6 @@ module.exports = function () {
 
   app.use(ssr({
     config: `${__dirname}/../../public/package.json!npm`,
-    main: 'lbh3/index.stache!done-autorender',
-    liveReload: true,
-    auth: {
-      cookie: 'feathers-jwt',
-      domains: [
-        'localhost'
-      ]
-    }
+    main: 'lbh3/index.stache!done-autorender'
   }));
 };
