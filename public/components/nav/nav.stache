@@ -2,21 +2,21 @@
 
 <nav>
   <ul class="container nav nav-fill">
-    <li class="{{#is page 'home'}}active{{/is}} nav-item">
+    <li class="{{#if isActive('home')}}active{{/if}} nav-item">
       <a class="nav-link" href="{{routeUrl page='home'}}">Home</a>
     </li>
-    <li class="{{#is page 'hareline'}}active{{/is}} nav-item">
+    <li class="{{#if isActive('hareline')}}active{{/if}} nav-item">
       <a class="nav-link" href="{{routeUrl page='hareline'}}">Hareline</a>
     </li>
-    <li class="{{#is page 'events'}}active{{/is}} nav-item">
+    <li class="{{#if isActive('events')}}active{{/if}} nav-item">
       <a class="nav-link" href="{{routeUrl page='events'}}">Past Runs</a>
     </li>
     {{#if session.user.canViewHashersList}}
-      <li class="{{#is page 'hashers'}}active{{/is}} nav-item">
+      <li class="{{#if isActive('hashers')}}active{{/if}} nav-item">
         <a class="nav-link" href="{{routeUrl page='hashers' secondaryPage=''}}">Hashers</a>
       </li>
     {{/if}}
-    <li class="{{#is page 'about'}}active{{/is}} nav-item">
+    <li class="{{#if isActive('about')}}active{{/if}} nav-item">
       <a class="nav-link" href="{{routeUrl page='about'}}">About</a>
     </li>
   </ul>
