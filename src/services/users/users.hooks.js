@@ -87,14 +87,16 @@ const getBoredInfo = function(hook) {
         canEditPostTrailInfo: false,
         canEditPreTrailInfo: false,
         canManageUsers: false,
+        canViewDirectoryInfo: false,
         canViewHashersEmailList: false,
-        canViewHashersList: false,
-        canViewOldData: false
+        canViewOldData: false,
+        canViewRunAttendance: false
       };
       if (boredPositions.includes(authHook.HASH_CASH)) {
         permission = Object.assign(permission, {
           canEditHasherInfo: true,
-          canViewHashersList: true
+          canViewDirectoryInfo: true,
+          canViewRunAttendance: true
         });
       }
       if (boredPositions.includes(authHook.HASH_FLASH)) {
@@ -109,9 +111,10 @@ const getBoredInfo = function(hook) {
           canAddSnoozes: true,
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,
+          canViewDirectoryInfo: true,
           canViewHashersEmailList: true,
-          canViewHashersList: true,
-          canViewOldData: true
+          canViewOldData: true,
+          canViewRunAttendance: true
         });
       }
       if (boredPositions.includes(authHook.ON_DISK)) {
@@ -119,21 +122,23 @@ const getBoredInfo = function(hook) {
           canAddHashers: true,
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,
+          canViewDirectoryInfo: true,
           canViewHashersEmailList: true,
-          canViewHashersList: true,
-          canViewOldData: true
+          canViewOldData: true,
+          canViewRunAttendance: true
         });
       }
       if (boredPositions.includes(authHook.ON_SEC)) {
         permission = Object.assign(permission, {
           canAddSnoozes: true,
-          canViewHashersList: true
+          canViewDirectoryInfo: true,
+          canViewRunAttendance: true
         });
       }
       if (boredPositions.includes(authHook.TRAILMASTERS)) {
         permission = Object.assign(permission, {
           canEditPreTrailInfo: true,
-          canViewHashersList: true
+          canViewDirectoryInfo: true
         });
       }
       if (boredPositions.includes(authHook.WEBMASTERS)) {
@@ -146,9 +151,10 @@ const getBoredInfo = function(hook) {
           canEditPostTrailInfo: true,
           canEditPreTrailInfo: true,
           canManageUsers: true,
+          canViewDirectoryInfo: true,
           canViewHashersEmailList: true,
-          canViewHashersList: true,
-          canViewOldData: true
+          canViewOldData: true,
+          canViewRunAttendance: true
         });
       }
       hook.result = Object.assign(hook.result, permission);

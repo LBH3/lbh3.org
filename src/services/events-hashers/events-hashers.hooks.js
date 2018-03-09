@@ -120,8 +120,8 @@ const removeHook = function(hook) {
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
-    find: [ authHook.restrictTo(authHook.GRANDMASTERS, authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.WEBMASTERS) ],
-    get: [ authHook.restrictTo(authHook.GRANDMASTERS, authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.WEBMASTERS) ],
+    find: [ authHook.restrictTo(authHook.GRANDMASTERS, authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.TRAILMASTERS, authHook.WEBMASTERS) ],
+    get: [ authHook.restrictTo(authHook.GRANDMASTERS, authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.TRAILMASTERS, authHook.WEBMASTERS) ],
     create: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createHook ],
     update: [ authHook.restrictTo() ],
     patch: [ authHook.restrictTo() ],

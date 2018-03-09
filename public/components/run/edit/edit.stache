@@ -13,482 +13,492 @@
   {{/if}}
 </h2>
 
-{{#if eventPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Loading trail…</strong>
-  </div>
-{{/if}}
-{{#if eventPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The trail failed to load. {{eventPromise.reason.message}}
-  </div>
-{{/if}}
-{{#if event}}
-  <form class="mb-4 mt-2" on:submit="editRun()">
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="hares">
-          Hares
-        </label>
-        <input autofocus class="form-control" id="hares" type="text" value:bind="event.haresMd">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="location">
-          Location
-        </label>
-        <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
-        {{#if event.locationPromise.value}}
-          <small>
-            {{{event.locationPromise.value.formattedAddress}}}
-          </small>
-        {{/if}}
-      </div>
+{{#if canEditEvent}}
+
+  {{#if eventPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Loading trail…</strong>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="name">
-          Name
-        </label>
-        <input class="form-control" id="name" type="text" value:bind="event.nameMd">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="bring">
-          Bring
-        </label>
-        <input class="form-control" id="bring" type="text" value:bind="event.bringMd">
-      </div>
+  {{/if}}
+  {{#if eventPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The trail failed to load. {{eventPromise.reason.message}}
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="directions">
-          Directions
-        </label>
-        <textarea class="form-control" id="directions" value:bind="event.directionsMd"></textarea>
-      </div>
-      <div class="form-group col-md-6">
-        <label for="from-the-hares">
-          From the Hares
-        </label>
-        <textarea class="form-control" id="from-the-hares" value:bind="event.fromTheHaresMd"></textarea>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="on-on">
-          On-On
-        </label>
-        <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
-        {{#if event.onOnPromise.value}}
-          <small>
-            {{{event.onOnPromise.value.formattedAddress}}}
-          </small>
-        {{/if}}
-      </div>
-      {{#if showPostTrailFields}}
-        <div class="form-group col-md-4">
-          <label for="scribe">
-            Scribe
+  {{/if}}
+  {{#if event}}
+    <form class="mb-4 mt-2" on:submit="editRun()">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="hares">
+            Hares
           </label>
-          <input
-            class="form-control"
-            id="scribe"
-            type="text"
-            value:bind="event.scribesMd"
-            {{^if event.scribesMd}}
-              {{#if scribes.length}}
-                placeholder="{{scribeNames}}"
-              {{else}}
-                disabled
-                placeholder="Add the scribe under Attendance"
-              {{/if}}
-            {{/if}}
-          />
+          <input autofocus class="form-control" id="hares" type="text" value:bind="event.haresMd">
         </div>
-        <div class="form-group col-md-2">
-          <label for="miles">
-            Miles
+        <div class="form-group col-md-6">
+          <label for="location">
+            Location
           </label>
-          <input
-            class="form-control"
-            id="miles"
-            min="0"
-            step="0.01"
-            type="number"
-            value:bind="event.miles"
-          />
+          <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
+          {{#if event.locationPromise.value}}
+            <small>
+              {{{event.locationPromise.value.formattedAddress}}}
+            </small>
+          {{/if}}
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="name">
+            Name
+          </label>
+          <input class="form-control" id="name" type="text" value:bind="event.nameMd">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="bring">
+            Bring
+          </label>
+          <input class="form-control" id="bring" type="text" value:bind="event.bringMd">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="directions">
+            Directions
+          </label>
+          <textarea class="form-control" id="directions" value:bind="event.directionsMd"></textarea>
+        </div>
+        <div class="form-group col-md-6">
+          <label for="from-the-hares">
+            From the Hares
+          </label>
+          <textarea class="form-control" id="from-the-hares" value:bind="event.fromTheHaresMd"></textarea>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="on-on">
+            On-On
+          </label>
+          <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
+          {{#if event.onOnPromise.value}}
+            <small>
+              {{{event.onOnPromise.value.formattedAddress}}}
+            </small>
+          {{/if}}
+        </div>
+        {{#if showPostTrailFields}}
+          <div class="form-group col-md-4">
+            <label for="scribe">
+              Scribe
+            </label>
+            <input
+              class="form-control"
+              id="scribe"
+              type="text"
+              value:bind="event.scribesMd"
+              {{^if event.scribesMd}}
+                {{#if scribes.length}}
+                  placeholder="{{scribeNames}}"
+                {{else}}
+                  disabled
+                  placeholder="Add the scribe under Attendance"
+                {{/if}}
+              {{/if}}
+            />
+          </div>
+          <div class="form-group col-md-2">
+            <label for="miles">
+              Miles
+            </label>
+            <input
+              class="form-control"
+              id="miles"
+              min="0"
+              step="0.01"
+              type="number"
+              value:bind="event.miles"
+            />
+          </div>
+        {{/if}}
+      </div>
+
+      {{#if showPostTrailFields}}
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="hashit-reason">
+              Hashit
+            </label>
+            <textarea class="form-control" id="hashit-reason" value:bind="event.hashitReasonMd"></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="run-notes">
+              Run Notes
+            </label>
+            <textarea class="form-control" id="run-notes" value:bind="event.trailCommentsMd"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="added-writeup">
+              Added writeup
+            </label>
+            <textarea class="form-control" id="added-writeup" value:bind="event.addedWriteupMd"></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="additional-writeup">
+              Additional writeup
+            </label>
+            <textarea class="form-control" id="additional-writeup" value:bind="event.additionalWriteupMd"></textarea>
+          </div>
+        </div>
+        <div class="form-row">
+          {{#if session.user.canAddPhotos}}
+            <div class="form-group col-md-6">
+              <label for="photos-url">
+                Photos URL
+              </label>
+              <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
+            </div>
+          {{/if}}
+          {{#if session.user.canAddSnoozes}}
+            <div class="form-group col-md-6">
+              <label for="snooze-url">
+                Snooze URL
+              </label>
+              <input class="form-control" id="snooze-url" type="text" value:bind="event.snoozeUrl">
+            </div>
+          {{/if}}
         </div>
       {{/if}}
-    </div>
 
-    {{#if showPostTrailFields}}
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="hashit-reason">
-            Hashit
-          </label>
-          <textarea class="form-control" id="hashit-reason" value:bind="event.hashitReasonMd"></textarea>
+      {{#if editingEventPromise.isPending}}
+        <div class="alert alert-info mt-3" role="alert">
+          <strong>Saving trail…</strong>
         </div>
-        <div class="form-group col-md-6">
-          <label for="run-notes">
-            Run Notes
-          </label>
-          <textarea class="form-control" id="run-notes" value:bind="event.trailCommentsMd"></textarea>
+      {{/if}}
+      {{#if editingEventPromise.isRejected}}
+        <div class="alert alert-danger mt-3" role="alert">
+          <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.message}}
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="added-writeup">
-            Added writeup
-          </label>
-          <textarea class="form-control" id="added-writeup" value:bind="event.addedWriteupMd"></textarea>
+      {{/if}}
+      {{#if editingEventPromise.isResolved}}
+        <div class="alert alert-success mt-3" role="alert">
+          <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          <strong>On on!</strong>
+          {{#if event.hasProbablyEnded}}
+            You successfully saved trail #{{event.trailNumber}}.
+          {{else}}
+            Both hash.org and lbh3.org have been updated.
+          {{/if}}
         </div>
-        <div class="form-group col-md-6">
-          <label for="additional-writeup">
-            Additional writeup
-          </label>
-          <textarea class="form-control" id="additional-writeup" value:bind="event.additionalWriteupMd"></textarea>
-        </div>
-      </div>
-      <div class="form-row">
-        {{#if session.user.canAddPhotos}}
+      {{/if}}
+
+      <button
+        class="btn btn-primary mt-3"
+        {{#if editingEventPromise.isPending}}disabled{{/if}}
+        type="submit">
+        Edit run
+      </button>
+
+      {{#if showPostTrailFields}}
+        <div class="form-row mt-4">
           <div class="form-group col-md-6">
-            <label for="photos-url">
-              Photos URL
+            <label for="new-boots">
+              New boots
             </label>
-            <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
+            <textarea class="form-control" disabled id="new-boots" value:bind="event.newBootsMd"></textarea>
           </div>
-        {{/if}}
-        {{#if session.user.canAddSnoozes}}
           <div class="form-group col-md-6">
-            <label for="snooze-url">
-              Snooze URL
+            <label for="new-names">
+              New names
             </label>
-            <input class="form-control" id="snooze-url" type="text" value:bind="event.snoozeUrl">
+            <textarea class="form-control" disabled id="new-names" value:bind="event.newNamesMd"></textarea>
           </div>
-        {{/if}}
-      </div>
-    {{/if}}
-
-    {{#if editingEventPromise.isPending}}
-      <div class="alert alert-info mt-3" role="alert">
-        <strong>Saving trail…</strong>
-      </div>
-    {{/if}}
-    {{#if editingEventPromise.isRejected}}
-      <div class="alert alert-danger mt-3" role="alert">
-        <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.message}}
-      </div>
-    {{/if}}
-    {{#if editingEventPromise.isResolved}}
-      <div class="alert alert-success mt-3" role="alert">
-        <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>On on!</strong>
-        {{#if event.hasProbablyEnded}}
-          You successfully saved trail #{{event.trailNumber}}.
-        {{else}}
-          Both hash.org and lbh3.org have been updated.
-        {{/if}}
-      </div>
-    {{/if}}
-
-    <button
-      class="btn btn-primary mt-3"
-      {{#if editingEventPromise.isPending}}disabled{{/if}}
-      type="submit">
-      Edit run
-    </button>
-
-    {{#if showPostTrailFields}}
-      <div class="form-row mt-4">
-        <div class="form-group col-md-6">
-          <label for="new-boots">
-            New boots
-          </label>
-          <textarea class="form-control" disabled id="new-boots" value:bind="event.newBootsMd"></textarea>
         </div>
-        <div class="form-group col-md-6">
-          <label for="new-names">
-            New names
-          </label>
-          <textarea class="form-control" disabled id="new-names" value:bind="event.newNamesMd"></textarea>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="visitors">
+              Visitors
+            </label>
+            <textarea class="form-control" disabled id="visitors" value:bind="event.visitorsMd"></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="returners">
+              Returners
+            </label>
+            <textarea class="form-control" disabled id="returners" value:bind="event.returnersMd"></textarea>
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="visitors">
-            Visitors
-          </label>
-          <textarea class="form-control" disabled id="visitors" value:bind="event.visitorsMd"></textarea>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="returners">
-            Returners
-          </label>
-          <textarea class="form-control" disabled id="returners" value:bind="event.returnersMd"></textarea>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="hare-patches">
-            Hare patches
-          </label>
-          <textarea class="form-control" disabled id="hare-patches" value:bind="event.harePatchesMd"></textarea>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="patches">
-            Runner patches
-          </label>
-          <textarea class="form-control" disabled id="patches" value:bind="event.patchesMd"></textarea>
-        </div>
-      </div>
-    {{/if}}
-  </form>
-{{/if}}
-
-{{#if event.hasStartedOrIsCloseToStarting}}
-  <h3>Attendance</h3>
-
-  {{#if hashersPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching attendance sheet…</strong>
-    </div>
-  {{/if}}
-
-  {{#if hashersPromise.isRejected}}
-    <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
-    </div>
-  {{/if}}
-
-  {{#if hashersPromise.isResolved}}
-    <form on:submit="addHasherToRun()">
-      <table class="table table-bordered table-responsive-sm table-sm">
-        <thead>
-          <tr>
-            <th></th>
-            <th>
-              <label for="hasher-name">
-                Name
-              </label>
-            </th>
-            <th>
-              <label for="payment-tier">
-                Payment tier
-              </label>
-            </th>
-            <th>
-              <label for="payment-notes">
-                Payment notes
-              </label>
-            </th>
-            <th>
-              <label for="role">
-                Role
-              </label>
-            </th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each hashers hasher=value}}
-            <tr>
-              <td>{{scope.root.plusOne(scope.index)}}</td>
-              <td>
-                <a href="{{scope.root.routeForHasher(hasher)}}">
-                  {{hasher.hashOrJustName}}
-                </a>
-              </td>
-              <td>
-                {{hasher.paymentTier}}
-              </td>
-              <td>
-                {{hasher.paymentNotes}}
-              </td>
-              <td>{{hasher.role}}</td>
-              <td class="text-center">
-                <button
-                  class="btn btn-danger btn-sm remove-hasher"
-                  on:click="removeHasher(hasher)"
-                >
-                  <span class="fa fa-remove"></span>
-                </button>
-              </td>
-            </tr>
-          {{/each}}
-          <tr>
-            <td></td>
-            <td>
-              <input
-                autocomplete="off"
-                class="form-control"
-                disabled
-                id="hasher-name"
-                on:input:value:to="hasherAwesompleteQuery"
-                type="text"
-              />
-            </td>
-            <td>
-              <select
-                class="form-control"
-                {{^if newHasherForRun.hasherId}}disabled{{/if}}
-                id="payment-tier"
-                value:bind="newHasherForRun.paymentTier"
-              >
-                {{#each paymentRates paymentRate=value}}
-                  <option value="{{paymentRate.tier}}">
-                    {{paymentRate.title}}
-                  </option>
-                {{/each}}
-              </select>
-            </td>
-            <td>
-              <input
-                class="form-control"
-                {{^if newHasherForRun.hasherId}}disabled{{/if}}
-                id="payment-notes"
-                value:bind="newHasherForRun.paymentNotes"
-                type="text"
-              />
-            </td>
-            <td>
-              <select
-                class="form-control"
-                {{^if newHasherForRun.hasherId}}disabled{{/if}}
-                id="role"
-                value:bind="newHasherForRun.role"
-              >
-                {{#each roles role=value}}
-                  <option value="{{role}}">
-                    {{role}}
-                  </option>
-                {{/each}}
-              </select>
-            </td>
-            <td class="text-center">
-              <button
-                class="btn {{#if addingHasherPromise.isRejected}}btn-warning{{else}}btn-primary{{/if}} btn-sm"
-                {{#if addingHasherPromise.isPending}}disabled{{/if}}
-                {{^if newHasherForRun.hasherId}}disabled{{/if}}
-                type="submit"
-              >
-                {{#if addingHasherPromise.isRejected}}
-                  <span class="fa fa-warning" title="{{addingHasherPromise.reason.message}}"></span>
-                {{else}}
-                  <span class="fa fa-plus"></span>
-                {{/if}}
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      {{#if session.user.canAddHashers}}
-        <div class="clearfix">
-          <a class="btn btn-primary float-right" href="{{routeUrl page='hashers' secondaryPage='add'}}">
-            Need to add a new hasher?
-          </a>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="hare-patches">
+              Hare patches
+            </label>
+            <textarea class="form-control" disabled id="hare-patches" value:bind="event.harePatchesMd"></textarea>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="patches">
+              Runner patches
+            </label>
+            <textarea class="form-control" disabled id="patches" value:bind="event.patchesMd"></textarea>
+          </div>
         </div>
       {{/if}}
     </form>
+  {{/if}}
 
-    <h3>Patches</h3>
-    {{#if hashers.length}}
-      <form on:submit="addPatch()">
-        <table class="table table-bordered table-responsive-sm table-sm">
-          <thead>
-            <tr>
-              <th></th>
-              <th><label for="patch-hasher-name">Hasher name</label></th>
-              <th><label for="patch-number">Patch number</label></th>
-              <th><label for="patch-type">Patch type</label></th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td></td>
-              <td>
-                <select
-                  class="form-control"
-                  id="patch-hasher-name"
-                  value:bind="newPatch.hasherId"
-                >
-                  <option></option>
-                  {{#each patchHashers hasher=value}}
-                    <option value="{{hasher.hasherId}}">
-                      {{hasher.hashOrJustName}}
-                    </option>
-                  {{/each}}
-                </select>
-              </td>
-              <td>
-                <input
-                  class="form-control"
-                  {{^if newPatch.hasherId}}disabled{{/if}}
-                  id="patch-number"
-                  min="0"
-                  step="1"
-                  type="number"
-                  value:bind="newPatch.number"
-                />
-              </td>
-              <td>
-                <select
-                  class="form-control"
-                  {{^if newPatch.hasherId}}disabled{{/if}}
-                  id="patch-type"
-                  value:bind="newPatch.type"
-                >
-                  <option value="hare">hares</option>
-                  <option value="run">runs</option>
-                </select>
-              </td>
-              <td class="text-center">
-                <button
-                  class="btn {{#if addingPatchPromise.isRejected}}btn-warning{{else}}btn-primary{{/if}} btn-sm"
-                  {{#if addingPatchPromise.isPending}}disabled{{/if}}
-                  {{^if newPatch.hasherId}}disabled{{/if}}
-                  type="submit"
-                >
-                  {{#if addingPatchPromise.isRejected}}
-                    <span class="fa fa-warning" title="{{addingPatchPromise.reason.message}}"></span>
-                  {{else}}
-                    <span class="fa fa-plus"></span>
-                  {{/if}}
-                </button>
-              </td>
-            </tr>
-            {{#each patches patch=value}}
+  {{#if session.user.canViewRunAttendance}}
+    {{#if event.hasStartedOrIsCloseToStarting}}
+      <h3>Attendance</h3>
+
+      {{#if hashersPromise.isPending}}
+        <div class="alert alert-info" role="alert">
+          <strong>Fetching attendance sheet…</strong>
+        </div>
+      {{/if}}
+
+      {{#if hashersPromise.isRejected}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
+        </div>
+      {{/if}}
+
+      {{#if hashersPromise.isResolved}}
+        <form on:submit="addHasherToRun()">
+          <table class="table table-bordered table-responsive-sm table-sm">
+            <thead>
               <tr>
-                <td>{{scope.root.plusOne(scope.index)}}</td>
+                <th></th>
+                <th>
+                  <label for="hasher-name">
+                    Name
+                  </label>
+                </th>
+                <th>
+                  <label for="payment-tier">
+                    Payment tier
+                  </label>
+                </th>
+                <th>
+                  <label for="payment-notes">
+                    Payment notes
+                  </label>
+                </th>
+                <th>
+                  <label for="role">
+                    Role
+                  </label>
+                </th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each hashers hasher=value}}
+                <tr>
+                  <td>{{scope.root.plusOne(scope.index)}}</td>
+                  <td>
+                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                      {{hasher.hashOrJustName}}
+                    </a>
+                  </td>
+                  <td>
+                    {{hasher.paymentTier}}
+                  </td>
+                  <td>
+                    {{hasher.paymentNotes}}
+                  </td>
+                  <td>{{hasher.role}}</td>
+                  <td class="text-center">
+                    <button
+                      class="btn btn-danger btn-sm remove-hasher"
+                      on:click="removeHasher(hasher)"
+                    >
+                      <span class="fa fa-remove"></span>
+                    </button>
+                  </td>
+                </tr>
+              {{/each}}
+              <tr>
+                <td></td>
                 <td>
-                  {{#if patch.hasher}}
-                    {{patch.hasher.hashOrJustName}}
-                  {{/if}}
+                  <input
+                    autocomplete="off"
+                    class="form-control"
+                    disabled
+                    id="hasher-name"
+                    on:input:value:to="hasherAwesompleteQuery"
+                    type="text"
+                  />
                 </td>
-                <td>{{patch.number}}</td>
-                <td>{{patch.type}}s</td>
+                <td>
+                  <select
+                    class="form-control"
+                    {{^if newHasherForRun.hasherId}}disabled{{/if}}
+                    id="payment-tier"
+                    value:bind="newHasherForRun.paymentTier"
+                  >
+                    {{#each paymentRates paymentRate=value}}
+                      <option value="{{paymentRate.tier}}">
+                        {{paymentRate.title}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
+                <td>
+                  <input
+                    class="form-control"
+                    {{^if newHasherForRun.hasherId}}disabled{{/if}}
+                    id="payment-notes"
+                    value:bind="newHasherForRun.paymentNotes"
+                    type="text"
+                  />
+                </td>
+                <td>
+                  <select
+                    class="form-control"
+                    {{^if newHasherForRun.hasherId}}disabled{{/if}}
+                    id="role"
+                    value:bind="newHasherForRun.role"
+                  >
+                    {{#each roles role=value}}
+                      <option value="{{role}}">
+                        {{role}}
+                      </option>
+                    {{/each}}
+                  </select>
+                </td>
                 <td class="text-center">
                   <button
-                    class="btn btn-danger btn-sm remove-patch"
-                    on:click="removePatch(patch)"
+                    class="btn {{#if addingHasherPromise.isRejected}}btn-warning{{else}}btn-primary{{/if}} btn-sm"
+                    {{#if addingHasherPromise.isPending}}disabled{{/if}}
+                    {{^if newHasherForRun.hasherId}}disabled{{/if}}
+                    type="submit"
                   >
-                    <span class="fa fa-remove"></span>
+                    {{#if addingHasherPromise.isRejected}}
+                      <span class="fa fa-warning" title="{{addingHasherPromise.reason.message}}"></span>
+                    {{else}}
+                      <span class="fa fa-plus"></span>
+                    {{/if}}
                   </button>
                 </td>
               </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </form>
-    {{else}}
-      <div class="alert alert-info" role="alert">
-        <strong>You can add patches after you add runners to the attendance sheet. 😊</strong>
-      </div>
+            </tbody>
+          </table>
+          {{#if session.user.canAddHashers}}
+            <div class="clearfix">
+              <a class="btn btn-primary float-right" href="{{routeUrl page='hashers' secondaryPage='add'}}">
+                Need to add a new hasher?
+              </a>
+            </div>
+          {{/if}}
+        </form>
+
+        <h3>Patches</h3>
+        {{#if hashers.length}}
+          <form on:submit="addPatch()">
+            <table class="table table-bordered table-responsive-sm table-sm">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th><label for="patch-hasher-name">Hasher name</label></th>
+                  <th><label for="patch-number">Patch number</label></th>
+                  <th><label for="patch-type">Patch type</label></th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td></td>
+                  <td>
+                    <select
+                      class="form-control"
+                      id="patch-hasher-name"
+                      value:bind="newPatch.hasherId"
+                    >
+                      <option></option>
+                      {{#each patchHashers hasher=value}}
+                        <option value="{{hasher.hasherId}}">
+                          {{hasher.hashOrJustName}}
+                        </option>
+                      {{/each}}
+                    </select>
+                  </td>
+                  <td>
+                    <input
+                      class="form-control"
+                      {{^if newPatch.hasherId}}disabled{{/if}}
+                      id="patch-number"
+                      min="0"
+                      step="1"
+                      type="number"
+                      value:bind="newPatch.number"
+                    />
+                  </td>
+                  <td>
+                    <select
+                      class="form-control"
+                      {{^if newPatch.hasherId}}disabled{{/if}}
+                      id="patch-type"
+                      value:bind="newPatch.type"
+                    >
+                      <option value="hare">hares</option>
+                      <option value="run">runs</option>
+                    </select>
+                  </td>
+                  <td class="text-center">
+                    <button
+                      class="btn {{#if addingPatchPromise.isRejected}}btn-warning{{else}}btn-primary{{/if}} btn-sm"
+                      {{#if addingPatchPromise.isPending}}disabled{{/if}}
+                      {{^if newPatch.hasherId}}disabled{{/if}}
+                      type="submit"
+                    >
+                      {{#if addingPatchPromise.isRejected}}
+                        <span class="fa fa-warning" title="{{addingPatchPromise.reason.message}}"></span>
+                      {{else}}
+                        <span class="fa fa-plus"></span>
+                      {{/if}}
+                    </button>
+                  </td>
+                </tr>
+                {{#each patches patch=value}}
+                  <tr>
+                    <td>{{scope.root.plusOne(scope.index)}}</td>
+                    <td>
+                      {{#if patch.hasher}}
+                        {{patch.hasher.hashOrJustName}}
+                      {{/if}}
+                    </td>
+                    <td>{{patch.number}}</td>
+                    <td>{{patch.type}}s</td>
+                    <td class="text-center">
+                      <button
+                        class="btn btn-danger btn-sm remove-patch"
+                        on:click="removePatch(patch)"
+                      >
+                        <span class="fa fa-remove"></span>
+                      </button>
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </form>
+        {{else}}
+          <div class="alert alert-info" role="alert">
+            <strong>You can add patches after you add runners to the attendance sheet. 😊</strong>
+          </div>
+        {{/if}}
+      {{/if}}
     {{/if}}
   {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to edit this run.
+  </div>
 {{/if}}

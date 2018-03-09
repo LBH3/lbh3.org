@@ -53,6 +53,25 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  canEditEvent: {
+    get: function() {
+      const session = this.session;
+      if (session) {
+        const event = this.event;
+        const user = session.user;
+        if (event && user) {
+          return (
+            (user.canEditPreTrailInfo && !event.hasProbablyEnded) ||
+            (user.canEditPostTrailInfo && event.hasStartedOrIsCloseToStarting)
+          );
+        }
+        // Loading event or user
+        return true;
+      }
+      return false;
+    }
+  },
+
   day: 'string',
 
   event: Event,

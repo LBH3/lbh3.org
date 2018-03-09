@@ -24,7 +24,7 @@
   </h2>
 {{/if}}
 
-{{#if session.user.canViewHashersList}}
+{{#if session.user.canViewDirectoryInfo}}
 
   <form class="mb-2">
     <div class="form-row align-items-center">

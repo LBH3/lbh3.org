@@ -14,7 +14,7 @@
   <div class="col"></div>
 </div>
 
-{{#if session.user.canViewHashersList}}
+{{#if session.user.canViewDirectoryInfo}}
 
   {{#if hashersPromise.isPending}}
     <div class="alert alert-info" role="alert">

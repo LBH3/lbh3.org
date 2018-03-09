@@ -34,7 +34,14 @@ const attachAuthInfo = function(hook) {
   });
 };
 
-const boredPositions = [authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS];
+const boredPositions = [
+  authHook.HASH_CASH,
+  authHook.HASH_HISTORIANS,
+  authHook.ON_DISK,
+  authHook.ON_SEC,
+  authHook.TRAILMASTERS,
+  authHook.WEBMASTERS
+];
 
 const createAndUpdateFields = function(hook) {
   const googleProfile = hook.params.user.googleProfile || {};
@@ -135,7 +142,7 @@ module.exports = {
     create: [ jwtAuthentication, authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
     update: [ jwtAuthentication, authHook.restrictTo(...boredPositions), createAndUpdateFields, makeRaw ],
     patch: [ jwtAuthentication, authHook.restrictTo() ],
-    remove: [ jwtAuthentication, authHook.restrictTo(authHook.WEBMASTERS) ]
+    remove: [ jwtAuthentication, authHook.restrictTo() ]
   },
 
   after: {
