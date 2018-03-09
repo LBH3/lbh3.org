@@ -53,7 +53,7 @@
             {{/if}}
 
             {{#if hasherPromise.isResolved}}
-              {{#if session.user.canViewHashersList}}
+              {{#if session.user.canViewDirectoryInfo}}
                 <a href="{{scope.root.routeForHasher(hasherPromise.value)}}">
                   {{hasherPromise.value.hashName}}
                 </a>

@@ -27,7 +27,7 @@
       <li><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">
         Mismanagement
       </a></li>
-      {{#if session.user.canViewHashersList}}
+      {{#if session.user.canViewDirectoryInfo}}
         <li><a href="{{routeUrl page='hashers' secondaryPage=''}}">
           Hashers Directory
         </a></li>

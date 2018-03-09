@@ -88,7 +88,7 @@
       <dt class="col-sm-3 text-md-right">On-on:</dt>
       <dd class="col-sm-9">{{{event.longOnOnHtml}}}</dd>
     {{/if}}
-    {{#if session.user.canViewHashersList}}
+    {{#if session.user.canViewDirectoryInfo}}
       {{#if hashers.length}}
         <dt class="col-md-3 text-md-right">Total hashers:</dt>
         <dd class="col-md-9">{{hashers.length}}</dd>
@@ -172,7 +172,7 @@
     {{/if}}
   </dl>
 
-  {{#if session.user.canEditHasherInfo}}
+  {{#if session.user.canViewRunAttendance}}
     {{#if showAttendancePrompt}}
       <div class="alert alert-info text-center" role="alert">
         <strong>No attendance data.</strong>
@@ -245,6 +245,7 @@
           </tbody>
         </table>
       {{/if}}
+
       {{#if cashReport}}
         <h3>Cash Report</h3>
         <table class="table table-bordered table-responsive-sm table-sm">

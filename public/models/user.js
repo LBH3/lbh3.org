@@ -43,11 +43,11 @@ var User = DefineMap.extend('User', {
     type: 'boolean',
     serialize: false
   },
-  canViewHashersEmailList: {
+  canViewDirectoryInfo: {
     type: 'boolean',
     serialize: false
   },
-  canViewHashersList: {
+  canViewHashersEmailList: {
     type: 'boolean',
     serialize: false
   },

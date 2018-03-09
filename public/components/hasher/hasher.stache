@@ -3,7 +3,7 @@
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/snooze-button/" />
 
-{{#if session.user.canViewHashersList}}
+{{#if session.user.canViewDirectoryInfo}}
 
   {{#if hasherPromise.isPending}}
     <div class="alert alert-info" role="alert">
@@ -136,11 +136,13 @@
             {{/headshotImage}}
 
             {{<uploadInput}}
-              <label class="btn btn-primary">
-                <span class="fa fa-upload"></span>
-                Upload head shot
-                <input accept="image/*" class="sr-only" type="file" />
-              </label>
+              {{#if session.user.canEditHasherInfo}}
+                <label class="btn btn-primary">
+                  <span class="fa fa-upload"></span>
+                  Upload head shot
+                  <input accept="image/*" class="sr-only" type="file" />
+                </label>
+              {{/if}}
             {{/uploadInput}}
 
             {{>headshotImage}}
@@ -352,71 +354,73 @@
       </div>
     {{/if}}
 
-    <h3 class="mb-3 mt-5">Old fields</h3>
+    {{#if session.user.canViewOldData}}
+      <h3 class="mb-3 mt-5">Old fields</h3>
 
-    <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Alerts:</b>
-        <br>
-        {{hasher.alerts}}
+      <div class="mb-4 row">
+        <div class="col-sm-3">
+          <b>Alerts:</b>
+          <br>
+          {{hasher.alerts}}
+        </div>
+        <div class="col-sm-3">
+          <b>Award count:</b>
+          <br>
+          {{hasher.awardCount}}
+        </div>
+        <div class="col-sm-3">
+          <b>End of year:</b>
+          <br>
+          {{hasher.endOfYear}}
+        </div>
+        <div class="col-sm-3">
+          <b>Event:</b>
+          <br>
+          {{hasher.event}}
+        </div>
       </div>
-      <div class="col-sm-3">
-        <b>Award count:</b>
-        <br>
-        {{hasher.awardCount}}
-      </div>
-      <div class="col-sm-3">
-        <b>End of year:</b>
-        <br>
-        {{hasher.endOfYear}}
-      </div>
-      <div class="col-sm-3">
-        <b>Event:</b>
-        <br>
-        {{hasher.event}}
-      </div>
-    </div>
 
-    <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Food preference:</b>
-        <br>
-        {{hasher.foodPreference}}
+      <div class="mb-4 row">
+        <div class="col-sm-3">
+          <b>Food preference:</b>
+          <br>
+          {{hasher.foodPreference}}
+        </div>
+        <div class="col-sm-3">
+          <b>History:</b>
+          <br>
+          {{hasher.history}}
+        </div>
+        <div class="col-sm-3">
+          <b>MIA:</b>
+          <br>
+          {{hasher.mia}}
+        </div>
+        <div class="col-sm-3">
+          <b>Owes:</b>
+          <br>
+          {{hasher.owes}}
+        </div>
       </div>
-      <div class="col-sm-3">
-        <b>History:</b>
-        <br>
-        {{hasher.history}}
-      </div>
-      <div class="col-sm-3">
-        <b>MIA:</b>
-        <br>
-        {{hasher.mia}}
-      </div>
-      <div class="col-sm-3">
-        <b>Owes:</b>
-        <br>
-        {{hasher.owes}}
-      </div>
-    </div>
 
-    <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Shirt size:</b>
-        <br>
-        {{hasher.shirtSize}}
+      <div class="mb-4 row">
+        <div class="col-sm-3">
+          <b>Shirt size:</b>
+          <br>
+          {{hasher.shirtSize}}
+        </div>
+        <div class="col-sm-3">
+          <b>Shoe size:</b>
+          <br>
+          {{hasher.shoeSize}}
+        </div>
+        <div class="col-sm-3">
+          <b>Waist size:</b>
+          <br>
+          {{hasher.waistSize}}
+        </div>
       </div>
-      <div class="col-sm-3">
-        <b>Shoe size:</b>
-        <br>
-        {{hasher.shoeSize}}
-      </div>
-      <div class="col-sm-3">
-        <b>Waist size:</b>
-        <br>
-        {{hasher.waistSize}}
-      </div>
-    </div>
+    {{/if}}
 
     <h3 class="mb-3 mt-5">Metadata</h3>
     <div class="mb-4 row">

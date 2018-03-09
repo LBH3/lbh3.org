@@ -416,84 +416,86 @@
       </div>
     </fieldset>
 
-    <fieldset class="mt-4">
-      <legend>
-        Old fields
-      </legend>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="alerts">
-            Alerts
-          </label>
-          <input class="form-control" disabled id="alerts" type="text" value:bind="hasher.alerts">
+    {{#if session.user.canViewOldData}}
+      <fieldset class="mt-4">
+        <legend>
+          Old fields
+        </legend>
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="alerts">
+              Alerts
+            </label>
+            <input class="form-control" disabled id="alerts" type="text" value:bind="hasher.alerts">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="awardCount">
+              Award count
+            </label>
+            <input class="form-control" disabled id="awardCount" min="0" type="number" value:bind="hasher.awardCount">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="endOfYear">
+              End of year
+            </label>
+            <input class="form-control" disabled id="endOfYear" min="0" type="number" value:bind="hasher.endOfYear">
+          </div>
         </div>
-        <div class="form-group col-md-4">
-          <label for="awardCount">
-            Award count
-          </label>
-          <input class="form-control" disabled id="awardCount" min="0" type="number" value:bind="hasher.awardCount">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="event">
+              Event
+            </label>
+            <input class="form-control" disabled id="event" type="text" value:bind="hasher.event">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="foodPreference">
+              Food preference
+            </label>
+            <input class="form-control" disabled id="foodPreference" type="text" value:bind="hasher.foodPreference">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="history">
+              History
+            </label>
+            <input class="form-control" disabled id="history" type="text" value:bind="hasher.history">
+          </div>
         </div>
-        <div class="form-group col-md-4">
-          <label for="endOfYear">
-            End of year
-          </label>
-          <input class="form-control" disabled id="endOfYear" min="0" type="number" value:bind="hasher.endOfYear">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="mia">
+              MIA
+            </label>
+            <input class="form-control" disabled id="mia" type="text" value:bind="hasher.mia">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="owes">
+              Owes
+            </label>
+            <input class="form-control" disabled id="owes" type="text" value:bind="hasher.owes">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="shirtSize">
+              Shirt size
+            </label>
+            <input class="form-control" disabled id="shirtSize" type="text" value:bind="hasher.shirtSize">
+          </div>
         </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="event">
-            Event
-          </label>
-          <input class="form-control" disabled id="event" type="text" value:bind="hasher.event">
+        <div class="form-row">
+          <div class="form-group col-md-4">
+            <label for="shoeSize">
+              Shoe size
+            </label>
+            <input class="form-control" disabled id="shoeSize" type="text" value:bind="hasher.shoeSize">
+          </div>
+          <div class="form-group col-md-4">
+            <label for="waistSize">
+              Waist size
+            </label>
+            <input class="form-control" disabled id="waistSize" type="text" value:bind="hasher.waistSize">
+          </div>
         </div>
-        <div class="form-group col-md-4">
-          <label for="foodPreference">
-            Food preference
-          </label>
-          <input class="form-control" disabled id="foodPreference" type="text" value:bind="hasher.foodPreference">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="history">
-            History
-          </label>
-          <input class="form-control" disabled id="history" type="text" value:bind="hasher.history">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="mia">
-            MIA
-          </label>
-          <input class="form-control" disabled id="mia" type="text" value:bind="hasher.mia">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="owes">
-            Owes
-          </label>
-          <input class="form-control" disabled id="owes" type="text" value:bind="hasher.owes">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="shirtSize">
-            Shirt size
-          </label>
-          <input class="form-control" disabled id="shirtSize" type="text" value:bind="hasher.shirtSize">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="shoeSize">
-            Shoe size
-          </label>
-          <input class="form-control" disabled id="shoeSize" type="text" value:bind="hasher.shoeSize">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="waistSize">
-            Waist size
-          </label>
-          <input class="form-control" disabled id="waistSize" type="text" value:bind="hasher.waistSize">
-        </div>
-      </div>
-    </fieldset>
+      </fieldset>
+    {{/if}}
   {{/if}}
 </form>
