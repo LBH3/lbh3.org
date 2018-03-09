@@ -205,19 +205,7 @@
       <div class="col-sm-2">
         <b>Miles:</b>
         <br>
-        {{#eq hasher.miles hasher.runMileage}}
-          {{hasher.miles}}
-        {{else}}
-          {{#if hasher.miles}}
-            {{#if hasher.runMileage}}
-              {{hasher.miles}} or {{hasher.runMileage}}
-            {{else}}
-              {{hasher.miles}}
-            {{/if}}
-          {{else}}
-            {{hasher.runMileage}}
-          {{/if}}
-        {{/eq}}
+        {{hasher.runMileage}}
       </div>
       <div class="col-sm-2">
         <b>Run count:</b>
