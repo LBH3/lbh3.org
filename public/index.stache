@@ -36,7 +36,7 @@
 
     <header>
       <lbh3-header />
-      <lbh3-nav page:from="page" year:from="year" />
+      <lbh3-nav day:from="day" month:from="month" page:from="page" year:from="year" />
     </header>
 
     <main class="container {{page}}">
