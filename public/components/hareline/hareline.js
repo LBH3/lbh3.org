@@ -11,14 +11,14 @@ export const ViewModel = DefineMap.extend({
   eventsPromise: {
     get: function() {
       const currentDate = new Date();
-      const startOfTheMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+      const startOfTheDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
       return Event.connection.getList({
         $limit: 100,
         $sort: {
           startDatetime: 1
         },
         startDatetime: {
-          $gte: startOfTheMonth
+          $gte: startOfTheDay
         }
       }).then(events => {
         this.eventsByMonth = Event.groupByMonth(events);
