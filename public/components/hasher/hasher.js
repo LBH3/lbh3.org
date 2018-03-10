@@ -168,7 +168,10 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.runsPromise.then(setValue);
+      const runsPromise = this.runsPromise;
+      if (runsPromise) {
+        runsPromise.then(setValue);
+      }
     }
   },
   runsPromise: {

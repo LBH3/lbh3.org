@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-unreachable */
 const aws = require('aws-sdk');
 const fs = require('fs');
 const ssr = require('done-ssr-middleware');
@@ -26,6 +26,107 @@ module.exports = function () {
     } else {
       next();
     }
+  });
+
+  app.get('/api/hashers/:hasherId/vcard.vcf', function(req, res) {
+    res.status(401);
+    res.end();
+    return;
+
+    const params = req.params;
+
+    const hasherId = params.hasherId;
+    const query = `SELECT * FROM hashers WHERE id=${hasherId}`;
+    const sequelize = app.get('sequelizeClient');
+    sequelize.query(query, {
+      type: sequelize.QueryTypes.SELECT
+    }).then(hashers => {
+      const hasher = hashers[0];
+      res.setHeader('Content-Type', 'text/vcard');
+      const vcardLines = [
+        'BEGIN:VCARD',
+        'VERSION:3.0'
+      ];
+      if (hasher.family_name || hasher.given_name) {
+        vcardLines.push(`N:${hasher.family_name};${hasher.given_name};;;`);
+        vcardLines.push(`FN:${hasher.given_name} ${hasher.family_name}`);
+      }
+      if (hasher.hash_name) {
+        vcardLines.push(`NICKNAME:${hasher.hash_name}`);
+      }
+      if (hasher.birth_day && hasher.birth_month) {
+        let birthDay = hasher.birth_day.toString();
+        birthDay = birthDay.length === 1 ? `0${birthDay}` : birthDay;
+        let birthMonth = hasher.birth_month.toString();
+        birthMonth = birthMonth.length === 1 ? `0${birthMonth}` : birthMonth;
+        const birthYear = hasher.birth_year || '--';
+        vcardLines.push(`BDAY:${birthYear}${birthMonth}${birthDay}`);
+      }
+      if (hasher.headshot_url) {
+        vcardLines.push(`PHOTO:${hasher.headshot_url}`);
+      }
+      if (hasher.email_addresses && hasher.email_addresses.length) {
+        hasher.email_addresses.forEach(emailAddress => {
+          vcardLines.push(`EMAIL:${emailAddress}`);
+        });
+      }
+      if (hasher.email_addresses_private && hasher.email_addresses_private.length) {
+        hasher.email_addresses_private.forEach(emailAddress => {
+          vcardLines.push(`EMAIL:${emailAddress}`);
+        });
+      }
+      if (hasher.cell_phone) {
+        vcardLines.push(`TEL;TYPE=CELL,VOICE:${hasher.cell_phone}`);
+      }
+      if (hasher.cell_phone_private) {
+        vcardLines.push(`TEL;TYPE=CELL,VOICE:${hasher.cell_phone_private}`);
+      }
+      if (hasher.home_phone) {
+        vcardLines.push(`TEL;TYPE=HOME,VOICE:${hasher.home_phone}`);
+      }
+      if (hasher.home_phone_private) {
+        vcardLines.push(`TEL;TYPE=HOME,VOICE:${hasher.home_phone_private}`);
+      }
+      if (hasher.work_phone) {
+        vcardLines.push(`TEL;TYPE=WORK,VOICE:${hasher.work_phone}`);
+      }
+      if (hasher.work_phone_private) {
+        vcardLines.push(`TEL;TYPE=WORK,VOICE:${hasher.work_phone_private}`);
+      }
+      if (hasher.address_street) {
+        vcardLines.push([
+          'ADR',
+          ':',
+          '',
+          hasher.address_street,
+          hasher.address_city,
+          hasher.address_state,
+          hasher.address_zip_code,
+          hasher.address_country
+        ].join(';'));
+      }
+      if (hasher.address_street_private) {
+        vcardLines.push([
+          'ADR',
+          ':',
+          '',
+          hasher.address_street_private,
+          hasher.address_city_private,
+          hasher.address_state_private,
+          hasher.address_zip_code_private,
+          hasher.address_country_private
+        ].join(';'));
+      }
+      vcardLines.push(`REV:${hasher.updated_at.toISOString()}`);
+      vcardLines.push('END:VCARD');
+      res.write(vcardLines.join('\n'));
+      res.end();
+    }, error => {
+      console.error(`Error fetching vCard for hasher #${hasherId}:`, error);
+      res.status(500);
+      res.write(JSON.stringify(error));
+      res.end();
+    });
   });
 
   app.get('/pastruns/runs/lbh3_:trailNumber\\_:date.php', function(req, res) {
