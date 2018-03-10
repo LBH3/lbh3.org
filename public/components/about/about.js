@@ -5,8 +5,8 @@ import view from './about.stache';
 
 export const ViewModel = DefineMap.extend({
   secondaryPage: {
-    type: 'string',
-    value: ''
+    default: '',
+    type: 'string'
   },
 
   /**

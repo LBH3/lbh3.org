@@ -27,8 +27,8 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
   showEdit: {
-    type: 'boolean',
-    value: false
+    default: false,
+    type: 'boolean'
   }
 });
 

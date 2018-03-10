@@ -5,7 +5,7 @@ import view from './header.stache';
 
 export const ViewModel = DefineMap.extend({
   title: {
-    value: 'Long Beach Hash House Harriers'
+    default: 'Long Beach Hash House Harriers'
   }
 });
 

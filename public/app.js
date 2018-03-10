@@ -13,8 +13,8 @@ const AppViewModel = DefineMap.extend({
   id: 'number',
   month: 'string',
   page: {
-    type: 'string',
-    value: defaultPage
+    default: defaultPage,
+    type: 'string'
   },
   search: {
     type: 'string',
@@ -25,34 +25,34 @@ const AppViewModel = DefineMap.extend({
   secondaryPage: 'string',
   skip: 'number',
   title: {
-    value: 'Long Beach Hash House Harriers',
+    default: 'Long Beach Hash House Harriers',
     serialize: false
   },
   trailNumber: 'number',
   year: 'number'
 });
 
-route('/about/mismanagement/{year}/', { page: 'about', secondaryPage: 'mismanagement', year: 0});
-route('/about/{secondaryPage}/', { page: 'about' });
-route('/about/', { page: 'about' });
-route('/events/', { page: 'events' });
-route('/events/founders/', { page: 'events', secondaryPage: 'founders'});
-route('/events/jesus-cuervo-1800-trail/', { page: 'events', secondaryPage: 'jesus-cuervo-1800-trail'});
-route('/events/memorial-service/', { page: 'events', secondaryPage: 'memorial-service'});
-route('/events/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
-route('/events/{year}/{month}/{day}/trail-{trailNumber}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0});
-route('/events/{year}/', { page: 'events', year: 0});
-route('/hareline/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'hareline', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
-route('/hareline/{secondaryPage}/', { page: 'hareline' });
-route('/hareline/', { page: 'hareline' });
-route('/hashers/add/', { page: 'hashers', secondaryPage: 'add'});
-route('/hashers/early-warning/', { page: 'hashers', secondaryPage: 'early-warning'});
-route('/hashers/email/', { page: 'hashers', secondaryPage: 'email'});
-route('/hashers/{id}/{secondaryPage}/', { page: 'hashers', id: 0, secondaryPage: ''});
-route('/hashers/{id}/', { page: 'hashers', id: 0 });
-route('/hashers/', { page: 'hashers', secondaryPage: '' });
-route('/users/{id}/{secondaryPage}/', { page: 'users', id: 0, secondaryPage: '' });
-route('/users/', { page: 'users' });
-route('/{page}', { page: defaultPage });
+route.register('/about/mismanagement/{year}/', { page: 'about', secondaryPage: 'mismanagement', year: 0});
+route.register('/about/{secondaryPage}/', { page: 'about' });
+route.register('/about/', { page: 'about' });
+route.register('/events/', { page: 'events' });
+route.register('/events/founders/', { page: 'events', secondaryPage: 'founders'});
+route.register('/events/jesus-cuervo-1800-trail/', { page: 'events', secondaryPage: 'jesus-cuervo-1800-trail'});
+route.register('/events/memorial-service/', { page: 'events', secondaryPage: 'memorial-service'});
+route.register('/events/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
+route.register('/events/{year}/{month}/{day}/trail-{trailNumber}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0});
+route.register('/events/{year}/', { page: 'events', year: 0});
+route.register('/hareline/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'hareline', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
+route.register('/hareline/{secondaryPage}/', { page: 'hareline' });
+route.register('/hareline/', { page: 'hareline' });
+route.register('/hashers/add/', { page: 'hashers', secondaryPage: 'add'});
+route.register('/hashers/early-warning/', { page: 'hashers', secondaryPage: 'early-warning'});
+route.register('/hashers/email/', { page: 'hashers', secondaryPage: 'email'});
+route.register('/hashers/{id}/{secondaryPage}/', { page: 'hashers', id: 0, secondaryPage: ''});
+route.register('/hashers/{id}/', { page: 'hashers', id: 0 });
+route.register('/hashers/', { page: 'hashers', secondaryPage: '' });
+route.register('/users/{id}/{secondaryPage}/', { page: 'users', id: 0, secondaryPage: '' });
+route.register('/users/', { page: 'users' });
+route.register('/{page}', { page: defaultPage });
 
 export default AppViewModel;

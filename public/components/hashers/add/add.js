@@ -12,7 +12,7 @@ export const ViewModel = DefineMap.extend({
 
   hasher: {
     Type: Hasher,
-    value: function() {
+    default: function() {
       return new Hasher();
     }
   },

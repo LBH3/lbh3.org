@@ -54,7 +54,7 @@ export const ViewModel = DefineMap.extend({
     }
   },
   yearsPromise: {
-    value: () => {
+    default: () => {
       return BoredYear.getList({
         $limit: 100,
         $sort: {

@@ -1,4 +1,4 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 <can-import from="font-awesome/css/font-awesome.css" />
 
 <p>For questions or to sign up for a run, <a href="mailto:trailmasters@lbh3.org">email our Trail Masters</a>.</p>

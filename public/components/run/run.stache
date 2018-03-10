@@ -1,4 +1,4 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 <can-import from="font-awesome/css/font-awesome.css" />
 <can-import from="~/components/no-ssr/" />
 <can-import from="~/components/photos-button/" />
@@ -70,8 +70,10 @@
         <strong>Loading map…</strong>
       </div>
     {{/if}}
-    {{#if event.locationPromise.value.placeId}}
-      <iframe src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q=place_id:{{event.locationPromise.value.placeId}}" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
+    {{#if event.locationPromise.isResolved}}
+      {{#if event.locationPromise.value.placeId}}
+        <iframe src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q=place_id:{{event.locationPromise.value.placeId}}" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
+      {{/if}}
     {{/if}}
   </lbh3-no-ssr>
 
@@ -137,37 +139,35 @@
       <dd class="col-md-9">{{{event.returnersHtml}}}</dd>
     {{/if}}
     {{#if session.user}}
-      {{#if event.miles}}
-        <dt class="col-md-3 text-md-right">Patches:</dt>
+      <dt class="col-md-3 text-md-right">Patches:</dt>
+      <dd class="col-md-9">
+        {{#if event.patchesPromise.isPending}}
+          Fetching patches…
+        {{/if}}
+        {{#if event.patchesPromise.isRejected}}
+          <strong>Fuck!</strong> The patches couldn’t be retrieved. {{event.patchesPromise.reason.message}}
+        {{/if}}
+        {{#if event.patchesPromise.isResolved}}
+          {{event.patchesFormatted}}
+        {{/if}}
+      </dd>
+      {{#if session.user.canViewOldData}}
+        <dt class="col-md-3 text-md-right">Old hare patch data:</dt>
         <dd class="col-md-9">
-          {{#if event.patchesPromise.isPending}}
-            Fetching patches…
-          {{/if}}
-          {{#if event.patchesPromise.isRejected}}
-            <strong>Fuck!</strong> The patches couldn’t be retrieved. {{event.patchesPromise.reason.message}}
-          {{/if}}
-          {{#if event.patchesPromise.isResolved}}
-            {{event.patchesFormatted}}
+          {{#if event.harePatchesHtml}}
+            {{{event.harePatchesHtml}}}
+          {{else}}
+            None
           {{/if}}
         </dd>
-        {{#if session.user.canViewOldData}}
-          <dt class="col-md-3 text-md-right">Old hare patch data:</dt>
-          <dd class="col-md-9">
-            {{#if event.harePatchesHtml}}
-              {{{event.harePatchesHtml}}}
-            {{else}}
-              None
-            {{/if}}
-          </dd>
-          <dt class="col-md-3 text-md-right">Old run patch data:</dt>
-          <dd class="col-md-9">
-            {{#if event.patchesHtml}}
-              {{{event.patchesHtml}}}
-            {{else}}
-              None
-            {{/if}}
-          </dd>
-        {{/if}}
+        <dt class="col-md-3 text-md-right">Old run patch data:</dt>
+        <dd class="col-md-9">
+          {{#if event.patchesHtml}}
+            {{{event.patchesHtml}}}
+          {{else}}
+            None
+          {{/if}}
+        </dd>
       {{/if}}
     {{/if}}
   </dl>
@@ -218,86 +218,88 @@
             </tr>
           </thead>
           <tbody>
-            {{#each hashers hasher=value}}
+            {{#each sortedHashers}}
               <tr>
                 <td>{{scope.root.plusOne(scope.index)}}</td>
-                <td>{{hasher.role}}</td>
+                <td>{{role}}</td>
                 <td>
-                  {{hasher.paymentNotesAndType}}
+                  {{paymentNotesAndType}}
                 </td>
                 <td>
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
-                    {{hasher.hashName}}
+                  <a href="{{scope.root.routeForHasher(this)}}">
+                    {{hashName}}
                   </a>
                 </td>
                 <td>
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
-                    {{hasher.familyName}}
+                  <a href="{{scope.root.routeForHasher(this)}}">
+                    {{familyName}}
                   </a>
                 </td>
                 <td>
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
-                    {{hasher.givenName}}
+                  <a href="{{scope.root.routeForHasher(this)}}">
+                    {{givenName}}
                   </a>
                 </td>
               </tr>
             {{/each}}
           </tbody>
         </table>
-      {{/if}}
 
-      {{#if cashReport}}
-        <h3>Cash Report</h3>
-        <table class="table table-bordered table-responsive-sm table-sm">
-          <thead>
-            <tr>
-              <th>Payment</th>
-              <th>Count</th>
-              <th>Rate</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each cashReport.records record=value}}
+        {{#if cashReport}}
+          <h3>Cash Report</h3>
+          <table class="table table-bordered table-responsive-sm table-sm">
+            <thead>
               <tr>
-                <td>{{record.title}}</td>
-                <td>
-                  {{#eq record.count 0}}
-                    {{record.count}}
-                  {{else}}
-                    <mark>
-                      {{record.count}}
-                    </mark>
-                  {{/eq}}
-                </td>
-                <td>{{record.rate}}</td>
-                <td>
-                  {{#eq record.total 0}}
-                    {{record.total}}
-                  {{else}}
-                    <mark>
-                      {{record.total}}
-                    </mark>
-                  {{/eq}}
-                </td>
+                <th>Payment</th>
+                <th>Count</th>
+                <th>Rate</th>
+                <th>Total</th>
               </tr>
-            {{/each}}
-          </tbody>
-          <tfoot>
-            <tr>
-              <td></td>
-              <th scope="col">
-                {{cashReport.totalCount}}
-              </th>
-              <td></td>
-              <th scope="col">
-                <mark>
-                  {{cashReport.totalAmount}}
-                </mark>
-              </th>
-            </tr>
-          </tfoot>
-        </table>
+            </thead>
+            <tbody>
+              {{#each cashReport.records record=value}}
+                <tr>
+                  <td>{{record.title}}</td>
+                  <td>
+                    {{#eq record.count 0}}
+                      {{record.count}}
+                    {{else}}
+                      <mark>
+                        {{record.count}}
+                      </mark>
+                    {{/eq}}
+                  </td>
+                  <td>{{record.rate}}</td>
+                  <td>
+                    {{#eq record.total 0}}
+                      {{record.total}}
+                    {{else}}
+                      <mark>
+                        {{record.total}}
+                      </mark>
+                    {{/eq}}
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td></td>
+                <th scope="col">
+                  <mark>
+                    {{cashReport.totalCount}}
+                  </mark>
+                </th>
+                <td></td>
+                <th scope="col">
+                  <mark>
+                    {{cashReport.totalAmount}}
+                  </mark>
+                </th>
+              </tr>
+            </tfoot>
+          </table>
+        {{/if}}
       {{/if}}
     {{/if}}
   {{/if}}

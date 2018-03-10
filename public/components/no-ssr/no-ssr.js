@@ -6,7 +6,7 @@ import view from './no-ssr.stache';
 
 export const ViewModel = DefineMap.extend({
   platform: {
-    value: () => {
+    default: () => {
       return platform;
     }
   }

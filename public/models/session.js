@@ -1,5 +1,6 @@
 import behaviors from './behaviors';
 import connect from 'can-connect';
+import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import feathersClient from './feathers-client';
 import feathersSessionBehavior from 'can-connect-feathers/session/';
@@ -26,6 +27,10 @@ export const Session = DefineMap.extend('Session', {
   sub: 'string'
 });
 
+Session.List = DefineList.extend({
+  '#': Session
+});
+
 Session.connection = connect([
   feathersSessionBehavior,
   ...behaviors
@@ -33,6 +38,7 @@ Session.connection = connect([
   feathersClient,
   idProp: 'exp',
   Map: Session,
+  List: Session.List,
   name: 'session'
 });
 

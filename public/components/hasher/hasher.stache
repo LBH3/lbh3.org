@@ -1,4 +1,4 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 <can-import from="font-awesome/css/font-awesome.css" />
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/snooze-button/" />

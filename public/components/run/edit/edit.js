@@ -148,7 +148,7 @@ export const ViewModel = DefineMap.extend({
   month: 'string',
 
   newHasherForRun: {
-    value: null,
+    default: null,
     set: function(newHasherForRun) {
       if (!newHasherForRun) {
         newHasherForRun = new EventsHashers({
@@ -162,7 +162,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   newPatch: {
-    value: null,
+    default: null,
     set: function(newPatch) {
       if (!newPatch) {
         newPatch = new Patch({
@@ -208,7 +208,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   paymentRates: {
-    value: () => {
+    default: () => {
       return [...EventsHashers.paymentRates].sort((x, y) => {
         return x.title.localeCompare(y.title);
       });
@@ -239,7 +239,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   roles: {
-    value: () => {
+    default: () => {
       return EventsHashers.roles;
     }
   },
