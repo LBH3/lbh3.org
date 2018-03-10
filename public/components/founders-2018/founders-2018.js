@@ -4,9 +4,6 @@ import './founders-2018.less';
 import view from './founders-2018.stache';
 
 export const ViewModel = DefineMap.extend({
-  message: {
-    value: 'This is the lbh3-founders-2018 component'
-  }
 });
 
 export default Component.extend({

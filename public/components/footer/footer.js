@@ -7,7 +7,7 @@ import view from './footer.stache';
 
 export const ViewModel = DefineMap.extend({
   platform: {
-    value: () => {
+    default: () => {
       return platform;
     }
   },

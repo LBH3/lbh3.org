@@ -38,7 +38,7 @@ export const ViewModel = DefineMap.extend({
     }
   },
   yearsPromise: {
-    value: () => {
+    default: () => {
       return Year.getList({
         $sort: {
           id: -1

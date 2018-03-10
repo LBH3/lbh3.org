@@ -82,15 +82,9 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      if (this.hashersPromise) {
-        this.hashersPromise.then(hashers => {
-          const sortAttendanceBy = this.sortAttendanceBy;
-          if (sortAttendanceBy === 'name') {
-            setValue(hashers.sort(sortByName));
-          } else {
-            setValue(hashers.sort(sortByPayment));
-          }
-        });
+      const hashersPromise = this.hashersPromise;
+      if (hashersPromise) {
+        hashersPromise.then(setValue);
       }
     }
   },
@@ -133,18 +127,20 @@ export const ViewModel = DefineMap.extend({
   },
 
   sortAttendanceBy: {
-    type: 'string',
-    value: 'name',
-    set: function(sortAttendanceBy) {
-      const hashers = this.hashers;
-      if (hashers) {
-        if (sortAttendanceBy === 'name') {
-          hashers.sort(sortByName);
-        } else {
-          hashers.sort(sortByPayment);
-        }
+    default: 'name',
+    type: 'string'
+  },
+  sortedHashers: {
+    get: function() {
+      const hashers = this.hashers || [];
+      const sortedHashers = [...hashers];
+      const sortAttendanceBy = this.sortAttendanceBy;
+      if (sortAttendanceBy === 'name') {
+        sortedHashers.sort(sortByName);
+      } else {
+        sortedHashers.sort(sortByPayment);
       }
-      return sortAttendanceBy;
+      return sortedHashers;
     }
   },
   trailNumber: 'number',

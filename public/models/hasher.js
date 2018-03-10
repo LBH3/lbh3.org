@@ -24,13 +24,13 @@ const datePropDefinition = {
 };
 
 const emailAddressesPropDefinition = {
+  default: function() {
+    return [];
+  },
   serialize: function(currentValue) {
     if (currentValue && currentValue.length > 0) {
       return (currentValue.get) ? currentValue.get() : currentValue;
     }
-  },
-  value: function() {
-    return [];
   }
 };
 

@@ -13,57 +13,59 @@
 {{/if}}
 
 {{#if hashersByPosition}}
-  {{#each hashersByPosition position=value}}
-    {{#if position.promise.isPending}}
-      <div class="alert alert-info" role="alert">
-        <strong>Fetching position…</strong>
-      </div>
-    {{/if}}
+  {{#each hashersByPosition}}
+    {{#if promise}}
+      {{#if promise.isPending}}
+        <div class="alert alert-info" role="alert">
+          <strong>Fetching position…</strong>
+        </div>
+      {{/if}}
 
-    {{#if position.promise.isRejected}}
-      <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The position couldn’t be retrieved. {{position.promise.reason.message}}
-      </div>
-    {{/if}}
+      {{#if promise.isRejected}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Fuck!</strong> The position couldn’t be retrieved. {{promise.reason.message}}
+        </div>
+      {{/if}}
 
-    {{#if position.promise.isResolved}}
-      <h3>
-        {{#is position.hashers.length 1}}
-          {{position.promise.value.singularName}}
-        {{else}}
-          {{position.promise.value.pluralName}}
-        {{/is}}
-        {{#if scope.root.showEmailLink}}
-          <small>
-            <a href="mailto:{{position.promise.value.emailAddress}}" title="Send an email">
-              <span class="fa fa-envelope"></span>
-            </a>
-          </small>
-        {{/if}}
-      </h3>
-      <ul>
-        {{#each position.hashers hasherPromise=value}}
-          <li>
-            {{#if hasherPromise.isPending}}
-              Fetching hasher…
-            {{/if}}
-
-            {{#if hasherPromise.isRejected}}
-              <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.message}}
-            {{/if}}
-
-            {{#if hasherPromise.isResolved}}
-              {{#if session.user.canViewDirectoryInfo}}
-                <a href="{{scope.root.routeForHasher(hasherPromise.value)}}">
-                  {{hasherPromise.value.hashName}}
-                </a>
-              {{else}}
-                {{hasherPromise.value.hashName}}
+      {{#if promise.isResolved}}
+        <h3>
+          {{#is hashers.length 1}}
+            {{promise.value.singularName}}
+          {{else}}
+            {{promise.value.pluralName}}
+          {{/is}}
+          {{#if scope.root.showEmailLink}}
+            <small>
+              <a href="mailto:{{promise.value.emailAddress}}" title="Send an email">
+                <span class="fa fa-envelope"></span>
+              </a>
+            </small>
+          {{/if}}
+        </h3>
+        <ul>
+          {{#each hashers}}
+            <li>
+              {{#if isPending}}
+                Fetching hasher…
               {{/if}}
-            {{/if}}
-          </li>
-        {{/each}}
-      </ul>
+
+              {{#if isRejected}}
+                <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{reason.message}}
+              {{/if}}
+
+              {{#if isResolved}}
+                {{#if scope.root.session.user.canViewDirectoryInfo}}
+                  <a href="{{scope.root.routeForHasher(value)}}">
+                    {{value.hashName}}
+                  </a>
+                {{else}}
+                  {{value.hashName}}
+                {{/if}}
+              {{/if}}
+            </li>
+          {{/each}}
+        </ul>
+      {{/if}}
     {{/if}}
   {{else}}
     <div class="alert alert-info" role="alert">

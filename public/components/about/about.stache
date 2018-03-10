@@ -1,4 +1,4 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 
 <h2>About LBH3</h2>
 

@@ -1,18 +1,7 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 <can-import from="font-awesome/css/font-awesome.css" />
 
-<div class="row">
-  <div class="col pt-2">
-    <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
-      <span class="fa fa-angle-double-left fa-lg"></span>
-      <span class="d-none d-md-inline-block">Hashers</span>
-    </a>
-  </div>
-  <div class="col-8">
-    <h2>Early Warning</h2>
-  </div>
-  <div class="col"></div>
-</div>
+<h2>Early Warning</h2>
 
 {{#if session.user.canViewDirectoryInfo}}
 

@@ -62,8 +62,8 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
   showEmailLink: {
-    type: 'boolean',
-    value: false
+    default: false,
+    type: 'boolean'
   },
   year: {
     Type: BoredYear

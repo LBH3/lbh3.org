@@ -11,10 +11,10 @@ const AdditionalFields = DefineMap.extend({
 
 export const ViewModel = DefineMap.extend({
   additionalFields: {
-    Type: AdditionalFields,
-    value: function() {
+    default: function() {
       return new AdditionalFields();
-    }
+    },
+    Type: AdditionalFields
   },
 
   editHasher: function() {
@@ -53,11 +53,11 @@ export const ViewModel = DefineMap.extend({
   },
 
   saveButtonLabel: {
-    value: 'Edit hasher',
+    default: 'Edit hasher',
   },
 
   saveSuccessMessage: {
-    value: 'The hasher’s info has been updated.'
+    default: 'The hasher’s info has been updated.'
   }
 });
 

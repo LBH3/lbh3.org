@@ -1,4 +1,4 @@
-<can-import from="can-stache/helpers/route" />
+<can-import from="can-stache-route-helpers" />
 
 <nav>
   <ul class="container nav nav-fill">

@@ -200,8 +200,8 @@ export const ViewModel = DefineMap.extend({
   },
 
   skip: {
-    type: 'number',
-    value: 0
+    default: 0,
+    type: 'number'
   }
 });
 
