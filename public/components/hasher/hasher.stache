@@ -19,18 +19,16 @@
 
   {{#if hasher}}
     <div class="mb-3 row">
-      <div class="col pt-2">
-        <a href="{{routeUrl page='hashers' secondaryPage=''}}" title="Go to the hasher directory">
-          <span class="fa fa-angle-double-left fa-lg"></span>
-          <span class="d-none d-md-inline-block">Hashers</span>
-        </a>
-      </div>
-      <div class="col-8">
+      <div class="col"></div>
+      <div class="col-md-8">
         <h2>{{hasher.hashOrJustName}}</h2>
       </div>
-      <div class="col pt-2 text-right">
+      <div class="col text-center text-md-right">
+        <a class="d-none p-2 p-md-1 pt-md-2" download href="/api/hashers/{{id}}/vcard.vcf" title="Download this hasher’s contact info">
+          <span class="fa fa-download fa-lg"></span>
+        </a>
         {{#if session.user.canEditHasherInfo}}
-          <a href="{{routeUrl page='hashers' id=hasher.id secondaryPage='edit'}}" title="Edit info">
+          <a class="d-inline-block p-2 p-md-1 pl-md-3 pt-md-2" href="{{routeUrl page='hashers' id=hasher.id secondaryPage='edit'}}" title="Edit info">
             <span class="fa fa-pencil-square-o fa-lg"></span>
           </a>
         {{/if}}
