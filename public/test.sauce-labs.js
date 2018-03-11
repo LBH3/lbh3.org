@@ -37,7 +37,7 @@ testSauceLabs({
   }],
   urls: [{
     name: 'lbh3',
-    url: 'http://localhost:3000/test.html?hidepassed'
+    url: 'http://localhost:3000/test.production.html?hidepassed'
   }],
   zeroAssertionsPass: false
 });
