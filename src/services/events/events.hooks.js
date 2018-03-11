@@ -2,7 +2,6 @@
 const { authenticate } = require('feathers-authentication').hooks;
 const authHook = require('../../hooks/auth');
 const Entities = require('html-entities').AllHtmlEntities;
-const getBoredHasher = require('../../utils/get-bored-hasher');
 const google = require('googleapis');
 const jwtAuthentication = authenticate('jwt');
 const makeRaw = require('../../utils/make-raw');
@@ -25,15 +24,6 @@ const allowedFields = [
   'startDatetime',
   'snoozeUrl',
   'trailNumber'
-];
-const boredPositions = [
-  authHook.GRANDMASTERS,
-  authHook.HASH_CASH,
-  authHook.HASH_HISTORIANS,
-  authHook.ON_DISK,
-  authHook.ON_SEC,
-  authHook.TRAILMASTERS,
-  authHook.WEBMASTERS
 ];
 const calendar = google.calendar('v3');
 const calendarEmail = 'lbh3-643@lbh3-171321.iam.gserviceaccount.com';
@@ -105,22 +95,7 @@ const filterData = function(data) {
 
 const filterFields = function(hook) {
   const user = hook.params.user;
-  if (user) {
-    return new Promise(function(resolve) {
-      getBoredHasher(hook.app, user).then(boredHashers => {
-        const found = boredHashers.data.find(boredHasher => {
-          return boredPositions.includes(boredHasher.positionId);
-        });
-        if (!found) {
-          hook.result = filterData(hook.result);
-        }
-        resolve(hook);
-      }, () => {
-        hook.result = filterData(hook.result);
-        resolve(hook);
-      });
-    });
-  } else {
+  if (!user || !user.hasherId) {
     hook.result = filterData(hook.result);
   }
 };

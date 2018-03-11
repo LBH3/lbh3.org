@@ -86,6 +86,13 @@ const uploadFile = function(file, signedRequest, url) {
 const $limit = 100;
 
 export const ViewModel = DefineMap.extend({
+  canViewHasher: {
+    type: 'boolean',
+    get: function() {
+      const user = this.session && this.session.user || {};
+      return user.canViewDirectoryInfo || user.hasherId === this.id;
+    }
+  },
   hasher: {
     get: function(lastValue, setValue) {
       if (lastValue) {

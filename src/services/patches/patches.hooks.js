@@ -4,8 +4,8 @@ const authHook = require('../../hooks/auth');
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
-    find: [ authHook.restrictTo(authHook.GRANDMASTERS, authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.TRAILMASTERS, authHook.WEBMASTERS) ],
-    get: [ authHook.restrictTo(authHook.GRANDMASTERS, authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.TRAILMASTERS, authHook.WEBMASTERS) ],
+    find: [ authHook.restrictToSignedInHashers ],
+    get: [ authHook.restrictToSignedInHashers ],
     create: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS) ],
     update: [ authHook.restrictTo() ],
     patch: [ authHook.restrictTo() ],

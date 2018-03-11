@@ -227,7 +227,7 @@ const Hasher = DefineMap.extend({
   namingTrailNumber: 'number',
   notesHtml: {
     get: function() {
-      return marked(this.notesMd);
+      return marked(this.notesMd || '');
     },
     serialize: false
   },
