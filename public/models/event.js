@@ -98,6 +98,13 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  hasEnded: {
+    get: function() {
+      const startDateAsMoment = this.startDateAsMoment.clone();
+      return startDateAsMoment.add(15, 'hours').isBefore();
+    },
+    serialize: false
+  },
   hashitReasonHtml: {
     get: function() {
       return marked(this.hashitReasonMd || '');

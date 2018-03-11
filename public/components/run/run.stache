@@ -90,37 +90,35 @@
       <dt class="col-sm-3 text-md-right">On-on:</dt>
       <dd class="col-sm-9">{{{event.longOnOnHtml}}}</dd>
     {{/if}}
-    {{#if session.user.canViewDirectoryInfo}}
-      {{#if hashers.length}}
-        <dt class="col-md-3 text-md-right">Total hashers:</dt>
-        <dd class="col-md-9">{{hashers.length}}</dd>
-      {{/if}}
-    {{/if}}
     {{#if event.miles}}
       <dt class="col-md-3 text-md-right">Miles:</dt>
       <dd class="col-md-9">{{event.miles}}</dd>
     {{/if}}
-    {{#if event.hashitReasonHtml}}
-      <dt class="col-sm-3 text-sm-right">Hashit:</dt>
-      <dd class="col-sm-9">{{{event.hashitReasonHtml}}}</dd>
-    {{/if}}
-    {{#if event.trailCommentsHtml}}
-      <dt class="col-sm-3 text-sm-right">Run Notes:</dt>
-      <dd class="col-sm-9">{{{event.trailCommentsHtml}}}</dd>
-    {{/if}}
-    {{#if event.scribesHtml}}
-      <dt class="col-sm-3 text-sm-right">Scribe:</dt>
-      <dd class="col-sm-9">{{{event.scribesHtml}}}</dd>
-    {{/if}}
-    {{#if event.addedWriteupHtml}}
-      <dt class="col-md-3 text-md-right">Added writeup:</dt>
-      <dd class="col-md-9">{{{event.addedWriteupHtml}}}</dd>
-    {{/if}}
-    {{#if event.additionalWriteupHtml}}
-      <dt class="col-md-3 text-md-right">Additional writeup:</dt>
-      <dd class="col-md-9">{{{event.additionalWriteupHtml}}}</dd>
-    {{/if}}
-    {{#if session.user.canEditHasherInfo}}
+    {{#if shouldShowPostTrailData}}
+      {{#if hashers.length}}
+        <dt class="col-md-3 text-md-right">Total hashers:</dt>
+        <dd class="col-md-9">{{hashers.length}}</dd>
+      {{/if}}
+      {{#if event.hashitReasonHtml}}
+        <dt class="col-sm-3 text-sm-right">Hashit:</dt>
+        <dd class="col-sm-9">{{{event.hashitReasonHtml}}}</dd>
+      {{/if}}
+      {{#if event.trailCommentsHtml}}
+        <dt class="col-sm-3 text-sm-right">Run Notes:</dt>
+        <dd class="col-sm-9">{{{event.trailCommentsHtml}}}</dd>
+      {{/if}}
+      {{#if event.scribesHtml}}
+        <dt class="col-sm-3 text-sm-right">Scribe:</dt>
+        <dd class="col-sm-9">{{{event.scribesHtml}}}</dd>
+      {{/if}}
+      {{#if event.addedWriteupHtml}}
+        <dt class="col-md-3 text-md-right">Added writeup:</dt>
+        <dd class="col-md-9">{{{event.addedWriteupHtml}}}</dd>
+      {{/if}}
+      {{#if event.additionalWriteupHtml}}
+        <dt class="col-md-3 text-md-right">Additional writeup:</dt>
+        <dd class="col-md-9">{{{event.additionalWriteupHtml}}}</dd>
+      {{/if}}
       {{#if event.newBootsHtml}}
         <dt class="col-md-3 text-md-right">New boots:</dt>
         <dd class="col-md-9">{{{event.newBootsHtml}}}</dd>
@@ -129,16 +127,14 @@
         <dt class="col-md-3 text-md-right">New names:</dt>
         <dd class="col-md-9">{{{event.newNamesHtml}}}</dd>
       {{/if}}
-    {{/if}}
-    {{#if event.visitorsHtml}}
-      <dt class="col-md-3 text-md-right">Visitors:</dt>
-      <dd class="col-md-9">{{{event.visitorsHtml}}}</dd>
-    {{/if}}
-    {{#if event.returnersHtml}}
-      <dt class="col-md-3 text-md-right">Returners:</dt>
-      <dd class="col-md-9">{{{event.returnersHtml}}}</dd>
-    {{/if}}
-    {{#if session.user}}
+      {{#if event.visitorsHtml}}
+        <dt class="col-md-3 text-md-right">Visitors:</dt>
+        <dd class="col-md-9">{{{event.visitorsHtml}}}</dd>
+      {{/if}}
+      {{#if event.returnersHtml}}
+        <dt class="col-md-3 text-md-right">Returners:</dt>
+        <dd class="col-md-9">{{{event.returnersHtml}}}</dd>
+      {{/if}}
       <dt class="col-md-3 text-md-right">Patches:</dt>
       <dd class="col-md-9">
         {{#if event.patchesPromise.isPending}}
@@ -172,7 +168,7 @@
     {{/if}}
   </dl>
 
-  {{#if session.user.canViewRunAttendance}}
+  {{#if canViewRunAttendance}}
     {{#if showAttendancePrompt}}
       <div class="alert alert-info text-center" role="alert">
         <strong>No attendance data.</strong>
@@ -196,54 +192,63 @@
 
     {{#if hashersPromise.isResolved}}
       {{#if hashers.length}}
-        <div class="d-flex justify-content-between mb-2">
-          <h3 class="mb-0 mt-2">Attendance</h3>
-          <div class="form-inline">
-            <label class="pr-2" for="sort-by">Sort by</label>
-            <select class="form-control" id="sort-by" value:bind="sortAttendanceBy">
-              <option value="name">Name</option>
-              <option value="payment">Payment</option>
-            </select>
+        {{#if session.user.canViewRunAttendance}}
+          <div class="d-flex justify-content-between mb-2">
+            <h3 class="mb-0 mt-2">Attendance</h3>
+            <div class="form-inline">
+              <label class="pr-2" for="sort-by">Sort by</label>
+              <select class="form-control" id="sort-by" value:bind="sortAttendanceBy">
+                <option value="name">Name</option>
+                <option value="payment">Payment</option>
+              </select>
+            </div>
           </div>
-        </div>
-        <table class="table table-bordered table-responsive-sm table-sm">
-          <thead>
-            <tr>
-              <th></th>
-              <th>Role</th>
-              <th>Payment</th>
-              <th>Hash Name</th>
-              <th>Last Name</th>
-              <th>First Name</th>
-            </tr>
-          </thead>
-          <tbody>
-            {{#each sortedHashers}}
+          <table class="table table-bordered table-responsive-sm table-sm">
+            <thead>
               <tr>
-                <td>{{scope.root.plusOne(scope.index)}}</td>
-                <td>{{role}}</td>
-                <td>
-                  {{paymentNotesAndType}}
-                </td>
-                <td>
-                  <a href="{{scope.root.routeForHasher(this)}}">
-                    {{hashName}}
-                  </a>
-                </td>
-                <td>
-                  <a href="{{scope.root.routeForHasher(this)}}">
-                    {{familyName}}
-                  </a>
-                </td>
-                <td>
-                  <a href="{{scope.root.routeForHasher(this)}}">
-                    {{givenName}}
-                  </a>
-                </td>
+                <th></th>
+                <th>Role</th>
+                <th>Payment</th>
+                <th>Hash Name</th>
+                <th>Last Name</th>
+                <th>First Name</th>
               </tr>
+            </thead>
+            <tbody>
+              {{#each sortedHashers}}
+                <tr>
+                  <td>{{scope.root.plusOne(scope.index)}}</td>
+                  <td>{{role}}</td>
+                  <td>
+                    {{paymentNotesAndType}}
+                  </td>
+                  <td>
+                    <a href="{{scope.root.routeForHasher(this)}}">
+                      {{hashName}}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{scope.root.routeForHasher(this)}}">
+                      {{familyName}}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{scope.root.routeForHasher(this)}}">
+                      {{givenName}}
+                    </a>
+                  </td>
+                </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        {{else}}
+          <h3>Attendance</h3>
+          <ol class="attendance-list">
+            {{#each sortedHashers}}
+              <li>{{hashOrJustName}}</li>
             {{/each}}
-          </tbody>
-        </table>
+          </ol>
+        {{/if}}
 
         {{#if cashReport}}
           <h3>Cash Report</h3>

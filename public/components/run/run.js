@@ -13,13 +13,32 @@ import view from './run.stache';
 import './run.less';
 
 export const ViewModel = DefineMap.extend({
+  canViewRunAttendance: {
+    get: function() {
+      const user  = this.session && this.session.user;
+      if (user) {
+        if (user.canViewRunAttendance) {
+          return true;
+        }
+        const hashers = this.hashers;
+        if (hashers) {
+          return hashers.some({
+            hasherId: user.hasherId
+          });
+        }
+      }
+      return false;
+    }
+  },
   cashReport: {
     get: function(lastValue, setValue) {
       if (lastValue) {
         return lastValue;
       }
-      if (this.hashersPromise) {
-        this.hashersPromise.then(hashers => {
+      const hashersPromise = this.hashersPromise;
+      const user  = this.session && this.session.user || {};
+      if (hashersPromise && user.canViewRunAttendance) {
+        hashersPromise.then(hashers => {
           const hashersByPaymentTier = {};
           hashers.forEach(hasher => {
             const paymentTier = hasher.paymentTier || (hasher.paymentNotes.toUpperCase() === 'F' ? 'founder' : '5');
@@ -109,23 +128,20 @@ export const ViewModel = DefineMap.extend({
     };
     return route.url(routeParams);
   },
-
-  /**
-   * Session.current is provided by the can-connect-feathers session behavior.
-   * It will automatically populate when `new Session().save()` occurs in the app
-   * or on refresh after login.
-   */
   get session() {
     return Session.current;
   },
-
+  shouldShowPostTrailData: {
+    get: function() {
+      return this.event.hasEnded && this.canViewRunAttendance;
+    }
+  },
   showAttendancePrompt: {
     type: 'boolean',
     get: function() {
       return !this.hashersPromise || !this.hashers || this.hashers.length === 0;
     }
   },
-
   sortAttendanceBy: {
     default: 'name',
     type: 'string'

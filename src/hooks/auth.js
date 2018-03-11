@@ -13,10 +13,6 @@ module.exports = {
 
   restrictTo: function(...boredPositions) {
     return function(hook) {
-      if (hook.type !== 'before') {
-        throw new Error('This hook should only be used as a “before” hook.');
-      }
-
       // If it was an internal call then skip this hook
       if (!hook.params.provider) {
         return hook;
@@ -42,5 +38,12 @@ module.exports = {
         }, reject);
       });
     };
+  },
+
+  restrictToSignedInHashers: function(hook) {
+    const user = hook.params.user;
+    if (!user || !user.hasherId) {
+      throw new errors.NotAuthenticated('You are not authenticated.');
+    }
   }
 };

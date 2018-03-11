@@ -24,6 +24,53 @@ const afterFindHook = function(hook) {
   });
 };
 
+const afterGetHook = function(hook) {
+  const user = hook.params.user;
+  if (user) {
+    const hasherId = hook.result.id;
+    if (hasherId === user.hasherId) {
+      // Ok to not filter the data and include the hasher’s mileage
+      return new Promise(function(resolve) {
+        const sequelizeClient = hook.app.get('sequelizeClient');
+        getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
+          hook.result.runMileage = Number(runMileage);
+          resolve(hook);
+        }, error => {
+          console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
+          resolve(hook);
+        });
+      });
+    } else {
+      return new Promise(function(resolve) {
+        getBoredHasher(hook.app, user).then(boredHashers => {
+          const found = boredHashers.data.find(boredHasher => {
+            return boredPositions.includes(boredHasher.positionId);
+          });
+          if (found) {
+            // Ok to not filter the data and include the hasher’s mileage
+            const sequelizeClient = hook.app.get('sequelizeClient');
+            getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
+              hook.result.runMileage = Number(runMileage);
+              resolve(hook);
+            }, error => {
+              console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
+              resolve(hook);
+            });
+          } else {
+            hook.result = filterData(hook.result);
+          }
+          resolve(hook);
+        }, () => {
+          hook.result = filterData(hook.result);
+          resolve(hook);
+        });
+      });
+    }
+  } else {
+    hook.result = filterData(hook.result);
+  }
+};
+
 const attachAuthInfo = function(hook) {
   return new Promise(function(resolve) {
     jwtAuthentication(hook).then(() => {
@@ -92,39 +139,6 @@ const filterData = function(data) {
     filteredFields[field] = data[field];
   });
   return filteredFields;
-};
-
-const afterGetHook = function(hook) {
-  const user = hook.params.user;
-  if (user) {
-    return new Promise(function(resolve) {
-      getBoredHasher(hook.app, user).then(boredHashers => {
-        const found = boredHashers.data.find(boredHasher => {
-          return boredPositions.includes(boredHasher.positionId);
-        });
-        if (found) {
-          // Ok to not filter the data and include the hasher’s mileage
-          const hasherId = hook.result.id;
-          const sequelizeClient = hook.app.get('sequelizeClient');
-          getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
-            hook.result.runMileage = Number(runMileage);
-            resolve(hook);
-          }, error => {
-            console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
-            resolve(hook);
-          });
-        } else {
-          hook.result = filterData(hook.result);
-        }
-        resolve(hook);
-      }, () => {
-        hook.result = filterData(hook.result);
-        resolve(hook);
-      });
-    });
-  } else {
-    hook.result = filterData(hook.result);
-  }
 };
 
 module.exports = {

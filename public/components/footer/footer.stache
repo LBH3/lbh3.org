@@ -2,15 +2,20 @@
   <p class="float-sm-left">
     <a href="mailto:contact@lbh3.org">Email us</a> with any questions, comments, or concerns.
   </p>
-  <p class="float-sm-right">
-    {{^eq platform.isNode true}}
+  {{^eq platform.isNode true}}
+    <p class="float-sm-right">
       {{#if session.user}}
+        {{#if session.user.hasherId}}
+          <a class="btn btn-link pr-sm-3" href="{{routeUrl page='hashers' id=session.user.hasherId}}" title="Your profile">
+            <span class="fa fa-user fa-lg"></span>
+          </a>
+        {{/if}}
         <button class="btn btn-link" type="button" on:click="session.destroy()">
           Sign out
         </button>
       {{else}}
         <a href="/auth/google">Sign in</a>
       {{/if}}
-    {{/eq}}
-  </p>
+    </p>
+  {{/eq}}
 </footer>

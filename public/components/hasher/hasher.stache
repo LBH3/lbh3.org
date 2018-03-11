@@ -3,7 +3,7 @@
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/snooze-button/" />
 
-{{#if session.user.canViewDirectoryInfo}}
+{{#if canViewHasher}}
 
   {{#if hasherPromise.isPending}}
     <div class="alert alert-info" role="alert">
@@ -44,22 +44,22 @@
             {{hasher.hashName}}
           </div>
           <div class="col-lg-4 mb-4">
-            <b>Who made you cum:</b>
-            <br>
-            {{hasher.whoMadeYouCum}}
-          </div>
-          <div class="col-lg-4 mb-4">
             <b>Mother hash:</b>
             <br>
             {{hasher.motherHash}}
+          </div>
+          <div class="col-lg-4 mb-4">
+            <b>Who made you cum:</b>
+            <br>
+            {{hasher.whoMadeYouCum}}
           </div>
         </div>
 
         <div class="row">
           <div class="col-lg-4 mb-4">
-            <b>Emailing:</b>
+            <b>Birthday:</b>
             <br>
-            {{hasher.emailing}}
+            {{hasher.formattedBirthday}}
           </div>
           <div class="col-lg-4 mb-4">
             <b>Naming trail:</b>
@@ -69,58 +69,70 @@
                 {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
               </a>
             {{else}}
-              {{hasher.namingTrailDate}}
-              {{#if hasher.namingTrailNumber}}
-                (#{{hasher.namingTrailNumber}})
+              {{#if hasher.namingTrailDate}}
+                {{hasher.namingTrailDate}}
+                {{#if hasher.namingTrailNumber}}
+                  (#{{hasher.namingTrailNumber}})
+                {{/if}}
+              {{else}}
+                {{#if hasher.namingTrailNumber}}
+                  #{{hasher.namingTrailNumber}}
+                {{else}}
+                  Not named at LBH3
+                {{/if}}
               {{/if}}
             {{/if}}
           </div>
-          <div class="col-lg-4 mb-4">
-            <b>Payment:</b>
-            <br>
-            {{hasher.payment}}
-          </div>
+          {{#if session.user.canViewDirectoryInfo}}
+            <div class="col-lg-4 mb-4">
+              <b>Emailing:</b>
+              <br>
+              {{hasher.emailing}}
+            </div>
+          {{/if}}
         </div>
 
-        <div class="row">
-          <div class="col-lg-4 mb-4">
-            <b>Punch card:</b>
-            <br>
-            {{hasher.punchCard}}
+        {{#if session.user.canViewDirectoryInfo}}
+          <div class="row">
+            <div class="col-lg-4 mb-4">
+              <b>Payment:</b>
+              <br>
+              {{hasher.payment}}
+            </div>
+            <div class="col-lg-4 mb-4">
+              <b>Punch card:</b>
+              <br>
+              {{hasher.punchCard}}
+            </div>
+            <div class="col-lg-4 mb-4">
+              <b>Run patch:</b>
+              <br>
+              {{hasher.runPatch}}
+            </div>
           </div>
-          <div class="col-lg-4 mb-4">
-            <b>Run patch:</b>
-            <br>
-            {{hasher.runPatch}}
-          </div>
-          <div class="col-lg-4 mb-4">
-            <b>Run sort:</b>
-            <br>
-            {{hasher.runSort}}
-          </div>
-        </div>
 
-        <div class="row">
-          <div class="col-lg-4 mb-4">
-            <b>Waiver:</b>
-            <br>
-            {{hasher.waiver}}
+          <div class="row">
+            <div class="col-lg-4 mb-4">
+              <b>Run sort:</b>
+              <br>
+              {{hasher.runSort}}
+            </div>
+            <div class="col-lg-4 mb-4">
+              <b>Waiver:</b>
+              <br>
+              {{hasher.waiver}}
+            </div>
+            <div class="col-lg-4 mb-4">
+              <b>Notes:</b>
+              <br>
+              {{#if hasher.notesHtml}}
+                {{{hasher.notesHtml}}}
+              {{else}}
+                None
+              {{/if}}
+            </div>
           </div>
-          <div class="col-lg-4 mb-4">
-            <b>Birthday:</b>
-            <br>
-            {{hasher.formattedBirthday}}
-          </div>
-          <div class="col-lg-4 mb-4">
-            <b>Notes:</b>
-            <br>
-            {{#if hasher.notesHtml}}
-              {{{hasher.notesHtml}}}
-            {{else}}
-              None
-            {{/if}}
-          </div>
-        </div>
+        {{/if}}
       </div>
       <div class="col-lg-3 col-sm-6 text-center">
         <form>
@@ -408,29 +420,31 @@
       </div>
     {{/if}}
 
-    <h3 class="mb-3 mt-5">Metadata</h3>
-    <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Created on:</b>
-        <br>
-        {{hasher.formattedCreatedAt}}
+    {{#if session.user.canViewDirectoryInfo}}
+      <h3 class="mb-3 mt-5">Metadata</h3>
+      <div class="mb-4 row">
+        <div class="col-sm-3">
+          <b>Created on:</b>
+          <br>
+          {{hasher.formattedCreatedAt}}
+        </div>
+        <div class="col-sm-3">
+          <b>Created by:</b>
+          <br>
+          {{hasher.createdBy}}
+        </div>
+        <div class="col-sm-3">
+          <b>Updated on:</b>
+          <br>
+          {{hasher.formattedUpdatedAt}}
+        </div>
+        <div class="col-sm-3">
+          <b>Updated by:</b>
+          <br>
+          {{hasher.updatedBy}}
+        </div>
       </div>
-      <div class="col-sm-3">
-        <b>Created by:</b>
-        <br>
-        {{hasher.createdBy}}
-      </div>
-      <div class="col-sm-3">
-        <b>Updated on:</b>
-        <br>
-        {{hasher.formattedUpdatedAt}}
-      </div>
-      <div class="col-sm-3">
-        <b>Updated by:</b>
-        <br>
-        {{hasher.updatedBy}}
-      </div>
-    </div>
+    {{/if}}
 
     <h3 class="mb-3 mt-5">Patches</h3>
 
@@ -569,6 +583,7 @@
           <strong>Hm, couldn’t find any runs for this hasher.</strong>
         </div>
       {{/if}}
+    {{/if}}
   {{/if}}
 
 {{else}}
