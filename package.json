@@ -22,6 +22,7 @@
   },
   "scripts": {
     "build": "cd public && node build && cd ..",
+    "build:tests": "cd public && node build-tests && cd ..",
     "ci": "node install-ci",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "heroku-postbuild": "npm run build",
@@ -36,8 +37,10 @@
     "start:development": "node src/ --develop",
     "start:production": "NODE_ENV=production PORT=8080 npm start",
     "test": "npm run eslint && npm run build && npm run mocha && npm run testee",
-    "test:ci": "npm run test && node public/test.sauce-labs.js",
-    "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec"
+    "test:ci": "npm run test:production && node public/test.sauce-labs.js",
+    "test:production": "npm run eslint && npm run build:tests && npm run mocha && npm run testee:production",
+    "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
+    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
   },
   "dependencies": {
     "aws-sdk": "^2.99.0",
