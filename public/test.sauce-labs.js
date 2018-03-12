@@ -3,22 +3,22 @@ const testSauceLabs = require('test-saucelabs');
 // https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
 
 testSauceLabs({
-  platforms: [{
+  platforms: [/*{
     'appium-version': '1.6.3',
     browserName: 'Browser',
     deviceName: 'Android Emulator',
     platform: 'Android 4.4'
-  }, {
+  }, */{
     'appium-version': '1.6.3',
     browserName: 'Safari',
     deviceName: 'iPhone 6 Simulator',
     platform: 'iOS',
     version: '9.0'
-  }, {
+  }, /*{
     browserName: 'internet explorer',
     platform: 'Windows 7',
     version: '11'
-  }, {
+  }, */{
     browserName: 'MicrosoftEdge',
     platform: 'Windows 10',
     version: '14'
