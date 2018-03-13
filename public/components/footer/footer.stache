@@ -1,20 +1,26 @@
 <footer class="container text-muted">
-  <p class="float-sm-left">
-    <a href="mailto:contact@lbh3.org">Email us</a> with any questions, comments, or concerns.
+  <p class="float-sm-left pt-3 text-center text-sm-left">
+    <a href="mailto:contact@lbh3.org">Email us</a> with any questions or comments.
   </p>
   {{^eq platform.isNode true}}
-    <p class="float-sm-right">
+    <ul class="justify-content-center justify-content-sm-end nav">
       {{#if session.user}}
         {{#if session.user.hasherId}}
-          <a class="btn btn-link pr-sm-3" href="{{routeUrl page='hashers' id=session.user.hasherId}}" title="Your profile">
-            <span class="fa fa-user fa-lg"></span>
-          </a>
+          <li class="nav-item">
+            <a class="btn btn-link p-3" href="{{routeUrl page='hashers' id=session.user.hasherId}}" title="Your profile">
+              Your profile
+            </a>
+          </li>
         {{/if}}
-        <button class="btn btn-link" type="button" on:click="session.destroy()">
-          Sign out
-        </button>
+        <li class="nav-item">
+          <button class="btn btn-link px-sm-0 py-3" type="button" on:click="session.destroy()">
+            Sign out
+          </button>
+        </li>
       {{else}}
-        <a href="/auth/google">Sign in</a>
+        <li class="nav-item">
+          <a class="btn btn-link px-sm-0 py-3" href="/auth/google">Sign in</a>
+        </li>
       {{/if}}
     </p>
   {{/eq}}
