@@ -37,7 +37,7 @@
     <table class="table table-bordered table-responsive-sm table-sm">
       <thead>
         <tr>
-          {{#if session.user.canEditPreTrailInfo}}
+          {{#if scope.root.session.user.canEditPreTrailInfo}}
             <th></th>
           {{/if}}
           <th>Date</th>
@@ -50,7 +50,7 @@
       <tbody>
         {{#each month.events event=value}}
           <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
-            {{#if session.user.canEditPreTrailInfo}}
+            {{#if scope.root.session.user.canEditPreTrailInfo}}
               <td class="text-center">
                 <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
                   <span class="fa fa-edit"></span>
