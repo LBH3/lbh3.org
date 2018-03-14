@@ -26,7 +26,7 @@ export const ViewModel = DefineMap.extend({
           runCount: -1
         },
         runCount: {
-          $gte: 390
+          $gte: 490
         }
       });
     }
