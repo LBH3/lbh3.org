@@ -41,6 +41,12 @@ module.exports = {
   },
 
   restrictToSignedInHashers: function(hook) {
+
+    // If it was an internal call then skip this hook
+    if (!hook.params.provider) {
+      return hook;
+    }
+
     const user = hook.params.user;
     if (!user || !user.hasherId) {
       throw new errors.NotAuthenticated('You are not authenticated.');
