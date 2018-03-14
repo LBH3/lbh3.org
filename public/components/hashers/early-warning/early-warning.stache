@@ -3,6 +3,8 @@
 
 <h2>Early Warning</h2>
 
+<p>This page lists all the hashers with 490 or more runs that are within 10 runs of the next multiple of 100.</p>
+
 {{#if session.user.canViewDirectoryInfo}}
 
   {{#if hashersPromise.isPending}}
@@ -17,33 +19,39 @@
     </div>
   {{/if}}
 
-  {{#if upcummingPatches}}
-    <table class="table table-bordered table-responsive-sm table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Hash Name</th>
-          <th scope="col">Current Run Count</th>
-          <th scope="col">Upcumming Patch</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each upcummingPatches upcummingPatch=value}}
+  {{#if hashersPromise.isResolved}}
+    {{#if upcummingPatches.length}}
+      <table class="table table-bordered table-responsive-sm table-sm">
+        <thead>
           <tr>
-            <td>
-              <a href="{{scope.root.routeForHasher(upcummingPatch.hasher)}}">
-                {{upcummingPatch.hasher.hashName}}
-              </a>
-            </td>
-            <td>
-              {{upcummingPatch.hasher.runCount}}
-            </td>
-            <td>
-              {{upcummingPatch.patchNumber}}
-            </td>
+            <th scope="col">Hash Name</th>
+            <th scope="col">Current Run Count</th>
+            <th scope="col">Upcumming Patch</th>
           </tr>
-        {{/each}}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {{#each upcummingPatches}}
+            <tr>
+              <td>
+                <a href="{{scope.root.routeForHasher(hasher)}}">
+                  {{hasher.hashName}}
+                </a>
+              </td>
+              <td>
+                {{hasher.runCount}}
+              </td>
+              <td>
+                {{patchNumber}}
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <div class="alert alert-info" role="alert">
+        <strong>No hashers matching that criteria found.</strong>
+      </div>
+    {{/if}}
   {{/if}}
 
 {{else}}
