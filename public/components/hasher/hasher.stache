@@ -585,9 +585,4 @@
       {{/if}}
     {{/if}}
   {{/if}}
-
-{{else}}
-  <div class="alert alert-danger" role="alert">
-    Sorry, you don’t have permission to see this page.
-  </div>
 {{/if}}
