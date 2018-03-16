@@ -22,6 +22,6 @@
           <a class="btn btn-link px-sm-0 py-3" href="/auth/google">Sign in</a>
         </li>
       {{/if}}
-    </p>
+    </ul>
   {{/eq}}
 </footer>
