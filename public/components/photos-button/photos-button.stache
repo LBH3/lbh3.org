@@ -1,7 +1,9 @@
+<can-import from="font-awesome/css/font-awesome.css" />
+
 {{<photosLink}}
   {{#if event.photosUrl}}
     <a href="{{event.photosUrl}}" target="_blank" title="View photos">
-      📷
+      <span class="fa fa-lg fa-camera"></span>
     </a>
   {{/if}}
 {{/photosLink}}
