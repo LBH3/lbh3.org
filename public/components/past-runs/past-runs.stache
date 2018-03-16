@@ -4,7 +4,9 @@
 <h2>Past Runs</h2>
 
 <div class="d-sm-flex justify-content-between">
-  <p>📷 for Photos and 📰 for Snooze</p>
+  <p>
+    <span class="fa fa-camera"></span> for Photos and <span class="fa fa-newspaper-o"></span> for Snooze
+  </p>
   <!--
   <p>
     Most Current:
