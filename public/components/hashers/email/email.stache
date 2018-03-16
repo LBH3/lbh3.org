@@ -15,15 +15,13 @@
   </div>
 {{/if}}
 
-{{#if emailGroups}}
-  {{#each emailGroups email=value}}
-    <h3>{{email.group}}</h3>
-    <ol>
-      {{#each email.hashers hasher=value}}
-        {{#if hasher.emailAddresses[0]}}
-          <li>{{hasher.emailAddresses[0]}}</li>
-        {{/if}}
+{{#each(emailGroups)}}
+  <h3>{{group}}</h3>
+  <ol>
+    {{#each(hashers)}}
+      {{#each(emailAddresses)}}
+        <li>{{this}}</li>
       {{/each}}
-    </ol>
-  {{/each}}
-{{/if}}
+    {{/each}}
+  </ol>
+{{/each}}
