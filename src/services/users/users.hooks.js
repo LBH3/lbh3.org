@@ -138,7 +138,8 @@ const getBoredInfo = function(hook) {
       if (boredPositions.includes(authHook.TRAILMASTERS)) {
         permission = Object.assign(permission, {
           canEditPreTrailInfo: true,
-          canViewDirectoryInfo: true
+          canViewDirectoryInfo: true,
+          canViewRunAttendance: true
         });
       }
       if (boredPositions.includes(authHook.WEBMASTERS)) {
