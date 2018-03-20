@@ -1,9 +1,6 @@
-<footer class="container text-muted">
-  <p class="float-sm-left pt-3 text-center text-sm-left">
-    <a href="mailto:contact@lbh3.org">Email us</a> with any questions or comments.
-  </p>
+<footer class="container {{^eq platform.isNode true}}d-flex flex-column flex-sm-row-reverse justify-content-sm-between{{/eq}} text-muted">
   {{^eq platform.isNode true}}
-    <ul class="justify-content-center justify-content-sm-end nav">
+    <ul class="justify-content-center nav">
       {{#if session.user}}
         {{#if session.user.hasherId}}
           <li class="nav-item">
@@ -24,4 +21,7 @@
       {{/if}}
     </ul>
   {{/eq}}
+  <p class="pt-sm-3 text-center text-sm-left">
+    <a href="mailto:contact@lbh3.org">Email us</a> with any questions or comments.
+  </p>
 </footer>
