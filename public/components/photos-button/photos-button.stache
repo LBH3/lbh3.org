@@ -2,7 +2,7 @@
 
 {{<photosLink}}
   {{#if event.photosUrl}}
-    <a href="{{event.photosUrl}}" target="_blank" title="View photos">
+    <a class="btn btn-link p-1" href="{{event.photosUrl}}" target="_blank" title="View photos">
       <span class="fa fa-lg fa-camera"></span>
     </a>
   {{/if}}
@@ -28,7 +28,7 @@
       {{#if event.photosUrl}}
         {{>photosLink}}
       {{else}}
-        <button class="btn btn-link" on:click="promptForUrl()" type="button">
+        <button class="btn btn-link p-1" on:click="promptForUrl()" type="button">
           <span class="fa fa-lg fa-edit"></span>
         </button>
       {{/if}}

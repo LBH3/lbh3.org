@@ -1,5 +1,16 @@
 <can-import from="font-awesome/css/font-awesome.css" />
 
+{{<snoozeButtons}}
+  <a class="btn btn-link p-1" href="{{event.snoozeUrl}}" target="_blank" title="View Snooze">
+    <span class="fa fa-lg fa-newspaper-o"></span>
+  </a>
+  {{#if session.user.canAddSnoozes}}
+    <button class="align-baseline btn btn-link p-1">
+      <span class="fa fa-lg fa-trash-o"></span>
+    </button>
+  {{/if}}
+{{/snoozeButtons}}
+
 {{#if session.user.canAddSnoozes}}
   {{#if uploadPromise}}
     {{#if uploadPromise.isPending}}
@@ -10,29 +21,32 @@
     {{/if}}
     {{#if uploadPromise.isResolved}}
       {{#if event.snoozeUrl}}
-        <a href="{{event.snoozeUrl}}" target="_blank" title="View Snooze">
-          <span class="fa fa-lg fa-newspaper-o"></span>
-        </a>
+        {{>snoozeButtons}}
       {{else}}
         <span class="fa fa-lg fa-warning" title="Unknown error"></span>
       {{/if}}
     {{/if}}
   {{else}}
     {{#if event.snoozeUrl}}
-      <a href="{{event.snoozeUrl}}" target="_blank" title="View Snooze">
-        <span class="fa fa-lg fa-newspaper-o"></span>
-      </a>
+      {{>snoozeButtons}}
     {{else}}
-      <label title="Upload Snooze">
-        <span class="fa fa-lg fa-upload"></span>
-        <input accept="application/pdf" class="sr-only" type="file" />
-      </label>
+      {{#if removePromise}}
+        {{#if removePromise.isPending}}
+          <span class="fa fa-lg fa-circle-o-notch fa-spin"></span>
+        {{/if}}
+        {{#if removePromise.isRejected}}
+          <span class="fa fa-lg fa-warning" title="{{removePromise.reason.message}}"></span>
+        {{/if}}
+      {{else}}
+        <label class="p-1" title="Upload Snooze">
+          <span class="fa fa-lg fa-upload"></span>
+          <input accept="application/pdf" class="sr-only" type="file" />
+        </label>
+      {{/if}}
     {{/if}}
   {{/if}}
 {{else}}
   {{#if event.snoozeUrl}}
-    <a href="{{event.snoozeUrl}}" target="_blank" title="View Snooze">
-      <span class="fa fa-lg fa-newspaper-o"></span>
-    </a>
+    {{>snoozeButtons}}
   {{/if}}
 {{/if}}
