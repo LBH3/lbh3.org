@@ -51,6 +51,7 @@ const uploadFile = function(file, signedRequest, url) {
 
 export const ViewModel = DefineMap.extend({
   event: Event,
+  removePromise: Promise,
   get session() {
     return Session.current;
   },
@@ -62,6 +63,22 @@ export default Component.extend({
   ViewModel,
   view,
   events: {
+    'button click': function(button, event) {
+      event.preventDefault();
+
+      const viewModel = this.viewModel;
+      const trail = viewModel.event;
+      const trailName = (trail.nameMd) ? `“${trail.nameMd}”` : `the trail on ${trail.startDateWithYearString}`;
+      const question = `Are you sure you want to delete the Snooze for ${trailName}?`;
+
+      if (window.confirm(question)) {
+        trail.snoozeUrl = '';
+        viewModel.uploadPromise = null;
+        viewModel.removePromise = trail.save().then(function() {
+          viewModel.removePromise = null;
+        });
+      }
+    },
     'input[type="file"] change': function(input) {
       const file = (input.files && input.files[0]) ? input.files[0] : null;
       if (file) {
