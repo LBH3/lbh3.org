@@ -100,7 +100,9 @@ export const ViewModel = DefineMap.extend({
       }
       const hashersPromise = this.hashersPromise;
       if (hashersPromise) {
-        hashersPromise.then(setValue);
+        hashersPromise.then(hashers => {
+          setValue(hashers.sort(sortByHashOrJustName));
+        });
       }
     }
   },
