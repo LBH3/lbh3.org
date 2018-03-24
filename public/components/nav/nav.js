@@ -8,15 +8,29 @@ export const ViewModel = DefineMap.extend({
   day: 'number',
   isActive: function(page) {
     const currentPage = this.page;
+
     if (currentPage === 'events' && (page === 'events' || page === 'hareline') && this.year) {
+      const isFuturePage = page === 'hareline';
+
       const currentDate = new Date();
-      const isFutureYear = this.year >= currentDate.getFullYear();
-      const isFutureMonth = isFutureYear && this.month >= (currentDate.getMonth() + 1);
-      const isFutureDay = isFutureMonth && this.day >= currentDate.getDate();
-      if (isFutureDay) {
-        return page === 'hareline';
+      const currentYear = currentDate.getFullYear();
+      if (currentYear === this.year) {
+
+        const currentMonth = currentDate.getMonth() + 1;
+        if (currentMonth === this.month) {
+
+          const currentDay = currentDate.getDate();
+          if (currentDay <= this.day) {
+            return isFuturePage;
+          }
+        } else if (currentMonth < this.month) {
+          return isFuturePage;
+        }
+      } else if (currentYear < this.year) {
+        return isFuturePage;
       }
     }
+
     return currentPage === page;
   },
   month: 'number',
