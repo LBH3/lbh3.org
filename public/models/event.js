@@ -151,7 +151,14 @@ const Event = DefineMap.extend({
       if (this.locationPromise) {
         this.locationPromise.then(location => {
           if (location.formattedAddress) {
-            resolve(location.formattedAddress);
+            let formattedAddress = location.formattedAddress;
+            if (formattedAddress.indexOf(location.name) === -1) {
+              formattedAddress = `${location.name}, ${formattedAddress}`;
+            }
+            if (formattedAddress.indexOf(this.locationMd) === -1) {
+              formattedAddress = `${this.locationMd}, ${formattedAddress}`;
+            }
+            resolve(formattedAddress.replace(', USA', ''));
           } else {
             resolve(this.shortLocationHtml);
           }
@@ -166,11 +173,14 @@ const Event = DefineMap.extend({
       if (this.onOnPromise) {
         this.onOnPromise.then(location => {
           if (location.formattedAddress) {
-            if (location.name) {
-              resolve(`${location.name}, ${location.formattedAddress}`);
-            } else {
-              resolve(location.formattedAddress);
+            let formattedAddress = location.formattedAddress;
+            if (formattedAddress.indexOf(location.name) === -1) {
+              formattedAddress = `${location.name}, ${formattedAddress}`;
             }
+            if (formattedAddress.indexOf(this.onOnMd) === -1) {
+              formattedAddress = `${this.onOnMd}, ${formattedAddress}`;
+            }
+            resolve(formattedAddress.replace(', USA', ''));
           } else {
             resolve(this.shortOnOnHtml);
           }
