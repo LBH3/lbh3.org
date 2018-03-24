@@ -149,35 +149,9 @@ const Hasher = DefineMap.extend({
   },
   givenName: 'string',
   givenNamePrivate: 'string',
+  hareCount: 'number',
   hareCount1: 'number',
   hareCount2: 'number',
-  hareCountMax: {
-    type: 'number',
-    serialize: false,
-    get: function() {
-      return Math.max(this.hareCount1 || 0, this.hareCount2 || 0);
-    }
-  },
-  hareCounts: {
-    type: 'string',
-    serialize: false,
-    get: function() {
-      const hareCount1 = this.hareCount1;
-      const hareCount2 = this.hareCount2;
-      if (hareCount1 && hareCount2) {
-        if (hareCount1 === hareCount2) {
-          return hareCount1;
-        } else {
-          return hareCount1 + ' or ' + hareCount2
-        }
-      } else if (hareCount1) {
-        return hareCount1;
-      } else if (hareCount2) {
-        return hareCount2;
-      }
-      return 0;
-    }
-  },
   hasDied: {
     type: 'boolean',
     serialize: false,
@@ -247,7 +221,7 @@ const Hasher = DefineMap.extend({
     get: function() {
       const patchesEligible = [];
 
-      const hareCount = this.hareCountMax;
+      const hareCount = this.hareCount;
       for (let hareCounter = 5; hareCounter <= hareCount; hareCounter += 5) {
         patchesEligible.push({
           number: hareCounter,

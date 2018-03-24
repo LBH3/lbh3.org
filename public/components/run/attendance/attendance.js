@@ -116,7 +116,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   patches: function(hasher) {
-    const hareCount = hasher.hareCountMax;
+    const hareCount = hasher.hareCount;
     const runCount = hasher.runCount;
 
     // Patches they are already owed
