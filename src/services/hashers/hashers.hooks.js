@@ -13,14 +13,46 @@ const afterFindHook = function(hook) {
   }
   const hashers = hook.result.data || [];
   const sequelizeClient = hook.app.get('sequelizeClient');
-  const promises = hashers.map(hasher => {
-    return getRunMileageForHasher(sequelizeClient, hasher.id);
+  const hareCountPromises = hashers.map(hasher => {
+    return getHareCountForHasher(sequelizeClient, hasher.id);
   });
-  return Promise.all(promises).then(results => {
+  return Promise.all(hareCountPromises).then(results => {
     results.forEach((result, index) => {
-      hashers[index].runMileage = Number(result);
+      hashers[index].hareCount = result;
+    });
+    const runMileagePromises = hashers.map(hasher => {
+      return getRunMileageForHasher(sequelizeClient, hasher.id);
+    });
+    return Promise.all(runMileagePromises);
+  }).then(results => {
+    results.forEach((result, index) => {
+      hashers[index].runMileage = result;
     });
     return hook;
+  });
+};
+
+const updateHookResultWithHasherStats = function(hook) {
+  return new Promise(function(resolve) {
+    const hasherId = hook.result.id;
+    const sequelizeClient = hook.app.get('sequelizeClient');
+
+    getHareCountForHasher(sequelizeClient, hasherId).then(hareCount => {
+      hook.result.hareCount = hareCount;
+
+      getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
+        hook.result.runMileage = runMileage;
+        resolve(hook);
+
+      }, error => {
+        console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
+        resolve(hook);
+      });
+
+    }, error => {
+      console.error(`Failed to fetch hare count for hasher #${hasherId} with error:`, error);
+      resolve(hook);
+    });
   });
 };
 
@@ -30,16 +62,7 @@ const afterGetHook = function(hook) {
     const hasherId = hook.result.id;
     if (hasherId === user.hasherId) {
       // Ok to not filter the data and include the hasher’s mileage
-      return new Promise(function(resolve) {
-        const sequelizeClient = hook.app.get('sequelizeClient');
-        getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
-          hook.result.runMileage = Number(runMileage);
-          resolve(hook);
-        }, error => {
-          console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
-          resolve(hook);
-        });
-      });
+      return updateHookResultWithHasherStats(hook);
     } else {
       return new Promise(function(resolve) {
         getBoredHasher(hook.app, user).then(boredHashers => {
@@ -48,18 +71,11 @@ const afterGetHook = function(hook) {
           });
           if (found) {
             // Ok to not filter the data and include the hasher’s mileage
-            const sequelizeClient = hook.app.get('sequelizeClient');
-            getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
-              hook.result.runMileage = Number(runMileage);
-              resolve(hook);
-            }, error => {
-              console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
-              resolve(hook);
-            });
+            updateHookResultWithHasherStats(hook).then(resolve);
           } else {
             hook.result = filterData(hook.result);
+            resolve(hook);
           }
-          resolve(hook);
         }, () => {
           hook.result = filterData(hook.result);
           resolve(hook);
@@ -123,12 +139,23 @@ const createAndUpdateFields = function(hook) {
   }
 };
 
+const getHareCountForHasher = function(sequelize, hasherId) {
+  const query = `SELECT COUNT(id) FROM events_hashers WHERE hasher_id=${hasherId} AND role ILIKE 'hare%'`;
+  return sequelize.query(query, {
+    type: sequelize.QueryTypes.SELECT
+  }).then(result => {
+    const hareCountString = result && result[0] && result[0].count;
+    return hareCountString && parseInt(hareCountString, 10) || 0;
+  });
+};
+
 const getRunMileageForHasher = function(sequelize, hasherId) {
   const query = `SELECT SUM(events.miles) FROM events_hashers INNER JOIN events ON (events_hashers.trail_number = events.trail_number) WHERE hasher_id=${hasherId}`;
   return sequelize.query(query, {
     type: sequelize.QueryTypes.SELECT
   }).then(result => {
-    return result && result[0] && result[0].sum || 0;
+    const runMileageString = result && result[0] && result[0].sum;
+    return runMileageString && parseFloat(runMileageString) || 0;
   });
 };
 

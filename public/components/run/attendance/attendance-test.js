@@ -95,7 +95,7 @@ QUnit.test('patches helper — at 5 hares and 25 runs', function(assert) {
     year: 2017
   });
   const hasher = new Hasher({
-    hareCount1: 5,
+    hareCount: 5,
     patches: [],
     runCount: 25
   });
@@ -111,7 +111,7 @@ QUnit.test('patches helper — at 11 hares and 69 runs', function(assert) {
     year: 2017
   });
   const hasher = new Hasher({
-    hareCount1: 11,
+    hareCount: 11,
     patches: [
       {number: 5, type: 'hare'},
       {number: 25, type: 'run'},
@@ -131,7 +131,7 @@ QUnit.test('patches helper — at 15 hares and 169 runs', function(assert) {
     year: 2017
   });
   const hasher = new Hasher({
-    hareCount1: 15,
+    hareCount: 15,
     patches: [
       {number: 5, type: 'hare'},
       {number: 10, type: 'hare'},
@@ -153,7 +153,7 @@ QUnit.test('patches helper — missing older patches', function(assert) {
     year: 2017
   });
   const hasher = new Hasher({
-    hareCount1: 15,
+    hareCount: 15,
     patches: [
       {number: 10, type: 'hare'},
       {number: 100, type: 'run'}
@@ -172,7 +172,7 @@ QUnit.test('patches helper — owed lots of patches', function(assert) {
     year: 2017
   });
   const hasher = new Hasher({
-    hareCount1: 0,
+    hareCount: 0,
     patches: [
       {number: 25, type: 'run'}
     ],
@@ -190,7 +190,7 @@ QUnit.test('patches helper — will earn patches if they hare the next run', fun
     year: 2017
   });
   const hasher = new Hasher({
-    hareCount1: 14,
+    hareCount: 14,
     patches: [
       {number: 5, type: 'hare'},
       {number: 10, type: 'hare'},

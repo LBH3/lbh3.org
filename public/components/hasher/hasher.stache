@@ -210,7 +210,7 @@
       <div class="col-sm-2">
         <b>Hare count:</b>
         <br>
-        {{hasher.hareCounts}}
+        {{hasher.hareCount}}
       </div>
       <div class="col-sm-2">
         <b>Miles:</b>
