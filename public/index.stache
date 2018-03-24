@@ -52,6 +52,15 @@
                 {{/if}}
               </can-import>
             {{/case}}
+            {{#case "privacy"}}
+              <can-import from="~/components/about/privacy/">
+                {{#if isPending}}
+                  Loading page…
+                {{else}}
+                  <lbh3-about-privacy />
+                {{/if}}
+              </can-import>
+            {{/case}}
             {{#default}}
               <can-import from="~/components/about/">
                 {{#if isPending}}

@@ -40,6 +40,10 @@
             <td>
               {{#if user.hasher}}
                 {{user.hasher.hashOrJustName}}
+              {{else}}
+                {{#if user.requestedName}}
+                  Requested: <strong>{{user.requestedName}}</strong>
+                {{/if}}
               {{/if}}
             </td>
             <td class="text-center">
