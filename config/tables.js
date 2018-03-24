@@ -55,7 +55,6 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       fromTheHaresMd: textType('from_the_hares_md'),
       harePatchesMd: textType('hare_patches_md'),
       haresMd: textType('hares_md'),
-      hashersTotal: intType('hashers_total'),
       hashitReasonMd: textType('hashit_reason_md'),
       locationGooglePlaceId: stringType('location_google_place_id'),
       locationMd: textType('location_md'),
@@ -154,8 +153,6 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       foodPreference: stringType('food_preference'),
       givenName: stringType('given_name'),
       givenNamePrivate: stringType('given_name_private'),
-      hareCount1: intType('hare_count_1'),
-      hareCount2: intType('hare_count_2'),
       hashName: stringType('hash_name'),
       headshotUrl: textType('headshot_url'),
       history: stringType('history'),
@@ -166,7 +163,6 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       mailHashName: stringType('mail_hash_name'),
       mailName: stringType('mail_name'),
       mia: stringType('mia'),
-      miles: decimalType('miles'),
       motherHash: stringType('mother_hash'),
       namingTrailDate: dateType('naming_trail_date'),
       namingTrailNumber: intType('naming_trail_number'),
@@ -176,7 +172,6 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       payment: stringType('payment'),
       punchCard: intType('punch_card'),
       runCount: intType('run_count'),
-      runMileage: decimalType('run_mileage'),
       runPatch: intType('run_patch'),
       runSort: intType('run_sort'),
       shirtSize: stringType('shirt_size'),
@@ -206,7 +201,8 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       facebookProfile: jsonType('facebook_profile'),
       googleId: stringType('google_id'),
       googleProfile: jsonType('google_profile'),
-      hasherId: intType('hasher_id')
+      hasherId: intType('hasher_id'),
+      requestedName: stringType('requested_name')
     }
   };
 };

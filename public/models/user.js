@@ -108,7 +108,8 @@ var User = DefineMap.extend('User', {
       }
     },
     serialize: false
-  }
+  },
+  requestedName: 'string'
 });
 
 User.List = DefineList.extend({

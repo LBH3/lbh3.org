@@ -150,8 +150,6 @@ const Hasher = DefineMap.extend({
   givenName: 'string',
   givenNamePrivate: 'string',
   hareCount: 'number',
-  hareCount1: 'number',
-  hareCount2: 'number',
   hasDied: {
     type: 'boolean',
     serialize: false,
@@ -184,7 +182,6 @@ const Hasher = DefineMap.extend({
   mailHashName: 'string',
   mailName: 'string',
   mia: 'string',
-  miles: 'number',
   motherHash: 'string',
   namingTrailDate: datePropDefinition,
   namingTrailDateParts: {

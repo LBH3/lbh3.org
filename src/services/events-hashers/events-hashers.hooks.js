@@ -49,7 +49,6 @@ const getRequiredData = function(hook) {
         hook.app.service('api/hashers').get(eventHasher.hasherId, hook.params).then(hasher => {
           resolve({
             event: events.data[0],
-            eventHasher,
             hasher
           });
         }, reject);
@@ -61,9 +60,6 @@ const getRequiredData = function(hook) {
 const createHook = function(hook) {
   return new Promise(function(resolve, reject) {
     getRequiredData(hook).then(({event, hasher}) => {
-      const didHare = hook.data.role.substr(0, 4) === 'Hare';
-      const eventMiles = Number(event.miles);
-
       let firstTrailDate;
       let firstTrailNumber;
       if (!hasher.firstTrailDate || new Date(hasher.firstTrailDate) > event.startDatetime) {
@@ -81,10 +77,7 @@ const createHook = function(hook) {
       const hasherPatchData = {
         firstTrailDate,
         firstTrailNumber,
-        hareCount1: (didHare) ? (hasher.hareCount1 + 1) : hasher.hareCount1,
-        hareCount2: (didHare) ? (hasher.hareCount2 + 1) : hasher.hareCount2,
         lastTrailDate,
-        miles: Number(hasher.miles) + eventMiles,
         runCount: Number(hasher.runCount) + 1
       };
       hook.app.service('api/hashers').patch(hasher.id, hasherPatchData).then(() => {
@@ -96,17 +89,12 @@ const createHook = function(hook) {
 
 const removeHook = function(hook) {
   return new Promise(function(resolve, reject) {
-    getRequiredData(hook).then(({event, eventHasher, hasher}) => {
+    getRequiredData(hook).then(({event, hasher}) => {
       getFirstAndLastTrailData({event, hasher, hook}).then(({newFirstTrail, newLastTrail}) => {
-        const didHare = eventHasher.role.substr(0, 4) === 'Hare';
-        const eventMiles = Number(event.miles);
         const hasherPatchData = {
           firstTrailDate: (newFirstTrail) ? newFirstTrail.start_datetime : null,
           firstTrailNumber: (newFirstTrail) ? newFirstTrail.trail_number : null,
-          hareCount1: (didHare) ? (hasher.hareCount1 - 1) : hasher.hareCount1,
-          hareCount2: (didHare) ? (hasher.hareCount2 - 1) : hasher.hareCount2,
           lastTrailDate: (newLastTrail) ? newLastTrail.start_datetime : null,
-          miles: Number(hasher.miles) - eventMiles,
           runCount: Number(hasher.runCount) - 1
         };
         hook.app.service('api/hashers').patch(hasher.id, hasherPatchData).then(() => {
