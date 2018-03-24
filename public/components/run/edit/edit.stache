@@ -39,10 +39,23 @@
             Location
           </label>
           <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
-          {{#if event.locationPromise.value}}
+          {{#if locationPromise.isRejected}}
+            <span class="fa fa-warning"></span>
             <small>
-              {{{event.locationPromise.value.formattedAddress}}}
+              Save failed. Maybe try again?
             </small>
+          {{else}}
+            {{#if locationPromise.isPending}}
+              <span class="fa fa-circle-o-notch fa-spin"></span>
+            {{/if}}
+            {{#if locationPromise.isResolved}}
+              <span class="fa fa-check"></span>
+            {{/if}}
+            {{#if event.locationPromise.value}}
+              <small>
+                {{{event.locationPromise.value.formattedAddress}}}
+              </small>
+            {{/if}}
           {{/if}}
         </div>
       </div>
@@ -80,10 +93,23 @@
             On-On
           </label>
           <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
-          {{#if event.onOnPromise.value}}
+          {{#if onOnPromise.isRejected}}
+            <span class="fa fa-warning"></span>
             <small>
-              {{{event.onOnPromise.value.formattedAddress}}}
+              Save failed. Maybe try again?
             </small>
+          {{else}}
+            {{#if onOnPromise.isPending}}
+              <span class="fa fa-circle-o-notch fa-spin"></span>
+            {{/if}}
+            {{#if onOnPromise.isResolved}}
+              <span class="fa fa-check"></span>
+            {{/if}}
+            {{#if event.onOnPromise.value}}
+              <small>
+                {{{event.onOnPromise.value.formattedAddress}}}
+              </small>
+            {{/if}}
           {{/if}}
         </div>
         {{#if showPostTrailFields}}

@@ -149,6 +149,8 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  locationPromise: Promise,
+
   month: 'string',
 
   newHasherForRun: {
@@ -177,6 +179,8 @@ export const ViewModel = DefineMap.extend({
       return newPatch;
     }
   },
+
+  onOnPromise: Promise,
 
   patches: {
     get: function(lastValue, setValue) {
@@ -401,13 +405,12 @@ export default Component.extend({
           const autocomplete = new google.maps.places.Autocomplete(locationInput, options);
           autocomplete.addListener('place_changed', () => {
             const place = Place.fromGoogle(autocomplete.getPlace());
-            place.save().then(savedPlace => {
+            const vmPromiseProperty = `${vmProperty}Promise`;
+            this.viewModel[vmPromiseProperty] = place.save().then(savedPlace => {
               const vmPropertyGPId = `${vmProperty}GooglePlaceId`;
               const vmPropertyMd = `${vmProperty}Md`;
               this.viewModel.event[vmPropertyGPId] = savedPlace.id;
               this.viewModel.event[vmPropertyMd] = savedPlace.name || savedPlace.formattedAddress;
-            }, error => {
-              console.error('Error while saving place:', error);
             });
           });
         }
