@@ -1,3 +1,5 @@
+import 'can-event-dom-enter/add-global/add-global';
+
 import Awesomplete from 'awesomplete';
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
@@ -215,6 +217,10 @@ export const ViewModel = DefineMap.extend({
         return x.title.localeCompare(y.title);
       });
     }
+  },
+
+  preventDefault: function(event) {
+    event.preventDefault();
   },
 
   plusOne: function(number) {

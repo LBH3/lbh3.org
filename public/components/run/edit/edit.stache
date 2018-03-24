@@ -255,7 +255,7 @@
       {{/if}}
 
       {{#if hashersPromise.isResolved}}
-        <form on:submit="addHasherToRun()">
+        <form on:enter="preventDefault(scope.event)" on:submit="addHasherToRun()">
           <table class="table table-bordered table-responsive-sm table-sm">
             <thead>
               <tr>
