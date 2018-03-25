@@ -1,3 +1,4 @@
+import BoredHasher from '~/models/bored-hasher';
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import EventsHashers from '~/models/events-hashers';
@@ -86,6 +87,28 @@ const uploadFile = function(file, signedRequest, url) {
 const $limit = 100;
 
 export const ViewModel = DefineMap.extend({
+  boredPositions: {
+    get: function(lastSetValue, resolve) {
+      if (lastSetValue) {
+        return lastSetValue;
+      }
+      const boredPositionsPromise = this.boredPositionsPromise;
+      if (boredPositionsPromise) {
+        boredPositionsPromise.then(resolve);
+      }
+    }
+  },
+  boredPositionsPromise: {
+    get: function() {
+      return BoredHasher.connection.getList({
+        hasherId: this.id,
+        $limit,
+        $sort: {
+          startDate: 1
+        }
+      });
+    }
+  },
   canViewHasher: {
     type: 'boolean',
     get: function() {

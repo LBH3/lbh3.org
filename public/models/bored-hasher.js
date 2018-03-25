@@ -17,7 +17,20 @@ const BoredHasher = DefineMap.extend({
   endDate: 'any',
   hasherId: 'number',
   positionId: 'number',
-  startDate: 'any'
+  positionPromise: {
+    get: function() {
+      return BoredPosition.get({
+        id: this.positionId
+      });
+    }
+  },
+  startDate: 'any',
+  startYear: {
+    get: function() {
+      const startDate = this.startDate || '';
+      return startDate.substr(0, 4);
+    }
+  }
 });
 
 BoredHasher.List = DefineList.extend({
