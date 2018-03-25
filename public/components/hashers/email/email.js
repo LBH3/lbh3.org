@@ -44,6 +44,9 @@ export const ViewModel = DefineMap.extend({
   },
   get session() {
     return Session.current;
+  },
+  title: {
+    default: 'Email List | Hashers | LBH3'
   }
 });
 

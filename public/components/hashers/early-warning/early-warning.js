@@ -41,6 +41,9 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
+  title: {
+    default: 'Early Warning | Hashers | LBH3'
+  },
   upcummingPatches: {
     get: function() {
       const hashers = this.hashers || [];

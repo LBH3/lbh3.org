@@ -23,6 +23,9 @@ export const ViewModel = DefineMap.extend({
     }
     return route.url(routeParams);
   },
+  title: {
+    default: 'Past Runs | LBH3'
+  },
   year: {
     type: 'number',
     get: function(year) {

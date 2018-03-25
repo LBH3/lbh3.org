@@ -39,6 +39,11 @@ export const ViewModel = DefineMap.extend({
       return this.mostRecentYear === this.year;
     }
   },
+  title: {
+    get: function() {
+      return `${this.year} Mismanagement | About | LBH3`;
+    }
+  },
   year: {
     type: 'number',
     get: function(year) {

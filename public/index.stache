@@ -48,7 +48,7 @@
                 {{#if isPending}}
                   Loading Mismanagement…
                 {{else}}
-                  <lbh3-about-mismanagement year:from="scope.root.year" />
+                  <lbh3-about-mismanagement title:to="scope.root.title" year:from="scope.root.year" />
                 {{/if}}
               </can-import>
             {{/case}}
@@ -57,7 +57,7 @@
                 {{#if isPending}}
                   Loading page…
                 {{else}}
-                  <lbh3-about-privacy />
+                  <lbh3-about-privacy title:to="scope.root.title" />
                 {{/if}}
               </can-import>
             {{/case}}
@@ -66,7 +66,7 @@
                 {{#if isPending}}
                   Loading about page…
                 {{else}}
-                  <lbh3-about secondaryPage:from="secondaryPage" />
+                  <lbh3-about secondaryPage:from="secondaryPage" title:to="scope.root.title" />
                 {{/if}}
               </can-import>
             {{/default}}
@@ -84,6 +84,7 @@
                       <lbh3-run-attendance
                         day:from="scope.root.day"
                         month:from="scope.root.month"
+                        title:to="scope.root.title"
                         trailNumber:from="scope.root.trailNumber"
                         year:from="scope.root.year"
                       />
@@ -100,6 +101,7 @@
                       <lbh3-run-edit
                         day:from="scope.root.day"
                         month:from="scope.root.month"
+                        title:to="scope.root.title"
                         trailNumber:from="scope.root.trailNumber"
                         year:from="scope.root.year"
                       />
@@ -112,7 +114,7 @@
                   {{#if isPending}}
                     Loading…
                   {{else}}
-                    <lbh3-founders-2018 />
+                    <lbh3-founders-2018 title:to="scope.root.title" />
                   {{/if}}
                 </can-import>
               {{/case}}
@@ -121,7 +123,7 @@
                   {{#if isPending}}
                     Loading…
                   {{else}}
-                    <lbh3-jesus-cuervo />
+                    <lbh3-jesus-cuervo title:to="scope.root.title" />
                   {{/if}}
                 </can-import>
               {{/case}}
@@ -130,7 +132,7 @@
                   {{#if isPending}}
                     Loading…
                   {{else}}
-                    <lbh3-memorial-service />
+                    <lbh3-memorial-service title:to="scope.root.title" />
                   {{/if}}
                 </can-import>
               {{/case}}
@@ -144,6 +146,7 @@
                   <lbh3-run
                     day:from="scope.root.day"
                     month:from="scope.root.month"
+                    title:to="scope.root.title"
                     trailNumber:from="scope.root.trailNumber"
                     year:from="scope.root.year"
                   />
@@ -154,7 +157,7 @@
                 {{#if isPending}}
                   Loading Past Runs…
                 {{else}}
-                  <lbh3-past-runs year:from="scope.root.year" />
+                  <lbh3-past-runs title:to="scope.root.title" year:from="scope.root.year" />
                 {{/if}}
               </can-import>
             {{/if}}
@@ -168,7 +171,7 @@
                   {{#if isPending}}
                     Loading the Hareline add page…
                   {{else}}
-                    <lbh3-hareline-add />
+                    <lbh3-hareline-add title:to="scope.root.title" />
                   {{/if}}
                 </can-import>
               </lbh3-no-ssr>
@@ -182,6 +185,7 @@
                     <lbh3-run-edit
                       day:from="scope.root.day"
                       month:from="scope.root.month"
+                      title:to="scope.root.title"
                       trailNumber:from="scope.root.trailNumber"
                       year:from="scope.root.year"
                     />
@@ -194,7 +198,7 @@
                 {{#if isPending}}
                   Loading haring guidelines…
                 {{else}}
-                  <lbh3-hareline-guidelines />
+                  <lbh3-hareline-guidelines title:to="scope.root.title" />
                 {{/if}}
               </can-import>
             {{/case}}
@@ -203,7 +207,7 @@
                 {{#if isPending}}
                   Loading the Hareline…
                 {{else}}
-                  <lbh3-hareline />
+                  <lbh3-hareline title:to="scope.root.title" />
                 {{/if}}
               </can-import>
             {{/default}}
@@ -218,7 +222,7 @@
                     {{#if isPending}}
                       Loading the add hasher page…
                     {{else}}
-                      <lbh3-hashers-add />
+                      <lbh3-hashers-add title:to="scope.root.title" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -229,7 +233,7 @@
                     {{#if isPending}}
                       Loading the early warning page…
                     {{else}}
-                      <lbh3-hashers-early-warning />
+                      <lbh3-hashers-early-warning title:to="scope.root.title" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -240,7 +244,7 @@
                     {{#if isPending}}
                       Loading the hashers email page…
                     {{else}}
-                      <lbh3-hashers-email />
+                      <lbh3-hashers-email title:to="scope.root.title" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -251,7 +255,7 @@
                     {{#if isPending}}
                       Loading the edit hasher page…
                     {{else}}
-                      <lbh3-hasher-edit id:from="scope.root.id" />
+                      <lbh3-hasher-edit id:from="scope.root.id" title:to="scope.root.title" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -263,7 +267,7 @@
                 {{#if isPending}}
                   Loading hasher page…
                 {{else}}
-                  <lbh3-hasher id:from="scope.root.id" skip:from="scope.root.skip" />
+                  <lbh3-hasher id:from="scope.root.id" skip:from="scope.root.skip" title:to="scope.root.title" />
                 {{/if}}
               </can-import>
             {{else}}
@@ -271,7 +275,7 @@
                 {{#if isPending}}
                   Loading Hashers page…
                 {{else}}
-                  <lbh3-hashers searchText:bind="scope.root.search" skip:from="scope.root.skip" />
+                  <lbh3-hashers searchText:bind="scope.root.search" skip:from="scope.root.skip" title:to="scope.root.title" />
                 {{/if}}
               </can-import>
             {{/if}}
@@ -290,7 +294,7 @@
                   Check <a href="http://www.hash.org" target="_blank">hash.org</a> for the next run.
                 </div>
               {{else}}
-                <lbh3-home />
+                <lbh3-home title:to="scope.root.title" />
               {{/if}}
             {{/if}}
           </can-import>
@@ -304,7 +308,7 @@
                     {{#if isPending}}
                       Loading the edit user page…
                     {{else}}
-                      <lbh3-user-edit id:from="scope.root.id" />
+                      <lbh3-user-edit id:from="scope.root.id" title:to="scope.root.title" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -315,7 +319,7 @@
               {{#if isPending}}
                 Loading users page…
               {{else}}
-                <lbh3-users secondaryPage:from="secondaryPage" />
+                <lbh3-users secondaryPage:from="secondaryPage" title:to="scope.root.title" />
               {{/if}}
             </can-import>
           {{/if}}

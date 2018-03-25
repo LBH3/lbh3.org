@@ -11,6 +11,9 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
+  title: {
+    default: 'Users | LBH3'
+  },
   users: {
     get: function(lastValue, setValue) {
       if (lastValue) {

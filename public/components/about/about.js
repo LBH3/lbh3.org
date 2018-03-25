@@ -9,13 +9,12 @@ export const ViewModel = DefineMap.extend({
     type: 'string'
   },
 
-  /**
-   * Session.current is provided by the can-connect-feathers session behavior.
-   * It will automatically populate when `new Session().save()` occurs in the app
-   * or on refresh after login.
-   */
   get session() {
     return Session.current;
+  },
+
+  title: {
+    default: 'About | LBH3'
   }
 });
 

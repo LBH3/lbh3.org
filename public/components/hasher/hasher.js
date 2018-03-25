@@ -197,11 +197,6 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  /**
-   * Session.current is provided by the can-connect-feathers session behavior.
-   * It will automatically populate when `new Session().save()` occurs in the app
-   * or on refresh after login.
-   */
   get session() {
     return Session.current;
   },
@@ -209,6 +204,16 @@ export const ViewModel = DefineMap.extend({
   skip: {
     default: 0,
     type: 'number'
+  },
+
+  title: {
+    get: function() {
+      const hasher = this.hasher;
+      if (hasher && hasher.hashOrJustName) {
+        return `${hasher.hashOrJustName} | Hashers | LBH3`;
+      }
+      return `#${this.id} | Hashers | LBH3`;
+    }
   }
 });
 
