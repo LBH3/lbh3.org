@@ -446,6 +446,41 @@
       </div>
     {{/if}}
 
+    <h3 class="mb-3 mt-5">Bored positions</h3>
+
+    {{#if boredPositionsPromise.isPending}}
+      <div class="alert alert-info" role="alert">
+        <strong>Fetching Bored positions…</strong>
+      </div>
+    {{/if}}
+
+    {{#if boredPositionsPromise.isRejected}}
+      <div class="alert alert-danger" role="alert">
+        <strong>Fuck!</strong> Couldn’t retrieve when this hasher has served on the Bored. {{boredPositionsPromise.reason.message}}
+      </div>
+    {{/if}}
+
+    {{#if boredPositionsPromise.isResolved}}
+      {{#if boredPositions.length}}
+        <ol>
+          {{#each boredPositions}}
+            <li>
+              <a href="{{routeUrl page='about' secondaryPage='mismanagement' year=startYear}}">
+                {{#if positionPromise.isResolved}}
+                  {{positionPromise.value.singularName}}
+                {{/if}}
+                {{startYear}}
+              </a>
+            </li>
+          {{/each}}
+        </ol>
+      {{else}}
+        <div class="alert alert-info" role="alert">
+          It doesn’t look like this hasher has served on the Bored.
+        </div>
+      {{/if}}
+    {{/if}}
+
     <h3 class="mb-3 mt-5">Patches</h3>
 
     {{#if patchesPromise.isPending}}
