@@ -50,6 +50,11 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
+  title: {
+    get: function() {
+      return `Edit #${this.id} | Users | LBH3`;
+    }
+  },
   user: {
     get: function(lastValue, setValue) {
       if (lastValue) {

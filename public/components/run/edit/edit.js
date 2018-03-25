@@ -282,11 +282,6 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  /**
-   * Session.current is provided by the can-connect-feathers session behavior.
-   * It will automatically populate when `new Session().save()` occurs in the app
-   * or on refresh after login.
-   */
   get session() {
     return Session.current;
   },
@@ -294,6 +289,12 @@ export const ViewModel = DefineMap.extend({
   showPostTrailFields: {
     get: function() {
       return this.event.hasStartedOrIsCloseToStarting && this.session && this.session.user.canEditPostTrailInfo;
+    }
+  },
+
+  title: {
+    get: function() {
+      return `Edit Run #${this.trailNumber} | LBH3`;
     }
   },
 

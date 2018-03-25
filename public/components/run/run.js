@@ -159,6 +159,11 @@ export const ViewModel = DefineMap.extend({
       return sortedHashers;
     }
   },
+  title: {
+    get: function() {
+      return `Run #${this.trailNumber} | LBH3`;
+    }
+  },
   trailNumber: 'number',
   year: 'number'
 });

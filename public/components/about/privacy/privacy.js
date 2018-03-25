@@ -19,7 +19,10 @@ export const ViewModel = DefineMap.extend({
   },
   savingPromise: Promise,
   get session() {
-   return Session.current;
+    return Session.current;
+  },
+  title: {
+    default: 'Privacy | About | LBH3'
   }
 });
 

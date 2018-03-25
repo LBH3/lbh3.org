@@ -25,7 +25,7 @@ const AppViewModel = DefineMap.extend({
   secondaryPage: 'string',
   skip: 'number',
   title: {
-    default: 'Long Beach Hash House Harriers',
+    default: 'LBH3',
     serialize: false
   },
   trailNumber: 'number',

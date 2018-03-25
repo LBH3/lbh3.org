@@ -4,6 +4,9 @@ import './founders-2018.less';
 import view from './founders-2018.stache';
 
 export const ViewModel = DefineMap.extend({
+  title: {
+    default: 'Found ’er Balls 2018 — 33 ⅓ | LBH3'
+  }
 });
 
 export default Component.extend({

@@ -45,5 +45,5 @@ QUnit.module('lbh3 functional smoke test', {
 });
 
 QUnit.skip('lbh3 main page shows up', function() {
-  F('title').text('Long Beach Hash House Harriers', 'Title is set');
+  F('title').text('LBH3', 'Title is set');
 });

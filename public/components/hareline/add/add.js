@@ -66,6 +66,9 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
+  title: {
+    default: 'Add a new trail | Hareline | LBH3'
+  },
   trailNumber: {
     type: 'number',
     get: function(lastValue) {

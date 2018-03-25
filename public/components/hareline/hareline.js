@@ -26,14 +26,11 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
-
-  /**
-   * Session.current is provided by the can-connect-feathers session behavior.
-   * It will automatically populate when `new Session().save()` occurs in the app
-   * or on refresh after login.
-   */
   get session() {
     return Session.current;
+  },
+  title: {
+    default: 'Hareline | LBH3'
   }
 });
 

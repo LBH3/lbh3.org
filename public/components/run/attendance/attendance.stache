@@ -10,18 +10,18 @@
   {{else}}
     Run #{{trailNumber}}
   {{/if}}
-  Attendance Sheet
+  Check-In Sheet
 </h2>
 
 {{#if hashersPromise.isPending}}
   <div class="alert alert-info" role="alert">
-    <strong>Fetching attendance sheet…</strong>
+    <strong>Fetching the check-in sheet…</strong>
   </div>
 {{/if}}
 
 {{#if hashersPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
+    <strong>Fuck!</strong> The check-in sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
   </div>
 {{/if}}
 

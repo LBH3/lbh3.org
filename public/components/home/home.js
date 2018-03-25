@@ -10,6 +10,9 @@ export default Component.extend({
   ViewModel: DefineMap.extend({
     get session() {
       return Session.current;
+    },
+    title: {
+      default: 'LBH3'
     }
   })
 });
