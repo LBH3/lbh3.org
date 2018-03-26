@@ -28,7 +28,7 @@
         Mismanagement
       </a></li>
       <li><a href="{{routeUrl page='about' secondaryPage='privacy'}}">
-        Privacy Changes Are Cumming
+        Upcuming Privacy Changes
       </a></li>
       {{#if session.user.canViewDirectoryInfo}}
         <li><a href="{{routeUrl page='hashers' secondaryPage=''}}">
