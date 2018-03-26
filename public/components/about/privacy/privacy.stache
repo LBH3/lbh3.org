@@ -1,19 +1,18 @@
 <can-import from="~/components/no-ssr/" />
 
-<h2>Privacy Changes Are Cumming</h2>
+<h2>Upcuming Privacy Changes</h2>
 
 <p class="lead">
   We are excited to announce some changes to lbh3.org that will
   <del>encourage harriettes to show their tits more</del>
-  make our photos and Snoozes private and allow you to see your
+  make our photos &amp; Snoozes private <em>and</em> allow you to see your
   run stats while signed in.
 </p>
 
 <p>
   Starting on or after Tuesday April&nbsp;11<sup>th</sup>, our photos and Snoozes
   will no longer be publicly available on our <a href="{{routeUrl page='events'}}">Past&nbsp;Runs</a>
-  page. You will need to sign in to our site and have your account linked by I’m
-  Fucking Matt Damon before you can see the photos and Snoozes for each run.
+  page. You will need to sign in to our site and request access to see our photos and Snoozes.
 </p>
 
 <p>
@@ -27,14 +26,14 @@
   {{#if session.user.hasherId}}
     <p>
       Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
-      Your account is already linked. Check out
+      Go grab yourself a beer because you’ve done everything required to see
       <a href="{{routeUrl page='hashers' id=session.user.hasherId}}">your&nbsp;profile</a>
-      or the <a href="{{routeUrl page='events'}}">Past&nbsp;Runs</a> page.
+      and the photos &amp; Snoozes on the <a href="{{routeUrl page='events'}}">Past&nbsp;Runs</a> page.
     </p>
 
   {{else}}
     <p>
-      <i>How do I sign in and get my account linked?</i>
+      <i>How do I sign in and request access?</i>
     </p>
 
     {{#if session.user}}
