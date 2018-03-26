@@ -537,7 +537,7 @@
         </table>
       {{else}}
         <div class="alert alert-info" role="alert">
-          <strong>Hm, couldn’t find any patches for this hasher.</strong>
+          It doesn’t look like this hasher has any patches.
         </div>
       {{/if}}
     {{/if}}
@@ -615,7 +615,7 @@
         </table>
       {{else}}
         <div class="alert alert-info" role="alert">
-          <strong>Hm, couldn’t find any runs for this hasher.</strong>
+          It doesn’t look like this person has actually hashed with LBH3.
         </div>
       {{/if}}
     {{/if}}
