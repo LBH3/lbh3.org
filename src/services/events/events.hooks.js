@@ -194,9 +194,11 @@ const getResourceForTrail = function(app, trailData) {
     // Location
     if (trailData.locationGooglePlaceId) {
       const placeService = app.service('api/places');
-      placeService.find({query: {id: trailData.locationGooglePlaceId}}).then(foundPlace => {
-        if (foundPlace && foundPlace.total > 0) {
-          resource.location = foundPlace.data[0].formattedAddress || resource.location;
+      placeService.find({query: {id: trailData.locationGooglePlaceId}}).then(foundPlaces => {
+        if (foundPlaces && foundPlaces.total > 0) {
+          const foundPlace = foundPlaces.data[0] || {};
+          const address = foundPlace.formattedAddress || resource.location;
+          resource.location = (foundPlace.name && address.indexOf(foundPlace.name) === -1) ? `${foundPlace.name}, ${address}` : address;
         }
         resolve(resource);
       }, reject);
