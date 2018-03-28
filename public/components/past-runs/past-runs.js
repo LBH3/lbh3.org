@@ -1,5 +1,6 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
+import Session from '~/models/session';
 import Year from '~/models/year';
 import route from 'can-route';
 import view from './past-runs.stache';
@@ -10,18 +11,15 @@ import '~/components/year/';
 const currentYear = (new Date()).getFullYear();
 
 export const ViewModel = DefineMap.extend({
-  get latestPhotosUrl () {
-    return '';// TODO
-  },
-  get latestSnoozeUrl () {
-    return '';// TODO
-  },
   routeForYear: function(year) {
     const routeParams = {page: 'events'};
     if (currentYear !== year) {
       routeParams.year = year;
     }
     return route.url(routeParams);
+  },
+  get session() {
+    return Session.current;
   },
   title: {
     default: 'Past Runs | LBH3'
