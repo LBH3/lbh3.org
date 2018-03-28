@@ -1,21 +1,15 @@
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="can-stache-route-helpers" />
 <can-import from="~/components/no-ssr/" />
 
 <h2>Past Runs</h2>
 
-<div class="d-sm-flex justify-content-between">
-  <p>
-    <span class="fa fa-camera"></span> for Photos and <span class="fa fa-newspaper-o"></span> for Snooze
-  </p>
-  <!--
-  <p>
-    Most Current:
-    <a href="{{latestPhotosUrl}}">Photos</a>
-    and
-    <a href="{{latestSnoozeUrl}}">Snooze</a>
-  </p>
-  -->
-</div>
+{{^if session.user.hasherId}}
+  <div class="alert alert-secondary" role="alert">
+    <a class="alert-link" href="{{routeUrl page='about' secondaryPage='privacy'}}">
+      Some changes are cuming to the privacy of our photos &amp; Snoozes. →
+    </a>
+  </div>
+{{/if}}
 
 <nav class="nav nav-pills">
   {{#each years yearObject=value}}
