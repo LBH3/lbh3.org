@@ -38,8 +38,12 @@
               {{/if}}
             </td>
             <td>
-              {{#if user.hasher}}
-                {{user.hasher.hashOrJustName}}
+              {{#if user.hasherPromise}}
+                {{#if user.hasherPromise.isResolved}}
+                  {{user.hasher.hashOrJustName}}
+                {{else}}
+                  <span class="fa fa-circle-o-notch fa-spin"></span>
+                {{/if}}
               {{else}}
                 {{#if user.requestedName}}
                   Requested: <strong>{{user.requestedName}}</strong>
