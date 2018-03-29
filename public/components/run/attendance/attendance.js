@@ -128,7 +128,7 @@ export const ViewModel = DefineMap.extend({
 
     // Patch if they hare this run
     const nextHareCount = hareCount + 1;
-    if (nextHareCount % 5 === 0) {
+    if (nextHareCount % 5 === 0 || nextHareCount.toString().substr(-2) === '69') {
       patches.push(nextHareCount + ' hares');
     }
 
