@@ -2,8 +2,9 @@
 module.exports = function (options) {
   return function (hook) {
     const query = hook.params.query || {};
-    if (query.$search) {
-      const searchTerms = [query.$search].map(term => {
+    const searchString = query.$search;
+    if (searchString) {
+      const searchTerms = searchString.split(' ').map(term => {
         const trimmedTerm = term.trim();
         return [
           `%${trimmedTerm}%`
