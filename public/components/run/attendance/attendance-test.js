@@ -145,6 +145,40 @@ QUnit.test('patches helper — at 15 hares and 169 runs', function(assert) {
   assert.equal(patches, '15 hares / 169 runs');
 });
 
+QUnit.test('patches helper — at 68 hares', function(assert) {
+  const vm = new ViewModel({
+    day: 31,
+    month: 12,
+    trailNumber: 1841,
+    year: 2017
+  });
+  const hasher = new Hasher({
+    hareCount: 68,
+    patches: [
+      {number: 65, type: 'hare'},
+    ]
+  });
+  const patches = vm.patches(hasher);
+  assert.equal(patches, '69 hares');
+});
+
+QUnit.test('patches helper — at 69 hares', function(assert) {
+  const vm = new ViewModel({
+    day: 31,
+    month: 12,
+    trailNumber: 1841,
+    year: 2017
+  });
+  const hasher = new Hasher({
+    hareCount: 69,
+    patches: [
+      {number: 69, type: 'hare'},
+    ]
+  });
+  const patches = vm.patches(hasher);
+  assert.equal(patches, '70 hares');
+});
+
 QUnit.test('patches helper — missing older patches', function(assert) {
   const vm = new ViewModel({
     day: 31,
