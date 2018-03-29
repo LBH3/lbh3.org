@@ -3,6 +3,7 @@ import behaviors from './behaviors';
 import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
+import EventsHashers from './events-hashers';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import marked from 'marked';
@@ -150,6 +151,20 @@ const Hasher = DefineMap.extend({
   givenName: 'string',
   givenNamePrivate: 'string',
   hareCount: 'number',
+  hareCountPromise: {
+    get: function() {
+      return EventsHashers.connection.getList({
+        $limit: 0,
+        hasherId: this.id,
+        role: {
+          $iLike: 'hare%'
+        }
+      }).then(result => {
+        this.hareCount = result.total;
+      });
+    },
+    serialize: false
+  },
   hasDied: {
     type: 'boolean',
     serialize: false,
