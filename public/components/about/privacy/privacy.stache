@@ -75,8 +75,8 @@
       </form>
     {{else}}
       <p>
-        Get started by <a href="/auth/google">signing in with Google</a>, then cum
-        back to this page.
+        Get started by <a href="/auth/google">signing in with Google</a>, then
+        <strong>cum back to this page to request access.</strong>
       </p>
       <p>
         Don’t have a Google account? You <em>might</em> be able to
