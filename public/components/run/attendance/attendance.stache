@@ -74,7 +74,11 @@
             {{runCount}}
           </td>
           <td class="text-center">
-            {{hareCount}}
+            {{#if hareCountPromise.isPending}}
+              <span class="fa fa-circle-o-notch fa-spin"></span>
+            {{else}}
+              {{hareCount}}
+            {{/if}}
           </td>
         </tr>
       {{/each}}
