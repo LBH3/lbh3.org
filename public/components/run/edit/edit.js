@@ -13,6 +13,7 @@ import './edit.less';
 import { sortByHashOrJustName } from '~/components/run/sort-hashers';
 import debounce from 'lodash.debounce';
 import loader from '@loader';
+import moment from 'moment';
 import route from 'can-route';
 import view from './edit.stache';
 
@@ -292,6 +293,26 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  startDate: {
+    type: 'string',
+    get: function(lastValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      return this.event.startDateAsMoment.format().substr(0, 10);
+    }
+  },
+
+  startTime: {
+    type: 'string',
+    get: function(lastValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      return this.event.startDateAsMoment.format().substr(11, 8);
+    }
+  },
+
   title: {
     get: function() {
       return `Edit Run #${this.trailNumber} | LBH3`;
@@ -306,6 +327,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   editRun: function() {
+    this.event.startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
     return this.editingEventPromise = this.event.save();
   },
 

@@ -28,7 +28,32 @@
   {{#if event}}
     <form class="mb-4 mt-2" on:submit="editRun()">
       <div class="form-row">
-        <div class="form-group col-md-12">
+        <div class="form-group col-md-6">
+          <label for="hares">
+            Date &amp; time
+          </label>
+          <div class="row">
+            <div class="col pr-1">
+              <input
+                class="form-control"
+                {{#if event.hasStartedOrIsCloseToStarting}}disabled{{/if}}
+                {{^if session.user.canAddTrails}}disabled{{/if}}
+                id="start-date"
+                type="date"
+                value:bind="startDate"
+              />
+            </div>
+            <div class="col pl-1">
+              <input
+                class="form-control"
+                id="start-time"
+                type="time"
+                value:bind="startTime"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="form-group col-md-6">
           <label for="hares">
             Hares
           </label>
