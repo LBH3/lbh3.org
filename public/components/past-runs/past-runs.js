@@ -12,7 +12,10 @@ const currentYear = (new Date()).getFullYear();
 
 export const ViewModel = DefineMap.extend({
   routeForYear: function(year) {
-    const routeParams = {page: 'events'};
+    const routeParams = {
+      page: 'events',
+      secondaryPage: ''
+    };
     if (currentYear !== year) {
       routeParams.year = year;
     }
