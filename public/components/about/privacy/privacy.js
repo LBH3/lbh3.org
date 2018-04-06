@@ -6,11 +6,7 @@ import view from './privacy.stache';
 
 export const ViewModel = DefineMap.extend({
   requestedName: {
-    type: 'string',
-    get: function(lastSetValue) {
-      const session = this.session || {};
-      return lastSetValue || session.user ? session.user.requestedName : '';
-    }
+    type: 'string'
   },
   save: function() {
     const user = this.session.user;
