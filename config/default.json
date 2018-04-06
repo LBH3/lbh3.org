@@ -32,6 +32,7 @@
       ]
     },
     "facebook": {
+      "callbackURL": "FACEBOOK_CALLBACK_URL",
       "clientID": "FACEBOOK_CLIENT_ID",
       "clientSecret": "FACEBOOK_CLIENT_SECRET",
       "successRedirect": "/",

@@ -57,14 +57,21 @@ var User = DefineMap.extend('User', {
   },
   displayName: {
     get: function() {
-      const profile = this.googleProfile || {};
+      const profile = this.profile || {};
       return profile.displayName || '';
+    },
+    serialize: false
+  },
+  email: {
+    get: function() {
+      const profile = this.profile || {};
+      return (profile.emails && profile.emails.length > 0) ? profile.emails[0].value : null;
     },
     serialize: false
   },
   familyName: {
     get: function() {
-      const profile = this.googleProfile || {};
+      const profile = this.profile || {};
       const name = profile.name || {};
       return name.familyName || '';
     },
@@ -72,16 +79,9 @@ var User = DefineMap.extend('User', {
   },
   givenName: {
     get: function() {
-      const profile = this.googleProfile || {};
+      const profile = this.profile || {};
       const name = profile.name || {};
       return name.givenName || '';
-    },
-    serialize: false
-  },
-  email: {
-    get: function() {
-      const profile = this.googleProfile || {};
-      return (profile.emails && profile.emails.length > 0) ? profile.emails[0].value : null;
     },
     serialize: false
   },
@@ -106,6 +106,12 @@ var User = DefineMap.extend('User', {
           id
         });
       }
+    },
+    serialize: false
+  },
+  profile: {
+    get: function() {
+      return this.facebookProfile || this.googleProfile;
     },
     serialize: false
   },

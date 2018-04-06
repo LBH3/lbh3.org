@@ -107,10 +107,10 @@ const boredPositions = [
 ];
 
 const createAndUpdateFields = function(hook) {
-  const googleProfile = hook.params.user.googleProfile || {};
-  let displayName = googleProfile.displayName || '';
-  if (!displayName && googleProfile.emails && googleProfile.emails[0]) {
-    displayName = googleProfile.emails[0];
+  const profile = hook.params.user.facebookProfile || hook.params.user.googleProfile || {};
+  let displayName = profile.displayName || '';
+  if (!displayName && profile.emails && profile.emails[0]) {
+    displayName = profile.emails[0];
   }
 
   if (hook.method === 'create' && !hook.data.createdBy && !hook.data.createdByUserId) {
