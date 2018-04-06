@@ -47,15 +47,27 @@ const authHooksForUserOrWebmaster = [
 ];
 
 const userInfo = function(hook) {
-  if (hook.data && hook.data.google) {
-    const googleProfile = hook.data.google.profile;
-    const profileData = {};
-    for (var key in googleProfile) {
-      if (googleProfile.hasOwnProperty(key) && key[0] !== '_') {
-        profileData[key] = googleProfile[key];
+  if (hook.data) {
+    var key;
+    if (hook.data.facebook && hook.data.facebook.profile) {
+      const facebookProfile = hook.data.facebook.profile;
+      const profileData = {};
+      for (key in facebookProfile) {
+        if (facebookProfile.hasOwnProperty(key) && key[0] !== '_') {
+          profileData[key] = facebookProfile[key];
+        }
       }
+      hook.data.facebookProfile = profileData;
+    } else if (hook.data.google) {
+      const googleProfile = hook.data.google.profile;
+      const profileData = {};
+      for (key in googleProfile) {
+        if (googleProfile.hasOwnProperty(key) && key[0] !== '_') {
+          profileData[key] = googleProfile[key];
+        }
+      }
+      hook.data.googleProfile = profileData;
     }
-    hook.data.googleProfile = profileData;
   }
 };
 

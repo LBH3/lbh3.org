@@ -75,15 +75,16 @@
       </form>
     {{else}}
       <p>
-        Get started by <a href="/auth/google">signing in with Google</a>, then
+        Get started by signing in with <a href="/auth/facebook">Facebook</a> or
+        <a href="/auth/google">Google</a>, then
         <strong>cum back to this page to request access.</strong>
       </p>
       <p>
-        Don’t have a Google account? You <em>might</em> be able to
+        Don’t have a Facebook or Google account? You <em>might</em> be able to
         <a href="mailto:webmaster@lbh3.org" title="Email I’m Fucking Matt Damon">
           bribe I’m Fucking Matt Damon
         </a>
-        with a beer to add support for Facebook or whatever bullshit you use.
+        with a beer to add support for Twitter or whatever bullshit you use.
       </p>
     {{/if}}
   {{/if}}

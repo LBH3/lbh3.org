@@ -29,7 +29,15 @@
       <tbody>
         {{#each users user=value}}
           <tr>
-            <td>{{user.email}}</td>
+            <td>
+              {{#if facebookProfile}}
+                <span class="fa fa-lg fa-facebook-square"></span>
+              {{/if}}
+              {{#if googleProfile}}
+                <span class="fa fa-lg fa-google"></span>
+              {{/if}}
+              {{user.email}}
+            </td>
             <td>
               {{#if user.displayName}}
                 {{user.displayName}}

@@ -1,3 +1,5 @@
+<can-import from="font-awesome/css/font-awesome.css" />
+
 <footer class="container {{^eq platform.isNode true}}d-flex flex-column flex-sm-row-reverse justify-content-sm-between{{/eq}} text-muted">
   {{^eq platform.isNode true}}
     <ul class="justify-content-center nav">
@@ -16,7 +18,14 @@
         </li>
       {{else}}
         <li class="nav-item">
-          <a class="btn btn-link px-sm-0 py-3" href="/auth/google">Sign in</a>
+          Sign in with
+          <a class="align-baseline btn btn-link px-sm-0 py-3" href="/auth/facebook" title="Facebook">
+            <span class="fa fa-lg fa-facebook-square"></span>
+          </a>
+          or
+          <a class="align-baseline btn btn-link px-sm-0 py-3" href="/auth/google" title="Google">
+            <span class="fa fa-lg fa-google"></span>
+          </a>
         </li>
       {{/if}}
     </ul>
