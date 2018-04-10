@@ -14,11 +14,9 @@ export const ViewModel = DefineMap.extend({
   routeForYear: function(year) {
     const routeParams = {
       page: 'events',
-      secondaryPage: ''
+      secondaryPage: '',
+      year
     };
-    if (currentYear !== year) {
-      routeParams.year = year;
-    }
     return route.url(routeParams);
   },
   get session() {
