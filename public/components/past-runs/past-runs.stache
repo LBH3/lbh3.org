@@ -4,11 +4,24 @@
 <h2>Past Runs</h2>
 
 {{^if session.user.hasherId}}
-  <div class="alert alert-secondary" role="alert">
-    <a class="alert-link" href="{{routeUrl page='about' secondaryPage='privacy'}}">
-      Some changes are cuming to the privacy of our photos &amp; Snoozes. →
-    </a>
-  </div>
+  {{#if session.user}}
+    <lbh3-no-ssr>
+      <can-import from="~/components/request-access/">
+        {{#if isResolved}}
+          <hr>
+          <lbh3-request-access />
+          <hr class="mt-0" />
+        {{/if}}
+      </can-import>
+    </lbh3-no-ssr>
+  {{else}}
+    <div class="alert alert-secondary" role="alert">
+      <a class="alert-link" href="{{routeUrl page='about' secondaryPage='privacy'}}">
+        Looking for our photos or the Snooze?
+        Read about some recent privacy changes and get access. →
+      </a>
+    </div>
+  {{/if}}
 {{/if}}
 
 <nav class="nav nav-pills">
@@ -24,4 +37,9 @@
 
 <lbh3-year year:from="year" />
 
-<p>If you see a picture you’d like removed, <a href="mailto:hashflash@lbh3.org">email our Hash Flash</a>.</p>
+{{#if session.user.hasherId}}
+  <p>
+    <a href="mailto:hashflash@lbh3.org">Email our Hash Flash</a>
+    if you see a picture you’d like removed.
+  </p>
+{{/if}}

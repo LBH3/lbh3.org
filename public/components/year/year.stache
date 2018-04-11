@@ -26,8 +26,10 @@
           <th>Hares</th>
           <th>Location</th>
           <th>Notes</th>
-          <th></th>
-          <th></th>
+          {{#if scope.root.session.user.hasherId}}
+            <th></th>
+            <th></th>
+          {{/if}}
         </tr>
       </thead>
       <tbody>
@@ -50,12 +52,14 @@
             <td>{{{event.haresHtml}}}</td>
             <td>{{{event.shortLocationHtml}}}</td>
             <td>{{{event.nameHtml}}}</td>
-            <td class="text-center">
-              <lbh3-photos-button event:from="event" showEdit:from="true" />
-            </td>
-            <td class="text-center">
-              <lbh3-snooze-button event:from="event" />
-            </td>
+            {{#if scope.root.session.user.hasherId}}
+              <td class="text-center">
+                <lbh3-photos-button event:from="event" showEdit:from="true" />
+              </td>
+              <td class="text-center">
+                <lbh3-snooze-button event:from="event" />
+              </td>
+            {{/if}}
           </tr>
         {{/each}}
       </tbody>

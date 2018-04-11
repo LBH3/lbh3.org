@@ -1,22 +1,14 @@
 <can-import from="~/components/no-ssr/" />
 
-<h2>Upcuming Privacy Changes</h2>
+<h2>Privacy Changes</h2>
 
 <p class="lead">
-  We are excited to announce some changes to lbh3.org that will
-  make our photos &amp; Snoozes private <em>and</em> allow you to see your
-  run stats while signed in.
+  We recently changed lbh3.org to only show our photos &amp; Snoozes to hashers
+  who have signed in, requested access, and had their identity verified.
 </p>
 
 <p>
-  Starting on or after Tuesday April&nbsp;10<sup>th</sup>, our photos and Snoozes
-  will no longer be publicly available on our <a href="{{routeUrl page='events'}}">Past&nbsp;Runs</a>
-  page. You will need to sign in to our site and request access to see our photos and Snoozes.
-</p>
-
-<p>
-  In addition to seeing the awesome photos that Hash Flash takes and amazing
-  Snoozes that On Sec puts together, you’ll be able to see your own entry in our
+  After signing in and being verified, you’ll be able to see your entry in the
   directory that Alouette and every On Disk volunteer have meticulously kept for
   decades.
 </p>
