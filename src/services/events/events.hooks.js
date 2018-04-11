@@ -20,9 +20,7 @@ const allowedFields = [
   'nameMd',
   'onOnGooglePlaceId',
   'onOnMd',
-  'photosUrl',
   'startDatetime',
-  'snoozeUrl',
   'trailNumber'
 ];
 const calendar = google.calendar('v3');
