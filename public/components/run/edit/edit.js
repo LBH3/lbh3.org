@@ -251,6 +251,18 @@ export const ViewModel = DefineMap.extend({
     return patch.destroy();
   },
 
+  resetLocation: function() {
+    const event = this.event;
+    event.resetLocation();
+    this.locationPromise = null;
+  },
+
+  resetOnOn: function() {
+    const event = this.event;
+    event.resetOnOn();
+    this.onOnPromise = null;
+  },
+
   roles: {
     default: () => {
       return EventsHashers.roles;
@@ -492,11 +504,7 @@ export default Component.extend({
       }
     },
 
-    '.remove-hasher click': function(element, event) {
-      event.preventDefault();
-    },
-
-    '.remove-patch click': function(element, event) {
+    '.prevent-default click': function(element, event) {
       event.preventDefault();
     },
 

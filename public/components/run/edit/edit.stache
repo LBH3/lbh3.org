@@ -79,7 +79,12 @@
           <label for="location">
             Location
           </label>
-          <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
+          <div class="d-flex">
+            <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
+            <button class="btn btn-link prevent-default" on:click="scope.root.resetLocation()">
+              <span class="fa fa-remove"></span>
+            </button>
+          </div>
           {{#if locationPromise.isRejected}}
             <span class="fa fa-warning"></span>
             <small>
@@ -106,7 +111,12 @@
           <label for="on-on">
             On-On
           </label>
-          <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
+          <div class="d-flex">
+            <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
+            <button class="btn btn-link prevent-default" on:click="scope.root.resetOnOn()">
+              <span class="fa fa-remove"></span>
+            </button>
+          </div>
           {{#if onOnPromise.isRejected}}
             <span class="fa fa-warning"></span>
             <small>
@@ -358,7 +368,7 @@
                   <td>{{hasher.role}}</td>
                   <td class="text-center">
                     <button
-                      class="btn btn-danger btn-sm remove-hasher"
+                      class="btn btn-danger btn-sm prevent-default"
                       on:click="scope.root.removeHasher(hasher)"
                     >
                       <span class="fa fa-remove"></span>
@@ -520,7 +530,7 @@
                     <td>{{type}}s</td>
                     <td class="text-center">
                       <button
-                        class="btn btn-danger btn-sm remove-patch"
+                        class="btn btn-danger btn-sm prevent-default"
                         on:click="scope.root.removePatch(this)"
                       >
                         <span class="fa fa-remove"></span>
