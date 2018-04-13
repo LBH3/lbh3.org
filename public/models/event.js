@@ -263,6 +263,14 @@ const Event = DefineMap.extend({
       }
     }
   },
+  resetLocation: function() {
+    this.locationGooglePlaceId = null;
+    this.locationMd = '';
+  },
+  resetOnOn: function() {
+    this.onOnGooglePlaceId = null;
+    this.onOnMd = '';
+  },
   returnersHtml: {
     get: function() {
       return marked(this.returnersMd || '');
