@@ -14,7 +14,7 @@
 
 {{#if hashersByPosition}}
   {{#if showEmailLink}}
-    <p>
+    <p class="d-print-none">
       Click the <span class="fa fa-envelope"></span> next to each position to email them specifically, or
       <a href="mailto:bored@lbh3.org">
         send an email to the entire Bored and our regular volunteers (Achey Breaky Fart &amp; 6-9 Split)
@@ -44,7 +44,7 @@
             {{promise.value.pluralName}}
           {{/is}}
           {{#if scope.root.showEmailLink}}
-            <small>
+            <small class="d-print-none">
               <a href="mailto:{{promise.value.emailAddress}}" title="Send an email">
                 <span class="fa fa-envelope"></span>
               </a>
