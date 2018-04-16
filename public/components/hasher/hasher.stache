@@ -28,7 +28,7 @@
           <span class="fa fa-download fa-lg"></span>
         </a>
         {{#if session.user.canEditHasherInfo}}
-          <a class="d-inline-block p-2 p-md-1 pl-md-3 pt-md-2" href="{{routeUrl page='hashers' id=hasher.id secondaryPage='edit'}}" title="Edit info">
+          <a class="d-inline-block d-print-none p-2 p-md-1 pl-md-3 pt-md-2" href="{{routeUrl page='hashers' id=hasher.id secondaryPage='edit'}}" title="Edit info">
             <span class="fa fa-pencil-square-o fa-lg"></span>
           </a>
         {{/if}}
@@ -147,7 +147,7 @@
 
             {{<uploadInput}}
               {{#if session.user.canEditHasherInfo}}
-                <label class="btn btn-primary">
+                <label class="btn btn-primary d-print-none">
                   <span class="fa fa-upload"></span>
                   Upload head shot
                   <input accept="image/*" class="sr-only" type="file" />
@@ -505,8 +505,8 @@
               <th>Hash#</th>
               <th>Hares</th>
               <th>Location</th>
-              <th></th>
-              <th></th>
+              <th class="d-print-none"></th>
+              <th class="d-print-none"></th>
             </tr>
           </thead>
           <tbody>
@@ -525,10 +525,10 @@
                 <td>{{patch.trailNumber}}</td>
                 <td>{{{patch.event.haresHtml}}}</td>
                 <td>{{{patch.event.shortLocationHtml}}}</td>
-                <td class="text-center">
+                <td class="d-print-none text-center">
                   <lbh3-photos-button event:from="patch.event" showEdit:from="true" />
                 </td>
-                <td class="text-center">
+                <td class="d-print-none text-center">
                   <lbh3-snooze-button event:from="patch.event" />
                 </td>
               </tr>
@@ -579,8 +579,8 @@
               <th>Hares</th>
               <th>Location</th>
               <th>Notes</th>
-              <th></th>
-              <th></th>
+              <th class="d-print-none"></th>
+              <th class="d-print-none"></th>
             </tr>
           </thead>
           <tbody>
@@ -603,10 +603,10 @@
                 <td>{{{run.event.haresHtml}}}</td>
                 <td>{{{run.event.shortLocationHtml}}}</td>
                 <td>{{{run.event.nameHtml}}}</td>
-                <td class="text-center">
+                <td class="d-print-none text-center">
                   <lbh3-photos-button event:from="run.event" showEdit:from="true" />
                 </td>
-                <td class="text-center">
+                <td class="d-print-none text-center">
                   <lbh3-snooze-button event:from="run.event" />
                 </td>
               </tr>

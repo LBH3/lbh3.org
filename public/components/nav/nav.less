@@ -21,10 +21,10 @@ lbh3-nav {
     background: #d02d33;
     color: white;
   }
-}
 
-@media print {
-	lbh3-nav {
-		display: none;
-	}
+  @media print {
+		a:not(.btn) {
+			text-decoration: none;
+		}
+  }
 }

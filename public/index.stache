@@ -327,7 +327,7 @@
       {{/switch}}
     </main>
 
-    <lbh3-footer />
+    <lbh3-footer class="d-print-none" />
 
     {{#switch env.NODE_ENV}}
       {{#case "production"}}

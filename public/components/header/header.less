@@ -29,10 +29,10 @@ lbh3-header {
       display: none;
     }
   }
-}
 
-@media print {
-	lbh3-header {
-		display: none;
-	}
+  @media print {
+    a:not(.btn) {
+      text-decoration: none;
+    }
+  }
 }

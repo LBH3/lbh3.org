@@ -31,14 +31,14 @@
     </div>
     <div class="col text-center text-md-right">
       {{#if session.user.canEditPostTrailInfo}}
-        <a class="d-inline-block p-2 p-md-1 pt-md-2" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}" title="Edit trail">
+        <a class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}" title="Edit trail">
           <span class="fa fa-lg fa-pencil-square-o"></span>
         </a>
       {{/if}}
       {{#if event.hasProbablyEnded}}
         {{#if session.user.hasherId}}
-          <lbh3-photos-button class="d-inline-block p-2 p-md-1 pt-md-2" event:from="event" />
-          <lbh3-snooze-button class="d-inline-block p-2 p-md-1 pt-md-2" event:from="event" />
+          <lbh3-photos-button class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" event:from="event" />
+          <lbh3-snooze-button class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" event:from="event" />
         {{/if}}
       {{/if}}
     </div>
@@ -183,15 +183,17 @@
 
   {{#if canViewRunAttendance}}
     {{#if showAttendancePrompt}}
-      <div class="alert alert-info text-center" role="alert">
-        {{#if event.hasProbablyEnded}}
+      {{#if event.hasProbablyEnded}}
+        <div class="alert alert-info text-center" role="alert">
           Attendance data hasn’t been added yet.
-        {{else}}
+        </div>
+      {{else}}
+        <div class="alert alert-info d-print-none text-center" role="alert">
           <a class="alert-link" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='attendance'}}" title="Edit trail">
             Need to print the check-in sheet?
           </a>
-        {{/if}}
-      </div>
+        </div>
+      {{/if}}
     {{/if}}
 
     {{#if hashersPromise.isPending}}

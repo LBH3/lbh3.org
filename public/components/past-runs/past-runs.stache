@@ -5,7 +5,7 @@
 
 {{^if session.user.hasherId}}
   {{#if session.user}}
-    <lbh3-no-ssr>
+    <lbh3-no-ssr class="d-print-none">
       <can-import from="~/components/request-access/">
         {{#if isResolved}}
           <hr>
@@ -15,7 +15,7 @@
       </can-import>
     </lbh3-no-ssr>
   {{else}}
-    <div class="alert alert-secondary" role="alert">
+    <div class="alert alert-secondary d-print-none" role="alert">
       <a class="alert-link" href="{{routeUrl page='about' secondaryPage='privacy'}}">
         Looking for our photos or the Snooze?
         Read about some recent privacy changes and get access. →
@@ -38,7 +38,7 @@
 <lbh3-year year:from="year" />
 
 {{#if session.user.hasherId}}
-  <p>
+  <p class="d-print-none">
     <a href="mailto:hashflash@lbh3.org">Email our Hash Flash</a>
     if you see a picture you’d like removed.
   </p>

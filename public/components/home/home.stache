@@ -3,7 +3,7 @@
 
 {{#if session.user}}
   {{^if session.user.hasherId}}
-    <lbh3-no-ssr>
+    <lbh3-no-ssr class="d-print-none">
       <can-import from="~/components/request-access/">
         {{#if isResolved}}
           <lbh3-request-access />
