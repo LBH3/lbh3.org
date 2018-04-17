@@ -27,7 +27,7 @@
 <nav class="nav nav-pills">
   {{#each years yearObject=value}}
     <a
-      class="{{#is yearObject.id scope.root.year}}active{{/is}} flex-sm-fill nav-link text-sm-center"
+      class="{{#is yearObject.id scope.root.year}}active{{/is}} nav-link text-sm-center"
       href="{{scope.root.routeForYear(yearObject.id)}}"
     >
       {{yearObject.id}}

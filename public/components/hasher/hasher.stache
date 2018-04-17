@@ -548,7 +548,7 @@
       <nav class="nav nav-pills">
         {{#each pages page=value}}
           <a
-            class="{{#is scope.root.currentPage page}}active{{/is}} flex-sm-fill nav-link text-sm-center"
+            class="{{#is scope.root.currentPage page}}active{{/is}} nav-link text-sm-center"
             href="{{scope.root.routeForPage(page)}}"
           >
             {{page}}
