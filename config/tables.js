@@ -193,6 +193,14 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       trailNumber: intType('trail_number'),
       type: enumType('type', ['hare', 'run'])
     },
+    special_events: {
+      id: primaryIntType,
+      createdAt: currentTimestampType('created_at'),
+      updatedAt: currentTimestampType('updated_at'),
+      descriptionMd: textType('description_md'),
+      urlId: stringType('url_id'),
+      year: intType('year')
+    },
     users: {
       id: primaryIntType,
       createdAt: currentTimestampType('created_at'),

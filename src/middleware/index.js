@@ -129,6 +129,10 @@ module.exports = function () {
     });
   });
 
+  app.get('/events/jesus-cuervo-1800-trail/', function(req, res) {
+    res.redirect('/events/2017/jesus-cuervo/');
+  });
+
   app.get('/pastruns/runs/lbh3_:trailNumber\\_:date.php', function(req, res) {
     const params = req.params;
 

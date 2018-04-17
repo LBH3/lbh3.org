@@ -21,7 +21,6 @@ import 'lbh3/components/hashers/email/email-test';
 import 'lbh3/components/hashers/hashers-test';
 import 'lbh3/components/header/header-test';
 import 'lbh3/components/home/home-test';
-import 'lbh3/components/jesus-cuervo/jesus-cuervo-test';
 import 'lbh3/components/memorial-service/memorial-service-test';
 import 'lbh3/components/nav/nav-test';
 import 'lbh3/components/no-ssr/no-ssr-test';
@@ -32,6 +31,8 @@ import 'lbh3/components/run/attendance/attendance-test';
 import 'lbh3/components/run/edit/edit-test';
 import 'lbh3/components/run/run-test';
 import 'lbh3/components/snooze-button/snooze-button-test';
+import 'lbh3/components/special-event/special-event-test';
+import 'lbh3/components/special-events/special-events-test';
 import 'lbh3/components/users/edit/edit-test';
 import 'lbh3/components/users/users-test';
 

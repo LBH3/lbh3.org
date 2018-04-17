@@ -9,4 +9,5 @@ import 'lbh3/models/fixtures/events-hashers';
 import 'lbh3/models/fixtures/hashers';
 import 'lbh3/models/fixtures/patches';
 import 'lbh3/models/fixtures/places';
+import 'lbh3/models/fixtures/special-events';
 import 'lbh3/models/fixtures/years';

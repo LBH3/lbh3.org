@@ -118,15 +118,6 @@
                   {{/if}}
                 </can-import>
               {{/case}}
-              {{#case "jesus-cuervo-1800-trail"}}
-                <can-import from="~/components/jesus-cuervo/">
-                  {{#if isPending}}
-                    Loading…
-                  {{else}}
-                    <lbh3-jesus-cuervo title:to="scope.root.title" />
-                  {{/if}}
-                </can-import>
-              {{/case}}
               {{#case "memorial-service"}}
                 <can-import from="~/components/memorial-service/">
                   {{#if isPending}}
@@ -153,13 +144,26 @@
                 {{/if}}
               </can-import>
             {{else}}
-              <can-import from="~/components/past-runs/">
-                {{#if isPending}}
-                  Loading Past Runs…
-                {{else}}
-                  <lbh3-past-runs title:to="scope.root.title" year:from="scope.root.year" />
-                {{/if}}
-              </can-import>
+              {{#if urlId}}
+                <can-import from="~/components/special-event/">
+                  {{#if isPending}}
+                    Loading…
+                  {{else}}
+                    <lbh3-special-event
+                      title:to="scope.root.title"
+                      urlId:from="scope.root.urlId"
+                    />
+                  {{/if}}
+                </can-import>
+              {{else}}
+                <can-import from="~/components/past-runs/">
+                  {{#if isPending}}
+                    Loading Past Runs…
+                  {{else}}
+                    <lbh3-past-runs title:to="scope.root.title" year:from="scope.root.year" />
+                  {{/if}}
+                </can-import>
+              {{/if}}
             {{/if}}
           {{/if}}
         {{/case}}
@@ -296,6 +300,15 @@
               {{else}}
                 <lbh3-home title:to="scope.root.title" />
               {{/if}}
+            {{/if}}
+          </can-import>
+        {{/case}}
+        {{#case "special-events"}}
+          <can-import from="~/components/special-events/">
+            {{#if isPending}}
+              Loading special events page…
+            {{else}}
+              <lbh3-special-events title:to="scope.root.title" />
             {{/if}}
           </can-import>
         {{/case}}

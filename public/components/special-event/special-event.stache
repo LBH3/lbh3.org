@@ -1,0 +1,15 @@
+{{#if specialEventPromise.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching event…</strong>
+  </div>
+{{/if}}
+
+{{#if specialEventPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The event couldn’t be retrieved. {{specialEventPromise.reason.message}}
+  </div>
+{{/if}}
+
+{{#if specialEvent}}
+  {{{specialEvent.descriptionHtml}}}
+{{/if}}
