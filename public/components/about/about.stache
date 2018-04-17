@@ -39,6 +39,9 @@
         <li><a href="{{routeUrl page='users'}}">
           Users
         </a></li>
+        <li><a href="{{routeUrl page='special-events'}}">
+          Special Events
+        </a></li>
       {{/if}}
       <li><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">
         How LBH3 Started
