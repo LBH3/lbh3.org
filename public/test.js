@@ -31,6 +31,7 @@ import 'lbh3/components/run/attendance/attendance-test';
 import 'lbh3/components/run/edit/edit-test';
 import 'lbh3/components/run/run-test';
 import 'lbh3/components/snooze-button/snooze-button-test';
+import 'lbh3/components/special-event/edit/edit-test';
 import 'lbh3/components/special-event/special-event-test';
 import 'lbh3/components/special-events/special-events-test';
 import 'lbh3/components/users/edit/edit-test';

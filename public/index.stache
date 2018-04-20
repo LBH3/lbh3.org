@@ -94,19 +94,33 @@
               {{/case}}
               {{#case "edit"}}
                 <lbh3-no-ssr>
-                  <can-import from="~/components/run/edit/">
-                    {{#if isPending}}
-                      Loading the edit run page…
-                    {{else}}
-                      <lbh3-run-edit
-                        day:from="scope.root.day"
-                        month:from="scope.root.month"
-                        title:to="scope.root.title"
-                        trailNumber:from="scope.root.trailNumber"
-                        year:from="scope.root.year"
-                      />
-                    {{/if}}
-                  </can-import>
+                  {{#if urlId}}
+                    <can-import from="~/components/special-event/edit/">
+                      {{#if isPending}}
+                        Loading the edit page…
+                      {{else}}
+                        <lbh3-special-event-edit
+                          title:to="scope.root.title"
+                          urlId:from="scope.root.urlId"
+                          year:from="scope.root.year"
+                        />
+                      {{/if}}
+                    </can-import>
+                  {{else}}
+                    <can-import from="~/components/run/edit/">
+                      {{#if isPending}}
+                        Loading the edit run page…
+                      {{else}}
+                        <lbh3-run-edit
+                          day:from="scope.root.day"
+                          month:from="scope.root.month"
+                          title:to="scope.root.title"
+                          trailNumber:from="scope.root.trailNumber"
+                          year:from="scope.root.year"
+                        />
+                      {{/if}}
+                    </can-import>
+                  {{/if}}
                 </lbh3-no-ssr>
               {{/case}}
               {{#case "founders"}}
@@ -152,6 +166,7 @@
                     <lbh3-special-event
                       title:to="scope.root.title"
                       urlId:from="scope.root.urlId"
+                      year:from="scope.root.year"
                     />
                   {{/if}}
                 </can-import>
