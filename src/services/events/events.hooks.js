@@ -147,7 +147,11 @@ const getResourceForTrail = function(app, trailData) {
     if (fromTheHaresText) {
       descriptionParts.push(fromTheHaresText);
     }
-    descriptionParts.push('Donation: $5 for the run');
+    if (haresText) {
+      descriptionParts.push('Donation: $5 for the run');
+    } else {
+      descriptionParts.push('Email our Trailmasters to hare this run: trailmasters@lbh3.org');
+    }
     if (bringText) {
       descriptionParts.push(`Bring: ${bringText}`);
     }
