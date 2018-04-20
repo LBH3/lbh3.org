@@ -1,9 +1,13 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
+import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import view from './special-event.stache';
 
 export const ViewModel = DefineMap.extend({
+  get session() {
+    return Session.current;
+  },
   specialEvent: SpecialEvent,
   specialEventPromise: {
     get: function() {
@@ -23,7 +27,9 @@ export const ViewModel = DefineMap.extend({
       }
       return 'Special Event | LBH3';
     }
-  }
+  },
+  urlId: 'string',
+  year: 'number'
 });
 
 export default Component.extend({

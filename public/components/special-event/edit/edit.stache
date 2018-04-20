@@ -1,0 +1,61 @@
+<can-import from="can-stache-route-helpers" />
+
+<h2>
+  Edit
+  <a href="{{routeUrl page='events' year=year urlId=urlId}}" title="Back to the event page">
+    {{specialEvent.title}}
+  </a>
+</h2>
+
+{{#if session.user.canEditFutureSpecialEvents}}
+  {{#if specialEventPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Loading event…</strong>
+    </div>
+  {{/if}}
+
+  {{#if specialEventPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The event failed to load. {{specialEventPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if specialEvent}}
+    <form class="mb-3" on:submit="editSpecialEvent()">
+      <div class="form-group">
+        <label for="description">
+          Description
+        </label>
+        <textarea
+          class="form-control"
+          id="description"
+          rows="8"
+          value:bind="descriptionMd"
+        ></textarea>
+      </div>
+
+      {{#if editSpecialEventPromise.isPending}}
+        <div class="alert alert-info" role="alert">
+          <strong>Saving special event…</strong>
+        </div>
+      {{/if}}
+      {{#if editSpecialEventPromise.isRejected}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Fuck!</strong> The special event failed to save. {{editSpecialEventPromise.reason.message}}
+        </div>
+      {{/if}}
+      {{#if editSpecialEventPromise.isResolved}}
+        <div class="alert alert-success" role="alert">
+          <strong>On on!</strong> You successfully edited the special event.
+        </div>
+      {{/if}}
+
+      <button
+        class="btn btn-primary"
+        {{#if editSpecialEventPromise.isPending}}disabled{{/if}}
+        type="submit">
+        Edit special event
+      </button>
+    </form>
+  {{/if}}
+{{/if}}
