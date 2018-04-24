@@ -21,41 +21,53 @@
   {{/if}}
 
   {{#if specialEvent}}
-    <form class="mb-3" on:submit="editSpecialEvent()">
-      <div class="form-group">
-        <label for="description">
-          Description
-        </label>
-        <textarea
-          class="form-control"
-          id="description"
-          rows="8"
-          value:bind="descriptionMd"
-        ></textarea>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg mb-3">
+          <form on:submit="editSpecialEvent()">
+            <div class="form-group">
+              <label class="sr-only" for="description">
+                Description
+              </label>
+              <textarea
+                class="border-primary form-control"
+                id="description"
+                on:input:value:to="descriptionMd"
+                rows="8"
+                value:bind="descriptionMd"
+              ></textarea>
+            </div>
+
+            {{#if editSpecialEventPromise.isPending}}
+              <div class="alert alert-info" role="alert">
+                <strong>Saving special event…</strong>
+              </div>
+            {{/if}}
+            {{#if editSpecialEventPromise.isRejected}}
+              <div class="alert alert-danger" role="alert">
+                <strong>Fuck!</strong> The special event failed to save. {{editSpecialEventPromise.reason.message}}
+              </div>
+            {{/if}}
+            {{#if editSpecialEventPromise.isResolved}}
+              <div class="alert alert-success" role="alert">
+                <strong>On on!</strong> You successfully edited the special event.
+              </div>
+            {{/if}}
+
+            <button
+              class="btn btn-primary"
+              {{#if editSpecialEventPromise.isPending}}disabled{{/if}}
+              type="submit">
+              Edit special event
+            </button>
+          </form>
+        </div>
+        <div class="col-lg mb-3">
+          <div class="border border-secondary p-3 rounded">
+            {{{descriptionHtml}}}
+          </div>
+        </div>
       </div>
-
-      {{#if editSpecialEventPromise.isPending}}
-        <div class="alert alert-info" role="alert">
-          <strong>Saving special event…</strong>
-        </div>
-      {{/if}}
-      {{#if editSpecialEventPromise.isRejected}}
-        <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> The special event failed to save. {{editSpecialEventPromise.reason.message}}
-        </div>
-      {{/if}}
-      {{#if editSpecialEventPromise.isResolved}}
-        <div class="alert alert-success" role="alert">
-          <strong>On on!</strong> You successfully edited the special event.
-        </div>
-      {{/if}}
-
-      <button
-        class="btn btn-primary"
-        {{#if editSpecialEventPromise.isPending}}disabled{{/if}}
-        type="submit">
-        Edit special event
-      </button>
-    </form>
+    </div>
   {{/if}}
 {{/if}}
