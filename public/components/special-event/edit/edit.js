@@ -3,7 +3,13 @@ import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import './edit.less';
+import marked from 'marked';
 import view from './edit.stache';
+
+marked.setOptions({
+  breaks: true,
+  gfm: true
+});
 
 export const ViewModel = DefineMap.extend({
   editSpecialEvent: function() {
@@ -11,6 +17,9 @@ export const ViewModel = DefineMap.extend({
     return this.editSpecialEventPromise = this.specialEvent.save();
   },
   editSpecialEventPromise: {},
+  get descriptionHtml() {
+    return marked(this.descriptionMd || '');
+  },
   descriptionMd: 'string',
   get session() {
     return Session.current;

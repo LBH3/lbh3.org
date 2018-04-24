@@ -2,6 +2,7 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
+import './special-event.less';
 import view from './special-event.stache';
 
 export const ViewModel = DefineMap.extend({
