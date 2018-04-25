@@ -12,6 +12,12 @@ const AppViewModel = DefineMap.extend({
   day: 'string',
   id: 'number',
   month: 'string',
+  noHeadshot: {
+    type: 'boolean',
+    serialize: function(noHeadshot) {
+      return noHeadshot || undefined;
+    }
+  },
   page: {
     default: defaultPage,
     type: 'string'
