@@ -140,6 +140,9 @@
         <div class="form-group col-md-6">
           <label for="directions">
             Directions
+            <small>
+              (<strong>**bold**</strong> <em>*italics*</em> ~~<strike>strike</strike>~~)
+            </small>
           </label>
           <textarea
             class="form-control"
@@ -158,6 +161,9 @@
         <div class="form-group col-md-6">
           <label for="from-the-hares">
             From the Hares
+            <small>
+              (<strong>**bold**</strong> <em>*italics*</em> ~~<strike>strike</strike>~~)
+            </small>
           </label>
           <textarea
             class="form-control"
