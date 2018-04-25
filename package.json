@@ -17,8 +17,8 @@
     "test": "test/"
   },
   "engines": {
-    "node": "8.x",
-    "npm": "5.7.x"
+    "node": "10.x",
+    "npm": "6.x"
   },
   "scripts": {
     "build": "cd public && node build && cd ..",
