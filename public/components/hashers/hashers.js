@@ -24,6 +24,7 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const searchText = (this.searchText) ? this.searchText.trim() : '';
       return Hasher.connection.getList({
+        headshotUrl: this.searchNoHeadshot ? '' : undefined,
         $limit,
         $search: searchText || undefined,
         $skip: this.skip,
@@ -63,12 +64,17 @@ export const ViewModel = DefineMap.extend({
   routeForPage: function(page) {
     const searchText = (this.searchText) ? this.searchText.trim() : '';
     const routeParams = {
+      noHeadshot: this.searchNoHeadshot,
       page: 'hashers',
       secondaryPage: '',
       search: searchText,
       skip: $limit * (page - 1)
     };
     return route.url(routeParams);
+  },
+
+  searchNoHeadshot: {
+    type: 'boolean'
   },
 
   searchText: 'string',

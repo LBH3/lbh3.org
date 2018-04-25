@@ -294,7 +294,12 @@
                 {{#if isPending}}
                   Loading Hashers page…
                 {{else}}
-                  <lbh3-hashers searchText:bind="scope.root.search" skip:from="scope.root.skip" title:to="scope.root.title" />
+                  <lbh3-hashers
+                    searchNoHeadshot:bind="scope.root.noHeadshot"
+                    searchText:bind="scope.root.search"
+                    skip:from="scope.root.skip"
+                    title:to="scope.root.title"
+                  />
                 {{/if}}
               </can-import>
             {{/if}}
