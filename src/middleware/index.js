@@ -1,5 +1,6 @@
 /* eslint-disable no-console, no-unreachable */
 const aws = require('aws-sdk');
+const env = process.env.NODE_ENV || 'development';
 const fs = require('fs');
 const ssr = require('done-ssr-middleware');
 
@@ -15,18 +16,20 @@ module.exports = function () {
     next();
   });
 
-  app.get('*', function(req, res, next) {
-    const httpHost = req.get('Host');
-    const needsSSLRedirect = req.headers['x-forwarded-proto'] !== 'https' && !httpHost.includes('localhost');
-    const needsWWWRedirect = httpHost === 'lbh3.org';
-    if (needsSSLRedirect) {
-      res.redirect(`https://${httpHost}${req.url}`);
-    } else if (needsWWWRedirect) {
-      res.redirect(`https://www.${httpHost}${req.url}`);
-    } else {
-      next();
-    }
-  });
+  if (env !== 'development') {
+    app.get('*', function(req, res, next) {
+      const httpHost = req.get('Host');
+      const needsSSLRedirect = req.headers['x-forwarded-proto'] !== 'https' && !httpHost.includes('localhost');
+      const needsWWWRedirect = httpHost === 'lbh3.org';
+      if (needsSSLRedirect) {
+        res.redirect(`https://${httpHost}${req.url}`);
+      } else if (needsWWWRedirect) {
+        res.redirect(`https://www.${httpHost}${req.url}`);
+      } else {
+        next();
+      }
+    });
+  }
 
   app.get('/api/hashers/:hasherId/vcard.vcf', function(req, res) {
     res.status(401);
