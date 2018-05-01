@@ -38,6 +38,10 @@
 <lbh3-year year:from="year" />
 
 {{#if session.user.hasherId}}
+  <p>
+    <strong>Share your pics with us!</strong> On any of our Google Photos pages,
+    click the <em>Add to album</em> icon/button to upload from your device.
+  </p>
   <p class="d-print-none">
     <a href="mailto:hashflash@lbh3.org">Email our Hash Flash</a>
     if you see a picture you’d like removed.
