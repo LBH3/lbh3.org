@@ -4,7 +4,7 @@ var buildPromise = stealTools.build({
   config: __dirname + "/package.json!npm"
 }, {
   bundleAssets: {
-    glob: 'images/*',
+    glob: 'assets/*',
     infer: false
   }
 });

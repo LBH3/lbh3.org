@@ -33,7 +33,7 @@ app.use(helmet());
 app.use(compress());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(favicon(path.join(app.get('public'), 'images', 'favicon.ico')));
+app.use(favicon(path.join(app.get('public'), 'assets', 'favicon.ico')));
 
 // Host the public folder
 app.use('/', feathers.static(app.get('public')));

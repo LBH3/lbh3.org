@@ -5,7 +5,7 @@ var buildPromise = stealTools.build({
   main: "lbh3/test"
 }, {
   bundleAssets: {
-    glob: 'images/*',
+    glob: 'assets/*',
     infer: false
   }
 });
