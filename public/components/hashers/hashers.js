@@ -9,6 +9,9 @@ import view from './hashers.stache';
 const $limit = 100;
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: 'LBH3 hasher directory.'
+  },
   hashers: {
     get: function(lastValue, setValue) {
       if (lastValue) {

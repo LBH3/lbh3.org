@@ -6,6 +6,15 @@ import './special-event.less';
 import view from './special-event.stache';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    get: function() {
+      const specialEvent = this.specialEvent || {};
+      if (specialEvent.title) {
+        return `Learn more about ${specialEvent.title}.`;
+      }
+      return '';
+    }
+  },
   get session() {
     return Session.current;
   },

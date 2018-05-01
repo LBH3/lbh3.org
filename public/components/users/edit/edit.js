@@ -9,6 +9,9 @@ import view from './edit.stache';
 
 export const ViewModel = DefineMap.extend({
   autocompleteHasher: {},
+  description: {
+    default: ''
+  },
   editingUserPromise: {},
   editUser: function() {
     this.user.hasherId = (this.autocompleteHasher) ? this.autocompleteHasher.id : 0;

@@ -5,6 +5,9 @@ import './privacy.less';
 import view from './privacy.stache';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: 'Learn about lbh3.org’s privacy policies.'
+  },
   requestedName: {
     type: 'string'
   },

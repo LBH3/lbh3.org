@@ -6,6 +6,9 @@ import './email.less';
 import view from './email.stache';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: ''
+  },
   emailGroups: {
     get: function(lastValue, setValue) {
       if (lastValue) {

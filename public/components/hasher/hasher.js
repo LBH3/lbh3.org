@@ -116,6 +116,15 @@ export const ViewModel = DefineMap.extend({
       return user.canViewDirectoryInfo || user.hasherId === this.id;
     }
   },
+  description: {
+    get: function() {
+      const hasher = this.hasher;
+      if (hasher && hasher.hashOrJustName) {
+        return `View the profile for ${hasher.hashOrJustName}.`;
+      }
+      return `View the profile for hasher #${this.id}.`;
+    }
+  },
   hasher: {
     get: function(lastValue, setValue) {
       if (lastValue) {

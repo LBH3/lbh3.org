@@ -10,6 +10,10 @@ const defaultPage = 'home';
 
 const AppViewModel = DefineMap.extend({
   day: 'string',
+  description: {
+    default: '',
+    serialize: false
+  },
   id: 'number',
   month: 'string',
   noHeadshot: {

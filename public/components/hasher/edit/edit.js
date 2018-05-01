@@ -7,6 +7,10 @@ import view from './edit.stache';
 import './edit.less';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: ''
+  },
+
   hasher: Hasher,
 
   hasherPromise: {

@@ -65,6 +65,11 @@ export const ViewModel = DefineMap.extend({
     }
   },
   day: 'string',
+  description: {
+    get: function() {
+      return `Details about LBH3 run #${this.trailNumber}.`;
+    }
+  },
   event: Event,
   eventPromise: {
     get: function() {

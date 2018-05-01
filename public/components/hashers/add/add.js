@@ -6,6 +6,10 @@ import './add.less';
 import view from './add.stache';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: ''
+  },
+
   didSave: function() {
     this.hasher = new Hasher();
   },
