@@ -46,5 +46,5 @@
   <figcaption class="figure-caption text-center">
     “The Box” for Thursday runs is south of Firestone/Manchester and west of Beach.
   </figcaption>
-  <img alt="Map of the box" class="figure-img img-fluid rounded" height="905" src="{{joinBase 'images/the-box.jpg'}}" width="970" />
+  <img alt="Map of the box" class="figure-img img-fluid rounded" height="905" src="{{joinBase 'assets/the-box.jpg'}}" width="970" />
 </figure>

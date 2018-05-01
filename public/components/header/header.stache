@@ -1,8 +1,8 @@
 <can-import from="can-stache-route-helpers" />
 
 <h1>
-  <a class="align-bottom" href="{{routeUrl page='home'}}">
-    <img alt="LBH3 logo" height="60" src="{{joinBase 'images/lbh3_rabbit_logo.png'}}" width="70" />
+  <a href="{{routeUrl page='home'}}">
+    <img alt="LBH3 logo" height="37" src="{{joinBase 'assets/header.png'}}" width="70" />
     {{title}}
   </a>
 </h1>
