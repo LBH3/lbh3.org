@@ -14,6 +14,9 @@ export const ViewModel = DefineMap.extend({
     return this.creatingSpecialEventPromise = new SpecialEvent(newData).save();
   },
   creatingSpecialEventPromise: {},
+  description: {
+    default: ''
+  },
   descriptionMd: 'string',
   title: {
     default: 'Special Events | LBH3'

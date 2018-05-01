@@ -22,6 +22,9 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
+  description: {
+    default: ''
+  },
   lastTrail: {
     get: function(lastValue, setValue) {
       if (lastValue) {

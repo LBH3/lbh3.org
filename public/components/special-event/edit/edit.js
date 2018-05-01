@@ -12,6 +12,9 @@ marked.setOptions({
 });
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: ''
+  },
   editSpecialEvent: function() {
     this.specialEvent.descriptionMd = this.descriptionMd;
     return this.editSpecialEventPromise = this.specialEvent.save();

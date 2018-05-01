@@ -7,6 +7,11 @@ import view from './mismanagement.stache';
 import '~/components/about/mismanagement/year/';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    get: function() {
+      return `LBH3 Mismanagement for the ${this.year} Bored year.`;
+    }
+  },
   mostRecentYear: {
     get: function() {
       const years = this.years;

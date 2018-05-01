@@ -11,6 +11,12 @@ import view from './attendance.stache';
 export const ViewModel = DefineMap.extend({
   day: 'string',
 
+  description: {
+    get: function() {
+      return `Check-in sheet for run #${this.trailNumber}.`;
+    }
+  },
+
   hashers: {
     get: function(lastValue, setValue) {
       if (lastValue) {

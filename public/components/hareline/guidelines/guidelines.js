@@ -4,6 +4,9 @@ import './guidelines.less';
 import view from './guidelines.stache';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: 'Learn how to plan and lay a great trail for LBH3.'
+  },
   title: {
     default: 'Haring Guidelines | LBH3'
   }

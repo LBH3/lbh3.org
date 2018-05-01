@@ -11,6 +11,11 @@ import '~/components/year/';
 const currentYear = (new Date()).getFullYear();
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    get: function() {
+      return `Archive of LBH3’s runs in ${this.year}.`;
+    }
+  },
   routeForYear: function(year) {
     const routeParams = {
       page: 'events',

@@ -7,6 +7,9 @@ import route from 'can-route';
 import view from './early-warning.stache';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: 'Early warning report for hashers with 490 or more runs that are within 10 runs of the next multiple of 100.'
+  },
   hashers: {
     get: function(lastValue, setValue) {
       if (lastValue) {

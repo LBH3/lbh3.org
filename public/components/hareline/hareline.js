@@ -7,6 +7,9 @@ import loader from '@loader';
 import view from './hareline.stache';
 
 export const ViewModel = DefineMap.extend({
+  description: {
+    default: 'Check out our upcuming trails and sign up to hare for LBH3!'
+  },
   eventsByMonth: DefineList,
   eventsPromise: {
     get: function() {
