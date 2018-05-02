@@ -45,6 +45,9 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
+  get ogTitle() {
+    return 'Add a new trail';
+  },
   startDate: {
     type: 'string',
     get: function(lastValue) {
@@ -69,8 +72,8 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
-  title: {
-    default: 'Add a new trail | Hareline | LBH3'
+  get title() {
+    return `${this.ogTitle} | Hareline | LBH3`;
   },
   trailNumber: {
     type: 'number',

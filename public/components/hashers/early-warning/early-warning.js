@@ -34,6 +34,9 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
+  get ogTitle() {
+    return 'Early Warning';
+  },
   routeForHasher: function(hasher) {
     const routeParams = {
       id: hasher.id,
@@ -44,8 +47,8 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
-  title: {
-    default: 'Early Warning | Hashers | LBH3'
+  get title() {
+    return `${this.ogTitle} | Hashers | LBH3`;
   },
   upcummingPatches: {
     get: function() {

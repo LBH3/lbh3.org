@@ -22,6 +22,10 @@ const AppViewModel = DefineMap.extend({
       return noHeadshot || undefined;
     }
   },
+  ogTitle: {
+    default: '',
+    serialize: false
+  },
   page: {
     default: defaultPage,
     type: 'string'

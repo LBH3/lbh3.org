@@ -8,6 +8,9 @@ export const ViewModel = DefineMap.extend({
   description: {
     default: 'Learn about lbh3.org’s privacy policies.'
   },
+  get ogTitle() {
+    return 'Privacy'
+  },
   requestedName: {
     type: 'string'
   },
@@ -20,8 +23,8 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
-  title: {
-    default: 'Privacy | About | LBH3'
+  get title() {
+    return `${this.ogTitle} | About | LBH3`;
   }
 });
 

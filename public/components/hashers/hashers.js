@@ -42,6 +42,9 @@ export const ViewModel = DefineMap.extend({
     const skip = hashers.skip;
     return (skip / $limit) + 1;
   },
+  get ogTitle() {
+    return 'Hashers';
+  },
   get pages() {
     const hashers = this.hashers;
     const pages = [];
@@ -91,8 +94,8 @@ export const ViewModel = DefineMap.extend({
     type: 'number'
   },
 
-  title: {
-    default: 'Hashers | LBH3'
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   }
 });
 

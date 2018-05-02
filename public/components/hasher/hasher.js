@@ -147,6 +147,13 @@ export const ViewModel = DefineMap.extend({
     const skip = runs.skip;
     return (skip / $limit) + 1;
   },
+  get ogTitle() {
+    const hasher = this.hasher;
+    if (hasher && hasher.hashOrJustName) {
+      return `${hasher.hashOrJustName}`;
+    }
+    return `Hasher #${this.id}`;
+  },
   get pages() {
     const runs = this.runs;
     const pages = [];
@@ -238,14 +245,8 @@ export const ViewModel = DefineMap.extend({
     type: 'number'
   },
 
-  title: {
-    get: function() {
-      const hasher = this.hasher;
-      if (hasher && hasher.hashOrJustName) {
-        return `${hasher.hashOrJustName} | Hashers | LBH3`;
-      }
-      return `#${this.id} | Hashers | LBH3`;
-    }
+  get title() {
+    return `${this.ogTitle} | Hashers | LBH3`;
   }
 });
 

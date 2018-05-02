@@ -7,8 +7,11 @@ export const ViewModel = DefineMap.extend({
   description: {
     default: 'Learn how to plan and lay a great trail for LBH3.'
   },
-  title: {
-    default: 'Haring Guidelines | LBH3'
+  get ogTitle() {
+    return 'Haring Guidelines';
+  },
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   }
 });
 

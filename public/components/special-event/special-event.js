@@ -10,10 +10,17 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const specialEvent = this.specialEvent || {};
       if (specialEvent.title) {
-        return `Learn more about ${specialEvent.title}.`;
+        return `Learn more about LBH3’s ${specialEvent.title}.`;
       }
       return '';
     }
+  },
+  get ogTitle() {
+    const specialEvent = this.specialEvent || {};
+    if (specialEvent.title) {
+      return specialEvent.title;
+    }
+    return 'Special Event';
   },
   get session() {
     return Session.current;
@@ -29,14 +36,8 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
-  title: {
-    get: function() {
-      const specialEvent = this.specialEvent || {};
-      if (specialEvent.title) {
-        return `${specialEvent.title} | Events | LBH3`;
-      }
-      return 'Special Event | LBH3';
-    }
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   },
   urlId: 'string',
   year: 'number'

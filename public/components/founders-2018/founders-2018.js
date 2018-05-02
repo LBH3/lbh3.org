@@ -7,8 +7,11 @@ export const ViewModel = DefineMap.extend({
   description: {
     default: 'Join us for Found ’er Balls 2018!'
   },
-  title: {
-    default: 'Found ’er Balls 2018 — 33 ⅓ | LBH3'
+  get ogTitle() {
+    return 'Found ’er Balls 2018 — 33 ⅓';
+  },
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   }
 });
 

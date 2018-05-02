@@ -6,8 +6,11 @@ export const ViewModel = DefineMap.extend({
   description: {
     default: 'Learn more about our upcuming LBH3 memorial service.'
   },
-  title: {
-    default: 'Hash Memorial Service | LBH3'
+  get ogTitle() {
+    return 'Hash Memorial Service';
+  },
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   }
 });
 

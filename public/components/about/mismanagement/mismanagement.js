@@ -20,6 +20,9 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
+  get ogTitle() {
+    return `${this.year} Mismanagement`;
+  },
   routeForYear: function(year) {
     const routeParams = {page: 'about', secondaryPage: 'mismanagement'};
     if (this.mostRecentYear !== year) {
@@ -44,10 +47,8 @@ export const ViewModel = DefineMap.extend({
       return this.mostRecentYear === this.year;
     }
   },
-  title: {
-    get: function() {
-      return `${this.year} Mismanagement | About | LBH3`;
-    }
+  get title() {
+    return `${this.ogTitle} | About | LBH3`;
   },
   year: {
     type: 'number',

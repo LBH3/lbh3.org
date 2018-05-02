@@ -24,6 +24,13 @@ export const ViewModel = DefineMap.extend({
     return marked(this.descriptionMd || '');
   },
   descriptionMd: 'string',
+  get ogTitle() {
+    const specialEvent = this.specialEvent || {};
+    if (specialEvent.title) {
+      return `Edit ${specialEvent.title}`;
+    }
+    return 'Edit a Special Event';
+  },
   get session() {
     return Session.current;
   },
@@ -43,14 +50,8 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
-  title: {
-    get: function() {
-      const specialEvent = this.specialEvent || {};
-      if (specialEvent.title) {
-        return `Edit ${specialEvent.title} | Special Events | LBH3`;
-      }
-      return "Edit | Special Events | LBH3";
-    }
+  get title() {
+    return `${this.ogTitle} | Special Events | LBH3`;
   },
   urlId: 'string',
   year: 'number'

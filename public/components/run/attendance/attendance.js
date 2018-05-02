@@ -50,6 +50,10 @@ export const ViewModel = DefineMap.extend({
 
   month: 'string',
 
+  get ogTitle() {
+    return `Check-In Sheet For Run #${this.trailNumber}`;
+  },
+
   routeForHasher: function(hasher) {
     const routeParams = {
       id: hasher.id,
@@ -74,10 +78,8 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
 
-  title: {
-    get: function() {
-      return `Check-In Sheet | Run #${this.trailNumber} | LBH3`;
-    }
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   },
 
   trailDateAsMoment: {

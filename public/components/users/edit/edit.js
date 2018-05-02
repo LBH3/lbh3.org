@@ -47,16 +47,17 @@ export const ViewModel = DefineMap.extend({
     }
   },
   id: 'number',
+  get ogTitle() {
+    return `Edit User #${this.id}`;
+  },
   resetEditingUserPromise: function() {
     this.editingUserPromise = null;
   },
   get session() {
     return Session.current;
   },
-  title: {
-    get: function() {
-      return `Edit #${this.id} | Users | LBH3`;
-    }
+  get title() {
+    return `${this.ogTitle} | Users | LBH3`;
   },
   user: {
     get: function(lastValue, setValue) {

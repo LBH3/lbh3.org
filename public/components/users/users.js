@@ -10,12 +10,15 @@ export const ViewModel = DefineMap.extend({
   description: {
     default: ''
   },
+  get ogTitle() {
+    return 'Users';
+  },
   secondaryPage: 'string',
   get session() {
     return Session.current;
   },
-  title: {
-    default: 'Users | LBH3'
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   },
   users: {
     get: function(lastValue, setValue) {
