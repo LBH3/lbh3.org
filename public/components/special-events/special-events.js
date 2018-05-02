@@ -18,8 +18,11 @@ export const ViewModel = DefineMap.extend({
     default: ''
   },
   descriptionMd: 'string',
-  title: {
-    default: 'Special Events | LBH3'
+  get ogTitle() {
+    return 'Special Events';
+  },
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   },
   urlId: 'string',
   year: {

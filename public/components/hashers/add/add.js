@@ -21,12 +21,16 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  get ogTitle() {
+    return 'Add a new hasher';
+  },
+
   get session() {
     return Session.current;
   },
 
-  title: {
-    default: 'Add a new hasher | Hashers | LBH3'
+  get title() {
+    return `${this.ogTitle} | Hashers | LBH3`;
   }
 });
 

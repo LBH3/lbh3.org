@@ -6,17 +6,24 @@
     <title>{{title}}</title>
     <meta name="description" content="{{description}}">
 
-    <!-- Apple -->
+    {{! Apple }}
     <link rel="apple-touch-icon" href="{{joinBase 'assets/apple-touch-icon-180x180.png'}}" sizes="180x180">
     <link rel="mask-icon" href="{{joinBase 'assets/safari-pinned-tab.svg'}}" color="#dc3232">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="LBH3">
 
-    <!-- Microsoft -->
+    {{! Facebook }}
+    <meta property="fb:app_id" content="857733227744669">
+
+    {{! Microsoft }}
     <meta name="msapplication-TileColor" content="#dc3232">
     <meta name="msapplication-config" content="{{joinBase 'assets/browserconfig.xml'}}">
 
-    <!-- Generic app metadata -->
+    {{! Open Graph }}
+    <meta property="og:image" content="https://www.lbh3.org/dist/assets/fb-image.png">
+    <meta property="og:title" content="{{ogTitle}}">
+
+    {{! Generic app metadata }}
     <link rel="manifest" href="{{joinBase 'assets/manifest.json'}}">
     <meta name="application-name" content="LBH3">
     <meta name="theme-color" content="#dc3232">
@@ -45,6 +52,7 @@
                 {{else}}
                   <lbh3-about-mismanagement
                     description:to="scope.root.description"
+                    ogTitle:to="scope.root.ogTitle"
                     title:to="scope.root.title"
                     year:from="scope.root.year"
                   />
@@ -58,6 +66,7 @@
                 {{else}}
                   <lbh3-about-privacy
                     description:to="scope.root.description"
+                    ogTitle:to="scope.root.ogTitle"
                     title:to="scope.root.title"
                   />
                 {{/if}}
@@ -70,6 +79,7 @@
                 {{else}}
                   <lbh3-about
                     description:to="scope.root.description"
+                    ogTitle:to="scope.root.ogTitle"
                     secondaryPage:from="secondaryPage"
                     title:to="scope.root.title"
                   />
@@ -91,6 +101,7 @@
                         day:from="scope.root.day"
                         description:to="scope.root.description"
                         month:from="scope.root.month"
+                        ogTitle:to="scope.root.ogTitle"
                         title:to="scope.root.title"
                         trailNumber:from="scope.root.trailNumber"
                         year:from="scope.root.year"
@@ -108,6 +119,7 @@
                       {{else}}
                         <lbh3-special-event-edit
                           description:to="scope.root.description"
+                          ogTitle:to="scope.root.ogTitle"
                           title:to="scope.root.title"
                           urlId:from="scope.root.urlId"
                           year:from="scope.root.year"
@@ -123,6 +135,7 @@
                           day:from="scope.root.day"
                           description:to="scope.root.description"
                           month:from="scope.root.month"
+                          ogTitle:to="scope.root.ogTitle"
                           title:to="scope.root.title"
                           trailNumber:from="scope.root.trailNumber"
                           year:from="scope.root.year"
@@ -139,6 +152,7 @@
                   {{else}}
                     <lbh3-founders-2018
                       description:to="scope.root.description"
+                      ogTitle:to="scope.root.ogTitle"
                       title:to="scope.root.title"
                     />
                   {{/if}}
@@ -151,6 +165,7 @@
                   {{else}}
                     <lbh3-memorial-service
                       description:to="scope.root.description"
+                      ogTitle:to="scope.root.ogTitle"
                       title:to="scope.root.title"
                     />
                   {{/if}}
@@ -167,6 +182,7 @@
                     day:from="scope.root.day"
                     description:to="scope.root.description"
                     month:from="scope.root.month"
+                    ogTitle:to="scope.root.ogTitle"
                     title:to="scope.root.title"
                     trailNumber:from="scope.root.trailNumber"
                     year:from="scope.root.year"
@@ -181,6 +197,7 @@
                   {{else}}
                     <lbh3-special-event
                       description:to="scope.root.description"
+                      ogTitle:to="scope.root.ogTitle"
                       title:to="scope.root.title"
                       urlId:from="scope.root.urlId"
                       year:from="scope.root.year"
@@ -194,6 +211,7 @@
                   {{else}}
                     <lbh3-past-runs
                       description:to="scope.root.description"
+                      ogTitle:to="scope.root.ogTitle"
                       title:to="scope.root.title"
                       year:from="scope.root.year"
                     />
@@ -213,6 +231,7 @@
                   {{else}}
                     <lbh3-hareline-add
                       description:to="scope.root.description"
+                      ogTitle:to="scope.root.ogTitle"
                       title:to="scope.root.title"
                     />
                   {{/if}}
@@ -229,6 +248,7 @@
                       day:from="scope.root.day"
                       description:to="scope.root.description"
                       month:from="scope.root.month"
+                      ogTitle:to="scope.root.ogTitle"
                       title:to="scope.root.title"
                       trailNumber:from="scope.root.trailNumber"
                       year:from="scope.root.year"
@@ -244,6 +264,7 @@
                 {{else}}
                   <lbh3-hareline-guidelines
                     description:to="scope.root.description"
+                    ogTitle:to="scope.root.ogTitle"
                     title:to="scope.root.title"
                   />
                 {{/if}}
@@ -256,6 +277,7 @@
                 {{else}}
                   <lbh3-hareline
                     description:to="scope.root.description"
+                    ogTitle:to="scope.root.ogTitle"
                     title:to="scope.root.title"
                   />
                 {{/if}}
@@ -274,6 +296,7 @@
                     {{else}}
                       <lbh3-hashers-add
                         description:to="scope.root.description"
+                        ogTitle:to="scope.root.ogTitle"
                         title:to="scope.root.title"
                       />
                     {{/if}}
@@ -288,6 +311,7 @@
                     {{else}}
                       <lbh3-hashers-early-warning
                         description:to="scope.root.description"
+                        ogTitle:to="scope.root.ogTitle"
                         title:to="scope.root.title"
                       />
                     {{/if}}
@@ -302,6 +326,7 @@
                     {{else}}
                       <lbh3-hashers-email
                         description:to="scope.root.description"
+                        ogTitle:to="scope.root.ogTitle"
                         title:to="scope.root.title"
                       />
                     {{/if}}
@@ -317,6 +342,7 @@
                       <lbh3-hasher-edit
                         description:to="scope.root.description"
                         id:from="scope.root.id"
+                        ogTitle:to="scope.root.ogTitle"
                         title:to="scope.root.title"
                       />
                     {{/if}}
@@ -333,6 +359,7 @@
                   <lbh3-hasher
                     description:to="scope.root.description"
                     id:from="scope.root.id"
+                    ogTitle:to="scope.root.ogTitle"
                     skip:from="scope.root.skip"
                     title:to="scope.root.title"
                   />
@@ -345,6 +372,7 @@
                 {{else}}
                   <lbh3-hashers
                     description:to="scope.root.description"
+                    ogTitle:to="scope.root.ogTitle"
                     searchNoHeadshot:bind="scope.root.noHeadshot"
                     searchText:bind="scope.root.search"
                     skip:from="scope.root.skip"
@@ -370,6 +398,7 @@
               {{else}}
                 <lbh3-home
                   description:to="scope.root.description"
+                  ogTitle:to="scope.root.ogTitle"
                   title:to="scope.root.title"
                 />
               {{/if}}
@@ -383,6 +412,7 @@
             {{else}}
               <lbh3-special-events
                 description:to="scope.root.description"
+                ogTitle:to="scope.root.ogTitle"
                 title:to="scope.root.title"
               />
             {{/if}}
@@ -400,6 +430,7 @@
                       <lbh3-user-edit
                         description:to="scope.root.description"
                         id:from="scope.root.id"
+                        ogTitle:to="scope.root.ogTitle"
                         title:to="scope.root.title"
                       />
                     {{/if}}
@@ -414,6 +445,7 @@
               {{else}}
                 <lbh3-users
                   description:to="scope.root.description"
+                  ogTitle:to="scope.root.ogTitle"
                   secondaryPage:from="secondaryPage"
                   title:to="scope.root.title"
                 />

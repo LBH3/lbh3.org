@@ -45,11 +45,14 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
+  get ogTitle() {
+    return 'Email List';
+  },
   get session() {
     return Session.current;
   },
-  title: {
-    default: 'Email List | Hashers | LBH3'
+  get title() {
+    return `${this.ogTitle} | Hashers | LBH3`;
   }
 });
 

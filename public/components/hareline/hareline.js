@@ -29,11 +29,14 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
+  get ogTitle() {
+    return 'Hareline';
+  },
   get session() {
     return Session.current;
   },
-  title: {
-    default: 'Hareline | LBH3'
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   }
 });
 

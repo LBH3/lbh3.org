@@ -181,6 +181,10 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  get ogTitle() {
+    return `Edit Run #${this.trailNumber}`;
+  },
+
   onOnPromise: Promise,
 
   patches: {
@@ -325,10 +329,8 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  title: {
-    get: function() {
-      return `Edit Run #${this.trailNumber} | LBH3`;
-    }
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   },
 
   trailNumber: 'number',

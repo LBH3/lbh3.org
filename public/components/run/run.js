@@ -123,6 +123,9 @@ export const ViewModel = DefineMap.extend({
     }
   },
   month: 'string',
+  get ogTitle() {
+    return `Run #${this.trailNumber}`;
+  },
   plusOne: function(number) {
     return number + 1;
   },
@@ -164,10 +167,8 @@ export const ViewModel = DefineMap.extend({
       return sortedHashers;
     }
   },
-  title: {
-    get: function() {
-      return `Run #${this.trailNumber} | LBH3`;
-    }
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   },
   trailNumber: 'number',
   year: 'number'

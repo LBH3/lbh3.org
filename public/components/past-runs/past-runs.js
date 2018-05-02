@@ -16,6 +16,9 @@ export const ViewModel = DefineMap.extend({
       return `Archive of LBH3’s runs in ${this.year}.`;
     }
   },
+  get ogTitle() {
+    return 'Past Runs';
+  },
   routeForYear: function(year) {
     const routeParams = {
       page: 'events',
@@ -27,8 +30,8 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
-  title: {
-    default: 'Past Runs | LBH3'
+  get title() {
+    return `${this.ogTitle} | LBH3`;
   },
   year: {
     type: 'number',

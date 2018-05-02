@@ -31,18 +31,20 @@ export const ViewModel = DefineMap.extend({
     type: 'number'
   },
 
+  get ogTitle() {
+    const hasher = this.hasher;
+    if (hasher && hasher.hashOrJustName) {
+      return `Edit ${hasher.hashOrJustName}`;
+    }
+    return `Edit hasher #${this.id}`;
+  },
+
   get session() {
     return Session.current;
   },
 
-  title: {
-    get: function() {
-      const hasher = this.hasher;
-      if (hasher && hasher.hashOrJustName) {
-        return `Edit ${hasher.hashOrJustName} | Hashers | LBH3`;
-      }
-      return `Edit #${this.id} | Hashers | LBH3`;
-    }
+  get title() {
+    return `${this.ogTitle} | Hashers | LBH3`;
   }
 });
 
