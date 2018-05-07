@@ -6,6 +6,8 @@ import Session from '~/models/session';
 import moment from 'moment';
 import view from './year.stache';
 
+import './year.less';
+
 export const ViewModel = DefineMap.extend({
   eventsByMonth: DefineList,
   eventsPromise: {

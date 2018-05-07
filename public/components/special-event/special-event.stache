@@ -14,7 +14,7 @@
 {{/if}}
 
 {{#if session.user.canEditFutureSpecialEvents}}
-  <nav class="justify-content-end nav">
+  <nav class="justify-content-center nav">
     <a class="nav-link" href="{{routeUrl page='events' year=year urlId=urlId secondaryPage='edit'}}" title="Edit info">
       <span class="fa fa-pencil-square-o fa-lg"></span>
     </a>

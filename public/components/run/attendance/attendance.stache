@@ -26,62 +26,64 @@
 {{/if}}
 
 {{#if hashersPromise.isResolved}}
-  <table class="table table-bordered table-responsive-sm table-sm table-striped">
-    <thead>
-      <tr>
-        <th class="text-center" scope="col">Pay</th>
-        <th scope="col">Hash Name</th>
-        <th scope="col">Last Name</th>
-        <th scope="col">First Name</th>
-        <th class="text-center" scope="col">B-Day</th>
-        <th class="text-center" scope="col">Patch</th>
-        <th class="text-center" scope="col">Runs</th>
-        <th class="text-center" scope="col">Hares</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each(hashers)}}
+  <div class="table-responsive">
+    <table class="table table-bordered table-sm table-striped">
+      <thead>
         <tr>
-          <td class="text-center">
-            {{payment}}
-          </td>
-          <td class="text-uppercase">
-            <a href="{{scope.root.routeForHasher(this)}}">
-              {{hashName}}
-            </a>
-          </td>
-          <td class="text-capitalize">
-            <a href="{{scope.root.routeForHasher(this)}}">
-              {{familyName}}
-            </a>
-          </td>
-          <td class="text-capitalize">
-            <a href="{{scope.root.routeForHasher(this)}}">
-              {{givenName}}
-            </a>
-          </td>
-          <td class="text-center">
-            {{scope.root.birthday(this)}}
-          </td>
-          <td class="text-center">
-            {{#if patchesPromise.isPending}}
-              <span class="fa fa-circle-o-notch fa-spin"></span>
-            {{else}}
-              {{scope.root.patches(this)}}
-            {{/if}}
-          </td>
-          <td class="text-center">
-            {{runCount}}
-          </td>
-          <td class="text-center">
-            {{#if hareCountPromise.isPending}}
-              <span class="fa fa-circle-o-notch fa-spin"></span>
-            {{else}}
-              {{hareCount}}
-            {{/if}}
-          </td>
+          <th class="text-center" scope="col">Pay</th>
+          <th scope="col">Hash Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">First Name</th>
+          <th class="text-center" scope="col">B-Day</th>
+          <th class="text-center" scope="col">Patch</th>
+          <th class="text-center" scope="col">Runs</th>
+          <th class="text-center" scope="col">Hares</th>
         </tr>
-      {{/each}}
-    </tbody>
-  </table>
+      </thead>
+      <tbody>
+        {{#each(hashers)}}
+          <tr>
+            <td class="text-center">
+              {{payment}}
+            </td>
+            <td class="text-uppercase">
+              <a href="{{scope.root.routeForHasher(this)}}">
+                {{hashName}}
+              </a>
+            </td>
+            <td class="text-capitalize">
+              <a href="{{scope.root.routeForHasher(this)}}">
+                {{familyName}}
+              </a>
+            </td>
+            <td class="text-capitalize">
+              <a href="{{scope.root.routeForHasher(this)}}">
+                {{givenName}}
+              </a>
+            </td>
+            <td class="text-center">
+              {{scope.root.birthday(this)}}
+            </td>
+            <td class="text-center">
+              {{#if patchesPromise.isPending}}
+                <span class="fa fa-circle-o-notch fa-spin"></span>
+              {{else}}
+                {{scope.root.patches(this)}}
+              {{/if}}
+            </td>
+            <td class="text-center">
+              {{runCount}}
+            </td>
+            <td class="text-center">
+              {{#if hareCountPromise.isPending}}
+                <span class="fa fa-circle-o-notch fa-spin"></span>
+              {{else}}
+                {{hareCount}}
+              {{/if}}
+            </td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
 {{/if}}

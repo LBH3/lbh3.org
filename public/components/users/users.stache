@@ -17,56 +17,58 @@
   {{/if}}
 
   {{#if users}}
-    <table class="table table-bordered table-responsive-sm table-sm">
-      <thead>
-        <tr>
-          <th scope="col">Email</th>
-          <th scope="col">Display Name</th>
-          <th scope="col">Hash Name</th>
-          <th class="text-center" scope="col">Edit</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each users user=value}}
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm">
+        <thead>
           <tr>
-            <td>
-              {{#if facebookProfile}}
-                <span class="fa fa-lg fa-facebook-square"></span>
-              {{/if}}
-              {{#if googleProfile}}
-                <span class="fa fa-lg fa-google"></span>
-              {{/if}}
-              {{user.email}}
-            </td>
-            <td>
-              {{#if user.displayName}}
-                {{user.displayName}}
-              {{else}}
-                {{user.givenName}} {{user.familyName}}
-              {{/if}}
-            </td>
-            <td>
-              {{#if user.hasherPromise}}
-                {{#if user.hasherPromise.isResolved}}
-                  {{user.hasher.hashOrJustName}}
-                {{else}}
-                  <span class="fa fa-circle-o-notch fa-spin"></span>
-                {{/if}}
-              {{else}}
-                {{#if user.requestedName}}
-                  Requested: <strong>{{user.requestedName}}</strong>
-                {{/if}}
-              {{/if}}
-            </td>
-            <td class="text-center">
-              <a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}" title="Edit user">
-                <span class="fa fa-lg fa-pencil-square-o"></span>
-              </a>
-            </td>
+            <th scope="col">Email</th>
+            <th scope="col">Display Name</th>
+            <th scope="col">Hash Name</th>
+            <th class="text-center" scope="col">Edit</th>
           </tr>
-        {{/each}}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {{#each users user=value}}
+            <tr>
+              <td>
+                {{#if facebookProfile}}
+                  <span class="fa fa-lg fa-facebook-square"></span>
+                {{/if}}
+                {{#if googleProfile}}
+                  <span class="fa fa-lg fa-google"></span>
+                {{/if}}
+                {{user.email}}
+              </td>
+              <td>
+                {{#if user.displayName}}
+                  {{user.displayName}}
+                {{else}}
+                  {{user.givenName}} {{user.familyName}}
+                {{/if}}
+              </td>
+              <td>
+                {{#if user.hasherPromise}}
+                  {{#if user.hasherPromise.isResolved}}
+                    {{user.hasher.hashOrJustName}}
+                  {{else}}
+                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                  {{/if}}
+                {{else}}
+                  {{#if user.requestedName}}
+                    Requested: <strong>{{user.requestedName}}</strong>
+                  {{/if}}
+                {{/if}}
+              </td>
+              <td class="text-center">
+                <a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}" title="Edit user">
+                  <span class="fa fa-lg fa-pencil-square-o"></span>
+                </a>
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
   {{/if}}
 
 {{else}}
