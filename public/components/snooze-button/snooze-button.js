@@ -51,6 +51,7 @@ const uploadFile = function(file, signedRequest, url) {
 
 export const ViewModel = DefineMap.extend({
   event: Event,
+  faSize: 'string',
   removePromise: Promise,
   get session() {
     return Session.current;

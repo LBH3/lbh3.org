@@ -349,7 +349,7 @@
 
       {{#if hashersPromise.isResolved}}
         <form on:enter="preventDefault(scope.event)" on:submit="addHasherToRun()">
-          <table class="table table-bordered table-responsive-sm table-sm">
+          <table class="table table-bordered table-sm">
             <thead>
               <tr>
                 <th></th>
@@ -480,7 +480,7 @@
         <h3>Patches</h3>
         {{#if hashers.length}}
           <form on:submit="addPatch()">
-            <table class="table table-bordered table-responsive-sm table-sm">
+            <table class="table table-bordered table-sm">
               <thead>
                 <tr>
                   <th></th>

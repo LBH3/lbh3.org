@@ -7,6 +7,7 @@ import view from './photos-button.stache';
 
 export const ViewModel = DefineMap.extend({
   event: Event,
+  faSize: 'string',
   promptForUrl: function() {
     const event = this.event;
     const eventName = (event.nameMd) ? `“${event.nameMd}”` : `the trail on ${event.startDateWithYearString}`;

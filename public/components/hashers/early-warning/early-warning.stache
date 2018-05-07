@@ -21,32 +21,34 @@
 
   {{#if hashersPromise.isResolved}}
     {{#if upcummingPatches.length}}
-      <table class="table table-bordered table-responsive-sm table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Hash Name</th>
-            <th scope="col">Current Run Count</th>
-            <th scope="col">Upcumming Patch</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each upcummingPatches}}
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <thead>
             <tr>
-              <td>
-                <a href="{{scope.root.routeForHasher(hasher)}}">
-                  {{hasher.hashName}}
-                </a>
-              </td>
-              <td>
-                {{hasher.runCount}}
-              </td>
-              <td>
-                {{patchNumber}}
-              </td>
+              <th scope="col">Hash Name</th>
+              <th scope="col">Current Run Count</th>
+              <th scope="col">Upcumming Patch</th>
             </tr>
-          {{/each}}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {{#each upcummingPatches}}
+              <tr>
+                <td>
+                  <a href="{{scope.root.routeForHasher(hasher)}}">
+                    {{hasher.hashName}}
+                  </a>
+                </td>
+                <td>
+                  {{hasher.runCount}}
+                </td>
+                <td>
+                  {{patchNumber}}
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
     {{else}}
       <div class="alert alert-info" role="alert">
         <strong>No hashers matching that criteria found.</strong>

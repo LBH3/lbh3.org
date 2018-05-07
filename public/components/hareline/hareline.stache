@@ -41,51 +41,53 @@
 {{#if eventsByMonth}}
   {{#each eventsByMonth month=value}}
     <h3>{{month.name}} {{month.year}}</h3>
-    <table class="table table-bordered table-responsive-sm table-sm">
-      <thead>
-        <tr>
-          {{#if scope.root.session.user.canEditPreTrailInfo}}
-            <th class="d-print-none"></th>
-          {{/if}}
-          <th>Date</th>
-          <th>Hash#</th>
-          <th>Hares</th>
-          <th>Location</th>
-          <th>Notes</th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each month.events event=value}}
-          <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm">
+        <thead>
+          <tr>
             {{#if scope.root.session.user.canEditPreTrailInfo}}
-              <td class="d-print-none text-center">
-                <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
-                  <span class="fa fa-edit"></span>
+              <th class="d-print-none"></th>
+            {{/if}}
+            <th>Date</th>
+            <th>Hash#</th>
+            <th>Hares</th>
+            <th>Location</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each month.events event=value}}
+            <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
+              {{#if scope.root.session.user.canEditPreTrailInfo}}
+                <td class="d-print-none text-center">
+                  <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
+                    <span class="fa fa-edit"></span>
+                  </a>
+                </td>
+              {{/if}}
+              <td>
+                <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
+                  {{event.startDateString}}
                 </a>
               </td>
-            {{/if}}
-            <td>
-              <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
-                {{event.startDateString}}
-              </a>
-            </td>
-            <td>
-              {{#if event.trailNumber}}
-                {{event.trailNumber}}
-              {{/if}}
-            </td>
-            <td>
-              {{#if event.haresHtml}}
-                {{{event.haresHtml}}}
-              {{else}}
-                Available!
-              {{/if}}
-            </td>
-            <td>{{{event.shortLocationHtml}}}</td>
-            <td>{{event.nameMd}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+              <td>
+                {{#if event.trailNumber}}
+                  {{event.trailNumber}}
+                {{/if}}
+              </td>
+              <td>
+                {{#if event.haresHtml}}
+                  {{{event.haresHtml}}}
+                {{else}}
+                  Available!
+                {{/if}}
+              </td>
+              <td>{{{event.shortLocationHtml}}}</td>
+              <td>{{event.nameMd}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
   {{/each}}
 {{/if}}

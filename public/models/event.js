@@ -290,13 +290,15 @@ const Event = DefineMap.extend({
           const localities = location.addressComponents.filter(addressComponent => {
             return addressComponent.types.indexOf('locality') > -1;
           });
+          let name = '';
           if (localities[0] && localities[0].long_name) {
-            resolve(localities[0].long_name);
+            name = localities[0].long_name;
           } else if (location.vicinity) {
-            resolve(location.vicinity);
+            name = location.vicinity;
           } else if (location.name) {
-            resolve(location.name);
+            name = location.name;
           }
+          resolve(`<p>${name}</p>`);
         });
       }
       return this.locationHtml;

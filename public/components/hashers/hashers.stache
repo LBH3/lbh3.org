@@ -64,52 +64,54 @@
 
   {{#if hashersPromise.isResolved}}
     {{#if hashers.length}}
-      <table class="table table-bordered table-responsive-sm table-sm">
-        <thead>
-          <tr>
-            <th scope="col">Hash Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">First Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#each hashers hasher=value}}
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <thead>
             <tr>
-              {{#if hasher.hasName}}
-                <td>
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
-                    {{hasher.hashName}}
-                  </a>
-                </td>
-                <td>
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
-                    {{#if hasher.familyName}}
-                      {{hasher.familyName}}
-                    {{else}}
-                      {{hasher.familyNamePrivate}}
-                    {{/if}}
-                  </a>
-                </td>
-                <td>
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
-                    {{#if hasher.givenName}}
-                      {{hasher.givenName}}
-                    {{else}}
-                      {{hasher.givenNamePrivate}}
-                    {{/if}}
-                  </a>
-                </td>
-              {{else}}
-                <td colspan="3">
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
-                    #{{hasher.id}}
-                  </a>
-                </td>
-              {{/if}}
+              <th scope="col">Hash Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">First Name</th>
             </tr>
-          {{/each}}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {{#each hashers hasher=value}}
+              <tr>
+                {{#if hasher.hasName}}
+                  <td>
+                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                      {{hasher.hashName}}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                      {{#if hasher.familyName}}
+                        {{hasher.familyName}}
+                      {{else}}
+                        {{hasher.familyNamePrivate}}
+                      {{/if}}
+                    </a>
+                  </td>
+                  <td>
+                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                      {{#if hasher.givenName}}
+                        {{hasher.givenName}}
+                      {{else}}
+                        {{hasher.givenNamePrivate}}
+                      {{/if}}
+                    </a>
+                  </td>
+                {{else}}
+                  <td colspan="3">
+                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                      #{{hasher.id}}
+                    </a>
+                  </td>
+                {{/if}}
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
 
       {{#if pages}}
         <nav class="nav nav-pills">

@@ -16,32 +16,39 @@
 {{/if}}
 
 {{#if event}}
-  <div class="row">
-    <div class="col"></div>
-    <div class="col-md-8">
-      <h2>
-        {{#if event.nameMd}}
-          {{{event.nameMd}}}
-          <br>
-          <small class="text-muted">Run #{{event.trailNumber}}</small>
-        {{else}}
-          Run #{{event.trailNumber}}
-        {{/if}}
-      </h2>
-    </div>
-    <div class="col text-center text-md-right">
-      {{#if session.user.canEditPostTrailInfo}}
-        <a class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}" title="Edit trail">
-          <span class="fa fa-lg fa-pencil-square-o"></span>
-        </a>
+  <h2>
+    {{#if event.nameMd}}
+      {{{event.nameMd}}}
+      <br>
+      <small class="text-muted">Run #{{event.trailNumber}}</small>
+    {{else}}
+      Run #{{event.trailNumber}}
+    {{/if}}
+  </h2>
+  <div class="d-flex justify-content-center mb-3">
+    {{#if session.user.canEditPostTrailInfo}}
+      <a
+        class="d-inline-block d-print-none mx-5"
+        href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}"
+        title="Edit trail"
+      >
+        <span class="fa fa-lg fa-pencil-square-o"></span>
+      </a>
+    {{/if}}
+    {{#if event.hasProbablyEnded}}
+      {{#if session.user.hasherId}}
+        <lbh3-photos-button
+          class="d-inline-block d-print-none mx-5"
+          event:from="event"
+          faSize:from="'lg'"
+        />
+        <lbh3-snooze-button
+          class="d-inline-block d-print-none mx-5"
+          event:from="event"
+          faSize:from="'lg'"
+        />
       {{/if}}
-      {{#if event.hasProbablyEnded}}
-        {{#if session.user.hasherId}}
-          <lbh3-photos-button class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" event:from="event" />
-          <lbh3-snooze-button class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" event:from="event" />
-        {{/if}}
-      {{/if}}
-    </div>
+    {{/if}}
   </div>
 
   <dl class="row">
@@ -221,44 +228,46 @@
               </select>
             </div>
           </div>
-          <table class="table table-bordered table-responsive-sm table-sm">
-            <thead>
-              <tr>
-                <th></th>
-                <th>Role</th>
-                <th>Payment</th>
-                <th>Hash Name</th>
-                <th>Last Name</th>
-                <th>First Name</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each sortedHashers}}
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <thead>
                 <tr>
-                  <td>{{scope.root.plusOne(scope.index)}}</td>
-                  <td>{{role}}</td>
-                  <td>
-                    {{paymentNotesAndType}}
-                  </td>
-                  <td>
-                    <a href="{{scope.root.routeForHasher(this)}}">
-                      {{hashName}}
-                    </a>
-                  </td>
-                  <td>
-                    <a href="{{scope.root.routeForHasher(this)}}">
-                      {{familyName}}
-                    </a>
-                  </td>
-                  <td>
-                    <a href="{{scope.root.routeForHasher(this)}}">
-                      {{givenName}}
-                    </a>
-                  </td>
+                  <th></th>
+                  <th>Role</th>
+                  <th>Payment</th>
+                  <th>Hash Name</th>
+                  <th>Last Name</th>
+                  <th>First Name</th>
                 </tr>
-              {{/each}}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {{#each sortedHashers}}
+                  <tr>
+                    <td>{{scope.root.plusOne(scope.index)}}</td>
+                    <td>{{role}}</td>
+                    <td>
+                      {{paymentNotesAndType}}
+                    </td>
+                    <td>
+                      <a href="{{scope.root.routeForHasher(this)}}">
+                        {{hashName}}
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{scope.root.routeForHasher(this)}}">
+                        {{familyName}}
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{{scope.root.routeForHasher(this)}}">
+                        {{givenName}}
+                      </a>
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
         {{else}}
           <h3>Attendance</h3>
           <ol class="attendance-list">
@@ -270,58 +279,60 @@
 
         {{#if cashReport}}
           <h3>Cash Report</h3>
-          <table class="table table-bordered table-responsive-sm table-sm">
-            <thead>
-              <tr>
-                <th>Payment</th>
-                <th>Count</th>
-                <th>Rate</th>
-                <th>Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#each cashReport.records record=value}}
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm">
+              <thead>
                 <tr>
-                  <td>{{record.title}}</td>
-                  <td>
-                    {{#eq record.count 0}}
-                      {{record.count}}
-                    {{else}}
-                      <mark>
-                        {{record.count}}
-                      </mark>
-                    {{/eq}}
-                  </td>
-                  <td>{{record.rate}}</td>
-                  <td>
-                    {{#eq record.total 0}}
-                      {{record.total}}
-                    {{else}}
-                      <mark>
-                        {{record.total}}
-                      </mark>
-                    {{/eq}}
-                  </td>
+                  <th>Payment</th>
+                  <th>Count</th>
+                  <th>Rate</th>
+                  <th>Total</th>
                 </tr>
-              {{/each}}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td></td>
-                <th scope="col">
-                  <mark>
-                    {{cashReport.totalCount}}
-                  </mark>
-                </th>
-                <td></td>
-                <th scope="col">
-                  <mark>
-                    {{cashReport.totalAmount}}
-                  </mark>
-                </th>
-              </tr>
-            </tfoot>
-          </table>
+              </thead>
+              <tbody>
+                {{#each cashReport.records record=value}}
+                  <tr>
+                    <td>{{record.title}}</td>
+                    <td>
+                      {{#eq record.count 0}}
+                        {{record.count}}
+                      {{else}}
+                        <mark>
+                          {{record.count}}
+                        </mark>
+                      {{/eq}}
+                    </td>
+                    <td>{{record.rate}}</td>
+                    <td>
+                      {{#eq record.total 0}}
+                        {{record.total}}
+                      {{else}}
+                        <mark>
+                          {{record.total}}
+                        </mark>
+                      {{/eq}}
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td></td>
+                  <th scope="col">
+                    <mark>
+                      {{cashReport.totalCount}}
+                    </mark>
+                  </th>
+                  <td></td>
+                  <th scope="col">
+                    <mark>
+                      {{cashReport.totalAmount}}
+                    </mark>
+                  </th>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
         {{/if}}
       {{/if}}
     {{/if}}
