@@ -2,11 +2,8 @@ import Component from 'can-component';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
-import Session from '~/models/session';
 import moment from 'moment';
 import view from './year.stache';
-
-import './year.less';
 
 export const ViewModel = DefineMap.extend({
   eventsByMonth: DefineList,
@@ -30,9 +27,6 @@ export const ViewModel = DefineMap.extend({
         return events;
       });
     }
-  },
-  get session() {
-    return Session.current;
   },
   year: {
     type: 'number'
