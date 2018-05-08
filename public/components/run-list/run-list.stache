@@ -1,0 +1,148 @@
+<can-import from="can-stache-route-helpers" />
+<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="~/components/photos-button/" />
+<can-import from="~/components/snooze-button/" />
+
+{{#each month.events event=value}}
+  <div class="border-bottom d-block d-sm-none mb-2 pb-2 xs-layout">
+    <div class="d-flex flex-row">
+      <a
+        class="mr-auto"
+        href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}"
+      >
+        {{#if event.trailNumber}}
+          {{event.startDateString}}
+        {{else}}
+          {{event.startDateString}}
+        {{/if}}
+        {{#if event.trailNumber}}
+          <span class="text-muted">
+            #{{event.trailNumber}}
+          </span>
+        {{/if}}
+      </a>
+      {{#if scope.root.showFutureTools}}
+        {{#if scope.root.session.user.canEditPreTrailInfo}}
+          <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
+            <span class="fa fa-edit"></span>
+          </a>
+        {{/if}}
+      {{else}}
+        {{#if scope.root.session.user.hasherId}}
+          <lbh3-photos-button
+            class="d-inline-flex mr-2"
+            event:from="event"
+            showEdit:from="true"
+          />
+          <lbh3-snooze-button
+            class="d-inline-flex"
+            event:from="event"
+          />
+        {{/if}}
+      {{/if}}
+    </div>
+    <h4 class="h6 mb-0 {{^if event.haresHtml}}text-danger{{/if}}">
+      {{#if event.nameHtml}}
+        {{^if event.haresHtml}}
+          Available!
+        {{/if}}
+        {{{event.nameHtml}}}
+      {{else}}
+        {{#if event.haresHtml}}
+          {{{event.haresHtml}}}
+        {{else}}
+          Available!
+        {{/if}}
+      {{/if}}
+    </h4>
+    <div class="text-muted truncate-text">
+      {{{event.shortLocationHtml}}}
+    </div>
+    {{#if event.nameHtml}}
+      <p class="hares">
+        <small class="text-muted">
+          {{event.haresMd}}
+        </small>
+      </p>
+    {{/if}}
+  </div>
+{{/each}}
+<div class="d-none d-sm-block table-responsive">
+  <table class="table table-bordered table-sm">
+    <thead>
+      <tr>
+        {{#if showFutureTools}}
+          {{#if scope.root.session.user.canEditPreTrailInfo}}
+            <th class="d-print-none"></th>
+          {{/if}}
+        {{/if}}
+        <th>Date</th>
+        <th>Hash#</th>
+        <th>Hares</th>
+        <th>Location</th>
+        <th>Notes</th>
+        {{^if showFutureTools}}
+          {{#if scope.root.session.user.hasherId}}
+            <th class="d-print-none"></th>
+            <th class="d-print-none"></th>
+          {{/if}}
+        {{/if}}
+      </tr>
+    </thead>
+    <tbody>
+      {{#each month.events event=value}}
+        <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
+          {{#if scope.root.showFutureTools}}
+            {{#if scope.root.session.user.canEditPreTrailInfo}}
+              <td class="d-print-none text-center">
+                <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
+                  <span class="fa fa-edit"></span>
+                </a>
+              </td>
+            {{/if}}
+          {{/if}}
+          <td>
+            {{#if event.trailNumber}}
+              <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
+                {{event.startDateString}}
+              </a>
+            {{else}}
+              {{event.startDateString}}
+            {{/if}}
+          </td>
+          <td>
+            {{#if event.trailNumber}}
+              {{event.trailNumber}}
+            {{/if}}
+          </td>
+          <td>
+            {{#if event.haresHtml}}
+              {{{event.haresHtml}}}
+            {{else}}
+              Available!
+            {{/if}}
+          </td>
+          <td>{{{event.shortLocationHtml}}}</td>
+          <td>{{{event.nameHtml}}}</td>
+          {{^if scope.root.showFutureTools}}
+            {{#if scope.root.session.user.hasherId}}
+              <td class="d-print-none text-center">
+                <lbh3-photos-button
+                  event:from="event"
+                  faSize:from="'lg'"
+                  showEdit:from="true"
+                />
+              </td>
+              <td class="d-print-none text-center">
+                <lbh3-snooze-button
+                  event:from="event"
+                  faSize:from="'lg'"
+                />
+              </td>
+            {{/if}}
+          {{/if}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</div>

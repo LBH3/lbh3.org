@@ -30,6 +30,7 @@ import 'lbh3/components/request-access/request-access-test';
 import 'lbh3/components/run/attendance/attendance-test';
 import 'lbh3/components/run/edit/edit-test';
 import 'lbh3/components/run/run-test';
+import 'lbh3/components/run-list/run-list-test';
 import 'lbh3/components/snooze-button/snooze-button-test';
 import 'lbh3/components/special-event/edit/edit-test';
 import 'lbh3/components/special-event/special-event-test';
