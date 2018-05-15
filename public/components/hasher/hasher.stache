@@ -588,7 +588,7 @@
                 <th>Hash#</th>
                 <th>Hares</th>
                 <th>Location</th>
-                <th>Notes</th>
+                <th>Name</th>
                 <th class="d-print-none"></th>
                 <th class="d-print-none"></th>
               </tr>
