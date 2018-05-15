@@ -191,7 +191,7 @@ module.exports = function () {
       Key: fileName,
       Expires: 60,
       ContentType: fileType,
-      ACL: 'public-read'
+      ACL: 'private'
     };
 
     s3.getSignedUrl('putObject', s3Params, (error, data) => {
@@ -208,6 +208,21 @@ module.exports = function () {
       }
       res.end();
     });
+  });
+
+  app.get('/snoozes/:year/:fileName', (req, res) => {
+    const awsConfig = app.get('aws');
+    const params = req.params;
+
+    const bucketName = awsConfig['snoozeBucketName'];
+    const fileName = `${params.year}/${params.fileName}`;
+    const s3 = new aws.S3();
+    const s3Params = {
+      Bucket: bucketName,
+      Key: fileName
+    };
+    res.attachment(fileName);
+    s3.getObject(s3Params).createReadStream().pipe(res);
   });
 
   app.use(ssr({

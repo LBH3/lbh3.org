@@ -1,7 +1,7 @@
 <can-import from="font-awesome/css/font-awesome.css" />
 
 {{<snoozeButtons}}
-  <a class="btn btn-link p-0" href="{{event.snoozeUrl}}" target="_blank" title="View Snooze">
+  <a class="btn btn-link p-0" href="{{event.snoozeUrlWithAuth}}" target="_blank" title="View Snooze">
     <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-newspaper-o"></span>
   </a>
   {{#if session.user.canAddSnoozes}}
@@ -23,14 +23,14 @@
       <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-warning" title="{{uploadPromise.reason.message}}"></span>
     {{/if}}
     {{#if uploadPromise.isResolved}}
-      {{#if event.snoozeUrl}}
+      {{#if event.snoozeUrlWithAuth}}
         {{>snoozeButtons}}
       {{else}}
         <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-warning" title="Unknown error"></span>
       {{/if}}
     {{/if}}
   {{else}}
-    {{#if event.snoozeUrl}}
+    {{#if event.snoozeUrlWithAuth}}
       {{>snoozeButtons}}
     {{else}}
       {{#if removePromise}}
@@ -49,7 +49,7 @@
     {{/if}}
   {{/if}}
 {{else}}
-  {{#if event.snoozeUrl}}
+  {{#if event.snoozeUrlWithAuth}}
     {{>snoozeButtons}}
   {{/if}}
 {{/if}}

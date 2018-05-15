@@ -53,6 +53,18 @@ const Event = DefineMap.extend({
   startDatetime: 'any',
   snoozeTitleMd: 'string',
   snoozeUrl: 'string',
+  snoozeUrlWithAuth: {
+    type: 'string',
+    serialize: false,
+    get: function() {
+      const snoozeUrl = this.snoozeUrl;
+      const urlParts = snoozeUrl ? snoozeUrl.split('.s3.amazonaws.com/') : null;
+      if (urlParts && urlParts.length === 2) {
+        return '/snoozes/' + urlParts[1];
+      }
+      return snoozeUrl;
+    }
+  },
   trailCommentsMd: 'string',
   trailNumber: 'number',
 
