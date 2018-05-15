@@ -109,28 +109,60 @@
     {{/if}}
   {{/if}}
 
-  <dl class="row">
-    {{#if event.miles}}
+  {{#if shouldShowPostTrailData}}
+    <dl class="row">
       <dt class="col-md-3 text-md-right">Miles:</dt>
-      <dd class="col-md-9">{{event.miles}}</dd>
-    {{/if}}
-    {{#if shouldShowPostTrailData}}
-      {{#if hashers.length}}
-        <dt class="col-md-3 text-md-right">Total hashers:</dt>
-        <dd class="col-md-9">{{hashers.length}}</dd>
-      {{/if}}
-      {{#if event.hashitReasonHtml}}
-        <dt class="col-sm-3 text-sm-right">Hashit:</dt>
-        <dd class="col-sm-9">{{{event.hashitReasonHtml}}}</dd>
-      {{/if}}
-      {{#if event.trailCommentsHtml}}
-        <dt class="col-sm-3 text-sm-right">Run Notes:</dt>
-        <dd class="col-sm-9">{{{event.trailCommentsHtml}}}</dd>
-      {{/if}}
-      {{#if event.scribesHtml}}
-        <dt class="col-sm-3 text-sm-right">Scribe:</dt>
-        <dd class="col-sm-9">{{{event.scribesHtml}}}</dd>
-      {{/if}}
+      <dd class="col-md-9">
+        {{#if event.miles}}
+          {{event.miles}}
+        {{else}}
+          ?
+        {{/if}}
+      </dd>
+      <dt class="col-md-3 text-md-right">Total hashers:</dt>
+      <dd class="col-md-9">
+        {{#if hashers.length}}
+          {{hashers.length}}
+        {{else}}
+          ?
+        {{/if}}
+      </dd>
+      <dt class="col-sm-3 text-sm-right">Hashit:</dt>
+      <dd class="col-sm-9">
+        {{#if event.hashitReasonHtml}}
+          {{{event.hashitReasonHtml}}}
+        {{else}}
+          {{#if hashers.length}}
+            None
+          {{else}}
+            ?
+          {{/if}}
+        {{/if}}
+      </dd>
+      <dt class="col-sm-3 text-sm-right">Scribe:</dt>
+      <dd class="col-sm-9">
+        {{#if event.scribesHtml}}
+          {{{event.scribesHtml}}}
+        {{else}}
+          {{#if hashers.length}}
+            None
+          {{else}}
+            ?
+          {{/if}}
+        {{/if}}
+      </dd>
+      <dt class="col-sm-3 text-sm-right">Run Notes:</dt>
+      <dd class="col-sm-9">
+        {{#if event.trailCommentsHtml}}
+          {{{event.trailCommentsHtml}}}
+        {{else}}
+          {{#if hashers.length}}
+            None
+          {{else}}
+            ?
+          {{/if}}
+        {{/if}}
+      </dd>
       {{#if event.addedWriteupHtml}}
         <dt class="col-md-3 text-md-right">Added writeup:</dt>
         <dd class="col-md-9">{{{event.addedWriteupHtml}}}</dd>
@@ -139,22 +171,54 @@
         <dt class="col-md-3 text-md-right">Additional writeup:</dt>
         <dd class="col-md-9">{{{event.additionalWriteupHtml}}}</dd>
       {{/if}}
-      {{#if event.newBootsHtml}}
-        <dt class="col-md-3 text-md-right">New boots:</dt>
-        <dd class="col-md-9">{{{event.newBootsHtml}}}</dd>
-      {{/if}}
-      {{#if event.newNamesHtml}}
-        <dt class="col-md-3 text-md-right">New names:</dt>
-        <dd class="col-md-9">{{{event.newNamesHtml}}}</dd>
-      {{/if}}
-      {{#if event.visitorsHtml}}
-        <dt class="col-md-3 text-md-right">Visitors:</dt>
-        <dd class="col-md-9">{{{event.visitorsHtml}}}</dd>
-      {{/if}}
-      {{#if event.returnersHtml}}
-        <dt class="col-md-3 text-md-right">Returners:</dt>
-        <dd class="col-md-9">{{{event.returnersHtml}}}</dd>
-      {{/if}}
+      <dt class="col-md-3 text-md-right">New boots:</dt>
+      <dd class="col-md-9">
+        {{#if event.newBootsHtml}}
+          {{{event.newBootsHtml}}}
+        {{else}}
+          {{#if hashers.length}}
+            None
+          {{else}}
+            ?
+          {{/if}}
+        {{/if}}
+      </dd>
+      <dt class="col-md-3 text-md-right">New names:</dt>
+      <dd class="col-md-9">
+        {{#if event.newNamesHtml}}
+          {{{event.newNamesHtml}}}
+        {{else}}
+          {{#if hashers.length}}
+            None
+          {{else}}
+            ?
+          {{/if}}
+        {{/if}}
+      </dd>
+      <dt class="col-md-3 text-md-right">Visitors:</dt>
+      <dd class="col-md-9">
+        {{#if event.visitorsHtml}}
+          {{{event.visitorsHtml}}}
+        {{else}}
+          {{#if hashers.length}}
+            None
+          {{else}}
+            ?
+          {{/if}}
+        {{/if}}
+      </dd>
+      <dt class="col-md-3 text-md-right">Returners:</dt>
+      <dd class="col-md-9">
+        {{#if event.returnersHtml}}
+          {{{event.returnersHtml}}}
+        {{else}}
+          {{#if hashers.length}}
+            None
+          {{else}}
+            ?
+          {{/if}}
+        {{/if}}
+      </dd>
       <dt class="col-md-3 text-md-right">Patches:</dt>
       <dd class="col-md-9">
         {{#if event.patchesPromise.isPending}}
@@ -185,8 +249,8 @@
           {{/if}}
         </dd>
       {{/if}}
-    {{/if}}
-  </dl>
+    </dl>
+  {{/if}}
 
   {{#if canViewRunAttendance}}
     {{#if showAttendancePrompt}}
