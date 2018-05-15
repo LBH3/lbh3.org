@@ -80,7 +80,7 @@
         <th>Hash#</th>
         <th>Hares</th>
         <th>Location</th>
-        <th>Notes</th>
+        <th>Name</th>
         {{^if showFutureTools}}
           {{#if scope.root.session.user.hasherId}}
             <th class="d-print-none"></th>
