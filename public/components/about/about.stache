@@ -21,7 +21,7 @@
       <li><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">
         Haring Guidelines
       </a></li>
-      <li><a href="{{routeUrl page='about'}}/LBH3SongBook.pdf">
+      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/LBH3SongBook.pdf">
         Song Book
       </a></li>
       <li><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">
@@ -43,16 +43,16 @@
           Special Events
         </a></li>
       {{/if}}
-      <li><a href="{{routeUrl page='about'}}/HowLBH3Started.pdf">
+      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/HowLBH3Started.pdf">
         How LBH3 Started
       </a></li>
-      <li><a href="{{routeUrl page='about'}}/FounderSkit.pdf">
+      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/FounderSkit.pdf">
         Found&nbsp;’er&nbsp;Balls Skit
       </a></li>
-      <li><a href="{{routeUrl page='about'}}/Whosleptwithbigpink.pdf">
+      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/Whosleptwithbigpink.pdf">
         Who Slept With Big Pink
       </a></li>
-      <li><a href="{{routeUrl page='about'}}/HotLips.pdf">
+      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/HotLips.pdf">
         Hot Lips Adventures
       </a></li>
     </ul>
