@@ -63,7 +63,7 @@
     "googleapis": "^21.2.0",
     "helmet": "^3.8.1",
     "html-entities": "^1.2.1",
-    "marked": "^0.3.6",
+    "marked": "^0.4.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
     "pg": "^7.4.1",
