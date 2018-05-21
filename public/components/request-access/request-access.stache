@@ -1,5 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 
 <p>
   Are you an LBH3 hasher? Provide your name to get special access to our site.
@@ -20,13 +21,13 @@
       />
       {{#if savingPromise}}
         {{#if savingPromise.isPending}}
-          <span class="fa fa-circle-o-notch fa-spin"></span>
+          <span class="fa fa-circle-notch fa-spin"></span>
           <small>
             Sending your request…
           </small>
         {{/if}}
         {{#if savingPromise.isRejected}}
-          <span class="fa fa-lg fa-warning"></span>
+          <span class="fa fa-lg fa-exclamation-triangle"></span>
           <small>
             <strong>Fuck!</strong> Something failed; you’ll need to try again.
             {{savingPromise.reason.message}}

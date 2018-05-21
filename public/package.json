@@ -35,6 +35,7 @@
     "serviceBaseURL": ""
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free-webfonts": "^1.0.9",
     "awesomplete": "^1.1.2",
     "bootstrap": "^4.0.0",
     "can-component": "^4.0.2",
@@ -60,7 +61,6 @@
     "feathers-hooks": "^2.0.2",
     "feathers-rest": "^1.8.0",
     "feathers-socketio": "^2.0.0",
-    "font-awesome": "^4.7.0",
     "generator-donejs": "^2.1.0",
     "jquery": "^3.2.1",
     "lodash.debounce": "^4.0.8",

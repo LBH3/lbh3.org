@@ -1,4 +1,5 @@
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" />
 
 <footer class="container {{^eq platform.isNode true}}d-flex flex-column flex-sm-row-reverse justify-content-sm-between{{/eq}} text-muted">
   {{^eq platform.isNode true}}
@@ -20,11 +21,11 @@
         <li class="nav-item">
           Sign in with
           <a class="align-baseline btn btn-link px-sm-0 py-3" href="/auth/facebook" title="Facebook">
-            <span class="fa fa-lg fa-facebook-square"></span>
+            <span class="fab fa-lg fa-facebook-square"></span>
           </a>
           or
           <a class="align-baseline btn btn-link px-sm-0 py-3" href="/auth/google" title="Google">
-            <span class="fa fa-lg fa-google"></span>
+            <span class="fab fa-lg fa-google"></span>
           </a>
         </li>
       {{/if}}
