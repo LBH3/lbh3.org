@@ -27,6 +27,15 @@
     <link rel="manifest" href="{{joinBase 'assets/manifest.json'}}">
     <meta name="application-name" content="LBH3">
     <meta name="theme-color" content="#dc3232">
+
+    {{! Global Site Tag (gtag.js) - Google Analytics }}
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91420608-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments)};
+      gtag('js', new Date());
+      gtag('config', 'UA-91420608-1');
+    </script>
   </head>
   <body>
     <can-import from="bootstrap/dist/css/bootstrap.css" />
