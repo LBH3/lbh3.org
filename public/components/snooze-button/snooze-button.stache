@@ -1,15 +1,17 @@
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 
 {{<snoozeButtons}}
   <a class="btn btn-link p-0" href="{{event.snoozeUrlWithAuth}}" target="_blank" title="View Snooze">
-    <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-newspaper-o"></span>
+    <span class="far fa-newspaper {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
   </a>
   {{#if session.user.canAddSnoozes}}
     {{#if faSize}}
       <br>
     {{/if}}
     <button class="btn btn-link p-0">
-      <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-trash-o"></span>
+      <span class="far fa-trash-alt {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
     </button>
   {{/if}}
 {{/snoozeButtons}}
@@ -17,16 +19,16 @@
 {{#if session.user.canAddSnoozes}}
   {{#if uploadPromise}}
     {{#if uploadPromise.isPending}}
-      <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-circle-o-notch fa-spin"></span>
+      <span class="fa fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
     {{/if}}
     {{#if uploadPromise.isRejected}}
-      <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-warning" title="{{uploadPromise.reason.message}}"></span>
+      <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{uploadPromise.reason.message}}"></span>
     {{/if}}
     {{#if uploadPromise.isResolved}}
       {{#if event.snoozeUrlWithAuth}}
         {{>snoozeButtons}}
       {{else}}
-        <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-warning" title="Unknown error"></span>
+        <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="Unknown error"></span>
       {{/if}}
     {{/if}}
   {{else}}
@@ -35,14 +37,14 @@
     {{else}}
       {{#if removePromise}}
         {{#if removePromise.isPending}}
-          <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-circle-o-notch fa-spin"></span>
+          <span class="fa fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
         {{/if}}
         {{#if removePromise.isRejected}}
-          <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-warning" title="{{removePromise.reason.message}}"></span>
+          <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{removePromise.reason.message}}"></span>
         {{/if}}
       {{else}}
         <label class="m-0 p-0" title="Upload Snooze">
-          <span class="fa {{#if faSize}}fa-{{faSize}}{{/if}} fa-upload"></span>
+          <span class="fa fa-upload {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
           <input accept="application/pdf" class="sr-only" type="file" />
         </label>
       {{/if}}

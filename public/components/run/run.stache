@@ -1,5 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/snooze-button/" />
 
@@ -32,7 +33,7 @@
         href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}"
         title="Edit trail"
       >
-        <span class="fa fa-lg fa-pencil-square-o"></span>
+        <span class="far fa-edit fa-lg"></span>
       </a>
     {{/if}}
     {{#if event.hasProbablyEnded}}

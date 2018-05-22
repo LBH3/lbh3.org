@@ -1,5 +1,4 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="font-awesome/css/font-awesome.css" />
 
 <h2>Email List</h2>
 

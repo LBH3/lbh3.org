@@ -1,5 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 
 {{#if session.user.canViewHashersEmailList}}
   <div class="mb-2 row">

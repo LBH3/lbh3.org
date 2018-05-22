@@ -1,5 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/snooze-button/" />
 
@@ -24,7 +25,7 @@
       {{#if scope.root.showFutureTools}}
         {{#if scope.root.session.user.canEditPreTrailInfo}}
           <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
-            <span class="fa fa-edit"></span>
+            <span class="far fa-edit"></span>
           </a>
         {{/if}}
       {{else}}
@@ -96,7 +97,7 @@
             {{#if scope.root.session.user.canEditPreTrailInfo}}
               <td class="d-print-none text-center">
                 <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
-                  <span class="fa fa-edit"></span>
+                  <span class="far fa-edit"></span>
                 </a>
               </td>
             {{/if}}

@@ -1,6 +1,7 @@
 <can-import from="awesomplete/awesomplete.base.css" />
 <can-import from="can-stache-route-helpers" />
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 
 <h2>
   Edit
@@ -78,17 +79,17 @@
           <div class="d-flex">
             <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
             <button class="btn btn-link prevent-default" on:click="scope.root.resetLocation()">
-              <span class="fa fa-remove"></span>
+              <span class="fa fa-times"></span>
             </button>
           </div>
           {{#if locationPromise.isRejected}}
-            <span class="fa fa-warning"></span>
+            <span class="fa fa-exclamation-triangle"></span>
             <small>
               Save failed. Maybe try again?
             </small>
           {{else}}
             {{#if locationPromise.isPending}}
-              <span class="fa fa-circle-o-notch fa-spin"></span>
+              <span class="fa fa-circle-notch fa-spin"></span>
             {{/if}}
             {{#if locationPromise.isResolved}}
               <span class="fa fa-check"></span>
@@ -110,17 +111,17 @@
           <div class="d-flex">
             <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
             <button class="btn btn-link prevent-default" on:click="scope.root.resetOnOn()">
-              <span class="fa fa-remove"></span>
+              <span class="fa fa-times"></span>
             </button>
           </div>
           {{#if onOnPromise.isRejected}}
-            <span class="fa fa-warning"></span>
+            <span class="fa fa-exclamation-triangle"></span>
             <small>
               Save failed. Maybe try again?
             </small>
           {{else}}
             {{#if onOnPromise.isPending}}
-              <span class="fa fa-circle-o-notch fa-spin"></span>
+              <span class="fa fa-circle-notch fa-spin"></span>
             {{/if}}
             {{#if onOnPromise.isResolved}}
               <span class="fa fa-check"></span>
@@ -397,7 +398,7 @@
                       class="btn btn-danger btn-sm prevent-default"
                       on:click="scope.root.removeHasher(hasher)"
                     >
-                      <span class="fa fa-remove"></span>
+                      <span class="fa fa-times"></span>
                     </button>
                   </td>
                 </tr>
@@ -459,7 +460,7 @@
                     type="submit"
                   >
                     {{#if addingHasherPromise.isRejected}}
-                      <span class="fa fa-warning" title="{{addingHasherPromise.reason.message}}"></span>
+                      <span class="fa fa-exclamation-triangle" title="{{addingHasherPromise.reason.message}}"></span>
                     {{else}}
                       <span class="fa fa-plus"></span>
                     {{/if}}
@@ -537,7 +538,7 @@
                       type="submit"
                     >
                       {{#if addingPatchPromise.isRejected}}
-                        <span class="fa fa-warning" title="{{addingPatchPromise.reason.message}}"></span>
+                        <span class="fa fa-exclamation-triangle" title="{{addingPatchPromise.reason.message}}"></span>
                       {{else}}
                         <span class="fa fa-plus"></span>
                       {{/if}}
@@ -559,7 +560,7 @@
                         class="btn btn-danger btn-sm prevent-default"
                         on:click="scope.root.removePatch(this)"
                       >
-                        <span class="fa fa-remove"></span>
+                        <span class="fa fa-times"></span>
                       </button>
                     </td>
                   </tr>

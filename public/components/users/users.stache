@@ -1,5 +1,8 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="font-awesome/css/font-awesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 
 {{#if session.user.canManageUsers}}
   <h2>Users</h2>
@@ -32,10 +35,10 @@
             <tr>
               <td>
                 {{#if facebookProfile}}
-                  <span class="fa fa-lg fa-facebook-square"></span>
+                  <span class="fab fa-lg fa-facebook-square"></span>
                 {{/if}}
                 {{#if googleProfile}}
-                  <span class="fa fa-lg fa-google"></span>
+                  <span class="fab fa-lg fa-google"></span>
                 {{/if}}
                 {{user.email}}
               </td>
@@ -51,7 +54,7 @@
                   {{#if user.hasherPromise.isResolved}}
                     {{user.hasher.hashOrJustName}}
                   {{else}}
-                    <span class="fa fa-circle-o-notch fa-spin"></span>
+                    <span class="fa fa-circle-notch fa-spin"></span>
                   {{/if}}
                 {{else}}
                   {{#if user.requestedName}}
@@ -61,7 +64,7 @@
               </td>
               <td class="text-center">
                 <a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}" title="Edit user">
-                  <span class="fa fa-lg fa-pencil-square-o"></span>
+                  <span class="far fa-edit fa-lg"></span>
                 </a>
               </td>
             </tr>
