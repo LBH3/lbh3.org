@@ -158,6 +158,7 @@ export const ViewModel = DefineMap.extend({
     default: null,
     set: function(newHasherForRun) {
       if (!newHasherForRun) {
+        this.newHasherRoleSplitUp = [];
         newHasherForRun = new EventsHashers({
           paymentTier: '5',
           role: 'Runner',
@@ -167,6 +168,8 @@ export const ViewModel = DefineMap.extend({
       return newHasherForRun;
     }
   },
+
+  newHasherRoleSplitUp: {},
 
   newPatch: {
     default: null,
@@ -267,9 +270,9 @@ export const ViewModel = DefineMap.extend({
     this.onOnPromise = null;
   },
 
-  roles: {
+  rolesSplitUp: {
     default: () => {
-      return EventsHashers.roles;
+      return EventsHashers.rolesSplitUp;
     }
   },
 
@@ -405,13 +408,6 @@ export default Component.extend({
       });
       if (paymentRate) {
         newHasherForRun.paymentNotes = paymentRate.abbr;
-
-        // Give focus to the “Role” select
-        const roleSelect = document.getElementById('role');
-        if (roleSelect) {
-          roleSelect.focus();
-        }
-
       } else {
         const paymentNotesSelect = document.getElementById('payment-notes');
         if (paymentNotesSelect) {
@@ -432,6 +428,20 @@ export default Component.extend({
         }
       }
     }, 250),
+
+    '{newHasherRoleSplitUp} length': function(newHasherRoleSplitUp) {
+      const viewModel = this.viewModel;
+      const newHasherForRun = viewModel.newHasherForRun;
+      if (newHasherForRun) {
+        let newRole = 'Runner';
+        if (newHasherRoleSplitUp && newHasherRoleSplitUp.length) {
+          newRole = newHasherRoleSplitUp.sort().join('/');
+        }
+        if (newRole !== newHasherForRun.role) {
+          newHasherForRun.role = newRole;
+        }
+      }
+    },
 
     enableAutocompleteForInput: function(id, vmProperty, options) {
       const interval = setInterval(() => {// Make sure the element is in the DOM
@@ -495,13 +505,6 @@ export default Component.extend({
         });
         if (paymentRate) {
           newHasherForRun.paymentTier = paymentRate.tier;
-        }
-      }
-
-      if (!newHasherForRun.paymentTier) {// Give focus to the “Payment tier” select
-        const paymentTierSelect = document.getElementById('payment-tier');
-        if (paymentTierSelect) {
-          paymentTierSelect.focus();
         }
       }
     },

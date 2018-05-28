@@ -1,4 +1,5 @@
 <can-import from="awesomplete/awesomplete.base.css" />
+<can-import from="can-stache-converters" />
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
@@ -360,6 +361,11 @@
                   </label>
                 </th>
                 <th>
+                  <label for="role">
+                    Role
+                  </label>
+                </th>
+                <th>
                   <label for="payment-tier">
                     Payment tier
                   </label>
@@ -367,11 +373,6 @@
                 <th>
                   <label for="payment-notes">
                     Payment notes
-                  </label>
-                </th>
-                <th>
-                  <label for="role">
-                    Role
                   </label>
                 </th>
                 <th></th>
@@ -386,13 +387,13 @@
                       {{hasher.hashOrJustName}}
                     </a>
                   </td>
+                  <td>{{hasher.role}}</td>
                   <td>
                     {{hasher.paymentTier}}
                   </td>
                   <td>
                     {{hasher.paymentNotes}}
                   </td>
-                  <td>{{hasher.role}}</td>
                   <td class="text-center">
                     <button
                       class="btn btn-danger btn-sm prevent-default"
@@ -416,6 +417,21 @@
                   />
                 </td>
                 <td>
+                  {{#each rolesSplitUp}}
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label {{^if ../newHasherForRun.hasherId}}text-muted{{/if}}">
+                        <input
+                          checked:bind="boolean-to-inList(this, ../newHasherRoleSplitUp)"
+                          class="form-check-input"
+                          {{^if ../newHasherForRun.hasherId}}disabled{{/if}}
+                          type="checkbox"
+                        />
+                        {{this}}
+                      </label>
+                    </div>
+                  {{/each}}
+                </td>
+                <td>
                   <select
                     class="form-control"
                     {{^if newHasherForRun.hasherId}}disabled{{/if}}
@@ -437,20 +453,6 @@
                     value:bind="newHasherForRun.paymentNotes"
                     type="text"
                   />
-                </td>
-                <td>
-                  <select
-                    class="form-control"
-                    {{^if newHasherForRun.hasherId}}disabled{{/if}}
-                    id="role"
-                    value:bind="newHasherForRun.role"
-                  >
-                    {{#each roles role=value}}
-                      <option value="{{role}}">
-                        {{role}}
-                      </option>
-                    {{/each}}
-                  </select>
                 </td>
                 <td class="text-center">
                   <button

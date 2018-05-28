@@ -21,11 +21,14 @@ const EventsHashers = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.eventsPromise.then(events => {
-        if (events && events.length > 0) {
-          setValue(events[0]);
-        }
-      });
+      const eventsPromise = this.eventsPromise;
+      if (eventsPromise) {
+        eventsPromise.then(events => {
+          if (events && events.length > 0) {
+            setValue(events[0]);
+          }
+        });
+      }
     },
     serialize: false
   },
@@ -141,6 +144,16 @@ EventsHashers.roles = [
   'Scribe/New Name',
   'Visitor',
   ''
+];
+
+EventsHashers.rolesSplitUp = [
+  'Hare',
+  'Hashit',
+  'New Boot',
+  'New Name',
+  'Returner',
+  'Scribe',
+  'Visitor'
 ];
 
 EventsHashers.rolesThatUpdateRunInfo = [
