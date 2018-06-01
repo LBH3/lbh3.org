@@ -10,7 +10,6 @@ before_install:
   - ./public/firefox-allow-popups.sh
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
-  - npm install -g npm@6
   - npm install -g greenkeeper-lockfile@1
 install:
   - npm ci
