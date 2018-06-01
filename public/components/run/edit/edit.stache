@@ -79,7 +79,7 @@
           </label>
           <div class="d-flex">
             <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
-            <button class="btn btn-link prevent-default" on:click="scope.root.resetLocation()">
+            <button class="btn btn-link prevent-default" on:click="scope.root.resetLocation()" type="button">
               <span class="fa fa-times"></span>
             </button>
           </div>
@@ -111,7 +111,7 @@
           </label>
           <div class="d-flex">
             <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
-            <button class="btn btn-link prevent-default" on:click="scope.root.resetOnOn()">
+            <button class="btn btn-link prevent-default" on:click="scope.root.resetOnOn()" type="button">
               <span class="fa fa-times"></span>
             </button>
           </div>
@@ -398,6 +398,7 @@
                     <button
                       class="btn btn-danger btn-sm prevent-default"
                       on:click="scope.root.removeHasher(hasher)"
+                      type="button"
                     >
                       <span class="fa fa-times"></span>
                     </button>
@@ -561,6 +562,7 @@
                       <button
                         class="btn btn-danger btn-sm prevent-default"
                         on:click="scope.root.removePatch(this)"
+                        type="button"
                       >
                         <span class="fa fa-times"></span>
                       </button>
