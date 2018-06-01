@@ -133,11 +133,7 @@
         {{#if event.hashitReasonHtml}}
           {{{event.hashitReasonHtml}}}
         {{else}}
-          {{#if hashers.length}}
-            None
-          {{else}}
-            ?
-          {{/if}}
+          {{valueForRole('hashit')}}
         {{/if}}
       </dd>
       <dt class="col-sm-3 text-sm-right">Scribe:</dt>
@@ -145,11 +141,7 @@
         {{#if event.scribesHtml}}
           {{{event.scribesHtml}}}
         {{else}}
-          {{#if hashers.length}}
-            None
-          {{else}}
-            ?
-          {{/if}}
+          {{valueForRole('scribe')}}
         {{/if}}
       </dd>
       <dt class="col-sm-3 text-sm-right">Run Notes:</dt>
@@ -177,11 +169,7 @@
         {{#if event.newBootsHtml}}
           {{{event.newBootsHtml}}}
         {{else}}
-          {{#if hashers.length}}
-            None
-          {{else}}
-            ?
-          {{/if}}
+          {{valueForRole('new boot')}}
         {{/if}}
       </dd>
       <dt class="col-md-3 text-md-right">New names:</dt>
@@ -189,11 +177,7 @@
         {{#if event.newNamesHtml}}
           {{{event.newNamesHtml}}}
         {{else}}
-          {{#if hashers.length}}
-            None
-          {{else}}
-            ?
-          {{/if}}
+          {{valueForRole('new name')}}
         {{/if}}
       </dd>
       <dt class="col-md-3 text-md-right">Visitors:</dt>
@@ -201,11 +185,7 @@
         {{#if event.visitorsHtml}}
           {{{event.visitorsHtml}}}
         {{else}}
-          {{#if hashers.length}}
-            None
-          {{else}}
-            ?
-          {{/if}}
+          {{valueForRole('visitor')}}
         {{/if}}
       </dd>
       <dt class="col-md-3 text-md-right">Returners:</dt>
@@ -213,11 +193,7 @@
         {{#if event.returnersHtml}}
           {{{event.returnersHtml}}}
         {{else}}
-          {{#if hashers.length}}
-            None
-          {{else}}
-            ?
-          {{/if}}
+          {{valueForRole('returner')}}
         {{/if}}
       </dd>
       <dt class="col-md-3 text-md-right">Patches:</dt>

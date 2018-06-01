@@ -171,6 +171,21 @@ export const ViewModel = DefineMap.extend({
     return `${this.ogTitle} | LBH3`;
   },
   trailNumber: 'number',
+  valueForRole: function(role) {
+    const hashers = this.hashers;
+    if (hashers && hashers.length) {
+      const filtered = hashers.filter(hasher => {
+        return hasher.role.toLowerCase().indexOf(role) > -1;
+      }).map(hasher => {
+        return hasher.hashOrJustName;
+      });
+      if (filtered.length) {
+        return filtered.join('; ');
+      }
+      return 'None';
+    }
+    return '?';
+  },
   year: 'number'
 });
 
