@@ -69,6 +69,7 @@
                 {{else}}
                   {{value.hashName}}
                 {{/if}}
+                {{scope.vm.addendum(scope.vm.year, scope.vm.positionForHasher(value))}}
               {{/if}}
             </li>
           {{/each}}

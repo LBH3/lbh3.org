@@ -5,10 +5,27 @@ import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import './year.less';
+import moment from 'moment-timezone';
 import route from 'can-route';
 import view from './year.stache';
 
+const timeZone = 'America/Los_Angeles';
+
 export const ViewModel = DefineMap.extend({
+  addendum: function(year, hasher) {
+    const parts = [];
+    if (hasher) {
+      if (hasher.startDate !== year.startDate) {
+        const startDate = moment(hasher.startDate).tz(timeZone);
+        parts.push('starting in ' + startDate.format('MMMM'));
+      }
+      if (hasher.endDate !== year.endDate) {
+        const endDate = moment(hasher.endDate).tz(timeZone);
+        parts.push('until ' + endDate.format('MMMM'));
+      }
+    }
+    return parts.join(' ');
+  },
   hashers: {
     get: function(lastValue, setValue) {
       if (lastValue) {
@@ -50,6 +67,12 @@ export const ViewModel = DefineMap.extend({
         }
       });
     }
+  },
+  positionForHasher: function(hasher) {
+    const filtered = this.hashers.filter(item => {
+      return hasher.id === item.hasherId;
+    });
+    return filtered[0];
   },
   routeForHasher: function(hasher) {
     const routeParams = {
