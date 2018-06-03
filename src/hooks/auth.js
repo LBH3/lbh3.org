@@ -1,4 +1,4 @@
-const errors = require('feathers-errors');
+const errors = require('@feathersjs/errors');
 const getBoredHasher = require('../utils/get-bored-hasher');
 
 module.exports = {

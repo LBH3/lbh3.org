@@ -1,7 +1,7 @@
-const authentication = require('feathers-authentication');
-const jwt = require('feathers-authentication-jwt');
+const authentication = require('@feathersjs/authentication');
+const jwt = require('@feathersjs/authentication-jwt');
 
-const oauth2 = require('feathers-authentication-oauth2');
+const oauth2 = require('@feathersjs/authentication-oauth2');
 const GoogleStrategy = require('passport-google-oauth20');
 const FacebookStrategy = require('passport-facebook');
 

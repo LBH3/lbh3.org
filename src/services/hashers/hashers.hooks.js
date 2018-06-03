@@ -1,7 +1,7 @@
 /*eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
-const { authenticate } = require('feathers-authentication').hooks;
+const { authenticate } = require('@feathersjs/authentication').hooks;
 const authHook = require('../../hooks/auth');
-const errors = require('feathers-errors');
+const errors = require('@feathersjs/errors');
 const getBoredHasher = require('../../utils/get-bored-hasher');
 const jwtAuthentication = authenticate('jwt');
 const makeRaw = require('../../utils/make-raw');

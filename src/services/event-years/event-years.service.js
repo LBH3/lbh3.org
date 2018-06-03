@@ -1,7 +1,6 @@
 // Initializes the `event-years` service on path `/api/event-years`
 const createService = require('./event-years.class.js');
 const hooks = require('./event-years.hooks');
-const filters = require('./event-years.filters');
 
 module.exports = function () {
   const app = this;
@@ -20,8 +19,4 @@ module.exports = function () {
   const service = app.service('api/event-years');
 
   service.hooks(hooks);
-
-  if (service.filter) {
-    service.filter(filters);
-  }
 };

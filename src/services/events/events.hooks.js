@@ -1,5 +1,5 @@
 /*eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
-const { authenticate } = require('feathers-authentication').hooks;
+const { authenticate } = require('@feathersjs/authentication').hooks;
 const authHook = require('../../hooks/auth');
 const Entities = require('html-entities').AllHtmlEntities;
 const google = require('googleapis');
