@@ -1,11 +1,12 @@
 /* eslint-disable no-console, no-unreachable */
+const { authenticate } = require('@feathersjs/authentication').express;
 const aws = require('aws-sdk');
+const cookieParser = require('cookie-parser');
 const env = process.env.NODE_ENV || 'development';
 const fs = require('fs');
 const ssr = require('done-ssr-middleware');
 
-module.exports = function () {
-  const app = this;
+module.exports = function (app) {
 
   app.use(function(req, res, next) {
     // res.header('Referrer-Policy', 'same-origin');
@@ -31,96 +32,89 @@ module.exports = function () {
     });
   }
 
-  app.get('/api/hashers/:hasherId/vcard.vcf', function(req, res) {
-    res.status(401);
-    res.end();
-    return;
-
+  app.get('/api/hashers/:hasherId/vcard.vcf', cookieParser(), authenticate('jwt'), function(req, res) {
     const params = req.params;
 
     const hasherId = params.hasherId;
-    const query = `SELECT * FROM hashers WHERE id=${hasherId}`;
-    const sequelize = app.get('sequelizeClient');
-    sequelize.query(query, {
-      type: sequelize.QueryTypes.SELECT
-    }).then(hashers => {
-      const hasher = hashers[0];
+    app.service('api/hashers').get(hasherId, {user: req.user}).then(hasher => {
       res.setHeader('Content-Type', 'text/vcard');
       const vcardLines = [
         'BEGIN:VCARD',
         'VERSION:3.0'
       ];
-      if (hasher.family_name || hasher.given_name) {
-        vcardLines.push(`N:${hasher.family_name};${hasher.given_name};;;`);
-        vcardLines.push(`FN:${hasher.given_name} ${hasher.family_name}`);
+      if (hasher.familyName || hasher.givenName) {
+        vcardLines.push(`N:${hasher.familyName};${hasher.givenName};;;`);
+        vcardLines.push(`FN:${hasher.givenName} ${hasher.familyName}`);
       }
-      if (hasher.hash_name) {
-        vcardLines.push(`NICKNAME:${hasher.hash_name}`);
+      if (hasher.hashName) {
+        vcardLines.push(`NICKNAME:${hasher.hashName}`);
       }
-      if (hasher.birth_day && hasher.birth_month) {
-        let birthDay = hasher.birth_day.toString();
+      if (hasher.birthDay && hasher.birthMonth) {
+        let birthDay = hasher.birthDay.toString();
         birthDay = birthDay.length === 1 ? `0${birthDay}` : birthDay;
-        let birthMonth = hasher.birth_month.toString();
+        let birthMonth = hasher.birthMonth.toString();
         birthMonth = birthMonth.length === 1 ? `0${birthMonth}` : birthMonth;
-        const birthYear = hasher.birth_year || '--';
+        const birthYear = hasher.birthYear || '--';
         vcardLines.push(`BDAY:${birthYear}${birthMonth}${birthDay}`);
       }
-      if (hasher.headshot_url) {
-        vcardLines.push(`PHOTO:${hasher.headshot_url}`);
+      if (hasher.headshotUrl) {
+        vcardLines.push(`PHOTO:${hasher.headshotUrl}`);
       }
-      if (hasher.email_addresses && hasher.email_addresses.length) {
-        hasher.email_addresses.forEach(emailAddress => {
+      if (hasher.emailAddresses && hasher.emailAddresses.length) {
+        hasher.emailAddresses.forEach(emailAddress => {
           vcardLines.push(`EMAIL:${emailAddress}`);
         });
       }
-      if (hasher.email_addresses_private && hasher.email_addresses_private.length) {
-        hasher.email_addresses_private.forEach(emailAddress => {
+      if (hasher.emailAddressesPrivate && hasher.emailAddressesPrivate.length) {
+        hasher.emailAddressesPrivate.forEach(emailAddress => {
           vcardLines.push(`EMAIL:${emailAddress}`);
         });
       }
-      if (hasher.cell_phone) {
-        vcardLines.push(`TEL;TYPE=CELL,VOICE:${hasher.cell_phone}`);
+      if (hasher.cellPhone) {
+        vcardLines.push(`TEL;TYPE=CELL,VOICE:${hasher.cellPhone}`);
       }
-      if (hasher.cell_phone_private) {
-        vcardLines.push(`TEL;TYPE=CELL,VOICE:${hasher.cell_phone_private}`);
+      if (hasher.cellPhonePrivate) {
+        vcardLines.push(`TEL;TYPE=CELL,VOICE:${hasher.cellPhonePrivate}`);
       }
-      if (hasher.home_phone) {
-        vcardLines.push(`TEL;TYPE=HOME,VOICE:${hasher.home_phone}`);
+      if (hasher.homePhone) {
+        vcardLines.push(`TEL;TYPE=HOME,VOICE:${hasher.homePhone}`);
       }
-      if (hasher.home_phone_private) {
-        vcardLines.push(`TEL;TYPE=HOME,VOICE:${hasher.home_phone_private}`);
+      if (hasher.homePhonePrivate) {
+        vcardLines.push(`TEL;TYPE=HOME,VOICE:${hasher.homePhonePrivate}`);
       }
-      if (hasher.work_phone) {
-        vcardLines.push(`TEL;TYPE=WORK,VOICE:${hasher.work_phone}`);
+      if (hasher.workPhone) {
+        vcardLines.push(`TEL;TYPE=WORK,VOICE:${hasher.workPhone}`);
       }
-      if (hasher.work_phone_private) {
-        vcardLines.push(`TEL;TYPE=WORK,VOICE:${hasher.work_phone_private}`);
+      if (hasher.workPhonePrivate) {
+        vcardLines.push(`TEL;TYPE=WORK,VOICE:${hasher.workPhonePrivate}`);
       }
-      if (hasher.address_street) {
+      if (hasher.addressStreet) {
         vcardLines.push([
           'ADR',
           ':',
           '',
-          hasher.address_street,
-          hasher.address_city,
-          hasher.address_state,
-          hasher.address_zip_code,
-          hasher.address_country
+          hasher.addressStreet,
+          hasher.addressCity,
+          hasher.addressState,
+          hasher.addressZipCode,
+          hasher.addressCountry
         ].join(';'));
       }
-      if (hasher.address_street_private) {
+      if (hasher.addressStreetPrivate) {
         vcardLines.push([
           'ADR',
           ':',
           '',
-          hasher.address_street_private,
-          hasher.address_city_private,
-          hasher.address_state_private,
-          hasher.address_zip_code_private,
-          hasher.address_country_private
+          hasher.addressStreetPrivate,
+          hasher.addressCityPrivate,
+          hasher.addressStatePrivate,
+          hasher.addressZipCodePrivate,
+          hasher.addressCountryPrivate
         ].join(';'));
       }
-      vcardLines.push(`REV:${hasher.updated_at.toISOString()}`);
+      if (hasher.updatedAt) {
+        vcardLines.push(`REV:${hasher.updatedAt.toISOString()}`);
+      }
       vcardLines.push('END:VCARD');
       res.write(vcardLines.join('\n'));
       res.end();

@@ -26,7 +26,12 @@
         <h2>{{hasher.hashOrJustName}}</h2>
       </div>
       <div class="col text-center text-md-right">
-        <a class="d-none p-2 p-md-1 pt-md-2" download href="/api/hashers/{{id}}/vcard.vcf" title="Download this hasher’s contact info">
+        <a
+          class="d-inline-block d-print-none p-2 p-md-1 pt-md-2"
+          download
+          href="/api/hashers/{{id}}/vcard.vcf"
+          title="Download this hasher’s contact info"
+        >
           <span class="fa fa-download fa-lg"></span>
         </a>
         {{#if session.user.canEditHasherInfo}}
