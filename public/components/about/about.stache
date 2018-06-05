@@ -1,4 +1,6 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 
 <h2>About LBH3</h2>
 
@@ -69,3 +71,61 @@
     </ul>
   </div>
 </div>
+
+{{#if session.user.canExportData}}
+  <h2>Download data</h2>
+  <p>Click on the links below to download parts of the database as CSV.</p>
+  <div class="alert alert-danger" role="alert">
+    This is sensitive, private data.
+    Do not download it unnecessarily.
+    Permanently delete it from your computer after using it.
+    <strong>Do not share it with anyone else.</strong>
+  </div>
+  <ul class="list-unstyled">
+    <li>
+      <a download href="/api/csv?service=bored-hashers">
+        Bored Hashers
+      </a>
+    </li>
+    <li>
+      <a download href="/api/csv?service=bored-positions">
+        Bored Positions
+      </a>
+    </li>
+    <li>
+      <a download href="/api/csv?service=bored-years">
+        Bored Years
+      </a>
+    </li>
+    <li>
+      <a download href="/api/csv?service=events">
+        Events
+      </a>
+    </li>
+    <li>
+      <a download href="/api/csv?service=events-hashers">
+        Events Hashers
+      </a>
+    </li>
+    <li>
+      <a download href="/api/csv?service=hashers">
+        Hashers
+      </a>
+    </li>
+    <li>
+      <a download href="/api/csv?service=patches">
+        Patches
+      </a>
+    </li>
+    <li>
+      <a download href="/api/csv?service=places">
+        Places
+      </a>
+    </li>
+    <li>
+      <a download href="/api/csv?service=special-events">
+        Special Events
+      </a>
+    </li>
+  </ul>
+{{/if}}

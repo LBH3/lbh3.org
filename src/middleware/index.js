@@ -3,7 +3,9 @@ const { authenticate } = require('@feathersjs/authentication').express;
 const aws = require('aws-sdk');
 const cookieParser = require('cookie-parser');
 const env = process.env.NODE_ENV || 'development';
+const eol = require('os').EOL;
 const fs = require('fs');
+const json2csv = require('json2csv');
 const ssr = require('done-ssr-middleware');
 
 module.exports = function (app) {
@@ -31,6 +33,60 @@ module.exports = function (app) {
       }
     });
   }
+
+  app.get('/api/csv', cookieParser(), authenticate('jwt'), function(req, res) {
+    const $limit = 500;
+    const query = req.query;
+
+    const serviceName = `api/${query.service}`;
+    const service = app.service(serviceName);
+
+    const errorHandler = error => {
+      console.error(`Error creating CSV for service ${service}:`, error);
+      res.status(500);
+      res.write(JSON.stringify(error));
+      res.end();
+    };
+
+    const processResults = (results, options) => {
+      const parser = new json2csv.Parser(options);
+      const csv = parser.parse(results.data);
+      res.write(csv + eol);
+    };
+
+    let result = service.find({ query: {$limit}, user: req.user });
+
+    result.then(initialResults => {
+      res.setHeader('Content-Disposition', `attachment;filename=${query.service}.csv`);
+      res.setHeader('Content-Type', 'text/csv');
+
+      processResults(initialResults);
+
+      const total = initialResults.total;
+      const numberOfPages = Math.ceil(total / $limit);
+
+      for (let i = 1; i < numberOfPages; i++) {
+        result = result.then(() => {
+          return new Promise((resolve, reject) => {
+            service.find({
+              query: {
+                $limit,
+                $skip: $limit * i
+              },
+              user: req.user
+            }).then(results => {
+              processResults(results, {header: false});
+              resolve();
+            }, reject);
+          });
+        }, errorHandler);
+      }
+
+      result.then(() => {
+        res.end();
+      }, errorHandler);
+    }, errorHandler);
+  });
 
   app.get('/api/hashers/:hasherId/vcard.vcf', cookieParser(), authenticate('jwt'), function(req, res) {
     const params = req.params;

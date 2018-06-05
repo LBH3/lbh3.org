@@ -7,28 +7,59 @@ const jwtAuthentication = authenticate('jwt');
 const makeRaw = require('../../utils/make-raw');
 const searchHook = require('../../hooks/search');
 
-const afterFindHook = function(hook) {
-  if (hook) {
-    return hook;
-  }
-  const hashers = hook.result.data || [];
-  const sequelizeClient = hook.app.get('sequelizeClient');
-  const hareCountPromises = hashers.map(hasher => {
-    return getHareCountForHasher(sequelizeClient, hasher.id);
+const shouldFilterData = function(hook) {
+  return new Promise(function(resolve) {
+    const user = hook.params.user;
+    if (user) {
+      const hasherId = hook.result.id;
+      if (hasherId === user.hasherId) {
+        // Ok to not filter the data and include the hasher’s mileage
+        resolve(false);
+      } else {
+        getBoredHasher(hook.app, user).then(boredHashers => {
+          const found = boredHashers.data.find(boredHasher => {
+            return boredPositions.includes(boredHasher.positionId);
+          });
+          resolve(!found);
+        }, () => {
+          resolve(true);
+        });
+      }
+    } else {
+      resolve(true);
+    }
   });
-  return Promise.all(hareCountPromises).then(results => {
-    results.forEach((result, index) => {
-      hashers[index].hareCount = result;
+};
+
+const afterFindHook = function(hook) {
+  return shouldFilterData(hook).then(filter => {
+    const hashers = hook.result.data;
+    if (filter) {
+      hook.result.data = hashers.map(hasher => {
+        return filterData(hasher);
+      });
+    }
+    if (hook) {
+      return hook;
+    }
+    const sequelizeClient = hook.app.get('sequelizeClient');
+    const hareCountPromises = hashers.map(hasher => {
+      return getHareCountForHasher(sequelizeClient, hasher.id);
     });
-    const runMileagePromises = hashers.map(hasher => {
-      return getRunMileageForHasher(sequelizeClient, hasher.id);
+    return Promise.all(hareCountPromises).then(results => {
+      results.forEach((result, index) => {
+        hashers[index].hareCount = result;
+      });
+      const runMileagePromises = hashers.map(hasher => {
+        return getRunMileageForHasher(sequelizeClient, hasher.id);
+      });
+      return Promise.all(runMileagePromises);
+    }).then(results => {
+      results.forEach((result, index) => {
+        hashers[index].runMileage = result;
+      });
+      return hook;
     });
-    return Promise.all(runMileagePromises);
-  }).then(results => {
-    results.forEach((result, index) => {
-      hashers[index].runMileage = result;
-    });
-    return hook;
   });
 };
 
@@ -57,34 +88,13 @@ const updateHookResultWithHasherStats = function(hook) {
 };
 
 const afterGetHook = function(hook) {
-  const user = hook.params.user;
-  if (user) {
-    const hasherId = hook.result.id;
-    if (hasherId === user.hasherId) {
-      // Ok to not filter the data and include the hasher’s mileage
-      return updateHookResultWithHasherStats(hook);
+  return shouldFilterData(hook).then(filter => {
+    if (filter) {
+      hook.result = filterData(hook.result);
     } else {
-      return new Promise(function(resolve) {
-        getBoredHasher(hook.app, user).then(boredHashers => {
-          const found = boredHashers.data.find(boredHasher => {
-            return boredPositions.includes(boredHasher.positionId);
-          });
-          if (found) {
-            // Ok to not filter the data and include the hasher’s mileage
-            updateHookResultWithHasherStats(hook).then(resolve);
-          } else {
-            hook.result = filterData(hook.result);
-            resolve(hook);
-          }
-        }, () => {
-          hook.result = filterData(hook.result);
-          resolve(hook);
-        });
-      });
+      return updateHookResultWithHasherStats(hook);
     }
-  } else {
-    hook.result = filterData(hook.result);
-  }
+  });
 };
 
 const attachAuthInfo = function(hook) {

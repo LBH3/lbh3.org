@@ -43,6 +43,10 @@ var User = DefineMap.extend('User', {
     type: 'boolean',
     serialize: false
   },
+  canExportData: {
+    type: 'boolean',
+    serialize: false
+  },
   canManageUsers: {
     type: 'boolean',
     serialize: false

@@ -99,6 +99,7 @@ const getBoredInfo = function(hook) {
         canEditHasherInfo: false,
         canEditPostTrailInfo: false,
         canEditPreTrailInfo: false,
+        canExportData: false,
         canManageUsers: false,
         canViewDirectoryInfo: false,
         canViewHashersEmailList: false,
@@ -113,6 +114,7 @@ const getBoredInfo = function(hook) {
       if (boredPositions.includes(authHook.HASH_CASH)) {
         permission = Object.assign(permission, {
           canEditHasherInfo: true,
+          canExportData: true,
           canViewDirectoryInfo: true,
           canViewRunAttendance: true
         });
@@ -129,6 +131,7 @@ const getBoredInfo = function(hook) {
           canAddSnoozes: true,
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,
+          canExportData: true,
           canViewDirectoryInfo: true,
           canViewHashersEmailList: true,
           canViewOldData: true,
@@ -156,6 +159,7 @@ const getBoredInfo = function(hook) {
       if (boredPositions.includes(authHook.TRAILMASTERS)) {
         permission = Object.assign(permission, {
           canEditPreTrailInfo: true,
+          canExportData: true,
           canViewDirectoryInfo: true,
           canViewRunAttendance: true
         });
@@ -170,6 +174,7 @@ const getBoredInfo = function(hook) {
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,
           canEditPreTrailInfo: true,
+          canExportData: true,
           canManageUsers: true,
           canViewDirectoryInfo: true,
           canViewHashersEmailList: true,
