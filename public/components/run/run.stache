@@ -27,7 +27,7 @@
     {{/if}}
   </h2>
   <div class="d-flex justify-content-center mb-3">
-    {{#if session.user.canEditPostTrailInfo}}
+    {{#if shouldShowEditButton}}
       <a
         class="d-inline-block d-print-none mx-5"
         href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}"

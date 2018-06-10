@@ -139,6 +139,15 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
+  shouldShowEditButton: {
+    get: function() {
+      const user  = this.session && this.session.user;
+      if (user) {
+        return user.canEditPostTrailInfo || user.canEditPreTrailInfo;
+      }
+      return false;
+    }
+  },
   shouldShowPostTrailData: {
     get: function() {
       return this.event.hasEnded && this.canViewRunAttendance;
