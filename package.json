@@ -40,7 +40,9 @@
     "test:ci": "npm run test:production && node public/test.sauce-labs.js",
     "test:production": "npm run eslint && npm run build:tests && npm run mocha && npm run testee:production",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
-    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
+    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.6",
@@ -72,7 +74,8 @@
     "sequelize-cli": "^4.0.0",
     "serve-favicon": "^2.4.3",
     "striptags": "^3.0.1",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "snyk": "^1.88.1"
   },
   "devDependencies": {
     "eslint": "^4.4.1",
@@ -82,5 +85,6 @@
     "request-promise": "^4.2.1",
     "through": "^2.3.8",
     "xml-stream": "^0.4.5"
-  }
+  },
+  "snyk": true
 }
