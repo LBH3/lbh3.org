@@ -343,13 +343,13 @@
                         </mark>
                       {{/eq}}
                     </td>
-                    <td>{{record.rate}}</td>
+                    <td>${{record.rate}}</td>
                     <td>
                       {{#eq record.total 0}}
-                        {{record.total}}
+                        ${{record.total}}
                       {{else}}
                         <mark>
-                          {{record.total}}
+                          ${{record.total}}
                         </mark>
                       {{/eq}}
                     </td>
@@ -367,7 +367,7 @@
                   <td></td>
                   <th scope="col">
                     <mark>
-                      {{cashReport.totalAmount}}
+                      ${{cashReport.totalAmount}}
                     </mark>
                   </th>
                 </tr>
