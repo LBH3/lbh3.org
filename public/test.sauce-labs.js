@@ -11,9 +11,9 @@ testSauceLabs({
   }, */{
     'appium-version': '1.7.1',
     browserName: 'Safari',
-    deviceName: 'iPhone 6 Simulator',
+    deviceName: 'iPhone 7 Simulator',
     platform: 'iOS',
-    version: '9.3'
+    version: '10.0'
   }, /*{
     browserName: 'internet explorer',
     platform: 'Windows 7',
@@ -32,8 +32,8 @@ testSauceLabs({
     version: '46'
   }, {
     browserName: 'safari',
-    platform: 'OS X 10.11',
-    version: '9'
+    platform: 'OS X 10.12',
+    version: '10'
   }],
   urls: [{
     name: 'lbh3',
