@@ -159,6 +159,16 @@ export const ViewModel = DefineMap.extend({
       return !this.hashersPromise || !this.hashers || this.hashers.length === 0;
     }
   },
+  showDonation: {
+    type: 'boolean',
+    get: function() {
+      const event = this.event;
+      if (event) {
+        return !event.hasProbablyEnded && !event.specialEventId;
+      }
+      return false;
+    }
+  },
   sortAttendanceBy: {
     default: 'name',
     type: 'string'

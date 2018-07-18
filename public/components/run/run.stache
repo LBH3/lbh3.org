@@ -63,7 +63,7 @@
       <dt class="col-sm-3 text-sm-right">Hares:</dt>
       <dd class="col-sm-9">{{{event.haresHtml}}}</dd>
     {{/if}}
-    {{^if event.hasProbablyEnded}}
+    {{#if showDonation}}
       <dt class="col-sm-3 text-sm-right">Donation:</dt>
       <dd class="col-sm-9">$5 for the run</dd>
     {{/if}}
