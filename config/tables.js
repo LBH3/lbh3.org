@@ -73,6 +73,7 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       snoozeDateSecondary: textType('snooze_date_secondary'),
       snoozeTitleMd: textType('snooze_title_md'),
       snoozeUrl: textType('snooze_url'),
+      specialEventId: intType('special_event_id'),
       trailCommentsMd: textType('trail_comments_md'),
       trailNumber: intType('trail_number'),
       visitorsMd: textType('visitors_md')
