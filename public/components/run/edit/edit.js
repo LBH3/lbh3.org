@@ -9,6 +9,7 @@ import Hasher from '~/models/hasher';
 import Patch from '~/models/patch';
 import Place from '~/models/place';
 import Session from '~/models/session';
+import SpecialEvent from '~/models/special-event';
 import './edit.less';
 import { sortByHashOrJustName } from '~/components/run/sort-hashers';
 import debounce from 'lodash.debounce';
@@ -309,6 +310,12 @@ export const ViewModel = DefineMap.extend({
   showPostTrailFields: {
     get: function() {
       return this.event.hasStartedOrIsCloseToStarting && this.session && this.session.user.canEditPostTrailInfo;
+    }
+  },
+
+  specialEventPromise: {
+    get: function() {
+      return SpecialEvent.connection.getList();
     }
   },
 

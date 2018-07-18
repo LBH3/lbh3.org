@@ -250,6 +250,28 @@
             </div>
           {{/if}}
         </div>
+      {{else}}
+        {{#if session.user.canManageUsers}}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="special-event">
+                Special Event
+              </label>
+              <select
+                class="form-control"
+                id="special-event"
+                value:bind="event.specialEventId"
+              >
+                <option value="0"></option>
+                {{#each specialEventPromise.value specialEvent=value}}
+                  <option value="{{specialEvent.id}}">
+                    {{specialEvent.urlId}} {{specialEvent.year}}
+                  </option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+        {{/if}}
       {{/if}}
 
       {{#if editingEventPromise.isPending}}

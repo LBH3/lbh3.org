@@ -65,6 +65,7 @@ const Event = DefineMap.extend({
       return snoozeUrl;
     }
   },
+  specialEventId: 'number',
   trailCommentsMd: 'string',
   trailNumber: 'number',
 
