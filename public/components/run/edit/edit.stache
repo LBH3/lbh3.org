@@ -149,7 +149,6 @@
           <textarea
             class="form-control"
             id="directions"
-            on:input:value:to="event.directionsMd"
             value:bind="event.directionsMd">
           </textarea>
           {{^if event.hasEnded}}
@@ -170,7 +169,6 @@
           <textarea
             class="form-control"
             id="from-the-hares"
-            on:input:value:to="event.fromTheHaresMd"
             value:bind="event.fromTheHaresMd">
           </textarea>
           {{^if event.hasEnded}}

@@ -32,7 +32,6 @@
               <textarea
                 class="border-primary form-control"
                 id="description"
-                on:input:value:to="descriptionMd"
                 rows="8"
                 value:bind="descriptionMd"
               ></textarea>
