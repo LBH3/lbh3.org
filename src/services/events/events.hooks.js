@@ -20,6 +20,7 @@ const allowedFields = [
   'nameMd',
   'onOnGooglePlaceId',
   'onOnMd',
+  'specialEventId',
   'startDatetime',
   'trailNumber'
 ];
