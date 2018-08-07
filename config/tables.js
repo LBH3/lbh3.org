@@ -109,7 +109,7 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       internationalPhoneNumber: stringType('international_phone_number'),
       name: textType('name'),
       placeId: stringType('place_id'),
-      reference: stringType('reference'),
+      reference: textType('reference'),
       scope: stringType('scope'),
       types: textArrayType('types'),
       url: textType('url'),
