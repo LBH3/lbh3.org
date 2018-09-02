@@ -69,7 +69,7 @@
     "moment": "^2.18.1",
     "moment-timezone": "^0.5.13",
     "socket.io-client": "^2.0.3",
-    "steal": "^1.6.5",
+    "steal": "^2.1.2",
     "steal-less": "^1.2.2",
     "steal-platform": "0.0.4",
     "steal-socket.io": "^4.0.9",
@@ -82,7 +82,7 @@
     "funcunit": "^3.2.0",
     "steal-conditional": "^1.0.0",
     "steal-qunit": "^1.0.1",
-    "steal-tools": "^1.11.3",
+    "steal-tools": "^2.0.5",
     "test-saucelabs": "0.0.2",
     "testee": "^0.7.0"
   }
