@@ -25,15 +25,15 @@
       On On!!!
     </small>
   </p>
-  {{^if isBeforeJuly23}}
+  {{^if isBeforeOctober13}}
     <hr>
   {{/if}}
 {{/if}}
 
-{{#if isBeforeJuly23}}
+{{#if isBeforeOctober13}}
   <p class="border mt-3 py-3 rounded text-center">
-    <a class="d-block" href="events/2018/ortega/">
-      Join us as we cummemorate our 1869<sup>th</sup>&nbsp;run with a campout this weekend!
+    <a class="d-block" href="events/2018/memorial-service/">
+      Join us for our Hash Memorial Service on Friday, October 12<sup>th</sup>
     </a>
   </p>
 {{/if}}
