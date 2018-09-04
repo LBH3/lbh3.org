@@ -72,7 +72,7 @@
     "sequelize-cli": "^4.0.0",
     "serve-favicon": "^2.4.3",
     "striptags": "^3.0.1",
-    "winston": "^2.3.1"
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "eslint": "^4.4.1",
