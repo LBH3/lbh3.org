@@ -157,7 +157,7 @@
                 <label class="btn btn-primary d-print-none">
                   <span class="fa fa-upload"></span>
                   Upload head shot
-                  <input accept="image/*" class="sr-only" type="file" />
+                  <input accept="image/*" class="sr-only" disabled type="file" />
                 </label>
               {{/if}}
             {{/uploadInput}}
