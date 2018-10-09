@@ -45,7 +45,7 @@ const getSignedRequest = function(file, hasher) {
     } else {
       const fileName = encodeURIComponent(`${uuid()}.${fileExtension}`);
       const xhr = new XMLHttpRequest();
-      xhr.open('GET', `/sign-s3?config-bucket-name=headshotsBucketName&file-name=${fileName}&file-type=${file.type}`);
+      xhr.open('GET', `/sign-s3?acl=public-read&config-bucket-name=headshotsBucketName&file-name=${fileName}&file-type=${file.type}`);
       xhr.onerror = () => {
         reject(xhr);
       };

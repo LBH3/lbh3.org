@@ -241,7 +241,7 @@ module.exports = function (app) {
       Key: fileName,
       Expires: 60,
       ContentType: fileType,
-      ACL: 'private'
+      ACL: req.query['acl'] || 'private'
     };
 
     s3.getSignedUrl('putObject', s3Params, (error, data) => {
