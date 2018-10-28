@@ -97,6 +97,19 @@
             {{/default}}
           {{/switch}}
         {{/case}}
+        {{#case "erection"}}
+          <can-import from="~/components/erection/">
+            {{#if isPending}}
+              Loading the erection page…
+            {{else}}
+              <lbh3-erection
+                description:to="scope.root.description"
+                ogTitle:to="scope.root.ogTitle"
+                title:to="scope.root.title"
+              />
+            {{/if}}
+          </can-import>
+        {{/case}}
         {{#case "events"}}
           {{#if secondaryPage}}
             {{#switch secondaryPage}}

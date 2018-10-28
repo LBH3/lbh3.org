@@ -64,6 +64,7 @@
     "feathers-socketio": "^2.0.0",
     "generator-donejs": "^2.1.0",
     "jquery": "^3.2.1",
+    "jsencrypt": "^3.0.0-rc.1",
     "lodash.debounce": "^4.0.8",
     "marked": "^0.3.6",
     "moment": "^2.18.1",

@@ -1,0 +1,140 @@
+<can-import from="~/components/no-ssr/" />
+
+<h2>LBH3 Erection 🗳</h2>
+
+<p class="lead">
+  Vote in our <del>election</del> erection for the 2019 Mismanagement.
+</p>
+
+<p>
+  For the first time ever, we’re taking our erection and putting it online! The
+  online ballot is the same as the ballot you can receive in person. You’re
+  still required to have at least six runs in the last year to vote.
+</p>
+
+<p><em><strong>
+  If you already took a paper ballot, you are not eligible to vote online.
+</strong></em></p>
+
+<lbh3-no-ssr>
+  {{#if session.user.hasherId}}
+
+    {{#if runsPromise.isPending}}
+      <div class="alert alert-info" role="alert">
+        <strong>Determining your eligibility to vote…</strong>
+      </div>
+    {{/if}}
+
+    {{#if runsPromise.isRejected}}
+      <div class="alert alert-danger" role="alert">
+        <strong>Fuck!</strong> Your run count couldn’t be checked. {{runsPromise.reason.message}}
+      </div>
+      <p>
+        If you’re concerned about running out of time before the erection is over,
+        be sure to cum to a Sunday run to pick up a paper ballot.
+      </p>
+    {{/if}}
+
+    {{#if runsPromise.isResolved}}
+      {{#if isEligibleToVote}}
+        {{#if encryptionWorks}}
+          <p>
+            Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
+            Looks like you’re ready to vote.
+          </p>
+        {{else}}
+          <div class="alert alert-danger" role="alert">
+            <strong>Sorry, you are not able to vote with this browser.</strong>
+          </div>
+          <p>
+            This is a technical issue you may be able to resolve by using a
+            different browser, such as
+            <a href="https://www.google.com/chrome/">Chrome</a> or
+            <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>.
+          </p>
+          <p>
+            You may want to
+            <a href="{{encryptionFailedEmailLink}}">
+              email I’m Fucking Matt Damon
+            </a>
+            to let him know about the issue.
+          </p>
+        {{/if}}
+      {{else}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Sorry, you are ineligible to vote.</strong>
+        </div>
+        <p>
+          If you believe you’ve received this message in error, please cum to a
+          Sunday run before the erection is over to pick up a paper ballot.
+        </p>
+      {{/if}}
+    {{/if}}
+
+  {{else}}
+
+    {{#if session.user}}
+      <p>
+        Get started by filling out the form below. I’m Fucking Matt Damon will
+        need to verify that it’s actually you before you get a ballot.
+      </p>
+
+      {{#if savingPromise.isPending}}
+        <div class="alert alert-info" role="alert">
+          <strong>Saving your request…</strong>
+        </div>
+      {{else}}
+        {{#if session.user.requestedName}}
+          <div class="alert alert-primary" role="alert">
+            You’ve requested access as <strong>{{session.user.requestedName}}</strong>.
+          </div>
+        {{/if}}
+      {{/if}}
+
+      {{#if savingPromise.isRejected}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Fuck!</strong> Something failed; you’ll need to try again.
+          {{savingPromise.reason.message}}
+        </div>
+      {{/if}}
+
+      {{^if savingPromise.isResolved}}
+        <form class="mb-3" on:submit="save()">
+          <div class="form-group">
+            <label for="requestedName">
+              Hash name <small>(or Just name if you’re not a named hasher)</small>
+            </label>
+            <input
+              autocomplete="off"
+              class="form-control"
+              id="requestedName"
+              placeholder="Hash or Just name"
+              type="text"
+              value:bind="requestedName"
+            />
+          </div>
+          <button
+            class="btn btn-primary"
+            {{#if savingPromise.isPending}}disabled{{/if}}
+            type="submit">
+            Request access
+          </button>
+        </form>
+      {{/if}}
+
+      <p>
+        If you’re concerned about running out of time before the erection is over,
+        be sure to cum to a Sunday run to pick up a paper ballot.
+      </p>
+
+    {{else}}
+      <p>
+        Get started by signing in with <a href="/auth/facebook">Facebook</a> or
+        <a href="/auth/google">Google</a>, then <strong>cum back to this page.</strong>
+      </p>
+      <p>
+        Don’t have a Facebook or Google account? Cum to a Sunday run and ask for a ballot.
+      </p>
+    {{/if}}
+  {{/if}}
+</lbh3-no-ssr>
