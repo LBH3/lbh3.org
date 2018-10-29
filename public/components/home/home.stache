@@ -25,15 +25,15 @@
       On On!!!
     </small>
   </p>
-  {{^if isBeforeOctober13}}
+  {{^if isBeforeJanuary21}}
     <hr>
   {{/if}}
 {{/if}}
 
-{{#if isBeforeOctober13}}
+{{#if isBeforeJanuary21}}
   <p class="border mt-3 py-3 rounded text-center">
-    <a class="d-block" href="events/2018/memorial-service/">
-      Join us for our Hash Memorial Service on Friday, October 12<sup>th</sup>
+    <a class="d-block" href="events/2019/1900-run/">
+      Cum help us celebrate our 1900<sup>th</sup> run on Sunday, January 27<sup>th</sup>
     </a>
   </p>
 {{/if}}
