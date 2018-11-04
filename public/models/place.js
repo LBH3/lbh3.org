@@ -30,29 +30,18 @@ Place.connection = connect([
 });
 
 Place.fromGoogle = function(googlePlace) {
+  const geometry = googlePlace.geometry;
+  const location = geometry.location;
   const place = {
     addressComponents: googlePlace.address_components,
     formattedAddress: googlePlace.formatted_address,
     formattedPhoneNumber: googlePlace.formatted_phone_number,
     geometryLocation: {
       coordinates: [
-        googlePlace.geometry.location.lat(),
-        googlePlace.geometry.location.lng()
+        location.lat(),
+        location.lng()
       ],
       type: 'Point'
-    },
-    geometryViewport: {
-      coordinates: [[
-        [
-          googlePlace.geometry.viewport.f.f,
-          googlePlace.geometry.viewport.b.f
-        ],
-        [
-          googlePlace.geometry.viewport.f.b,
-          googlePlace.geometry.viewport.b.b
-        ]
-      ]],
-      type: 'Polygon'
     },
     icon: googlePlace.icon,
     id: googlePlace.id,
@@ -66,6 +55,23 @@ Place.fromGoogle = function(googlePlace) {
     vicinity: googlePlace.vicinity,
     website: googlePlace.website
   };
+  const viewport = geometry.viewport;
+  if (viewport && viewport.toJSON) {
+    const viewportJSON = viewport.toJSON() || {};
+    place.geometryViewport = {
+      coordinates: [[
+        [
+          viewportJSON.north,
+          viewportJSON.east
+        ],
+        [
+          viewportJSON.south,
+          viewportJSON.west
+        ]
+      ]],
+      type: 'Polygon'
+    };
+  }
   return new Place(place);
 };
 
