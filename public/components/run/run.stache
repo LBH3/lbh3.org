@@ -73,14 +73,20 @@
     {{/if}}
   </dl>
 
-  {{#if event.locationPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Loading map…</strong>
-    </div>
-  {{/if}}
-  {{#if event.locationPromise.isResolved}}
-    {{#if event.locationPromise.value.placeId}}
-      <iframe title="Map of the run’s start location" src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q=place_id:{{event.locationPromise.value.placeId}}" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
+  {{#if event.locationPromise}}
+    {{#if event.locationPromise.isPending}}
+      <div class="alert alert-info" role="alert">
+        <strong>Loading map…</strong>
+      </div>
+    {{/if}}
+    {{#if event.locationPromise.isResolved}}
+      {{#if event.locationPromise.value.placeId}}
+        <iframe title="Map of the run’s start location" src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q=place_id:{{event.locationPromise.value.placeId}}" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
+      {{/if}}
+    {{/if}}
+  {{else}}
+    {{#if event.locationMd}}
+      <iframe title="Map of the run’s start location" src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q={{event.locationMd}}" width="100%" height="368" frameborder="0" style="border:0" allowfullscreen></iframe>
     {{/if}}
   {{/if}}
 
