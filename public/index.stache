@@ -38,7 +38,6 @@
     </script>
   </head>
   <body>
-    <can-import from="bootstrap/dist/css/bootstrap.css" />
     <can-import from="~/styles.less" />
     <can-import from="~/app" export-as="viewModel" />
     <can-import from="~/components/footer/" />
