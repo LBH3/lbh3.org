@@ -10,3 +10,5 @@ import 'lbh3/models/patch-test';
 import 'lbh3/models/place-test';
 import 'lbh3/models/special-event-test';
 import 'lbh3/models/year-test';
+
+import '~/models/election-test';

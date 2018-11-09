@@ -4,6 +4,7 @@ import 'lbh3/models/fixtures/authentication';
 import 'lbh3/models/fixtures/bored-hashers';
 import 'lbh3/models/fixtures/bored-positions';
 import 'lbh3/models/fixtures/bored-years';
+import 'lbh3/models/fixtures/elections';
 import 'lbh3/models/fixtures/events';
 import 'lbh3/models/fixtures/events-hashers';
 import 'lbh3/models/fixtures/hashers';
