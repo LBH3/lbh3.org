@@ -2,6 +2,7 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import JSEncrypt from 'jsencrypt';
 
+import Election from '~/models/election';
 import EventsHashers from '~/models/events-hashers';
 import Session from '~/models/session';
 
@@ -79,6 +80,15 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get description() {
     return 'Vote for the 2019 Bored.';
   },
+  election: Election,
+  get electionPromise() {
+    const currentDate = new Date();
+    return Election.connection.getList({
+      urlId: this.urlId
+    }).then(elections => {
+      this.election = elections[0];
+    });
+  },
   get encryptionWorks() {
     const message = 'LBH3 🗳';
     const encrypt = new JSEncrypt();
@@ -141,6 +151,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get encryptionFailedEmailLink() {
     return `mailto:webmaster@lbh3.org?subject=LBH3 erection encryption issue&body=[Keep this] browser: ${navigator.userAgent}`;
   },
+  urlId: 'string',
 });
 
 export default Component.extend({

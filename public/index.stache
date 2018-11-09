@@ -105,6 +105,7 @@
                 description:to="scope.root.description"
                 ogTitle:to="scope.root.ogTitle"
                 title:to="scope.root.title"
+                urlId:from="scope.root.urlId"
               />
             {{/if}}
           </can-import>

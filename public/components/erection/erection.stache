@@ -42,6 +42,151 @@
             Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
             Looks like you’re ready to vote.
           </p>
+
+          {{#if electionPromise.isPending}}
+            <div class="alert alert-info" role="alert">
+              <strong>Fetching your ballot…</strong>
+            </div>
+          {{/if}}
+
+          {{#if electionPromise.isRejected}}
+            <div class="alert alert-danger" role="alert">
+              <strong>Fuck!</strong> Your ballot couldn’t be checked. {{electionPromise.reason.message}}
+            </div>
+            <p>
+              If you’re concerned about running out of time before the erection is over,
+              be sure to cum to a Sunday run to pick up a paper ballot.
+            </p>
+          {{/if}}
+
+          {{#if electionPromise.isResolved}}
+            <form class="mb-4 mt-2" on:submit="submitBallot()">
+              <h3>2018 Mismanagement Positions</h3>
+              {{#each(election.schema.positions)}}
+                <fieldset class="form-group">
+                  <legend>
+                    {{title}}
+                  </legend>
+                  <small class="form-text text-muted">
+                    {{#eq(maxSelection, 1)}}
+                      Vote for One
+                    {{else}}
+                      Vote for Two
+                    {{/eq}}
+                  </small>
+                  {{#each(options)}}
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                        <input
+                          class="form-check-input"
+                          type="checkbox"
+                        />
+                        {{this}}
+                      </label>
+                    </div>
+                  {{/each}}
+                </fieldset>
+              {{/each}}
+
+              <h3>Awards for 2017</h3>
+              {{#each(election.schema.awards)}}
+                {{#switch(type)}}
+                  {{#case('hasher')}}
+                    {{#if(options)}}
+                      <fieldset class="form-group">
+                        <legend>
+                          {{title}}
+                          <small>
+                            {{description}}
+                          </small>
+                        </legend>
+                        <div class="table-responsive">
+                          <table class="table table-bordered table-sm">
+                            <thead>
+                              <tr>
+                                <th>Hash Name</th>
+                                <th>Runs</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {{#each(hasherOptions)}}
+                                <tr>
+                                  <td>
+                                    <label class="form-check-label">
+                                      <input
+                                        class="form-check-input"
+                                        type="radio"
+                                      />
+                                      {{hashName}}
+                                    </label>
+                                  </td>
+                                  <td class="text-nowrap">
+                                    {{runCount}}
+                                    {{#if(hareCount)}}
+                                      + {{hareCount}}
+                                      {{#eq(hareCount, 1)}}
+                                        Hare
+                                      {{else}}
+                                        Hares
+                                      {{/eq}}
+                                    {{/if}}
+                                  </td>
+                                </tr>
+                              {{/each}}
+                            </tbody>
+                          </table>
+                        </div>
+                      </fieldset>
+                    {{else}}
+                      <label>
+                        {{title}}
+                        <input
+                          autocomplete="off"
+                          class="form-control"
+                          on:input:value:to="hasherAwesompleteQuery"
+                          type="text"
+                        />
+                      </label>
+                    {{/if}}
+                  {{/each}}
+                  {{#case('run')}}
+                    <label>
+                      {{title}}
+                      <input
+                        autocomplete="off"
+                        class="form-control"
+                        on:input:value:to="hasherAwesompleteQuery"
+                        type="text"
+                      />
+                    </label>
+                  {{/each}}
+                  {{#case('textarea')}}
+                    <div class="form-group">
+                      <label for="textarea-{{scope.index}}">
+                        {{title}}
+                        <small>
+                          ({{description}})
+                        </small>
+                      </label>
+                      <textarea
+                        class="form-control"
+                        id="textarea-{{scope.index}}"
+                        value:bind="hasher.notesMd"
+                      ></textarea>
+                    </div>
+                  {{/each}}
+                {{/switch}}
+              {{/each}}
+
+              <button
+                class="btn btn-primary mt-3"
+                {{#if editingEventPromise.isPending}}disabled{{/if}}
+                type="submit">
+                Submit ballot
+              </button>
+            </form>
+          {{/if}}
+
         {{else}}
           <div class="alert alert-danger" role="alert">
             <strong>Sorry, you are not able to vote with this browser.</strong>
