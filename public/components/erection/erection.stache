@@ -1,3 +1,4 @@
+<can-import from="can-stache-converters" />
 <can-import from="~/components/no-ssr/" />
 
 <h2>LBH3 Erection 🗳</h2>
@@ -60,7 +61,7 @@
           {{/if}}
 
           {{#if electionPromise.isResolved}}
-            <form class="mb-4 mt-2" on:submit="submitBallot()">
+            <form class="mb-4 mt-2" on:submit="save(ballot)">
               <h3>2018 Mismanagement Positions</h3>
               {{#each(election.schema.positions)}}
                 <fieldset class="form-group">
@@ -74,22 +75,38 @@
                       Vote for Two
                     {{/eq}}
                   </small>
-                  {{#each(options)}}
+                  {{#each(hasherOptions)}}
                     <div class="form-check form-check-inline">
                       <label class="form-check-label">
                         <input
+                          checked:bind="boolean-to-inList(./id, ../../ballot[../id])"
                           class="form-check-input"
+                          {{#eq(../../ballot[../id].indexOf(./id), -1)}}
+                            {{#eq(../maxSelection, ../../ballot[../id].length)}}disabled{{/eq}}
+                          {{/eq}}
                           type="checkbox"
                         />
-                        {{this}}
+                        {{hashName}}
                       </label>
                     </div>
                   {{/each}}
+                  {{#if(showWriteInOption)}}
+                    <div class="form-check form-check-inline">
+                      <label class="form-check-label">
+                        Write in
+                        {{!TODO}}
+                        <input
+                          class="form-check-input"
+                          type="text"
+                        />
+                      </label>
+                    </div>
+                  {{/if}}
                 </fieldset>
               {{/each}}
 
               <h3>Awards for 2017</h3>
-              {{#each(election.schema.awards)}}
+              {{#each(election.schema.awards, award=value)}}
                 {{#switch(type)}}
                   {{#case('hasher')}}
                     {{#if(options)}}
@@ -111,10 +128,11 @@
                             <tbody>
                               {{#each(hasherOptions)}}
                                 <tr>
-                                  <td>
+                                  <td class="form-check">
                                     <label class="form-check-label">
                                       <input
-                                        class="form-check-input"
+                                        checked:bind="equal(../../../ballot[../../award.id], id)"
+                                        name="{{../../award.id}}"
                                         type="radio"
                                       />
                                       {{hashName}}
@@ -140,6 +158,7 @@
                     {{else}}
                       <label>
                         {{title}}
+                        {{!TODO}}
                         <input
                           autocomplete="off"
                           class="form-control"
@@ -148,21 +167,27 @@
                         />
                       </label>
                     {{/if}}
-                  {{/each}}
+                  {{/case}}
                   {{#case('run')}}
                     <label>
                       {{title}}
-                      <input
-                        autocomplete="off"
+                      <select
                         class="form-control"
-                        on:input:value:to="hasherAwesompleteQuery"
-                        type="text"
-                      />
+                        id="{{award.id}}"
+                        value:bind="../../ballot[../award.id]"
+                      >
+                        <option value="0">Select one</option>
+                        {{#each(../../allRunsPromise.value)}}
+                          <option value="{{id}}">
+                            {{trailNumber}} — {{locationMd}} — {{haresMd}}
+                          </option>
+                        {{/each}}
+                      </select>
                     </label>
-                  {{/each}}
+                  {{/case}}
                   {{#case('textarea')}}
                     <div class="form-group">
-                      <label for="textarea-{{scope.index}}">
+                      <label for="{{../award.id}}">
                         {{title}}
                         <small>
                           ({{description}})
@@ -170,11 +195,11 @@
                       </label>
                       <textarea
                         class="form-control"
-                        id="textarea-{{scope.index}}"
-                        value:bind="hasher.notesMd"
+                        id="{{../award.id}}"
+                        value:bind="../../ballot[../award.id]"
                       ></textarea>
                     </div>
-                  {{/each}}
+                  {{/case}}
                 {{/switch}}
               {{/each}}
 

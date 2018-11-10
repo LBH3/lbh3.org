@@ -1,8 +1,11 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import JSEncrypt from 'jsencrypt';
+import moment from 'moment';
 
+import Ballot from '~/models/ballot';
 import Election from '~/models/election';
+import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Session from '~/models/session';
 
@@ -77,6 +80,32 @@ mgcHzcmZ5iKeTBJhcDAVdwsCAwEAAQ==
 -----END PUBLIC KEY-----`;
 
 export const ViewModel = DefineMap.extend('ErectionVM', {
+  get allRunsPromise() {
+    const election = this.election;
+    if (election) {
+      const year = election.year;
+      const endDate = moment().year(year).endOf('year').toDate();
+      const startDate = moment().year(year).startOf('year').toDate();
+      return Event.connection.getList({
+        $limit: 100,
+        $sort: {
+          startDatetime: 1
+        },
+        startDatetime: {
+          $gte: startDate,
+          $lte: endDate
+        }
+      });
+    }
+  },
+  ballot: {
+    get(lastSetValue) {
+      const election = this.election;
+      if (election) {
+        return lastSetValue || Ballot.fromElection(election);
+      }
+    }
+  },
   get description() {
     return 'Vote for the 2019 Bored.';
   },
@@ -136,10 +165,9 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       }
     }
   },
-  save: function() {
-    const user = this.session.user;
-    user.requestedName = this.requestedName;
-    this.savingPromise = user.save();
+  save: function(ballot) {
+    console.log('ballot.get():', ballot.get());
+    this.savingPromise = ballot.save();
   },
   savingPromise: Promise,
   get session() {
@@ -151,7 +179,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get encryptionFailedEmailLink() {
     return `mailto:webmaster@lbh3.org?subject=LBH3 erection encryption issue&body=[Keep this] browser: ${navigator.userAgent}`;
   },
-  urlId: 'string',
+  urlId: 'string'
 });
 
 export default Component.extend({
