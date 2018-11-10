@@ -1,6 +1,7 @@
 // Main file that loads all model fixtures
 
 import 'lbh3/models/fixtures/authentication';
+import 'lbh3/models/fixtures/ballots';
 import 'lbh3/models/fixtures/bored-hashers';
 import 'lbh3/models/fixtures/bored-positions';
 import 'lbh3/models/fixtures/bored-years';
