@@ -66,5 +66,8 @@
     "accessSecret": "AWS_SECRET_ACCESS_KEY",
     "headshotsBucketName": "lbh3-headshots-test",
     "snoozeBucketName": "lbh3-snooze-test"
+  },
+  "raygun": {
+    "apiKey": "RAYGUN_API_KEY"
   }
 }

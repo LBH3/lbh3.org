@@ -55,6 +55,11 @@ app.configure(middleware);
 app.use(notFound());
 app.use(handler());
 
+// Raygun
+const raygun = require('raygun');
+const raygunClient = new raygun.Client().init({ apiKey: app.get('raygun').apiKey });
+app.use(raygunClient.expressHandler);
+
 app.hooks(appHooks);
 
 module.exports = app;
