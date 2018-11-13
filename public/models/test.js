@@ -11,4 +11,5 @@ import 'lbh3/models/hasher-test';
 import 'lbh3/models/patch-test';
 import 'lbh3/models/place-test';
 import 'lbh3/models/special-event-test';
+import 'lbh3/models/unencrypted-ballot-test';
 import 'lbh3/models/year-test';
