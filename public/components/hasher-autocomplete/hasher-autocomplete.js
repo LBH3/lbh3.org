@@ -39,7 +39,7 @@ export const ViewModel = DefineMap.extend({
   selected: Hasher,
 
   showNameAfterSelection: {
-    value: false
+    default: false
   },
 
   connectedCallback(element) {
