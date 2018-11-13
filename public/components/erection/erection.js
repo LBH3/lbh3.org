@@ -8,6 +8,7 @@ import Election from '~/models/election';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Session from '~/models/session';
+import UnencryptedBallot from '~/models/unencrypted-ballot';
 
 import './erection.less';
 import view from './erection.stache';
@@ -102,16 +103,16 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     get(lastSetValue) {
       const election = this.election;
       if (election) {
-        return lastSetValue || Ballot.fromElection(election);
+        return lastSetValue || UnencryptedBallot.fromElection(election);
       }
     }
   },
   get description() {
+    // TODO
     return 'Vote for the 2019 Bored.';
   },
   election: Election,
   get electionPromise() {
-    const currentDate = new Date();
     return Election.connection.getList({
       urlId: this.urlId
     }).then(elections => {
@@ -119,20 +120,26 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     });
   },
   get encryptionWorks() {
-    const message = 'LBH3 🗳';
-    const encrypt = new JSEncrypt();
-    encrypt.setPublicKey(testPublicKey);
-    const encrypted = encrypt.encrypt(message);
-    const decrypt = new JSEncrypt();
-    decrypt.setPrivateKey(testPrivateKey);
-    const uncrypted = decrypt.decrypt(encrypted);
-    return message === uncrypted;
+    try {
+      const message = 'LBH3 🗳';
+      const encrypt = new JSEncrypt();
+      encrypt.setPublicKey(testPublicKey);
+      const encrypted = encrypt.encrypt(message);
+      const decrypt = new JSEncrypt();
+      decrypt.setPrivateKey(testPrivateKey);
+      const uncrypted = decrypt.decrypt(encrypted);
+      return message === uncrypted;
+    } catch (error) {
+      console.error(error);
+    }
+    return false;
   },
   isEligibleToVote: {
     type: 'boolean',
     default: true
   },
   get ogTitle() {
+    // TODO: incorporate the election name?
     return 'Erection';
   },
   requestedName: {
@@ -167,7 +174,8 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   },
   save: function(ballot) {
     console.log('ballot.get():', ballot.get());
-    this.savingPromise = ballot.save();
+    const encryptedBallot = Ballot.fromUnencrypted(ballot, this.election.publicKey);
+    this.savingPromise = encryptedBallot.save();
   },
   savingPromise: Promise,
   get session() {
@@ -179,7 +187,32 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get encryptionFailedEmailLink() {
     return `mailto:webmaster@lbh3.org?subject=LBH3 erection encryption issue&body=[Keep this] browser: ${navigator.userAgent}`;
   },
-  urlId: 'string'
+  urlId: 'string',
+
+  didSelectHasher(autocompleteElement, hasherList, options, maxSelection) {
+    const selectedHasher = autocompleteElement.viewModel.selected;
+
+    // Select the hasher
+    if (hasherList.indexOf(selectedHasher.id) === -1 && hasherList.length < maxSelection) {
+      hasherList.push(selectedHasher.id);
+    }
+
+    // Add the hasher to the list of candidates
+    const matchingOptions = options.filter(option => {
+      return option.id === selectedHasher.id;
+    });
+    if (matchingOptions.length === 0) {
+      options.push(selectedHasher);
+    }
+  },
+
+  selectHasherForAward(autocompleteElement, awardId) {
+    const selectedHasher = autocompleteElement.viewModel.selected;
+
+    // Select the hasher
+    this.ballot[awardId] = selectedHasher.id;
+  }
+
 });
 
 export default Component.extend({
