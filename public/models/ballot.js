@@ -8,21 +8,15 @@ import feathersServiceBehavior from 'can-connect-feathers/service';
 
 const Ballot = DefineMap.extend({
   seal: false,
-  fromElection(election) {
-    const ballot = {};
-    election.schema.awards.forEach(award => {
-      if (award.type === 'hasher') {
-        ballot[award.id] = 0;
-      } else if (award.type === 'run') {
-        ballot[award.id] = 0;
-      } else if (award.type === 'textarea') {
-        ballot[award.id] = '';
-      }
+  fromUnencrypted(ballot, publicKey) {
+    const values = ballot.get();
+    const encrypt = new JSEncrypt();
+    encrypt.setPublicKey(publicKey);
+    const encrypted = encrypt.encrypt(JSON.stringify(values));
+    console.log('encrypted:', encrypted);
+    return new this.constructor({
+      encrypted
     });
-    election.schema.positions.forEach(position => {
-      ballot[position.id] = [];
-    });
-    return new this.constructor(ballot);
   }
 }, {
   id: 'any'

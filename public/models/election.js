@@ -28,7 +28,7 @@ const Award = DefineMap.extend({
   hasherOptions: {
     get(lastSetValue, resolve) {
       this.hasherOptionsPromise.then(hashers => {
-        resolve(randomize(hashers));
+        resolve(new Hasher.List(randomize(hashers)));
       });
     }
   },
@@ -52,7 +52,7 @@ const Position = DefineMap.extend({
   hasherOptions: {
     get(lastSetValue, resolve) {
       this.hasherOptionsPromise.then(hashers => {
-        resolve(randomize(hashers));
+        resolve(new Hasher.List(randomize(hashers)));
       });
     }
   },
