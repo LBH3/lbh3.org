@@ -1,0 +1,71 @@
+<can-import from="can-stache-converters" />
+<can-import from="~/components/hasher-autocomplete/" />
+
+{{!TODO: these permissions should be different}}
+{{#if session.user.canManageUsers}}
+  <h2>Erection Administration</h2>
+
+  <form on:submit="scope.event.preventDefault()">
+    <div class="form-group">
+      <label for="private-key">Private key</label>
+      <textarea
+        class="form-control"
+        id="private-key"
+        value:to="privateKey"
+      ></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Decrypt</button>
+  </form>
+
+  {{#if ballotsPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching the ballots…</strong>
+    </div>
+  {{/if}}
+
+  {{#if ballotsPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The ballots couldn’t be retrieved. {{ballotsPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if ballotsPromise.isResolved}}
+    {{#eq ballotsPromise.value.length 0}}
+      <div class="alert alert-info" role="alert">
+        No ballots found.
+      </div>
+    {{else}}
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Decrypted</th>
+              <th scope="col">Encrypted</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each(ballotsPromise.value)}}
+              <tr>
+                <td>
+                  {{id}}
+                </td>
+                <td>
+                  {{../decryptBallot(encrypted)}}
+                </td>
+                <td>
+                  {{encrypted}}
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{/eq}}
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}

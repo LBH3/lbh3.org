@@ -97,18 +97,39 @@
           {{/switch}}
         {{/case}}
         {{#case "erection"}}
-          <can-import from="~/components/erection/">
-            {{#if isPending}}
-              Loading the erection page…
-            {{else}}
-              <lbh3-erection
-                description:to="scope.root.description"
-                ogTitle:to="scope.root.ogTitle"
-                title:to="scope.root.title"
-                urlId:from="scope.root.urlId"
-              />
-            {{/if}}
-          </can-import>
+          {{#if secondaryPage}}
+            {{#switch secondaryPage}}
+              {{#case "admin"}}
+                <lbh3-no-ssr>
+                  <can-import from="~/components/erection/admin/">
+                    {{#if isPending}}
+                      Loading the erection admin page…
+                    {{else}}
+                      <lbh3-erection-admin
+                        description:to="scope.root.description"
+                        ogTitle:to="scope.root.ogTitle"
+                        title:to="scope.root.title"
+                        urlId:from="scope.root.urlId"
+                      />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
+              {{/case}}
+            {{/switch}}
+          {{else}}
+            <can-import from="~/components/erection/">
+              {{#if isPending}}
+                Loading the erection page…
+              {{else}}
+                <lbh3-erection
+                  description:to="scope.root.description"
+                  ogTitle:to="scope.root.ogTitle"
+                  title:to="scope.root.title"
+                  urlId:from="scope.root.urlId"
+                />
+              {{/if}}
+            </can-import>
+          {{/if}}
         {{/case}}
         {{#case "events"}}
           {{#if secondaryPage}}
