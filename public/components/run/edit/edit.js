@@ -1,6 +1,5 @@
 import 'can-event-dom-enter/add-global/add-global';
 
-import Awesomplete from 'awesomplete';
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
@@ -108,34 +107,6 @@ export const ViewModel = DefineMap.extend({
           setValue(hashers.sort(sortByHashOrJustName));
         });
       }
-    }
-  },
-
-  hasherAwesomplete: {},
-
-  hasherAwesompleteQuery: {
-    type: 'string',
-    set: function(hasherAwesompleteQuery) {
-      if (hasherAwesompleteQuery) {
-        Hasher.connection.getList({
-          $search: hasherAwesompleteQuery,
-          $sort: {
-            lastTrailDate: -1
-          }
-        }).then(results => {
-          const newList = [];
-          results.forEach(result => {
-            newList.push({
-              label: result.hashOrJustName,
-              value: result
-            });
-          });
-          if (this.hasherAwesomplete) {
-            this.hasherAwesomplete.list = newList;
-          }
-        });
-      }
-      return hasherAwesompleteQuery;
     }
   },
 
@@ -302,6 +273,8 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
+
+  selectedHasher: Hasher,
 
   get session() {
     return Session.current;
@@ -471,32 +444,11 @@ export default Component.extend({
       }, 10);
     },
 
-    '{viewModel} hashers': function(viewModel) {
-      const interval = setInterval(() => {// Make sure the element is in the DOM
-        const hasherInput = document.getElementById('hasher-name');
-        if (hasherInput) {
-          clearInterval(interval);
-          hasherInput.disabled = false;
-          viewModel.hasherAwesomplete = new Awesomplete(hasherInput, {
-            autoFirst: true,
-            filter: () => {
-              return true;
-            },
-            minChars: 1,
-            sort: false
-          });
-        }
-      }, 10);
-    },
-
-    '#hasher-name awesomplete-selectcomplete': function(element, event) {
-      const hasher = event.text.value;
-
-      // Update the autocomplete input element to show the hasher’s name
-      element.value = hasher.hashOrJustName;
+    '{viewModel} selectedHasher': function(viewModel) {
+      const hasher = viewModel.selectedHasher;
 
       // Update the new hasher model data
-      const newHasherForRun = this.viewModel.newHasherForRun;
+      const newHasherForRun = viewModel.newHasherForRun;
       newHasherForRun.familyName = hasher.familyName;
       newHasherForRun.givenName = hasher.givenName;
       newHasherForRun.hasherId = hasher.id;
@@ -522,13 +474,6 @@ export default Component.extend({
 
     '{element} submit': function(element, event) {
       event.preventDefault();
-    },
-
-    '{element} removed': function() {
-      const hasherAwesomplete = this.viewModel.hasherAwesomplete;
-      if (hasherAwesomplete) {
-        hasherAwesomplete.destroy();
-      }
     }
   }
 });
