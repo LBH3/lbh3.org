@@ -55,7 +55,7 @@
     "compression": "^1.7.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
-    "done-ssr": "^2.1.2",
+    "done-ssr": "^3.0.0",
     "done-ssr-middleware": "^2.0.0",
     "feathers-authentication-hooks": "^0.1.4",
     "feathers-hooks-common": "^3.7.1",
