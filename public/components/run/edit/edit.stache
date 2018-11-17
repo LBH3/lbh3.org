@@ -439,7 +439,6 @@
                     <input
                       autocomplete="off"
                       class="form-control"
-                      disabled
                       id="hasher-name"
                       type="text"
                     />
