@@ -9,6 +9,8 @@ const data = [
     id: 1,
     createdAt: '2018-11-08T15:22:19.890Z',
     updatedAt: '2018-11-08T15:22:19.890Z',
+    advertisementMd: 'It’s erection time! Vote for members of the 2018 Bored. 🗳',
+    descriptionMd: 'Please complete and submit this ballot. Vote for the number of positions as noted in each category. Less is fine, more will nullify your vote in that category. Use the run list provided to select your nominations for the Best and Worst for 2017. At the same time, vote for the new hasher and harriette you consider to be “Rookie of the Year.” You can submit this form until February 4<sup>th</sup>. Finally, come to FOUND ’ER BALLS on February 17<sup>th</sup> to find out the results of the Board Election & to celebrate the ups and downs of 2017!',
     endDatetime: tomorrow,
     publicKey: `-----BEGIN PUBLIC KEY-----
     MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqRxHDMIkPN7xRPcXMs5n
@@ -25,6 +27,7 @@ const data = [
     mgcHzcmZ5iKeTBJhcDAVdwsCAwEAAQ==
     -----END PUBLIC KEY-----`,
     startDatetime: '2018-11-08T15:22:19.890Z',
+    titleMd: '2017 Ballot',
     urlId: '2017',
     year: 2017,
     schema: {

@@ -6,6 +6,7 @@ import DefineList from 'can-define/list/';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import Hasher from './hasher';
+import marked from 'marked';
 
 const randomize = (list) => {
   const array = [...list];
@@ -84,7 +85,19 @@ const Election = DefineMap.extend({
   seal: false
 }, {
   id: 'any',
+  descriptionHtml: {
+    get: function() {
+      return marked(this.descriptionMd || '');
+    },
+    serialize: false
+  },
   schema: Schema,
+  titleHtml: {
+    get: function() {
+      return marked(this.titleMd || '');
+    },
+    serialize: false
+  }
 });
 
 Election.List = DefineList.extend({

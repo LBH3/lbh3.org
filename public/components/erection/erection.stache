@@ -1,12 +1,22 @@
 <can-import from="can-stache-converters" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 <can-import from="~/components/hasher-autocomplete/" />
 <can-import from="~/components/no-ssr/" />
+
+{{<h2Template}}
+  {{#if(election)}}
+    <h2>{{{election.titleHtml}}}</h2>
+  {{else}}
+    <h2>Erection</h2>
+  {{/if}}
+{{/h2Template}}
 
 {{#if session.user.canManageUsers}}
   <div class="mb-2 row">
     <div class="col"></div>
     <div class="col">
-      <h2>LBH3 Erection 🗳</h2>
+      {{>h2Template}}
     </div>
     <div class="col text-right">
       <a
@@ -19,24 +29,18 @@
     </div>
   </div>
 {{else}}
-  <h2>LBH3 Erection 🗳</h2>
+  {{>h2Template}}
 {{/if}}
 
 <p class="lead">
-  Vote in our <del>election</del> erection for the 2019 Mismanagement.
-</p>
-
-<p>
   For the first time ever, we’re taking our erection and putting it online! The
   online ballot is the same as the ballot you can receive in person. You’re
   still required to have at least six runs in the last year to vote.
 </p>
 
-<p><em><strong>
-  If you already took a paper ballot, you are not eligible to vote online.
-</strong></em></p>
-
 <lbh3-no-ssr>
+  <hr>
+
   {{#if session.user.hasherId}}
 
     {{#if runsPromise.isPending}}
@@ -85,7 +89,6 @@
             {{^if savingPromise}}
               <p>
                 Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
-                Looks like you’re ready to vote.
               </p>
             {{/if}}
 
@@ -106,26 +109,41 @@
             {{/if}}
 
             {{#if electionPromise.isResolved}}
-              <dl>
-                <dt>UUID:</dt>
-                <dd>{{ballot.uuid}}</dd>
-              </dl>
+              {{{election.descriptionHtml}}}
+
+              <p><em><strong>
+                If you already took a paper ballot, you are not eligible to vote online.
+                If you take a paper ballot after submitting an online ballot, your online ballot will be discarded.
+              </strong></em></p>
+
+              <h3>Instructions</h3>
+              <ul>
+                <li>Select the checkbox or radio button next to your choice.</li>
+                <li>Don’t vote for more choices than indicated.</li>
+                <li>You don’t have to vote in every race.</li>
+              </ul>
+              <h4>Write-in candidates</h4>
+              <ul>
+                <li>To add a candidate, use the search text box to find your candidate, then select their name.</li>
+                <li>Once their name appears next to the other candidates, select the checkbox next to their name (if it is not already checked).</li>
+                <li>Do not write-in a candidate whose name already appears on the ballot.</li>
+              </ul>
               <form class="mb-4 mt-2" on:submit="save(ballot)">
                 <h3>2018 Mismanagement Positions</h3>
                 {{#each(election.schema.positions)}}
                   <fieldset class="form-group">
-                    <legend>
+                    <legend class="col-form-label col-form-label-lg pb-0">
                       {{title}}
+                      <small class="text-muted">
+                        {{#eq(maxSelection, 1)}}
+                          Vote for One
+                        {{else}}
+                          Vote for Two
+                        {{/eq}}
+                      </small>
                     </legend>
-                    <small class="form-text text-muted">
-                      {{#eq(maxSelection, 1)}}
-                        Vote for One
-                      {{else}}
-                        Vote for Two
-                      {{/eq}}
-                    </small>
                     {{#each(hasherOptions)}}
-                      <div class="form-check form-check-inline">
+                      <div class="form-check mt-1">
                         <label class="form-check-label">
                           <input
                             checked:bind="boolean-to-inList(./id, ../../ballot[../id])"
@@ -140,15 +158,16 @@
                       </div>
                     {{/each}}
                     {{#if(showWriteInOption)}}
-                      <div class="form-check form-check-inline">
+                      <div class="form-check mt-1">
                         <label class="form-check-label">
-                          Write in search
+                          Write-in search
                           <lbh3-hasher-autocomplete
                             on:selected="../didSelectHasher(scope.element, ../ballot[./id], hasherOptions, maxSelection)"
                           >
                             <input
                               autocomplete="off"
                               class="form-control"
+                              placeholder="Hash or Just name"
                               type="text"
                             />
                           </lbh3-hasher-autocomplete>
@@ -164,14 +183,14 @@
                     {{#case('hasher')}}
                       {{#if(options)}}
                         <fieldset class="form-group">
-                          <legend>
+                          <legend class="col-form-label col-form-label-lg mb-0">
                             {{title}}
-                            <small>
+                            <small class="text-muted">
                               {{description}}
                             </small>
                           </legend>
                           <div class="table-responsive">
-                            <table class="table table-bordered table-sm">
+                            <table class="table">
                               <thead>
                                 <tr>
                                   <th>Hash Name</th>
@@ -181,7 +200,7 @@
                               <tbody>
                                 {{#each(hasherOptions)}}
                                   <tr>
-                                    <td class="form-check">
+                                    <td>
                                       <label class="form-check-label">
                                         <input
                                           checked:bind="equal(../../../ballot[../../award.id], id)"
@@ -209,43 +228,66 @@
                           </div>
                         </fieldset>
                       {{else}}
-                        <label>
-                          {{title}}
-                          <lbh3-hasher-autocomplete
-                            on:selected="../../selectHasherForAward(scope.element, ./id)"
-                            showNameAfterSelection:from="true"
-                          >
-                            <input
-                              autocomplete="off"
-                              class="form-control"
-                              type="text"
-                            />
-                          </lbh3-hasher-autocomplete>
-                        </label>
+                        <div class="form-group">
+                          <label class="col-form-label col-form-label-lg" for="{{./id}}">
+                            {{title}}
+                          </label>
+                          {{^if(../../ballot[../award.id])}}
+                            <lbh3-hasher-autocomplete
+                              on:selected="../../selectHasherForAward(scope.element, ./id)"
+                              showNameAfterSelection:from="false"
+                            >
+                              <input
+                                autocomplete="off"
+                                class="form-control"
+                                id="{{./id}}"
+                                placeholder="Hash or Just name"
+                                type="text"
+                              />
+                            </lbh3-hasher-autocomplete>
+                          {{/if}}
+                          {{#if(../../ballot[./id])}}
+                            <div class="form-check">
+                              <label class="form-check-label">
+                                <input
+                                  checked:from="true"
+                                  class="form-check-input"
+                                  on:click="scope.vm.deselectHasherForAward(./id)"
+                                  type="checkbox"
+                                />
+                                {{#with(../../cachedHashers[../../ballot[./id]])}}
+                                  {{./hashOrJustName}}
+                                {{/with}}
+                              </label>
+                            </div>
+                          {{/if}}
+                        </div>
                       {{/if}}
                     {{/case}}
                     {{#case('run')}}
-                      <label>
-                        {{title}}
-                        <select
-                          class="form-control"
-                          id="{{award.id}}"
-                          value:bind="../../ballot[../award.id]"
-                        >
-                          <option value="0">Select one</option>
-                          {{#each(../../allRunsPromise.value)}}
-                            <option value="{{id}}">
-                              {{trailNumber}} — {{locationMd}} — {{haresMd}}
-                            </option>
-                          {{/each}}
-                        </select>
-                      </label>
+                      <div class="form-group">
+                        <label class="col-form-label col-form-label-lg">
+                          {{title}}
+                          <select
+                            class="form-control"
+                            id="{{award.id}}"
+                            value:bind="../../ballot[../award.id]"
+                          >
+                            <option value="0">Select one</option>
+                            {{#each(../../allRunsPromise.value)}}
+                              <option value="{{id}}">
+                                {{trailNumber}} — {{locationMd}} — {{haresMd}}
+                              </option>
+                            {{/each}}
+                          </select>
+                        </label>
+                      </div>
                     {{/case}}
                     {{#case('textarea')}}
                       <div class="form-group">
-                        <label for="{{../award.id}}">
+                        <label class="col-form-label col-form-label-lg" for="{{../award.id}}">
                           {{title}}
-                          <small>
+                          <small class="text-muted">
                             ({{description}})
                           </small>
                         </label>
@@ -259,12 +301,18 @@
                   {{/switch}}
                 {{/each}}
 
-                <button
-                  class="btn btn-primary mt-3"
-                  {{#if editingEventPromise.isPending}}disabled{{/if}}
-                  type="submit">
-                  Submit ballot
-                </button>
+                <div class="d-flex align-items-baseline flex-column flex-md-row justify-content-between">
+                  <button
+                    class="btn btn-primary mt-3"
+                    {{#if editingEventPromise.isPending}}disabled{{/if}}
+                    type="submit">
+                    Submit ballot
+                  </button>
+                  <dl class="d-inline-flex mt-3">
+                    <dt class="mr-1">UUID:</dt>
+                    <dd>{{ballot.uuid}}</dd>
+                  </dl>
+                </div>
               </form>
             {{/if}}
           {{/if}}

@@ -107,6 +107,11 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       }
     }
   },
+  cachedHashers: {
+    default: () => {
+      return {};
+    }
+  },
   get description() {
     // TODO
     return 'Vote for the 2019 Bored.';
@@ -189,6 +194,10 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   },
   urlId: 'string',
 
+  deselectHasherForAward(awardId) {
+    this.ballot[awardId] = null;
+  },
+
   didSelectHasher(autocompleteElement, hasherList, options, maxSelection) {
     const selectedHasher = autocompleteElement.viewModel.selected;
 
@@ -210,6 +219,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     const selectedHasher = autocompleteElement.viewModel.selected;
 
     // Select the hasher
+    this.cachedHashers[selectedHasher.id] = selectedHasher;
     this.ballot[awardId] = selectedHasher.id;
   }
 
