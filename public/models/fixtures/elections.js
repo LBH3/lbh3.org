@@ -9,8 +9,21 @@ const data = [
     id: 1,
     createdAt: '2018-11-08T15:22:19.890Z',
     updatedAt: '2018-11-08T15:22:19.890Z',
+    advertise: true,
     advertisementMd: 'It’s erection time! Vote for members of the 2018 Bored. 🗳',
-    descriptionMd: 'Please complete and submit this ballot. Vote for the number of positions as noted in each category. Less is fine, more will nullify your vote in that category. Use the run list provided to select your nominations for the Best and Worst for 2017. At the same time, vote for the new hasher and harriette you consider to be “Rookie of the Year.” You can submit this form until February 4<sup>th</sup>. Finally, come to FOUND ’ER BALLS on February 17<sup>th</sup> to find out the results of the Board Election & to celebrate the ups and downs of 2017!',
+    descriptionMd: `#### Instructions
+
+- Vote for the number of positions as noted in each category.
+- Select the checkbox or radio button next to your choice.
+- You don’t have to vote in every race.
+
+##### Write-in candidates
+
+- To add a candidate, use the search text box to find your candidate, then select their name.
+- Once their name appears next to the other candidates, select the checkbox next to their name (if it is not already checked).
+- Do not write-in a candidate whose name already appears on the ballot.
+
+You can submit this form until February 4<sup>th</sup>. Cum to Found ’er Balls on February 17<sup>th</sup> to find out the results of the Bored Erection and to celebrate the ups & downs of 2017!`,
     endDatetime: tomorrow,
     publicKey: `-----BEGIN PUBLIC KEY-----
     MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAqRxHDMIkPN7xRPcXMs5n
@@ -65,21 +78,32 @@ const data = [
         {
           description: 'Select one',
           id: 'best-rookie-harrier',
-          options: [7764, 7591, 7787, 7576, 7590, 7333],
+          options: [
+            {id: 7764, name: 'Bungholeo', runs: '15'},
+            {id: 7591, name: 'Cumchata', runs: '22'},
+            {id: 7787, name: 'Flocking Lunartic', runs: '12 + 1 Hare'},
+            {id: 7576, name: 'Pond’s Cum', runs: '10'},
+            {id: 7590, name: 'Semper Fido', runs: '27'},
+            {id: 7333, name: 'Wiiiiiiiiiiiiii', runs: '24'}
+          ],
           title: 'Best Rookie Harrier of 2017',
           type: 'hasher'
         },
         {
           description: 'Select one',
           id: 'best-rookie-harriette',
-          options: [7568, 7587, 7559],
+          options: [
+            {id: 7568, name: '8 Dicks a Week', runs: '15'},
+            {id: 7587, name: 'Hormione', runs: '20'},
+            {id: 7559, name: 'Spitty Spitty Gangbang', runs: '48 + 3 Hares'}
+          ],
           title: 'Best Rookie Harriette of 2017',
           type: 'hasher'
         },
         {
           description: 'Up to the GMs’ discretion—so be clever and fun',
           id: 'write-in-awards',
-          title: 'Write in Awards',
+          title: 'Write-in Awards',
           type: 'textarea'
         }
       ],
@@ -87,61 +111,92 @@ const data = [
         {
           id: 'grandmaster',
           maxSelection: 2,
-          options: [7164, 7273, 5425, 7303],
+          options: [
+            {id: 7164, name: 'Hokey Tokey'},
+            {id: 7273, name: 'Lick Me Tender Lick Me Deep'},
+            {id: 5425, name: 'Wrect Him'},
+            {id: 7303, name: 'Yoko Anal'}
+          ],
           title: 'Grandmaster'
         },
         {
           id: 'trailmaster',
           maxSelection: 2,
-          options: [7167, 6229, 16],
+          options: [
+            {id: 7167, name: 'I Don’t Swallow'},
+            {id: 6229, name: 'Koo Koo 4 Cock'},
+            {id: 16, name: 'Mr. Rats Ass'}
+          ],
           title: 'Trailmaster'
         },
         {
           id: 'haberdasher',
           maxSelection: 2,
-          options: [6099, 7559],
+          options: [
+            {id: 6099, name: 'Pinhole Artist'},
+            {id: 7559, name: 'Spitty Spitty Gangbang'}
+          ],
           title: 'Haberdasher'
         },
         {
           id: 'on-disc',
           maxSelection: 2,
-          options: [6143, 6643],
+          options: [
+            {id: 6143, name: 'Mounds of Joy'},
+            {id: 6643, name: 'Shitter Splitter'}
+          ],
           title: 'On Disc'
         },
         {
           id: 'hash-cash',
           maxSelection: 2,
-          options: [3167, 25],
+          options: [
+            {id: 3167, name: 'Dr. Strange Glove'},
+            {id: 25, name: 'Hi-Speed Copulator'}
+          ],
           title: 'Hash Cash'
         },
         {
           id: 'brewmeister',
           maxSelection: 2,
-          options: [14],
+          options: [
+            {id: 14, name: 'Last Train To Cuntsville'}
+          ],
           title: 'Brewmeister'
         },
         {
           id: 'munchmeister',
           maxSelection: 2,
-          options: [7313, 33, 148],
+          options: [
+            {id: 7313, name: 'Bi-Cunnilingual'},
+            {id: 33, name: 'Kammonawannaleia'},
+            {id: 148, name: 'Victoria’s Secretion'}
+          ],
           title: 'Munchmeister'
         },
         {
           id: 'hash-flash',
           maxSelection: 2,
-          options: [6535],
+          options: [
+            {id: 6535, name: 'Transcuntinental'}
+          ],
           title: 'Hash Flash'
         },
         {
           id: 'on-sec',
           maxSelection: 2,
-          options: [44, 5908],
+          options: [
+            {id: 44, name: 'Corn Hole Hussie'},
+            {id: 5908, name: 'Splitting Adams'}
+          ],
           title: 'On Sec'
         },
         {
           id: 'webmeister',
           maxSelection: 1,
-          options: [6394],
+          options: [
+            {id: 6394, name: 'I’m Fucking Matt Damon'}
+          ],
           title: 'Webmeister'
         }
       ]

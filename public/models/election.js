@@ -27,20 +27,9 @@ const Award = DefineMap.extend({
   seal: false
 }, {
   hasherOptions: {
-    get(lastSetValue, resolve) {
-      this.hasherOptionsPromise.then(hashers => {
-        resolve(new Hasher.List(randomize(hashers)));
-      });
+    get() {
+      return new DefineList(randomize(this.options));
     }
-  },
-  get hasherOptionsPromise() {
-    const options = this.options || [];
-    const promises = options.map(option => {
-      return Hasher.connection.getData({
-        id: option
-      });
-    });
-    return Promise.all(promises);
   }
 });
 Award.List = DefineList.extend({
@@ -51,20 +40,9 @@ const Position = DefineMap.extend({
   seal: false
 }, {
   hasherOptions: {
-    get(lastSetValue, resolve) {
-      this.hasherOptionsPromise.then(hashers => {
-        resolve(new Hasher.List(randomize(hashers)));
-      });
+    get() {
+      return new DefineList(randomize(this.options));
     }
-  },
-  get hasherOptionsPromise() {
-    const options = this.options || [];
-    const promises = options.map(option => {
-      return Hasher.connection.getData({
-        id: option
-      });
-    });
-    return Promise.all(promises);
   },
   get showWriteInOption() {
     return this.maxSelection > this.options.length;
@@ -91,13 +69,7 @@ const Election = DefineMap.extend({
     },
     serialize: false
   },
-  schema: Schema,
-  titleHtml: {
-    get: function() {
-      return marked(this.titleMd || '');
-    },
-    serialize: false
-  }
+  schema: Schema
 });
 
 Election.List = DefineList.extend({
