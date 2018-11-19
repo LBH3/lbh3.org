@@ -50,8 +50,9 @@ const AppViewModel = DefineMap.extend({
 route.register('/about/mismanagement/{year}/', { page: 'about', secondaryPage: 'mismanagement', year: 0});
 route.register('/about/{secondaryPage}/', { page: 'about' });
 route.register('/about/', { page: 'about' });
-route.register('/erection/{urlId}/{secondaryPage}/', { page: 'erection', urlId: '', secondaryPage: ''});
-route.register('/erection/{urlId}/', { page: 'erection', urlId: '' });
+route.register('/erections/{urlId}/{secondaryPage}/', { page: 'erections', urlId: '', secondaryPage: ''});
+route.register('/erections/{urlId}/', { page: 'erections', urlId: '' });
+route.register('/erections/', { page: 'erections' });
 route.register('/events/', { page: 'events' });
 route.register('/events/founders/{year}/', { page: 'events', secondaryPage: 'founders', year: 0});
 route.register('/events/founders/', { page: 'events', secondaryPage: 'founders'});

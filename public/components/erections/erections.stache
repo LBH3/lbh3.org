@@ -1,0 +1,150 @@
+<h2>Add an erection</h2>
+
+{{#if session.user.canManageUsers}}
+  <form on:submit="createElection()">
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="title-md">
+        Title
+      </label>
+      <div class="col-9">
+        <input autofocus class="form-control" id="title-md" type="text" value:bind="titleMd">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="description-md">
+        Description
+      </label>
+      <div class="col-9">
+        <textarea class="form-control" id="description-md" value:bind="descriptionMd"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="advertise">
+        Advertise
+      </label>
+      <div class="col-9">
+        <select class="form-control" id="advertise" value:bind="advertise">
+          <option value="false">No</option>
+          <option value="true">Yes</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="advertisement-md">
+        Advertisement
+      </label>
+      <div class="col-9">
+        <textarea class="form-control" id="advertisement-md" value:bind="advertisementMd"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="public-key">
+        Public key
+      </label>
+      <div class="col-9">
+        <textarea class="form-control" id="public-key" value:bind="publicKey"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="schema">
+        Schema
+      </label>
+      <div class="col-9">
+        <textarea class="form-control" id="schema" value:bind="schema"></textarea>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="url-id">
+        URL ID
+      </label>
+      <div class="col-9">
+        <input autofocus class="form-control" id="url-id" type="text" value:bind="urlId">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="year">
+        Year
+      </label>
+      <div class="col-9">
+        <input autofocus class="form-control" id="year" type="number" value:bind="year">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <div class="form-group col-md-6">
+        <label for="start-date">
+          Start date &amp; time
+        </label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            id="start-date"
+            type="date"
+            value:bind="startDate"
+          />
+          <input
+            class="form-control"
+            id="start-time"
+            type="time"
+            value:bind="startTime"
+          />
+        </div>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="end-date">
+          End date &amp; time
+        </label>
+        <div class="input-group">
+          <input
+            class="form-control"
+            id="end-date"
+            type="date"
+            value:bind="endDate"
+          />
+          <input
+            class="form-control"
+            id="end-time"
+            type="time"
+            value:bind="endTime"
+          />
+        </div>
+      </div>
+    </div>
+
+    {{#if creatingElectionPromise.isPending}}
+      <div class="alert alert-info" role="alert">
+        <strong>Saving the erection…</strong>
+      </div>
+    {{/if}}
+    {{#if creatingElectionPromise.isRejected}}
+      <div class="alert alert-danger" role="alert">
+        <strong>Fuck!</strong> The new erection failed to save. {{creatingElectionPromise.reason.message}}
+      </div>
+    {{/if}}
+    {{#if creatingElectionPromise.isResolved}}
+      <div class="alert alert-success" role="alert">
+        <strong>On on!</strong> You successfully created the erection.
+      </div>
+    {{/if}}
+
+    <button
+      class="btn btn-primary"
+      {{#if creatingElectionPromise.isPending}}disabled{{/if}}
+      type="submit">
+      Create the erection
+    </button>
+  </form>
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}

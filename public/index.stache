@@ -96,36 +96,50 @@
             {{/default}}
           {{/switch}}
         {{/case}}
-        {{#case "erection"}}
-          {{#if secondaryPage}}
-            {{#switch secondaryPage}}
-              {{#case "admin"}}
-                <lbh3-no-ssr>
-                  <can-import from="~/components/erection/admin/">
-                    {{#if isPending}}
-                      Loading the erection admin page…
-                    {{else}}
-                      <lbh3-erection-admin
-                        description:to="scope.root.description"
-                        ogTitle:to="scope.root.ogTitle"
-                        title:to="scope.root.title"
-                        urlId:from="scope.root.urlId"
-                      />
-                    {{/if}}
-                  </can-import>
-                </lbh3-no-ssr>
-              {{/case}}
-            {{/switch}}
+        {{#case "erections"}}
+          {{#if urlId}}
+            {{#if secondaryPage}}
+              {{#switch secondaryPage}}
+                {{#case "admin"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/erection/admin/">
+                      {{#if isPending}}
+                        Loading the erection admin page…
+                      {{else}}
+                        <lbh3-erection-admin
+                          description:to="scope.root.description"
+                          ogTitle:to="scope.root.ogTitle"
+                          title:to="scope.root.title"
+                          urlId:from="scope.root.urlId"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+              {{/switch}}
+            {{else}}
+              <can-import from="~/components/erection/">
+                {{#if isPending}}
+                  Loading the erection page…
+                {{else}}
+                  <lbh3-erection
+                    description:to="scope.root.description"
+                    ogTitle:to="scope.root.ogTitle"
+                    title:to="scope.root.title"
+                    urlId:from="scope.root.urlId"
+                  />
+                {{/if}}
+              </can-import>
+            {{/if}}
           {{else}}
-            <can-import from="~/components/erection/">
+            <can-import from="~/components/erections/">
               {{#if isPending}}
-                Loading the erection page…
+                Loading the erections page…
               {{else}}
-                <lbh3-erection
+                <lbh3-erections
                   description:to="scope.root.description"
                   ogTitle:to="scope.root.ogTitle"
                   title:to="scope.root.title"
-                  urlId:from="scope.root.urlId"
                 />
               {{/if}}
             </can-import>

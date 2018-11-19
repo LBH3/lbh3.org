@@ -44,6 +44,9 @@
         <li><a href="{{routeUrl page='special-events'}}">
           Special Events
         </a></li>
+        <li><a href="{{routeUrl page='erections'}}">
+          Erections
+        </a></li>
       {{/if}}
       <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/HowLBH3Started.pdf">
         How LBH3 Started
