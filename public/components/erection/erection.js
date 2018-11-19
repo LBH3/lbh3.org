@@ -90,7 +90,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       return Event.connection.getList({
         $limit: 100,
         $sort: {
-          startDatetime: 1
+          trailNumber: 1
         },
         startDatetime: {
           $gte: startDate,
@@ -105,6 +105,23 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       if (election) {
         return lastSetValue || UnencryptedBallot.fromElection(election);
       }
+    }
+  },
+  get ballotFetchingFailedEmailLink() {
+    return `mailto:webmaster@lbh3.org?subject=LBH3 erection submitted ballots could not be fetched&body=[Keep this] browser: ${navigator.userAgent}`;
+  },
+  get ballotsPromise() {
+    const election = this.election;
+    const hasherId = this.user.hasherId;
+    if (election && hasherId) {
+      return Ballot.connection.getList({
+        $limit: 100,
+        $sort: {
+          createdAt: -1
+        },
+        electionId: election.id,
+        hasherId
+      });
     }
   },
   cachedHashers: {
@@ -123,6 +140,9 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     }).then(elections => {
       this.election = elections[0];
     });
+  },
+  get encryptionFailedEmailLink() {
+    return `mailto:webmaster@lbh3.org?subject=LBH3 erection encryption issue&body=[Keep this] browser: ${navigator.userAgent}`;
   },
   get encryptionWorks() {
     try {
@@ -163,9 +183,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   },
   runsPromise: {
     get: function() {
-      const session = this.session || {};
-      const user = session.user || {};
-      const hasherId = user.hasherId;
+      const hasherId = this.user.hasherId;
       if (hasherId) {
         return EventsHashers.connection.getList({
           hasherId,
@@ -178,9 +196,12 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     }
   },
   save: function(ballot) {
-    console.log('ballot.get():', ballot.get());
-    const encryptedBallot = Ballot.fromUnencrypted(ballot, this.election.publicKey);
-    this.savingPromise = encryptedBallot.save();
+    try {
+      const encryptedBallot = Ballot.fromUnencrypted(ballot, this.election.publicKey);
+      this.savingPromise = encryptedBallot.save();
+    } catch (error) {
+      this.savingPromise = Promise.reject(error);
+    }
   },
   savingPromise: Promise,
   get session() {
@@ -189,10 +210,11 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get title() {
     return `${this.ogTitle} | LBH3`;
   },
-  get encryptionFailedEmailLink() {
-    return `mailto:webmaster@lbh3.org?subject=LBH3 erection encryption issue&body=[Keep this] browser: ${navigator.userAgent}`;
-  },
   urlId: 'string',
+  get user() {
+    const session = this.session || {};
+    return session.user || {};
+  },
 
   deselectHasherForAward(awardId) {
     this.ballot[awardId] = null;
@@ -202,17 +224,25 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     const selectedHasher = autocompleteElement.viewModel.selected;
 
     // Select the hasher
-    if (hasherList.indexOf(selectedHasher.id) === -1 && hasherList.length < maxSelection) {
-      hasherList.push(selectedHasher.id);
-    }
+    this.toggleHasherInList(selectedHasher, hasherList, maxSelection);
 
     // Add the hasher to the list of candidates
     const matchingOptions = options.filter(option => {
       return option.id === selectedHasher.id;
     });
     if (matchingOptions.length === 0) {
-      options.push(selectedHasher);
+      options.push({
+        id: selectedHasher.id,
+        name: selectedHasher.hashOrJustName
+      });
     }
+  },
+
+  hasherListContains(hashers, id) {
+    const matchingHashers = hashers.filter(hasher => {
+      return hasher.id === id;
+    });
+    return matchingHashers.length > 0;
   },
 
   selectHasherForAward(autocompleteElement, awardId) {
@@ -221,6 +251,28 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     // Select the hasher
     this.cachedHashers[selectedHasher.id] = selectedHasher;
     this.ballot[awardId] = selectedHasher.id;
+  },
+
+  toggleHasherInList(hasher, hasherList, maxSelection, checkbox) {
+    if (this.hasherListContains(hasherList, hasher.id)) {
+      // Remove it
+      hasherList.filter(option => {
+        return hasher.id === option.id;
+      }).forEach(hasher => {
+        hasherList.splice(hasherList.indexOf(hasher), 1);
+      });
+    } else if (hasherList.length < maxSelection) {
+      // Add it
+      hasherList.push({
+        id: hasher.id,
+        name: hasher.name || hasher.hashOrJustName
+      });
+    } else {
+      alert('You’ve selected the maximum number of choices for this position. Deselect one of your other choices before selecting another.');
+    }
+    if (checkbox) {
+      checkbox.checked = this.hasherListContains(hasherList, hasher.id);
+    }
   }
 
 });

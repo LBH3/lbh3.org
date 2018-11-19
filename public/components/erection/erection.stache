@@ -6,39 +6,39 @@
 
 {{<h2Template}}
   {{#if(election)}}
-    <h2>{{{election.titleHtml}}}</h2>
+    <h2 class="text-nowrap">{{election.titleMd}}</h2>
   {{else}}
     <h2>Erection</h2>
   {{/if}}
 {{/h2Template}}
 
-{{#if session.user.canManageUsers}}
-  <div class="mb-2 row">
-    <div class="col"></div>
-    <div class="col">
-      {{>h2Template}}
-    </div>
-    <div class="col text-right">
-      <a
-        class="d-inline-block d-print-none p-2 p-md-1 pt-md-2"
-        href="{{routeUrl page='erection' secondaryPage='admin' urlId=urlId}}"
-        title="Go to the erection administration page"
-      >
-        Admin
-      </a>
-    </div>
-  </div>
-{{else}}
-  {{>h2Template}}
-{{/if}}
-
-<p class="lead">
-  For the first time ever, we’re taking our erection and putting it online! The
-  online ballot is the same as the ballot you can receive in person. You’re
-  still required to have at least six runs in the last year to vote.
-</p>
-
 <lbh3-no-ssr>
+  {{#if session.user.canManageUsers}}
+    <div class="mb-2 row">
+      <div class="col"></div>
+      <div class="col">
+        {{>h2Template}}
+      </div>
+      <div class="col text-right">
+        <a
+          class="d-inline-block d-print-none p-2 p-md-1 pt-md-2"
+          href="{{routeUrl page='erection' secondaryPage='admin' urlId=urlId}}"
+          title="Go to the erection administration page"
+        >
+          Admin
+        </a>
+      </div>
+    </div>
+  {{else}}
+    {{>h2Template}}
+  {{/if}}
+
+  <p class="lead">
+    For the first time ever, we’re taking our erection and putting it online!
+    The online ballot is the same as the ballot you can receive in person.
+    You’re still required to have at least six runs in the last year to vote.
+  </p>
+
   <hr>
 
   {{#if session.user.hasherId}}
@@ -90,6 +90,10 @@
               <p>
                 Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
               </p>
+              <p><em><strong>
+                If you already took a paper ballot, you are not eligible to vote online.
+                If you take a paper ballot after submitting an online ballot, your online ballot will be discarded.
+              </strong></em></p>
             {{/if}}
 
             {{#if electionPromise.isPending}}
@@ -109,27 +113,73 @@
             {{/if}}
 
             {{#if electionPromise.isResolved}}
+              {{#if ballotsPromise.isPending}}
+                <div class="alert alert-info" role="alert">
+                  <strong>Fetching submitted ballots…</strong>
+                </div>
+              {{/if}}
+
+              {{#if ballotsPromise.isRejected}}
+                <div class="alert alert-danger" role="alert">
+                  <strong>Fuck!</strong> The ballots you have already submitted couldn’t be fetched. {{ballotsPromise.reason.message}}
+                </div>
+                <p>
+                  You may want to
+                  <a href="{{ballotFetchingFailedEmailLink}}">
+                    email I’m Fucking Matt Damon
+                  </a>
+                  to let him know about the issue.
+                </p>
+              {{/if}}
+
+              {{#if ballotsPromise.isResolved}}
+                {{^eq(ballotsPromise.value.length, 0)}}
+                  <h3>Submitted ballots</h3>
+                  <p>
+                    Below are the ballots you have already submitted.
+                    {{#eq(ballotsPromise.value.length, 1)}}
+                      The ballot below will be counted in the erection.
+                    {{else}}
+                      <strong>The last ballot you submit will be counted in the erection.</strong>
+                    {{/eq}}
+                  </p>
+                  <div class="table-responsive">
+                    <table class="table">
+                      <thead>
+                        <tr>
+                          <th>Datetime submitted</th>
+                          <th>Encrypted hash</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {{#each(ballotsPromise.value)}}
+                          <tr>
+                            <td class="text-nowrap">
+                              {{createdAtFormatted}}
+                            </td>
+                            <td>
+                              {{sha256}}
+                            </td>
+                          </tr>
+                        {{/each}}
+                      </tbody>
+                    </table>
+                  </div>
+                {{/eq}}
+              {{/if}}
+
+              <h3>New ballot</h3>
+              {{^eq(ballotsPromise.value.length, 0)}}
+                <p>
+                  You have already submitted a ballot (see above).
+                  Ballots cannot be changed, but you can submit a new ballot to replace your old ballot.
+                  The last ballot you submit will be counted in the erection.
+                </p>
+              {{/eq}}
               {{{election.descriptionHtml}}}
 
-              <p><em><strong>
-                If you already took a paper ballot, you are not eligible to vote online.
-                If you take a paper ballot after submitting an online ballot, your online ballot will be discarded.
-              </strong></em></p>
-
-              <h3>Instructions</h3>
-              <ul>
-                <li>Select the checkbox or radio button next to your choice.</li>
-                <li>Don’t vote for more choices than indicated.</li>
-                <li>You don’t have to vote in every race.</li>
-              </ul>
-              <h4>Write-in candidates</h4>
-              <ul>
-                <li>To add a candidate, use the search text box to find your candidate, then select their name.</li>
-                <li>Once their name appears next to the other candidates, select the checkbox next to their name (if it is not already checked).</li>
-                <li>Do not write-in a candidate whose name already appears on the ballot.</li>
-              </ul>
               <form class="mb-4 mt-2" on:submit="save(ballot)">
-                <h3>2018 Mismanagement Positions</h3>
+                <h4>2018 Mismanagement Positions</h4>
                 {{#each(election.schema.positions)}}
                   <fieldset class="form-group">
                     <legend class="col-form-label col-form-label-lg pb-0">
@@ -146,14 +196,12 @@
                       <div class="form-check mt-1">
                         <label class="form-check-label">
                           <input
-                            checked:bind="boolean-to-inList(./id, ../../ballot[../id])"
+                            checked:from="../../hasherListContains(../../ballot[../id], ./id)"
                             class="form-check-input"
-                            {{#eq(../../ballot[../id].indexOf(./id), -1)}}
-                              {{#eq(../maxSelection, ../../ballot[../id].length)}}disabled{{/eq}}
-                            {{/eq}}
+                            on:click="../../toggleHasherInList(this, ../../ballot[../id], ../maxSelection, scope.element)"
                             type="checkbox"
                           />
-                          {{hashOrJustName}}
+                          {{name}}
                         </label>
                       </div>
                     {{/each}}
@@ -177,7 +225,7 @@
                   </fieldset>
                 {{/each}}
 
-                <h3>Awards for 2017</h3>
+                <h4>Awards for 2017</h4>
                 {{#each(election.schema.awards, award=value)}}
                   {{#switch(type)}}
                     {{#case('hasher')}}
@@ -207,19 +255,11 @@
                                           name="{{../../award.id}}"
                                           type="radio"
                                         />
-                                        {{hashName}}
+                                        {{name}}
                                       </label>
                                     </td>
                                     <td class="text-nowrap">
-                                      {{runCount}}
-                                      {{#if(hareCount)}}
-                                        + {{hareCount}}
-                                        {{#eq(hareCount, 1)}}
-                                          Hare
-                                        {{else}}
-                                          Hares
-                                        {{/eq}}
-                                      {{/if}}
+                                      {{runs}}
                                     </td>
                                   </tr>
                                 {{/each}}
@@ -275,7 +315,7 @@
                           >
                             <option value="0">Select one</option>
                             {{#each(../../allRunsPromise.value)}}
-                              <option value="{{id}}">
+                              <option value="{{trailNumber}}">
                                 {{trailNumber}} — {{locationMd}} — {{haresMd}}
                               </option>
                             {{/each}}
