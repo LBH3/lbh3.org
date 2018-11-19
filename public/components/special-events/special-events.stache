@@ -1,51 +1,58 @@
 <h2>Add a special event</h2>
 
-<form on:submit="createSpecialEvent()">
-  <div class="form-group row">
-    <label class="col-3 col-form-label" for="year">
-      Year
-    </label>
-    <div class="col-9">
-      <input autofocus class="form-control" id="year" type="number" value:bind="year">
+{{#if session.user.canManageUsers}}
+  <form on:submit="createSpecialEvent()">
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="year">
+        Year
+      </label>
+      <div class="col-9">
+        <input autofocus class="form-control" id="year" type="number" value:bind="year">
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-3 col-form-label" for="url-id">
-      URL ID
-    </label>
-    <div class="col-9">
-      <input autofocus class="form-control" id="url-id" type="text" value:bind="urlId">
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="url-id">
+        URL ID
+      </label>
+      <div class="col-9">
+        <input autofocus class="form-control" id="url-id" type="text" value:bind="urlId">
+      </div>
     </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-3 col-form-label" for="description">
-      Description
-    </label>
-    <div class="col-9">
-      <textarea class="form-control" id="description" value:bind="descriptionMd"></textarea>
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="description">
+        Description
+      </label>
+      <div class="col-9">
+        <textarea class="form-control" id="description" value:bind="descriptionMd"></textarea>
+      </div>
     </div>
-  </div>
 
-  {{#if creatingSpecialEventPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Saving special event…</strong>
-    </div>
-  {{/if}}
-  {{#if creatingSpecialEventPromise.isRejected}}
-    <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The new special event failed to save. {{creatingSpecialEventPromise.reason.message}}
-    </div>
-  {{/if}}
-  {{#if creatingSpecialEventPromise.isResolved}}
-    <div class="alert alert-success" role="alert">
-      <strong>On on!</strong> You successfully created the special event.
-    </div>
-  {{/if}}
+    {{#if creatingSpecialEventPromise.isPending}}
+      <div class="alert alert-info" role="alert">
+        <strong>Saving special event…</strong>
+      </div>
+    {{/if}}
+    {{#if creatingSpecialEventPromise.isRejected}}
+      <div class="alert alert-danger" role="alert">
+        <strong>Fuck!</strong> The new special event failed to save. {{creatingSpecialEventPromise.reason.message}}
+      </div>
+    {{/if}}
+    {{#if creatingSpecialEventPromise.isResolved}}
+      <div class="alert alert-success" role="alert">
+        <strong>On on!</strong> You successfully created the special event.
+      </div>
+    {{/if}}
 
-  <button
-    class="btn btn-primary"
-    {{#if creatingSpecialEventPromise.isPending}}disabled{{/if}}
-    type="submit">
-    Create special event
-  </button>
-</form>
+    <button
+      class="btn btn-primary"
+      {{#if creatingSpecialEventPromise.isPending}}disabled{{/if}}
+      type="submit">
+      Create special event
+    </button>
+  </form>
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}
