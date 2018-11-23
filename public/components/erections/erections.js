@@ -16,6 +16,7 @@ export const ViewModel = DefineMap.extend({
       advertisementMd: this.advertisementMd,
       descriptionMd: this.descriptionMd,
       endDatetime: moment(`${this.endDate} ${this.endTime}`).format(),
+      endedNoticeMd: this.endedNoticeMd,
       publicKey: this.publicKey,
       schema: eval(`(${this.schema})`),
       startDatetime: moment(`${this.startDate} ${this.startTime}`).format(),
@@ -23,7 +24,6 @@ export const ViewModel = DefineMap.extend({
       urlId: this.urlId,
       year: this.year
     };
-    console.log('newData:', newData);
     return this.creatingElectionPromise = new Election(newData).save();
   },
   creatingElectionPromise: {},
@@ -37,6 +37,7 @@ export const ViewModel = DefineMap.extend({
     },
     type: 'string'
   },
+  endedNoticeMd: 'string',
   endTime: {
     default: '00:00:00',
     type: 'string'

@@ -38,7 +38,16 @@
         Advertisement
       </label>
       <div class="col-9">
-        <textarea class="form-control" id="advertisement-md" value:bind="advertisementMd"></textarea>
+        <input class="form-control" id="advertisement-md" type="text" value:bind="advertisementMd">
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="ended-notice-md">
+        Ended notice
+      </label>
+      <div class="col-9">
+        <input class="form-control" id="ended-notice-md" type="text" value:bind="endedNoticeMd">
       </div>
     </div>
 
@@ -65,7 +74,7 @@
         URL ID
       </label>
       <div class="col-9">
-        <input autofocus class="form-control" id="url-id" type="text" value:bind="urlId">
+        <input class="form-control" id="url-id" type="text" value:bind="urlId">
       </div>
     </div>
 
@@ -74,7 +83,7 @@
         Year
       </label>
       <div class="col-9">
-        <input autofocus class="form-control" id="year" type="number" value:bind="year">
+        <input class="form-control" id="year" type="number" value:bind="year">
       </div>
     </div>
 
