@@ -37,7 +37,26 @@ export default Component.extend({
     get showUpcomingElections() {
       const session = this.session || {};
       const user = session.user || {};
-      return user.canManageUsers;
+      const allPermissions = [
+        user.canAddHashers,
+        user.canAddPhotos,
+        user.canAddSnoozes,
+        user.canAddTrails,
+        user.canEditFutureSpecialEvents,
+        user.canEditHasherInfo,
+        user.canEditPostTrailInfo,
+        user.canEditPreTrailInfo,
+        user.canExportData,
+        user.canManageUsers,
+        user.canViewDirectoryInfo,
+        user.canViewHashersEmailList,
+        user.canViewOldData,
+        user.canViewRunAttendance
+      ];
+      const truePermissions = allPermissions.filter(permission => {
+        return permission;
+      });
+      return truePermissions.length > 0;
     },
     get title() {
       return 'LBH3';

@@ -63,6 +63,10 @@ var User = DefineMap.extend('User', {
     type: 'boolean',
     serialize: false
   },
+  canViewRunAttendance: {
+    type: 'boolean',
+    serialize: false
+  },
   displayName: {
     get: function() {
       const profile = this.profile || {};
