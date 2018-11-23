@@ -116,6 +116,22 @@
                     </can-import>
                   </lbh3-no-ssr>
                 {{/case}}
+                {{#case "edit"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/erection/edit/">
+                      {{#if isPending}}
+                        Loading the edit erection page…
+                      {{else}}
+                        <lbh3-erection-edit
+                          description:to="scope.root.description"
+                          ogTitle:to="scope.root.ogTitle"
+                          title:to="scope.root.title"
+                          urlId:from="scope.root.urlId"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
               {{/switch}}
             {{else}}
               <can-import from="~/components/erection/">

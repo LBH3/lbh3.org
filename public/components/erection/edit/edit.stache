@@ -1,0 +1,61 @@
+<can-import from="can-stache-route-helpers" />
+
+<h2>
+  Edit
+  <a href="{{routeUrl page='erections' urlId=urlId}}" title="Back to the erection page">
+    {{erection.title}}
+  </a>
+</h2>
+
+{{#if session.user.canManageUsers}}
+  {{#if erectionPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Loading erection…</strong>
+    </div>
+  {{/if}}
+
+  {{#if erectionPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The erection failed to load. {{erectionPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if erection}}
+    <form on:submit="editErection()">
+      <div class="form-group row">
+        <label class="col-3 col-form-label" for="advertise">
+          Advertise
+        </label>
+        <div class="col-9">
+          <select class="form-control" id="advertise" value:bind="erection.advertise">
+            <option value="false">No</option>
+            <option value="true">Yes</option>
+          </select>
+        </div>
+      </div>
+
+      {{#if editErectionPromise.isPending}}
+        <div class="alert alert-info" role="alert">
+          <strong>Saving special erection…</strong>
+        </div>
+      {{/if}}
+      {{#if editErectionPromise.isRejected}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Fuck!</strong> The special erection failed to save. {{editErectionPromise.reason.message}}
+        </div>
+      {{/if}}
+      {{#if editErectionPromise.isResolved}}
+        <div class="alert alert-success" role="alert">
+          <strong>On on!</strong> You successfully edited the special erection.
+        </div>
+      {{/if}}
+
+      <button
+        class="btn btn-primary"
+        {{#if editErectionPromise.isPending}}disabled{{/if}}
+        type="submit">
+        Edit special erection
+      </button>
+    </form>
+  {{/if}}
+{{/if}}

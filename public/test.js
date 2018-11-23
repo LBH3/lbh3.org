@@ -9,6 +9,7 @@ import 'lbh3/components/about/mismanagement/year/year-test';
 import 'lbh3/components/about/privacy/privacy-test';
 import 'lbh3/components/erection/erection-test';
 import 'lbh3/components/erection/admin/admin-test';
+import 'lbh3/components/erection/edit/edit-test';
 import 'lbh3/components/erections/erections-test';
 import 'lbh3/components/footer/footer-test';
 import 'lbh3/components/founders-2018/founders-2018-test';
