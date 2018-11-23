@@ -1,4 +1,7 @@
 import Component from 'can-component';
+import CryptoJSAES from 'crypto-js/aes';
+import CryptoJSCore from 'crypto-js/core';
+import CryptoJSLib from 'crypto-js/lib-typedarrays';
 import DefineMap from 'can-define/map/';
 import JSEncrypt from 'jsencrypt';
 import moment from 'moment';
@@ -142,22 +145,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     });
   },
   get encryptionFailedEmailLink() {
-    return `mailto:webmaster@lbh3.org?subject=LBH3 erection encryption issue&body=[Keep this] browser: ${navigator.userAgent}`;
-  },
-  get encryptionWorks() {
-    try {
-      const message = 'LBH3 🗳';
-      const encrypt = new JSEncrypt();
-      encrypt.setPublicKey(testPublicKey);
-      const encrypted = encrypt.encrypt(message);
-      const decrypt = new JSEncrypt();
-      decrypt.setPrivateKey(testPrivateKey);
-      const uncrypted = decrypt.decrypt(encrypted);
-      return message === uncrypted;
-    } catch (error) {
-      console.error(error);
-    }
-    return false;
+    return `mailto:webmaster@lbh3.org?subject=LBH3 erection encryption issue&body=[Keep this] ${this.testEncryptionError} [Browser: ${navigator.userAgent}]`;
   },
   isEligibleToVote: {
     type: 'boolean',
@@ -197,7 +185,9 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   },
   save: function(ballot) {
     try {
-      const encryptedBallot = Ballot.fromUnencrypted(ballot, this.election.publicKey);
+      const election = this.election;
+      const encryptedBallot = Ballot.fromUnencrypted(ballot, election.publicKey);
+      encryptedBallot.electionId = election.id;
       this.savingPromise = encryptedBallot.save();
     } catch (error) {
       this.savingPromise = Promise.reject(error);
@@ -206,6 +196,52 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   savingPromise: Promise,
   get session() {
     return Session.current;
+  },
+  get testEncryptionError() {
+    try {
+      const message = 'LBH3 🗳';
+
+      // Generate a secret key
+      const bytes = 256/8;
+      const aesKey = CryptoJSLib.random(bytes).toString() || '';
+      if (aesKey.length !== bytes * 2) {
+        throw new Error('AES key length is ' + aesKey.length);
+      }
+
+      // Encrypt the message
+      const encryptedMessage = CryptoJSAES.encrypt(message, aesKey).toString() || '';
+      if (encryptedMessage.length === 0) {
+        throw new Error('Encrypted message length is 0.');
+      }
+
+      // Encrypt the secret key
+      const encrypt = new JSEncrypt();
+      encrypt.setPublicKey(testPublicKey);
+      const encryptedKey = encrypt.encrypt(aesKey) || '';
+      if (encryptedKey.length === 0) {
+        throw new Error('Encrypted key length is 0.');
+      }
+
+      // Decrypt the secret key
+      const decrypt = new JSEncrypt();
+      decrypt.setPrivateKey(testPrivateKey);
+      const uncrypted = decrypt.decrypt(encryptedKey);
+      if (aesKey !== uncrypted) {
+        throw new Error('Decrypted secret key does not match generated secret key.');
+      }
+
+      // Decrypt the message
+      const originalText  = CryptoJSAES.decrypt(encryptedMessage, aesKey).toString(CryptoJSCore.enc.Utf8);
+      if (originalText === message) {
+        return null;
+      } else {
+        throw new Error('Decrypted text does not match original message.');
+      }
+    } catch (error) {
+      console.error(error);
+      return error;
+    }
+    return new Error('Unknown error.');
   },
   get title() {
     return `${this.ogTitle} | LBH3`;
