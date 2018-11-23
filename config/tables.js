@@ -1,6 +1,7 @@
 'use strict';
 
 exports.getDefinitionsWithSequelize = function (Sequelize) {
+  const booleanType = field => ({type: Sequelize.BOOLEAN, field, notNull: true, field, defaultValue: false});
   const boxType = field => ({type: Sequelize.GEOMETRY('POLYGON'), field});
   const currentTimestampType = field => ({type: 'timestamp with time zone', notNull: true, field, defaultValue: 'now()'});
   const dateType = field => ({type: Sequelize.DATEONLY, field});
@@ -17,6 +18,16 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
   const timestampType = field => ({type: 'timestamp with time zone', notNull: true, field});
 
   return {
+    ballots: {
+      id: primaryIntType,
+      createdAt: currentTimestampType('created_at'),
+      updatedAt: currentTimestampType('updated_at'),
+      electionId: intType('election_id'),
+      encryptedBallot: textType('encrypted_ballot'),
+      encryptedKey: textType('encrypted_key'),
+      hasherId: intType('hasher_id'),
+      sha256: stringType('sha256')
+    },
     bored_hashers: {
       id: primaryIntType,
       createdAt: currentTimestampType('created_at'),
@@ -41,6 +52,22 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       updatedAt: currentTimestampType('updated_at'),
       endDate: dateType('end_date'),
       startDate: dateType('start_date'),
+      year: intType('year')
+    },
+    elections: {
+      id: primaryIntType,
+      createdAt: currentTimestampType('created_at'),
+      updatedAt: currentTimestampType('updated_at'),
+      advertise: booleanType('advertise'),
+      advertisementMd: stringType('advertisement_md'),
+      descriptionMd: textType('description_md'),
+      endDatetime: timestampType('end_datetime'),
+      endedNoticeMd: stringType('ended_notice_md'),
+      publicKey: textType('public_key'),
+      schema: jsonType('schema'),
+      startDatetime: timestampType('start_datetime'),
+      titleMd: stringType('title_md'),
+      urlId: stringType('url_id'),
       year: intType('year')
     },
     events: {

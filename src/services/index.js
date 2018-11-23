@@ -9,6 +9,8 @@ const hashers = require('./hashers/hashers.service.js');
 const eventsHashers = require('./events-hashers/events-hashers.service.js');
 const patches = require('./patches/patches.service.js');
 const specialEvents = require('./special-events/special-events.service.js');
+const elections = require('./elections/elections.service.js');
+const ballots = require('./ballots/ballots.service.js');
 module.exports = function () {
   const app = this; // eslint-disable-line no-unused-vars
   app.configure(users);
@@ -22,4 +24,6 @@ module.exports = function () {
   app.configure(eventsHashers);
   app.configure(patches);
   app.configure(specialEvents);
+  app.configure(elections);
+  app.configure(ballots);
 };
