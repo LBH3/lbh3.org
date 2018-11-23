@@ -7,6 +7,7 @@ import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import Hasher from './hasher';
 import marked from 'marked';
+import moment from 'moment-timezone';
 
 const randomize = (list) => {
   const array = [...list];
@@ -23,20 +24,9 @@ const randomize = (list) => {
   return array;
 };
 
-const Award = DefineMap.extend({
-  seal: false
-}, {
-  hasherOptions: {
-    get() {
-      return new DefineList(randomize(this.options));
-    }
-  }
-});
-Award.List = DefineList.extend({
-  '#': Award
-});
+const timeZone = 'America/Los_Angeles';
 
-const Position = DefineMap.extend({
+const Race = DefineMap.extend({
   seal: false
 }, {
   hasherOptions: {
@@ -48,15 +38,22 @@ const Position = DefineMap.extend({
     return this.maxSelection > this.options.length;
   }
 });
-Position.List = DefineList.extend({
-  '#': Position
+Race.List = DefineList.extend({
+  '#': Race
+});
+
+const SchemaChild = DefineMap.extend({
+  seal: false
+}, {
+  races: Race.List,
+  title: 'string'
 });
 
 const Schema = DefineMap.extend({
   seal: false
 }, {
-  awards: Award.List,
-  positions: Position.List,
+  awards: SchemaChild,
+  positions: SchemaChild
 });
 
 const Election = DefineMap.extend({
@@ -66,6 +63,24 @@ const Election = DefineMap.extend({
   descriptionHtml: {
     get: function() {
       return marked(this.descriptionMd || '');
+    },
+    serialize: false
+  },
+  endDateAsMoment: {
+    get: function() {
+      return moment(this.endDatetime).tz(timeZone);
+    },
+    serialize: false
+  },
+  endedNoticeHtml: {
+    get: function() {
+      return marked(this.endedNoticeMd || '');
+    },
+    serialize: false
+  },
+  hasEnded: {
+    get: function() {
+      return this.endDateAsMoment.isBefore();
     },
     serialize: false
   },

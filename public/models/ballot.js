@@ -1,6 +1,8 @@
 import algebra from './algebra';
 import behaviors from './behaviors';
 import connect from 'can-connect';
+import CryptoJSAES from 'crypto-js/aes';
+import CryptoJSLib from 'crypto-js/lib-typedarrays';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import feathersClient from './feathers-client';
@@ -10,15 +12,25 @@ import moment from 'moment-timezone';
 const Ballot = DefineMap.extend({
   seal: false,
   fromUnencrypted(ballot, publicKey) {
-    const values = ballot.serialize();
+    const serializedBallot = JSON.stringify(ballot.serialize());
+
+    // Generate a secret key
+    const aesKey = CryptoJSLib.random(256/8).toString();
+
+    // Encrypt the message
+    const encryptedBallot = CryptoJSAES.encrypt(serializedBallot, aesKey).toString();
+
+    // Encrypt the secret key
     const encrypt = new JSEncrypt();
     encrypt.setPublicKey(publicKey);
-    const encrypted = encrypt.encrypt(JSON.stringify(values));
-    if (!encrypted) {
+    const encryptedKey = encrypt.encrypt(aesKey);
+    if (!encryptedKey) {
       throw new Error('Unknown error while encrypting the ballot.');
     }
+
     return new this.constructor({
-      encrypted
+      encryptedBallot,
+      encryptedKey
     });
   }
 }, {
@@ -28,7 +40,8 @@ const Ballot = DefineMap.extend({
     get: function() {
       return moment(this.createdAt).format('LL LTS');
     }
-  }
+  },
+  electionId: 'number'
 });
 
 Ballot.List = DefineList.extend({

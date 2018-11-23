@@ -1,10 +1,5 @@
-import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
-
-const uuid = function(a) {
-  // From https://gist.github.com/jed/982883
-  return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,uuid);
-};
+import DefineMap from 'can-define/map/';
 
 const serializeHasherOptions = function(currentValue) {
   return currentValue ? currentValue.map(hasher => {
@@ -16,7 +11,7 @@ const UnencryptedBallot = DefineMap.extend({
   seal: false,
   fromElection(election) {
     const ballot = {};
-    election.schema.awards.forEach(award => {
+    election.schema.awards.races.forEach(award => {
       if (award.type === 'hasher') {
         ballot[award.id] = 0;
       } else if (award.type === 'run') {
@@ -25,7 +20,7 @@ const UnencryptedBallot = DefineMap.extend({
         ballot[award.id] = '';
       }
     });
-    election.schema.positions.forEach(position => {
+    election.schema.positions.races.forEach(position => {
       ballot[position.id] = [];
     });
     return new this.constructor(ballot);
@@ -48,12 +43,6 @@ const UnencryptedBallot = DefineMap.extend({
   'on-disc': {serialize: serializeHasherOptions},
   'on-sec': {serialize: serializeHasherOptions},
   'trailmaster': {serialize: serializeHasherOptions},
-  uuid: {
-    serialize: true,
-    get() {
-      return uuid();
-    }
-  },
   'webmeister': {serialize: serializeHasherOptions},
   'worst-trail': 'number',
   'write-in-awards': 'string',
