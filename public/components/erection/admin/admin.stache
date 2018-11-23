@@ -39,28 +39,63 @@
         <table class="table table-bordered table-sm">
           <thead>
             <tr>
-              <th scope="col">ID</th>
+              <th scope="col">Encrypted hash</th>
               <th scope="col">Decrypted</th>
-              <th scope="col">Encrypted</th>
             </tr>
           </thead>
           <tbody>
             {{#each(ballotsPromise.value)}}
               <tr>
                 <td>
-                  {{id}}
+                  {{sha256}}
                 </td>
                 <td>
-                  {{../decryptBallot(encrypted)}}
-                </td>
-                <td>
-                  {{encrypted}}
+                  {{../decryptBallot(encryptedBallot, encryptedKey)}}
                 </td>
               </tr>
             {{/each}}
           </tbody>
         </table>
       </div>
+
+      {{#if(decrypter)}}
+
+        <h3>{{election.schema.positions.title}}</h3>
+        {{#each(election.schema.positions.races)}}
+          <h4>{{title}}</h4>
+          <ul>
+            {{#each(../talliedVotes[id])}}
+              <li>
+                {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+              </li>
+            {{/each}}
+          </ul>
+        {{/each}}
+
+        <h3>{{election.schema.awards.title}}</h3>
+        {{#each(election.schema.awards.races)}}
+          <h4>{{title}}</h4>
+          <ul>
+            {{#each(../talliedVotes[id])}}
+              <li>
+                {{#switch(../type)}}
+                  {{#case('hasher')}}
+                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                  {{/case}}
+                  {{#case('run')}}
+                    <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
+                      {{scope.key}}: {{this}}
+                    </span>
+                  {{/case}}
+                  {{#case('textarea')}}
+                    {{scope.key}}
+                  {{/case}}
+                {{/switch}}
+              </li>
+            {{/each}}
+          </ul>
+        {{/each}}
+      {{/if}}
     {{/eq}}
   {{/if}}
 
