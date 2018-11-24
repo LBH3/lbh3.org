@@ -14,10 +14,18 @@ export default Component.extend({
     },
     get electionsPromise() {
       if (this.showUpcomingElections) {
+        const currentDate = new Date();
         return Election.connection.getList({
           $limit: 100,
           $sort: {
             endDatetime: 1
+          },
+          advertise: true,
+          endDatetime: {
+            $gte: currentDate
+          },
+          startDatetime: {
+            $lte: currentDate
           }
         });
       }
