@@ -34,26 +34,8 @@ export default Component.extend({
     get showUpcomingElections() {
       const session = this.session || {};
       const user = session.user || {};
-      const allPermissions = [
-        user.canAddHashers,
-        user.canAddPhotos,
-        user.canAddSnoozes,
-        user.canAddTrails,
-        user.canEditFutureSpecialEvents,
-        user.canEditHasherInfo,
-        user.canEditPostTrailInfo,
-        user.canEditPreTrailInfo,
-        user.canExportData,
-        user.canManageUsers,
-        user.canViewDirectoryInfo,
-        user.canViewHashersEmailList,
-        user.canViewOldData,
-        user.canViewRunAttendance
-      ];
-      const truePermissions = allPermissions.filter(permission => {
-        return permission;
-      });
-      return truePermissions.length > 0;
+      const boredMembers = [14, 7303, 7273, 6099, 7559, 3167, 25, 178, 6535, 10, 7313, 33, 6143, 6643, 44, 5908, 16, 6229, 6394];
+      return boredMembers.indexOf(user.hasherId) > -1;
     },
     get title() {
       return 'LBH3';
