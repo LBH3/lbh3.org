@@ -22,9 +22,6 @@ export default Component.extend({
         });
       }
     },
-    get isBeforeJanuary21() {
-      return new Date() < new Date('Jan 21 2019 08:00:00 UTC');
-    },
     get isBeforeFebruary17() {
       return new Date() < new Date('Feb 17 2019 08:00:00 UTC');
     },
