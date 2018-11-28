@@ -10,30 +10,33 @@ import view from './hasher-autocomplete.stache';
 export const ViewModel = DefineMap.extend({
   hasherAwesomplete: {},
 
-  hasherAwesompleteQuery: {
-    type: 'string',
-    set: function(hasherAwesompleteQuery) {
-      if (hasherAwesompleteQuery) {
-        Hasher.connection.getList({
-          $search: hasherAwesompleteQuery,
-          $sort: {
-            lastTrailDate: -1
-          }
-        }).then(results => {
-          const newList = [];
-          results.forEach(result => {
-            newList.push({
-              label: result.hashOrJustName,
-              value: result
-            });
-          });
-          if (this.hasherAwesomplete) {
-            this.hasherAwesomplete.list = newList;
-          }
-        });
+  hasherAwesompleteQuery: 'string',
+
+  get hashersPromise() {
+    const hashersPromise = this.hasherAwesompleteQuery ? Hasher.connection.getList({
+      $search: this.hasherAwesompleteQuery,
+      $sort: {
+        lastTrailDate: -1
       }
-      return hasherAwesompleteQuery;
+    }) : Promise.resolve([]);
+    if (this.hasherAwesomplete) {
+      this.hasherAwesomplete.list = [];
     }
+    hashersPromise.then(results => {
+      if (results.__listSet && results.__listSet.$search === this.hasherAwesompleteQuery) {
+        const newList = [];
+        results.forEach(result => {
+          newList.push({
+            label: result.hashOrJustName,
+            value: result
+          });
+        });
+        if (this.hasherAwesomplete) {
+          this.hasherAwesomplete.list = newList;
+        }
+      }
+    });
+    return hashersPromise;
   },
 
   selected: Hasher,

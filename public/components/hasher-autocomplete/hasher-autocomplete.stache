@@ -1,1 +1,21 @@
 <content />
+
+{{#if hashersPromise.isPending}}
+  <div class="awesomplete">
+    <ul role="listbox">
+      <li>
+        <strong>Fetching hashers…</strong>
+      </li>
+    </ul>
+  </div>
+{{/if}}
+
+{{#if hashersPromise.isRejected}}
+  <div class="awesomplete">
+    <ul role="listbox">
+      <li>
+        <strong>Fuck!</strong> Hashers couldn’t be fetched. {{hashersPromise.reason.message}}
+      </li>
+    </ul>
+  </div>
+{{/if}}
