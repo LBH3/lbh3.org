@@ -9,7 +9,7 @@ testSauceLabs({
     deviceName: 'Android Emulator',
     platform: 'Android 4.4'
   }, */{
-    'appium-version': '1.7.1',
+    'appium-version': '1.8.0',
     browserName: 'Safari',
     deviceName: 'iPhone 7 Simulator',
     platform: 'iOS',
