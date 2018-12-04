@@ -179,7 +179,8 @@ const Hasher = DefineMap.extend({
       if (hashName) {
         return hashName;
       }
-      return `Just ${this.givenName} ${this.familyName}`.trim();
+      const parts = ['Just', this.givenName, this.familyName];
+      return parts.join(' ').trim();
     }
   },
   hasName: {
