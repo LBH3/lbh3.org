@@ -11,7 +11,7 @@ const shouldFilterData = function(hook) {
   return new Promise(function(resolve) {
     const user = hook.params.user;
     if (user) {
-      const hasherId = hook.result.id;
+      const hasherId = hook.result ? hook.result.id : null;
       if (hasherId === user.hasherId) {
         // Ok to not filter the data and include the hasher’s mileage
         resolve(false);
@@ -27,6 +27,21 @@ const shouldFilterData = function(hook) {
       }
     } else {
       resolve(true);
+    }
+  });
+};
+
+const beforeFindHook = function(hook) {
+  return shouldFilterData(hook).then(filter => {
+    if (filter) {
+      return searchHook({
+        fields: ['hashName']
+      })(hook);
+    } else {
+      return searchHook({
+        contains: ['emailAddresses', 'emailAddressesPrivate'],
+        fields: ['familyName', 'givenName', 'hashName']
+      })(hook);
     }
   });
 };
@@ -183,11 +198,8 @@ module.exports = {
     all: [],
     find: [
       jwtAuthentication,
-      authHook.restrictTo(...boredPositions),
-      searchHook({
-        contains: ['emailAddresses', 'emailAddressesPrivate'],
-        fields: ['familyName', 'givenName', 'hashName']
-      })
+      attachAuthInfo,
+      beforeFindHook
     ],
     get: [ attachAuthInfo ],
     create: [ jwtAuthentication, authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
