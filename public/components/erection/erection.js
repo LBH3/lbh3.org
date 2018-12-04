@@ -84,6 +84,14 @@ mgcHzcmZ5iKeTBJhcDAVdwsCAwEAAQ==
 -----END PUBLIC KEY-----`;
 
 export const ViewModel = DefineMap.extend('ErectionVM', {
+  allRuns: {
+    get: function(lastValue, setValue) {
+      const allRunsPromise = this.allRunsPromise;
+      if (allRunsPromise) {
+        allRunsPromise.then(setValue);
+      }
+    }
+  },
   get allRunsPromise() {
     const election = this.election;
     if (election) {
@@ -188,11 +196,21 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       const election = this.election;
       const encryptedBallot = Ballot.fromUnencrypted(ballot, election.publicKey);
       encryptedBallot.electionId = election.id;
+      this.savingUnencryptedBallot = ballot;
       this.savingPromise = encryptedBallot.save();
     } catch (error) {
       this.savingPromise = Promise.reject(error);
     }
   },
+  savingEncryptedBallot: {
+    get(lastSetValue, resolve) {
+      const savingPromise = this.savingPromise;
+      if (savingPromise) {
+        savingPromise.then(resolve);
+      }
+    }
+  },
+  savingUnencryptedBallot: UnencryptedBallot,
   savingPromise: Promise,
   get session() {
     return Session.current;
@@ -279,6 +297,21 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       return hasher.id === id;
     });
     return matchingHashers.length > 0;
+  },
+
+  hasherWithIdInOptions(hasherId, options) {
+    const filtered = options.filter(option => {
+      return hasherId === option.id;
+    });
+    return (filtered.length > 0) ? filtered[0].name : hasherId;
+  },
+
+  runWithTrailNumber(trailNumber) {
+    const allRuns = this.allRuns || [];
+    const filtered = allRuns.filter(run => {
+      return run.trailNumber === trailNumber;
+    });
+    return (filtered.length > 0) ? filtered[0] : null;
   },
 
   selectHasherForAward(autocompleteElement, awardId) {

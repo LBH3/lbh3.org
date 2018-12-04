@@ -61,7 +61,7 @@ You can submit this form until February 4<sup>th</sup>. Cum to Found ’er Balls
           {
             id: 'best-on-on',
             title: 'Best On-On of 2017',
-            type: 'run'
+            type: 'on-on'
           },
           {
             id: 'most-deserved-hashit',

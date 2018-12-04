@@ -124,8 +124,91 @@
               {{/if}}
 
               {{#if savingPromise.isResolved}}
-                <div class="alert alert-primary" role="alert">
-                  <strong>Success!</strong> Your ballot has been submitted.
+                <div class="alert alert-success pb-0" role="alert">
+                  <h4 class="alert-heading">Success!</h4>
+                  <p>The ballot below has been submitted. <span class="alert-link" onclick="print()">Print this page</span> for your records.</p>
+                  <hr>
+                  <div class="container pl-0 pr-0">
+                    <div class="row">
+                      <div class="col-sm">
+                        <h5>{{election.schema.positions.title}}</h5>
+                        {{#each(election.schema.positions.races)}}
+                          <hr>
+                          <h6>{{title}}</h6>
+                          {{#eq(../savingUnencryptedBallot[id].length, 0)}}
+                            <p><i>None selected</i></p>
+                          {{else}}
+                            <ul>
+                              {{#each(../savingUnencryptedBallot[id])}}
+                                <li>{{name}}</li>
+                              {{/each}}
+                            </ul>
+                          {{/eq}}
+                        {{/each}}
+                      </div>
+                      <div class="col-sm">
+                        <h5>{{election.schema.awards.title}}</h5>
+                        {{#each(election.schema.awards.races, award=value)}}
+                          <hr>
+                          <h6>{{title}}</h6>
+                          {{#switch(type)}}
+                            {{#case('hasher')}}
+                              <p>
+                                {{#if(../../savingUnencryptedBallot[../id])}}
+                                  {{#if(options)}}
+                                    {{../../hasherWithIdInOptions(../../savingUnencryptedBallot[../id], options)}}
+                                  {{else}}
+                                    {{#with(../../cachedHashers[../../savingUnencryptedBallot[../id]])}}
+                                      {{./hashOrJustName}}
+                                    {{/with}}
+                                  {{/if}}
+                                {{else}}
+                                  <i>None selected</i>
+                                {{/if}}
+                              </p>
+                            {{/case}}
+                            {{#case('on-on')}}
+                              <p>
+                                {{#with(../../runWithTrailNumber(../../savingUnencryptedBallot[../id]))}}
+                                  {{#if(trailNumber)}}
+                                    {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
+                                  {{else}}
+                                    <i>None selected</i>
+                                  {{/if}}
+                                {{/with}}
+                              </p>
+                            {{/case}}
+                            {{#case('run')}}
+                              <p>
+                                {{#with(../../runWithTrailNumber(../../savingUnencryptedBallot[../id]))}}
+                                  {{#if(trailNumber)}}
+                                    {{trailNumber}} — {{locationMd}} — {{haresMd}}
+                                  {{else}}
+                                    <i>None selected</i>
+                                  {{/if}}
+                                {{/with}}
+                              </p>
+                            {{/case}}
+                            {{#case('textarea')}}
+                              {{#if(../../savingUnencryptedBallot[../id])}}
+                                <p>
+                                  {{../../savingUnencryptedBallot[../id]}}
+                                </p>
+                              {{else}}
+                                <p><i>None</i></p>
+                              {{/if}}
+                            {{/case}}
+                          {{/switch}}
+                        {{/each}}
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  <p class="text-right">
+                    <small style="word-break: break-all">
+                      Encrypted hash: {{savingEncryptedBallot.sha256}}
+                    </small>
+                  </p>
                 </div>
               {{/if}}
 
@@ -166,9 +249,9 @@
                     <p>
                       Below are the ballots you have already submitted.
                       {{#eq(ballotsPromise.value.length, 1)}}
-                        The ballot below will be counted in the erection.
+                        <span class="text-success">The ballot below will be counted in the erection.</span>
                       {{else}}
-                        <strong>The last ballot you submit will be counted in the erection.</strong>
+                        <strong class="text-success">The last ballot you submit will be counted in the erection.</strong>
                       {{/eq}}
                     </p>
                     <div class="table-responsive">
@@ -181,7 +264,7 @@
                         </thead>
                         <tbody>
                           {{#each(ballotsPromise.value)}}
-                            <tr>
+                            <tr class="{{#eq(scope.index, 0)}}text-success{{else}}text-muted{{/eq}}">
                               <td class="text-nowrap">
                                 {{createdAtFormatted}}
                               </td>
@@ -243,9 +326,11 @@
                               on:selected="../didSelectHasher(scope.element, ../ballot[./id], hasherOptions, maxSelection)"
                             >
                               <input
+                                autocapitalize="off"
                                 autocomplete="off"
+                                autocorrect="off"
                                 class="form-control"
-                                placeholder="Hash or Just name"
+                                placeholder="Type a hash name here"
                                 type="text"
                               />
                             </lbh3-hasher-autocomplete>
@@ -308,10 +393,12 @@
                                 showNameAfterSelection:from="false"
                               >
                                 <input
+                                  autocapitalize="off"
                                   autocomplete="off"
+                                  autocorrect="off"
                                   class="form-control"
                                   id="{{./id}}"
-                                  placeholder="Hash or Just name"
+                                  placeholder="Type a hash name here"
                                   type="text"
                                 />
                               </lbh3-hasher-autocomplete>
@@ -333,6 +420,25 @@
                             {{/if}}
                           </div>
                         {{/if}}
+                      {{/case}}
+                      {{#case('on-on')}}
+                        <div class="form-group">
+                          <label class="col-form-label col-form-label-lg">
+                            {{title}}
+                            <select
+                              class="form-control"
+                              id="{{award.id}}"
+                              value:bind="../../ballot[../award.id]"
+                            >
+                              <option value="0">Select one</option>
+                              {{#each(../../allRunsPromise.value)}}
+                                <option value="{{trailNumber}}">
+                                  {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
+                                </option>
+                              {{/each}}
+                            </select>
+                          </label>
+                        </div>
                       {{/case}}
                       {{#case('run')}}
                         <div class="form-group">
@@ -405,7 +511,7 @@
             </div>
           {{else}}
             {{#if session.user.requestedName}}
-              <div class="alert alert-primary" role="alert">
+              <div class="alert alert-success" role="alert">
                 You’ve requested access as <strong>{{session.user.requestedName}}</strong>.
               </div>
             {{/if}}
@@ -428,7 +534,7 @@
                   autocomplete="off"
                   class="form-control"
                   id="requestedName"
-                  placeholder="Hash or Just name"
+                  placeholder="Your hash or “Just” name"
                   type="text"
                   value:bind="requestedName"
                 />
