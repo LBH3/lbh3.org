@@ -1,7 +1,7 @@
 <can-import from="can-stache-route-helpers" />
 
 <nav>
-  <ul class="container nav nav-fill">
+  <ul class="container-fluid nav nav-fill">
     <li class="{{#if isActive('home')}}active{{/if}} nav-item">
       <a class="nav-link" href="{{routeUrl page='home'}}">Home</a>
     </li>

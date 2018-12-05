@@ -128,79 +128,77 @@
                   <h4 class="alert-heading">Success!</h4>
                   <p>The ballot below has been submitted. <span class="alert-link" onclick="print()">Print this page</span> for your records.</p>
                   <hr>
-                  <div class="container pl-0 pr-0">
-                    <div class="row">
-                      <div class="col-sm">
-                        <h5>{{election.schema.positions.title}}</h5>
-                        {{#each(election.schema.positions.races)}}
-                          <hr>
-                          <h6>{{title}}</h6>
-                          {{#eq(../savingUnencryptedBallot[id].length, 0)}}
-                            <p><i>None selected</i></p>
-                          {{else}}
-                            <ul>
-                              {{#each(../savingUnencryptedBallot[id])}}
-                                <li>{{name}}</li>
-                              {{/each}}
-                            </ul>
-                          {{/eq}}
-                        {{/each}}
-                      </div>
-                      <div class="col-sm">
-                        <h5>{{election.schema.awards.title}}</h5>
-                        {{#each(election.schema.awards.races, award=value)}}
-                          <hr>
-                          <h6>{{title}}</h6>
-                          {{#switch(type)}}
-                            {{#case('hasher')}}
-                              <p>
-                                {{#if(../../savingUnencryptedBallot[../id])}}
-                                  {{#if(options)}}
-                                    {{../../hasherWithIdInOptions(../../savingUnencryptedBallot[../id], options)}}
-                                  {{else}}
-                                    {{#with(../../cachedHashers[../../savingUnencryptedBallot[../id]])}}
-                                      {{./hashOrJustName}}
-                                    {{/with}}
-                                  {{/if}}
+                  <div class="row">
+                    <div class="col-md">
+                      <h5>{{election.schema.positions.title}}</h5>
+                      {{#each(election.schema.positions.races)}}
+                        <hr>
+                        <h6>{{title}}</h6>
+                        {{#eq(../savingUnencryptedBallot[id].length, 0)}}
+                          <p><i>None selected</i></p>
+                        {{else}}
+                          <ul>
+                            {{#each(../savingUnencryptedBallot[id])}}
+                              <li>{{name}}</li>
+                            {{/each}}
+                          </ul>
+                        {{/eq}}
+                      {{/each}}
+                    </div>
+                    <div class="col-md">
+                      <h5>{{election.schema.awards.title}}</h5>
+                      {{#each(election.schema.awards.races, award=value)}}
+                        <hr>
+                        <h6>{{title}}</h6>
+                        {{#switch(type)}}
+                          {{#case('hasher')}}
+                            <p>
+                              {{#if(../../savingUnencryptedBallot[../id])}}
+                                {{#if(options)}}
+                                  {{../../hasherWithIdInOptions(../../savingUnencryptedBallot[../id], options)}}
+                                {{else}}
+                                  {{#with(../../cachedHashers[../../savingUnencryptedBallot[../id]])}}
+                                    {{./hashOrJustName}}
+                                  {{/with}}
+                                {{/if}}
+                              {{else}}
+                                <i>None selected</i>
+                              {{/if}}
+                            </p>
+                          {{/case}}
+                          {{#case('on-on')}}
+                            <p>
+                              {{#with(../../runWithTrailNumber(../../savingUnencryptedBallot[../id]))}}
+                                {{#if(trailNumber)}}
+                                  {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
                                 {{else}}
                                   <i>None selected</i>
                                 {{/if}}
-                              </p>
-                            {{/case}}
-                            {{#case('on-on')}}
+                              {{/with}}
+                            </p>
+                          {{/case}}
+                          {{#case('run')}}
+                            <p>
+                              {{#with(../../runWithTrailNumber(../../savingUnencryptedBallot[../id]))}}
+                                {{#if(trailNumber)}}
+                                  {{trailNumber}} — {{locationMd}} — {{haresMd}}
+                                {{else}}
+                                  <i>None selected</i>
+                                {{/if}}
+                              {{/with}}
+                            </p>
+                          {{/case}}
+                          {{#case('textarea')}}
+                            {{#if(../../savingUnencryptedBallot[../id])}}
                               <p>
-                                {{#with(../../runWithTrailNumber(../../savingUnencryptedBallot[../id]))}}
-                                  {{#if(trailNumber)}}
-                                    {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
-                                  {{else}}
-                                    <i>None selected</i>
-                                  {{/if}}
-                                {{/with}}
+                                {{../../savingUnencryptedBallot[../id]}}
                               </p>
-                            {{/case}}
-                            {{#case('run')}}
-                              <p>
-                                {{#with(../../runWithTrailNumber(../../savingUnencryptedBallot[../id]))}}
-                                  {{#if(trailNumber)}}
-                                    {{trailNumber}} — {{locationMd}} — {{haresMd}}
-                                  {{else}}
-                                    <i>None selected</i>
-                                  {{/if}}
-                                {{/with}}
-                              </p>
-                            {{/case}}
-                            {{#case('textarea')}}
-                              {{#if(../../savingUnencryptedBallot[../id])}}
-                                <p>
-                                  {{../../savingUnencryptedBallot[../id]}}
-                                </p>
-                              {{else}}
-                                <p><i>None</i></p>
-                              {{/if}}
-                            {{/case}}
-                          {{/switch}}
-                        {{/each}}
-                      </div>
+                            {{else}}
+                              <p><i>None</i></p>
+                            {{/if}}
+                          {{/case}}
+                        {{/switch}}
+                      {{/each}}
                     </div>
                   </div>
                   <hr>
@@ -292,7 +290,7 @@
 
                 <form class="mb-4 mt-2" on:submit="save(ballot)">
                   <div class="row">
-                    <div class="col-sm">
+                    <div class="col-md">
                       <h4>{{election.schema.positions.title}}</h4>
                       {{#each(election.schema.positions.races)}}
                         <fieldset class="form-group">
@@ -341,7 +339,7 @@
                         </fieldset>
                       {{/each}}
                     </div>
-                    <div class="col-sm">
+                    <div class="col-md">
                       <h4>{{election.schema.awards.title}}</h4>
                       {{#each(election.schema.awards.races, award=value)}}
                         {{#switch(type)}}

@@ -49,7 +49,7 @@
       <lbh3-nav day:from="day" month:from="month" page:from="page" year:from="year" />
     </header>
 
-    <main class="container {{page}}">
+    <main class="container-fluid {{page}}">
       {{#switch page}}
         {{#case "about"}}
           {{#switch secondaryPage}}
