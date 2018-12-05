@@ -62,9 +62,50 @@
     {{#if event.nameHtml}}
       <p class="hares">
         <small class="text-muted">
+          {{#if ../showingAdditionalInfo}}
+            <strong>Hares:</strong>
+          {{/if}}
           {{event.haresMd}}
         </small>
       </p>
+    {{/if}}
+    {{#if ../session.user.hasherId}}
+      {{#if ../showScribe}}
+        {{#if event.scribesMd}}
+          <p class="hares">
+            <small class="text-muted">
+              <strong>Scribe:</strong> {{event.scribesMd}}
+            </small>
+          </p>
+        {{/if}}
+      {{/if}}
+      {{#if ../showHashit}}
+        {{#if event.hashitReasonMd}}
+          <p class="hares">
+            <small class="text-muted">
+              <strong>Hashit:</strong> {{event.hashitReasonMd}}
+            </small>
+          </p>
+        {{/if}}
+      {{/if}}
+      {{#if ../showNotes}}
+        {{#if event.trailCommentsMd}}
+          <p class="hares">
+            <small class="text-muted">
+              <strong>Run notes:</strong> {{event.trailCommentsMd}}
+            </small>
+          </p>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+    {{#if ../showOnOn}}
+      {{#if event.onOnMd}}
+        <p class="hares">
+          <small class="text-muted">
+            <strong>On-on:</strong> {{event.onOnMd}}
+          </small>
+        </p>
+      {{/if}}
     {{/if}}
   </div>
 {{/each}}
@@ -73,7 +114,7 @@
     <thead>
       <tr>
         {{#if showFutureTools}}
-          {{#if scope.root.session.user.canEditPreTrailInfo}}
+          {{#if session.user.canEditPreTrailInfo}}
             <th class="d-print-none"></th>
           {{/if}}
         {{/if}}
@@ -82,8 +123,22 @@
         <th>Hares</th>
         <th>Location</th>
         <th>Name</th>
+        {{#if session.user.hasherId}}
+          {{#if showScribe}}
+            <th>Scribe</th>
+          {{/if}}
+          {{#if showHashit}}
+            <th>Hashit</th>
+          {{/if}}
+          {{#if showNotes}}
+            <th>Notes</th>
+          {{/if}}
+        {{/if}}
+        {{#if showOnOn}}
+          <th>On-on</th>
+        {{/if}}
         {{^if showFutureTools}}
-          {{#if scope.root.session.user.hasherId}}
+          {{#if session.user.hasherId}}
             <th class="d-print-none"></th>
             <th class="d-print-none"></th>
           {{/if}}
@@ -125,6 +180,36 @@
           </td>
           <td>{{{event.shortLocationHtml}}}</td>
           <td>{{{event.nameHtml}}}</td>
+          {{#if ../session.user.hasherId}}
+            {{#if ../showScribe}}
+              <td>
+                {{#if event.scribesMd}}
+                  {{event.scribesMd}}
+                {{/if}}
+              </td>
+            {{/if}}
+            {{#if ../showHashit}}
+              <td>
+                {{#if event.hashitReasonMd}}
+                  {{event.hashitReasonMd}}
+                {{/if}}
+              </td>
+            {{/if}}
+            {{#if ../showNotes}}
+              <td>
+                {{#if event.trailCommentsMd}}
+                  {{event.trailCommentsMd}}
+                {{/if}}
+              </td>
+            {{/if}}
+          {{/if}}
+          {{#if ../showOnOn}}
+            <td>
+              {{#if event.onOnMd}}
+                {{event.onOnMd}}
+              {{/if}}
+            </td>
+          {{/if}}
           {{^if scope.root.showFutureTools}}
             {{#if scope.root.session.user.hasherId}}
               <td class="d-print-none text-center">

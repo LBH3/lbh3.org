@@ -285,6 +285,10 @@
                     <lbh3-past-runs
                       description:to="scope.root.description"
                       ogTitle:to="scope.root.ogTitle"
+                      showHashit:bind="scope.root.showHashit"
+                      showNotes:bind="scope.root.showNotes"
+                      showOnOn:bind="scope.root.showOnOn"
+                      showScribe:bind="scope.root.showScribe"
                       title:to="scope.root.title"
                       year:from="scope.root.year"
                     />

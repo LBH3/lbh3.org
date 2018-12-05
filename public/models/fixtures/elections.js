@@ -16,6 +16,7 @@ const data = [
 - Vote for the number of positions as noted in each category.
 - Select the checkbox or radio button next to your choice.
 - You don’t have to vote in every race.
+- Use the <a href="https://www.lbh3.org/events/2017/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Past Runs page</a> to write in your nominations for the Best and Worst of 2017.
 
 ##### Write-in candidates
 

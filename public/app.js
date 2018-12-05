@@ -38,6 +38,30 @@ const AppViewModel = DefineMap.extend({
   },
   secondaryPage: 'string',
   skip: 'number',
+  showHashit: {
+    type: 'boolean',
+    serialize: function(search) {
+      return (search) ? search : undefined;
+    }
+  },
+  showNotes: {
+    type: 'boolean',
+    serialize: function(search) {
+      return (search) ? search : undefined;
+    }
+  },
+  showOnOn: {
+    type: 'boolean',
+    serialize: function(search) {
+      return (search) ? search : undefined;
+    }
+  },
+  showScribe: {
+    type: 'boolean',
+    serialize: function(search) {
+      return (search) ? search : undefined;
+    }
+  },
   title: {
     default: 'LBH3',
     serialize: false

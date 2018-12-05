@@ -28,6 +28,10 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
+  showHashit: 'boolean',
+  showNotes: 'boolean',
+  showOnOn: 'boolean',
+  showScribe: 'boolean',
   year: {
     type: 'number'
   }

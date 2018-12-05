@@ -150,7 +150,7 @@
           {{valueForRole('scribe')}}
         {{/if}}
       </dd>
-      <dt class="col-sm-3 text-sm-right">Run Notes:</dt>
+      <dt class="col-sm-3 text-sm-right">Run notes:</dt>
       <dd class="col-sm-9">
         {{#if event.trailCommentsHtml}}
           {{{event.trailCommentsHtml}}}

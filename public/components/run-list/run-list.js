@@ -12,7 +12,14 @@ export const ViewModel = DefineMap.extend({
   showFutureTools: {
     default: false,
     type: 'boolean'
-  }
+  },
+  showHashit: 'boolean',
+  get showingAdditionalInfo() {
+    return this.showHashit || this.showNotes || this.showOnOn || this.showScribe;
+  },
+  showNotes: 'boolean',
+  showOnOn: 'boolean',
+  showScribe: 'boolean'
 });
 
 export default Component.extend({

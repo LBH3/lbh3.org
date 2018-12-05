@@ -15,6 +15,12 @@
 {{#if eventsByMonth}}
   {{#each eventsByMonth month=value}}
     <h3>{{month.name}} {{year}}</h3>
-    <lbh3-run-list month:from="month" />
+    <lbh3-run-list
+      month:from="month"
+      showHashit:from="../showHashit"
+      showNotes:from="../showNotes"
+      showOnOn:from="../showOnOn"
+      showScribe:from="../showScribe"
+    />
   {{/each}}
 {{/if}}
