@@ -291,191 +291,195 @@
                 {{{election.descriptionHtml}}}
 
                 <form class="mb-4 mt-2" on:submit="save(ballot)">
-
-                  <h4>{{election.schema.positions.title}}</h4>
-                  {{#each(election.schema.positions.races)}}
-                    <fieldset class="form-group">
-                      <legend class="col-form-label col-form-label-lg pb-0">
-                        {{title}}
-                        <small class="text-muted">
-                          {{#eq(maxSelection, 1)}}
-                            Vote for One
-                          {{else}}
-                            Vote for Two
-                          {{/eq}}
-                        </small>
-                      </legend>
-                      {{#each(hasherOptions)}}
-                        <div class="form-check mt-1">
-                          <label class="form-check-label">
-                            <input
-                              checked:from="../../hasherListContains(../../ballot[../id], ./id)"
-                              class="form-check-input"
-                              on:click="../../toggleHasherInList(this, ../../ballot[../id], ../maxSelection, scope.element)"
-                              type="checkbox"
-                            />
-                            {{name}}
-                          </label>
-                        </div>
-                      {{/each}}
-                      {{#if(showWriteInOption)}}
-                        <div class="form-check mt-1">
-                          <label class="form-check-label">
-                            Write-in search
-                            <lbh3-hasher-autocomplete
-                              on:selected="../didSelectHasher(scope.element, ../ballot[./id], hasherOptions, maxSelection)"
-                            >
-                              <input
-                                autocapitalize="off"
-                                autocomplete="off"
-                                autocorrect="off"
-                                class="form-control"
-                                placeholder="Type a hash name here"
-                                type="text"
-                              />
-                            </lbh3-hasher-autocomplete>
-                          </label>
-                        </div>
-                      {{/if}}
-                    </fieldset>
-                  {{/each}}
-
-                  <h4>{{election.schema.awards.title}}</h4>
-                  {{#each(election.schema.awards.races, award=value)}}
-                    {{#switch(type)}}
-                      {{#case('hasher')}}
-                        {{#if(options)}}
-                          <fieldset class="form-group">
-                            <legend class="col-form-label col-form-label-lg mb-0">
-                              {{title}}
-                              <small class="text-muted">
-                                {{description}}
-                              </small>
-                            </legend>
-                            <div class="table-responsive">
-                              <table class="table">
-                                <thead>
-                                  <tr>
-                                    <th>Hash Name</th>
-                                    <th>Runs</th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {{#each(hasherOptions)}}
-                                    <tr>
-                                      <td>
-                                        <label class="form-check-label">
-                                          <input
-                                            checked:bind="equal(../../../ballot[../../award.id], id)"
-                                            name="{{../../award.id}}"
-                                            type="radio"
-                                          />
-                                          {{name}}
-                                        </label>
-                                      </td>
-                                      <td class="text-nowrap">
-                                        {{runs}}
-                                      </td>
-                                    </tr>
-                                  {{/each}}
-                                </tbody>
-                              </table>
-                            </div>
-                          </fieldset>
-                        {{else}}
-                          <div class="form-group">
-                            <label class="col-form-label col-form-label-lg" for="{{./id}}">
-                              {{title}}
-                            </label>
-                            {{^if(../../ballot[../award.id])}}
-                              <lbh3-hasher-autocomplete
-                                on:selected="../../selectHasherForAward(scope.element, ./id)"
-                                showNameAfterSelection:from="false"
-                              >
-                                <input
-                                  autocapitalize="off"
-                                  autocomplete="off"
-                                  autocorrect="off"
-                                  class="form-control"
-                                  id="{{./id}}"
-                                  placeholder="Type a hash name here"
-                                  type="text"
-                                />
-                              </lbh3-hasher-autocomplete>
-                            {{/if}}
-                            {{#if(../../ballot[./id])}}
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input
-                                    checked:from="true"
-                                    class="form-check-input"
-                                    on:click="scope.vm.deselectHasherForAward(./id)"
-                                    type="checkbox"
-                                  />
-                                  {{#with(../../cachedHashers[../../ballot[./id]])}}
-                                    {{./hashOrJustName}}
-                                  {{/with}}
-                                </label>
-                              </div>
-                            {{/if}}
-                          </div>
-                        {{/if}}
-                      {{/case}}
-                      {{#case('on-on')}}
-                        <div class="form-group">
-                          <label class="col-form-label col-form-label-lg">
-                            {{title}}
-                            <select
-                              class="form-control"
-                              id="{{award.id}}"
-                              value:bind="../../ballot[../award.id]"
-                            >
-                              <option value="0">Select one</option>
-                              {{#each(../../allRunsPromise.value)}}
-                                <option value="{{trailNumber}}">
-                                  {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
-                                </option>
-                              {{/each}}
-                            </select>
-                          </label>
-                        </div>
-                      {{/case}}
-                      {{#case('run')}}
-                        <div class="form-group">
-                          <label class="col-form-label col-form-label-lg">
-                            {{title}}
-                            <select
-                              class="form-control"
-                              id="{{award.id}}"
-                              value:bind="../../ballot[../award.id]"
-                            >
-                              <option value="0">Select one</option>
-                              {{#each(../../allRunsPromise.value)}}
-                                <option value="{{trailNumber}}">
-                                  {{trailNumber}} — {{locationMd}} — {{haresMd}}
-                                </option>
-                              {{/each}}
-                            </select>
-                          </label>
-                        </div>
-                      {{/case}}
-                      {{#case('textarea')}}
-                        <div class="form-group">
-                          <label class="col-form-label col-form-label-lg" for="{{../award.id}}">
+                  <div class="row">
+                    <div class="col-sm">
+                      <h4>{{election.schema.positions.title}}</h4>
+                      {{#each(election.schema.positions.races)}}
+                        <fieldset class="form-group">
+                          <legend class="col-form-label col-form-label-lg pb-0">
                             {{title}}
                             <small class="text-muted">
-                              ({{description}})
+                              {{#eq(maxSelection, 1)}}
+                                Vote for One
+                              {{else}}
+                                Vote for Two
+                              {{/eq}}
                             </small>
-                          </label>
-                          <textarea
-                            class="form-control"
-                            id="{{../award.id}}"
-                            value:bind="../../ballot[../award.id]"
-                          ></textarea>
-                        </div>
-                      {{/case}}
-                    {{/switch}}
-                  {{/each}}
+                          </legend>
+                          {{#each(hasherOptions)}}
+                            <div class="form-check mt-1">
+                              <label class="form-check-label">
+                                <input
+                                  checked:from="../../hasherListContains(../../ballot[../id], ./id)"
+                                  class="form-check-input"
+                                  on:click="../../toggleHasherInList(this, ../../ballot[../id], ../maxSelection, scope.element)"
+                                  type="checkbox"
+                                />
+                                {{name}}
+                              </label>
+                            </div>
+                          {{/each}}
+                          {{#if(showWriteInOption)}}
+                            <div class="form-check mt-1">
+                              <label class="form-check-label">
+                                Write-in search
+                                <lbh3-hasher-autocomplete
+                                  on:selected="../didSelectHasher(scope.element, ../ballot[./id], hasherOptions, maxSelection)"
+                                >
+                                  <input
+                                    autocapitalize="off"
+                                    autocomplete="off"
+                                    autocorrect="off"
+                                    class="form-control"
+                                    placeholder="Type a hash name here"
+                                    type="text"
+                                  />
+                                </lbh3-hasher-autocomplete>
+                              </label>
+                            </div>
+                          {{/if}}
+                        </fieldset>
+                      {{/each}}
+                    </div>
+                    <div class="col-sm">
+                      <h4>{{election.schema.awards.title}}</h4>
+                      {{#each(election.schema.awards.races, award=value)}}
+                        {{#switch(type)}}
+                          {{#case('hasher')}}
+                            {{#if(options)}}
+                              <fieldset class="form-group">
+                                <legend class="col-form-label col-form-label-lg mb-0">
+                                  {{title}}
+                                  <small class="text-muted">
+                                    {{description}}
+                                  </small>
+                                </legend>
+                                <div class="table-responsive">
+                                  <table class="table">
+                                    <thead>
+                                      <tr>
+                                        <th>Hash Name</th>
+                                        <th>Runs</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                      {{#each(hasherOptions)}}
+                                        <tr>
+                                          <td>
+                                            <label class="form-check-label">
+                                              <input
+                                                checked:bind="equal(../../../ballot[../../award.id], id)"
+                                                name="{{../../award.id}}"
+                                                type="radio"
+                                              />
+                                              {{name}}
+                                            </label>
+                                          </td>
+                                          <td class="text-nowrap">
+                                            {{runs}}
+                                          </td>
+                                        </tr>
+                                      {{/each}}
+                                    </tbody>
+                                  </table>
+                                </div>
+                              </fieldset>
+                            {{else}}
+                              <div class="form-group">
+                                <label class="col-form-label col-form-label-lg" for="{{./id}}">
+                                  {{title}}
+                                </label>
+                                {{^if(../../ballot[../award.id])}}
+                                  <lbh3-hasher-autocomplete
+                                    on:selected="../../selectHasherForAward(scope.element, ./id)"
+                                    showNameAfterSelection:from="false"
+                                  >
+                                    <input
+                                      autocapitalize="off"
+                                      autocomplete="off"
+                                      autocorrect="off"
+                                      class="form-control"
+                                      id="{{./id}}"
+                                      placeholder="Type a hash name here"
+                                      type="text"
+                                    />
+                                  </lbh3-hasher-autocomplete>
+                                {{/if}}
+                                {{#if(../../ballot[./id])}}
+                                  <div class="form-check">
+                                    <label class="form-check-label">
+                                      <input
+                                        checked:from="true"
+                                        class="form-check-input"
+                                        on:click="scope.vm.deselectHasherForAward(./id)"
+                                        type="checkbox"
+                                      />
+                                      {{#with(../../cachedHashers[../../ballot[./id]])}}
+                                        {{./hashOrJustName}}
+                                      {{/with}}
+                                    </label>
+                                  </div>
+                                {{/if}}
+                              </div>
+                            {{/if}}
+                          {{/case}}
+                          {{#case('on-on')}}
+                            <div class="form-group">
+                              <label class="col-form-label col-form-label-lg">
+                                {{title}}
+                                <select
+                                  class="form-control"
+                                  id="{{award.id}}"
+                                  value:bind="../../ballot[../award.id]"
+                                >
+                                  <option value="0">Select one</option>
+                                  {{#each(../../allRunsPromise.value)}}
+                                    <option value="{{trailNumber}}">
+                                      {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
+                                    </option>
+                                  {{/each}}
+                                </select>
+                              </label>
+                            </div>
+                          {{/case}}
+                          {{#case('run')}}
+                            <div class="form-group">
+                              <label class="col-form-label col-form-label-lg">
+                                {{title}}
+                                <select
+                                  class="form-control"
+                                  id="{{award.id}}"
+                                  value:bind="../../ballot[../award.id]"
+                                >
+                                  <option value="0">Select one</option>
+                                  {{#each(../../allRunsPromise.value)}}
+                                    <option value="{{trailNumber}}">
+                                      {{trailNumber}} — {{locationMd}} — {{haresMd}}
+                                    </option>
+                                  {{/each}}
+                                </select>
+                              </label>
+                            </div>
+                          {{/case}}
+                          {{#case('textarea')}}
+                            <div class="form-group">
+                              <label class="col-form-label col-form-label-lg" for="{{../award.id}}">
+                                {{title}}
+                                <small class="text-muted">
+                                  ({{description}})
+                                </small>
+                              </label>
+                              <textarea
+                                class="form-control"
+                                id="{{../award.id}}"
+                                value:bind="../../ballot[../award.id]"
+                              ></textarea>
+                            </div>
+                          {{/case}}
+                        {{/switch}}
+                      {{/each}}
+                    </div>
+                  </div>
 
                   <button
                     class="btn btn-primary mt-3"
