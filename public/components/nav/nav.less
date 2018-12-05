@@ -1,9 +1,13 @@
 lbh3-nav {
-	display: block;
+  display: block;
 
   nav {
     border-bottom: 1px solid black;
-    margin: 0 0 .5rem;
+    margin: 0 0 0.5rem;
+    @supports (padding: max(0px)) {
+      padding-left: ~"max(15px, env(safe-area-inset-left))";
+      padding-right: ~"max(15px, env(safe-area-inset-right))";
+    }
   }
   .nav {
     padding: 0;
@@ -23,8 +27,8 @@ lbh3-nav {
   }
 
   @media print {
-		a:not(.btn) {
-			text-decoration: none;
-		}
+    a:not(.btn) {
+      text-decoration: none;
+    }
   }
 }

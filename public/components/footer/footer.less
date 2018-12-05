@@ -1,6 +1,13 @@
 lbh3-footer {
-	border-top: 1px solid black;
-	display: block;
+  border-top: 1px solid black;
+  display: block;
+
+  footer.container-fluid {
+    @supports(padding: max(0px)) {
+      padding-left: ~"max(15px, env(safe-area-inset-left))";
+      padding-right: ~"max(15px, env(safe-area-inset-right))";
+    }
+  }
 
   p {
     border: 1px solid transparent;

@@ -1,7 +1,9 @@
 @import './node_modules/bootstrap/dist/css/bootstrap.css';
 
 body {
-  padding-bottom: env(safe-area-inset-bottom);
+  @supports(padding: max(0px)) {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
 }
 
 h2 {
@@ -13,6 +15,13 @@ a, .btn-link {
 }
 a:hover, .btn-link:hover {
   color: #bd2130;
+}
+
+main.container-fluid {
+  @supports(padding: max(0px)) {
+    padding-left: ~"max(15px, env(safe-area-inset-left))";
+    padding-right: ~"max(15px, env(safe-area-inset-right))";
+  }
 }
 
 main .nav-pills {
@@ -36,7 +45,7 @@ main .nav-pills .nav-link.active {
 }
 
 @media print {
-  body, .container {
+  body, .container-fluid {
     max-width: 100%;
     min-width: auto !important;
   }

@@ -1,10 +1,14 @@
 lbh3-header {
-	display: block;
+  display: block;
 
   h1 {
     border-bottom: 1px solid black;
     margin: 0;
     text-align: center;
+    @supports (padding: max(0px)) {
+      padding-left: ~"max(15px, env(safe-area-inset-left))";
+      padding-right: ~"max(15px, env(safe-area-inset-right))";
+    }
   }
   h1 a {
     line-height: 60px;
@@ -23,7 +27,7 @@ lbh3-header {
 
   @media (max-width: 767px) {
     h1 {
-      font-size: 1.40rem;
+      font-size: 1.4rem;
     }
   }
   @media (max-width: 414px) {
