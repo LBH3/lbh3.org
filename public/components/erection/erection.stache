@@ -153,11 +153,11 @@
                         {{#switch(type)}}
                           {{#case('hasher')}}
                             <p>
-                              {{#if(../../savingUnencryptedBallot[../id])}}
+                              {{#if(scope.vm.savingUnencryptedBallot[id])}}
                                 {{#if(options)}}
-                                  {{../../hasherWithIdInOptions(../../savingUnencryptedBallot[../id], options)}}
+                                  {{scope.vm.hasherWithIdInOptions(scope.vm.savingUnencryptedBallot[id], options)}}
                                 {{else}}
-                                  {{#with(../../cachedHashers[../../savingUnencryptedBallot[../id]])}}
+                                  {{#with(scope.vm.cachedHashers[scope.vm.savingUnencryptedBallot[id]])}}
                                     {{./hashOrJustName}}
                                   {{/with}}
                                 {{/if}}
@@ -168,7 +168,7 @@
                           {{/case}}
                           {{#case('on-on')}}
                             <p>
-                              {{#with(../../runWithTrailNumber(../../savingUnencryptedBallot[../id]))}}
+                              {{#with(scope.vm.runWithTrailNumber(scope.vm.savingUnencryptedBallot[id]))}}
                                 {{#if(trailNumber)}}
                                   {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
                                 {{else}}
@@ -179,7 +179,7 @@
                           {{/case}}
                           {{#case('run')}}
                             <p>
-                              {{#with(../../runWithTrailNumber(../../savingUnencryptedBallot[../id]))}}
+                              {{#with(scope.vm.runWithTrailNumber(scope.vm.savingUnencryptedBallot[id]))}}
                                 {{#if(trailNumber)}}
                                   {{trailNumber}} — {{locationMd}} — {{haresMd}}
                                 {{else}}
@@ -189,9 +189,9 @@
                             </p>
                           {{/case}}
                           {{#case('textarea')}}
-                            {{#if(../../savingUnencryptedBallot[../id])}}
+                            {{#if(scope.vm.savingUnencryptedBallot[id])}}
                               <p>
-                                {{../../savingUnencryptedBallot[../id]}}
+                                {{scope.vm.savingUnencryptedBallot[id]}}
                               </p>
                             {{else}}
                               <p><i>None</i></p>
@@ -308,9 +308,9 @@
                             <div class="form-check mt-1">
                               <label class="form-check-label">
                                 <input
-                                  checked:from="../../hasherListContains(../../ballot[../id], ./id)"
+                                  checked:from="../../hasherListContains(scope.vm.ballot[../id], ./id)"
                                   class="form-check-input"
-                                  on:click="../../toggleHasherInList(this, ../../ballot[../id], ../maxSelection, scope.element)"
+                                  on:click="../../toggleHasherInList(this, scope.vm.ballot[../id], ../maxSelection, scope.element)"
                                   type="checkbox"
                                 />
                                 {{name}}
@@ -366,8 +366,8 @@
                                           <td>
                                             <label class="form-check-label">
                                               <input
-                                                checked:bind="equal(../../../ballot[../../award.id], id)"
-                                                name="{{../../award.id}}"
+                                                checked:bind="equal(scope.vm.ballot[../award.id], id)"
+                                                name="{{../award.id}}"
                                                 type="radio"
                                               />
                                               {{name}}
@@ -387,9 +387,9 @@
                                 <label class="col-form-label col-form-label-lg" for="{{./id}}">
                                   {{title}}
                                 </label>
-                                {{^if(../../ballot[../award.id])}}
+                                {{^if(scope.vm.ballot[award.id])}}
                                   <lbh3-hasher-autocomplete
-                                    on:selected="../../selectHasherForAward(scope.element, ./id)"
+                                    on:selected="scope.vm.selectHasherForAward(scope.element, ./id)"
                                     showNameAfterSelection:from="false"
                                   >
                                     <input
@@ -403,7 +403,7 @@
                                     />
                                   </lbh3-hasher-autocomplete>
                                 {{/if}}
-                                {{#if(../../ballot[./id])}}
+                                {{#if(scope.vm.ballot[./id])}}
                                   <div class="form-check">
                                     <label class="form-check-label">
                                       <input
@@ -412,7 +412,7 @@
                                         on:click="scope.vm.deselectHasherForAward(./id)"
                                         type="checkbox"
                                       />
-                                      {{#with(../../cachedHashers[../../ballot[./id]])}}
+                                      {{#with(scope.vm.cachedHashers[scope.vm.ballot[./id]])}}
                                         {{./hashOrJustName}}
                                       {{/with}}
                                     </label>
@@ -428,10 +428,10 @@
                                 <select
                                   class="form-control"
                                   id="{{award.id}}"
-                                  value:bind="../../ballot[../award.id]"
+                                  value:bind="scope.vm.ballot[award.id]"
                                 >
                                   <option value="0">Select one</option>
-                                  {{#each(../../allRunsPromise.value)}}
+                                  {{#each(scope.vm.allRunsPromise.value)}}
                                     <option value="{{trailNumber}}">
                                       {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
                                     </option>
@@ -447,10 +447,10 @@
                                 <select
                                   class="form-control"
                                   id="{{award.id}}"
-                                  value:bind="../../ballot[../award.id]"
+                                  value:bind="scope.vm.ballot[award.id]"
                                 >
                                   <option value="0">Select one</option>
-                                  {{#each(../../allRunsPromise.value)}}
+                                  {{#each(scope.vm.allRunsPromise.value)}}
                                     <option value="{{trailNumber}}">
                                       {{trailNumber}} — {{locationMd}} — {{haresMd}}
                                     </option>
@@ -461,7 +461,7 @@
                           {{/case}}
                           {{#case('textarea')}}
                             <div class="form-group">
-                              <label class="col-form-label col-form-label-lg" for="{{../award.id}}">
+                              <label class="col-form-label col-form-label-lg" for="{{award.id}}">
                                 {{title}}
                                 <small class="text-muted">
                                   ({{description}})
@@ -469,8 +469,8 @@
                               </label>
                               <textarea
                                 class="form-control"
-                                id="{{../award.id}}"
-                                value:bind="../../ballot[../award.id]"
+                                id="{{award.id}}"
+                                value:bind="scope.vm.ballot[award.id]"
                               ></textarea>
                             </div>
                           {{/case}}
@@ -481,7 +481,7 @@
 
                   <button
                     class="btn btn-primary mt-3"
-                    {{#if editingEventPromise.isPending}}disabled{{/if}}
+                    {{#if savingPromise.isPending}}disabled{{/if}}
                     type="submit">
                     Submit ballot
                   </button>
