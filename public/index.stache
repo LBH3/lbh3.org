@@ -73,6 +73,7 @@
                   Loading page…
                 {{else}}
                   <lbh3-about-privacy
+                    class="container"
                     description:to="scope.root.description"
                     ogTitle:to="scope.root.ogTitle"
                     title:to="scope.root.title"
@@ -86,6 +87,7 @@
                   Loading about page…
                 {{else}}
                   <lbh3-about
+                    class="container"
                     description:to="scope.root.description"
                     ogTitle:to="scope.root.ogTitle"
                     secondaryPage:from="secondaryPage"
@@ -139,6 +141,7 @@
                   Loading the erection page…
                 {{else}}
                   <lbh3-erection
+                    class="container"
                     description:to="scope.root.description"
                     ogTitle:to="scope.root.ogTitle"
                     title:to="scope.root.title"
@@ -269,6 +272,7 @@
                     Loading…
                   {{else}}
                     <lbh3-special-event
+                      class="container"
                       description:to="scope.root.description"
                       ogTitle:to="scope.root.ogTitle"
                       title:to="scope.root.title"
@@ -340,6 +344,7 @@
                   Loading haring guidelines…
                 {{else}}
                   <lbh3-hareline-guidelines
+                    class="container"
                     description:to="scope.root.description"
                     ogTitle:to="scope.root.ogTitle"
                     title:to="scope.root.title"
@@ -474,6 +479,7 @@
                 </div>
               {{else}}
                 <lbh3-home
+                  class="container"
                   description:to="scope.root.description"
                   ogTitle:to="scope.root.ogTitle"
                   title:to="scope.root.title"
