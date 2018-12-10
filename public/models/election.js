@@ -84,7 +84,13 @@ const Election = DefineMap.extend({
     },
     serialize: false
   },
-  schema: Schema
+  schema: Schema,
+  startDateAsMoment: {
+    get: function() {
+      return moment(this.startDatetime).tz(timeZone);
+    },
+    serialize: false
+  }
 });
 
 Election.List = DefineList.extend({
