@@ -7,7 +7,7 @@ import JSEncrypt from 'jsencrypt';
 import moment from 'moment';
 
 import Ballot from '~/models/ballot';
-import Election from '~/models/election';
+import {Election, randomize} from '~/models/election';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Session from '~/models/session';
@@ -155,6 +155,49 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get encryptionFailedEmailLink() {
     return `mailto:webmaster@lbh3.org?subject=LBH3 erection encryption issue&body=[Keep this] ${this.testEncryptionError} [Browser: ${navigator.userAgent}]`;
   },
+  get hashits() {
+    const hashitsAndScribes = this.hashitsAndScribes;
+    if (hashitsAndScribes) {
+      const hasherIds = new Set();
+      const options = hashitsAndScribes.filter(hasher => {
+        return hasher.role.toLowerCase().indexOf('hashit') > -1;
+      }).filter(hasher => {
+        if (hasherIds.has(hasher.hasherId)) {
+          return false;
+        }
+        hasherIds.add(hasher.hasherId);
+        return true;
+      });
+      return randomize(options);
+    }
+  },
+  hashitsAndScribes: {
+    get: function(lastValue, setValue) {
+      const hashitsAndScribesPromise = this.hashitsAndScribesPromise;
+      if (hashitsAndScribesPromise) {
+        hashitsAndScribesPromise.then(setValue);
+      }
+    }
+  },
+  get hashitsAndScribesPromise() {
+    const allRuns = this.allRuns;
+    if (allRuns) {
+      const firstTrailNumber = allRuns[0].trailNumber;
+      const lastTrailNumber = allRuns[allRuns.length - 1].trailNumber;
+      return EventsHashers.connection.getList({
+        $limit: 500,
+        role: {
+          $iLike: {
+            $any: ['hashit', '%hashit', 'hashit%', 'scribe', '%scribe', 'scribe%']
+          }
+        },
+        trailNumber: {
+          $gte: firstTrailNumber,
+          $lte: lastTrailNumber
+        }
+      });
+    }
+  },
   isEligibleToVote: {
     type: 'boolean',
     default: true
@@ -191,17 +234,6 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       }
     }
   },
-  save: function(ballot) {
-    try {
-      const election = this.election;
-      const encryptedBallot = Ballot.fromUnencrypted(ballot, election.publicKey);
-      encryptedBallot.electionId = election.id;
-      this.savingUnencryptedBallot = ballot;
-      this.savingPromise = encryptedBallot.save();
-    } catch (error) {
-      this.savingPromise = Promise.reject(error);
-    }
-  },
   savingEncryptedBallot: {
     get(lastSetValue, resolve) {
       const savingPromise = this.savingPromise;
@@ -214,6 +246,22 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   savingPromise: Promise,
   get session() {
     return Session.current;
+  },
+  get scribes() {
+    const hashitsAndScribes = this.hashitsAndScribes;
+    if (hashitsAndScribes) {
+      const hasherIds = new Set();
+      const options = hashitsAndScribes.filter(hasher => {
+        return hasher.role.toLowerCase().indexOf('scribe') > -1;
+      }).filter(hasher => {
+        if (hasherIds.has(hasher.hasherId)) {
+          return false;
+        }
+        hasherIds.add(hasher.hasherId);
+        return true;
+      });
+      return randomize(options);
+    }
   },
   get testEncryptionError() {
     try {
@@ -274,6 +322,18 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     this.ballot[awardId] = null;
   },
 
+  didSelectEventHasher(selectElement, options) {
+    const hasherId = parseInt(selectElement.value, 10);
+    if (hasherId) {
+      const matchingOptions = options.filter(option => {
+        return option.hasherId === hasherId;
+      });
+      if (matchingOptions.length > 0) {
+        this.cachedHashers[hasherId] = matchingOptions[0];
+      }
+    }
+  },
+
   didSelectHasher(autocompleteElement, hasherList, options, maxSelection) {
     const selectedHasher = autocompleteElement.viewModel.selected;
 
@@ -312,6 +372,18 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       return run.trailNumber === trailNumber;
     });
     return (filtered.length > 0) ? filtered[0] : null;
+  },
+
+  save(ballot) {
+    try {
+      const election = this.election;
+      const encryptedBallot = Ballot.fromUnencrypted(ballot, election.publicKey);
+      encryptedBallot.electionId = election.id;
+      this.savingUnencryptedBallot = ballot;
+      this.savingPromise = encryptedBallot.save();
+    } catch (error) {
+      this.savingPromise = Promise.reject(error);
+    }
   },
 
   selectHasherForAward(autocompleteElement, awardId) {

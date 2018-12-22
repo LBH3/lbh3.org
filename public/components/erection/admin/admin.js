@@ -83,7 +83,7 @@ export const ViewModel = DefineMap.extend({
 
       // Create racesByType{type}
       election.schema.awards.races.forEach(award => {
-        if (award.type === 'hasher') {
+        if (award.type === 'hasher' || award.type === 'hashit' || award.type === 'scribe') {
           races.push(award.id);
         }
       });

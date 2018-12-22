@@ -43,7 +43,7 @@ export const ViewModel = DefineMap.extend({
     type: 'string'
   },
   get ogTitle() {
-    return 'Special Events';
+    return 'Erections';
   },
   publicKey: 'string',
   schema: 'string',

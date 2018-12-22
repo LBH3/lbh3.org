@@ -209,6 +209,17 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  namePlaintext: {
+    get: function() {
+      const nameHtml = this.nameHtml;
+      if (nameHtml) {
+        const element = document.createElement('span');
+        element.innerHTML = nameHtml;
+        return element.textContent;
+      }
+    },
+    serialize: false
+  },
   newBootsHtml: {
     get: function() {
       return marked(this.newBootsMd || '');

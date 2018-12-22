@@ -9,7 +9,7 @@ import Hasher from './hasher';
 import marked from 'marked';
 import moment from 'moment-timezone';
 
-const randomize = (list) => {
+export const randomize = (list) => {
   const array = [...list];
   let currentIndex = list.length;
   let randomIndex;
@@ -56,7 +56,7 @@ const Schema = DefineMap.extend({
   positions: SchemaChild
 });
 
-const Election = DefineMap.extend({
+export const Election = DefineMap.extend({
   seal: false
 }, {
   id: 'any',

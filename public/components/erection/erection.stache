@@ -166,11 +166,22 @@
                               {{/if}}
                             </p>
                           {{/case}}
+                          {{#case('hashit')}}
+                            <p>
+                              {{#if(scope.vm.savingUnencryptedBallot[id])}}
+                                {{#with(scope.vm.cachedHashers[scope.vm.savingUnencryptedBallot[id]])}}
+                                  {{./hashOrJustName}}
+                                {{/with}}
+                              {{else}}
+                                <i>None selected</i>
+                              {{/if}}
+                            </p>
+                          {{/case}}
                           {{#case('on-on')}}
                             <p>
                               {{#with(scope.vm.runWithTrailNumber(scope.vm.savingUnencryptedBallot[id]))}}
                                 {{#if(trailNumber)}}
-                                  {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
+                                  {{trailNumber}} — {{#if(onOnMd)}}{{onOnMd}}{{else}}?{{/if}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
                                 {{else}}
                                   <i>None selected</i>
                                 {{/if}}
@@ -181,11 +192,22 @@
                             <p>
                               {{#with(scope.vm.runWithTrailNumber(scope.vm.savingUnencryptedBallot[id]))}}
                                 {{#if(trailNumber)}}
-                                  {{trailNumber}} — {{locationMd}} — {{haresMd}}
+                                  {{trailNumber}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
                                 {{else}}
                                   <i>None selected</i>
                                 {{/if}}
                               {{/with}}
+                            </p>
+                          {{/case}}
+                          {{#case('scribe')}}
+                            <p>
+                              {{#if(scope.vm.savingUnencryptedBallot[id])}}
+                                {{#with(scope.vm.cachedHashers[scope.vm.savingUnencryptedBallot[id]])}}
+                                  {{./hashOrJustName}}
+                                {{/with}}
+                              {{else}}
+                                <i>None selected</i>
+                              {{/if}}
                             </p>
                           {{/case}}
                           {{#case('textarea')}}
@@ -253,7 +275,7 @@
                       {{/eq}}
                     </p>
                     <div class="table-responsive">
-                      <table class="table">
+                      <table class="table table-sm">
                         <thead>
                           <tr>
                             <th>Datetime submitted</th>
@@ -346,7 +368,7 @@
                           {{#case('hasher')}}
                             {{#if(options)}}
                               <fieldset class="form-group">
-                                <legend class="col-form-label col-form-label-lg mb-0">
+                                <legend class="col-form-label col-form-label-lg mb-0 w-100">
                                   {{title}}
                                   <small class="text-muted">
                                     {{description}}
@@ -384,7 +406,7 @@
                               </fieldset>
                             {{else}}
                               <div class="form-group">
-                                <label class="col-form-label col-form-label-lg" for="{{./id}}">
+                                <label class="col-form-label col-form-label-lg w-100" for="{{./id}}">
                                   {{title}}
                                 </label>
                                 {{^if(scope.vm.ballot[award.id])}}
@@ -421,9 +443,29 @@
                               </div>
                             {{/if}}
                           {{/case}}
+                          {{#case('hashit')}}
+                            <div class="form-group">
+                              <label class="col-form-label col-form-label-lg w-100">
+                                {{title}}
+                                <select
+                                  class="form-control"
+                                  id="{{award.id}}"
+                                  on:change="scope.vm.didSelectEventHasher(scope.element, scope.vm.hashits)"
+                                  value:bind="scope.vm.ballot[award.id]"
+                                >
+                                  <option value="0">Select one</option>
+                                  {{#each(scope.vm.hashits)}}
+                                    <option value="{{hasherId}}">
+                                      {{hashOrJustName}}
+                                    </option>
+                                  {{/each}}
+                                </select>
+                              </label>
+                            </div>
+                          {{/case}}
                           {{#case('on-on')}}
                             <div class="form-group">
-                              <label class="col-form-label col-form-label-lg">
+                              <label class="col-form-label col-form-label-lg w-100">
                                 {{title}}
                                 <select
                                   class="form-control"
@@ -433,7 +475,7 @@
                                   <option value="0">Select one</option>
                                   {{#each(scope.vm.allRunsPromise.value)}}
                                     <option value="{{trailNumber}}">
-                                      {{trailNumber}} — {{onOnMd}} — {{haresMd}} — {{locationMd}}
+                                      {{trailNumber}} — {{#if(onOnMd)}}{{onOnMd}}{{else}}?{{/if}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
                                     </option>
                                   {{/each}}
                                 </select>
@@ -442,7 +484,7 @@
                           {{/case}}
                           {{#case('run')}}
                             <div class="form-group">
-                              <label class="col-form-label col-form-label-lg">
+                              <label class="col-form-label col-form-label-lg w-100">
                                 {{title}}
                                 <select
                                   class="form-control"
@@ -452,7 +494,27 @@
                                   <option value="0">Select one</option>
                                   {{#each(scope.vm.allRunsPromise.value)}}
                                     <option value="{{trailNumber}}">
-                                      {{trailNumber}} — {{locationMd}} — {{haresMd}}
+                                      {{trailNumber}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
+                                    </option>
+                                  {{/each}}
+                                </select>
+                              </label>
+                            </div>
+                          {{/case}}
+                          {{#case('scribe')}}
+                            <div class="form-group">
+                              <label class="col-form-label col-form-label-lg w-100">
+                                {{title}}
+                                <select
+                                  class="form-control"
+                                  id="{{award.id}}"
+                                  on:change="scope.vm.didSelectEventHasher(scope.element, scope.vm.scribes)"
+                                  value:bind="scope.vm.ballot[award.id]"
+                                >
+                                  <option value="0">Select one</option>
+                                  {{#each(scope.vm.scribes)}}
+                                    <option value="{{hasherId}}">
+                                      {{hashOrJustName}}
                                     </option>
                                   {{/each}}
                                 </select>
@@ -461,7 +523,7 @@
                           {{/case}}
                           {{#case('textarea')}}
                             <div class="form-group">
-                              <label class="col-form-label col-form-label-lg" for="{{award.id}}">
+                              <label class="col-form-label col-form-label-lg w-100" for="{{award.id}}">
                                 {{title}}
                                 <small class="text-muted">
                                   ({{description}})

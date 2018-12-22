@@ -82,6 +82,9 @@
                   {{#case('hasher')}}
                     {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
                   {{/case}}
+                  {{#case('hashit')}}
+                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                  {{/case}}
                   {{#case('on-on')}}
                     <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
                       {{scope.key}}: {{this}}
@@ -91,6 +94,9 @@
                     <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
                       {{scope.key}}: {{this}}
                     </span>
+                  {{/case}}
+                  {{#case('scribe')}}
+                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
                   {{/case}}
                   {{#case('textarea')}}
                     {{scope.key}}
