@@ -8,6 +8,7 @@ import moment from 'moment';
 
 import Ballot from '~/models/ballot';
 import {Election, randomize} from '~/models/election';
+import ElectionEligibility from '~/models/election-eligibility';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Session from '~/models/session';
@@ -145,6 +146,29 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     return 'Vote for the 2019 Bored.';
   },
   election: Election,
+  electionEligibility: {
+    get: function(lastValue, setValue) {
+      const electionEligibilityPromise = this.electionEligibilityPromise;
+      if (electionEligibilityPromise) {
+        electionEligibilityPromise.then(results => {
+          setValue(results[0]);
+        });
+      }
+    }
+  },
+  get electionEligibilityEmailLink() {
+    return `mailto:ondisk@lbh3.org?subject=${this.userHashName} not eligible to vote`;
+  },
+  get electionEligibilityPromise() {
+    const election = this.election;
+    const hasherId = this.user.hasherId;
+    if (election && hasherId) {
+      return ElectionEligibility.connection.getList({
+        electionId: election.id,
+        hasherId
+      });
+    }
+  },
   get electionPromise() {
     return Election.connection.getList({
       urlId: this.urlId
@@ -198,41 +222,12 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       });
     }
   },
-  isEligibleToVote: {
-    type: 'boolean',
-    default: true
-  },
   get ogTitle() {
     // TODO: incorporate the election name?
     return 'Erection';
   },
   requestedName: {
     type: 'string'
-  },
-  runs: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
-      }
-      const runsPromise = this.runsPromise;
-      if (runsPromise) {
-        runsPromise.then(setValue);
-      }
-    }
-  },
-  runsPromise: {
-    get: function() {
-      const hasherId = this.user.hasherId;
-      if (hasherId) {
-        return EventsHashers.connection.getList({
-          hasherId,
-          $limit: 15,
-          $sort: {
-            trailNumber: -1
-          }
-        });
-      }
-    }
   },
   savingEncryptedBallot: {
     get(lastSetValue, resolve) {
@@ -316,6 +311,10 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get user() {
     const session = this.session || {};
     return session.user || {};
+  },
+  get userHashName() {
+    const user = this.user;
+    return user.hasher ? user.hasher.hashOrJustName : '';
   },
 
   deselectHasherForAward(awardId) {

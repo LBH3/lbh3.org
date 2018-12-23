@@ -69,15 +69,15 @@
 
       {{#if session.user.hasherId}}
 
-        {{#if runsPromise.isPending}}
+        {{#if electionEligibilityPromise.isPending}}
           <div class="alert alert-info" role="alert">
             <strong>Determining your eligibility to vote…</strong>
           </div>
         {{/if}}
 
-        {{#if runsPromise.isRejected}}
+        {{#if electionEligibilityPromise.isRejected}}
           <div class="alert alert-danger" role="alert">
-            <strong>Fuck!</strong> Your run count couldn’t be checked. {{runsPromise.reason.message}}
+            <strong>Fuck!</strong> Your run count couldn’t be checked. {{electionEligibilityPromise.reason.message}}
           </div>
           <p>
             If you’re concerned about running out of time before the erection is over,
@@ -85,8 +85,8 @@
           </p>
         {{/if}}
 
-        {{#if runsPromise.isResolved}}
-          {{#if isEligibleToVote}}
+        {{#if electionEligibilityPromise.isResolved}}
+          {{#if electionEligibility.eligible}}
             {{#if testEncryptionError}}
               <div class="alert alert-danger" role="alert">
                 <strong>Sorry, you are not able to vote with this browser.</strong>
@@ -235,7 +235,7 @@
               {{^if savingPromise.isPending}}
                 {{^if savingPromise}}
                   <p>
-                    Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
+                    Hello{{#if(userHashName)}} <strong>{{userHashName}}</strong>{{/if}}!
                   </p>
                   <p><em><strong>
                     If you already took a paper ballot, you are not eligible to vote online.
@@ -552,11 +552,45 @@
             {{/if}}
           {{else}}
             <div class="alert alert-danger" role="alert">
-              <strong>Sorry, you are ineligible to vote.</strong>
+              <strong>Sorry, it looks like you’re not eligible to vote.</strong>
+              You must have at least six runs in the last year to vote.
             </div>
+            {{#eq(electionEligibility.runs.length, 0)}}
+              <p><strong>It doesn’t look like you attended any runs last year.</strong></p>
+            {{else}}
+              <p><strong>Below is our record of the runs you’ve attended:</strong></p>
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm">
+                  <thead>
+                    <tr>
+                      <th>Date</th>
+                      <th>Hash#</th>
+                      <th>Hares</th>
+                      <th>Location</th>
+                      <th>Name</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each electionEligibility.runs run=value}}
+                      <tr>
+                        <td>{{run.event.startDateWithYearString}}</td>
+                        <td>{{run.trailNumber}}</td>
+                        <td>{{{run.event.haresHtml}}}</td>
+                        <td>{{{run.event.shortLocationHtml}}}</td>
+                        <td>{{{run.event.nameHtml}}}</td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
+            {{/eq}}
             <p>
               If you believe you’ve received this message in error, please cum to a
-              Sunday run before the erection is over to pick up a paper ballot.
+              Sunday run before the erection is over or
+              <a href="{{electionEligibilityEmailLink}}">
+                email On Disk
+              </a>
+              with the runs you attended that we’re missing in our record.
             </p>
           {{/if}}
         {{/if}}

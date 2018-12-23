@@ -11,6 +11,7 @@ const patches = require('./patches/patches.service.js');
 const specialEvents = require('./special-events/special-events.service.js');
 const elections = require('./elections/elections.service.js');
 const ballots = require('./ballots/ballots.service.js');
+const electionEligibility = require('./election-eligibility/election-eligibility.service.js');
 module.exports = function () {
   const app = this; // eslint-disable-line no-unused-vars
   app.configure(users);
@@ -26,4 +27,5 @@ module.exports = function () {
   app.configure(specialEvents);
   app.configure(elections);
   app.configure(ballots);
+  app.configure(electionEligibility);
 };

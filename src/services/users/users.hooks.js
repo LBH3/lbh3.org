@@ -1,50 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const authHook = require('../../hooks/auth');
 const commonHooks = require('feathers-hooks-common');
-const { restrictToOwner } = require('feathers-authentication-hooks');
-
-const restrictToUser = restrictToOwner({
-  idField: 'id',
-  ownerField: 'id'
-});
-
-const restrictToWebmaster = authHook.restrictTo(authHook.WEBMASTERS);
-
-const authHooksForUser = [
-  authenticate('jwt'),
-  restrictToUser
-];
-
-const authHookForWebmaster = function(hook) {
-  return new Promise(function(resolve, reject) {
-    const authForWebmaster = restrictToWebmaster(hook);
-    if (authForWebmaster === hook) {
-      resolve(hook);
-    } else {
-      authForWebmaster.then(resolve, reject);
-    }
-  });
-};
-
-const authHooksForUserOrWebmaster = [
-  authenticate('jwt'),
-  function(hook) {
-    return new Promise(function(resolve, reject) {
-      try {
-        const authForUser = restrictToUser(hook);
-        if (authForUser === hook) {
-          authHookForWebmaster(hook).then(resolve, reject);
-        } else {
-          authForUser.then(resolve, error => { // eslint-disable-line no-unused-vars
-            authHookForWebmaster(hook).then(resolve, reject);
-          });
-        }
-      } catch (error) { // eslint-disable-line no-unused-vars
-        authHookForWebmaster(hook).then(resolve, reject);
-      }
-    });
-  }
-];
 
 const userInfo = function(hook) {
   if (hook.data) {
@@ -192,11 +148,11 @@ module.exports = {
   before: {
     all: [],
     find: [ authenticate('jwt') ],
-    get: [ ...authHooksForUserOrWebmaster ],
+    get: [ authenticate('jwt'), authHook.restrictToUserOrWebmaster ],
     create: [ userInfo ],
-    update: [ ...authHooksForUserOrWebmaster, userInfo ],
-    patch: [ ...authHooksForUser ],
-    remove: [ ...authHooksForUser ]
+    update: [ authenticate('jwt'), authHook.restrictToUserOrWebmaster, userInfo ],
+    patch: [ authenticate('jwt'), authHook.restrictToUser ],
+    remove: [ authenticate('jwt'), authHook.restrictToUser ]
   },
 
   after: {

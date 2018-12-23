@@ -7,6 +7,7 @@ import moment from 'moment';
 
 import Ballot from '~/models/ballot';
 import Election from '~/models/election';
+import ElectionEligibility from '~/models/election-eligibility';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';
@@ -64,6 +65,15 @@ export const ViewModel = DefineMap.extend({
     get(lastSetValue, resolve) {
       this.electionPromise.then(elections => {
         resolve(elections[0]);
+      });
+    }
+  },
+
+  get electionEligibilityPromise() {
+    const election = this.election;
+    if (election) {
+      return ElectionEligibility.connection.getList({
+        electionId: election.id
       });
     }
   },

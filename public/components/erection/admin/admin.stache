@@ -5,6 +5,81 @@
 {{#if session.user.canManageUsers}}
   <h2>Erection Administration</h2>
 
+  <h3>Hasher eligibility</h3>
+  {{#if electionEligibilityPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching eligible hashers…</strong>
+    </div>
+  {{/if}}
+
+  {{#if electionEligibilityPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The eligible hashers couldn’t be retrieved. {{electionEligibilityPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if electionEligibilityPromise.isResolved}}
+    {{#eq electionEligibilityPromise.value.length 0}}
+      <div class="alert alert-info" role="alert">
+        No eligible hashers found.
+      </div>
+    {{else}}
+      <div class="row">
+        <div class="col-sm">
+          <h4>Eligible ({{electionEligibilityPromise.value.eligible.length}})</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Runs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each(electionEligibilityPromise.value.eligible)}}
+                  <tr>
+                    <td class="text-success">
+                      {{hashOrJustName}}
+                    </td>
+                    <td>
+                      {{runs.length}}
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-sm">
+          <h4>Not eligible ({{electionEligibilityPromise.value.notEligible.length}})</h4>
+          <div class="table-responsive">
+            <table class="table table-bordered table-sm table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Name</th>
+                  <th scope="col">Runs</th>
+                </tr>
+              </thead>
+              <tbody>
+                {{#each(electionEligibilityPromise.value.notEligible)}}
+                  <tr>
+                    <td class="text-danger">
+                      {{hashOrJustName}}
+                    </td>
+                    <td>
+                      {{runs.length}}
+                    </td>
+                  </tr>
+                {{/each}}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    {{/eq}}
+  {{/if}}
+
+  <h3>Ballot decryption</h3>
   <form on:submit="scope.event.preventDefault()">
     <div class="form-group">
       <label for="private-key">Private key</label>
