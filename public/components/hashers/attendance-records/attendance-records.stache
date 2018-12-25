@@ -1,0 +1,65 @@
+<can-import from="can-stache-route-helpers" />
+
+<h2>Attendance records</h2>
+
+<form class="mb-2" on:submit="scope.event.preventDefault()">
+  <div class="form-inline">
+    <label class="sr-only" for="searchText">Role</label>
+    <input autocomplete="off" autofocus class="form-control" id="searchText" placeholder="Role" type="text" value:bind="searchText">
+    <button class="btn btn-primary ml-2" type="submit">
+      Search
+    </button>
+  </div>
+</form>
+
+{{#if hashersPromises.isPending}}
+  <div class="alert alert-info" role="alert">
+    <strong>Fetching attendance records…</strong>
+  </div>
+{{/if}}
+
+{{#if hashersPromises.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The attendance records couldn’t be retrieved. {{hashersPromises.reason.message}}
+  </div>
+{{/if}}
+
+{{#if hashersPromises.isResolved}}
+  {{#eq hashersPromises.value.length 0}}
+    <div class="alert alert-info" role="alert">
+      No attendance records found.
+    </div>
+  {{else}}
+    <div class="table-responsive">
+      <table class="table table-bordered table-sm table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Runs</th>
+            <th scope="col">First trail</th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each(hashers)}}
+            <tr>
+              <td>
+                <a href="{{scope.vm.routeForHasher(this)}}">
+                  {{hashName}}
+                </a>
+              </td>
+              <td>
+                {{runCount}}
+                {{^eq(hareCount, 0)}}
+                  + {{hareCount}} Hare{{^eq(hareCount, 1)}}s{{/eq}}
+                {{/eq}}
+              </td>
+              <td>
+                {{firstTrailDate}} (#{{firstTrailNumber}})
+              </td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    </div>
+  {{/eq}}
+{{/if}}

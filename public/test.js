@@ -21,6 +21,7 @@ import 'lbh3/components/hasher/hasher-test';
 import 'lbh3/components/hasher-autocomplete/hasher-autocomplete-test';
 import 'lbh3/components/hasher-edit-form/hasher-edit-form-test';
 import 'lbh3/components/hashers/add/add-test';
+import 'lbh3/components/hashers/attendance-records/attendance-records-test';
 import 'lbh3/components/hashers/early-warning/early-warning-test';
 import 'lbh3/components/hashers/email/email-test';
 import 'lbh3/components/hashers/hashers-test';

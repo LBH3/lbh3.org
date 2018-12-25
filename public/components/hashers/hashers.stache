@@ -15,6 +15,9 @@
       <a class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" href="{{routeUrl page='hashers' secondaryPage='email'}}" title="Go to the email list">
         <span class="fa fa-envelope fa-lg"></span>
       </a>
+      <a class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}" title="Go to the attendance records page">
+        <span class="fa fa-bars fa-lg"></span>
+      </a>
     </div>
   </div>
 {{else}}

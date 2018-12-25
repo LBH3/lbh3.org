@@ -385,6 +385,21 @@
                   </can-import>
                 </lbh3-no-ssr>
               {{/case}}
+              {{#case "attendance-records"}}
+                <lbh3-no-ssr>
+                  <can-import from="~/components/hashers/attendance-records/">
+                    {{#if isPending}}
+                      Loading the attendance records page…
+                    {{else}}
+                      <lbh3-hashers-attendance-records
+                        description:to="scope.root.description"
+                        ogTitle:to="scope.root.ogTitle"
+                        title:to="scope.root.title"
+                      />
+                    {{/if}}
+                  </can-import>
+                </lbh3-no-ssr>
+              {{/case}}
               {{#case "early-warning"}}
                 <lbh3-no-ssr>
                   <can-import from="~/components/hashers/early-warning/">
