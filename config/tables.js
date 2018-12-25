@@ -212,6 +212,15 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       workPhone: stringType('work_phone'),
       workPhonePrivate: stringType('work_phone_private')
     },
+    paper_ballots: {
+      id: primaryIntType,
+      createdAt: currentTimestampType('created_at'),
+      updatedAt: currentTimestampType('updated_at'),
+      addedById: intType('added_by_id'),
+      dateTaken: dateType('date_taken'),
+      electionId: intType('election_id'),
+      hasherId: intType('hasher_id')
+    },
     patches: {
       id: primaryIntType,
       createdAt: currentTimestampType('created_at'),

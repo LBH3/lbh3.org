@@ -11,6 +11,7 @@ import ElectionEligibility from '~/models/election-eligibility';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';
+import PaperBallot from '~/models/paper-ballot';
 import Session from '~/models/session';
 import UnencryptedBallot from '~/models/unencrypted-ballot';
 
@@ -153,8 +154,26 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  newPaperBallotDateTaken: {
+    default() {
+      return moment().format('YYYY-MM-DD');
+    },
+    type: 'string'
+  },
+  newPaperBallotHasher: Hasher,
+  newPaperBallotPromise: Promise,
+
   get ogTitle() {
     return 'Admin'
+  },
+
+  get paperBallotsPromise() {
+    const election = this.election;
+    if (election) {
+      return PaperBallot.connection.getList({
+        electionId: election.id
+      });
+    }
   },
 
   privateKey: 'string',
@@ -277,6 +296,21 @@ export const ViewModel = DefineMap.extend({
 
   urlId: 'string',
 
+  addPaperBallot() {
+    const newPaperBallotHasher = this.newPaperBallotHasher;
+    if (newPaperBallotHasher) {
+      const paperBallot = new PaperBallot({
+        dateTaken: this.newPaperBallotDateTaken,
+        electionId: this.election.id,
+        hasherId: newPaperBallotHasher.id
+      });
+      this.newPaperBallotPromise = paperBallot.save();
+      this.newPaperBallotPromise.then(() => {
+        this.newPaperBallotHasher = null;
+      });
+    }
+  },
+
   decryptBallot(encryptedBallot, encryptedKey) {
     const decrypter = this.decrypter;
     if (decrypter) {
@@ -305,5 +339,10 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'lbh3-erection-admin',
   ViewModel,
-  view
+  view,
+  events: {
+    '{element} submit': function(element, event) {
+      event.preventDefault();
+    }
+  }
 });

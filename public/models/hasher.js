@@ -156,7 +156,7 @@ const Hasher = DefineMap.extend({
         return lastValue;
       }
       const hareCountPromise = this.hareCountPromise;
-      if (hareCountPromise) {
+      if (hareCountPromise && setValue) {
         hareCountPromise.then(result => {
           setValue(result.total);
         });

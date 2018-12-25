@@ -11,6 +11,7 @@ import {Election, randomize} from '~/models/election';
 import ElectionEligibility from '~/models/election-eligibility';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
+import PaperBallot from '~/models/paper-ballot';
 import Session from '~/models/session';
 import UnencryptedBallot from '~/models/unencrypted-ballot';
 
@@ -225,6 +226,33 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get ogTitle() {
     // TODO: incorporate the election name?
     return 'Erection';
+  },
+  paperBallot: {
+    get: function(lastValue, setValue) {
+      const paperBallotsPromise = this.paperBallotsPromise;
+      if (paperBallotsPromise) {
+        paperBallotsPromise.then(results => {
+          setValue(results[0]);
+        });
+      }
+    }
+  },
+  get paperBallotEmailLink() {
+    return 'mailto:webmaster@lbh3.org?subject=LBH3.org says I already took a paper ballot?';
+  },
+  get paperBallotsPromise() {
+    const election = this.election;
+    const hasherId = this.user.hasherId;
+    if (election && hasherId) {
+      return PaperBallot.connection.getList({
+        $limit: 1,
+        $sort: {
+          createdAt: -1
+        },
+        electionId: election.id,
+        hasherId
+      });
+    }
   },
   requestedName: {
     type: 'string'
