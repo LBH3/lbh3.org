@@ -230,19 +230,35 @@
         <table class="table table-bordered table-sm">
           <thead>
             <tr>
+              {{#if(session.user.canManageUsers)}}
+                <th scope="col">Voter</th>
+              {{/if}}
               <th scope="col">Encrypted hash</th>
-              <th scope="col">Decrypted</th>
+              {{#if(privateKey)}}
+                <th scope="col">Decrypted</th>
+              {{/if}}
             </tr>
           </thead>
           <tbody>
             {{#each(ballotsPromise.value)}}
               <tr>
+                {{#if(../session.user.canManageUsers)}}
+                  <td>
+                    {{#if hasherPromise.isResolved}}
+                      {{hasher.hashOrJustName}}
+                    {{else}}
+                      <span class="fa fa-circle-notch fa-spin"></span>
+                    {{/if}}
+                  </td>
+                {{/if}}
                 <td>
                   {{sha256}}
                 </td>
-                <td>
-                  {{../decryptBallot(encryptedBallot, encryptedKey)}}
-                </td>
+                {{#if(../privateKey)}}
+                  <td>
+                    {{../decryptBallot(encryptedBallot, encryptedKey)}}
+                  </td>
+                {{/if}}
               </tr>
             {{/each}}
           </tbody>

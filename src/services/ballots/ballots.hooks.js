@@ -3,6 +3,19 @@ const authHook = require('../../hooks/auth');
 const crypto = require('crypto');
 const errors = require('@feathersjs/errors');
 
+const afterHook = function(hook) {
+  const ballots = hook.result.data;
+  ballots.forEach(ballot => {
+    const hash = crypto.createHmac('sha256', Math.random().toString());
+    hash.update(ballot.hasherId.toString());
+    ballot.hasherIdHmac = hash.digest('base64');
+
+    if (hook.params.user.canManageUsers !== true) {
+      delete ballot.hasherId;
+    }
+  });
+};
+
 const createHook = function(hook) {
   return new Promise((resolve, reject) => {
     const electionEligibilityService = hook.app.service('api/election-eligibility');
@@ -32,7 +45,7 @@ module.exports = {
   before: {
     all: [ authenticate('jwt') ],
     find: [ authHook.restrictToSignedInHashers ],
-    get: [ authHook.restrictToSignedInHashers ],
+    get: [ authHook.restrictTo() ],
     create: [ authHook.restrictToSignedInHashers, createHook ],
     update: [ authHook.restrictTo() ],
     patch: [ authHook.restrictTo() ],
@@ -41,7 +54,7 @@ module.exports = {
 
   after: {
     all: [],
-    find: [],
+    find: [ afterHook ],
     get: [],
     create: [],
     update: [],

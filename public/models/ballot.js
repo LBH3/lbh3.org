@@ -7,6 +7,7 @@ import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
+import Hasher from '~/models/hasher';
 import moment from 'moment-timezone';
 
 const Ballot = DefineMap.extend({
@@ -41,7 +42,31 @@ const Ballot = DefineMap.extend({
       return moment(this.createdAt).format('LL LTS');
     }
   },
-  electionId: 'number'
+  electionId: 'number',
+  hasher: {
+    get: function(lastValue, setValue) {
+      const hasherPromise = this.hasherPromise;
+      if (hasherPromise) {
+        hasherPromise.then(hashers => {
+          if (hashers && hashers.length > 0) {
+            setValue(hashers[0]);
+          }
+        });
+      }
+    },
+    serialize: false
+  },
+  hasherPromise: {
+    get: function() {
+      const id = this.hasherId;
+      if (id) {
+        return Hasher.connection.getList({
+          id
+        });
+      }
+    },
+    serialize: false
+  }
 });
 
 Ballot.List = DefineList.extend({

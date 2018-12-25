@@ -24,6 +24,7 @@ export const ViewModel = DefineMap.extend({
       return this.electionPromise.then(elections => {
         const election = elections[0];
         return Ballot.connection.getList({
+          $limit: 500,
           electionId: election.id
         });
       });
