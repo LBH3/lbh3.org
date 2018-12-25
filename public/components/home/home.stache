@@ -4,12 +4,9 @@
 {{#if session.user}}
   {{^if session.user.hasherId}}
     <lbh3-no-ssr class="d-print-none">
-      <can-import from="~/components/request-access/">
-        {{#if isResolved}}
-          <lbh3-request-access />
-          <hr class="mt-0" />
-        {{/if}}
-      </can-import>
+      <can-import from="~/components/request-access/" />
+      <lbh3-request-access />
+      <hr class="mt-0" />
     </lbh3-no-ssr>
   {{/if}}
 {{else}}
