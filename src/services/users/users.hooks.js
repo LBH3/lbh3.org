@@ -29,6 +29,7 @@ const userInfo = function(hook) {
 
 const getBoredInfo = function(hook) {
   return new Promise(function(resolve, reject) {
+    const hasherId = hook.result.hasherId;
     const now = new Date();
     const oneMonthAgo = new Date((new Date()).setMonth((new Date()).getMonth() - 1));
     const boredHashersQuery = {
@@ -36,7 +37,7 @@ const getBoredInfo = function(hook) {
         endDate: {
           $gte: oneMonthAgo
         },
-        hasherId: hook.result.hasherId,
+        hasherId,
         startDate: {
           $lte: now
         }
@@ -51,6 +52,7 @@ const getBoredInfo = function(hook) {
         canAddPhotos: false,
         canAddSnoozes: false,
         canAddTrails: false,
+        canAdministerElections: false,
         canEditFutureSpecialEvents: false,
         canEditHasherInfo: false,
         canEditPostTrailInfo: false,
@@ -62,6 +64,11 @@ const getBoredInfo = function(hook) {
         canViewOldData: false,
         canViewRunAttendance: false
       };
+      if (hasherId === 189) {// Special exception
+        permission = Object.assign(permission, {
+          canAdministerElections: true
+        });
+      }
       if (boredPositions.includes(authHook.GRANDMASTERS)) {
         permission = Object.assign(permission, {
           canEditFutureSpecialEvents: true
@@ -126,6 +133,7 @@ const getBoredInfo = function(hook) {
           canAddPhotos: true,
           canAddSnoozes: true,
           canAddTrails: true,
+          canAdministerElections: true,
           canEditFutureSpecialEvents: true,
           canEditHasherInfo: true,
           canEditPostTrailInfo: true,

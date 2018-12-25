@@ -8,6 +8,11 @@ const beforeFindHook = function(hook) {
     return hook;
   }
 
+  // Special exception
+  if (hook.params.user.hasherId === 189) {
+    return hook;
+  }
+
   return authHook.restrictToWebmaster(hook);
 };
 

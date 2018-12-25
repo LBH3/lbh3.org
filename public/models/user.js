@@ -27,6 +27,10 @@ var User = DefineMap.extend('User', {
     type: 'boolean',
     serialize: false
   },
+  canAdministerElections: {
+    type: 'boolean',
+    serialize: false
+  },
   canEditFutureSpecialEvents: {
     type: 'boolean',
     serialize: false

@@ -1,8 +1,7 @@
 <can-import from="can-stache-converters" />
 <can-import from="~/components/hasher-autocomplete/" />
 
-{{!TODO: these permissions should be different}}
-{{#if session.user.canManageUsers}}
+{{#if session.user.canAdministerElections}}
   <h2>Erection Administration</h2>
 
   <h3>Hasher eligibility</h3>

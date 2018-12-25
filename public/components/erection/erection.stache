@@ -24,7 +24,7 @@
       {{/if}}
     </div>
     <div class="col text-right">
-      {{#if session.user.canManageUsers}}
+      {{#if session.user.canAdministerElections}}
         <a
           class="d-inline-block d-print-none p-2 p-md-1 pt-md-2"
           href="{{routeUrl page='erections' secondaryPage='admin' urlId=urlId}}"
@@ -585,12 +585,12 @@
               </div>
             {{/eq}}
             <p>
-              If you believe you’ve received this message in error, please cum to a
+              If you believe you’ve attended more runs, please cum to a
               Sunday run before the erection is over or
               <a href="{{electionEligibilityEmailLink}}">
                 email On Disk
               </a>
-              with the runs you attended that we’re missing in our record.
+              with the runs you’ve attended that we’re missing in our record.
             </p>
           {{/if}}
         {{/if}}
