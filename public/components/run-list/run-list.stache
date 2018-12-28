@@ -183,30 +183,30 @@
           {{#if ../session.user.hasherId}}
             {{#if ../showScribe}}
               <td>
-                {{#if event.scribesMd}}
-                  {{event.scribesMd}}
+                {{#if event.scribesHtml}}
+                  {{{event.scribesHtml}}}
                 {{/if}}
               </td>
             {{/if}}
             {{#if ../showHashit}}
               <td>
-                {{#if event.hashitReasonMd}}
-                  {{event.hashitReasonMd}}
+                {{#if event.hashitReasonHtml}}
+                  {{{event.hashitReasonHtml}}}
                 {{/if}}
               </td>
             {{/if}}
             {{#if ../showNotes}}
               <td>
-                {{#if event.trailCommentsMd}}
-                  {{event.trailCommentsMd}}
+                {{#if event.trailCommentsHtml}}
+                  {{{event.trailCommentsHtml}}}
                 {{/if}}
               </td>
             {{/if}}
           {{/if}}
           {{#if ../showOnOn}}
             <td>
-              {{#if event.onOnMd}}
-                {{event.onOnMd}}
+              {{#if event.onOnHtml}}
+                {{{event.onOnHtml}}}
               {{/if}}
             </td>
           {{/if}}
