@@ -96,7 +96,7 @@
 
             {{#if paperBallotsPromise.isRejected}}
               <div class="alert alert-danger" role="alert">
-                <strong>Fuck!</strong> Your run count couldn’t be checked. {{paperBallotsPromise.reason.message}}
+                <strong>Fuck!</strong> Your eligibility couldn’t be checked. {{paperBallotsPromise.reason.message}}
               </div>
               <p>
                 If you’re concerned about running out of time before the erection is over,
