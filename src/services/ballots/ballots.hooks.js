@@ -16,6 +16,21 @@ const afterHook = function(hook) {
   });
 };
 
+const beforeFindHook = function(hook) {
+
+  // Allow users to fetch their own paper ballots
+  if (hook.params.query.hasherId) {
+    if (Number(hook.params.query.hasherId) === hook.params.user.hasherId) {
+      return hook;
+    }
+    // If it’s not the user querying for their own ballot, restrict to webmaster
+    return authHook.restrictToWebmaster(hook);
+  }
+
+  // If there’s no query by hasherId, then continue
+  return hook;
+};
+
 const createHook = function(hook) {
   return new Promise((resolve, reject) => {
     const electionEligibilityService = hook.app.service('api/election-eligibility');
@@ -44,7 +59,7 @@ const createHook = function(hook) {
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
-    find: [ authHook.restrictToSignedInHashers ],
+    find: [ authHook.restrictToSignedInHashers, beforeFindHook ],
     get: [ authHook.restrictTo() ],
     create: [ authHook.restrictToSignedInHashers, createHook ],
     update: [ authHook.restrictTo() ],
