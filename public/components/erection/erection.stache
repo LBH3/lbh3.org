@@ -1,40 +1,17 @@
 <can-import from="can-stache-converters" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="~/components/erection/nav/" />
 <can-import from="~/components/hasher-autocomplete/" />
 <can-import from="~/components/no-ssr/" />
 
 <lbh3-no-ssr>
-  <div class="mb-2 row">
-    <div class="col">
-      {{#if session.user.canManageUsers}}
-        <a
-          class="d-inline-block d-print-none p-2 p-md-1 pt-md-2"
-          href="{{routeUrl page='erections' secondaryPage='edit' urlId=urlId}}"
-        >
-          Edit
-        </a>
-      {{/if}}
-    </div>
-    <div class="col">
-      {{#if(election)}}
-        <h2 class="text-nowrap">{{election.titleMd}}</h2>
-      {{else}}
-        <h2>Erection</h2>
-      {{/if}}
-    </div>
-    <div class="col text-right">
-      {{#if session.user.canAdministerElections}}
-        <a
-          class="d-inline-block d-print-none p-2 p-md-1 pt-md-2"
-          href="{{routeUrl page='erections' secondaryPage='admin' urlId=urlId}}"
-          title="Go to the erection administration page"
-        >
-          Admin
-        </a>
-      {{/if}}
-    </div>
-  </div>
+  <lbh3-erection-nav
+    election:from="election"
+    secondaryPage:from="secondaryPage"
+    session:from="session"
+    urlId:from="urlId"
+  />
 
   {{#if electionPromise.isPending}}
     <div class="alert alert-info" role="alert">
@@ -588,7 +565,7 @@
                 <p>
                   Otherwise, be sure to fill out the paper ballot you took and return it before the erection is over.
                 </p>
-              {{/if}}
+              {{/eq}}
             {{/if}}
           {{else}}
             <div class="alert alert-danger" role="alert">

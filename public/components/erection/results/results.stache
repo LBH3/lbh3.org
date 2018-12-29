@@ -1,0 +1,140 @@
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="can-stache-converters" />
+<can-import from="~/components/erection/nav/" />
+<can-import from="~/components/hasher-autocomplete/" />
+
+{{#if session.user.canAdministerElections}}
+  <lbh3-erection-nav
+    election:from="election"
+    secondaryPage:from="secondaryPage"
+    session:from="session"
+    urlId:from="urlId"
+  />
+
+  <form class="mb-3" on:submit="scope.event.preventDefault()">
+    <div class="form-group">
+      <label for="private-key">Private key</label>
+      <textarea
+        class="form-control"
+        id="private-key"
+        value:to="privateKey"
+      ></textarea>
+    </div>
+    <button class="btn btn-primary" type="submit">Decrypt</button>
+  </form>
+
+  {{#if ballotsPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching the ballots…</strong>
+    </div>
+  {{/if}}
+
+  {{#if ballotsPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The ballots couldn’t be retrieved. {{ballotsPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if ballotsPromise.isResolved}}
+    {{#eq ballotsPromise.value.length 0}}
+      <div class="alert alert-info" role="alert">
+        No ballots found.
+      </div>
+    {{else}}
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm">
+          <thead>
+            <tr>
+              {{#if(session.user.canManageUsers)}}
+                <th scope="col">Voter</th>
+              {{/if}}
+              <th scope="col">Encrypted hash</th>
+              {{#if(privateKey)}}
+                <th scope="col">Decrypted</th>
+              {{/if}}
+            </tr>
+          </thead>
+          <tbody>
+            {{#each(ballotsPromise.value)}}
+              <tr>
+                {{#if(../session.user.canManageUsers)}}
+                  <td>
+                    {{#if hasherPromise.isResolved}}
+                      {{hasher.hashOrJustName}}
+                    {{else}}
+                      <span class="fa fa-circle-notch fa-spin"></span>
+                    {{/if}}
+                  </td>
+                {{/if}}
+                <td>
+                  {{sha256}}
+                </td>
+                {{#if(../privateKey)}}
+                  <td>
+                    {{../decryptBallot(encryptedBallot, encryptedKey)}}
+                  </td>
+                {{/if}}
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+
+      {{#if(decrypter)}}
+
+        <h3>{{election.schema.positions.title}}</h3>
+        {{#each(election.schema.positions.races)}}
+          <h4>{{title}}</h4>
+          <ul>
+            {{#each(../talliedVotes[id])}}
+              <li>
+                {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+              </li>
+            {{/each}}
+          </ul>
+        {{/each}}
+
+        <h3>{{election.schema.awards.title}}</h3>
+        {{#each(election.schema.awards.races)}}
+          <h4>{{title}}</h4>
+          <ul>
+            {{#each(../talliedVotes[id])}}
+              <li>
+                {{#switch(../type)}}
+                  {{#case('hasher')}}
+                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                  {{/case}}
+                  {{#case('hashit')}}
+                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                  {{/case}}
+                  {{#case('on-on')}}
+                    <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
+                      {{scope.key}}: {{this}}
+                    </span>
+                  {{/case}}
+                  {{#case('run')}}
+                    <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
+                      {{scope.key}}: {{this}}
+                    </span>
+                  {{/case}}
+                  {{#case('scribe')}}
+                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                  {{/case}}
+                  {{#case('textarea')}}
+                    {{scope.key}}
+                  {{/case}}
+                {{/switch}}
+              </li>
+            {{/each}}
+          </ul>
+        {{/each}}
+      {{/if}}
+    {{/eq}}
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}

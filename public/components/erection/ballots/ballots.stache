@@ -1,0 +1,130 @@
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="can-stache-converters" />
+<can-import from="can-stache-route-helpers" />
+<can-import from="~/components/erection/nav/" />
+<can-import from="~/components/hasher-autocomplete/" />
+
+{{#if session.user.canAdministerElections}}
+  <lbh3-erection-nav
+    election:from="election"
+    secondaryPage:from="secondaryPage"
+    session:from="session"
+    urlId:from="urlId"
+  />
+
+  {{#if paperBallotsPromise.isPending}}
+    <div class="alert alert-info" role="alert">
+      <strong>Fetching paper ballots…</strong>
+    </div>
+  {{/if}}
+
+  {{#if paperBallotsPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The paper ballots couldn’t be retrieved. {{paperBallotsPromise.reason.message}}
+    </div>
+  {{/if}}
+
+  {{#if paperBallotsPromise.isResolved}}
+    {{#eq paperBallotsPromise.value.length 0}}
+      <div class="alert alert-info" role="alert">
+        No paper ballots found.
+      </div>
+    {{else}}
+      <div class="table-responsive">
+        <table class="table table-bordered table-sm table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Hasher</th>
+              <th scope="col">Date taken</th>
+              <th scope="col">Added by</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each(paperBallotsPromise.value)}}
+              <tr>
+                <td>
+                  {{#if hasherPromise.isResolved}}
+                    {{hasher.hashOrJustName}}
+                  {{else}}
+                    <span class="fa fa-circle-notch fa-spin"></span>
+                  {{/if}}
+                </td>
+                <td>
+                  {{dateTaken}}
+                </td>
+                <td>
+                  {{#if addedByHasherPromise.isResolved}}
+                    {{addedByHasher.hashOrJustName}}
+                  {{else}}
+                    <span class="fa fa-circle-notch fa-spin"></span>
+                  {{/if}}
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    {{/eq}}
+
+    <h3>Record a paper ballot was taken</h3>
+
+    {{#if newPaperBallotPromise.isPending}}
+      <div class="alert alert-info mt-3" role="alert">
+        <strong>Saving paper ballot…</strong>
+      </div>
+    {{else}}
+      {{#if newPaperBallotPromise.isRejected}}
+        <div class="alert alert-danger mt-3" role="alert">
+          <strong>Fuck!</strong> The paper ballot couldn’t be saved. {{newPaperBallotPromise.reason.message}}
+        </div>
+      {{/if}}
+      {{#if newPaperBallotPromise.isResolved}}
+        <div class="alert alert-success mt-3" role="alert">
+          <strong>The paper ballot was successfully saved!</strong>
+        </div>
+      {{/if}}
+      <form class="mb-3" on:submit="addPaperBallot()">
+        <div class="form-group">
+          <label for="hasher-name">Hash name</label>
+          <lbh3-hasher-autocomplete
+            selected:to="newPaperBallotHasher"
+            showNameAfterSelection:from="true"
+          >
+            <input
+              autocomplete="off"
+              class="form-control"
+              id="hasher-name"
+              type="text"
+            />
+          </lbh3-hasher-autocomplete>
+        </div>
+        <div class="form-group">
+          <label for="date-taken">
+            Date taken
+          </label>
+          <div class="input-group">
+            <input
+              class="form-control"
+              id="date-taken"
+              type="date"
+              value:bind="newPaperBallotDateTaken"
+            />
+          </div>
+        </div>
+        <button
+          class="btn btn-primary"
+          {{^if(newPaperBallotHasher)}}disabled{{/if}}
+          type="submit"
+        >
+          Save
+        </button>
+      </form>
+    {{/if}}
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}

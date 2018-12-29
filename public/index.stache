@@ -102,15 +102,17 @@
           {{#if urlId}}
             {{#if secondaryPage}}
               {{#switch secondaryPage}}
-                {{#case "admin"}}
+                {{#case "ballots"}}
                   <lbh3-no-ssr>
-                    <can-import from="~/components/erection/admin/">
+                    <can-import from="~/components/erection/ballots/">
                       {{#if isPending}}
-                        Loading the erection admin page…
+                        Loading the erection ballots page…
                       {{else}}
-                        <lbh3-erection-admin
+                        <lbh3-erection-ballots
+                          class="container pl-0 pr-0"
                           description:to="scope.root.description"
                           ogTitle:to="scope.root.ogTitle"
+                          secondaryPage:from="scope.root.secondaryPage"
                           title:to="scope.root.title"
                           urlId:from="scope.root.urlId"
                         />
@@ -125,8 +127,44 @@
                         Loading the edit erection page…
                       {{else}}
                         <lbh3-erection-edit
+                          class="container pl-0 pr-0"
                           description:to="scope.root.description"
                           ogTitle:to="scope.root.ogTitle"
+                          secondaryPage:from="scope.root.secondaryPage"
+                          title:to="scope.root.title"
+                          urlId:from="scope.root.urlId"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+                {{#case "eligibility"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/erection/eligibility/">
+                      {{#if isPending}}
+                        Loading the erection eligibility page…
+                      {{else}}
+                        <lbh3-erection-eligibility
+                          description:to="scope.root.description"
+                          ogTitle:to="scope.root.ogTitle"
+                          secondaryPage:from="scope.root.secondaryPage"
+                          title:to="scope.root.title"
+                          urlId:from="scope.root.urlId"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+                {{#case "results"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/erection/results/">
+                      {{#if isPending}}
+                        Loading the erection results page…
+                      {{else}}
+                        <lbh3-erection-results
+                          description:to="scope.root.description"
+                          ogTitle:to="scope.root.ogTitle"
+                          secondaryPage:from="scope.root.secondaryPage"
                           title:to="scope.root.title"
                           urlId:from="scope.root.urlId"
                         />
@@ -144,6 +182,7 @@
                     class="container pl-0 pr-0"
                     description:to="scope.root.description"
                     ogTitle:to="scope.root.ogTitle"
+                    secondaryPage:from="scope.root.secondaryPage"
                     title:to="scope.root.title"
                     urlId:from="scope.root.urlId"
                   />

@@ -7,16 +7,14 @@ import moment from 'moment';
 
 import Ballot from '~/models/ballot';
 import Election from '~/models/election';
-import ElectionEligibility from '~/models/election-eligibility';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';
-import PaperBallot from '~/models/paper-ballot';
 import Session from '~/models/session';
 import UnencryptedBallot from '~/models/unencrypted-ballot';
 
-import './admin.less';
-import view from './admin.stache';
+import './results.less';
+import view from './results.stache';
 
 export const ViewModel = DefineMap.extend({
   ballotsPromise: {
@@ -60,22 +58,13 @@ export const ViewModel = DefineMap.extend({
   },
 
   description: {
-    default: 'Administer the erection.'
+    default: 'Erection results.'
   },
 
   election: {
     get(lastSetValue, resolve) {
       this.electionPromise.then(elections => {
         resolve(elections[0]);
-      });
-    }
-  },
-
-  get electionEligibilityPromise() {
-    const election = this.election;
-    if (election) {
-      return ElectionEligibility.connection.getList({
-        electionId: election.id
       });
     }
   },
@@ -155,26 +144,8 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  newPaperBallotDateTaken: {
-    default() {
-      return moment().format('YYYY-MM-DD');
-    },
-    type: 'string'
-  },
-  newPaperBallotHasher: Hasher,
-  newPaperBallotPromise: Promise,
-
   get ogTitle() {
-    return 'Admin'
-  },
-
-  get paperBallotsPromise() {
-    const election = this.election;
-    if (election) {
-      return PaperBallot.connection.getList({
-        electionId: election.id
-      });
-    }
+    return 'Results'
   },
 
   privateKey: 'string',
@@ -297,21 +268,6 @@ export const ViewModel = DefineMap.extend({
 
   urlId: 'string',
 
-  addPaperBallot() {
-    const newPaperBallotHasher = this.newPaperBallotHasher;
-    if (newPaperBallotHasher) {
-      const paperBallot = new PaperBallot({
-        dateTaken: this.newPaperBallotDateTaken,
-        electionId: this.election.id,
-        hasherId: newPaperBallotHasher.id
-      });
-      this.newPaperBallotPromise = paperBallot.save();
-      this.newPaperBallotPromise.then(() => {
-        this.newPaperBallotHasher = null;
-      });
-    }
-  },
-
   decryptBallot(encryptedBallot, encryptedKey) {
     const decrypter = this.decrypter;
     if (decrypter) {
@@ -338,7 +294,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-  tag: 'lbh3-erection-admin',
+  tag: 'lbh3-erection-results',
   ViewModel,
   view,
   events: {

@@ -1,11 +1,12 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/erection/nav/" />
 
-<h2>
-  Edit
-  <a href="{{routeUrl page='erections' urlId=urlId}}" title="Back to the erection page">
-    {{erection.title}}
-  </a>
-</h2>
+<lbh3-erection-nav
+  election:from="election"
+  secondaryPage:from="secondaryPage"
+  session:from="session"
+  urlId:from="urlId"
+/>
 
 {{#if session.user.canManageUsers}}
   {{#if erectionPromise.isPending}}
@@ -21,7 +22,7 @@
   {{/if}}
 
   {{#if erection}}
-    <form on:submit="editErection()">
+    <form class="mb-3" on:submit="editErection()">
 
       <div class="form-group row">
         <label class="col-3 col-form-label" for="title-md">
