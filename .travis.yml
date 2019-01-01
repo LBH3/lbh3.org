@@ -1,8 +1,14 @@
 language: node_js
 node_js: 10
 addons:
+  apt:
+    packages:
+      - postgresql-9.6-postgis-2.3
   firefox: "53.0"
+  postgresql: "9.6"
   sauce_connect: true
+services:
+  - postgresql
 cache:
   directories:
     - "$HOME/.npm"

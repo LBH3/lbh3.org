@@ -35,12 +35,19 @@ const beforeFindHook = function(hook) {
   return shouldFilterData(hook).then(filter => {
     if (filter) {
       return searchHook({
-        fields: ['hashName']
+        fields: ['hash_name'],
+        oldOptions: {
+          fields: ['hashName']
+        }
       })(hook);
     } else {
       return searchHook({
-        contains: ['emailAddresses', 'emailAddressesPrivate'],
-        fields: ['familyName', 'givenName', 'hashName']
+        contains: ['email_addresses', 'email_addresses_private'],
+        fields: ['family_name', 'given_name', 'hash_name'],
+        oldOptions: {
+          contains: ['emailAddresses', 'emailAddressesPrivate'],
+          fields: ['familyName', 'givenName', 'hashName']
+        }
       })(hook);
     }
   });

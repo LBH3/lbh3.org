@@ -1,0 +1,1481 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 10.5
+-- Dumped by pg_dump version 10.5
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: postgis; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS postgis WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION postgis; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION postgis IS 'PostGIS geometry, geography, and raster spatial types and functions';
+
+
+--
+-- Name: enum_events_hashers_payment_tier; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE public.enum_events_hashers_payment_tier AS ENUM (
+    '5',
+    'baby',
+    'bored',
+    'c',
+    'dues',
+    'hares',
+    'kids',
+    'lt',
+    'punch'
+);
+
+
+ALTER TYPE public.enum_events_hashers_payment_tier OWNER TO postgres;
+
+--
+-- Name: enum_events_hashers_payment_type; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE public.enum_events_hashers_payment_type AS ENUM (
+    'both',
+    'cash',
+    'check',
+    'no_charge'
+);
+
+
+ALTER TYPE public.enum_events_hashers_payment_type OWNER TO postgres;
+
+--
+-- Name: enum_patches_type; Type: TYPE; Schema: public; Owner: postgres
+--
+
+CREATE TYPE public.enum_patches_type AS ENUM (
+    'hare',
+    'run'
+);
+
+
+ALTER TYPE public.enum_patches_type OWNER TO postgres;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: _migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public._migrations (
+    name character varying(255) NOT NULL
+);
+
+
+ALTER TABLE public._migrations OWNER TO postgres;
+
+--
+-- Name: bored_hashers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.bored_hashers (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.080906-06'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.080906-06'::timestamp with time zone,
+    end_date date,
+    hasher_id integer DEFAULT 0,
+    position_id integer DEFAULT 0,
+    start_date date
+);
+
+
+ALTER TABLE public.bored_hashers OWNER TO postgres;
+
+--
+-- Name: bored_hashers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.bored_hashers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.bored_hashers_id_seq OWNER TO postgres;
+
+--
+-- Name: bored_hashers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.bored_hashers_id_seq OWNED BY public.bored_hashers.id;
+
+
+--
+-- Name: bored_positions; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.bored_positions (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.11586-06'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.11586-06'::timestamp with time zone,
+    email_address character varying(255) DEFAULT ''::character varying,
+    plural_name character varying(255) DEFAULT ''::character varying,
+    singular_name character varying(255) DEFAULT ''::character varying,
+    sort_position integer DEFAULT 0
+);
+
+
+ALTER TABLE public.bored_positions OWNER TO postgres;
+
+--
+-- Name: bored_positions_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.bored_positions_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.bored_positions_id_seq OWNER TO postgres;
+
+--
+-- Name: bored_positions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.bored_positions_id_seq OWNED BY public.bored_positions.id;
+
+
+--
+-- Name: bored_years; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.bored_years (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.179941-06'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.179941-06'::timestamp with time zone,
+    end_date date,
+    start_date date,
+    year integer DEFAULT 0
+);
+
+
+ALTER TABLE public.bored_years OWNER TO postgres;
+
+--
+-- Name: bored_years_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.bored_years_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.bored_years_id_seq OWNER TO postgres;
+
+--
+-- Name: bored_years_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.bored_years_id_seq OWNED BY public.bored_years.id;
+
+
+--
+-- Name: events; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.events (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2017-07-23 14:02:31.089911-05'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2017-07-23 14:02:31.089911-05'::timestamp with time zone,
+    bring_md text DEFAULT ''::text,
+    directions_md text DEFAULT ''::text,
+    external_id character varying(255) DEFAULT ''::character varying,
+    from_the_hares_md text DEFAULT ''::text,
+    hares_md text DEFAULT ''::text,
+    hashit_reason_md text DEFAULT ''::text,
+    location_google_place_id character varying(255) DEFAULT ''::character varying,
+    location_md text DEFAULT ''::text,
+    name_md text DEFAULT ''::text,
+    on_on_google_place_id character varying(255) DEFAULT ''::character varying,
+    on_on_md text DEFAULT ''::text,
+    photos_url text DEFAULT ''::text,
+    scribes_md text DEFAULT ''::text,
+    start_datetime timestamp with time zone,
+    snooze_title_md text DEFAULT ''::text,
+    snooze_url text DEFAULT ''::text,
+    trail_comments_md text DEFAULT ''::text,
+    trail_number integer DEFAULT 0,
+    additional_writeup_md text DEFAULT ''::text,
+    added_writeup_md text DEFAULT ''::text,
+    hare_patches_md text DEFAULT ''::text,
+    miles numeric,
+    new_boots_md text DEFAULT ''::text,
+    new_names_md text DEFAULT ''::text,
+    patches_md text DEFAULT ''::text,
+    returners_md text DEFAULT ''::text,
+    snooze_date_primary text DEFAULT ''::text,
+    snooze_date_secondary text DEFAULT ''::text,
+    visitors_md text DEFAULT ''::text,
+    special_event_id integer DEFAULT 0
+);
+
+
+ALTER TABLE public.events OWNER TO postgres;
+
+--
+-- Name: events_hashers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.events_hashers (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.313125-06'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.313125-06'::timestamp with time zone,
+    event_payment character varying(255) DEFAULT ''::character varying,
+    external_id character varying(255) DEFAULT ''::character varying,
+    family_name character varying(255) DEFAULT ''::character varying,
+    food_preference character varying(255) DEFAULT ''::character varying,
+    given_name character varying(255) DEFAULT ''::character varying,
+    hasher_id integer DEFAULT 0,
+    hash_name character varying(255) DEFAULT ''::character varying,
+    payment_notes character varying(255) DEFAULT ''::character varying,
+    payment_tier public.enum_events_hashers_payment_tier,
+    payment_type public.enum_events_hashers_payment_type,
+    role character varying(255) DEFAULT ''::character varying,
+    run_patch character varying(255) DEFAULT ''::character varying,
+    trail_number integer DEFAULT 0
+);
+
+
+ALTER TABLE public.events_hashers OWNER TO postgres;
+
+--
+-- Name: events_hashers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.events_hashers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.events_hashers_id_seq OWNER TO postgres;
+
+--
+-- Name: events_hashers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.events_hashers_id_seq OWNED BY public.events_hashers.id;
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.events_id_seq OWNER TO postgres;
+
+--
+-- Name: events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.events_id_seq OWNED BY public.events.id;
+
+
+--
+-- Name: google_places; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.google_places (
+    id character varying(255) NOT NULL,
+    address_components json,
+    created_at timestamp with time zone DEFAULT '2017-07-23 14:02:31.139756-05'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2017-07-23 14:02:31.139756-05'::timestamp with time zone,
+    formatted_address text DEFAULT ''::text,
+    formatted_phone_number character varying(255) DEFAULT ''::character varying,
+    geometry_location public.geometry(Point),
+    geometry_viewport public.geometry(Polygon),
+    icon text DEFAULT ''::text,
+    international_phone_number character varying(255) DEFAULT ''::character varying,
+    name text DEFAULT ''::text,
+    place_id character varying(255) DEFAULT ''::character varying,
+    reference text DEFAULT ''::character varying,
+    scope character varying(255) DEFAULT ''::character varying,
+    types text[] DEFAULT '{}'::text[],
+    url text DEFAULT ''::text,
+    vicinity character varying(255) DEFAULT ''::character varying,
+    website text DEFAULT ''::text
+);
+
+
+ALTER TABLE public.google_places OWNER TO postgres;
+
+--
+-- Name: hashers; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.hashers (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.762819-06'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2018-01-09 00:31:12.762819-06'::timestamp with time zone,
+    address_country character varying(255) DEFAULT ''::character varying,
+    address_country_private character varying(255) DEFAULT ''::character varying,
+    address_city character varying(255) DEFAULT ''::character varying,
+    address_city_private character varying(255) DEFAULT ''::character varying,
+    address_state character varying(255) DEFAULT ''::character varying,
+    address_state_private character varying(255) DEFAULT ''::character varying,
+    address_street character varying(255) DEFAULT ''::character varying,
+    address_street_private character varying(255) DEFAULT ''::character varying,
+    address_zip_code character varying(255) DEFAULT ''::character varying,
+    address_zip_code_private character varying(255) DEFAULT ''::character varying,
+    alerts character varying(255) DEFAULT ''::character varying,
+    award_count integer DEFAULT 0,
+    birth_day integer DEFAULT 0,
+    birth_month integer DEFAULT 0,
+    birth_year integer DEFAULT 0,
+    cell_phone character varying(255) DEFAULT ''::character varying,
+    cell_phone_private character varying(255) DEFAULT ''::character varying,
+    created_by character varying(255) DEFAULT ''::character varying,
+    created_by_user_id integer DEFAULT 0,
+    died character varying(255) DEFAULT ''::character varying,
+    email_addresses text[] DEFAULT '{}'::text[],
+    email_addresses_private text[] DEFAULT '{}'::text[],
+    emailing character varying(255) DEFAULT ''::character varying,
+    end_of_year integer DEFAULT 0,
+    event character varying(255) DEFAULT ''::character varying,
+    external_id character varying(255) DEFAULT ''::character varying,
+    family_name character varying(255) DEFAULT ''::character varying,
+    family_name_private character varying(255) DEFAULT ''::character varying,
+    fax character varying(255) DEFAULT ''::character varying,
+    first_trail_date date,
+    first_trail_number integer DEFAULT 0,
+    food_preference character varying(255) DEFAULT ''::character varying,
+    given_name character varying(255) DEFAULT ''::character varying,
+    given_name_private character varying(255) DEFAULT ''::character varying,
+    hash_name character varying(255) DEFAULT ''::character varying,
+    headshot_url text DEFAULT ''::text,
+    history character varying(255) DEFAULT ''::character varying,
+    home_phone character varying(255) DEFAULT ''::character varying,
+    home_phone_private character varying(255) DEFAULT ''::character varying,
+    in_memoriam text DEFAULT ''::text,
+    last_trail_date date,
+    mail_hash_name character varying(255) DEFAULT ''::character varying,
+    mail_name character varying(255) DEFAULT ''::character varying,
+    mia character varying(255) DEFAULT ''::character varying,
+    mother_hash character varying(255) DEFAULT ''::character varying,
+    naming_trail_date date,
+    naming_trail_number integer DEFAULT 0,
+    notes_md text DEFAULT ''::text,
+    owes character varying(255) DEFAULT ''::character varying,
+    passed character varying(255) DEFAULT ''::character varying,
+    payment character varying(255) DEFAULT ''::character varying,
+    punch_card integer DEFAULT 0,
+    run_count integer DEFAULT 0,
+    run_patch integer DEFAULT 0,
+    run_sort integer DEFAULT 0,
+    shirt_size character varying(255) DEFAULT ''::character varying,
+    shoe_size character varying(255) DEFAULT ''::character varying,
+    updated_by character varying(255) DEFAULT ''::character varying,
+    updated_by_user_id integer DEFAULT 0,
+    waist_size character varying(255) DEFAULT ''::character varying,
+    waiver character varying(255) DEFAULT ''::character varying,
+    who_made_you_cum text DEFAULT ''::text,
+    work_phone character varying(255) DEFAULT ''::character varying,
+    work_phone_private character varying(255) DEFAULT ''::character varying
+);
+
+
+ALTER TABLE public.hashers OWNER TO postgres;
+
+--
+-- Name: hashers_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.hashers_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.hashers_id_seq OWNER TO postgres;
+
+--
+-- Name: hashers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.hashers_id_seq OWNED BY public.hashers.id;
+
+
+--
+-- Name: patches; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.patches (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2018-02-05 23:16:16.839099-06'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2018-02-05 23:16:16.839099-06'::timestamp with time zone,
+    hasher_id integer DEFAULT 0,
+    number integer DEFAULT 0,
+    trail_number integer DEFAULT 0,
+    type public.enum_patches_type
+);
+
+
+ALTER TABLE public.patches OWNER TO postgres;
+
+--
+-- Name: patches_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.patches_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.patches_id_seq OWNER TO postgres;
+
+--
+-- Name: patches_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.patches_id_seq OWNED BY public.patches.id;
+
+
+--
+-- Name: special_events; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.special_events (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2018-04-17 01:18:23.28147-05'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2018-04-17 01:18:23.28147-05'::timestamp with time zone,
+    description_md text DEFAULT ''::text,
+    url_id character varying(255) DEFAULT ''::character varying,
+    year integer DEFAULT 0
+);
+
+
+ALTER TABLE public.special_events OWNER TO postgres;
+
+--
+-- Name: special_events_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.special_events_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.special_events_id_seq OWNER TO postgres;
+
+--
+-- Name: special_events_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.special_events_id_seq OWNED BY public.special_events.id;
+
+
+--
+-- Name: users; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.users (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2017-07-23 14:02:31.233178-05'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2017-07-23 14:02:31.233178-05'::timestamp with time zone,
+    facebook_id character varying(255) DEFAULT ''::character varying,
+    facebook_profile json,
+    google_id character varying(255) DEFAULT ''::character varying,
+    google_profile json,
+    hasher_id integer DEFAULT 0,
+    requested_name character varying(255) DEFAULT ''::character varying
+);
+
+
+ALTER TABLE public.users OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.users_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.users_id_seq OWNER TO postgres;
+
+--
+-- Name: users_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
+
+
+--
+-- Name: bored_hashers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bored_hashers ALTER COLUMN id SET DEFAULT nextval('public.bored_hashers_id_seq'::regclass);
+
+
+--
+-- Name: bored_positions id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bored_positions ALTER COLUMN id SET DEFAULT nextval('public.bored_positions_id_seq'::regclass);
+
+
+--
+-- Name: bored_years id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bored_years ALTER COLUMN id SET DEFAULT nextval('public.bored_years_id_seq'::regclass);
+
+
+--
+-- Name: events id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.events ALTER COLUMN id SET DEFAULT nextval('public.events_id_seq'::regclass);
+
+
+--
+-- Name: events_hashers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.events_hashers ALTER COLUMN id SET DEFAULT nextval('public.events_hashers_id_seq'::regclass);
+
+
+--
+-- Name: hashers id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.hashers ALTER COLUMN id SET DEFAULT nextval('public.hashers_id_seq'::regclass);
+
+
+--
+-- Name: patches id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.patches ALTER COLUMN id SET DEFAULT nextval('public.patches_id_seq'::regclass);
+
+
+--
+-- Name: special_events id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.special_events ALTER COLUMN id SET DEFAULT nextval('public.special_events_id_seq'::regclass);
+
+
+--
+-- Name: users id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users ALTER COLUMN id SET DEFAULT nextval('public.users_id_seq'::regclass);
+
+
+--
+-- Data for Name: _migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public._migrations (name) FROM stdin;
+20170707042057-init.js
+20170926223415-more-data.js
+20180121155318-patches.js
+20180324171913-requested-name.js
+20180417045506-special-events.js
+20180716181522-events-associate-special-events.js
+20180806221522-places-reference.js
+\.
+
+
+--
+-- Data for Name: bored_hashers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.bored_hashers (id, created_at, updated_at, end_date, hasher_id, position_id, start_date) FROM stdin;
+1	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	2	9	1985-01-06
+2	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	1	9	1985-01-06
+3	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	3	9	1985-01-06
+4	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	1	19	1985-01-06
+5	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	89	19	1985-01-06
+6	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	2	1	1985-01-06
+7	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	179	1	1985-01-06
+8	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	10	4	1985-01-06
+9	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	2	4	1985-01-06
+10	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	3	4	1985-01-06
+11	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	52	15	1985-01-06
+12	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	3	15	1985-01-06
+13	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	107	12	1985-01-06
+14	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1986-01-19	109	17	1985-01-06
+15	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1987-01-25	2	9	1986-01-19
+16	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1987-01-25	3	9	1986-01-19
+17	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1987-01-25	89	19	1986-01-19
+18	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1987-01-25	165	1	1986-01-19
+19	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1987-01-25	139	1	1986-01-19
+20	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1987-01-25	10	4	1986-01-19
+21	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1987-01-25	52	15	1986-01-19
+22	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1987-01-25	10	7	1986-01-19
+23	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	10	2	1987-01-25
+24	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	52	2	1987-01-25
+25	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	89	19	1987-01-25
+26	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	165	1	1987-01-25
+27	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	139	1	1987-01-25
+28	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	86	4	1987-01-25
+29	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	47	5	1987-01-25
+30	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	48	15	1987-01-25
+31	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1988-01-24	64	7	1987-01-25
+32	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	10	2	1988-01-24
+33	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	52	2	1988-01-24
+34	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	24	19	1988-01-24
+35	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	79	1	1988-01-24
+36	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	208	1	1988-01-24
+37	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	216	4	1988-01-24
+38	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	47	5	1988-01-24
+39	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	103	15	1988-01-24
+40	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	141	14	1988-01-24
+41	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-02-05	64	7	1988-01-24
+42	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	52	2	1989-02-05
+43	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	216	2	1989-02-05
+44	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	24	19	1989-02-05
+45	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	116	1	1989-02-05
+46	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	79	1	1989-02-05
+47	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	89	4	1989-02-05
+48	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	137	5	1989-02-05
+49	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	184	15	1989-02-05
+50	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1989-06-01	431	14	1989-02-05
+51	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	688	14	1989-06-01
+52	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1990-02-25	98	7	1989-02-05
+53	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	1	2	1990-02-25
+54	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	142	2	1990-02-25
+55	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	24	19	1990-02-25
+56	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	253	1	1990-02-25
+57	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	184	1	1990-02-25
+58	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	118	4	1990-02-25
+59	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	89	5	1990-02-25
+60	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	6	15	1990-02-25
+61	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	141	14	1990-02-25
+62	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1991-02-03	306	7	1990-02-25
+63	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	2	2	1991-02-03
+64	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	79	2	1991-02-03
+65	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	4	19	1991-02-03
+66	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	7	1	1991-02-03
+67	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	37	1	1991-02-03
+68	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	145	4	1991-02-03
+69	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	34	5	1991-02-03
+70	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	118	10	1991-02-03
+71	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	6	15	1991-02-03
+72	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	5	14	1991-02-03
+73	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	57	7	1991-02-03
+74	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1992-02-02	24	17	1991-02-03
+75	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	48	2	1992-02-02
+76	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	182	2	1992-02-02
+77	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	62	19	1992-02-02
+78	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	266	1	1992-02-02
+79	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	36	1	1992-02-02
+80	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	87	4	1992-02-02
+81	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	285	4	1992-02-02
+82	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	171	5	1992-02-02
+83	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	662	8	1992-02-02
+84	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	6	15	1992-02-02
+85	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	64	14	1992-02-02
+86	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	98	7	1992-02-02
+87	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1993-02-14	88	17	1992-02-02
+88	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	48	2	1993-02-14
+89	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	16	2	1993-02-14
+90	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	36	19	1993-02-14
+91	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	97	1	1993-02-14
+92	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	7	1	1993-02-14
+93	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	106	4	1993-02-14
+94	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	174	5	1993-02-14
+95	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	6	15	1993-02-14
+96	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	54	14	1993-02-14
+97	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1994-01-23	87	7	1993-02-14
+98	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	16	2	1994-01-23
+99	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	11	2	1994-01-23
+100	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	13	19	1994-01-23
+101	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	26	1	1994-01-23
+102	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	138	1	1994-01-23
+103	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	151	4	1994-01-23
+104	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	63	4	1994-01-23
+105	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	30	4	1994-01-23
+106	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	175	16	1994-01-23
+107	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	290	13	1994-01-23
+108	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1995-01-15	6	7	1994-01-23
+109	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	59	2	1995-01-15
+110	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	36	2	1995-01-15
+111	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	16	19	1995-01-15
+112	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	26	1	1995-01-15
+113	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	138	1	1995-01-15
+114	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	30	4	1995-01-15
+115	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	142	4	1995-01-15
+116	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	115	15	1995-01-15
+117	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	136	14	1995-01-15
+118	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	251	7	1995-01-15
+119	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	20	2	1996-02-11
+120	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	77	2	1996-02-11
+121	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	5	19	1996-02-11
+122	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	61	19	1996-02-11
+123	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-06-06	546	1	1996-02-11
+124	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-09-29	9	1	1996-02-11
+125	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	14	1	1996-05-30
+126	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-05-30	192	1	1996-02-11
+127	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	164	4	1996-02-11
+128	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1996-02-11	63	4	1995-01-15
+129	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	6	15	1996-02-11
+130	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	80	14	1996-02-11
+131	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1997-02-02	381	7	1996-02-11
+132	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	20	2	1997-02-02
+133	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	86	2	1997-02-02
+134	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	7	19	1997-02-02
+135	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	5	19	1997-02-02
+136	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	14	1	1997-02-02
+137	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	192	1	1997-02-02
+138	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	164	4	1997-02-02
+139	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	63	4	1997-02-02
+140	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	6	15	1997-02-02
+141	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	80	14	1997-02-02
+143	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	26	2	1998-02-08
+145	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	81	19	1998-02-08
+146	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	13	19	1998-02-08
+147	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	94	1	1998-02-08
+148	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	14	1	1998-02-08
+149	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	84	4	1998-02-08
+150	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	69	4	1998-02-08
+151	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	50	5	1998-02-08
+152	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	226	11	1998-02-08
+153	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	6	15	1998-02-08
+154	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	38	14	1998-02-08
+155	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	471	7	1998-02-08
+156	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	95	7	1998-02-08
+157	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	26	2	1999-02-21
+159	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	32	19	1999-02-21
+160	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	7	19	1999-02-21
+161	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	94	1	1999-02-21
+162	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	14	1	1999-02-21
+163	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	112	4	1999-02-21
+164	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	69	4	1999-02-21
+165	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	19	5	1999-02-21
+166	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	258	11	1999-02-21
+167	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	84	15	1999-02-21
+168	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	80	14	1999-02-21
+169	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	44	7	1999-02-21
+170	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	95	7	1999-02-21
+171	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	86	17	1999-02-21
+172	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	94	2	2000-02-20
+173	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	80	2	2000-02-20
+174	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	12	19	2000-02-20
+175	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	5	19	2000-02-20
+176	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	927	1	2000-02-20
+177	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	14	1	2000-02-20
+178	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	112	4	2000-02-20
+179	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	41	4	2000-02-20
+180	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	76	5	2000-02-20
+181	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	33	11	2000-02-20
+182	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	258	11	2000-02-20
+183	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	95	15	2000-02-20
+184	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	69	14	2000-02-20
+186	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	44	7	2000-02-20
+187	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	127	7	2000-02-20
+188	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	225	17	2000-02-20
+189	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	70	2	2001-02-18
+190	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-07-01	346	2	2001-02-18
+191	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	50	2	2001-07-01
+192	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	16	19	2001-02-18
+193	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	56	1	2001-02-18
+194	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	14	1	2001-02-18
+195	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	46	4	2001-02-18
+196	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	335	5	2001-02-18
+197	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	72	11	2001-02-18
+198	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	38	15	2001-02-18
+199	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	112	14	2001-02-18
+200	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	111	14	2001-02-18
+201	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	44	7	2001-02-18
+202	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	123	18	2001-02-18
+203	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	6303	21	2001-02-18
+204	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2002-02-03	67	22	2001-02-18
+205	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	16	2	2002-02-03
+206	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	43	2	2002-02-03
+207	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	163	19	2002-02-03
+208	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	56	1	2002-02-03
+209	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	14	1	2002-02-03
+210	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	93	4	2002-02-03
+211	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	100	5	2002-02-03
+212	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	33	11	2002-02-03
+213	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	46	15	2002-02-03
+214	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	112	14	2002-02-03
+215	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	25	14	2002-02-03
+216	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	44	7	2002-02-03
+217	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	111	7	2002-02-03
+218	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	15	18	2002-02-03
+219	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	6303	21	2002-02-03
+220	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2003-02-09	67	22	2002-02-03
+221	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	26	2	2003-02-09
+222	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	102	2	2003-02-09
+223	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	5	19	2003-02-09
+224	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	56	1	2003-02-09
+225	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	14	1	2003-02-09
+226	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	93	4	2003-02-09
+227	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	50	4	2003-02-09
+228	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	155	5	2003-02-09
+229	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	33	11	2003-02-09
+230	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	46	15	2003-02-09
+231	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	25	14	2003-02-09
+232	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	277	14	2003-02-09
+233	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	44	7	2003-02-09
+234	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	111	7	2003-02-09
+235	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	44	18	2003-02-09
+236	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	6303	21	2003-02-09
+237	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2004-02-08	67	22	2003-02-09
+238	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	45	2	2004-02-08
+239	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	43	2	2004-02-08
+240	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	120	19	2004-02-08
+241	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	56	1	2004-02-08
+242	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	14	1	2004-02-08
+243	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	38	4	2004-02-08
+244	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	50	4	2004-02-08
+245	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	32	5	2004-02-08
+246	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	124	5	2004-02-08
+247	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	6	11	2004-02-08
+248	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	189	11	2004-02-08
+249	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	33	15	2004-02-08
+250	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	67	15	2004-02-08
+251	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	144	14	2004-02-08
+252	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	134	14	2004-02-08
+253	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	30	7	2004-02-08
+254	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	111	7	2004-02-08
+255	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	44	18	2004-02-08
+256	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	6303	21	2004-02-08
+257	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2005-02-06	67	22	2004-02-08
+258	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	45	2	2005-02-06
+259	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	43	2	2005-02-06
+260	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	91	19	2005-02-06
+261	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	56	1	2005-02-06
+262	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	14	1	2005-02-06
+263	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	38	4	2005-02-06
+264	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	25	4	2005-02-06
+265	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	32	5	2005-02-06
+266	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	124	5	2005-02-06
+267	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	33	11	2005-02-06
+268	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	150	11	2005-02-06
+269	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	178	15	2005-02-06
+270	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	67	15	2005-02-06
+271	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	189	15	2005-02-06
+272	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	10	14	2005-02-06
+273	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	144	14	2005-02-06
+274	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	30	7	2005-02-06
+275	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	111	7	2005-02-06
+276	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	44	18	2005-02-06
+277	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	6303	21	2005-02-06
+278	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2006-02-12	67	22	2005-02-06
+279	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	45	2	2006-02-12
+280	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	43	2	2006-02-12
+281	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	91	19	2006-02-12
+282	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	56	1	2006-02-12
+283	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	14	1	2006-02-12
+284	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	38	4	2006-02-12
+285	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	336	4	2006-02-12
+286	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	32	5	2006-02-12
+287	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	178	5	2006-02-12
+288	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	168	11	2006-02-12
+289	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	314	11	2006-02-12
+290	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	6	15	2006-02-12
+291	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	189	15	2006-02-12
+292	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	10	14	2006-02-12
+293	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	144	7	2006-02-12
+294	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	124	7	2006-02-12
+295	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	44	18	2006-02-12
+296	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	6303	21	2006-02-12
+297	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2007-02-18	67	22	2006-02-12
+298	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	25	2	2007-02-18
+299	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	43	2	2007-02-18
+300	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	27	19	2007-02-18
+301	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	56	1	2007-02-18
+302	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	14	1	2007-02-18
+303	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	168	4	2007-02-18
+304	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	314	4	2007-02-18
+305	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	178	5	2007-02-18
+306	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	99	5	2007-02-18
+307	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	33	11	2007-02-18
+308	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	6	15	2007-02-18
+309	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	189	15	2007-02-18
+310	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	10	14	2007-02-18
+311	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	5	14	2007-02-18
+312	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	124	7	2007-02-18
+313	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	44	18	2007-02-18
+314	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	6303	21	2007-02-18
+315	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2008-02-10	67	22	2007-02-18
+316	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	66	2	2008-02-10
+317	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	27	2	2008-02-10
+318	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	5	19	2008-02-10
+319	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	56	1	2008-02-10
+320	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	14	1	2008-02-10
+321	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	9	4	2008-02-10
+322	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	168	4	2008-02-10
+323	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	178	5	2008-02-10
+324	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	301	5	2008-02-10
+325	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	544	11	2008-02-10
+326	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	505	11	2008-02-10
+327	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	6	15	2008-02-10
+328	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	189	15	2008-02-10
+329	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	10	14	2008-02-10
+330	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	25	7	2008-02-10
+331	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	44	18	2008-02-10
+332	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	6303	21	2008-02-10
+333	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2009-02-08	67	22	2008-02-10
+334	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	43	2	2009-02-08
+335	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	27	2	2009-02-08
+336	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	16	19	2009-02-08
+337	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	14	1	2009-02-08
+338	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	5443	1	2009-02-08
+339	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	9	4	2009-02-08
+341	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	660	5	2009-02-08
+342	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	301	5	2009-02-08
+343	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	6	11	2009-02-08
+344	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	120	11	2009-02-08
+345	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	38	15	2009-02-08
+346	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	161	15	2009-02-08
+347	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	10	14	2009-02-08
+348	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	124	14	2009-02-08
+349	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	5	3	2009-02-08
+350	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	30	3	2009-02-08
+351	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	44	18	2009-02-08
+352	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	6303	21	2009-02-08
+353	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	67	22	2009-02-08
+354	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	5704	2	2010-02-21
+355	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	43	2	2010-02-21
+356	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	67	19	2010-02-21
+357	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	14	1	2010-02-21
+358	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	5443	1	2010-02-21
+360	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	18	4	2010-02-21
+361	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	301	5	2010-02-21
+362	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	537	5	2010-02-21
+363	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	33	11	2010-02-21
+364	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	5425	11	2010-02-21
+365	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	189	15	2010-02-21
+366	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	81	14	2010-02-21
+367	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	10	14	2010-02-21
+368	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	178	3	2010-02-21
+369	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	5756	3	2010-02-21
+370	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	6303	21	2010-02-21
+371	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	67	22	2010-02-21
+372	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	5704	2	2011-01-30
+373	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	5756	2	2011-01-30
+374	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	148	19	2011-01-30
+375	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	14	1	2011-01-30
+376	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	5443	1	2011-01-30
+378	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	38	4	2011-01-30
+379	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	6105	5	2011-01-30
+380	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	6144	5	2011-01-30
+381	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	5425	11	2011-01-30
+382	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	1468	15	2011-01-30
+383	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	189	15	2011-01-30
+384	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	6143	14	2011-01-30
+385	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	18	14	2011-01-30
+386	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	6154	3	2011-01-30
+387	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	5912	3	2011-01-30
+388	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	6303	21	2011-01-30
+389	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	67	22	2011-01-30
+390	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	5756	2	2012-02-12
+391	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	5443	2	2012-02-12
+392	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	38	19	2012-02-12
+393	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	14	1	2012-02-12
+394	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	6372	1	2012-02-12
+395	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	6223	4	2012-02-12
+397	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	4543	5	2012-02-12
+398	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	5425	5	2012-02-12
+399	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	33	11	2012-02-12
+400	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	189	15	2012-02-12
+401	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	6125	14	2012-02-12
+402	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	18	14	2012-02-12
+403	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	700	3	2012-02-12
+404	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	5483	3	2012-02-12
+405	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	10	6	2012-02-12
+406	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	5425	21	2012-02-12
+407	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	67	22	2012-02-12
+408	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	16	2	2013-02-03
+409	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	5897	2	2013-02-03
+410	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	6394	19	2013-02-03
+411	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	14	1	2013-02-03
+412	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	6372	1	2013-02-03
+413	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	6223	4	2013-02-03
+415	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	6671	5	2013-02-03
+416	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	157	5	2013-02-03
+417	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	246	11	2013-02-03
+418	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	3435	11	2013-02-03
+419	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	189	15	2013-02-03
+420	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	5908	15	2013-02-03
+421	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	81	14	2013-02-03
+422	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	18	14	2013-02-03
+423	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	6535	3	2013-02-03
+424	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	5425	3	2013-02-03
+425	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	10	6	2013-02-03
+426	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	5425	21	2013-02-03
+427	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	67	22	2013-02-03
+428	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	5239	2	2014-01-26
+429	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	5897	2	2014-01-26
+430	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	700	19	2014-01-26
+431	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-11-09	4543	19	2014-01-26
+432	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	18	19	2014-11-09
+433	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	14	1	2014-01-26
+434	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	6372	1	2014-01-26
+436	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	6099	4	2014-01-26
+437	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	157	5	2014-01-26
+438	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	246	11	2014-01-26
+439	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	3435	11	2014-01-26
+440	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	189	15	2014-01-26
+441	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	5908	15	2014-01-26
+442	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	81	14	2014-01-26
+443	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	5358	14	2014-01-26
+444	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	6535	3	2014-01-26
+445	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	10	6	2014-01-26
+446	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	6394	20	2014-01-26
+447	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	27	2	2015-01-25
+448	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	6535	2	2015-01-25
+449	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	7062	19	2015-01-25
+450	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	18	19	2015-01-25
+451	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	14	1	2015-01-25
+452	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	7020	1	2015-01-25
+454	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	6099	4	2015-01-25
+455	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	32	5	2015-01-25
+456	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	5756	5	2015-01-25
+457	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	33	11	2015-01-25
+458	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	5425	11	2015-01-25
+459	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	38	15	2015-01-25
+460	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	189	15	2015-01-25
+461	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	81	14	2015-01-25
+462	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	5358	14	2015-01-25
+463	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	3435	3	2015-01-25
+464	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	10	6	2015-01-25
+465	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	5908	20	2015-01-25
+466	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	5239	2	2016-01-31
+467	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	6535	2	2016-01-31
+468	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	18	19	2016-01-31
+469	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	5756	19	2016-01-31
+470	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	14	1	2016-01-31
+471	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	246	4	2016-01-31
+473	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	7164	5	2016-01-31
+474	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	7167	5	2016-01-31
+475	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	7425	11	2016-01-31
+476	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	5425	11	2016-01-31
+477	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	6643	15	2016-01-31
+478	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	81	14	2016-01-31
+479	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	5358	14	2016-01-31
+480	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	7062	3	2016-01-31
+481	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	6099	3	2016-01-31
+482	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	10	6	2016-01-31
+483	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	5908	20	2016-01-31
+484	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	5239	2	2017-02-12
+485	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	7273	2	2017-02-12
+486	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	148	19	2017-02-12
+487	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	7164	19	2017-02-12
+488	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	14	1	2017-02-12
+489	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	25	4	2017-02-12
+490	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	246	4	2017-02-12
+491	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	3167	14	2017-02-12
+492	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	7303	14	2017-02-12
+493	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	6099	3	2017-02-12
+494	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	7559	3	2017-02-12
+495	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	3435	11	2017-02-12
+496	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	6479	11	2017-02-12
+497	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	6	15	2017-02-12
+498	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	6535	15	2017-02-12
+499	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	5425	5	2017-08-10
+500	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-08-10	6995	5	2017-02-12
+501	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	7313	5	2017-02-12
+502	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	10	6	2017-02-12
+142	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1998-02-08	25	7	1997-02-02
+144	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	1999-02-21	25	2	1998-02-08
+158	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2000-02-20	25	2	1999-02-21
+185	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2001-02-18	25	14	2000-02-20
+340	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2010-02-21	25	4	2009-02-08
+359	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2011-01-30	25	4	2010-02-21
+377	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2012-02-12	25	4	2011-01-30
+396	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2013-02-03	25	4	2012-02-12
+414	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2014-01-26	25	4	2013-02-03
+435	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2015-01-25	25	4	2014-01-26
+453	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2016-01-31	25	4	2015-01-25
+472	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	25	4	2016-01-31
+503	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-02-18	6394	20	2017-02-12
+504	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	7273	2	2018-02-18
+505	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	7303	2	2018-02-18
+507	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	16	19	2018-02-18
+508	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	14	1	2018-02-18
+509	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	3167	4	2018-02-18
+510	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	25	4	2018-02-18
+511	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	6143	14	2018-02-18
+512	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	6643	14	2018-02-18
+513	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	6099	3	2018-02-18
+514	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	7559	3	2018-02-18
+515	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	7313	11	2018-02-18
+516	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	33	11	2018-02-18
+517	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	44	15	2018-02-18
+518	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	5908	15	2018-02-18
+519	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	178	5	2018-02-18
+520	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	6535	5	2018-02-18
+521	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	10	6	2018-02-18
+522	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	6394	20	2018-02-18
+523	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2019-02-17	6229	19	2018-05-31
+506	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2018-05-31	7167	19	2018-02-18
+524	2018-01-09 00:31:12.080906-06	2018-01-09 00:31:12.080906-06	2017-02-12	6229	15	2016-01-31
+\.
+
+
+--
+-- Data for Name: bored_positions; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.bored_positions (id, created_at, updated_at, email_address, plural_name, singular_name, sort_position) FROM stdin;
+1	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	brewmeister@lbh3.org	Brewmeisters	Brewmeister	3
+2	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	grandmasters@lbh3.org	Grandmasters	Grandmaster	1
+3	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	haberdashery@lbh3.org	Haberdashery	Haberdashery	7
+4	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	hashcash@lbh3.org	Hash Cash	Hash Cash	4
+5	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	hashflash@lbh3.org	Hash Flash	Hash Flash	14
+6	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	hashhistorian@lbh3.org	Hash Historians	Hash Historian	18
+7	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	haberdashery@lbh3.org	Hash Pushers	Hash Pusher	8
+8	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06		Hash Trash	Hash Trash	15
+9	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	grandmasters@lbh3.org	Jointmasters	Jointmaster	0
+10	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	munchmeisters@lbh3.org	Masters of Munchies	Master of Munchies	9
+11	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	munchmeisters@lbh3.org	Munchmeisters	Munchmeister	10
+12	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06		Official LBH3 Harlots	Official LBH3 Harlot	13
+13	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	ondisk@lbh3.org	On Dick	On Dick	5
+14	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	ondisk@lbh3.org	On Disk	On Disk	6
+15	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	onsec@lbh3.org	On Sec	On Sec	11
+16	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	onsec@lbh3.org	On Sex	On Sex	12
+17	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06		Religious Advisors	Religious Advisor	16
+18	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06		Songmeisters	Songmeister	17
+19	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	trailmasters@lbh3.org	Trailmasters	Trailmaster	2
+20	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	webmaster@lbh3.org	Webmasters	Webmaster	19
+21	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	webmaster@lbh3.org	Webmasters (General)	Webmaster (General)	21
+22	2018-01-09 00:31:12.11586-06	2018-01-09 00:31:12.11586-06	webmaster@lbh3.org	Webmasters (Snooze)	Webmaster (Snooze)	22
+\.
+
+
+--
+-- Data for Name: bored_years; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.bored_years (id, created_at, updated_at, end_date, start_date, year) FROM stdin;
+1	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1986-01-19	1985-01-06	1985
+2	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1987-01-25	1986-01-19	1986
+3	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1988-01-24	1987-01-25	1987
+4	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1989-02-05	1988-01-24	1988
+5	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1990-02-25	1989-02-05	1989
+6	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1991-02-03	1990-02-25	1990
+7	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1992-02-02	1991-02-03	1991
+8	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1993-02-14	1992-02-02	1992
+9	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1994-01-23	1993-02-14	1993
+10	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1995-01-15	1994-01-23	1994
+11	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1996-02-11	1995-01-15	1995
+12	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1997-02-02	1996-02-11	1996
+13	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1998-02-08	1997-02-02	1997
+14	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	1999-02-21	1998-02-08	1998
+15	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2000-02-20	1999-02-21	1999
+16	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2001-02-18	2000-02-20	2000
+17	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2002-02-03	2001-02-18	2001
+18	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2003-02-09	2002-02-03	2002
+19	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2004-02-08	2003-02-09	2003
+20	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2005-02-06	2004-02-08	2004
+21	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2006-02-12	2005-02-06	2005
+22	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2007-02-18	2006-02-12	2006
+23	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2008-02-10	2007-02-18	2007
+24	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2009-02-08	2008-02-10	2008
+25	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2010-02-21	2009-02-08	2009
+26	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2011-01-30	2010-02-21	2010
+27	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2012-02-12	2011-01-30	2011
+28	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2013-02-03	2012-02-12	2012
+29	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2014-01-26	2013-02-03	2013
+30	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2015-01-25	2014-01-26	2014
+31	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2016-01-31	2015-01-25	2015
+32	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2017-02-12	2016-01-31	2016
+33	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2018-02-18	2017-02-12	2017
+34	2018-01-09 00:31:12.179941-06	2018-01-09 00:31:12.179941-06	2019-02-17	2018-02-18	2018
+\.
+
+
+--
+-- Data for Name: events; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.events (id, created_at, updated_at, bring_md, directions_md, external_id, from_the_hares_md, hares_md, hashit_reason_md, location_google_place_id, location_md, name_md, on_on_google_place_id, on_on_md, photos_url, scribes_md, start_datetime, snooze_title_md, snooze_url, trail_comments_md, trail_number, additional_writeup_md, added_writeup_md, hare_patches_md, miles, new_boots_md, new_names_md, patches_md, returners_md, snooze_date_primary, snooze_date_secondary, visitors_md, special_event_id) FROM stdin;
+\.
+
+
+--
+-- Data for Name: events_hashers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.events_hashers (id, created_at, updated_at, event_payment, external_id, family_name, food_preference, given_name, hasher_id, hash_name, payment_notes, payment_tier, payment_type, role, run_patch, trail_number) FROM stdin;
+\.
+
+
+--
+-- Data for Name: google_places; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.google_places (id, address_components, created_at, updated_at, formatted_address, formatted_phone_number, geometry_location, geometry_viewport, icon, international_phone_number, name, place_id, reference, scope, types, url, vicinity, website) FROM stdin;
+\.
+
+
+--
+-- Data for Name: hashers; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.hashers (id, created_at, updated_at, address_country, address_country_private, address_city, address_city_private, address_state, address_state_private, address_street, address_street_private, address_zip_code, address_zip_code_private, alerts, award_count, birth_day, birth_month, birth_year, cell_phone, cell_phone_private, created_by, created_by_user_id, died, email_addresses, email_addresses_private, emailing, end_of_year, event, external_id, family_name, family_name_private, fax, first_trail_date, first_trail_number, food_preference, given_name, given_name_private, hash_name, headshot_url, history, home_phone, home_phone_private, in_memoriam, last_trail_date, mail_hash_name, mail_name, mia, mother_hash, naming_trail_date, naming_trail_number, notes_md, owes, passed, payment, punch_card, run_count, run_patch, run_sort, shirt_size, shoe_size, updated_by, updated_by_user_id, waist_size, waiver, who_made_you_cum, work_phone, work_phone_private) FROM stdin;
+14	2018-01-03 14:00:00-06	2018-09-10 11:49:00.951-05												0	0	0	0				0		{}	{}		0						\N	\N				Last Train To Cuntsville						2018-09-07					\N	\N					0	0	0	0				0					
+38	2018-01-03 14:00:00-06	2018-09-30 15:43:16.251-05												0	0	0	0				0		{}	{}		0						\N	\N				6-9 Split						2018-09-28					\N	\N					0	0	0	0				0					
+25	2018-01-03 14:00:00-06	2018-09-30 15:45:32.312-05												0	0	0	0				0		{}	{}		0						\N	\N				Hi-Speed Copulator						2018-09-28					\N	\N					0	0	0	0				0					
+10	2018-01-03 14:00:00-06	2018-09-30 15:43:35.485-05												0	0	0	0				0		{}	{}		0						\N	\N				Alouette						2018-09-28					\N	\N					0	0	0	0				0					
+5425	2008-03-04 14:00:00-06	2018-09-23 18:55:36.988-05												0	0	0	0				0		{}	{}		0						\N	\N				Wrect Him						2018-09-21					\N	\N					0	0	0	0				0					
+6394	\N	2018-10-08 18:56:41.475-05	United States	\N	Long Beach	\N	CA	\N	\N	\N	90808	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	{chasen@chasenlehara.com}	\N	y	\N	\N	\N	Le Hara	Le Hara	\N	\N	\N	\N	Chasen	Chasen	I'm Fucking Matt Damon	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Chasen Le Hara	1	\N	y	\N	\N	\N
+\.
+
+
+--
+-- Data for Name: patches; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.patches (id, created_at, updated_at, hasher_id, number, trail_number, type) FROM stdin;
+\.
+
+
+--
+-- Data for Name: spatial_ref_sys; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM stdin;
+\.
+
+
+--
+-- Data for Name: special_events; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.special_events (id, created_at, updated_at, description_md, url_id, year) FROM stdin;
+1	2018-04-17 01:20:09.039-05	2018-04-17 01:20:09.039-05	## Jesus Cuervo 1800 Trail\n\nJoin us for three days of hashing for our 1800<sup>th</sup> run!\n\nWe’ll have our regular Thursday evening trail at 6:30 p.m. on April 13<sup>th</sup>, then a pre-lube on Friday the 14<sup>th</sup> before the main event on Saturday April 15<sup>th</sup>!\n\nSaturday will include:\n\n- Mimosa &amp; bagel or muffin breakfast\n- An AWESOME trail\n- Lunch\n- A custom patch made for the event!\n\nSaturday’s trail is dog and stroller friendly. Bring shiggy socks!\n\n<hr>\n\n<p class="text-center"><a href="https://goo.gl/forms/BZrhlNjZL4KIJQMG2">Register now for Saturday’s trail!</a></p>\n\n<hr>\n\n### Zombie Bunny Pub Crawl and Drinking Practice\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Friday 4/14 ~ 6:00 p.m. drinking practice (bring rare songs!), 6:30 hares off, 6:45 pack away</dd>\n  <dt class="col-sm-3 text-sm-right">Start:</dt>\n  <dd class="col-sm-9">5000 E Ocean Blvd, Long Beach, CA 90803</dd>\n  <dt class="col-sm-3 text-sm-right">Hares:</dt>\n  <dd class="col-sm-9">Bicunninglingual and Hairy Twatter</dd>\n  <dt class="col-sm-3 text-sm-right">Donation:</dt>\n  <dd class="col-sm-9">$10 for the run</dd>\n</dl>\n<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3317.2021796615873!2d-118.14188568479271!3d33.75544098068765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd30489bd87857%3A0x48469c4f1cd33641!2s5000+E+Ocean+Blvd%2C+Long+Beach%2C+CA+90803!5e0!3m2!1sen!2sus!4v1489636960459" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>\n\n<hr>\n\n### Jesus Cuervo 1800 Trail\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Saturday 4/15 ~ 10:00 a.m. breakfast, 10:15 hares off, pack away at 10:30</dd>\n  <dt class="col-sm-3 text-sm-right">Start:</dt>\n  <dd class="col-sm-9">532 Paseo Del Mar, Palos Verdes Estates, CA 90274</dd>\n  <dt class="col-sm-3 text-sm-right">Hares:</dt>\n  <dd class="col-sm-9">Spitty Spitty Gang Bang, Shitter Splitter, and Hokey Tokey</dd>\n  <dt class="col-sm-3 text-sm-right">Donation:</dt>\n  <dd class="col-sm-9"><a href="https://goo.gl/forms/BZrhlNjZL4KIJQMG2">$15 for the run (rego!)</a></dd>\n</dl>\n<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.4808874799787!2d-118.40555518479165!3d33.799901180675356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd4c9836adf071%3A0x7890dbb1bf713a47!2s532+Paseo+Del+Mar%2C+Palos+Verdes+Estates%2C+CA+90274!5e0!3m2!1sen!2sus!4v1491963000461" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>	jesus-cuervo	2017
+2	2018-04-17 01:20:42.397-05	2018-07-20 10:07:07.852-05	## Ortega Campout 2018\n\nJoin LBH3 as we cummemorate our 1869<sup>th</sup> run with a jam-packed campout!\n\nThere will be shiggalicious trails, Tent-to-tent, Talent Show, Chili-Cookoff Contest, Beer-Kilted Yoga, Hash Olympics, swimming, beer all weekend, and&nbsp;more!&nbsp;🍻\n\n<hr><a class="d-block text-center" href="https://docs.google.com/forms/d/e/1FAIpQLSf0Q6w5azD4Xg2SBZx7jVcg2FHnesr5o7D4zOnl1bOiIsuI3w/viewform" target="_blank">Fill out your rego form online right now!</a><hr>\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Dates:</dt>\n  <dd class="col-sm-9">Friday July 20<sup>th</sup> – Sunday July 22<sup>nd</sup></dd>\n  <dt class="col-sm-3 text-sm-right">Price:</dt>\n  <dd class="col-sm-9">$79.69 through June 14<sup>th</sup>\n$89.69 through July 13<sup>th</sup>\n<strong>$99.69 through the day of the event</strong></dd>\n  <dt class="col-sm-3 text-sm-right">Where:</dt>\n  <dd class="col-sm-9">[Ortega Oaks RV Park & Campground](http://www.ortegaoaks.com)\n34040 Ortega Hwy, Lake Elsinore, CA 92530</dd>\n</dl>\n<iframe width="100%" height="200" frameborder="0" style="border:0" allowfullscreen="" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEED9iCwz71U-gtb7Ulk3pb7SfAS-gtTQ&amp;q=place_id:ChIJh3mG4wuR3IARRQMYx548lQM&amp;zoom=9"></iframe>\n\n<hr>\n\n### Directions from the I-5\n\n- Exit CA-74/Ortega Highway.\n- Head east on Ortega Hwy for 19 miles.\n- Campground entrance will be on the right-hand side (turn near the candy store’s parking lot).\n\n### Schedule\n\n**Times are subject to change because we may be drunk and/or hungover.**\n\n#### Friday\n\n<table class="table"><tbody><tr><th scope="row">Anytime</th><td>Cum! Organizers will arrive ~2pm</td></tr><tr><th scope="row">3 pm</th><td>Kegs tapped</td></tr><tr><th scope="row">5 pm – 7 pm</th><td>Check in</td></tr><tr><th scope="row">7 pm</th><td>Potluck & chili cook-off</td></tr><tr><th scope="row">9 pm</th><td>Tent-to-tent</td></tr></tbody></table><hr>\n\nChili Cook-Off Contest, Potluck, and Tent-to-Tent crawl! Sign up to prepare your famous chili, otherwise bring your favorite camping side dish or dessert to share with others. This does not mean drop food off for someone else to cook/prepare!\n\nAfter dinner there will be a tent-to-tent drink crawl. NO, you do not have to host the entire hash inside your tent. You can set up outside your tent or anywhere you choose in our very large, very private campground. If you are interested in hosting the hash at your tent, prepare a libation for others to enjoy. The best tent gets a prize!\n\n#### Saturday morning\n\n<table class="table"><tbody><tr><th scope="row">8 am or sooner</th><td>Breakfast</td></tr><tr><th scope="row">9 am</th><td>Beer-kilted yoga</td></tr><tr><th scope="row">11 am</th><td>1869<sup>th</sup> run (hares away at 10:45)</td></tr></tbody></table><hr>\n\nBreakfast followed by Beer-Kilted Yoga! Bring your mat, kilt, and vessel to breathe in your beer and breathe out your responsibilities.\n\n#### Saturday afternoon\n\n<table class="table"><tbody><tr><th scope="row">After trail</th><td>Lunch</td></tr><tr><th scope="row">After lunch</th><td>Circle</td></tr><tr><th scope="row">4 pm</th><td>Hash olympics</td></tr></tbody></table><hr>\n\nHares off at 11 am for a shiggalicious trail. Down downs and lunch after trail. Take a nap or hang by the pool and get ready for Hasholympics. \n\n#### Saturday night\n\n<table class="table"><tbody><tr><th scope="row">6:30 pm</th><td>Dinner</td></tr><tr><th scope="row">8 pm</th><td>Talent show</td></tr><tr><th scope="row">9 pm</th><td>Movie</td></tr><tr><th scope="row">Midnight or sooner</th><td>Midnight naked run</td></tr></tbody></table><hr>\n\nCatered BBQ dinner and then enjoy the sights and sounds of our talented hashers in our very own Hasher Talent Show.\n\n#### Sunday morning\n\n<table class="table"><tbody><tr><th scope="row">8 am or sooner</th><td>Breakfast</td></tr><tr><th scope="row">11 am</th><td>Hangover trail (hares away at 10:45)</td></tr><tr><td></td><td>No set checkout time from the campground</td></tr></tbody></table><hr>\n\nBreakfast and Hangover Hash.\n\n<hr><a class="d-block text-center" href="https://docs.google.com/forms/d/e/1FAIpQLSf0Q6w5azD4Xg2SBZx7jVcg2FHnesr5o7D4zOnl1bOiIsuI3w/viewform" target="_blank">Fill out your rego form online right now!</a><hr>\n\n### FAQ\n\n#### What do I get for the rego cost?\n\nThe weekend price includes camping fees, BEER flowing all weekend at the campground and the end of each run,  Saturday and Sunday morning Cuntinental Breakfast, lunch after trail on Saturday, and catered dinner on Saturday night.  The campground has BBQs, water, toilets, & showers. Dogs and kids are allowed, but must be leashed at all times.\n\n#### What should I bring?\n\nYour own tent (unless you enjoy sleeping under the stars or you’re smooth enough to talk someone into sharing their tent with you), any food or alcohol you personally require that is not listed above and thereby will not be provided by the event. **Bring an item for potluck. You will need water for the Saturday trail… it will be HOT!**\n\n**Full packing list:** camping gear, tent, sleeping bag, WATER, vessel, sunblock, bug spray, toiletries, towel, swimsuit, soap, water bottle/hydration pack for Saturday’s trail, hat, sunglasses, kilt/sarong/wrap for kilted beer yoga, flashlight/headlamps, jacket, pants for night-time, WATER, 2 pairs of running clothes, and serving utensils for your potluck item.\n\n**Suggested items:** toilet paper (there are 2 toilets with running water and 2 porta potties), munchies (there are 3 meals on Saturday and breakfast Sunday provided), condoms, baby wipes, tent lights, battery-operated fans, booze, soda, onesie, food/coals to grill (there are a few small grills), firewood, s’mores, Tecnu, rubbing alcohol, and a first-aid kit.\n\n#### Is there a pool?\n\nYes.\n\n#### What’s the parking situation?\n\nVery limited—try to carpool.\n\nYou **cannot** bring an RV.\n\n#### What’s cellphone service like?\n\nDepending on your carrier, there is little to no reception once you drive up the mountain. \n\n#### Can I show up and pay for just one of the trails or activities?\n\nNo.\n\n#### Is this a kid-friendly event?\n\nBring at your own risk… this is an uncensored hash event. Price for kids is $50.\n\n#### What do the chili cook-off participants need to know?\n\nLet Lick Me Tender know if you are entering the cook-off with another person (so we know how many entries we will have). You are responsible for heating your chili. There is not a power source. We have a small supply of dixie cups and spoons. We suggest bringing your own small cups to pass out your chili.\n\n#### What do the tent-to-tent participants need to know?\n\nPlease let Lick Me Tender know if you are joining up with someone else for your shot check (so we know how many tents we will have). The GMs will be haring this trail. Have your shot/drink poured and ready to quickly distribute. Bring a table or a surface to place your shots on. Keep in mind, some people are impressed by the presentation and others are impressed by the taste of the drink.	ortega	2018
+3	2018-09-04 01:41:49.482-05	2018-09-04 01:45:02.233-05	## Hash Memorial Service\n\nIt has become a Long Beach Hash House Harriers tradition to plant a tree as a living memorial for Long Beach connected hashers who have died. We will conduct such a service at the site of the 18 trees that have been planted.\n\nFollowing the service, we will continue on to the El Dorado Park Golf Course Bar and Restaurant where hashers can buy their own drinks and a toast will be given for those that have gone on.\n\nWe look forward to seeing you there. Please note that we will start right at **6 p.m.**\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Friday 10/12 at 6:00 p.m.</dd>\n  <dt class="col-sm-3 text-sm-right">Location:</dt>\n  <dd class="col-sm-9">**El Dorado Duck Pond** near 2400 N Studebaker Rd, Long Beach, CA 90815</dd>\n</dl><iframe title="Map of the El Dorado Duck Pond’s location" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6630.949547786434!2d-118.09498299999998!3d33.800059000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf8ecc25c9b4e8ac3!2sEl+Dorado+Park+East+Duck+Pond!5e0!3m2!1sen!2sus!4v1506905976355" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Directions:</dt>\n  <dd class="col-sm-9">The cross street for the Duck Pond is Los Arcos. Go North on Studebaker Rd. from the San Diego Fwy (405). Turn into the golf course parking lot and go north to free parking.</dd>\n    <dt class="col-sm-3 text-sm-right">Reception (on on):</dt>\n    <dd class="col-sm-9">El Dorado Park Golf Course Bar and Restaurant</dd>\n</dl>	memorial-service	2018
+\.
+
+
+--
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.users (id, created_at, updated_at, facebook_id, facebook_profile, google_id, google_profile, hasher_id, requested_name) FROM stdin;
+1	2017-07-23 14:05:31.025-05	2018-10-08 18:55:25.093-05		\N	111979573134746438460	{"id":"111979573134746438460","displayName":"Chasen Le Hara","name":{"familyName":"Le Hara","givenName":"Chasen"},"emails":[{"value":"chasen@chasenlehara.com","type":"account"}],"photos":[{"value":"https://lh3.googleusercontent.com/-NxZ5HzQCe4Q/AAAAAAAAAAI/AAAAAAAAAFM/KhnqDoSdHGE/photo.jpg?sz=50"}],"gender":"male","provider":"google"}	6394	
+\.
+
+
+--
+-- Name: bored_hashers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.bored_hashers_id_seq', 524, true);
+
+
+--
+-- Name: bored_positions_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.bored_positions_id_seq', 22, true);
+
+
+--
+-- Name: bored_years_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.bored_years_id_seq', 34, true);
+
+
+--
+-- Name: events_hashers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.events_hashers_id_seq', 139995, true);
+
+
+--
+-- Name: events_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.events_id_seq', 1981, true);
+
+
+--
+-- Name: hashers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.hashers_id_seq', 8014, true);
+
+
+--
+-- Name: patches_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.patches_id_seq', 2433, true);
+
+
+--
+-- Name: special_events_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.special_events_id_seq', 3, true);
+
+
+--
+-- Name: users_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.users_id_seq', 145, true);
+
+
+--
+-- Name: _migrations _migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public._migrations
+    ADD CONSTRAINT _migrations_pkey PRIMARY KEY (name);
+
+
+--
+-- Name: bored_hashers bored_hashers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bored_hashers
+    ADD CONSTRAINT bored_hashers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: bored_positions bored_positions_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bored_positions
+    ADD CONSTRAINT bored_positions_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: bored_years bored_years_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.bored_years
+    ADD CONSTRAINT bored_years_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: events_hashers events_hashers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.events_hashers
+    ADD CONSTRAINT events_hashers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: events events_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.events
+    ADD CONSTRAINT events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: google_places google_places_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.google_places
+    ADD CONSTRAINT google_places_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: hashers hashers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.hashers
+    ADD CONSTRAINT hashers_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: patches patches_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.patches
+    ADD CONSTRAINT patches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: special_events special_events_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.special_events
+    ADD CONSTRAINT special_events_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- PostgreSQL database dump complete
+--
+
