@@ -40,7 +40,17 @@ export const ViewModel = DefineMap.extend({
   year: {
     type: 'number',
     get: function(year) {
-      return year || currentYear;
+      if (year) {
+        return year;
+      }
+      const years = this.years;
+      if (years) {
+        const filtered = years.filter({id: currentYear});
+        if (filtered.length === 0) {
+          return currentYear - 1;
+        }
+      }
+      return currentYear;
     }
   },
   years: {
