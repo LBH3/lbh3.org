@@ -337,6 +337,7 @@ You can submit this form until February 3<sup>rd</sup>. Cum to [Found ’er Ball
             id: 'trailmaster',
             maxSelection: 2,
             options: [
+              {id: 7186, name: 'Curbfeeler'},
               {id: 6099, name: 'Pinhole Artist'}
             ],
             title: 'Trailmaster'
@@ -371,7 +372,8 @@ You can submit this form until February 3<sup>rd</sup>. Cum to [Found ’er Ball
             id: 'brewmeister',
             maxSelection: 2,
             options: [
-              {id: 7313, name: 'Bi-Cunnilingual'}
+              {id: 7313, name: 'Bi-Cunnilingual'},
+              {id: 14, name: 'Last Train To Cuntsville'}
             ],
             title: 'Brewmeister'
           },
@@ -391,8 +393,7 @@ You can submit this form until February 3<sup>rd</sup>. Cum to [Found ’er Ball
               {id: 312, name: 'Beefeater'},
               {id: 977, name: 'Buttdart'},
               {id: 7931, name: 'Don’t A Salt Me'},
-              {id: 5756, name: 'Princess of Incest'},
-              {id: 5425, name: 'Wrect Him'}
+              {id: 5756, name: 'Princess of Incest'}
             ],
             title: 'Hash Flash'
           },
