@@ -42,6 +42,65 @@
         No ballots found.
       </div>
     {{else}}
+
+      {{#if(decrypter)}}
+        <hr>
+        <div class="row">
+          <div class="col-md">
+            <h3>{{election.schema.positions.title}}</h3>
+            {{#each(election.schema.positions.races)}}
+              <h4>{{title}}</h4>
+              <ul>
+                {{#each(../talliedVotes[id])}}
+                  <li>
+                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                  </li>
+                {{/each}}
+              </ul>
+            {{/each}}
+          </div>
+          <div class="col-md">
+            <h3>{{election.schema.awards.title}}</h3>
+            {{#each(election.schema.awards.races)}}
+              <h4>{{title}}</h4>
+              <ul>
+                {{#each(../talliedVotes[id])}}
+                  <li>
+                    {{#switch(../type)}}
+                      {{#case('hasher')}}
+                        {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                      {{/case}}
+                      {{#case('hashit')}}
+                        {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                      {{/case}}
+                      {{#case('on-on')}}
+                        <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
+                          {{scope.key}}: {{this}}
+                        </span>
+                      {{/case}}
+                      {{#case('run')}}
+                        <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
+                          {{scope.key}}: {{this}}
+                        </span>
+                      {{/case}}
+                      {{#case('scribe')}}
+                        {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
+                      {{/case}}
+                      {{#case('textarea')}}
+                        {{scope.key}}
+                      {{/case}}
+                    {{/switch}}
+                  </li>
+                {{/each}}
+              </ul>
+            {{/each}}
+          </div>
+        </div>
+      {{/if}}
+
+      <hr>
+
+      <h3>Individual ballots</h3>
       <div class="table-responsive">
         <table class="table table-bordered table-sm">
           <thead>
@@ -80,56 +139,6 @@
           </tbody>
         </table>
       </div>
-
-      {{#if(decrypter)}}
-
-        <h3>{{election.schema.positions.title}}</h3>
-        {{#each(election.schema.positions.races)}}
-          <h4>{{title}}</h4>
-          <ul>
-            {{#each(../talliedVotes[id])}}
-              <li>
-                {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
-              </li>
-            {{/each}}
-          </ul>
-        {{/each}}
-
-        <h3>{{election.schema.awards.title}}</h3>
-        {{#each(election.schema.awards.races)}}
-          <h4>{{title}}</h4>
-          <ul>
-            {{#each(../talliedVotes[id])}}
-              <li>
-                {{#switch(../type)}}
-                  {{#case('hasher')}}
-                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
-                  {{/case}}
-                  {{#case('hashit')}}
-                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
-                  {{/case}}
-                  {{#case('on-on')}}
-                    <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
-                      {{scope.key}}: {{this}}
-                    </span>
-                  {{/case}}
-                  {{#case('run')}}
-                    <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
-                      {{scope.key}}: {{this}}
-                    </span>
-                  {{/case}}
-                  {{#case('scribe')}}
-                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
-                  {{/case}}
-                  {{#case('textarea')}}
-                    {{scope.key}}
-                  {{/case}}
-                {{/switch}}
-              </li>
-            {{/each}}
-          </ul>
-        {{/each}}
-      {{/if}}
     {{/eq}}
   {{/if}}
 
