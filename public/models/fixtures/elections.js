@@ -337,8 +337,7 @@ You can submit this form until February 3<sup>rd</sup>. Cum to [Found ’er Ball
             id: 'trailmaster',
             maxSelection: 2,
             options: [
-              {id: 7186, name: 'Curbfeeler'},
-              {id: 6099, name: 'Pinhole Artist'}
+              {id: 7186, name: 'Curbfeeler'}
             ],
             title: 'Trailmaster'
           },
