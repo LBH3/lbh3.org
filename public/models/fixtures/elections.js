@@ -289,8 +289,8 @@ You can submit this form until February 3<sup>rd</sup>. Cum to [Found ’er Ball
             id: 'best-rookie-harrier',
             options: [
               {id: 7036, name: '3 Strikes & Urine', runs: '32 + 2 Hares'},
-              {id: 7873, name: '6 Down 9 Across', runs: '16 + 1 Hare'},
-              {id: 7957, name: 'Funyun', runs: '18'},
+              {id: 7873, name: '6 Down 9 Across', runs: '17 + 1 Hare'},
+              {id: 7957, name: 'Funyun', runs: '19 + 1 Hare'},
               {id: 7741, name: 'Wrong Hole, Bundy', runs: '26'}
             ],
             title: 'Best Rookie Harrier of 2018',
@@ -302,11 +302,11 @@ You can submit this form until February 3<sup>rd</sup>. Cum to [Found ’er Ball
             options: [
               {id: 7963, name: 'Badunka Drunk', runs: '10'},
               {id: 7251, name: 'Bukkake Barbie', runs: '11'},
-              {id: 7931, name: 'Don’t A Salt Me', runs: '22'},
+              {id: 7931, name: 'Don’t A Salt Me', runs: '23'},
               {id: 7993, name: 'Guten Taco', runs: '11'},
               {id: 6852, name: 'Krakk Lipp', runs: '11'},
               {id: 7706, name: 'Likes It RUFF!', runs: '7'},
-              {id: 7932, name: 'Stockholm Syndrome', runs: '13'}
+              {id: 7932, name: 'Stockholm Syndrome', runs: '14'}
             ],
             title: 'Best Rookie Harriette of 2018',
             type: 'hasher'
