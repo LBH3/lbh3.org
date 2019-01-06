@@ -43,7 +43,7 @@ export default Component.extend({
       const session = this.session || {};
       const user = session.user || {};
       const allowedHashers = [14, 7303, 7273, 6099, 7559, 3167, 25, 178, 6535, 10, 7313, 33, 6143, 6643, 44, 5908, 16, 6229, 6394, 189];
-      return allowedHashers.indexOf(user.hasherId) > -1;
+      return true || allowedHashers.indexOf(user.hasherId) > -1;
     },
     get title() {
       return 'LBH3';
