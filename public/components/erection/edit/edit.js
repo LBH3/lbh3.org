@@ -50,6 +50,14 @@ export const ViewModel = DefineMap.extend({
     }
     return 'Edit an Erection';
   },
+  schema: {
+    get() {
+      return JSON.stringify(this.erection.schema.get());
+    },
+    set(stringValue) {
+      this.erection.schema = eval(`(${stringValue})`);
+    }
+  },
   get session() {
     return Session.current;
   },
