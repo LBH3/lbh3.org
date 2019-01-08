@@ -361,11 +361,11 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     }
   },
 
-  didSelectHasher(autocompleteElement, hasherList, options, maxSelection) {
+  didSelectHasher(autocompleteElement, hasherList, options, maxSelection, originalOptions) {
     const selectedHasher = autocompleteElement.viewModel.selected;
 
     // Select the hasher
-    this.toggleHasherInList(selectedHasher, hasherList, maxSelection);
+    this.toggleHasherInList(selectedHasher, hasherList, maxSelection, originalOptions);
 
     // Add the hasher to the list of candidates
     const matchingOptions = options.filter(option => {
@@ -421,7 +421,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     this.ballot[awardId] = selectedHasher.id;
   },
 
-  toggleHasherInList(hasher, hasherList, maxSelection, checkbox) {
+  toggleHasherInList(hasher, hasherList, maxSelection, originalOptions, checkbox) {
     if (this.hasherListContains(hasherList, hasher.id)) {
       // Remove it
       hasherList.filter(option => {
@@ -430,11 +430,31 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
         hasherList.splice(hasherList.indexOf(hasher), 1);
       });
     } else if (hasherList.length < maxSelection) {
-      // Add it
-      hasherList.push({
-        id: hasher.id,
-        name: hasher.name || hasher.hashOrJustName
+      const originalHasherIds = originalOptions.map(option => {
+        return option.id;
       });
+      if (originalHasherIds.indexOf(hasher.id) === -1) {
+        // The user is selecting an unoriginal hasher
+        const selectedUnoriginalHashers = hasherList.filter(option => {
+          return originalHasherIds.indexOf(option.id) === -1;
+        });
+        const numberOfUnoriginalHashersThatCanBeSelected = maxSelection - originalHasherIds.length;
+        if (selectedUnoriginalHashers.length < numberOfUnoriginalHashersThatCanBeSelected) {
+          // Add it
+          hasherList.push({
+            id: hasher.id,
+            name: hasher.name || hasher.hashOrJustName
+          });
+        } else {
+          alert('You’ve selected the maximum number of write-ins for this position. Deselect one of your other choices before selecting another.');
+        }
+      } else {
+        // Add it
+        hasherList.push({
+          id: hasher.id,
+          name: hasher.name || hasher.hashOrJustName
+        });
+      }
     } else {
       alert('You’ve selected the maximum number of choices for this position. Deselect one of your other choices before selecting another.');
     }

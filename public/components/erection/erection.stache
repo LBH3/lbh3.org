@@ -328,7 +328,7 @@
                                     <input
                                       checked:from="../../hasherListContains(scope.vm.ballot[../id], ./id)"
                                       class="form-check-input"
-                                      on:click="../../toggleHasherInList(this, scope.vm.ballot[../id], ../maxSelection, scope.element)"
+                                      on:click="../../toggleHasherInList(this, scope.vm.ballot[../id], ../maxSelection, ../options, scope.element)"
                                       type="checkbox"
                                     />
                                     {{name}}
@@ -340,7 +340,7 @@
                                   <label class="form-check-label">
                                     Write-in search
                                     <lbh3-hasher-autocomplete
-                                      on:selected="../didSelectHasher(scope.element, ../ballot[./id], hasherOptions, maxSelection)"
+                                      on:selected="../didSelectHasher(scope.element, ../ballot[./id], hasherOptions, maxSelection, options)"
                                     >
                                       <input
                                         autocapitalize="off"
