@@ -9,7 +9,7 @@ const beforeHook = function(hook) {
   }
 
   // Special exception
-  if (hook.params.user.hasherId === 70) {
+  if (hook.params.user.hasherId === 70 || hook.params.user.hasherId === 3435) {
     return hook;
   }
 
