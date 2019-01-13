@@ -65,6 +65,9 @@ module.exports = function () {
             // Transform the mapping to an array of hashers with runs
             const endResult = [];
             hashersToRuns.forEach((runs, hasherId) => {
+              runs.sort((a, b) => {
+                return a.trailNumber - b.trailNumber;
+              });
               const lastRun = runs[runs.length - 1];
               endResult.push({
                 eligible: runs.length >= 6,
