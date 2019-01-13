@@ -24,9 +24,9 @@
             <a
               class="{{#eq(secondaryPage, 'ballots')}}active{{/eq}} nav-link"
               href="{{routeUrl page='erections' secondaryPage='ballots' urlId=urlId}}"
-              title="Go to the erection ballots page"
+              title="Go to the paper ballots page"
             >
-              Ballots
+              Paper Ballots
             </a>
           </li>
           <li class="nav-item">
