@@ -1,6 +1,4 @@
 import Component from 'can-component';
-import CryptoJSAES from 'crypto-js/aes';
-import CryptoJSCore from 'crypto-js/core';
 import DefineMap from 'can-define/map/';
 import JSEncrypt from 'jsencrypt';
 import moment from 'moment';
@@ -23,6 +21,9 @@ export const ViewModel = DefineMap.extend({
         const election = elections[0];
         return Ballot.connection.getList({
           $limit: 500,
+          $sort: {
+            createdAt: -1
+          },
           electionId: election.id
         });
       });
@@ -32,17 +33,21 @@ export const ViewModel = DefineMap.extend({
   decryptedBallots: {
     get(lastSetValue, resolve) {
       const decrypter = this.decrypter;
-      if (decrypter) {
+      const election = this.election;
+      if (decrypter && election) {
         this.ballotsPromise.then(ballots => {
-          const decryptedBallots = ballots.map(ballot => {
-            const decryptedBallot = JSON.parse(this.decryptBallot(ballot.encryptedBallot, ballot.encryptedKey));
-            // TODO: the ballots should be validated
-            return {
-              ...ballot,
-              ...decryptedBallot
-            };
+          const hasherIdHmacs = new Set();
+          ballots.forEach(ballot => {
+            if (hasherIdHmacs.has(ballot.hasherIdHmac)) {
+              ballot.duplicateBallot = true;
+            } else {
+              if (ballot.hasherTookPaperBallot === false) {
+                ballot.decrypt(this.decrypter, this.election);
+              }
+              hasherIdHmacs.add(ballot.hasherIdHmac);
+            }
           });
-          resolve(decryptedBallots);
+          resolve(ballots);
         });
       }
     }
@@ -76,9 +81,9 @@ export const ViewModel = DefineMap.extend({
   },
 
   get hasherIds() {
-    const decryptedBallots = this.decryptedBallots;
+    const originalBallots = this.originalBallots;
     const election = this.election;
-    if (decryptedBallots && election) {
+    if (originalBallots && election) {
       const hasherIds = new Set();
       const races = [];
 
@@ -92,10 +97,10 @@ export const ViewModel = DefineMap.extend({
         races.push(position.id);
       });
 
-      // Run through the decrypted ballots and tally the votes
-      decryptedBallots.forEach(ballot => {
+      // Run through the decrypted ballots and collect the hasher IDs
+      originalBallots.forEach(ballot => {
         races.forEach(raceId => {
-          const vote = ballot[raceId];
+          const vote = ballot.decryptedBallot[raceId];
           if (vote.forEach) {
             vote.forEach(id => {
               hasherIds.add(id);
@@ -148,6 +153,15 @@ export const ViewModel = DefineMap.extend({
     return 'Results'
   },
 
+  get originalBallots() {
+    const decryptedBallots = this.decryptedBallots;
+    if (decryptedBallots) {
+      return decryptedBallots.filter(ballot => {
+        return !ballot.duplicateBallot && ballot.hasherTookPaperBallot === false;
+      });
+    }
+  },
+
   privateKey: 'string',
 
   runs: {
@@ -187,9 +201,9 @@ export const ViewModel = DefineMap.extend({
   },
 
   get runTrailNumbers() {
-    const decryptedBallots = this.decryptedBallots;
+    const originalBallots = this.originalBallots;
     const election = this.election;
-    if (decryptedBallots && election) {
+    if (originalBallots && election) {
       const races = [];
       const runTrailNumbers = new Set();
 
@@ -200,10 +214,10 @@ export const ViewModel = DefineMap.extend({
         }
       });
 
-      // Run through the decrypted ballots and tally the votes
-      decryptedBallots.forEach(ballot => {
+      // Run through the decrypted ballots and collect the trail numbers
+      originalBallots.forEach(ballot => {
         races.forEach(raceId => {
-          const vote = ballot[raceId];
+          const vote = ballot.decryptedBallot[raceId];
           if (vote.forEach) {
             vote.forEach(id => {
               runTrailNumbers.add(id);
@@ -223,9 +237,9 @@ export const ViewModel = DefineMap.extend({
   },
 
   get talliedVotes() {
-    const decryptedBallots = this.decryptedBallots;
+    const originalBallots = this.originalBallots;
     const election = this.election;
-    if (decryptedBallots && election) {
+    if (originalBallots && election) {
       const talliedVotes = [];
 
       // Set up the talliedVotes structure
@@ -243,16 +257,20 @@ export const ViewModel = DefineMap.extend({
         }
         votes[id] += 1;
       };
-      decryptedBallots.forEach(ballot => {
+      originalBallots.forEach(ballot => {
+        const errors = ballot.decryptedBallot.errors;
         for (let raceId in talliedVotes) {
-          const votes = talliedVotes[raceId];
-          const vote = ballot[raceId];
-          if (vote.forEach) {
-            vote.forEach(id => {
-              countVote(votes, id);
-            });
-          } else if (vote) {
-            countVote(votes, vote);
+          const raceErrors = errors && errors[raceId];
+          if (!raceErrors || raceErrors.length === 0) {
+            const votes = talliedVotes[raceId];
+            const vote = ballot.decryptedBallot[raceId];
+            if (vote.forEach) {
+              vote.forEach(id => {
+                countVote(votes, id);
+              });
+            } else if (vote) {
+              countVote(votes, vote);
+            }
           }
         }
       });
@@ -268,20 +286,6 @@ export const ViewModel = DefineMap.extend({
 
   urlId: 'string',
 
-  decryptBallot(encryptedBallot, encryptedKey) {
-    const decrypter = this.decrypter;
-    if (decrypter) {
-
-      // Decrypt the secret key
-      const decryptedSecretKey = decrypter.decrypt(encryptedKey);
-
-      // Decrypt the message
-      const decryptedBallot  = CryptoJSAES.decrypt(encryptedBallot, decryptedSecretKey).toString(CryptoJSCore.enc.Utf8);
-
-      return decryptedBallot || 'Invalid private key';
-    }
-  },
-
   nameForHasherWithID(hasherId) {
     const hashersByID = this.hashersByID || {};
     return hashersByID[hasherId] || hasherId;
@@ -290,6 +294,19 @@ export const ViewModel = DefineMap.extend({
   nameForRunWithTrailNumber(trailNumber) {
     const runsByTrailNumber = this.runsByTrailNumber || {};
     return runsByTrailNumber[trailNumber] || trailNumber;
+  },
+
+  sortVotes(votes) {
+    const arrayOfVotes = [];
+    for (let key in votes) {
+      arrayOfVotes.push({
+        key,
+        value: votes[key]
+      });
+    }
+    return arrayOfVotes.sort((a, b) => {
+      return b.value - a.value;
+    });
   }
 });
 

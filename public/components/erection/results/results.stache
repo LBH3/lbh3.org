@@ -45,54 +45,116 @@
 
       {{#if(decrypter)}}
         <hr>
+        <h3>Results</h3>
+        <p>
+          Below are the summed results of the erection.
+          The nominees are <em>roughly</em> ordered by the number of votes they received.
+        </p>
         <div class="row">
           <div class="col-md">
-            <h3>{{election.schema.positions.title}}</h3>
+            <h4>{{election.schema.positions.title}}</h4>
             {{#each(election.schema.positions.races)}}
-              <h4>{{title}}</h4>
-              <ul>
-                {{#each(../talliedVotes[id])}}
-                  <li>
-                    {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
-                  </li>
-                {{/each}}
-              </ul>
+              <h5>{{title}}</h5>
+              <div class="table-responsive">
+                <table class="table table-sm table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Nominee</th>
+                      <th scope="col">Votes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {{#each(../sortVotes(../talliedVotes[id]))}}
+                      <tr>
+                        <td>
+                          {{scope.vm.nameForHasherWithID(key)}}
+                        </td>
+                        <td>
+                          {{value}}
+                        </td>
+                      </tr>
+                    {{/each}}
+                  </tbody>
+                </table>
+              </div>
             {{/each}}
           </div>
           <div class="col-md">
-            <h3>{{election.schema.awards.title}}</h3>
+            <h4>{{election.schema.awards.title}}</h4>
             {{#each(election.schema.awards.races)}}
-              <h4>{{title}}</h4>
-              <ul>
-                {{#each(../talliedVotes[id])}}
-                  <li>
-                    {{#switch(../type)}}
-                      {{#case('hasher')}}
-                        {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
-                      {{/case}}
-                      {{#case('hashit')}}
-                        {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
-                      {{/case}}
-                      {{#case('on-on')}}
-                        <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
-                          {{scope.key}}: {{this}}
-                        </span>
-                      {{/case}}
-                      {{#case('run')}}
-                        <span title="{{scope.vm.nameForRunWithTrailNumber(scope.key)}}">
-                          {{scope.key}}: {{this}}
-                        </span>
-                      {{/case}}
-                      {{#case('scribe')}}
-                        {{scope.vm.nameForHasherWithID(scope.key)}}: {{this}}
-                      {{/case}}
-                      {{#case('textarea')}}
-                        {{scope.key}}
-                      {{/case}}
-                    {{/switch}}
-                  </li>
-                {{/each}}
-              </ul>
+              <h5>{{title}}</h5>
+
+              {{#eq(type, 'textarea')}}
+                <ul>
+                  {{#each(../sortVotes(../talliedVotes[id]))}}
+                    <li>
+                      <p>
+                        {{key}}
+                      </p>
+                    </li>
+                  {{/each}}
+                </ul>
+
+              {{else}}
+                <div class="table-responsive">
+                  <table class="table table-sm table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Nominee</th>
+                        <th scope="col">Votes</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {{#each(../sortVotes(../talliedVotes[id]))}}
+                        <tr>
+                          {{#switch(../type)}}
+                            {{#case('hasher')}}
+                              <td>
+                                {{scope.vm.nameForHasherWithID(key)}}
+                              </td>
+                              <td>
+                                {{value}}
+                              </td>
+                            {{/case}}
+                            {{#case('hashit')}}
+                              <td>
+                                {{scope.vm.nameForHasherWithID(key)}}
+                              </td>
+                              <td>
+                                {{value}}
+                              </td>
+                            {{/case}}
+                            {{#case('on-on')}}
+                              <td>
+                                Run #{{scope.vm.nameForRunWithTrailNumber(key)}}
+                              </td>
+                              <td>
+                                {{value}}
+                              </td>
+                            {{/case}}
+                            {{#case('run')}}
+                              <td>
+                                Run #{{scope.vm.nameForRunWithTrailNumber(key)}}
+                              </td>
+                              <td>
+                                {{value}}
+                              </td>
+                            {{/case}}
+                            {{#case('scribe')}}
+                              <td>
+                                {{scope.vm.nameForHasherWithID(key)}}
+                              </td>
+                              <td>
+                                {{value}}
+                              </td>
+                            {{/case}}
+                          {{/switch}}
+                        </tr>
+                      {{/each}}
+                    </tbody>
+                  </table>
+                </div>
+              {{/eq}}
             {{/each}}
           </div>
         </div>
@@ -101,44 +163,72 @@
       <hr>
 
       <h3>Individual ballots</h3>
-      <div class="table-responsive">
-        <table class="table table-bordered table-sm">
-          <thead>
-            <tr>
-              {{#if(session.user.canManageUsers)}}
-                <th scope="col">Voter</th>
-              {{/if}}
-              <th scope="col">Encrypted hash</th>
-              {{#if(privateKey)}}
-                <th scope="col">Decrypted</th>
-              {{/if}}
-            </tr>
-          </thead>
-          <tbody>
-            {{#each(ballotsPromise.value)}}
-              <tr>
-                {{#if(../session.user.canManageUsers)}}
-                  <td>
-                    {{#if hasherPromise.isResolved}}
-                      {{hasher.hashOrJustName}}
+      <ol>
+        {{#if(privateKey)}}
+          {{#each(decryptedBallots)}}
+            <li class="mb-4">
+              <p class="mb-0">
+                {{sha256}}
+              </p>
+              {{#if(duplicateBallot)}}
+                <p class="mb-0 text-danger">
+                  Duplicate ballot (not counted in the results above)
+                </p>
+              {{else}}
+                {{#if(hasherTookPaperBallot)}}
+                  <p class="mb-0 text-danger">
+                    Hasher took a paper ballot (this online ballot is not counted in the results above)
+                  </p>
+                {{else}}
+                  {{#if(decryptionError)}}
+                    <p class="mb-0 text-danger">
+                      {{decryptionError}}
+                    </p>
+                  {{else}}
+                    {{#if(decryptedBallot.errors)}}
+                      <ul class="text-danger">
+                        {{#each(decryptedBallot.errors)}}
+                          <li>{{value}}</li>
+                        {{/each}}
+                      </ul>
                     {{else}}
-                      <span class="fa fa-circle-notch fa-spin"></span>
+                      <p class="mb-0 text-success">
+                        No errors
+                      </p>
                     {{/if}}
-                  </td>
+                    <details>
+                      <summary>Decrypted ballot</summary>
+                      {{decryptedBallotJSON}}
+                    </details>
+                  {{/if}}
                 {{/if}}
-                <td>
+              {{/if}}
+            </li>
+          {{/each}}
+        {{else}}
+          {{#each(ballotsPromise.value)}}
+            <li>
+              <p>
+                {{#if(../session.user.canManageUsers)}}
+                  {{#if hasherPromise.isResolved}}
+                    {{hasher.hashOrJustName}}
+                  {{else}}
+                    <span class="fa fa-circle-notch fa-spin"></span>
+                  {{/if}}
+                  <span class="text-muted">
+                    {{sha256}}
+                  </span>
+                {{else}}
                   {{sha256}}
-                </td>
-                {{#if(../privateKey)}}
-                  <td>
-                    {{../decryptBallot(encryptedBallot, encryptedKey)}}
-                  </td>
                 {{/if}}
-              </tr>
-            {{/each}}
-          </tbody>
-        </table>
-      </div>
+              </p>
+            </li>
+          {{else}}
+            <li>No ballots</li>
+          {{/each}}
+        {{/if}}
+      </ol>
+
     {{/eq}}
   {{/if}}
 

@@ -5,14 +5,40 @@ const errors = require('@feathersjs/errors');
 
 const afterHook = function(hook) {
   const ballots = hook.result.data;
-  ballots.forEach(ballot => {
-    const hash = crypto.createHmac('sha256', Math.random().toString());
-    hash.update(ballot.hasherId.toString());
-    ballot.hasherIdHmac = hash.digest('base64');
 
-    if (hook.params.user.canManageUsers !== true) {
-      delete ballot.hasherId;
-    }
+  // Fetch the paper ballots taken during this election
+  const paperBallotService = hook.app.service('api/paper-ballots');
+  return paperBallotService.find({
+    query: {
+      electionId: hook.params.query.electionId
+    },
+    user: hook.params.user
+  }).then(results => {
+    const paperBallots = results.data;
+
+    // Get the hasher IDs of everyone who took a paper ballot
+    const hasherIdsWhoTookPaperBallots = paperBallots.map(paperBallot => {
+      return paperBallot.hasherId;
+    });
+
+    // Generate a key for the hasherIdHmac; this needs to be the same for every ballot
+    const key = Math.random().toString();
+
+    // Run through all the ballots
+    ballots.forEach(ballot => {
+
+      // Mark ballots that should be removed because the hasher took a paper ballot too
+      ballot.hasherTookPaperBallot = hasherIdsWhoTookPaperBallots.indexOf(ballot.hasherId) > -1;
+
+      // Add hasherIdHmac and remove hasherId
+      const hash = crypto.createHmac('sha256', key);
+      hash.update(ballot.hasherId.toString());
+      ballot.hasherIdHmac = hash.digest('base64');
+
+      if (hook.params.user.canManageUsers !== true) {
+        delete ballot.hasherId;
+      }
+    });
   });
 };
 

@@ -2,6 +2,7 @@ import algebra from './algebra';
 import behaviors from './behaviors';
 import connect from 'can-connect';
 import CryptoJSAES from 'crypto-js/aes';
+import CryptoJSCore from 'crypto-js/core';
 import CryptoJSLib from 'crypto-js/lib-typedarrays';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
@@ -9,6 +10,7 @@ import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import Hasher from '~/models/hasher';
 import moment from 'moment-timezone';
+import UnencryptedBallot from './unencrypted-ballot';
 
 const Ballot = DefineMap.extend({
   seal: false,
@@ -42,7 +44,13 @@ const Ballot = DefineMap.extend({
       return moment(this.createdAt).format('LL LTS');
     }
   },
+  decryptedBallot: UnencryptedBallot,
+  decryptedBallotJSON: 'string',
+  decryptionError: 'any',
+  duplicateBallot: 'boolean',
   electionId: 'number',
+  encryptedBallot: 'string',
+  encryptedKey: 'string',
   hasher: {
     get: function(lastValue, setValue) {
       const hasherPromise = this.hasherPromise;
@@ -66,6 +74,35 @@ const Ballot = DefineMap.extend({
       }
     },
     serialize: false
+  },
+  hasherTookPaperBallot: 'boolean',
+
+  decrypt(decrypter, election) {
+    try {
+
+      // Decrypt the secret key
+      const decryptedSecretKey = decrypter.decrypt(this.encryptedKey);
+
+      // Decrypt the message
+      const decryptedBallotJSON = CryptoJSAES.decrypt(this.encryptedBallot, decryptedSecretKey).toString(CryptoJSCore.enc.Utf8);
+
+      if (decryptedBallotJSON) {
+
+        // Parse the JSON
+        const parsedJSON = JSON.parse(decryptedBallotJSON);
+
+        // Set the schema so the ballot can be validated
+        parsedJSON.electionSchema = election.schema;
+
+        this.decryptedBallot = new UnencryptedBallot(parsedJSON);
+        this.decryptedBallotJSON = decryptedBallotJSON;
+      } else {
+        throw new Error('Invalid private key');
+      }
+    } catch (error) {
+      console.error(error);
+      this.decryptionError = error;
+    }
   }
 });
 
