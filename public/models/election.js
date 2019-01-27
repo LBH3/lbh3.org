@@ -60,6 +60,14 @@ export const Election = DefineMap.extend({
   seal: false
 }, {
   id: 'any',
+  advertisementHtml: {
+    get: function() {
+      const rendered = marked(this.advertisementMd || '');
+      return rendered.replace('<p>', '').replace('</p>', '').trim();
+    },
+    serialize: false
+  },
+  advertisementMd: 'string',
   descriptionHtml: {
     get: function() {
       return marked(this.descriptionMd || '');

@@ -43,7 +43,7 @@
       {{#each(electionsPromise.value)}}
         <p class="border mt-3 py-3 rounded text-center">
           <a class="d-block" href="erections/{{urlId}}/">
-            {{advertisementMd}}
+            {{{advertisementHtml}}}
           </a>
         </p>
       {{/each}}
