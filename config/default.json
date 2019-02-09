@@ -29,7 +29,8 @@
       "successRedirect": "/",
       "scope": [
         "profile openid email"
-      ]
+      ],
+      "userProfileURL": "https://www.googleapis.com/oauth2/v3/userinfo"
     },
     "facebook": {
       "callbackURL": "FACEBOOK_CALLBACK_URL",
