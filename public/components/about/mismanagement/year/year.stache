@@ -17,7 +17,7 @@
   {{#if showEmailLink}}
     <p class="d-print-none">
       Click the <span class="fa fa-envelope"></span> next to each position to email them directly, or
-      <a href="mailto:bored@lbh3.org">send an email to the entire Bored and our regular volunteers (Achey Breaky Fart &amp; 6-9 Split)</a>.
+      <a href="mailto:bored@lbh3.org">send an email to the entire Bored and our regular volunteers (currently just Achey Breaky Fart)</a>.
     </p>
   {{/if}}
 
