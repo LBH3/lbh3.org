@@ -141,8 +141,18 @@ const boredPositions = [
 const createAndUpdateFields = function(hook) {
   const profile = hook.params.user.facebookProfile || hook.params.user.googleProfile || {};
   let displayName = profile.displayName || '';
-  if (!displayName && profile.emails && profile.emails[0]) {
-    displayName = profile.emails[0];
+  if (!displayName) {
+    if (typeof profile.name === 'object') {
+      const familyName = profile.name.familyName || '';
+      const givenName = profile.name.givenName || '';
+      displayName = `${givenName} ${familyName}`.trim();
+    }
+    if (!displayName && profile.emails && profile.emails.length > 0) {
+      const firstEmail = profile.emails[0];
+      if (firstEmail && firstEmail.value) {
+        displayName = firstEmail.value;
+      }
+    }
   }
 
   if (hook.method === 'create' && !hook.data.createdBy && !hook.data.createdByUserId) {
