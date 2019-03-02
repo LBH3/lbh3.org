@@ -23,6 +23,7 @@
   "scripts": {
     "build": "cd public && node build && cd ..",
     "build:tests": "cd public && node build-tests && cd ..",
+    "bundlesize": "node ./node_modules/.bin/bundlesize",
     "ci": "node install-ci",
     "eslint": "eslint src/. test/. --config .eslintrc.json",
     "heroku-postbuild": "npm run build",
@@ -36,10 +37,10 @@
     "start:debug": "node --inspect src/",
     "start:development": "node src/ --develop",
     "start:production": "NODE_ENV=production PORT=8080 npm start",
-    "test": "npm run eslint && npm run build && npm run mocha && npm run testee",
+    "test": "npm run eslint && npm run build && bundlesize && npm run mocha && npm run testee",
     "test:ci": "npm run test:production && node public/test.sauce-labs.js",
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -U postgres && psql -c 'create database lbh3_test;' -U postgres && psql lbh3_test < ./test/lbh3_test.dump -U postgres -v ON_ERROR_STOP=1",
-    "test:production": "npm run eslint && npm run build:tests && npm run mocha && npm run testee:production",
+    "test:production": "npm run eslint && npm run build && bundlesize && npm run build:tests && npm run mocha && npm run testee:production",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
     "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
   },
@@ -77,6 +78,7 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "bundlesize": "^0.17.1",
     "eslint": "^4.4.1",
     "http-server": "^0.11.1",
     "mocha": "^5.1.1",
@@ -84,5 +86,27 @@
     "request-promise": "^4.2.1",
     "through": "^2.3.8",
     "xml-stream": "^0.4.5"
-  }
+  },
+  "bundlesize": [
+    {
+      "path": "./public/dist/steal.production.js",
+      "maxSize": "26 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/index.css",
+      "maxSize": "10 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/index.js",
+      "maxSize": "239 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/home/home.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/home/home.js",
+      "maxSize": "4 kB"
+    }
+  ]
 }
