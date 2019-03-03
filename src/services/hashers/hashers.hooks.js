@@ -61,9 +61,6 @@ const afterFindHook = function(hook) {
         return filterData(hasher);
       });
     }
-    if (hook) {
-      return hook;
-    }
     const sequelizeClient = hook.app.get('sequelizeClient');
     const hareCountPromises = hashers.map(hasher => {
       return getHareCountForHasher(sequelizeClient, hasher.id);
@@ -71,6 +68,14 @@ const afterFindHook = function(hook) {
     return Promise.all(hareCountPromises).then(results => {
       results.forEach((result, index) => {
         hashers[index].hareCount = result;
+      });
+      const runCountPromises = hashers.map(hasher => {
+        return getRunCountForHasher(sequelizeClient, hasher.id);
+      });
+      return Promise.all(runCountPromises);
+    }).then(results => {
+      results.forEach((result, index) => {
+        hashers[index].runCount = result;
       });
       const runMileagePromises = hashers.map(hasher => {
         return getRunMileageForHasher(sequelizeClient, hasher.id);
@@ -93,12 +98,20 @@ const updateHookResultWithHasherStats = function(hook) {
     getHareCountForHasher(sequelizeClient, hasherId).then(hareCount => {
       hook.result.hareCount = hareCount;
 
-      getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
-        hook.result.runMileage = runMileage;
-        resolve(hook);
+      getRunCountForHasher(sequelizeClient, hasherId).then(runCount => {
+        hook.result.runCount = runCount;
+
+        getRunMileageForHasher(sequelizeClient, hasherId).then(runMileage => {
+          hook.result.runMileage = runMileage;
+          resolve(hook);
+
+        }, error => {
+          console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
+          resolve(hook);
+        });
 
       }, error => {
-        console.error(`Failed to fetch run mileage for hasher #${hasherId} with error:`, error);
+        console.error(`Failed to fetch run count for hasher #${hasherId} with error:`, error);
         resolve(hook);
       });
 
@@ -188,6 +201,16 @@ const getHareCountForHasher = function(sequelize, hasherId) {
   }).then(result => {
     const hareCountString = result && result[0] && result[0].count;
     return hareCountString && parseInt(hareCountString, 10) || 0;
+  });
+};
+
+const getRunCountForHasher = function(sequelize, hasherId) {
+  const query = `SELECT COUNT(id) FROM events_hashers WHERE hasher_id=${hasherId}`;
+  return sequelize.query(query, {
+    type: sequelize.QueryTypes.SELECT
+  }).then(result => {
+    const runCountString = result && result[0] && result[0].count;
+    return runCountString && parseInt(runCountString, 10) || 0;
   });
 };
 

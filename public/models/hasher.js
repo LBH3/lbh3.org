@@ -150,35 +150,7 @@ const Hasher = DefineMap.extend({
   },
   givenName: 'string',
   givenNamePrivate: 'string',
-  hareCount: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
-      }
-      const hareCountPromise = this.hareCountPromise;
-      if (hareCountPromise && setValue) {
-        hareCountPromise.then(result => {
-          setValue(result.total);
-        });
-      }
-    },
-    serialize: false
-  },
-  hareCountPromise: {
-    get: function() {
-      const hasherId = this.id;
-      if (hasherId) {
-        return EventsHashers.connection.getList({
-          $limit: 0,
-          hasherId,
-          role: {
-            $iLike: 'hare%'
-          }
-        });
-      }
-    },
-    serialize: false
-  },
+  hareCount: 'number',
   hasDied: {
     type: 'boolean',
     serialize: false,
