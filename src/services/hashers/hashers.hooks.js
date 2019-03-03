@@ -62,29 +62,26 @@ const afterFindHook = function(hook) {
       });
     }
     const sequelizeClient = hook.app.get('sequelizeClient');
-    const hareCountPromises = hashers.map(hasher => {
-      return getHareCountForHasher(sequelizeClient, hasher.id);
+
+    const promises = hashers.map(hasher => {
+      const query = `
+        (SELECT COUNT(id) FROM events_hashers WHERE hasher_id=${hasher.id} AND role ILIKE 'hare%')
+        UNION ALL
+        (SELECT COUNT(id) FROM events_hashers WHERE hasher_id=${hasher.id})
+        UNION ALL
+        (SELECT SUM(events.miles) FROM events_hashers INNER JOIN events ON (events_hashers.trail_number = events.trail_number) WHERE hasher_id=${hasher.id})
+      `;
+      return sequelizeClient.query(query, {
+        type: sequelizeClient.QueryTypes.SELECT
+      }).then(result => {
+        if (result && result[0]) {
+          hasher.hareCount = parseFloat(result[0].count) || 0;
+          hasher.runCount = parseFloat(result[1].count) || 0;
+          hasher.runMileage = parseFloat(result[2].count) || 0;
+        }
+      });
     });
-    return Promise.all(hareCountPromises).then(results => {
-      results.forEach((result, index) => {
-        hashers[index].hareCount = result;
-      });
-      const runCountPromises = hashers.map(hasher => {
-        return getRunCountForHasher(sequelizeClient, hasher.id);
-      });
-      return Promise.all(runCountPromises);
-    }).then(results => {
-      results.forEach((result, index) => {
-        hashers[index].runCount = result;
-      });
-      const runMileagePromises = hashers.map(hasher => {
-        return getRunMileageForHasher(sequelizeClient, hasher.id);
-      });
-      return Promise.all(runMileagePromises);
-    }).then(results => {
-      results.forEach((result, index) => {
-        hashers[index].runMileage = result;
-      });
+    return Promise.all(promises).then(() => {
       return hook;
     });
   });
