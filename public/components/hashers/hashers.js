@@ -29,7 +29,7 @@ export const ViewModel = DefineMap.extend({
       return Hasher.connection.getList({
         headshotUrl: this.searchNoHeadshot ? '' : undefined,
         $limit,
-        $search: searchText || undefined,
+        search: searchText || undefined,
         $skip: this.skip,
         $sort: {
           lastTrailDate: -1

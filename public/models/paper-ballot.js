@@ -85,6 +85,7 @@ PaperBallot.connection = connect([
   feathersService: feathersClient.service('/api/paper-ballots'),
   Map: PaperBallot,
   List: PaperBallot.List,
+  idProp: 'id',
   name: 'paper-ballot',
   algebra
 });

@@ -5,10 +5,12 @@ import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import EventsHashers from './events-hashers';
 import feathersClient from './feathers-client';
+import feathersQueryLogic from 'feathers-query-logic';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import marked from 'marked';
 import moment from 'moment-timezone';
 import Patch from './patch';
+import QueryLogic from 'can-query-logic';
 
 marked.setOptions({
   breaks: true,
@@ -333,8 +335,10 @@ Hasher.connection = connect([
   feathersService: feathersClient.service('/api/hashers'),
   Map: Hasher,
   List: Hasher.List,
+  idProp: 'id',
   name: 'hasher',
-  algebra
+  algebra,
+  queryLogic: new QueryLogic(Hasher, feathersQueryLogic)
 });
 
 Hasher.groupByEmailing = function(hashers) {

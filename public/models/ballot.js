@@ -117,6 +117,7 @@ Ballot.connection = connect([
   feathersService: feathersClient.service('/api/ballots'),
   Map: Ballot,
   List: Ballot.List,
+  idProp: 'id',
   name: 'ballot',
   algebra
 });

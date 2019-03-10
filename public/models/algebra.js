@@ -1,5 +1,5 @@
 import helpers from 'can-set/src/helpers';
-import set from 'can-set';
+import set from 'can-set-legacy';
 
 /**
  * Feathers-compatible can-set algebra for can-connect Models.
@@ -7,18 +7,18 @@ import set from 'can-set';
 export default new set.Algebra(
   set.comparators.id('id'),
   set.props.offsetLimit('$skip', '$limit'),
-  set.comparators.sort('$sort', defaultSort),
-  {
-    '$populate': function () {
-      return true;
-    },
-    '$search': function () {
-      return true;
-    },
-    startDatetime: function () {
-      return true;
-    }
-  }
+  // set.comparators.sort('$sort', defaultSort),
+  // {
+  //   '$populate': function () {
+  //     return true;
+  //   },
+  //   '$search': function () {
+  //     return true;
+  //   },
+  //   startDatetime: function () {
+  //     return true;
+  //   }
+  // }
 );
 
 // TODO: this should belong to can-set module: `can-set/src/helpers.defaultSort`

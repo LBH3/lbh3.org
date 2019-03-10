@@ -28,6 +28,7 @@ BoredYear.connection = connect([
   feathersService: feathersClient.service('/api/bored-years'),
   Map: BoredYear,
   List: BoredYear.List,
+  idProp: 'id',
   name: 'bored-year',
   algebra
 });

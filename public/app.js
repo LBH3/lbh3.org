@@ -3,7 +3,7 @@ import '~/components/no-ssr/';
 import DefineMap from 'can-define/map/';
 import loader from '@loader';
 import route from 'can-route';
-import 'can-route-pushstate';
+import RoutePushstate from 'can-route-pushstate';
 
 const currentYear = (new Date()).getFullYear();
 const defaultPage = 'home';
@@ -70,6 +70,8 @@ const AppViewModel = DefineMap.extend({
   urlId: 'string',
   year: 'number'
 });
+
+route.urlData = new RoutePushstate();
 
 route.register('/about/mismanagement/{year}/', { page: 'about', secondaryPage: 'mismanagement', year: 0});
 route.register('/about/{secondaryPage}/', { page: 'about' });

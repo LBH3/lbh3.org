@@ -4,13 +4,14 @@ import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import feathersClient from './feathers-client';
+import feathersQueryLogic from 'feathers-query-logic';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import marked from 'marked';
 import moment from 'moment-timezone';
 import Patch from './patch';
 import Place from './place';
 import platform from 'steal-platform';
-import set from 'can-set';
+import QueryLogic from 'can-query-logic';
 
 const defaultLocale = (platform.isNode) ? 'en-US' : undefined;
 const timeZone = 'America/Los_Angeles';
@@ -474,8 +475,10 @@ Event.connection = connect([
   feathersService: feathersClient.service('/api/events'),
   Map: Event,
   List: Event.List,
+  idProp: 'id',
   name: 'event',
-  algebra
+  algebra,
+  queryLogic: new QueryLogic(Event, feathersQueryLogic)
 });
 
 const monthNames = [

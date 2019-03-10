@@ -4,9 +4,10 @@ import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import feathersClient from './feathers-client';
+import feathersQueryLogic from 'feathers-query-logic';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import loader from '@loader';
-import set from 'can-set';
+import QueryLogic from 'can-query-logic';
 
 const Place = DefineMap.extend({
   seal: false
@@ -25,8 +26,10 @@ Place.connection = connect([
   feathersService: feathersClient.service('/api/places'),
   Map: Place,
   List: Place.List,
+  idProp: 'id',
   name: 'place',
-  algebra
+  algebra,
+  queryLogic: new QueryLogic(Place, feathersQueryLogic)
 });
 
 Place.fromGoogle = function(googlePlace) {

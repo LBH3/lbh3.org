@@ -49,6 +49,7 @@ ElectionEligibility.connection = connect([
   feathersService: feathersClient.service('/api/election-eligibility'),
   Map: ElectionEligibility,
   List: ElectionEligibility.List,
+  idProp: 'id',
   name: 'election-eligibility',
   algebra
 });

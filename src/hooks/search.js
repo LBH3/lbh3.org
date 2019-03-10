@@ -1,10 +1,10 @@
-// A hook that makes a fuzzy text search from a $search parameter in the query
+// A hook that makes a fuzzy text search from a search parameter in the query
 const Utils = require('sequelize/lib/utils');
 
 const oldSearchHook = function (options) {
   return function (hook) {
     const query = hook.params.query || {};
-    const searchString = query.$search;
+    const searchString = query.search;
     if (searchString) {
       const searchTerms = searchString.split(' ').map(term => {
         const trimmedTerm = term.trim();
@@ -18,7 +18,7 @@ const oldSearchHook = function (options) {
         return {
           [field]: {
             $contains: [
-              query.$search
+              query.search
             ]
           }
         };
@@ -36,7 +36,7 @@ const oldSearchHook = function (options) {
         ...containsQueries,
         ...iLikeQueries
       ];
-      delete query.$search;
+      delete query.search;
     }
   };
 };
@@ -45,7 +45,7 @@ module.exports = function (options) {
   return function (hook) {
     const query = hook.params.query || {};
 
-    if (query.$search) {
+    if (query.search) {
       const model = hook.app.service('api/hashers').Model;
       const sequelizeClient = hook.app.get('sequelizeClient');
 
@@ -60,7 +60,7 @@ module.exports = function (options) {
       const selectQuery = model.QueryInterface.QueryGenerator.selectQuery('hashers', queryOptions, model).slice(0, -1);// Slice to remove ‘;’
 
       // Build the WHERE clause
-      const searchTerms = query.$search.replace(/'/gi, '').replace(/-/gi, ' ').trim().split(' ').map(term => {
+      const searchTerms = query.search.replace(/'/gi, '').replace(/-/gi, ' ').trim().split(' ').map(term => {
         return `${term.trim()}:*`;
       }).filter(term => {
         return term.length > 0;

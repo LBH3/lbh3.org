@@ -112,6 +112,7 @@ Election.connection = connect([
   feathersService: feathersClient.service('/api/elections'),
   Map: Election,
   List: Election.List,
+  idProp: 'id',
   name: 'election',
   algebra
 });

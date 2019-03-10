@@ -49,6 +49,7 @@ SpecialEvent.connection = connect([
   feathersService: feathersClient.service('/api/special-events'),
   Map: SpecialEvent,
   List: SpecialEvent.List,
+  idProp: 'id',
   name: 'special-event',
   algebra
 });

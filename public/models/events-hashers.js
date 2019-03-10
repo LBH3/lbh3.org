@@ -7,7 +7,6 @@ import Event from './event';
 import feathersClient from './feathers-client';
 import feathersServiceBehavior from 'can-connect-feathers/service';
 import Hasher from './hasher';
-import set from 'can-set';
 import loader from '@loader';
 
 const EventsHashers = DefineMap.extend({
@@ -112,6 +111,7 @@ EventsHashers.connection = connect([
   feathersService: feathersClient.service('/api/events-hashers'),
   Map: EventsHashers,
   List: EventsHashers.List,
+  idProp: 'id',
   name: 'events-hashers',
   algebra
 });

@@ -1,8 +1,10 @@
+import algebra from './algebra';
+import behaviors from './behaviors';
+import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
-import loader from '@loader';
-import set from 'can-set';
-import superMap from 'can-connect/can/super-map/';
+import feathersClient from './feathers-client';
+import feathersServiceBehavior from 'can-connect-feathers/service';
 
 const BoredPosition = DefineMap.extend({
   seal: false
@@ -15,18 +17,18 @@ const BoredPosition = DefineMap.extend({
   sortPosition: 'number'
 });
 
-const algebra = new set.Algebra(
-  set.props.id('id')
-);
-
 BoredPosition.List = DefineList.extend({
   '#': BoredPosition
 });
 
-BoredPosition.connection = superMap({
-  url: loader.serviceBaseURL + '/api/bored-positions',
+BoredPosition.connection = connect([
+  feathersServiceBehavior,
+  ...behaviors
+], {
+  feathersService: feathersClient.service('/api/bored-positions'),
   Map: BoredPosition,
   List: BoredPosition.List,
+  idProp: 'id',
   name: 'bored-positions',
   algebra
 });

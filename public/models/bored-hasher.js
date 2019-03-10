@@ -44,6 +44,7 @@ BoredHasher.connection = connect([
   feathersService: feathersClient.service('/api/bored-hashers'),
   Map: BoredHasher,
   List: BoredHasher.List,
+  idProp: 'id',
   name: 'bored-hashers',
   algebra
 });

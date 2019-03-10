@@ -26,7 +26,7 @@ export const ViewModel = DefineMap.extend({
     set: function(hasherAwesompleteQuery) {
       if (hasherAwesompleteQuery) {
         Hasher.connection.getList({
-          $search: hasherAwesompleteQuery,
+          search: hasherAwesompleteQuery,
           $sort: {
             lastTrailDate: -1
           }
