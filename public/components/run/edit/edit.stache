@@ -79,7 +79,7 @@
           </label>
           <div class="d-flex">
             <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
-            <button class="btn btn-link prevent-default" on:click="scope.root.resetLocation()" type="button">
+            <button class="btn btn-link prevent-default" on:click="scope.vm.resetLocation()" type="button">
               <span class="fa fa-times"></span>
             </button>
           </div>
@@ -115,7 +115,7 @@
           </label>
           <div class="d-flex">
             <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
-            <button class="btn btn-link prevent-default" on:click="scope.root.resetOnOn()" type="button">
+            <button class="btn btn-link prevent-default" on:click="scope.vm.resetOnOn()" type="button">
               <span class="fa fa-times"></span>
             </button>
           </div>
@@ -405,9 +405,9 @@
             <tbody>
               {{#each hashers hasher=value}}
                 <tr>
-                  <td>{{scope.root.plusOne(scope.index)}}</td>
+                  <td>{{scope.vm.plusOne(scope.index)}}</td>
                   <td>
-                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                    <a href="{{scope.vm.routeForHasher(hasher)}}">
                       {{hasher.hashOrJustName}}
                     </a>
                   </td>
@@ -421,7 +421,7 @@
                   <td class="text-center">
                     <button
                       class="btn btn-danger btn-sm prevent-default"
-                      on:click="scope.root.removeHasher(hasher)"
+                      on:click="scope.vm.removeHasher(hasher)"
                       type="button"
                     >
                       <span class="fa fa-times"></span>
@@ -577,7 +577,7 @@
                 </tr>
                 {{#each patches}}
                   <tr>
-                    <td>{{scope.root.plusOne(scope.index)}}</td>
+                    <td>{{scope.vm.plusOne(scope.index)}}</td>
                     <td>
                       {{#if hasher}}
                         {{hasher.hashOrJustName}}
@@ -588,7 +588,7 @@
                     <td class="text-center">
                       <button
                         class="btn btn-danger btn-sm prevent-default"
-                        on:click="scope.root.removePatch(this)"
+                        on:click="scope.vm.removePatch(this)"
                         type="button"
                       >
                         <span class="fa fa-times"></span>

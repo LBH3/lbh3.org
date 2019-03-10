@@ -18,7 +18,7 @@
       {{#each years yearObject=value}}
         <a
           class="{{#is yearObject.year ../year}}active{{/is}} nav-link text-sm-center"
-          href="{{scope.root.routeForYear(yearObject.year)}}"
+          href="{{scope.vm.routeForYear(yearObject.year)}}"
         >
           {{yearObject.year}}
         </a>

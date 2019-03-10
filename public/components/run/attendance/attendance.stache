@@ -48,28 +48,28 @@
               {{payment}}
             </td>
             <td class="text-uppercase">
-              <a href="{{scope.root.routeForHasher(this)}}">
+              <a href="{{scope.vm.routeForHasher(this)}}">
                 {{hashName}}
               </a>
             </td>
             <td class="text-capitalize">
-              <a href="{{scope.root.routeForHasher(this)}}">
+              <a href="{{scope.vm.routeForHasher(this)}}">
                 {{familyName}}
               </a>
             </td>
             <td class="text-capitalize">
-              <a href="{{scope.root.routeForHasher(this)}}">
+              <a href="{{scope.vm.routeForHasher(this)}}">
                 {{givenName}}
               </a>
             </td>
             <td class="text-center">
-              {{scope.root.birthday(this)}}
+              {{scope.vm.birthday(this)}}
             </td>
             <td class="text-center">
               {{#if patchesPromise.isPending}}
                 <span class="fa fa-circle-notch fa-spin"></span>
               {{else}}
-                {{scope.root.patches(this)}}
+                {{scope.vm.patches(this)}}
               {{/if}}
             </td>
             <td class="text-center">

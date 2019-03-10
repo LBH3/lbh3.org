@@ -82,12 +82,12 @@
               <tr>
                 {{#if hasher.hasName}}
                   <td>
-                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                    <a href="{{scope.vm.routeForHasher(hasher)}}">
                       {{hasher.hashName}}
                     </a>
                   </td>
                   <td>
-                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                    <a href="{{scope.vm.routeForHasher(hasher)}}">
                       {{#if hasher.familyName}}
                         {{hasher.familyName}}
                       {{else}}
@@ -96,7 +96,7 @@
                     </a>
                   </td>
                   <td>
-                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                    <a href="{{scope.vm.routeForHasher(hasher)}}">
                       {{#if hasher.givenName}}
                         {{hasher.givenName}}
                       {{else}}
@@ -106,7 +106,7 @@
                   </td>
                 {{else}}
                   <td colspan="3">
-                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                    <a href="{{scope.vm.routeForHasher(hasher)}}">
                       #{{hasher.id}}
                     </a>
                   </td>
@@ -121,8 +121,8 @@
         <nav class="nav nav-pills">
           {{#each pages page=value}}
             <a
-              class="{{#is scope.root.currentPage page}}active{{/is}} nav-link text-sm-center"
-              href="{{scope.root.routeForPage(page)}}"
+              class="{{#is scope.vm.currentPage page}}active{{/is}} nav-link text-sm-center"
+              href="{{scope.vm.routeForPage(page)}}"
             >
               {{page}}
             </a>

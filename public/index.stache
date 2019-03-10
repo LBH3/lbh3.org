@@ -59,10 +59,10 @@
                   Loading Mismanagement…
                 {{else}}
                   <lbh3-about-mismanagement
-                    description:to="scope.root.description"
-                    ogTitle:to="scope.root.ogTitle"
-                    title:to="scope.root.title"
-                    year:from="scope.root.year"
+                    description:to="scope.vm.description"
+                    ogTitle:to="scope.vm.ogTitle"
+                    title:to="scope.vm.title"
+                    year:from="scope.vm.year"
                   />
                 {{/if}}
               </can-import>
@@ -74,9 +74,9 @@
                 {{else}}
                   <lbh3-about-privacy
                     class="container pl-0 pr-0"
-                    description:to="scope.root.description"
-                    ogTitle:to="scope.root.ogTitle"
-                    title:to="scope.root.title"
+                    description:to="scope.vm.description"
+                    ogTitle:to="scope.vm.ogTitle"
+                    title:to="scope.vm.title"
                   />
                 {{/if}}
               </can-import>
@@ -88,10 +88,10 @@
                 {{else}}
                   <lbh3-about
                     class="container pl-0 pr-0"
-                    description:to="scope.root.description"
-                    ogTitle:to="scope.root.ogTitle"
+                    description:to="scope.vm.description"
+                    ogTitle:to="scope.vm.ogTitle"
                     secondaryPage:from="secondaryPage"
-                    title:to="scope.root.title"
+                    title:to="scope.vm.title"
                   />
                 {{/if}}
               </can-import>
@@ -110,11 +110,11 @@
                       {{else}}
                         <lbh3-erection-ballots
                           class="container pl-0 pr-0"
-                          description:to="scope.root.description"
-                          ogTitle:to="scope.root.ogTitle"
-                          secondaryPage:from="scope.root.secondaryPage"
-                          title:to="scope.root.title"
-                          urlId:from="scope.root.urlId"
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          secondaryPage:from="scope.vm.secondaryPage"
+                          title:to="scope.vm.title"
+                          urlId:from="scope.vm.urlId"
                         />
                       {{/if}}
                     </can-import>
@@ -128,11 +128,11 @@
                       {{else}}
                         <lbh3-erection-edit
                           class="container pl-0 pr-0"
-                          description:to="scope.root.description"
-                          ogTitle:to="scope.root.ogTitle"
-                          secondaryPage:from="scope.root.secondaryPage"
-                          title:to="scope.root.title"
-                          urlId:from="scope.root.urlId"
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          secondaryPage:from="scope.vm.secondaryPage"
+                          title:to="scope.vm.title"
+                          urlId:from="scope.vm.urlId"
                         />
                       {{/if}}
                     </can-import>
@@ -145,11 +145,11 @@
                         Loading the erection eligibility page…
                       {{else}}
                         <lbh3-erection-eligibility
-                          description:to="scope.root.description"
-                          ogTitle:to="scope.root.ogTitle"
-                          secondaryPage:from="scope.root.secondaryPage"
-                          title:to="scope.root.title"
-                          urlId:from="scope.root.urlId"
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          secondaryPage:from="scope.vm.secondaryPage"
+                          title:to="scope.vm.title"
+                          urlId:from="scope.vm.urlId"
                         />
                       {{/if}}
                     </can-import>
@@ -162,11 +162,11 @@
                         Loading the erection results page…
                       {{else}}
                         <lbh3-erection-results
-                          description:to="scope.root.description"
-                          ogTitle:to="scope.root.ogTitle"
-                          secondaryPage:from="scope.root.secondaryPage"
-                          title:to="scope.root.title"
-                          urlId:from="scope.root.urlId"
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          secondaryPage:from="scope.vm.secondaryPage"
+                          title:to="scope.vm.title"
+                          urlId:from="scope.vm.urlId"
                         />
                       {{/if}}
                     </can-import>
@@ -180,11 +180,11 @@
                 {{else}}
                   <lbh3-erection
                     class="container pl-0 pr-0"
-                    description:to="scope.root.description"
-                    ogTitle:to="scope.root.ogTitle"
-                    secondaryPage:from="scope.root.secondaryPage"
-                    title:to="scope.root.title"
-                    urlId:from="scope.root.urlId"
+                    description:to="scope.vm.description"
+                    ogTitle:to="scope.vm.ogTitle"
+                    secondaryPage:from="scope.vm.secondaryPage"
+                    title:to="scope.vm.title"
+                    urlId:from="scope.vm.urlId"
                   />
                 {{/if}}
               </can-import>
@@ -195,9 +195,9 @@
                 Loading the erections page…
               {{else}}
                 <lbh3-erections
-                  description:to="scope.root.description"
-                  ogTitle:to="scope.root.ogTitle"
-                  title:to="scope.root.title"
+                  description:to="scope.vm.description"
+                  ogTitle:to="scope.vm.ogTitle"
+                  title:to="scope.vm.title"
                 />
               {{/if}}
             </can-import>
@@ -213,13 +213,13 @@
                       Loading the run attendance sheet page…
                     {{else}}
                       <lbh3-run-attendance
-                        day:from="scope.root.day"
-                        description:to="scope.root.description"
-                        month:from="scope.root.month"
-                        ogTitle:to="scope.root.ogTitle"
-                        title:to="scope.root.title"
-                        trailNumber:from="scope.root.trailNumber"
-                        year:from="scope.root.year"
+                        day:from="scope.vm.day"
+                        description:to="scope.vm.description"
+                        month:from="scope.vm.month"
+                        ogTitle:to="scope.vm.ogTitle"
+                        title:to="scope.vm.title"
+                        trailNumber:from="scope.vm.trailNumber"
+                        year:from="scope.vm.year"
                       />
                     {{/if}}
                   </can-import>
@@ -233,11 +233,11 @@
                         Loading the edit page…
                       {{else}}
                         <lbh3-special-event-edit
-                          description:to="scope.root.description"
-                          ogTitle:to="scope.root.ogTitle"
-                          title:to="scope.root.title"
-                          urlId:from="scope.root.urlId"
-                          year:from="scope.root.year"
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          title:to="scope.vm.title"
+                          urlId:from="scope.vm.urlId"
+                          year:from="scope.vm.year"
                         />
                       {{/if}}
                     </can-import>
@@ -247,13 +247,13 @@
                         Loading the edit run page…
                       {{else}}
                         <lbh3-run-edit
-                          day:from="scope.root.day"
-                          description:to="scope.root.description"
-                          month:from="scope.root.month"
-                          ogTitle:to="scope.root.ogTitle"
-                          title:to="scope.root.title"
-                          trailNumber:from="scope.root.trailNumber"
-                          year:from="scope.root.year"
+                          day:from="scope.vm.day"
+                          description:to="scope.vm.description"
+                          month:from="scope.vm.month"
+                          ogTitle:to="scope.vm.ogTitle"
+                          title:to="scope.vm.title"
+                          trailNumber:from="scope.vm.trailNumber"
+                          year:from="scope.vm.year"
                         />
                       {{/if}}
                     </can-import>
@@ -266,9 +266,9 @@
                     Loading…
                   {{else}}
                     <lbh3-founders-2018
-                      description:to="scope.root.description"
-                      ogTitle:to="scope.root.ogTitle"
-                      title:to="scope.root.title"
+                      description:to="scope.vm.description"
+                      ogTitle:to="scope.vm.ogTitle"
+                      title:to="scope.vm.title"
                     />
                   {{/if}}
                 </can-import>
@@ -279,9 +279,9 @@
                     Loading…
                   {{else}}
                     <lbh3-memorial-service
-                      description:to="scope.root.description"
-                      ogTitle:to="scope.root.ogTitle"
-                      title:to="scope.root.title"
+                      description:to="scope.vm.description"
+                      ogTitle:to="scope.vm.ogTitle"
+                      title:to="scope.vm.title"
                     />
                   {{/if}}
                 </can-import>
@@ -291,16 +291,16 @@
             {{#if trailNumber}}
               <can-import from="~/components/run/">
                 {{#if isPending}}
-                  Loading trail #{{scope.root.trailNumber}}…
+                  Loading trail #{{scope.vm.trailNumber}}…
                 {{else}}
                   <lbh3-run
-                    day:from="scope.root.day"
-                    description:to="scope.root.description"
-                    month:from="scope.root.month"
-                    ogTitle:to="scope.root.ogTitle"
-                    title:to="scope.root.title"
-                    trailNumber:from="scope.root.trailNumber"
-                    year:from="scope.root.year"
+                    day:from="scope.vm.day"
+                    description:to="scope.vm.description"
+                    month:from="scope.vm.month"
+                    ogTitle:to="scope.vm.ogTitle"
+                    title:to="scope.vm.title"
+                    trailNumber:from="scope.vm.trailNumber"
+                    year:from="scope.vm.year"
                   />
                 {{/if}}
               </can-import>
@@ -312,11 +312,11 @@
                   {{else}}
                     <lbh3-special-event
                       class="container pl-0 pr-0"
-                      description:to="scope.root.description"
-                      ogTitle:to="scope.root.ogTitle"
-                      title:to="scope.root.title"
-                      urlId:from="scope.root.urlId"
-                      year:from="scope.root.year"
+                      description:to="scope.vm.description"
+                      ogTitle:to="scope.vm.ogTitle"
+                      title:to="scope.vm.title"
+                      urlId:from="scope.vm.urlId"
+                      year:from="scope.vm.year"
                     />
                   {{/if}}
                 </can-import>
@@ -326,14 +326,14 @@
                     Loading Past Runs…
                   {{else}}
                     <lbh3-past-runs
-                      description:to="scope.root.description"
-                      ogTitle:to="scope.root.ogTitle"
-                      showHashit:bind="scope.root.showHashit"
-                      showNotes:bind="scope.root.showNotes"
-                      showOnOn:bind="scope.root.showOnOn"
-                      showScribe:bind="scope.root.showScribe"
-                      title:to="scope.root.title"
-                      year:from="scope.root.year"
+                      description:to="scope.vm.description"
+                      ogTitle:to="scope.vm.ogTitle"
+                      showHashit:bind="scope.vm.showHashit"
+                      showNotes:bind="scope.vm.showNotes"
+                      showOnOn:bind="scope.vm.showOnOn"
+                      showScribe:bind="scope.vm.showScribe"
+                      title:to="scope.vm.title"
+                      year:from="scope.vm.year"
                     />
                   {{/if}}
                 </can-import>
@@ -350,9 +350,9 @@
                     Loading the Hareline add page…
                   {{else}}
                     <lbh3-hareline-add
-                      description:to="scope.root.description"
-                      ogTitle:to="scope.root.ogTitle"
-                      title:to="scope.root.title"
+                      description:to="scope.vm.description"
+                      ogTitle:to="scope.vm.ogTitle"
+                      title:to="scope.vm.title"
                     />
                   {{/if}}
                 </can-import>
@@ -365,13 +365,13 @@
                     Loading the edit run page…
                   {{else}}
                     <lbh3-run-edit
-                      day:from="scope.root.day"
-                      description:to="scope.root.description"
-                      month:from="scope.root.month"
-                      ogTitle:to="scope.root.ogTitle"
-                      title:to="scope.root.title"
-                      trailNumber:from="scope.root.trailNumber"
-                      year:from="scope.root.year"
+                      day:from="scope.vm.day"
+                      description:to="scope.vm.description"
+                      month:from="scope.vm.month"
+                      ogTitle:to="scope.vm.ogTitle"
+                      title:to="scope.vm.title"
+                      trailNumber:from="scope.vm.trailNumber"
+                      year:from="scope.vm.year"
                     />
                   {{/if}}
                 </can-import>
@@ -384,9 +384,9 @@
                 {{else}}
                   <lbh3-hareline-guidelines
                     class="container pl-0 pr-0"
-                    description:to="scope.root.description"
-                    ogTitle:to="scope.root.ogTitle"
-                    title:to="scope.root.title"
+                    description:to="scope.vm.description"
+                    ogTitle:to="scope.vm.ogTitle"
+                    title:to="scope.vm.title"
                   />
                 {{/if}}
               </can-import>
@@ -397,9 +397,9 @@
                   Loading the Hareline…
                 {{else}}
                   <lbh3-hareline
-                    description:to="scope.root.description"
-                    ogTitle:to="scope.root.ogTitle"
-                    title:to="scope.root.title"
+                    description:to="scope.vm.description"
+                    ogTitle:to="scope.vm.ogTitle"
+                    title:to="scope.vm.title"
                   />
                 {{/if}}
               </can-import>
@@ -416,9 +416,9 @@
                       Loading the add hasher page…
                     {{else}}
                       <lbh3-hashers-add
-                        description:to="scope.root.description"
-                        ogTitle:to="scope.root.ogTitle"
-                        title:to="scope.root.title"
+                        description:to="scope.vm.description"
+                        ogTitle:to="scope.vm.ogTitle"
+                        title:to="scope.vm.title"
                       />
                     {{/if}}
                   </can-import>
@@ -431,9 +431,9 @@
                       Loading the attendance records page…
                     {{else}}
                       <lbh3-hashers-attendance-records
-                        description:to="scope.root.description"
-                        ogTitle:to="scope.root.ogTitle"
-                        title:to="scope.root.title"
+                        description:to="scope.vm.description"
+                        ogTitle:to="scope.vm.ogTitle"
+                        title:to="scope.vm.title"
                       />
                     {{/if}}
                   </can-import>
@@ -446,9 +446,9 @@
                       Loading the early warning page…
                     {{else}}
                       <lbh3-hashers-early-warning
-                        description:to="scope.root.description"
-                        ogTitle:to="scope.root.ogTitle"
-                        title:to="scope.root.title"
+                        description:to="scope.vm.description"
+                        ogTitle:to="scope.vm.ogTitle"
+                        title:to="scope.vm.title"
                       />
                     {{/if}}
                   </can-import>
@@ -461,9 +461,9 @@
                       Loading the hashers email page…
                     {{else}}
                       <lbh3-hashers-email
-                        description:to="scope.root.description"
-                        ogTitle:to="scope.root.ogTitle"
-                        title:to="scope.root.title"
+                        description:to="scope.vm.description"
+                        ogTitle:to="scope.vm.ogTitle"
+                        title:to="scope.vm.title"
                       />
                     {{/if}}
                   </can-import>
@@ -476,10 +476,10 @@
                       Loading the edit hasher page…
                     {{else}}
                       <lbh3-hasher-edit
-                        description:to="scope.root.description"
-                        id:from="scope.root.id"
-                        ogTitle:to="scope.root.ogTitle"
-                        title:to="scope.root.title"
+                        description:to="scope.vm.description"
+                        id:from="scope.vm.id"
+                        ogTitle:to="scope.vm.ogTitle"
+                        title:to="scope.vm.title"
                       />
                     {{/if}}
                   </can-import>
@@ -493,11 +493,11 @@
                   Loading hasher page…
                 {{else}}
                   <lbh3-hasher
-                    description:to="scope.root.description"
-                    id:from="scope.root.id"
-                    ogTitle:to="scope.root.ogTitle"
-                    skip:from="scope.root.skip"
-                    title:to="scope.root.title"
+                    description:to="scope.vm.description"
+                    id:from="scope.vm.id"
+                    ogTitle:to="scope.vm.ogTitle"
+                    skip:from="scope.vm.skip"
+                    title:to="scope.vm.title"
                   />
                 {{/if}}
               </can-import>
@@ -507,12 +507,12 @@
                   Loading Hashers page…
                 {{else}}
                   <lbh3-hashers
-                    description:to="scope.root.description"
-                    ogTitle:to="scope.root.ogTitle"
-                    searchNoHeadshot:bind="scope.root.noHeadshot"
-                    searchText:bind="scope.root.search"
-                    skip:from="scope.root.skip"
-                    title:to="scope.root.title"
+                    description:to="scope.vm.description"
+                    ogTitle:to="scope.vm.ogTitle"
+                    searchNoHeadshot:bind="scope.vm.noHeadshot"
+                    searchText:bind="scope.vm.search"
+                    skip:from="scope.vm.skip"
+                    title:to="scope.vm.title"
                   />
                 {{/if}}
               </can-import>
@@ -534,9 +534,9 @@
               {{else}}
                 <lbh3-home
                   class="container pl-0 pr-0"
-                  description:to="scope.root.description"
-                  ogTitle:to="scope.root.ogTitle"
-                  title:to="scope.root.title"
+                  description:to="scope.vm.description"
+                  ogTitle:to="scope.vm.ogTitle"
+                  title:to="scope.vm.title"
                 />
               {{/if}}
             {{/if}}
@@ -548,9 +548,9 @@
               Loading special events page…
             {{else}}
               <lbh3-special-events
-                description:to="scope.root.description"
-                ogTitle:to="scope.root.ogTitle"
-                title:to="scope.root.title"
+                description:to="scope.vm.description"
+                ogTitle:to="scope.vm.ogTitle"
+                title:to="scope.vm.title"
               />
             {{/if}}
           </can-import>
@@ -565,10 +565,10 @@
                       Loading the edit user page…
                     {{else}}
                       <lbh3-user-edit
-                        description:to="scope.root.description"
-                        id:from="scope.root.id"
-                        ogTitle:to="scope.root.ogTitle"
-                        title:to="scope.root.title"
+                        description:to="scope.vm.description"
+                        id:from="scope.vm.id"
+                        ogTitle:to="scope.vm.ogTitle"
+                        title:to="scope.vm.title"
                       />
                     {{/if}}
                   </can-import>
@@ -581,10 +581,10 @@
                 Loading users page…
               {{else}}
                 <lbh3-users
-                  description:to="scope.root.description"
-                  ogTitle:to="scope.root.ogTitle"
+                  description:to="scope.vm.description"
+                  ogTitle:to="scope.vm.ogTitle"
                   secondaryPage:from="secondaryPage"
-                  title:to="scope.root.title"
+                  title:to="scope.vm.title"
                 />
               {{/if}}
             </can-import>

@@ -42,7 +42,7 @@
           {{else}}
             {{promise.value.pluralName}}
           {{/is}}
-          {{#if scope.root.showEmailLink}}
+          {{#if scope.vm.showEmailLink}}
             <small class="d-print-none">
               <a href="mailto:{{promise.value.emailAddress}}" title="Send an email">
                 <span class="fa fa-envelope"></span>
@@ -62,8 +62,8 @@
               {{/if}}
 
               {{#if isResolved}}
-                {{#if scope.root.session.user.canViewDirectoryInfo}}
-                  <a href="{{scope.root.routeForHasher(value)}}">
+                {{#if scope.vm.session.user.canViewDirectoryInfo}}
+                  <a href="{{scope.vm.routeForHasher(value)}}">
                     {{value.hashName}}
                   </a>
                 {{else}}

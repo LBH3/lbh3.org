@@ -22,14 +22,14 @@
           </span>
         {{/if}}
       </a>
-      {{#if scope.root.showFutureTools}}
-        {{#if scope.root.session.user.canEditPreTrailInfo}}
+      {{#if scope.vm.showFutureTools}}
+        {{#if scope.vm.session.user.canEditPreTrailInfo}}
           <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
             <span class="far fa-edit"></span>
           </a>
         {{/if}}
       {{else}}
-        {{#if scope.root.session.user.hasherId}}
+        {{#if scope.vm.session.user.hasherId}}
           <lbh3-photos-button
             class="d-inline-flex mr-2"
             event:from="event"
@@ -148,8 +148,8 @@
     <tbody>
       {{#each month.events event=value}}
         <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
-          {{#if scope.root.showFutureTools}}
-            {{#if scope.root.session.user.canEditPreTrailInfo}}
+          {{#if scope.vm.showFutureTools}}
+            {{#if scope.vm.session.user.canEditPreTrailInfo}}
               <td class="d-print-none text-center">
                 <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
                   <span class="far fa-edit"></span>
@@ -210,8 +210,8 @@
               {{/if}}
             </td>
           {{/if}}
-          {{^if scope.root.showFutureTools}}
-            {{#if scope.root.session.user.hasherId}}
+          {{^if scope.vm.showFutureTools}}
+            {{#if scope.vm.session.user.hasherId}}
               <td class="d-print-none text-center">
                 <lbh3-photos-button
                   event:from="event"

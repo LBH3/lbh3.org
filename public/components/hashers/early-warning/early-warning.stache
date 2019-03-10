@@ -33,7 +33,7 @@
             {{#each upcummingPatches}}
               <tr>
                 <td>
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
+                  <a href="{{scope.vm.routeForHasher(hasher)}}">
                     {{hasher.hashName}}
                   </a>
                 </td>

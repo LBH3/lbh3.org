@@ -290,23 +290,23 @@
               <tbody>
                 {{#each sortedHashers}}
                   <tr>
-                    <td>{{scope.root.plusOne(scope.index)}}</td>
+                    <td>{{scope.vm.plusOne(scope.index)}}</td>
                     <td>{{role}}</td>
                     <td>
                       {{paymentNotesAndType}}
                     </td>
                     <td>
-                      <a href="{{scope.root.routeForHasher(this)}}">
+                      <a href="{{scope.vm.routeForHasher(this)}}">
                         {{hashName}}
                       </a>
                     </td>
                     <td>
-                      <a href="{{scope.root.routeForHasher(this)}}">
+                      <a href="{{scope.vm.routeForHasher(this)}}">
                         {{familyName}}
                       </a>
                     </td>
                     <td>
-                      <a href="{{scope.root.routeForHasher(this)}}">
+                      <a href="{{scope.vm.routeForHasher(this)}}">
                         {{givenName}}
                       </a>
                     </td>
