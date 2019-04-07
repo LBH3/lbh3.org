@@ -1,31 +1,24 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 
 const Year = DefineMap.extend({
   seal: false
 }, {
-  id: 'number'
+  id: {
+    identity: true,
+    type: 'number'
+  }
 });
 
 Year.List = DefineList.extend({
   '#': Year
 });
 
-Year.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/event-years'),
+Year.connection = feathersModel('/api/event-years', {
   Map: Year,
   List: Year.List,
-  idProp: 'id',
-  name: 'year',
-  algebra
+  name: 'year'
 });
 
 export default Year;

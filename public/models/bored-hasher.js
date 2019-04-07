@@ -1,17 +1,16 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
 import BoredPosition from '~/models/bored-position';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import Hasher from '~/models/hasher';
 
 const BoredHasher = DefineMap.extend({
   seal: false
 }, {
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   createdAt: 'any',
   updatedAt: 'any',
   endDate: 'any',
@@ -37,16 +36,10 @@ BoredHasher.List = DefineList.extend({
   '#': BoredHasher
 });
 
-BoredHasher.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/bored-hashers'),
+BoredHasher.connection = feathersModel('/api/bored-hashers', {
   Map: BoredHasher,
   List: BoredHasher.List,
-  idProp: 'id',
-  name: 'bored-hashers',
-  algebra
+  name: 'bored-hashers'
 });
 
 BoredHasher.groupByPosition = function(hashers) {

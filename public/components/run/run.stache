@@ -337,7 +337,7 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each cashReport.records record=value}}
+                {{#for(record of cashReport.records)}}
                   <tr>
                     <td>{{record.title}}</td>
                     <td>
@@ -360,7 +360,7 @@
                       {{/eq}}
                     </td>
                   </tr>
-                {{/each}}
+                {{/for}}
               </tbody>
               <tfoot>
                 <tr>

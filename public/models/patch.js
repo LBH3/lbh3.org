@@ -1,12 +1,7 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import Event from './event';
-import feathersClient from './feathers-client';
-import feathersQueryLogic from 'feathers-query-logic';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import Hasher from './hasher';
 import QueryLogic from 'can-query-logic';
 
@@ -69,27 +64,23 @@ const Patch = DefineMap.extend({
     },
     serialize: false
   },
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   number: 'number',
   trailNumber: 'number',
-  type: 'string'
+  type: QueryLogic.makeEnum(['hare', 'run'])
 });
 
 Patch.List = DefineList.extend({
   '#': Patch
 });
 
-Patch.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/patches'),
+Patch.connection = feathersModel('/api/patches', {
   Map: Patch,
   List: Patch.List,
-  idProp: 'id',
-  name: 'patch',
-  algebra,
-  queryLogic: new QueryLogic(Patch, feathersQueryLogic)
+  name: 'patch'
 });
 
 export default Patch;

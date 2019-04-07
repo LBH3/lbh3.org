@@ -22,7 +22,7 @@ export const ViewModel = DefineMap.extend({
   },
   hashersPromise: {
     get: function() {
-      return Hasher.connection.getList({
+      return Hasher.getList({
         $or: [
           {emailing: '1'},
           {emailing: '2'},

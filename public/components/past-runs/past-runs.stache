@@ -25,14 +25,14 @@
 {{/if}}
 
 <nav class="nav nav-pills">
-  {{#each years yearObject=value}}
+  {{#for(yearObject of years)}}
     <a
       class="{{#is yearObject.id scope.vm.year}}active{{/is}} nav-link text-sm-center"
       href="{{scope.vm.routeForYear(yearObject.id)}}"
     >
       {{yearObject.id}}
     </a>
-  {{/each}}
+  {{/for}}
 </nav>
 
 <details class="mb-3">

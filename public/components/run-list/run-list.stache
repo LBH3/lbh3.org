@@ -4,7 +4,7 @@
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/snooze-button/" />
 
-{{#each month.events event=value}}
+{{#for(event of month.events)}}
   <div class="border-bottom d-block d-sm-none mb-2 pb-2 xs-layout">
     <div class="d-flex flex-row">
       <a
@@ -62,15 +62,15 @@
     {{#if event.nameHtml}}
       <p class="hares">
         <small class="text-muted">
-          {{#if ../showingAdditionalInfo}}
+          {{#if this.showingAdditionalInfo}}
             <strong>Hares:</strong>
           {{/if}}
           {{event.haresMd}}
         </small>
       </p>
     {{/if}}
-    {{#if ../session.user.hasherId}}
-      {{#if ../showScribe}}
+    {{#if this.session.user.hasherId}}
+      {{#if this.showScribe}}
         {{#if event.scribesMd}}
           <p class="hares">
             <small class="text-muted">
@@ -79,7 +79,7 @@
           </p>
         {{/if}}
       {{/if}}
-      {{#if ../showHashit}}
+      {{#if this.showHashit}}
         {{#if event.hashitReasonMd}}
           <p class="hares">
             <small class="text-muted">
@@ -88,7 +88,7 @@
           </p>
         {{/if}}
       {{/if}}
-      {{#if ../showNotes}}
+      {{#if this.showNotes}}
         {{#if event.trailCommentsMd}}
           <p class="hares">
             <small class="text-muted">
@@ -98,7 +98,7 @@
         {{/if}}
       {{/if}}
     {{/if}}
-    {{#if ../showOnOn}}
+    {{#if this.showOnOn}}
       {{#if event.onOnMd}}
         <p class="hares">
           <small class="text-muted">
@@ -108,7 +108,7 @@
       {{/if}}
     {{/if}}
   </div>
-{{/each}}
+{{/for}}
 <div class="d-none d-sm-block table-responsive">
   <table class="table table-bordered table-sm">
     <thead>
@@ -146,7 +146,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#each month.events event=value}}
+      {{#for(event of month.events)}}
         <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
           {{#if scope.vm.showFutureTools}}
             {{#if scope.vm.session.user.canEditPreTrailInfo}}
@@ -180,22 +180,22 @@
           </td>
           <td>{{{event.shortLocationHtml}}}</td>
           <td>{{{event.nameHtml}}}</td>
-          {{#if ../session.user.hasherId}}
-            {{#if ../showScribe}}
+          {{#if this.session.user.hasherId}}
+            {{#if this.showScribe}}
               <td>
                 {{#if event.scribesHtml}}
                   {{{event.scribesHtml}}}
                 {{/if}}
               </td>
             {{/if}}
-            {{#if ../showHashit}}
+            {{#if this.showHashit}}
               <td>
                 {{#if event.hashitReasonHtml}}
                   {{{event.hashitReasonHtml}}}
                 {{/if}}
               </td>
             {{/if}}
-            {{#if ../showNotes}}
+            {{#if this.showNotes}}
               <td>
                 {{#if event.trailCommentsHtml}}
                   {{{event.trailCommentsHtml}}}
@@ -203,7 +203,7 @@
               </td>
             {{/if}}
           {{/if}}
-          {{#if ../showOnOn}}
+          {{#if this.showOnOn}}
             <td>
               {{#if event.onOnHtml}}
                 {{{event.onOnHtml}}}
@@ -228,7 +228,7 @@
             {{/if}}
           {{/if}}
         </tr>
-      {{/each}}
+      {{/for}}
     </tbody>
   </table>
 </div>

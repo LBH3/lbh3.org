@@ -518,7 +518,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each patches patch=value}}
+              {{#for(patch of patches)}}
                 <tr>
                   <td class="text-nowrap">{{patch.number}} {{patch.type}}s</td>
                   <td>
@@ -547,7 +547,7 @@
                     />
                   </td>
                 </tr>
-              {{/each}}
+              {{/for}}
             </tbody>
           </table>
         </div>
@@ -562,14 +562,14 @@
 
     {{#if pages.length}}
       <nav class="nav nav-pills">
-        {{#each pages page=value}}
+        {{#for(page of pages)}}
           <a
             class="{{#is scope.vm.currentPage page}}active{{/is}} nav-link text-sm-center"
             href="{{scope.vm.routeForPage(page)}}"
           >
             {{page}}
           </a>
-        {{/each}}
+        {{/for}}
       </nav>
     {{/if}}
 
@@ -601,7 +601,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each runs run=value}}
+              {{#for(run of runs)}}
                 <tr>
                   <td>
                     {{#if run.event.trailNumber}}
@@ -634,7 +634,7 @@
                     />
                   </td>
                 </tr>
-              {{/each}}
+              {{/for}}
             </tbody>
           </table>
         </div>

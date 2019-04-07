@@ -13,7 +13,7 @@ export const ViewModel = DefineMap.extend({
       const currentYear = currentDate.year();
       const endDate = (currentYear === this.year) ? currentDate.toDate() : moment().year(this.year).endOf('year').toDate();
       const startDate = moment().year(this.year).startOf('year').toDate();
-      return Event.connection.getList({
+      return Event.getList({
         $limit: 100,
         $sort: {
           startDatetime: 1

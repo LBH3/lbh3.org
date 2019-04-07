@@ -20,7 +20,10 @@ export const Session = DefineMap.extend('Session', {
       }
     }
   },
-  exp: 'number',
+  exp: {
+    identity: true,
+    type: 'number'
+  },
   aud: 'string',
   iat: 'number',
   iss: 'string',

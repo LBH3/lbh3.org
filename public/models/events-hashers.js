@@ -1,18 +1,18 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import Event from './event';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import Hasher from './hasher';
 import loader from '@loader';
+import QueryLogic from 'can-query-logic';
 
 const EventsHashers = DefineMap.extend({
   seal: false
 }, {
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   createdAt: 'any',
   updatedAt: 'any',
   event: {
@@ -93,8 +93,8 @@ const EventsHashers = DefineMap.extend({
     },
     serialize: false
   },
-  paymentTier: 'string',
-  paymentType: 'string',
+  paymentTier: QueryLogic.makeEnum(['5', 'baby', 'bored', 'c', 'dues', 'hares', 'kids', 'lt', 'punch']),
+  paymentType: QueryLogic.makeEnum(['both', 'cash', 'check', 'no_charge']),
   role: 'string',
   runPatch: 'string',
   trailNumber: 'number'
@@ -104,16 +104,10 @@ EventsHashers.List = DefineList.extend({
   '#': EventsHashers
 });
 
-EventsHashers.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/events-hashers'),
+EventsHashers.connection = feathersModel('/api/events-hashers', {
   Map: EventsHashers,
   List: EventsHashers.List,
-  idProp: 'id',
-  name: 'events-hashers',
-  algebra
+  name: 'events-hashers'
 });
 
 EventsHashers.paymentRates = [

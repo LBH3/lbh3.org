@@ -35,7 +35,7 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const urlId = this.urlId;
       if (urlId) {
-        return Erection.connection.getList({
+        return Erection.getList({
           urlId
         }).then(erections => {
           this.erection = erections[0];

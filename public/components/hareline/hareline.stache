@@ -39,8 +39,8 @@
 {{/if}}
 
 {{#if eventsByMonth}}
-  {{#each eventsByMonth month=value}}
+  {{#for(month of eventsByMonth)}}
     <h3>{{month.name}} {{month.year}}</h3>
     <lbh3-run-list month:from="month" showFutureTools:from="true" />
-  {{/each}}
+  {{/for}}
 {{/if}}

@@ -1,15 +1,14 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 
 const BoredPosition = DefineMap.extend({
   seal: false
 }, {
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   createdAt: 'any',
   updatedAt: 'any',
   pluralName: 'string',
@@ -21,16 +20,10 @@ BoredPosition.List = DefineList.extend({
   '#': BoredPosition
 });
 
-BoredPosition.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/bored-positions'),
+BoredPosition.connection = feathersModel('/api/bored-positions', {
   Map: BoredPosition,
   List: BoredPosition.List,
-  idProp: 'id',
-  name: 'bored-positions',
-  algebra
+  name: 'bored-positions'
 });
 
 export default BoredPosition;

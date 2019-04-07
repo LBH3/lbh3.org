@@ -26,7 +26,7 @@ export const ViewModel = DefineMap.extend({
   hashersPromise: {
     get: function() {
       const searchText = (this.searchText) ? this.searchText.trim() : '';
-      return Hasher.connection.getList({
+      return Hasher.getList({
         headshotUrl: this.searchNoHeadshot ? '' : undefined,
         $limit,
         search: searchText || undefined,

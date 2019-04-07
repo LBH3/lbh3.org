@@ -78,7 +78,7 @@
             </tr>
           </thead>
           <tbody>
-            {{#each hashers hasher=value}}
+            {{#for(hasher of hashers)}}
               <tr>
                 {{#if hasher.hasName}}
                   <td>
@@ -112,21 +112,21 @@
                   </td>
                 {{/if}}
               </tr>
-            {{/each}}
+            {{/for}}
           </tbody>
         </table>
       </div>
 
       {{#if pages}}
         <nav class="nav nav-pills">
-          {{#each pages page=value}}
+          {{#for(page of pages)}}
             <a
               class="{{#is scope.vm.currentPage page}}active{{/is}} nav-link text-sm-center"
               href="{{scope.vm.routeForPage(page)}}"
             >
               {{page}}
             </a>
-          {{/each}}
+          {{/for}}
         </nav>
       {{/if}}
 

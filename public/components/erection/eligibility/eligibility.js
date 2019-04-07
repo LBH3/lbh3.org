@@ -24,14 +24,14 @@ export const ViewModel = DefineMap.extend({
   get electionEligibilityPromise() {
     const election = this.election;
     if (election) {
-      return ElectionEligibility.connection.getList({
+      return ElectionEligibility.getList({
         electionId: election.id
       });
     }
   },
 
   get electionPromise() {
-    return Election.connection.getList({
+    return Election.getList({
       urlId: this.urlId
     });
   },

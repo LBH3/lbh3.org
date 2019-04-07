@@ -15,7 +15,7 @@ export default Component.extend({
     get electionsPromise() {
       if (this.showUpcomingElections) {
         const currentDate = new Date();
-        return Election.connection.getList({
+        return Election.getList({
           $limit: 100,
           $sort: {
             endDatetime: 1

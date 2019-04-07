@@ -1,35 +1,25 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
-import feathersClient from './feathers-client';
-import feathersQueryLogic from 'feathers-query-logic';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import loader from '@loader';
-import QueryLogic from 'can-query-logic';
 
 const Place = DefineMap.extend({
   seal: false
 }, {
-  id: 'string'
+  id: {
+    identity: true,
+    type: 'string'
+  }
 });
 
 Place.List = DefineList.extend({
   '#': Place
 });
 
-Place.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/places'),
+Place.connection = feathersModel('/api/places', {
   Map: Place,
   List: Place.List,
-  idProp: 'id',
-  name: 'place',
-  algebra,
-  queryLogic: new QueryLogic(Place, feathersQueryLogic)
+  name: 'place'
 });
 
 Place.fromGoogle = function(googlePlace) {

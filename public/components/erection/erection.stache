@@ -143,7 +143,7 @@
                         </div>
                         <div class="col-md">
                           <h5>{{election.schema.awards.title}}</h5>
-                          {{#each(election.schema.awards.races, award=value)}}
+                          {{#for(award of election.schema.awards.races)}}
                             <hr>
                             <h6>{{title}}</h6>
                             {{#switch(type)}}
@@ -216,7 +216,7 @@
                                 {{/if}}
                               {{/case}}
                             {{/switch}}
-                          {{/each}}
+                          {{/for}}
                         </div>
                       </div>
                       <hr>
@@ -359,7 +359,7 @@
                         </div>
                         <div class="col-md">
                           <h4>{{election.schema.awards.title}}</h4>
-                          {{#each(election.schema.awards.races, award=value)}}
+                          {{#for(award of election.schema.awards.races)}}
                             {{#switch(type)}}
                               {{#case('hasher')}}
                                 {{#if(options)}}
@@ -533,7 +533,7 @@
                                 </div>
                               {{/case}}
                             {{/switch}}
-                          {{/each}}
+                          {{/for}}
                         </div>
                       </div>
 
@@ -588,7 +588,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{#each electionEligibility.runs run=value}}
+                    {{#for(run of electionEligibility.runs)}}
                       <tr>
                         <td>{{run.event.startDateWithYearString}}</td>
                         <td>{{run.trailNumber}}</td>
@@ -596,7 +596,7 @@
                         <td>{{{run.event.shortLocationHtml}}}</td>
                         <td>{{{run.event.nameHtml}}}</td>
                       </tr>
-                    {{/each}}
+                    {{/for}}
                   </tbody>
                 </table>
               </div>

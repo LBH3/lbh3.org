@@ -30,10 +30,22 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
-  showHashit: 'boolean',
-  showNotes: 'boolean',
-  showOnOn: 'boolean',
-  showScribe: 'boolean',
+  showHashit: {
+    default: false,
+    type: 'boolean'
+  },
+  showNotes: {
+    default: false,
+    type: 'boolean'
+  },
+  showOnOn: {
+    default: false,
+    type: 'boolean'
+  },
+  showScribe: {
+    default: false,
+    type: 'boolean'
+  },
   get title() {
     return `${this.ogTitle} | LBH3`;
   },

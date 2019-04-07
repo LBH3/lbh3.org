@@ -31,13 +31,13 @@
           </tr>
         </thead>
         <tbody>
-          {{#each users user=value}}
+          {{#for(user of users)}}
             <tr>
               <td>
-                {{#if facebookProfile}}
+                {{#if user.facebookProfile}}
                   <span class="fab fa-lg fa-facebook-square"></span>
                 {{/if}}
-                {{#if googleProfile}}
+                {{#if user.googleProfile}}
                   <span class="fab fa-lg fa-google"></span>
                 {{/if}}
                 {{user.email}}
@@ -68,7 +68,7 @@
                 </a>
               </td>
             </tr>
-          {{/each}}
+          {{/for}}
         </tbody>
       </table>
     </div>

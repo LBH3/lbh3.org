@@ -37,7 +37,7 @@ export const ViewModel = DefineMap.extend({
   },
   lastTrailPromise: {
     get: function() {
-      return Event.connection.getList({
+      return Event.getList({
         $limit: 1,
         $sort: {
           startDatetime: -1

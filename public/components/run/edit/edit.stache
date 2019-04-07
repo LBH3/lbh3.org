@@ -265,11 +265,11 @@
                 value:bind="event.specialEventId"
               >
                 <option value="0"></option>
-                {{#each specialEventPromise.value specialEvent=value}}
+                {{#for(specialEvent of specialEventPromise.value)}}
                   <option value="{{specialEvent.id}}">
                     {{specialEvent.urlId}} {{specialEvent.year}}
                   </option>
-                {{/each}}
+                {{/for}}
               </select>
             </div>
           </div>
@@ -403,7 +403,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each hashers hasher=value}}
+              {{#for(hasher of hashers)}}
                 <tr>
                   <td>{{scope.vm.plusOne(scope.index)}}</td>
                   <td>
@@ -428,7 +428,7 @@
                     </button>
                   </td>
                 </tr>
-              {{/each}}
+              {{/for}}
               <tr>
                 <td></td>
                 <td>
@@ -466,11 +466,11 @@
                     id="payment-tier"
                     value:bind="newHasherForRun.paymentTier"
                   >
-                    {{#each paymentRates paymentRate=value}}
+                    {{#for(paymentRate of paymentRates)}}
                       <option value="{{paymentRate.tier}}">
                         {{paymentRate.title}}
                       </option>
-                    {{/each}}
+                    {{/for}}
                   </select>
                 </td>
                 <td>
@@ -531,11 +531,11 @@
                       value:bind="newPatch.hasherId"
                     >
                       <option></option>
-                      {{#each patchHashers hasher=value}}
+                      {{#for(hasher of patchHashers)}}
                         <option value="{{hasher.hasherId}}">
                           {{hasher.hashOrJustName}}
                         </option>
-                      {{/each}}
+                      {{/for}}
                     </select>
                   </td>
                   <td>

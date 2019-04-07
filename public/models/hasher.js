@@ -1,16 +1,10 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import EventsHashers from './events-hashers';
-import feathersClient from './feathers-client';
-import feathersQueryLogic from 'feathers-query-logic';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import marked from 'marked';
 import moment from 'moment-timezone';
 import Patch from './patch';
-import QueryLogic from 'can-query-logic';
 
 marked.setOptions({
   breaks: true,
@@ -40,7 +34,10 @@ const emailAddressesPropDefinition = {
 const Hasher = DefineMap.extend({
   seal: false
 }, {
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   createdAt: 'any',
   updatedAt: 'any',
   addressCountry: 'string',
@@ -328,17 +325,10 @@ Hasher.List = DefineList.extend({
   '#': Hasher
 });
 
-Hasher.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/hashers'),
+Hasher.connection = feathersModel('/api/hashers', {
   Map: Hasher,
   List: Hasher.List,
-  idProp: 'id',
-  name: 'hasher',
-  algebra,
-  queryLogic: new QueryLogic(Hasher, feathersQueryLogic)
+  name: 'hasher'
 });
 
 Hasher.groupByEmailing = function(hashers) {

@@ -142,9 +142,9 @@
         </label>
       </div>
       <div class="form-group col-md-9">
-        {{#each hasher.emailAddresses emailAddress=value}}
+        {{#for(emailAddress of hasher.emailAddresses)}}
           <input class="form-control mb-2" type="email" value:bind="emailAddress">
-        {{/each}}
+        {{/for}}
         <input class="form-control mb-2" id="emailAddresses" type="email" value:bind="additionalFields.emailAddress">
       </div>
     </div>
@@ -241,9 +241,9 @@
         </label>
       </div>
       <div class="form-group col-md-9">
-        {{#each hasher.emailAddressesPrivate emailAddress=value}}
+        {{#for(emailAddress of hasher.emailAddressesPrivate)}}
           <input class="form-control mb-2" type="email" value:bind="emailAddress">
-        {{/each}}
+        {{/for}}
         <input class="form-control mb-2" id="emailAddressesPrivate" type="email" value:bind="additionalFields.emailAddressPrivate">
       </div>
     </div>
@@ -323,11 +323,11 @@
       <strong>Fuck!</strong> The hasher’s info failed to save. {{editingHasherPromise.reason.message}}
       {{#if editingHasherPromise.reason.errors}}
         <ul>
-          {{#each editingHasherPromise.reason.errors error=value}}
+          {{#for(error of editingHasherPromise.reason.errors)}}
             <li>
               {{error.message}}
             </li>
-          {{/each}}
+          {{/for}}
         </ul>
       {{/if}}
     </div>

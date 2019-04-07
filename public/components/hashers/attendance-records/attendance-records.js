@@ -26,7 +26,7 @@ export const ViewModel = DefineMap.extend({
         }
       };
     }
-    return EventsHashers.connection.getList(query);
+    return EventsHashers.getList(query);
   },
 
   hashers: {

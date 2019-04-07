@@ -1,15 +1,14 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 
 const BoredYear = DefineMap.extend({
   seal: false
 }, {
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   createdAt: 'any',
   updatedAt: 'any',
   endDate: 'any',
@@ -21,16 +20,10 @@ BoredYear.List = DefineList.extend({
   '#': BoredYear
 });
 
-BoredYear.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/bored-years'),
+BoredYear.connection = feathersModel('/api/bored-years', {
   Map: BoredYear,
   List: BoredYear.List,
-  idProp: 'id',
-  name: 'bored-year',
-  algebra
+  name: 'bored-year'
 });
 
 export default BoredYear;

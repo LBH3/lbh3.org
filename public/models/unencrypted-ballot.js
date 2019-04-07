@@ -26,7 +26,10 @@ const UnencryptedBallot = DefineMap.extend({
     return new this.constructor(ballot);
   }
 }, {
-  id: 'any',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   'best-on-on': 'number',
   'best-rookie-harrier': 'number',
   'best-rookie-harriette': 'number',

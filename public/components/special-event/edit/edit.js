@@ -40,7 +40,7 @@ export const ViewModel = DefineMap.extend({
       const urlId = this.urlId;
       const year = this.year;
       if (urlId && year) {
-        return SpecialEvent.connection.getList({
+        return SpecialEvent.getList({
           urlId,
           year
         }).then(specialEvents => {
