@@ -135,7 +135,7 @@
     {{/if}}
     {{#if creatingElectionPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The new erection failed to save. {{creatingElectionPromise.reason.message}}
+        <strong>Fuck!</strong> The new erection failed to save. {{creatingElectionPromise.reason.xhr.message}}
       </div>
     {{/if}}
     {{#if creatingElectionPromise.isResolved}}

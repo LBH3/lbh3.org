@@ -62,7 +62,7 @@
 
   {{#if hashersPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The hashers couldn’t be retrieved. {{hashersPromise.reason.message}}
+      <strong>Fuck!</strong> The hashers couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
     </div>
   {{/if}}
 

@@ -34,7 +34,7 @@
     {{/if}}
     {{#if creatingSpecialEventPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The new special event failed to save. {{creatingSpecialEventPromise.reason.message}}
+        <strong>Fuck!</strong> The new special event failed to save. {{creatingSpecialEventPromise.reason.xhr.message}}
       </div>
     {{/if}}
     {{#if creatingSpecialEventPromise.isResolved}}

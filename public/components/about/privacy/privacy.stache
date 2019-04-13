@@ -47,7 +47,7 @@
       {{#if savingPromise.isRejected}}
         <div class="alert alert-danger" role="alert">
           <strong>Fuck!</strong> Something failed; you’ll need to try again.
-          {{savingPromise.reason.message}}
+          {{savingPromise.reason.xhr.message}}
         </div>
       {{/if}}
 

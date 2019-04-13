@@ -30,7 +30,7 @@
           <span class="fa fa-lg fa-exclamation-triangle"></span>
           <small>
             <strong>Fuck!</strong> Something failed; you’ll need to try again.
-            {{savingPromise.reason.message}}
+            {{savingPromise.reason.xhr.message}}
           </small>
         {{/if}}
         {{#if savingPromise.isResolved}}

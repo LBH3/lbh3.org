@@ -33,7 +33,7 @@
   {{/if}}
   {{#if creatingTrailPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The new trail failed to save. {{creatingTrailPromise.reason.message}}
+      <strong>Fuck!</strong> The new trail failed to save. {{creatingTrailPromise.reason.xhr.message}}
     </div>
   {{/if}}
   {{#if creatingTrailPromise.isResolved}}

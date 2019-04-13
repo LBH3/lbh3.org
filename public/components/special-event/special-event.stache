@@ -10,7 +10,7 @@
 
 {{#if specialEventPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The event couldn’t be retrieved. {{specialEventPromise.reason.message}}
+    <strong>Fuck!</strong> The event couldn’t be retrieved. {{specialEventPromise.reason.xhr.message}}
   </div>
 {{/if}}
 

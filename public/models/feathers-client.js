@@ -10,6 +10,7 @@ const jQueryReplacement = {
   ajax: function(request) {
     request.beforeSend = (xhr) => {
       if (request.headers) {
+        delete request.headers['Content-Type'];// Otherwise this gets set twice
         for (let header in request.headers) {
           xhr.setRequestHeader(header, request.headers[header]);
         }

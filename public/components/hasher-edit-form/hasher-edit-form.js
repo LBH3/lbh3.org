@@ -1,6 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Hasher from '~/models/hasher';
+import Session from '~/models/session';
 import './hasher-edit-form.less';
 import view from './hasher-edit-form.stache';
 
@@ -58,6 +59,10 @@ export const ViewModel = DefineMap.extend({
 
   saveSuccessMessage: {
     default: 'The hasher’s info has been updated.'
+  },
+
+  get session() {
+    return Session.current;
   }
 });
 

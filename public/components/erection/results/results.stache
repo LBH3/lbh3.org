@@ -32,7 +32,7 @@
 
   {{#if ballotsPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The ballots couldn’t be retrieved. {{ballotsPromise.reason.message}}
+      <strong>Fuck!</strong> The ballots couldn’t be retrieved. {{ballotsPromise.reason.xhr.message}}
     </div>
   {{/if}}
 

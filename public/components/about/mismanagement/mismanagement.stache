@@ -8,7 +8,7 @@
 
 {{#if yearsPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The Mismanagement years couldn’t be retrieved. {{yearsPromise.reason.message}}
+    <strong>Fuck!</strong> The Mismanagement years couldn’t be retrieved. {{yearsPromise.reason.xhr.message}}
   </div>
 {{/if}}
 

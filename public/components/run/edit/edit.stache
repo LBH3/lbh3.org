@@ -24,7 +24,7 @@
   {{/if}}
   {{#if eventPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The trail failed to load. {{eventPromise.reason.message}}
+      <strong>Fuck!</strong> The trail failed to load. {{eventPromise.reason.xhr.message}}
     </div>
   {{/if}}
   {{#if event}}
@@ -286,7 +286,7 @@
           <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.message}}
+          <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.xhr.message}}
         </div>
       {{/if}}
       {{#if editingEventPromise.isResolved}}
@@ -369,7 +369,7 @@
 
       {{#if hashersPromise.isRejected}}
         <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
+          <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
         </div>
       {{/if}}
 
@@ -490,7 +490,7 @@
                     type="submit"
                   >
                     {{#if addingHasherPromise.isRejected}}
-                      <span class="fa fa-exclamation-triangle" title="{{addingHasherPromise.reason.message}}"></span>
+                      <span class="fa fa-exclamation-triangle" title="{{addingHasherPromise.reason.xhr.message}}"></span>
                     {{else}}
                       <span class="fa fa-plus"></span>
                     {{/if}}
@@ -568,7 +568,7 @@
                       type="submit"
                     >
                       {{#if addingPatchPromise.isRejected}}
-                        <span class="fa fa-exclamation-triangle" title="{{addingPatchPromise.reason.message}}"></span>
+                        <span class="fa fa-exclamation-triangle" title="{{addingPatchPromise.reason.xhr.message}}"></span>
                       {{else}}
                         <span class="fa fa-plus"></span>
                       {{/if}}

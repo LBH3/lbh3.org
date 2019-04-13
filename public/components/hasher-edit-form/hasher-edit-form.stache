@@ -320,7 +320,7 @@
       <button aria-label="Close" class="close" type="button" on:click="resetEditingHasherPromise()">
         <span aria-hidden="true">&times;</span>
       </button>
-      <strong>Fuck!</strong> The hasher’s info failed to save. {{editingHasherPromise.reason.message}}
+      <strong>Fuck!</strong> The hasher’s info failed to save. {{editingHasherPromise.reason.xhr.message}}
       {{#if editingHasherPromise.reason.errors}}
         <ul>
           {{#for(error of editingHasherPromise.reason.errors)}}

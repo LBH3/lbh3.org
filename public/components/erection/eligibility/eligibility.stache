@@ -20,7 +20,7 @@
 
   {{#if electionEligibilityPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The eligible hashers couldn’t be retrieved. {{electionEligibilityPromise.reason.message}}
+      <strong>Fuck!</strong> The eligible hashers couldn’t be retrieved. {{electionEligibilityPromise.reason.xhr.message}}
     </div>
   {{/if}}
 

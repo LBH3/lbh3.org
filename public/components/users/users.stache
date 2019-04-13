@@ -15,7 +15,7 @@
 
   {{#if usersPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The users couldn’t be retrieved. {{usersPromise.reason.message}}
+      <strong>Fuck!</strong> The users couldn’t be retrieved. {{usersPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
