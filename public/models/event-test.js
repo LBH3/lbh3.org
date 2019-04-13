@@ -10,5 +10,5 @@ QUnit.test('getList', function(assert) {
     assert.equal(items.length, 2);
     assert.equal(items.item(0).trailNumber, 1471);
     done();
-  });
+  }, done);
 });

@@ -12,8 +12,8 @@ QUnit.test('createTrail resets the form', function(assert) {
     trailNumber: 1800
   });
   assert.equal(vm.trailNumber, 1800);
-  vm.createTrail().then(function() {
+  vm.createTrail().then(function(trail) {
     assert.equal(vm.trailNumber, 1801);
-    done();
-  });
+    trail.destroy().then(done, done);
+  }, done);
 });
