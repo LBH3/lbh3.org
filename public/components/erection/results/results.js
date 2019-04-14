@@ -19,7 +19,7 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       return this.electionPromise.then(elections => {
         const election = elections[0];
-        return Ballot.connection.getList({
+        return Ballot.getList({
           $limit: 500,
           $sort: {
             createdAt: -1
@@ -75,7 +75,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   get electionPromise() {
-    return Election.connection.getList({
+    return Election.getList({
       urlId: this.urlId
     });
   },
@@ -190,7 +190,7 @@ export const ViewModel = DefineMap.extend({
       const promises = runTrailNumbers.filter(trailNumber => {
         return trailNumber;
       }).map(trailNumber => {
-        return Event.connection.getList({
+        return Event.getList({
           trailNumber
         }).then(events => {
           return events[0];

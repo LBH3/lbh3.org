@@ -278,5 +278,7 @@ module.exports = function (app) {
   app.use(ssr({
     config: `${__dirname}/../../public/package.json!npm`,
     main: 'lbh3/index.stache!done-autorender'
+  }, {
+    strategy: 'seo'
   }));
 };

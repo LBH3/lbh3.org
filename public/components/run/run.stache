@@ -12,7 +12,7 @@
 
 {{#if eventPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The run couldn’t be retrieved. {{eventPromise.reason.message}}
+    <strong>Fuck!</strong> The run couldn’t be retrieved. {{eventPromise.reason.xhr.message}}
   </div>
 {{/if}}
 
@@ -208,7 +208,7 @@
           Fetching patches…
         {{/if}}
         {{#if event.patchesPromise.isRejected}}
-          <strong>Fuck!</strong> The patches couldn’t be retrieved. {{event.patchesPromise.reason.message}}
+          <strong>Fuck!</strong> The patches couldn’t be retrieved. {{event.patchesPromise.reason.xhr.message}}
         {{/if}}
         {{#if event.patchesPromise.isResolved}}
           {{event.patchesFormatted}}
@@ -258,7 +258,7 @@
 
     {{#if hashersPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
+        <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
       </div>
     {{/if}}
 
@@ -290,23 +290,23 @@
               <tbody>
                 {{#each sortedHashers}}
                   <tr>
-                    <td>{{scope.root.plusOne(scope.index)}}</td>
+                    <td>{{scope.vm.plusOne(scope.index)}}</td>
                     <td>{{role}}</td>
                     <td>
                       {{paymentNotesAndType}}
                     </td>
                     <td>
-                      <a href="{{scope.root.routeForHasher(this)}}">
+                      <a href="{{scope.vm.routeForHasher(this)}}">
                         {{hashName}}
                       </a>
                     </td>
                     <td>
-                      <a href="{{scope.root.routeForHasher(this)}}">
+                      <a href="{{scope.vm.routeForHasher(this)}}">
                         {{familyName}}
                       </a>
                     </td>
                     <td>
-                      <a href="{{scope.root.routeForHasher(this)}}">
+                      <a href="{{scope.vm.routeForHasher(this)}}">
                         {{givenName}}
                       </a>
                     </td>
@@ -337,7 +337,7 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each cashReport.records record=value}}
+                {{#for(record of cashReport.records)}}
                   <tr>
                     <td>{{record.title}}</td>
                     <td>
@@ -360,7 +360,7 @@
                       {{/eq}}
                     </td>
                   </tr>
-                {{/each}}
+                {{/for}}
               </tbody>
               <tfoot>
                 <tr>

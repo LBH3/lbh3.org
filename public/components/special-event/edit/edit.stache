@@ -16,7 +16,7 @@
 
   {{#if specialEventPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The event failed to load. {{specialEventPromise.reason.message}}
+      <strong>Fuck!</strong> The event failed to load. {{specialEventPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
@@ -43,7 +43,7 @@
           {{/if}}
           {{#if editSpecialEventPromise.isRejected}}
             <div class="alert alert-danger" role="alert">
-              <strong>Fuck!</strong> The special event failed to save. {{editSpecialEventPromise.reason.message}}
+              <strong>Fuck!</strong> The special event failed to save. {{editSpecialEventPromise.reason.xhr.message}}
             </div>
           {{/if}}
           {{#if editSpecialEventPromise.isResolved}}

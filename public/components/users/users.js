@@ -30,7 +30,7 @@ export const ViewModel = DefineMap.extend({
   },
   usersPromise: {
     get: function() {
-      return User.connection.getList({
+      return User.getList({
         $limit: 50,
         $sort: {
           updatedAt: -1

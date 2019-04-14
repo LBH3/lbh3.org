@@ -100,7 +100,7 @@ export const ViewModel = DefineMap.extend({
   },
   boredPositionsPromise: {
     get: function() {
-      return BoredHasher.connection.getList({
+      return BoredHasher.getList({
         hasherId: this.id,
         $limit,
         $sort: {
@@ -184,7 +184,7 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const hasherId = this.hasher.id;
       if (hasherId) {
-        return Patch.connection.getList({
+        return Patch.getList({
           hasherId,
           $limit: 500,
           $sort: {
@@ -224,7 +224,7 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const hasherId = this.hasher.id;
       if (hasherId) {
-        return EventsHashers.connection.getList({
+        return EventsHashers.getList({
           hasherId,
           $limit,
           $skip: this.skip,

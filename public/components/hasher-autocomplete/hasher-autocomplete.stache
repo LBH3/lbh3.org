@@ -14,7 +14,7 @@
   <div class="awesomplete">
     <ul role="listbox">
       <li>
-        <strong>Fuck!</strong> Hashers couldn’t be fetched. {{hashersPromise.reason.message}}
+        <strong>Fuck!</strong> Hashers couldn’t be fetched. {{hashersPromise.reason.xhr.message}}
       </li>
     </ul>
   </div>

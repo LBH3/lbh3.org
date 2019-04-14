@@ -1,13 +1,9 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import CryptoJSAES from 'crypto-js/aes';
 import CryptoJSCore from 'crypto-js/core';
 import CryptoJSLib from 'crypto-js/lib-typedarrays';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import Hasher from '~/models/hasher';
 import moment from 'moment-timezone';
 import UnencryptedBallot from './unencrypted-ballot';
@@ -37,7 +33,10 @@ const Ballot = DefineMap.extend({
     });
   }
 }, {
-  id: 'any',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   createdAtFormatted: {
     serialize: false,
     get: function() {
@@ -110,15 +109,10 @@ Ballot.List = DefineList.extend({
   '#': Ballot
 });
 
-Ballot.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/ballots'),
+Ballot.connection = feathersModel('/api/ballots', {
   Map: Ballot,
   List: Ballot.List,
-  name: 'ballot',
-  algebra
+  name: 'ballot'
 });
 
 export default Ballot;

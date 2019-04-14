@@ -1,17 +1,16 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import Hasher from '~/models/hasher';
 import moment from 'moment';
 
 const PaperBallot = DefineMap.extend({
   seal: false
 }, {
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   addedByHasher: {
     get: function(lastValue, setValue) {
       const addedByHasherPromise = this.addedByHasherPromise;
@@ -78,15 +77,10 @@ PaperBallot.List = DefineList.extend({
   '#': PaperBallot
 });
 
-PaperBallot.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/paper-ballots'),
+PaperBallot.connection = feathersModel('/api/paper-ballots', {
   Map: PaperBallot,
   List: PaperBallot.List,
-  name: 'paper-ballot',
-  algebra
+  name: 'paper-ballot'
 });
 
 export default PaperBallot;

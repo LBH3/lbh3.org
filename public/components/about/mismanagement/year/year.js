@@ -52,7 +52,7 @@ export const ViewModel = DefineMap.extend({
         return;
       }
 
-      return BoredHasher.connection.getList({
+      return BoredHasher.getList({
         $limit: 100,
         $sort: {
           startDate: 1

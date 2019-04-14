@@ -15,7 +15,7 @@
 
   {{#if hasherPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.message}}
+      <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
@@ -170,8 +170,8 @@
               {{/if}}
               {{#if headshotPromise.isRejected}}
                 <span class="fa fa-exclamation-triangle"></span>
-                {{#if headshotPromise.reason.message}}
-                  {{headshotPromise.reason.message}}
+                {{#if headshotPromise.reason.xhr.message}}
+                  {{headshotPromise.reason.xhr.message}}
                 {{else}}
                   Unknown error
                 {{/if}}
@@ -463,7 +463,7 @@
 
     {{#if boredPositionsPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> Couldn’t retrieve when this hasher has served on the Bored. {{boredPositionsPromise.reason.message}}
+        <strong>Fuck!</strong> Couldn’t retrieve when this hasher has served on the Bored. {{boredPositionsPromise.reason.xhr.message}}
       </div>
     {{/if}}
 
@@ -498,7 +498,7 @@
 
     {{#if patchesPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The hasher’s patches couldn’t be retrieved. {{patchesPromise.reason.message}}
+        <strong>Fuck!</strong> The hasher’s patches couldn’t be retrieved. {{patchesPromise.reason.xhr.message}}
       </div>
     {{/if}}
 
@@ -518,7 +518,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each patches patch=value}}
+              {{#for(patch of patches)}}
                 <tr>
                   <td class="text-nowrap">{{patch.number}} {{patch.type}}s</td>
                   <td>
@@ -547,7 +547,7 @@
                     />
                   </td>
                 </tr>
-              {{/each}}
+              {{/for}}
             </tbody>
           </table>
         </div>
@@ -562,14 +562,14 @@
 
     {{#if pages.length}}
       <nav class="nav nav-pills">
-        {{#each pages page=value}}
+        {{#for(page of pages)}}
           <a
-            class="{{#is scope.root.currentPage page}}active{{/is}} nav-link text-sm-center"
-            href="{{scope.root.routeForPage(page)}}"
+            class="{{#is scope.vm.currentPage page}}active{{/is}} nav-link text-sm-center"
+            href="{{scope.vm.routeForPage(page)}}"
           >
             {{page}}
           </a>
-        {{/each}}
+        {{/for}}
       </nav>
     {{/if}}
 
@@ -581,7 +581,7 @@
 
     {{#if runsPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The hasher’s runs couldn’t be retrieved. {{runsPromise.reason.message}}
+        <strong>Fuck!</strong> The hasher’s runs couldn’t be retrieved. {{runsPromise.reason.xhr.message}}
       </div>
     {{/if}}
 
@@ -601,7 +601,7 @@
               </tr>
             </thead>
             <tbody>
-              {{#each runs run=value}}
+              {{#for(run of runs)}}
                 <tr>
                   <td>
                     {{#if run.event.trailNumber}}
@@ -634,7 +634,7 @@
                     />
                   </td>
                 </tr>
-              {{/each}}
+              {{/for}}
             </tbody>
           </table>
         </div>

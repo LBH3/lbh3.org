@@ -1,16 +1,15 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/list';
 import DefineMap from 'can-define/map/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import Hasher from './hasher';
 
 var User = DefineMap.extend('User', {
   seal: false
 }, {
-  id: 'any',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   canAddHashers: {
     type: 'boolean',
     serialize: false
@@ -138,17 +137,10 @@ User.List = DefineList.extend({
   '#': User
 });
 
-User.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
+User.connection = feathersModel('/api/users', {
   Map: User,
   List: User.List,
-  feathersService: feathersClient.service('/api/users'),
-  name: 'users',
-  algebra
+  name: 'users'
 });
-
-User.algebra = algebra;
 
 export default User;

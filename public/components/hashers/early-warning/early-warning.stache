@@ -14,7 +14,7 @@
 
   {{#if hashersPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The early warning report couldn’t be retrieved. {{hashersPromise.reason.message}}
+      <strong>Fuck!</strong> The early warning report couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
@@ -33,7 +33,7 @@
             {{#each upcummingPatches}}
               <tr>
                 <td>
-                  <a href="{{scope.root.routeForHasher(hasher)}}">
+                  <a href="{{scope.vm.routeForHasher(hasher)}}">
                     {{hasher.hashName}}
                   </a>
                 </td>

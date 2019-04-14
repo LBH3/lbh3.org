@@ -24,7 +24,7 @@
   {{/if}}
   {{#if eventPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The trail failed to load. {{eventPromise.reason.message}}
+      <strong>Fuck!</strong> The trail failed to load. {{eventPromise.reason.xhr.message}}
     </div>
   {{/if}}
   {{#if event}}
@@ -79,7 +79,7 @@
           </label>
           <div class="d-flex">
             <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
-            <button class="btn btn-link prevent-default" on:click="scope.root.resetLocation()" type="button">
+            <button class="btn btn-link prevent-default" on:click="scope.vm.resetLocation()" type="button">
               <span class="fa fa-times"></span>
             </button>
           </div>
@@ -115,7 +115,7 @@
           </label>
           <div class="d-flex">
             <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
-            <button class="btn btn-link prevent-default" on:click="scope.root.resetOnOn()" type="button">
+            <button class="btn btn-link prevent-default" on:click="scope.vm.resetOnOn()" type="button">
               <span class="fa fa-times"></span>
             </button>
           </div>
@@ -265,11 +265,11 @@
                 value:bind="event.specialEventId"
               >
                 <option value="0"></option>
-                {{#each specialEventPromise.value specialEvent=value}}
+                {{#for(specialEvent of specialEventPromise.value)}}
                   <option value="{{specialEvent.id}}">
                     {{specialEvent.urlId}} {{specialEvent.year}}
                   </option>
-                {{/each}}
+                {{/for}}
               </select>
             </div>
           </div>
@@ -286,7 +286,7 @@
           <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.message}}
+          <strong>Fuck!</strong> The trail failed to save. {{editingEventPromise.reason.xhr.message}}
         </div>
       {{/if}}
       {{#if editingEventPromise.isResolved}}
@@ -369,7 +369,7 @@
 
       {{#if hashersPromise.isRejected}}
         <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.message}}
+          <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
         </div>
       {{/if}}
 
@@ -403,11 +403,11 @@
               </tr>
             </thead>
             <tbody>
-              {{#each hashers hasher=value}}
+              {{#for(hasher of hashers)}}
                 <tr>
-                  <td>{{scope.root.plusOne(scope.index)}}</td>
+                  <td>{{scope.vm.plusOne(scope.index)}}</td>
                   <td>
-                    <a href="{{scope.root.routeForHasher(hasher)}}">
+                    <a href="{{scope.vm.routeForHasher(hasher)}}">
                       {{hasher.hashOrJustName}}
                     </a>
                   </td>
@@ -421,14 +421,14 @@
                   <td class="text-center">
                     <button
                       class="btn btn-danger btn-sm prevent-default"
-                      on:click="scope.root.removeHasher(hasher)"
+                      on:click="scope.vm.removeHasher(hasher)"
                       type="button"
                     >
                       <span class="fa fa-times"></span>
                     </button>
                   </td>
                 </tr>
-              {{/each}}
+              {{/for}}
               <tr>
                 <td></td>
                 <td>
@@ -466,11 +466,11 @@
                     id="payment-tier"
                     value:bind="newHasherForRun.paymentTier"
                   >
-                    {{#each paymentRates paymentRate=value}}
+                    {{#for(paymentRate of paymentRates)}}
                       <option value="{{paymentRate.tier}}">
                         {{paymentRate.title}}
                       </option>
-                    {{/each}}
+                    {{/for}}
                   </select>
                 </td>
                 <td>
@@ -490,7 +490,7 @@
                     type="submit"
                   >
                     {{#if addingHasherPromise.isRejected}}
-                      <span class="fa fa-exclamation-triangle" title="{{addingHasherPromise.reason.message}}"></span>
+                      <span class="fa fa-exclamation-triangle" title="{{addingHasherPromise.reason.xhr.message}}"></span>
                     {{else}}
                       <span class="fa fa-plus"></span>
                     {{/if}}
@@ -531,11 +531,11 @@
                       value:bind="newPatch.hasherId"
                     >
                       <option></option>
-                      {{#each patchHashers hasher=value}}
+                      {{#for(hasher of patchHashers)}}
                         <option value="{{hasher.hasherId}}">
                           {{hasher.hashOrJustName}}
                         </option>
-                      {{/each}}
+                      {{/for}}
                     </select>
                   </td>
                   <td>
@@ -568,7 +568,7 @@
                       type="submit"
                     >
                       {{#if addingPatchPromise.isRejected}}
-                        <span class="fa fa-exclamation-triangle" title="{{addingPatchPromise.reason.message}}"></span>
+                        <span class="fa fa-exclamation-triangle" title="{{addingPatchPromise.reason.xhr.message}}"></span>
                       {{else}}
                         <span class="fa fa-plus"></span>
                       {{/if}}
@@ -577,7 +577,7 @@
                 </tr>
                 {{#each patches}}
                   <tr>
-                    <td>{{scope.root.plusOne(scope.index)}}</td>
+                    <td>{{scope.vm.plusOne(scope.index)}}</td>
                     <td>
                       {{#if hasher}}
                         {{hasher.hashOrJustName}}
@@ -588,7 +588,7 @@
                     <td class="text-center">
                       <button
                         class="btn btn-danger btn-sm prevent-default"
-                        on:click="scope.root.removePatch(this)"
+                        on:click="scope.vm.removePatch(this)"
                         type="button"
                       >
                         <span class="fa fa-times"></span>

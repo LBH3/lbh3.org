@@ -17,7 +17,7 @@
 
   {{#if erectionPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The erection failed to load. {{erectionPromise.reason.message}}
+      <strong>Fuck!</strong> The erection failed to load. {{erectionPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
@@ -147,7 +147,7 @@
       {{/if}}
       {{#if editErectionPromise.isRejected}}
         <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> The special erection failed to save. {{editErectionPromise.reason.message}}
+          <strong>Fuck!</strong> The special erection failed to save. {{editErectionPromise.reason.xhr.message}}
         </div>
       {{/if}}
       {{#if editErectionPromise.isResolved}}

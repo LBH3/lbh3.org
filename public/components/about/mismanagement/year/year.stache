@@ -9,7 +9,7 @@
 
 {{#if hashersPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The Mismanagement list couldn’t be retrieved. {{positionsPromise.reason.message}}
+    <strong>Fuck!</strong> The Mismanagement list couldn’t be retrieved. {{positionsPromise.reason.xhr.message}}
   </div>
 {{/if}}
 
@@ -31,7 +31,7 @@
 
       {{#if promise.isRejected}}
         <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> The position couldn’t be retrieved. {{promise.reason.message}}
+          <strong>Fuck!</strong> The position couldn’t be retrieved. {{promise.reason.xhr.message}}
         </div>
       {{/if}}
 
@@ -42,7 +42,7 @@
           {{else}}
             {{promise.value.pluralName}}
           {{/is}}
-          {{#if scope.root.showEmailLink}}
+          {{#if scope.vm.showEmailLink}}
             <small class="d-print-none">
               <a href="mailto:{{promise.value.emailAddress}}" title="Send an email">
                 <span class="fa fa-envelope"></span>
@@ -58,12 +58,12 @@
               {{/if}}
 
               {{#if isRejected}}
-                <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{reason.message}}
+                <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{reason.xhr.message}}
               {{/if}}
 
               {{#if isResolved}}
-                {{#if scope.root.session.user.canViewDirectoryInfo}}
-                  <a href="{{scope.root.routeForHasher(value)}}">
+                {{#if scope.vm.session.user.canViewDirectoryInfo}}
+                  <a href="{{scope.vm.routeForHasher(value)}}">
                     {{value.hashName}}
                   </a>
                 {{else}}

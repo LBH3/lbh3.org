@@ -1,16 +1,16 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import EventsHashers from './events-hashers';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import { sortByHashOrJustName } from '~/components/run/sort-hashers';
 
 const ElectionEligibility = DefineMap.extend({
   seal: false
 }, {
+  id: {
+    identity: true,
+    type: 'number'
+  },
   familyName: 'string',
   givenName: 'string',
   hasherId: 'number',
@@ -42,15 +42,10 @@ ElectionEligibility.List = DefineList.extend({
   }
 });
 
-ElectionEligibility.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/election-eligibility'),
+ElectionEligibility.connection = feathersModel('/api/election-eligibility', {
   Map: ElectionEligibility,
   List: ElectionEligibility.List,
-  name: 'election-eligibility',
-  algebra
+  name: 'election-eligibility'
 });
 
 export default ElectionEligibility;

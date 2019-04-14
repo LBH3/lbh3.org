@@ -23,7 +23,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   get electionPromise() {
-    return Election.connection.getList({
+    return Election.getList({
       urlId: this.urlId
     });
   },
@@ -44,7 +44,7 @@ export const ViewModel = DefineMap.extend({
   get paperBallotsPromise() {
     const election = this.election;
     if (election) {
-      return PaperBallot.connection.getList({
+      return PaperBallot.getList({
         $limit: 500,
         electionId: election.id
       });

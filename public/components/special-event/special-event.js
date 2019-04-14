@@ -31,7 +31,7 @@ export const ViewModel = DefineMap.extend({
       const params = {
         urlId: this.urlId
       };
-      return SpecialEvent.connection.getList(params).then(specialEvents => {
+      return SpecialEvent.getList(params).then(specialEvents => {
         this.specialEvent = specialEvents[0];
       });
     }

@@ -21,7 +21,7 @@
 
   {{#if paperBallotsPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The paper ballots couldn’t be retrieved. {{paperBallotsPromise.reason.message}}
+      <strong>Fuck!</strong> The paper ballots couldn’t be retrieved. {{paperBallotsPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
@@ -76,7 +76,7 @@
     {{else}}
       {{#if newPaperBallotPromise.isRejected}}
         <div class="alert alert-danger mt-3" role="alert">
-          <strong>Fuck!</strong> The paper ballot couldn’t be saved. {{newPaperBallotPromise.reason.message}}
+          <strong>Fuck!</strong> The paper ballot couldn’t be saved. {{newPaperBallotPromise.reason.xhr.message}}
         </div>
       {{/if}}
       {{#if newPaperBallotPromise.isResolved}}

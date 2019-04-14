@@ -17,7 +17,7 @@
         <span class="fa fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
       {{/if}}
       {{#if savePromise.isRejected}}
-        <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{savePromise.reason.message}}"></span>
+        <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{savePromise.reason.xhr.message}}"></span>
       {{/if}}
       {{#if savePromise.isResolved}}
         {{#if event.photosUrl}}

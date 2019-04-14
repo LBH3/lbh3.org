@@ -29,6 +29,7 @@
     "heroku-postbuild": "npm run build",
     "install": "node install",
     "mocha": "mocha test/ --recursive --exit",
+    "mocha:debug": "mocha test/ --recursive --inspect-brk --exit",
     "sequelize:migrate": "sequelize db:migrate",
     "sequelize:migrate:rerun": "npm run sequelize:migrate:undo && npm run sequelize:migrate",
     "sequelize:migrate:undo": "sequelize db:migrate:undo",
@@ -57,8 +58,8 @@
     "compression": "^1.7.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
-    "done-ssr": "^2.1.2",
-    "done-ssr-middleware": "^2.0.0",
+    "done-ssr": "^3.2.7",
+    "done-ssr-middleware": "^3.0.0",
     "feathers-authentication-hooks": "^0.1.4",
     "feathers-hooks-common": "^3.7.1",
     "feathers-sequelize": "^2.4.0",
@@ -90,7 +91,7 @@
   "bundlesize": [
     {
       "path": "./public/dist/steal.production.js",
-      "maxSize": "26 kB"
+      "maxSize": "25 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/index.css",
@@ -98,7 +99,7 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/index.js",
-      "maxSize": "239 kB"
+      "maxSize": "214 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/home/home.css",
@@ -106,7 +107,7 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/components/home/home.js",
-      "maxSize": "4 kB"
+      "maxSize": "7 kB"
     }
   ]
 }

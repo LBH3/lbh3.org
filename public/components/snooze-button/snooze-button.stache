@@ -22,7 +22,7 @@
       <span class="fa fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
     {{/if}}
     {{#if uploadPromise.isRejected}}
-      <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{uploadPromise.reason.message}}"></span>
+      <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{uploadPromise.reason.xhr.message}}"></span>
     {{/if}}
     {{#if uploadPromise.isResolved}}
       {{#if event.snoozeUrlWithAuth}}
@@ -40,7 +40,7 @@
           <span class="fa fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
         {{/if}}
         {{#if removePromise.isRejected}}
-          <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{removePromise.reason.message}}"></span>
+          <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{removePromise.reason.xhr.message}}"></span>
         {{/if}}
       {{else}}
         <label class="m-0 p-0" title="Upload Snooze">

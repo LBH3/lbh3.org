@@ -8,21 +8,21 @@
 
 {{#if yearsPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The Mismanagement years couldn’t be retrieved. {{yearsPromise.reason.message}}
+    <strong>Fuck!</strong> The Mismanagement years couldn’t be retrieved. {{yearsPromise.reason.xhr.message}}
   </div>
 {{/if}}
 
 {{#if yearsPromise.isResolved}}
   {{#if years.length}}
     <nav class="nav nav-pills">
-      {{#each years yearObject=value}}
+      {{#for(yearObject of years)}}
         <a
-          class="{{#is yearObject.year ../year}}active{{/is}} nav-link text-sm-center"
-          href="{{scope.root.routeForYear(yearObject.year)}}"
+          class="{{#is yearObject.year this.year}}active{{/is}} nav-link text-sm-center"
+          href="{{this.routeForYear(yearObject.year)}}"
         >
           {{yearObject.year}}
         </a>
-      {{/each}}
+      {{/for}}
     </nav>
   {{else}}
     <div class="alert alert-info" role="alert">

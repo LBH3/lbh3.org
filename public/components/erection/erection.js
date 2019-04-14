@@ -100,7 +100,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       const year = election.year;
       const endDate = moment().year(year).endOf('year').toDate();
       const startDate = moment().year(year).startOf('year').toDate();
-      return Event.connection.getList({
+      return Event.getList({
         $limit: 100,
         $sort: {
           trailNumber: 1
@@ -127,7 +127,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     const election = this.election;
     const hasherId = this.user.hasherId;
     if (election && hasherId) {
-      return Ballot.connection.getList({
+      return Ballot.getList({
         $limit: 100,
         $sort: {
           createdAt: -1
@@ -164,14 +164,14 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     const election = this.election;
     const hasherId = this.user.hasherId;
     if (election && hasherId) {
-      return ElectionEligibility.connection.getList({
+      return ElectionEligibility.getList({
         electionId: election.id,
         hasherId
       });
     }
   },
   get electionPromise() {
-    return Election.connection.getList({
+    return Election.getList({
       urlId: this.urlId
     }).then(elections => {
       this.election = elections[0];
@@ -209,7 +209,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     if (allRuns) {
       const firstTrailNumber = allRuns[0].trailNumber;
       const lastTrailNumber = allRuns[allRuns.length - 1].trailNumber;
-      return EventsHashers.connection.getList({
+      return EventsHashers.getList({
         $limit: 500,
         role: {
           $iLike: {
@@ -244,7 +244,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     const election = this.election;
     const hasherId = this.user.hasherId;
     if (election && hasherId) {
-      return PaperBallot.connection.getList({
+      return PaperBallot.getList({
         $limit: 1,
         $sort: {
           createdAt: -1

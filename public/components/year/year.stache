@@ -8,19 +8,19 @@
 
 {{#if eventsPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The runs couldn’t be retrieved. {{eventsPromise.reason.message}}
+    <strong>Fuck!</strong> The runs couldn’t be retrieved. {{eventsPromise.reason.xhr.message}}
   </div>
 {{/if}}
 
-{{#if eventsByMonth}}
-  {{#each eventsByMonth month=value}}
+{{#if(eventsPromise.isResolved)}}
+  {{#for(month of eventsByMonth)}}
     <h3>{{month.name}} {{year}}</h3>
     <lbh3-run-list
       month:from="month"
-      showHashit:from="../showHashit"
-      showNotes:from="../showNotes"
-      showOnOn:from="../showOnOn"
-      showScribe:from="../showScribe"
+      showHashit:from="showHashit"
+      showNotes:from="showNotes"
+      showOnOn:from="showOnOn"
+      showScribe:from="showScribe"
     />
-  {{/each}}
+  {{/for}}
 {{/if}}

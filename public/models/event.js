@@ -1,16 +1,11 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import marked from 'marked';
 import moment from 'moment-timezone';
 import Patch from './patch';
 import Place from './place';
 import platform from 'steal-platform';
-import set from 'can-set';
 
 const defaultLocale = (platform.isNode) ? 'en-US' : undefined;
 const timeZone = 'America/Los_Angeles';
@@ -34,7 +29,10 @@ const localizedStringForDate = function(date, locales, options) {
 const Event = DefineMap.extend({
   seal: false
 }, {
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   createdAt: 'any',
   updatedAt: 'any',
   bringMd: 'string',
@@ -467,15 +465,10 @@ Event.List = DefineList.extend({
   '#': Event
 });
 
-Event.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/events'),
+Event.connection = feathersModel('/api/events', {
   Map: Event,
   List: Event.List,
-  name: 'event',
-  algebra
+  name: 'event'
 });
 
 const monthNames = [

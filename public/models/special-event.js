@@ -1,10 +1,6 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import marked from 'marked';
 
 marked.setOptions({
@@ -15,7 +11,10 @@ marked.setOptions({
 const SpecialEvent = DefineMap.extend({
   seal: false
 }, {
-  id: 'number',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   createdAt: 'any',
   updatedAt: 'any',
   descriptionHtml: {
@@ -42,15 +41,10 @@ SpecialEvent.List = DefineList.extend({
   '#': SpecialEvent
 });
 
-SpecialEvent.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/special-events'),
+SpecialEvent.connection = feathersModel('/api/special-events', {
   Map: SpecialEvent,
   List: SpecialEvent.List,
-  name: 'special-event',
-  algebra
+  name: 'special-event'
 });
 
 export default SpecialEvent;

@@ -23,7 +23,7 @@ export const ViewModel = DefineMap.extend({
   },
   hashersPromise: {
     get: function() {
-      return Hasher.connection.getList({
+      return Hasher.getList({
         $limit: 500,
         $sort: {
           runCount: -1

@@ -20,7 +20,7 @@
 
 {{#if hashersPromises.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The attendance records couldn’t be retrieved. {{hashersPromises.reason.message}}
+    <strong>Fuck!</strong> The attendance records couldn’t be retrieved. {{hashersPromises.reason.xhr.message}}
   </div>
 {{/if}}
 

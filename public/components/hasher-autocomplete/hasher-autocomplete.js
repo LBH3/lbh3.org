@@ -13,8 +13,8 @@ export const ViewModel = DefineMap.extend({
   hasherAwesompleteQuery: 'string',
 
   get hashersPromise() {
-    const hashersPromise = this.hasherAwesompleteQuery ? Hasher.connection.getList({
-      $search: this.hasherAwesompleteQuery,
+    const hashersPromise = this.hasherAwesompleteQuery ? Hasher.getList({
+      search: this.hasherAwesompleteQuery,
       $sort: {
         lastTrailDate: -1
       }
@@ -23,7 +23,8 @@ export const ViewModel = DefineMap.extend({
       this.hasherAwesomplete.list = [];
     }
     hashersPromise.then(results => {
-      if (results.__listSet && results.__listSet.$search === this.hasherAwesompleteQuery) {
+      const listQuery = results[Symbol.for("can.listQuery")];
+      if (listQuery && listQuery.search === this.hasherAwesompleteQuery) {
         const newList = [];
         results.forEach(result => {
           newList.push({

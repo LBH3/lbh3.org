@@ -83,7 +83,7 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const trailNumber = this.trailNumber;
       if (trailNumber) {
-        return Event.connection.getList({
+        return Event.getList({
           trailNumber
         }).then(events => {
           this.event = events[0];
@@ -114,7 +114,7 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const trailNumber = this.trailNumber;
       if (trailNumber) {
-        return EventsHashers.connection.getList({
+        return EventsHashers.getList({
           $limit: 500,
           trailNumber
         });
@@ -178,7 +178,7 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const trailNumber = this.trailNumber;
       if (trailNumber) {
-        return Patch.connection.getList({
+        return Patch.getList({
           $limit: 500,
           trailNumber
         });
@@ -288,7 +288,7 @@ export const ViewModel = DefineMap.extend({
 
   specialEventPromise: {
     get: function() {
-      return SpecialEvent.connection.getList();
+      return SpecialEvent.getList();
     }
   },
 

@@ -21,7 +21,7 @@
 
   {{#if electionPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> Your ballot couldn’t be fetched. {{electionPromise.reason.message}}
+      <strong>Fuck!</strong> Your ballot couldn’t be fetched. {{electionPromise.reason.xhr.message}}
     </div>
     <p>
       If you’re concerned about running out of time before the erection is over,
@@ -54,7 +54,7 @@
 
         {{#if electionEligibilityPromise.isRejected}}
           <div class="alert alert-danger" role="alert">
-            <strong>Fuck!</strong> Your run count couldn’t be checked. {{electionEligibilityPromise.reason.message}}
+            <strong>Fuck!</strong> Your run count couldn’t be checked. {{electionEligibilityPromise.reason.xhr.message}}
           </div>
           <p>
             If you’re concerned about running out of time before the erection is over,
@@ -73,7 +73,7 @@
 
             {{#if paperBallotsPromise.isRejected}}
               <div class="alert alert-danger" role="alert">
-                <strong>Fuck!</strong> Your eligibility couldn’t be checked. {{paperBallotsPromise.reason.message}}
+                <strong>Fuck!</strong> Your eligibility couldn’t be checked. {{paperBallotsPromise.reason.xhr.message}}
               </div>
               <p>
                 If you’re concerned about running out of time before the erection is over,
@@ -111,7 +111,7 @@
 
                   {{#if savingPromise.isRejected}}
                     <div class="alert alert-danger" role="alert">
-                      <strong>Fuck!</strong> Your ballot couldn’t be submitted. {{savingPromise.reason.message}}
+                      <strong>Fuck!</strong> Your ballot couldn’t be submitted. {{savingPromise.reason.xhr.message}}
                     </div>
                     <p>
                       If you’re concerned about running out of time before the erection is over,
@@ -143,7 +143,7 @@
                         </div>
                         <div class="col-md">
                           <h5>{{election.schema.awards.title}}</h5>
-                          {{#each(election.schema.awards.races, award=value)}}
+                          {{#for(award of election.schema.awards.races)}}
                             <hr>
                             <h6>{{title}}</h6>
                             {{#switch(type)}}
@@ -216,7 +216,7 @@
                                 {{/if}}
                               {{/case}}
                             {{/switch}}
-                          {{/each}}
+                          {{/for}}
                         </div>
                       </div>
                       <hr>
@@ -248,7 +248,7 @@
 
                     {{#if ballotsPromise.isRejected}}
                       <div class="alert alert-danger" role="alert">
-                        <strong>Fuck!</strong> The ballots you have already submitted couldn’t be fetched. {{ballotsPromise.reason.message}}
+                        <strong>Fuck!</strong> The ballots you have already submitted couldn’t be fetched. {{ballotsPromise.reason.xhr.message}}
                       </div>
                       <p>
                         You may want to
@@ -359,7 +359,7 @@
                         </div>
                         <div class="col-md">
                           <h4>{{election.schema.awards.title}}</h4>
-                          {{#each(election.schema.awards.races, award=value)}}
+                          {{#for(award of election.schema.awards.races)}}
                             {{#switch(type)}}
                               {{#case('hasher')}}
                                 {{#if(options)}}
@@ -533,7 +533,7 @@
                                 </div>
                               {{/case}}
                             {{/switch}}
-                          {{/each}}
+                          {{/for}}
                         </div>
                       </div>
 
@@ -588,7 +588,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{#each electionEligibility.runs run=value}}
+                    {{#for(run of electionEligibility.runs)}}
                       <tr>
                         <td>{{run.event.startDateWithYearString}}</td>
                         <td>{{run.trailNumber}}</td>
@@ -596,7 +596,7 @@
                         <td>{{{run.event.shortLocationHtml}}}</td>
                         <td>{{{run.event.nameHtml}}}</td>
                       </tr>
-                    {{/each}}
+                    {{/for}}
                   </tbody>
                 </table>
               </div>
@@ -635,7 +635,7 @@
           {{#if savingPromise.isRejected}}
             <div class="alert alert-danger" role="alert">
               <strong>Fuck!</strong> Something failed; you’ll need to try again.
-              {{savingPromise.reason.message}}
+              {{savingPromise.reason.xhr.message}}
             </div>
           {{/if}}
 

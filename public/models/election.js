@@ -1,10 +1,6 @@
-import algebra from './algebra';
-import behaviors from './behaviors';
-import connect from 'can-connect';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
-import feathersClient from './feathers-client';
-import feathersServiceBehavior from 'can-connect-feathers/service';
+import feathersModel from './feathers-model';
 import Hasher from './hasher';
 import marked from 'marked';
 import moment from 'moment-timezone';
@@ -59,7 +55,10 @@ const Schema = DefineMap.extend({
 export const Election = DefineMap.extend({
   seal: false
 }, {
-  id: 'any',
+  id: {
+    identity: true,
+    type: 'number'
+  },
   advertisementHtml: {
     get: function() {
       const rendered = marked(this.advertisementMd || '');
@@ -105,15 +104,10 @@ Election.List = DefineList.extend({
   '#': Election
 });
 
-Election.connection = connect([
-  feathersServiceBehavior,
-  ...behaviors
-], {
-  feathersService: feathersClient.service('/api/elections'),
+Election.connection = feathersModel('/api/elections', {
   Map: Election,
   List: Election.List,
-  name: 'election',
-  algebra
+  name: 'election'
 });
 
 export default Election;

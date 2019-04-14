@@ -13,7 +13,7 @@
 
   {{#if userPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The user couldn’t be retrieved. {{userPromise.reason.message}}
+      <strong>Fuck!</strong> The user couldn’t be retrieved. {{userPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
@@ -80,14 +80,14 @@
           <button aria-label="Close" class="close" type="button" on:click="resetEditingUserPromise()">
             <span aria-hidden="true">&times;</span>
           </button>
-          <strong>Fuck!</strong> The user’s info failed to save. {{editingUserPromise.reason.message}}
+          <strong>Fuck!</strong> The user’s info failed to save. {{editingUserPromise.reason.xhr.message}}
           {{#if editingUserPromise.reason.errors}}
             <ul>
-              {{#each editingUserPromise.reason.errors error=value}}
+              {{#for(error of editingUserPromise.reason.errors)}}
                 <li>
                   {{error.message}}
                 </li>
-              {{/each}}
+              {{/for}}
             </ul>
           {{/if}}
         </div>
