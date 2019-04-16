@@ -21,58 +21,58 @@
     </p>
   {{/if}}
 
-  {{#each hashersByPosition}}
-    {{#if promise}}
-      {{#if promise.isPending}}
+  {{#for(hasherByPosition of hashersByPosition)}}
+    {{#if hasherByPosition.promise}}
+      {{#if hasherByPosition.promise.isPending}}
         <div class="alert alert-info" role="alert">
           <strong>Fetching position…</strong>
         </div>
       {{/if}}
 
-      {{#if promise.isRejected}}
+      {{#if hasherByPosition.promise.isRejected}}
         <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> The position couldn’t be retrieved. {{promise.reason.xhr.message}}
+          <strong>Fuck!</strong> The position couldn’t be retrieved. {{hasherByPosition.promise.reason.xhr.message}}
         </div>
       {{/if}}
 
-      {{#if promise.isResolved}}
+      {{#if hasherByPosition.promise.isResolved}}
         <h3>
           {{#is hashers.length 1}}
-            {{promise.value.singularName}}
+            {{hasherByPosition.promise.value.singularName}}
           {{else}}
-            {{promise.value.pluralName}}
+            {{hasherByPosition.promise.value.pluralName}}
           {{/is}}
-          {{#if scope.vm.showEmailLink}}
+          {{#if showEmailLink}}
             <small class="d-print-none">
-              <a href="mailto:{{promise.value.emailAddress}}" title="Send an email">
+              <a href="mailto:{{hasherByPosition.promise.value.emailAddress}}" title="Send an email">
                 <span class="fa fa-envelope"></span>
               </a>
             </small>
           {{/if}}
         </h3>
         <ul>
-          {{#each hashers}}
+          {{#for(hasherPromise of hasherByPosition.hashers)}}
             <li>
-              {{#if isPending}}
+              {{#if hasherPromise.isPending}}
                 Fetching hasher…
               {{/if}}
 
-              {{#if isRejected}}
-                <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{reason.xhr.message}}
+              {{#if hasherPromise.isRejected}}
+                <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.xhr.message}}
               {{/if}}
 
-              {{#if isResolved}}
-                {{#if scope.vm.session.user.canViewDirectoryInfo}}
-                  <a href="{{scope.vm.routeForHasher(value)}}">
-                    {{value.hashName}}
+              {{#if hasherPromise.isResolved}}
+                {{#if session.user.canViewDirectoryInfo}}
+                  <a href="{{routeForHasher(hasherPromise.value)}}">
+                    {{hasherPromise.value.hashName}}
                   </a>
                 {{else}}
-                  {{value.hashName}}
+                  {{hasherPromise.value.hashName}}
                 {{/if}}
-                {{scope.vm.addendum(scope.vm.year, scope.vm.positionForHasher(value))}}
+                {{addendum(year, positionForHasher(hasherPromise.value))}}
               {{/if}}
             </li>
-          {{/each}}
+          {{/for}}
         </ul>
       {{/if}}
     {{/if}}
@@ -80,5 +80,5 @@
     <div class="alert alert-info" role="alert">
       <strong>The Mismanagement roster for this year has not been added.</strong>
     </div>
-  {{/each}}
+  {{/for}}
 {{/if}}

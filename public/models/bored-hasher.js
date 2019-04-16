@@ -43,7 +43,7 @@ BoredHasher.connection = feathersModel('/api/bored-hashers', {
 });
 
 BoredHasher.groupByPosition = function(hashers) {
-  const hashersByPosition = [];
+  const hashersByPosition = {};
   hashers.forEach(function(hasher) {
     const positionId = hasher.positionId;
     if (!hashersByPosition[positionId]) {
@@ -55,7 +55,7 @@ BoredHasher.groupByPosition = function(hashers) {
     }
     hashersByPosition[positionId].hashers.push(Hasher.get({id: hasher.hasherId}));
   });
-  return hashersByPosition;
+  return Object.values(hashersByPosition);
 };
 
 export default BoredHasher;
