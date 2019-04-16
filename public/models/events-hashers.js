@@ -77,7 +77,12 @@ const EventsHashers = DefineMap.extend({
     },
     serialize: false
   },
-  paymentNotes: 'string',
+  paymentNotes: {
+    type: 'string',
+    set: function(paymentNotes) {
+      return paymentNotes && paymentNotes.toUpperCase ? paymentNotes.toUpperCase() : paymentNotes;
+    }
+  },
   paymentNotesAndType: {
     get: function() {
       const paymentNotes = this.paymentNotes;
