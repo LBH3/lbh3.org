@@ -45,6 +45,7 @@
             />
             <input
               class="form-control"
+              {{^if session.user.canAddTrails}}disabled{{/if}}
               id="start-time"
               type="time"
               value:bind="startTime"

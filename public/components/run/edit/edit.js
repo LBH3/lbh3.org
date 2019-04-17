@@ -324,7 +324,9 @@ export const ViewModel = DefineMap.extend({
   },
 
   editRun: function() {
-    this.event.startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
+    if (this.session.user.canAddTrails) {
+      this.event.startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
+    }
     return this.editingEventPromise = this.event.save();
   },
 
