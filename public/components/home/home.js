@@ -30,8 +30,8 @@ export default Component.extend({
         });
       }
     },
-    get isBeforeFebruary17() {
-      return new Date() < new Date('Feb 17 2019 08:00:00 UTC');
+    get isBeforeAugust25() {
+      return new Date() < new Date('Aug 25 2019 07:00:00 UTC');
     },
     get ogTitle() {
       return this.title;
