@@ -2,7 +2,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const authHook = require('../../hooks/auth');
 const Entities = require('html-entities').AllHtmlEntities;
-const google = require('googleapis');
+const { google } = require('googleapis');
 const jwtAuthentication = authenticate('jwt');
 const makeRaw = require('../../utils/make-raw');
 const marked = require('marked');
@@ -122,7 +122,8 @@ const getEvent = function(auth, trailData) {
       if (error) {
         reject(error);
       } else {
-        const matchingEvent = (response && response.items && response.items[0]) ? response.items[0] : null;
+        const matchingEvent = (response && response.data && response.data.items) ? response.data.items[0] : null;
+        console.info('Found matching event:', matchingEvent);
         resolve(matchingEvent);
       }
     });
