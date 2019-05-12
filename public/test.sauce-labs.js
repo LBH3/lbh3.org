@@ -9,11 +9,11 @@ testSauceLabs({
     deviceName: 'Android Emulator',
     platform: 'Android 4.4'
   }, */{
-    'appium-version': '1.8.0',
+    'appium-version': '1.9.1',
     browserName: 'Safari',
     deviceName: 'iPhone 7 Simulator',
     platform: 'iOS',
-    version: '10.0'
+    version: '10.3'
   }, /*{
     browserName: 'internet explorer',
     platform: 'Windows 7',
