@@ -63,7 +63,7 @@
     "feathers-authentication-hooks": "^0.1.4",
     "feathers-hooks-common": "^3.7.1",
     "feathers-sequelize": "^2.4.0",
-    "googleapis": "^39.2.0",
+    "googleapis": "^40.0.0",
     "helmet": "^3.8.1",
     "html-entities": "^1.2.1",
     "json2csv": "^4.1.3",
