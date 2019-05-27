@@ -3,6 +3,11 @@ import DefineMap from 'can-define/map/';
 import feathersModel from './feathers-model';
 import Hasher from './hasher';
 
+const doNotSerializeBooleanType = {
+  serialize: false,
+  type: 'boolean'
+};
+
 var User = DefineMap.extend('User', {
   seal: false
 }, {
@@ -10,66 +15,21 @@ var User = DefineMap.extend('User', {
     identity: true,
     type: 'number'
   },
-  canAddHashers: {
-    type: 'boolean',
-    serialize: false
-  },
-  canAddPhotos: {
-    type: 'boolean',
-    serialize: false
-  },
-  canAddSnoozes: {
-    type: 'boolean',
-    serialize: false
-  },
-  canAddTrails: {
-    type: 'boolean',
-    serialize: false
-  },
-  canAdministerElections: {
-    type: 'boolean',
-    serialize: false
-  },
-  canEditFutureSpecialEvents: {
-    type: 'boolean',
-    serialize: false
-  },
-  canEditHasherInfo: {
-    type: 'boolean',
-    serialize: false
-  },
-  canEditPostTrailInfo: {
-    type: 'boolean',
-    serialize: false
-  },
-  canEditPreTrailInfo: {
-    type: 'boolean',
-    serialize: false
-  },
-  canExportData: {
-    type: 'boolean',
-    serialize: false
-  },
-  canManageUsers: {
-    type: 'boolean',
-    serialize: false
-  },
-  canViewDirectoryInfo: {
-    type: 'boolean',
-    serialize: false
-  },
-  canViewHashersEmailList: {
-    type: 'boolean',
-    serialize: false
-  },
-  canViewOldData: {
-    type: 'boolean',
-    serialize: false
-  },
-  canViewRunAttendance: {
-    type: 'boolean',
-    serialize: false
-  },
+  canAddHashers: doNotSerializeBooleanType,
+  canAddPhotos: doNotSerializeBooleanType,
+  canAddSnoozes: doNotSerializeBooleanType,
+  canAddTrails: doNotSerializeBooleanType,
+  canAdministerElections: doNotSerializeBooleanType,
+  canEditFutureSpecialEvents: doNotSerializeBooleanType,
+  canEditHasherInfo: doNotSerializeBooleanType,
+  canEditPostTrailInfo: doNotSerializeBooleanType,
+  canEditPreTrailInfo: doNotSerializeBooleanType,
+  canExportData: doNotSerializeBooleanType,
+  canManageUsers: doNotSerializeBooleanType,
+  canViewDirectoryInfo: doNotSerializeBooleanType,
+  canViewHashersEmailList: doNotSerializeBooleanType,
+  canViewOldData: doNotSerializeBooleanType,
+  canViewRunAttendance: doNotSerializeBooleanType,
   displayName: {
     get: function() {
       const profile = this.profile || {};
