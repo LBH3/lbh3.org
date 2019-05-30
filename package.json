@@ -53,7 +53,7 @@
     "@feathersjs/errors": "^3.3.0",
     "@feathersjs/feathers": "^3.1.5",
     "@feathersjs/socketio": "^3.2.1",
-    "aws-sdk": "^2.99.0",
+    "aws-sdk": "^2.466.0",
     "body-parser": "^1.17.2",
     "compression": "^1.7.0",
     "cookie-parser": "^1.4.3",
