@@ -110,7 +110,7 @@
   </div>
 {{/for}}
 <div class="d-none d-sm-block table-responsive">
-  <table class="table table-bordered table-sm">
+  <table class="table table-sm table-striped">
     <thead>
       <tr>
         {{#if showFutureTools}}

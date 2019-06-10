@@ -34,7 +34,7 @@
         <div class="col-sm">
           <h3>Eligible ({{electionEligibilityPromise.value.eligible.length}})</h3>
           <div class="table-responsive">
-            <table class="table table-bordered table-sm table-striped">
+            <table class="table table-sm table-striped">
               <thead>
                 <tr>
                   <th scope="col">Name</th>
@@ -59,7 +59,7 @@
         <div class="col-sm">
           <h3>Not eligible ({{electionEligibilityPromise.value.notEligible.length}})</h3>
           <div class="table-responsive">
-            <table class="table table-bordered table-sm table-striped">
+            <table class="table table-sm table-striped">
               <thead>
                 <tr>
                   <th scope="col">Name</th>

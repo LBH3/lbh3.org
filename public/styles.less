@@ -1,6 +1,9 @@
 @import './node_modules/bootstrap/dist/css/bootstrap.css';
 
 body {
+  background: var(--light);
+  color: var(--dark);
+
   @supports(padding: max(0px)) {
     padding-bottom: env(safe-area-inset-bottom);
   }
@@ -11,10 +14,14 @@ h2 {
 }
 
 a, .btn-link {
-  color: #dc3232;
+  color: var(--link-color);
 }
 a:hover, .btn-link:hover {
-  color: #bd2130;
+  color: var(--link-color-hover);
+}
+
+hr {
+  border-top: 1px solid var(--hr-color);
 }
 
 main.container-fluid {
@@ -29,12 +36,178 @@ main .nav-pills {
 }
 
 main .nav-pills .nav-link.active {
-  background: #dc3232;
+  background: var(--link-color);
+}
+
+mark {
+  background-color: var(--mark-background-color);
 }
 
 .alert ul {
   margin-bottom: 0;
   margin-top: .5rem;
+}
+
+.alert-danger {
+  background-color: var(--alert-danger-background-color);
+  border-color: var(--alert-danger-border-color);
+  color: var(--alert-danger-text-color);
+
+  .alert-link {
+    color: var(--alert-danger-link-text-color);
+  }
+}
+
+.alert-info {
+  background-color: var(--alert-info-background-color);
+  border-color: var(--alert-info-border-color);
+  color: var(--alert-info-text-color);
+
+  .alert-link {
+    color: var(--alert-info-link-text-color);
+  }
+}
+
+.alert-primary {
+  background-color: var(--alert-primary-background-color);
+  border-color: var(--alert-primary-border-color);
+  color: var(--alert-primary-text-color);
+
+  .alert-link {
+    color: var(--alert-primary-link-text-color);
+  }
+}
+
+.alert-secondary {
+  background-color: var(--alert-secondary-background-color);
+  border-color: var(--alert-secondary-border-color);
+  color: var(--alert-secondary-text-color);
+
+  .alert-link {
+    color: var(--alert-secondary-link-text-color);
+  }
+}
+
+.alert-success {
+  background-color: var(--alert-success-background-color);
+  border-color: var(--alert-success-border-color);
+  color: var(--alert-success-text-color);
+
+  .alert-link {
+    color: var(--alert-success-link-text-color);
+  }
+}
+
+.border {
+  border: 1px solid var(--border-color) !important;
+}
+
+.btn-danger {
+  background-color: var(--button-color-danger-background-color);
+  border-color: var(--button-color-danger-border-color);
+
+  &:hover {
+    background-color: var(--button-color-danger-hover-background-color);
+    border-color: var(--button-color-danger-hover-border-color);
+  }
+}
+
+.btn-primary {
+  background-color: var(--button-color-primary-background-color);
+  border-color: var(--button-color-primary-border-color);
+
+  &:hover {
+    background-color: var(--button-color-primary-hover-background-color);
+    border-color: var(--button-color-primary-hover-border-color);
+  }
+}
+
+.form-control {
+  background-color: var(--form-control-background-color);
+  border-color: var(--form-control-border-color);
+  color: var(--form-control-text-color);
+
+  &:disabled {
+    background-color: var(--form-control-disabled-background-color);
+  }
+
+  &:focus {
+    background-color: var(--form-control-focus-background-color);
+    border-color: var(--form-control-focus-border-color);
+    box-shadow: var(--form-control-focus-box-shadow);
+    color: var(--form-control-focus-text-color);
+  }
+}
+
+.close {
+  color: var(--close-color);
+  text-shadow: var(--close-text-shadow);
+
+  &:hover {
+    color: var(--close-color);
+  }
+}
+
+.pac-container {
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  background: var(--awesomplete-background-color);
+  backdrop-filter: saturate(180%) blur(20px);
+  border: 1px solid var(--awesomplete-border-color);
+  border-radius: .25rem;
+
+  .pac-item {
+    border-top-color: var(--awesomplete-border-color);
+    color: var(--text-muted-color);
+
+		&:active, &:hover, &.pac-item-selected {
+      background-color: var(--blue);
+      color: #fff;
+
+      .pac-item-query {
+        color: #fff;
+      }
+    }
+  }
+
+  .pac-item-query {
+    color: var(--text-color);
+  }
+
+  &.pac-logo {
+    &:after {
+      @media (prefers-color-scheme: dark) {
+        background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white3.png);
+      }
+      &.hdpi {
+        @media (prefers-color-scheme: dark) {
+          background-image: url(https://maps.gstatic.com/mapfiles/api-3/images/powered-by-google-on-non-white3_hdpi.png);
+        }
+      }
+    }
+  }
+}
+
+.table {
+  color: var(--text-color);
+
+  td, th, thead th {
+    border-color: var(--table-cell-border-color);
+  }
+}
+
+.table-danger, .table-danger > th, .table-danger > td {
+  background-color: var(--table-danger-background-color);
+}
+.table-danger th, .table-danger td, .table-danger thead th, .table-danger tbody + tbody {
+  border-color: var(--table-danger-border-color);
+}
+
+.table-striped tbody tr:nth-of-type(odd) {
+  background-color: var(--table-striped-background-color);
+}
+
+.text-muted {
+  color: var(--text-muted-color) !important;
 }
 
 /* Workaround for https://github.com/twbs/bootstrap/issues/21577 */
@@ -48,5 +221,122 @@ main .nav-pills .nav-link.active {
   body, .container-fluid {
     max-width: 100%;
     min-width: auto !important;
+  }
+}
+
+:root {
+  --alert-danger-background-color: #f8d7da;
+  --alert-danger-border-color: #f5c6cb;
+  --alert-danger-link-text-color: #491217;
+  --alert-danger-text-color: #721c24;
+  --alert-info-background-color: #d1ecf1;
+  --alert-info-border-color: #bee5eb;
+  --alert-info-link-text-color: #062c33;
+  --alert-info-text-color: #0c5460;
+  --alert-primary-background-color: #cce5ff;
+  --alert-primary-border-color: #b8daff;
+  --alert-primary-link-text-color: #002752;
+  --alert-primary-text-color: #004085;
+  --alert-secondary-background-color: #e2e3e5;
+  --alert-secondary-border-color: #d6d8db;
+  --alert-secondary-link-text-color: #202326;
+  --alert-secondary-text-color: #383d41;
+  --alert-success-background-color: #d4edda;
+  --alert-success-border-color: #c3e6cb;
+  --alert-success-link-text-color: #0b2e13;
+  --alert-success-text-color: #155724;
+  --awesomplete-background-color: rgba(255, 255, 255, 0.9);
+  --awesomplete-border-color: rgba(0, 0, 0, .15);
+  --border-color: #dee2e6;
+  --button-color-danger-background-color: #dc3545;
+  --button-color-danger-border-color: #dc3545;
+  --button-color-danger-hover-background-color: #c82333;
+  --button-color-danger-hover-border-color: #bd2130;
+  --button-color-primary-background-color: #007bff;
+  --button-color-primary-border-color: #007bff;
+  --button-color-primary-hover-background-color: #0069d9;
+  --button-color-primary-hover-border-color: #0062cc;
+  --close-color: #000;
+  --close-text-shadow: 0 1px 0 #fff;
+  --facebook-blue: #4267B2;
+  --facebook-blue-hover: darken(#4267B2, 10%);
+  --form-control-background-color: #fff;
+  --form-control-border-color: #ced4da;
+  --form-control-text-color: #495057;
+  --form-control-disabled-background-color: #e9ecef;
+  --form-control-focus-background-color: #fff;
+  --form-control-focus-border-color: #80bdff;
+  --form-control-focus-text-color: #495057;
+  --hr-color: rgba(0, 0, 0, 0.1);
+  --link-color: #dc3232;
+  --link-color-hover: darken(#dc3232, 10%);
+  --mark-background-color: #fcf8e3;
+  --nav-link-active-background-color: #000;
+  --table-cell-border-color: #dee2e6;
+  --table-danger-background-color: #f5c6cb;
+  --table-danger-border-color: #f5c6cb;
+  --table-striped-background-color: rgba(0, 0, 0, 0.05);
+  --text-color: #212529;
+  --text-muted-color: #6c757d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --alert-danger-background-color: #491217;
+    --alert-danger-border-color: #721c24;
+    --alert-danger-link-text-color: #f8d7da;
+    --alert-danger-text-color: #f5c6cb;
+    --alert-info-background-color: #062c33;
+    --alert-info-border-color: #0c5460;
+    --alert-info-link-text-color: #d1ecf1;
+    --alert-info-text-color: #bee5eb;
+    --alert-primary-background-color: #002752;
+    --alert-primary-border-color: #004085;
+    --alert-primary-link-text-color: #cce5ff;
+    --alert-primary-text-color: #b8daff;
+    --alert-secondary-background-color: #202326;
+    --alert-secondary-border-color: #383d41;
+    --alert-secondary-link-text-color: #e2e3e5;
+    --alert-secondary-text-color: #d6d8db;
+    --alert-success-background-color: #0b2e13;
+    --alert-success-border-color: #155724;
+    --alert-success-link-text-color: #d4edda;
+    --alert-success-text-color: #c3e6cb;
+    --awesomplete-background-color: rgba(40, 40, 40, 0.9);
+    --awesomplete-border-color: rgba(255, 255, 255, .15);
+    --border-color: #32383e;
+    --button-color-danger-background-color: #bd2130;
+    --button-color-danger-border-color: #c82333;
+    --button-color-danger-hover-background-color: #dc3545;
+    --button-color-danger-hover-border-color: #dc3545;
+    --button-color-primary-background-color: #0062cc;
+    --button-color-primary-border-color: #0069d9;
+    --button-color-primary-hover-background-color: #007bff;
+    --button-color-primary-hover-border-color: #007bff;
+    --close-color: #fff;
+    --close-text-shadow: 0 1px 0 #000;
+    --dark: #f8f9fa;
+    --facebook-blue-hover: lighten(#4267B2, 10%);
+    --form-control-background-color: #666;
+    --form-control-border-color: #777;
+    --form-control-text-color: #ccc;
+    --form-control-disabled-background-color: #333;
+    --form-control-focus-background-color: #666;
+    --form-control-focus-border-color: #074180;
+    --form-control-focus-box-shadow: 0 0 0 0.2rem rgba(60, 88, 128, 0.75);
+    --form-control-focus-text-color: #ccc;
+    --hr-color: rgba(255, 255, 255, 0.5);
+    --link-color: #f03c32;
+    --link-color-hover: lighten(#f03c32, 5%);
+    --light: #000;
+    --mark-background-color: yellow;
+    --nav-link-active-background-color: #666;
+    --table-cell-border-color: #32383e;
+    --table-danger-background-color: #4d0d07;
+    --table-danger-border-color: #4d0d07;
+    --table-striped-background-color: rgba(255, 255, 255, 0.075);
+    --text-color: #ccc;
+    --text-muted-color: #bbb;
+    --white: #000;
   }
 }

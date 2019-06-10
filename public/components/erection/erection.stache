@@ -577,7 +577,7 @@
             {{else}}
               <p><strong>Below is our record of the runs you’ve attended:</strong></p>
               <div class="table-responsive">
-                <table class="table table-bordered table-sm">
+                <table class="table table-sm table-striped">
                   <thead>
                     <tr>
                       <th>Date</th>

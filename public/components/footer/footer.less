@@ -1,5 +1,5 @@
 lbh3-footer {
-  border-top: 1px solid black;
+  border-top: 1px solid var(--nav-link-active-background-color);
   display: block;
 
   footer.container-fluid {
@@ -13,7 +13,10 @@ lbh3-footer {
     border: 1px solid transparent;
   }
 
-  .facebook, .facebook:hover {
-    color: #4267B2;
+  .facebook {
+    color: var(--facebook-blue);
+    &:hover {
+      color: var(--facebook-blue-hover);
+    }
   }
 }

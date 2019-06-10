@@ -276,7 +276,7 @@
             </div>
           </div>
           <div class="table-responsive">
-            <table class="table table-bordered table-sm">
+            <table class="table table-sm table-striped">
               <thead>
                 <tr>
                   <th></th>
@@ -327,7 +327,7 @@
         {{#if cashReport}}
           <h3>Cash Report</h3>
           <div class="table-responsive">
-            <table class="table table-bordered table-sm">
+            <table class="table table-sm table-striped">
               <thead>
                 <tr>
                   <th>Payment</th>

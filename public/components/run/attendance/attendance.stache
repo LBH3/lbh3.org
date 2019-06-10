@@ -1,4 +1,3 @@
-<can-import from="awesomplete/awesomplete.base.css" />
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
@@ -28,7 +27,7 @@
 
 {{#if hashersPromise.isResolved}}
   <div class="table-responsive">
-    <table class="table table-bordered table-sm table-striped">
+    <table class="table table-sm table-striped">
       <thead>
         <tr>
           <th class="text-center" scope="col">Pay</th>

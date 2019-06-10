@@ -2,7 +2,6 @@ lbh3-header {
 	display: block;
 
   h1 {
-    border-bottom: 1px solid black;
     margin: 0;
     text-align: center;
     @supports (padding: max(0px)) {
@@ -12,16 +11,16 @@ lbh3-header {
   }
   h1 a {
     line-height: 60px;
-    img {
-      background: #dc3232;
+    svg {
       bottom: 3px;
+      fill: var(--link-color);
       position: relative;
     }
   }
   h1 a:hover {
     text-decoration: none;
-    img {
-      background: #bd2130;
+    svg {
+      fill: var(--link-color-hover);
     }
   }
 
@@ -39,7 +38,7 @@ lbh3-header {
     h1 a {
       line-height: 3rem;
     }
-    h1 img {
+    h1 svg {
       display: none;
     }
   }

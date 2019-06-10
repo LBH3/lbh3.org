@@ -1,7 +1,7 @@
-<can-import from="awesomplete/awesomplete.base.css" />
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="~/components/hasher-autocomplete/" />
 
 {{#if session.user.canManageUsers}}
 
@@ -59,14 +59,17 @@
     <form on:submit="editUser()">
       <div class="form-group">
         <label for="hasher-name">Hash name</label>
-        <input
-          autocomplete="off"
-          class="form-control"
-          disabled
-          id="hasher-name"
-          on:input:value:to="hasherAwesompleteQuery"
-          type="text"
-        />
+        <lbh3-hasher-autocomplete
+          selected:to="autocompleteHasher"
+          showNameAfterSelection:from="true"
+        >
+          <input
+            autocomplete="off"
+            class="form-control"
+            id="hasher-name"
+            type="text"
+          />
+        </lbh3-hasher-autocomplete>
       </div>
 
       {{#if editingUserPromise.isPending}}

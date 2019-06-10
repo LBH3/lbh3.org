@@ -95,11 +95,11 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/index.css",
-      "maxSize": "10 kB"
+      "maxSize": "11 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/index.js",
-      "maxSize": "215 kB"
+      "maxSize": "217 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/home/home.css",
