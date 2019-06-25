@@ -98,9 +98,6 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
-  get googleMapsKey() {
-    return loader.googleMapsKey;
-  },
   hashers: {
     get: function(lastValue, setValue) {
       if (lastValue) {

@@ -30,6 +30,7 @@ import 'lbh3/components/hashers/email/email-test';
 import 'lbh3/components/hashers/hashers-test';
 import 'lbh3/components/header/header-test';
 import 'lbh3/components/home/home-test';
+import 'lbh3/components/map/map-test';
 import 'lbh3/components/memorial-service/memorial-service-test';
 import 'lbh3/components/nav/nav-test';
 import 'lbh3/components/no-ssr/no-ssr-test';

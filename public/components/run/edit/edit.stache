@@ -3,6 +3,7 @@
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 <can-import from="~/components/hasher-autocomplete/" />
+<can-import from="~/components/map/" />
 
 <h2>
   Edit
@@ -103,10 +104,10 @@
             {{/if}}
           {{/if}}
           {{#if event.locationPromise.value.placeId}}
-            <iframe title="Map of the run’s start location" src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q=place_id:{{event.locationPromise.value.placeId}}" width="100%" height="208" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <lbh3-map placeId:from="event.locationPromise.value.placeId" style="height: 208px" />
           {{else}}
             {{#if event.locationMd}}
-              <iframe title="Map of the run’s start location" src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q={{event.locationMd}}" width="100%" height="208" frameborder="0" style="border:0" allowfullscreen></iframe>
+              <lbh3-map q:from="event.locationMd" style="height: 208px" />
             {{/if}}
           {{/if}}
         </div>
@@ -139,7 +140,7 @@
             {{/if}}
           {{/if}}
           {{#if event.onOnPromise.value.placeId}}
-            <iframe title="Map of the run’s on-on location" src="https://www.google.com/maps/embed/v1/place?key={{googleMapsKey}}&q=place_id:{{event.onOnPromise.value.placeId}}" width="100%" height="208" frameborder="0" style="border:0" allowfullscreen></iframe>
+            <lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 208px" />
           {{/if}}
         </div>
       </div>
