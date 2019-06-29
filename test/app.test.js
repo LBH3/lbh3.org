@@ -1,4 +1,5 @@
 const assert = require('assert');
+const iterate = require('leakage').iterate;
 const rp = require('request-promise');
 const app = require('../src/app');
 
@@ -16,6 +17,19 @@ describe('Feathers application tests', () => {
     return rp('http://localhost:8080').then(body =>
       assert.ok(body.indexOf('<html>') !== -1)
     );
+  });
+
+  it('does not leak', async function() {
+    this.timeout(180000);
+    await iterate.async(async () => {
+      return rp('http://localhost:8080/events/2019/01/06/trail-1898/');
+    }, {
+      iterations: 2
+    }).catch(error => {
+      const increaseSize = error.message.split('\n')[0].split('by')[1];
+      assert.ok(parseFloat(increaseSize) < 4, `Increase was ${increaseSize}`);
+      assert.ok(increaseSize.indexOf('MB') > 0, 'Increase is in MB');
+    });
   });
 
   xdescribe('404', function() {

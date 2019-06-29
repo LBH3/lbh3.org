@@ -82,6 +82,7 @@
     "bundlesize": "^0.17.1",
     "eslint": "^4.4.1",
     "http-server": "^0.11.1",
+    "leakage": "^0.4.0",
     "mocha": "^5.1.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
