@@ -43,7 +43,9 @@
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -U postgres && psql -c 'create database lbh3_test;' -U postgres && psql lbh3_test < ./test/lbh3_test.dump -U postgres -v ON_ERROR_STOP=1",
     "test:production": "npm run eslint && npm run build && bundlesize && npm run build:tests && npm run mocha && npm run testee:production",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
-    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
+    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.6",
@@ -77,7 +79,8 @@
     "sequelize-cli": "^4.0.0",
     "serve-favicon": "^2.4.3",
     "striptags": "^3.0.1",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "snyk": "^1.189.0"
   },
   "devDependencies": {
     "bundlesize": "^0.17.1",
@@ -111,5 +114,6 @@
       "path": "./public/dist/bundles/lbh3/components/home/home.js",
       "maxSize": "7 kB"
     }
-  ]
+  ],
+  "snyk": true
 }
