@@ -1,12 +1,17 @@
 import '~/components/no-ssr/';
 
 import DefineMap from 'can-define/map/';
+import Honeybadger from 'honeybadger-js';
 import loader from '@loader';
 import route from 'can-route';
 import RoutePushstate from 'can-route-pushstate';
 
 const currentYear = (new Date()).getFullYear();
 const defaultPage = 'home';
+
+Honeybadger.configure({
+  apiKey: 'ff6891e2'
+});
 
 const AppViewModel = DefineMap.extend({
   day: 'string',

@@ -4,6 +4,7 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
+const Honeybadger = require('honeybadger').configure({apiKey: 'a6a30ced'});
 
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
@@ -26,6 +27,8 @@ const app = express(feathers());
 
 // Load app configuration
 app.configure(configuration());
+
+app.use(Honeybadger.requestHandler);
 
 // Enable CORS, security, compression, favicon and body parsing
 app.use(cors());
@@ -54,6 +57,8 @@ app.configure(middleware);
 // Configure a middleware for 404s and the error handler
 app.use(notFound());
 app.use(handler());
+
+app.use(Honeybadger.errorHandler);
 
 // Raygun
 const raygun = require('raygun');

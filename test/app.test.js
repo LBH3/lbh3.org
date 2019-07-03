@@ -27,7 +27,7 @@ describe('Feathers application tests', () => {
       iterations: 2
     }).catch(error => {
       const increaseSize = error.message.split('\n')[0].split('by')[1].trim();
-      assert.ok(parseFloat(increaseSize) < 6, `Increase was ${increaseSize}`);
+      assert.ok(parseFloat(increaseSize) < 6.5, `Increase was ${increaseSize}`);
       assert.ok(increaseSize.indexOf('MB') > 0, 'Increase is in MB');
     });
   });
