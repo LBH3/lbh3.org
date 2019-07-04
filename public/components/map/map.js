@@ -251,7 +251,7 @@ export default Component.extend({
       return () => {
 
         // Remove the marker click listener
-        if (google && marker) {
+        if (window.google && marker) {
           google.maps.event.clearInstanceListeners(marker);
         }
 
