@@ -29,7 +29,8 @@ export const ViewModel = DefineMap.extend({
   specialEventPromise: {
     get: function() {
       const params = {
-        urlId: this.urlId
+        urlId: this.urlId,
+        year: this.year
       };
       return SpecialEvent.getList(params).then(specialEvents => {
         this.specialEvent = specialEvents[0];
