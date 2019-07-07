@@ -4,6 +4,7 @@ import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import './edit.less';
 import marked from 'marked';
+import moment from 'moment';
 import view from './edit.stache';
 
 marked.setOptions({
@@ -17,6 +18,7 @@ export const ViewModel = DefineMap.extend({
   },
   editSpecialEvent: function() {
     this.specialEvent.descriptionMd = this.descriptionMd;
+    this.specialEvent.startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
     return this.editSpecialEventPromise = this.specialEvent.save();
   },
   editSpecialEventPromise: {},
@@ -50,6 +52,27 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
+
+  startDate: {
+    type: 'string',
+    get: function(lastValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      return this.specialEvent.startDateAsMoment.format().substr(0, 10);
+    }
+  },
+
+  startTime: {
+    type: 'string',
+    get: function(lastValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      return this.specialEvent.startDateAsMoment.format().substr(11, 8);
+    }
+  },
+
   get title() {
     return `${this.ogTitle} | Special Events | LBH3`;
   },

@@ -6,7 +6,7 @@ import './photos-button.less';
 import view from './photos-button.stache';
 
 export const ViewModel = DefineMap.extend({
-  event: Event,
+  event: 'any',
   faSize: 'string',
   promptForUrl: function() {
     const event = this.event;

@@ -3,12 +3,15 @@ import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import './special-events.less';
+import moment from 'moment';
 import view from './special-events.stache';
 
 export const ViewModel = DefineMap.extend({
   createSpecialEvent: function() {
+    const startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
     const newData = {
       descriptionMd: this.descriptionMd,
+      startDatetime,
       urlId: this.urlId,
       year: this.year
     };
@@ -25,6 +28,8 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
+  startDate: 'string',
+  startTime: 'string',
   get title() {
     return `${this.ogTitle} | LBH3`;
   },

@@ -7,15 +7,15 @@ import Patch from './patch';
 import Place from './place';
 import platform from 'steal-platform';
 
-const defaultLocale = (platform.isNode) ? 'en-US' : undefined;
-const timeZone = 'America/Los_Angeles';
+export const defaultLocale = (platform.isNode) ? 'en-US' : undefined;
+export const timeZone = 'America/Los_Angeles';
 
 marked.setOptions({
   breaks: true,
   gfm: true
 });
 
-const localizedStringForDate = function(date, locales, options) {
+export const localizedStringForDate = function(date, locales, options) {
   if (date.toLocaleDateString) {
     try {
       return date.toLocaleDateString(defaultLocale, options);

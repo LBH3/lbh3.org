@@ -235,6 +235,10 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       createdAt: currentTimestampType('created_at'),
       updatedAt: currentTimestampType('updated_at'),
       descriptionMd: textType('description_md'),
+      locationGooglePlaceId: stringType('location_google_place_id'),
+      locationMd: textType('location_md'),
+      photosUrl: textType('photos_url'),
+      startDatetime: timestampType('start_datetime'),
       urlId: stringType('url_id'),
       year: intType('year')
     },

@@ -19,6 +19,22 @@
       </div>
     </div>
     <div class="form-group row">
+      <label class="col-3 col-form-label" for="start-date">
+        Date
+      </label>
+      <div class="col-9">
+        <input class="form-control" id="start-date" type="date" value:bind="startDate">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-3 col-form-label" for="start-time">
+        Time
+      </label>
+      <div class="col-9">
+        <input class="form-control" id="start-time" type="time" value:bind="startTime">
+      </div>
+    </div>
+    <div class="form-group row">
       <label class="col-3 col-form-label" for="description">
         Description
       </label>

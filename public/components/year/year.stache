@@ -1,18 +1,20 @@
 <can-import from="~/components/run-list/" />
 
-{{#if eventsPromise.isPending}}
+{{#if allEventsPromise.isPending}}
   <div class="alert alert-info" role="alert">
     <strong>Fetching runs…</strong>
   </div>
 {{/if}}
 
-{{#if eventsPromise.isRejected}}
+{{#if allEventsPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The runs couldn’t be retrieved. {{eventsPromise.reason.xhr.message}}
+    <strong>Fuck!</strong> The runs couldn’t be retrieved.
+    {{eventsPromise.reason.xhr.message}}
+    {{specialEventsPromise.reason.xhr.message}}
   </div>
 {{/if}}
 
-{{#if(eventsPromise.isResolved)}}
+{{#if(allEventsPromise.isResolved)}}
   {{#for(month of eventsByMonth)}}
     <h3>{{month.name}} {{year}}</h3>
     <lbh3-run-list

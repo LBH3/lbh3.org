@@ -1,7 +1,9 @@
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
+import { defaultLocale, localizedStringForDate, timeZone } from './event';
 import feathersModel from './feathers-model';
 import marked from 'marked';
+import moment from 'moment';
 
 marked.setOptions({
   breaks: true,
@@ -24,6 +26,38 @@ const SpecialEvent = DefineMap.extend({
     serialize: false
   },
   descriptionMd: 'string',
+  nameHtml: {
+    get: function() {
+      return this.title;
+    },
+    serialize: false
+  },
+  nameMd: {
+    get: function() {
+      return this.title;
+    },
+    serialize: false
+  },
+  startDate: {
+    get: function() {
+      return new Date(this.startDatetime);
+    },
+    serialize: false
+  },
+  startDateAsMoment: {
+    get: function() {
+      return moment(this.startDatetime).tz(timeZone);
+    },
+    serialize: false
+  },
+  startDateString: {
+    get: function() {
+      const options = {day: 'numeric', month: 'numeric', timeZone};
+      return localizedStringForDate(this.startDate, defaultLocale, options);
+    },
+    serialize: false
+  },
+  startDatetime: 'any',
   title: {
     get: function() {
       const textContainer = document.createElement('div');
