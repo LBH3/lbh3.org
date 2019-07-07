@@ -18,7 +18,7 @@
   {{#for(month of eventsByMonth)}}
     <h3>{{month.name}} {{year}}</h3>
     <lbh3-run-list
-      month:from="month"
+      events:from="month.events"
       showHashit:from="showHashit"
       showNotes:from="showNotes"
       showOnOn:from="showOnOn"

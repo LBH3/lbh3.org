@@ -3,6 +3,7 @@
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 <can-import from="~/components/photos-button/" />
+<can-import from="~/components/run-list/" />
 <can-import from="~/components/snooze-button/" />
 
 {{#if canViewHasher}}
@@ -469,18 +470,43 @@
 
     {{#if boredPositionsPromise.isResolved}}
       {{#if boredPositions.length}}
-        <ol>
-          {{#each boredPositions}}
-            <li>
-              <a href="{{routeUrl page='about' secondaryPage='mismanagement' year=startYear}}">
-                {{#if positionPromise.isResolved}}
-                  {{positionPromise.value.singularName}}
-                {{/if}}
-                {{startYear}}
-              </a>
-            </li>
-          {{/each}}
-        </ol>
+        <div class="table-responsive">
+          <table class="table table-sm table-striped">
+            <thead>
+              <tr>
+                <th>Year</th>
+                <th>Position</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#for(boredPosition of boredPositions)}}
+                <tr>
+                  <td>
+                    {{boredPosition.startYear}}
+                  </td>
+                  <td>
+                    {{#if boredPosition.positionPromise.isPending}}
+                      <span class="fa fa-circle-notch fa-spin"></span>
+                    {{/if}}
+                    {{#if boredPosition.positionPromise.isRejected}}
+                      <span class="fa fa-exclamation-triangle"></span>
+                      {{#if boredPosition.positionPromise.reason.xhr.message}}
+                        {{boredPosition.positionPromise.reason.xhr.message}}
+                      {{else}}
+                        Unknown error
+                      {{/if}}
+                    {{/if}}
+                    {{#if boredPosition.positionPromise.isResolved}}
+                      <a href="{{routeUrl page='about' secondaryPage='mismanagement' year=boredPosition.startYear}}">
+                        {{boredPosition.positionPromise.value.singularName}}
+                      </a>
+                    {{/if}}
+                  </td>
+                </tr>
+              {{/for}}
+            </tbody>
+          </table>
+        </div>
       {{else}}
         <div class="alert alert-info" role="alert">
           It doesn’t look like this hasher has served on the Bored.
@@ -510,11 +536,6 @@
               <tr>
                 <th>Patch</th>
                 <th>Date</th>
-                <th>Hash#</th>
-                <th>Hares</th>
-                <th>Location</th>
-                <th class="d-print-none"></th>
-                <th class="d-print-none"></th>
               </tr>
             </thead>
             <tbody>
@@ -522,29 +543,26 @@
                 <tr>
                   <td class="text-nowrap">{{patch.number}} {{patch.type}}s</td>
                   <td>
-                    {{#if patch.event.trailNumber}}
-                      <a href="{{routeUrl page='events' year=patch.event.startDateParts.year month=patch.event.startDateParts.month day=patch.event.startDateParts.day trailNumber=patch.trailNumber}}">
-                        {{patch.event.startDateWithYearString}}
-                      </a>
-                    {{else}}
-                      {{patch.event.startDateWithYearString}}
+                    {{#if patch.eventsPromise.isPending}}
+                      <span class="fa fa-circle-notch fa-spin"></span>
                     {{/if}}
-                  </td>
-                  <td>{{patch.trailNumber}}</td>
-                  <td>{{{patch.event.haresHtml}}}</td>
-                  <td>{{{patch.event.shortLocationHtml}}}</td>
-                  <td class="d-print-none text-center">
-                    <lbh3-photos-button
-                      event:from="patch.event"
-                      faSize:from="'lg'"
-                      showEdit:from="true"
-                    />
-                  </td>
-                  <td class="d-print-none text-center">
-                    <lbh3-snooze-button
-                      event:from="patch.event"
-                      faSize:from="'lg'"
-                    />
+                    {{#if patch.eventsPromise.isRejected}}
+                      <span class="fa fa-exclamation-triangle"></span>
+                      {{#if patch.eventsPromise.reason.xhr.message}}
+                        {{patch.eventsPromise.reason.xhr.message}}
+                      {{else}}
+                        Unknown error
+                      {{/if}}
+                    {{/if}}
+                    {{#if patch.eventsPromise.isResolved}}
+                      {{#if patch.trailNumber}}
+                        <a href="{{routeUrl page='events' year=patch.event.startDateParts.year month=patch.event.startDateParts.month day=patch.event.startDateParts.day trailNumber=patch.trailNumber}}">
+                          {{patch.event.startDateWithYearString}}
+                        </a>
+                      {{else}}
+                        {{patch.event.startDateWithYearString}}
+                      {{/if}}
+                    {{/if}}
                   </td>
                 </tr>
               {{/for}}
@@ -560,8 +578,35 @@
 
     <h3 class="mb-3 mt-5">Runs</h3>
 
+    {{#if eventsPromise.isPending}}
+      <div class="alert alert-info" role="alert">
+        <strong>Fetching runs…</strong>
+      </div>
+    {{/if}}
+
+    {{#if eventsPromise.isRejected}}
+      <div class="alert alert-danger" role="alert">
+        <strong>Fuck!</strong> The hasher’s runs couldn’t be retrieved.
+        {{runsPromise.reason.xhr.message}}
+        {{eventsPromise.reason.xhr.message}}
+      </div>
+    {{/if}}
+
+    {{#if eventsPromise.isResolved}}
+      {{#if events.length}}
+        {{#for(event of events)}}{{/for}}
+        <lbh3-run-list
+          events:from="events"
+        />
+      {{else}}
+        <div class="alert alert-info" role="alert">
+          It doesn’t look like this person has actually hashed with LBH3.
+        </div>
+      {{/if}}
+    {{/if}}
+
     {{#if pages.length}}
-      <nav class="nav nav-pills">
+      <nav class="mt-0 nav nav-pills">
         {{#for(page of pages)}}
           <a
             class="{{#is scope.vm.currentPage page}}active{{/is}} nav-link text-sm-center"
@@ -571,78 +616,6 @@
           </a>
         {{/for}}
       </nav>
-    {{/if}}
-
-    {{#if runsPromise.isPending}}
-      <div class="alert alert-info" role="alert">
-        <strong>Fetching runs…</strong>
-      </div>
-    {{/if}}
-
-    {{#if runsPromise.isRejected}}
-      <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The hasher’s runs couldn’t be retrieved. {{runsPromise.reason.xhr.message}}
-      </div>
-    {{/if}}
-
-    {{#if runsPromise.isResolved}}
-      {{#if runs.length}}
-        <div class="table-responsive">
-          <table class="table table-sm table-striped">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Hash#</th>
-                <th>Hares</th>
-                <th>Location</th>
-                <th>Name</th>
-                <th class="d-print-none"></th>
-                <th class="d-print-none"></th>
-              </tr>
-            </thead>
-            <tbody>
-              {{#for(run of runs)}}
-                <tr>
-                  <td>
-                    {{#if run.event.trailNumber}}
-                      <a href="{{routeUrl page='events' year=run.event.startDateParts.year month=run.event.startDateParts.month day=run.event.startDateParts.day trailNumber=run.trailNumber}}">
-                        {{run.event.startDateWithYearString}}
-                      </a>
-                    {{else}}
-                      {{run.event.startDateWithYearString}}
-                    {{/if}}
-                  </td>
-                  <td>
-                    {{#if run.trailNumber}}
-                      {{run.trailNumber}}
-                    {{/if}}
-                  </td>
-                  <td>{{{run.event.haresHtml}}}</td>
-                  <td>{{{run.event.shortLocationHtml}}}</td>
-                  <td>{{{run.event.nameHtml}}}</td>
-                  <td class="d-print-none text-center">
-                    <lbh3-photos-button
-                      event:from="run.event"
-                      faSize:from="'lg'"
-                      showEdit:from="true"
-                    />
-                  </td>
-                  <td class="d-print-none text-center">
-                    <lbh3-snooze-button
-                      event:from="run.event"
-                      faSize:from="'lg'"
-                    />
-                  </td>
-                </tr>
-              {{/for}}
-            </tbody>
-          </table>
-        </div>
-      {{else}}
-        <div class="alert alert-info" role="alert">
-          It doesn’t look like this person has actually hashed with LBH3.
-        </div>
-      {{/if}}
     {{/if}}
   {{/if}}
 {{/if}}

@@ -5,7 +5,7 @@ import './run-list.less';
 import view from './run-list.stache';
 
 export const ViewModel = DefineMap.extend({
-  month: {},
+  events: {},
   get session() {
     return Session.current;
   },

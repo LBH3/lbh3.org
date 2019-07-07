@@ -41,6 +41,6 @@
 {{#if eventsByMonth}}
   {{#for(month of eventsByMonth)}}
     <h3>{{month.name}} {{month.year}}</h3>
-    <lbh3-run-list month:from="month" showFutureTools:from="true" />
+    <lbh3-run-list events:from="month.events" showFutureTools:from="true" />
   {{/for}}
 {{/if}}

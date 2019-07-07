@@ -4,7 +4,7 @@
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/snooze-button/" />
 
-{{#for(event of month.events)}}
+{{#for(event of events)}}
   <div class="border-bottom d-block d-sm-none mb-2 pb-2 xs-layout">
     <div class="d-flex flex-row">
       {{#if(event.urlId)}}
@@ -163,7 +163,7 @@
       </tr>
     </thead>
     <tbody>
-      {{#for(event of month.events)}}
+      {{#for(event of events)}}
         {{#if(event.urlId)}}
           <tr>
             {{#if showFutureTools}}

@@ -102,9 +102,9 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       return BoredHasher.getList({
         hasherId: this.id,
-        $limit,
+        $limit: 500,
         $sort: {
-          startDate: 1
+          startDate: -1
         }
       });
     }
@@ -123,6 +123,33 @@ export const ViewModel = DefineMap.extend({
         return `View the profile for ${hasher.hashOrJustName}.`;
       }
       return `View the profile for hasher #${this.id}.`;
+    }
+  },
+  events: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      const eventsPromise = this.eventsPromise;
+      if (eventsPromise) {
+        eventsPromise.then(results => {
+          setValue(results.map(result => {
+            return result[0];
+          }));
+        });
+      }
+    }
+  },
+  get eventsPromise() {
+    const runsPromise = this.runsPromise;
+    if (runsPromise) {
+      return runsPromise.then(runs => {
+        if (runs) {
+          return Promise.all(runs.map(run => {
+            return run.eventsPromise;
+          }));
+        }
+      });
     }
   },
   hasher: {
@@ -188,7 +215,8 @@ export const ViewModel = DefineMap.extend({
           hasherId,
           $limit: 500,
           $sort: {
-            trailNumber: -1
+            type: 1,
+            number: -1
           }
         });
       }
