@@ -132,11 +132,11 @@
       <tr>
         {{#if showFutureTools}}
           {{#if session.user.canEditPreTrailInfo}}
-            <th class="d-print-none"></th>
+            <th class="d-print-none single-icon-column"></th>
           {{/if}}
         {{/if}}
-        <th>Date</th>
-        <th>Hash #</th>
+        <th class="date-column">Date</th>
+        <th class="trail-number-column">#</th>
         <th>Name</th>
         <th>Hares</th>
         <th>Location</th>
@@ -156,8 +156,8 @@
         {{/if}}
         {{^if showFutureTools}}
           {{#if session.user.hasherId}}
-            <th class="d-print-none"></th>
-            <th class="d-print-none"></th>
+            <th class="d-print-none single-icon-column"></th>
+            <th class="d-print-none single-icon-column"></th>
           {{/if}}
         {{/if}}
       </tr>
@@ -168,45 +168,46 @@
           <tr>
             {{#if showFutureTools}}
               {{#if session.user.canEditFutureSpecialEvents}}
-                <td class="d-print-none text-center">
+                <td class="d-print-none text-center single-icon-column">
                   <a href="{{routeUrl page='events' secondaryPage='edit' urlId=event.urlId year=event.year}}">
                     <span class="far fa-edit"></span>
                   </a>
                 </td>
               {{/if}}
             {{/if}}
-            <td>
+            <td class="date-column">
               <a href="{{routeUrl page='events' urlId=event.urlId year=event.year}}">
                 {{event.startDateString}}
               </a>
             </td>
-            <td>{{! Hash # }}</td>
-            <td colspan="2">{{{event.title}}}</td>
+            <td class="trail-number-column">{{! # }}</td>
+            <td>{{{event.title}}}</td>
+            <td>{{! Hares }}</td>
             <td>{{{event.shortLocationHtml}}}</td>
             {{#if session.user.hasherId}}
               {{#if showScribe}}
-                <th></th>
+                <td></td>
               {{/if}}
               {{#if showHashit}}
-                <th></th>
+                <td></td>
               {{/if}}
               {{#if showNotes}}
-                <th></th>
+                <td></td>
               {{/if}}
             {{/if}}
             {{#if showOnOn}}
-              <th></th>
+              <td></td>
             {{/if}}
             {{^if showFutureTools}}
               {{#if session.user.hasherId}}
-                <td class="d-print-none text-center">
+                <td class="d-print-none single-icon-column">
                   <lbh3-photos-button
                     event:from="event"
                     faSize:from="'lg'"
                     showEdit:from="true"
                   />
                 </td>
-                <td class="d-print-none"></td>
+                <td class="d-print-none single-icon-column"></td>
               {{/if}}
             {{/if}}
           </tr>
@@ -214,14 +215,14 @@
           <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
             {{#if showFutureTools}}
               {{#if session.user.canEditPreTrailInfo}}
-                <td class="d-print-none text-center">
+                <td class="d-print-none single-icon-column">
                   <a href="{{routeUrl page='hareline' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
                     <span class="far fa-edit"></span>
                   </a>
                 </td>
               {{/if}}
             {{/if}}
-            <td>
+            <td class="date-column">
               {{#if event.trailNumber}}
                 <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
                   {{event.startDateString}}
@@ -230,7 +231,7 @@
                 {{event.startDateString}}
               {{/if}}
             </td>
-            <td>
+            <td class="trail-number-column">
               {{#if event.trailNumber}}
                 {{event.trailNumber}}
               {{/if}}
@@ -276,14 +277,14 @@
             {{/if}}
             {{^if showFutureTools}}
               {{#if session.user.hasherId}}
-                <td class="d-print-none text-center">
+                <td class="d-print-none single-icon-column">
                   <lbh3-photos-button
                     event:from="event"
                     faSize:from="'lg'"
                     showEdit:from="true"
                   />
                 </td>
-                <td class="d-print-none text-center">
+                <td class="d-print-none single-icon-column">
                   <lbh3-snooze-button
                     event:from="event"
                     faSize:from="'lg'"
