@@ -9,10 +9,8 @@ export const ViewModel = DefineMap.extend({
   get session() {
     return Session.current;
   },
-  showFutureTools: {
-    default: false,
-    type: 'boolean'
-  },
+  showFutureTools: 'boolean',
+  showYear: 'boolean',
   showHashit: 'boolean',
   get showingAdditionalInfo() {
     return this.showHashit || this.showNotes || this.showOnOn || this.showScribe;

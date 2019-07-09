@@ -597,6 +597,7 @@
         {{#for(event of events)}}{{/for}}
         <lbh3-run-list
           events:from="events"
+          showYear:raw="true"
         />
       {{else}}
         <div class="alert alert-info" role="alert">

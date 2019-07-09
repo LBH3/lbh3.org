@@ -12,15 +12,19 @@
           class="mr-auto"
           href="{{routeUrl page='events' urlId=event.urlId year=event.year}}"
         >
-          {{event.startDateString}}
+          {{#if(showYear)}}
+            {{event.startDateWithYearString}}
+          {{else}}
+            {{event.startDateString}}
+          {{/if}}
         </a>
       {{else}}
         <a
           class="mr-auto"
           href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}"
         >
-          {{#if event.trailNumber}}
-            {{event.startDateString}}
+          {{#if(showYear)}}
+            {{event.startDateWithYearString}}
           {{else}}
             {{event.startDateString}}
           {{/if}}
@@ -177,7 +181,11 @@
             {{/if}}
             <td class="date-column">
               <a href="{{routeUrl page='events' urlId=event.urlId year=event.year}}">
-                {{event.startDateString}}
+                {{#if(showYear)}}
+                  {{event.startDateWithYearString}}
+                {{else}}
+                  {{event.startDateString}}
+                {{/if}}
               </a>
             </td>
             <td class="trail-number-column">{{! # }}</td>
@@ -225,10 +233,18 @@
             <td class="date-column">
               {{#if event.trailNumber}}
                 <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}">
-                  {{event.startDateString}}
+                  {{#if(showYear)}}
+                    {{event.startDateWithYearString}}
+                  {{else}}
+                    {{event.startDateString}}
+                  {{/if}}
                 </a>
               {{else}}
-                {{event.startDateString}}
+                {{#if(showYear)}}
+                  {{event.startDateWithYearString}}
+                {{else}}
+                  {{event.startDateString}}
+                {{/if}}
               {{/if}}
             </td>
             <td class="trail-number-column">
