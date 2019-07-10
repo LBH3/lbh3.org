@@ -5,7 +5,7 @@ import loader from '@loader';
 import platform from 'steal-platform';
 import view from './map.stache';
 
-const darkModeStyles = [
+export const darkModeStyles = [
   {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
   {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
   {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
@@ -113,11 +113,6 @@ export default Component.extend({
       }
     },
     placeId: 'string',
-    platform: {
-      default: () => {
-        return platform;
-      }
-    },
     q: 'string',
 
     connectedCallback(element) {

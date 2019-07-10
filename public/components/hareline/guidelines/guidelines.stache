@@ -5,8 +5,8 @@
   <li>Hares run for free, to a maximum of three. Bring your receipt(s) to be reimbursed up to $50 for flour and beer check expenses.</li>
   <li>If you want to be reimbursed more than $50, you must get approval at a Bored Meeting before the event. This includes extra beer, parking, entertainment, food, etc.</li>
   <li>LBH3 is an A-to-B hash. If you have to lay an A-to-A trail, get a “dummy” bag van to make it “look” like an A-to-B run. The beer van can’t be used for a bag van. If A-to-B is a long way, you must shuttle “drivers” back to the start before Down-Downs.</li>
-  <li>Thursdays: plan your trail “in the box” (south of Firestone/Manchester, west of Beach; see the map below). Any exceptions must be pre-approved with the Trailmaster(s).</li>
-  <li>Sundays: avoid “Thursday” trails. Go find some shiggy! If you want to run in BFE, contact Trailmaster.</li>
+  <li>Thursdays: plan your trail “in the box” (see the map below). Any exceptions must be pre-approved with the Trailmaster(s).</li>
+  <li>Sundays: avoid “Thursday” trails. Go find some shiggy! If you want to run in BFE, contact the Trailmaster(s).</li>
   <li>Where you set your trail is fairly crucial, so give it some thought. Give the pack some interesting scenery and shiggy… anything except 100% flat, long, street running. Also, don’t center your run around that great On-On you found (unless you can give the pack a good trail in the area).</li>
   <li>1-2 hares are good, 3 could work, but be careful with more. Consider breaking in a virgin hare; let them scout and run with you.</li>
   <li>Pick a start where we can park for free and late. Make sure there are restrooms nearby (parks with restrooms are nice).</li>
@@ -45,7 +45,15 @@
 
 <figure class="figure mx-auto">
   <figcaption class="figure-caption text-center">
-    “The Box” for Thursday runs is south of Firestone/Manchester and west of Beach.
+    “The Box” for Thursday runs is as follows:
+    stay on or west of Brookhurst St. from the ocean to Commonwealth Ave;
+    stay on or south of Commonwealth from Brookhurst to Gilbert St;
+    from Commonwealth to Imperial Highway, stay on or west of Gilbert St., which becomes Idaho St;
+    stay on or south of Imperial Hwy from Idaho to the 605 freeway;
+    stay south of the 105 freeway from the 605 to Hawthorne Blvd;
+    stay on or east of Hawthorne from the 105 to the Pacific Coast Highway (PCH);
+    stay on or north of the PCH from Hawthorne to Western Ave;
+    stay on or east of Western from the PCH to the ocean.
   </figcaption>
-  <img alt="Map of the box" class="figure-img img-fluid rounded" height="905" src="{{joinBase 'assets/the-box.jpg'}}" width="970" />
+  <div class="figure-img img-fluid rounded" id="boxMap"></div>
 </figure>
