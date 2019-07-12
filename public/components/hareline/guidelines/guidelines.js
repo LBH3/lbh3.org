@@ -1069,11 +1069,23 @@ export const ViewModel = DefineMap.extend({
 						bounds.extend(coordinate);
 					});
 					const center = bounds.getCenter();
+
+					const boxMapHeight = boxMap.getBoundingClientRect().height;
+					let zoom = 9;
+					if (boxMapHeight >= 684) {
+						zoom = 11;
+					} else if (boxMapHeight >= 394) {
+						zoom = 10;
+					}
+
 					map = new google.maps.Map(boxMap, {
 						center: {lat: center.lat(), lng: center.lng()},
+						mapTypeControlOptions: {
+							style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+						},
 						minZoom: 8,
 						styles: isDarkMode ? darkModeStyles : [],
-						zoom: 11
+						zoom
 					});
 
 					map.data.add({
