@@ -594,7 +594,7 @@
                         <td>{{run.trailNumber}}</td>
                         <td>{{{run.event.haresHtml}}}</td>
                         <td>{{{run.event.shortLocationHtml}}}</td>
-                        <td>{{{run.event.nameHtml}}}</td>
+                        <td>{{{run.event.nameHtmlNoParagraphs}}}</td>
                       </tr>
                     {{/for}}
                   </tbody>

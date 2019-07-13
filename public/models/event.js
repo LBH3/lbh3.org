@@ -207,6 +207,12 @@ const Event = DefineMap.extend({
     },
     serialize: false
   },
+  nameHtmlNoParagraphs: {
+    get: function() {
+      return this.nameHtml.replace(/<p>/g, ' ').replace(/<\/p>/g, ' ').trim();
+    },
+    serialize: false
+  },
   namePlaintext: {
     get: function() {
       const nameHtml = this.nameHtml;

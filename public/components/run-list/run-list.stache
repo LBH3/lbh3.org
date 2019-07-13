@@ -64,11 +64,11 @@
       {{/if}}
     </div>
     <h4 class="h6 mb-0 {{^or(event.haresHtml, event.urlId)}}text-danger{{/or}}">
-      {{#if event.nameHtml}}
+      {{#if event.nameHtmlNoParagraphs}}
         {{^or(event.haresHtml, event.urlId)}}
           Available!
         {{/or}}
-        {{{event.nameHtml}}}
+        {{{event.nameHtmlNoParagraphs}}}
       {{else}}
         {{#if event.haresHtml}}
           {{{event.haresHtml}}}
@@ -80,7 +80,7 @@
     <div class="text-muted truncate-text">
       {{{event.shortLocationHtml}}}
     </div>
-    {{#and(event.haresMd, event.nameHtml)}}
+    {{#and(event.haresMd, event.nameHtmlNoParagraphs)}}
       <p class="hares">
         <small class="text-muted">
           {{#if this.showingAdditionalInfo}}
@@ -252,7 +252,7 @@
                 {{event.trailNumber}}
               {{/if}}
             </td>
-            <td>{{{event.nameHtml}}}</td>
+            <td>{{{event.nameHtmlNoParagraphs}}}</td>
             <td>
               {{#if event.haresHtml}}
                 {{{event.haresHtml}}}
