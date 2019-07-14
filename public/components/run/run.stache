@@ -19,8 +19,8 @@
 
 {{#if event}}
   <h2>
-    {{#if event.nameMd}}
-      {{{event.nameMd}}}
+    {{#if event.nameHtml}}
+      {{{event.nameHtml}}}
       <br>
       <small class="text-muted">Run #{{event.trailNumber}}</small>
     {{else}}

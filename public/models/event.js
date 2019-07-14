@@ -26,6 +26,10 @@ export const localizedStringForDate = function(date, locales, options) {
   return date.toString();
 };
 
+const oneLine = (markdown) => {
+  return marked(markdown).replace(/<p>/g, ' ').replace(/<\/p>/g, ' ').trim();
+};
+
 const Event = DefineMap.extend({
   seal: false
 }, {
@@ -69,19 +73,19 @@ const Event = DefineMap.extend({
 
   addedWriteupHtml: {
     get: function() {
-      return marked(this.addedWriteupMd || '');
+      return oneLine(this.addedWriteupMd || '');
     },
     serialize: false
   },
   additionalWriteupHtml: {
     get: function() {
-      return marked(this.additionalWriteupMd || '');
+      return oneLine(this.additionalWriteupMd || '');
     },
     serialize: false
   },
   bringHtml: {
     get: function() {
-      return marked(this.bringMd || '');
+      return oneLine(this.bringMd || '');
     },
     serialize: false
   },
@@ -99,13 +103,13 @@ const Event = DefineMap.extend({
   },
   harePatchesHtml: {
     get: function() {
-      return marked(this.harePatchesMd || '');
+      return oneLine(this.harePatchesMd || '');
     },
     serialize: false
   },
   haresHtml: {
     get: function() {
-      return marked(this.haresMd || '');
+      return oneLine(this.haresMd || '');
     },
     serialize: false
   },
@@ -118,7 +122,7 @@ const Event = DefineMap.extend({
   },
   hashitReasonHtml: {
     get: function() {
-      return marked(this.hashitReasonMd || '');
+      return oneLine(this.hashitReasonMd || '');
     },
     serialize: false
   },
@@ -143,7 +147,7 @@ const Event = DefineMap.extend({
   },
   locationHtml: {
     get: function() {
-      return marked(this.locationMd || '');
+      return oneLine(this.locationMd || '');
     },
     serialize: false
   },
@@ -203,7 +207,7 @@ const Event = DefineMap.extend({
   },
   nameHtml: {
     get: function() {
-      return marked(this.nameMd || '');
+      return oneLine(this.nameMd || '');
     },
     serialize: false
   },
@@ -220,19 +224,19 @@ const Event = DefineMap.extend({
   },
   newBootsHtml: {
     get: function() {
-      return marked(this.newBootsMd || '');
+      return oneLine(this.newBootsMd || '');
     },
     serialize: false
   },
   newNamesHtml: {
     get: function() {
-      return marked(this.newNamesMd || '');
+      return oneLine(this.newNamesMd || '');
     },
     serialize: false
   },
   onOnHtml: {
     get: function() {
-      return marked(this.onOnMd || '');
+      return oneLine(this.onOnMd || '');
     },
     serialize: false
   },
@@ -271,7 +275,7 @@ const Event = DefineMap.extend({
   },
   patchesHtml: {
     get: function() {
-      return marked(this.patchesMd || '');
+      return oneLine(this.patchesMd || '');
     },
     serialize: false
   },
@@ -295,13 +299,13 @@ const Event = DefineMap.extend({
   },
   returnersHtml: {
     get: function() {
-      return marked(this.returnersMd || '');
+      return oneLine(this.returnersMd || '');
     },
     serialize: false
   },
   scribesHtml: {
     get: function() {
-      return marked(this.scribesMd || '');
+      return oneLine(this.scribesMd || '');
     },
     serialize: false
   },
@@ -320,7 +324,7 @@ const Event = DefineMap.extend({
           } else if (location.name) {
             name = location.name;
           }
-          resolve(`<p>${name}</p>`);
+          resolve(name);
         });
       }
       return this.locationHtml;
@@ -349,7 +353,7 @@ const Event = DefineMap.extend({
   },
   snoozeTitleHtml: {
     get: function() {
-      return marked(this.snoozeTitleMd || '');
+      return oneLine(this.snoozeTitleMd || '');
     },
     serialize: false
   },
@@ -407,13 +411,13 @@ const Event = DefineMap.extend({
   },
   trailCommentsHtml: {
     get: function() {
-      return marked(this.trailCommentsMd || '');
+      return oneLine(this.trailCommentsMd || '');
     },
     serialize: false
   },
   visitorsHtml: {
     get: function() {
-      return marked(this.visitorsMd || '');
+      return oneLine(this.visitorsMd || '');
     },
     serialize: false
   },
