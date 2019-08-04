@@ -288,7 +288,13 @@ export const ViewModel = DefineMap.extend({
 
   specialEventPromise: {
     get: function() {
-      return SpecialEvent.getList();
+      return SpecialEvent.getList({
+        $limit: 500,
+        $sort: {
+          year: -1,
+          startDatetime: -1
+        }
+      });
     }
   },
 
