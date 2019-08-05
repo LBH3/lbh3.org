@@ -2,16 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
 
-<h2>
-  {{#if event}}
-    <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}" title="View trail">
-      Run #{{trailNumber}}
-    </a>
-  {{else}}
-    Run #{{trailNumber}}
-  {{/if}}
-  Check-In Sheet
-</h2>
+<h2>Run #{{trailNumber}} Check-In Sheet</h2>
 
 {{#if hashersPromise.isPending}}
   <div class="alert alert-info" role="alert">

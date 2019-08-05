@@ -7,10 +7,16 @@ lbh3-run-attendance {
 
 	@media print {
 		table {
-			font-size: 75%;
-			a {
+			a:not(.btn) {
 				color: inherit;
+				text-decoration: none;
 			}
 		}
+	}
+}
+
+@media print {
+	header {
+		display: none;
 	}
 }
