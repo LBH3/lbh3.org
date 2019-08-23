@@ -21,8 +21,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   get eventQuery() {
-    const currentDate = new Date();
-    const startOfTheDay = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+    const startOfTheDay = moment(this.endDatetime).tz('America/Los_Angeles').startOf('day').format();
     return {
       $limit: 100,
       startDatetime: {
