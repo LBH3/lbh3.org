@@ -7,6 +7,7 @@ import Session from '~/models/session';
 import { sortByName, sortByPayment } from '~/components/run/sort-hashers';
 
 import loader from '@loader';
+import moment from 'moment-timezone';
 import route from 'can-route';
 import view from './run.stache';
 
@@ -81,14 +82,13 @@ export const ViewModel = DefineMap.extend({
           trailNumber
         };
       } else {
-        const currentDate = new Date();
-        const yesterday = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate());
+        const startOfToday = moment(this.endDatetime).tz('America/Los_Angeles').startOf('day').format();
         params = {
           $sort: {
             startDatetime: 1
           },
           startDatetime: {
-            $gte: yesterday
+            $gte: startOfToday
           }
         };
       }
