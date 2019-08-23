@@ -13,7 +13,7 @@ import './edit.less';
 import { sortByHashOrJustName } from '~/components/run/sort-hashers';
 import debounce from 'lodash.debounce';
 import loader from '@loader';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import route from 'can-route';
 import view from './edit.stache';
 
@@ -331,7 +331,7 @@ export const ViewModel = DefineMap.extend({
 
   editRun: function() {
     if (this.session.user.canAddTrails) {
-      this.event.startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
+      this.event.startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format();
     }
     return this.editingEventPromise = this.event.save();
   },
