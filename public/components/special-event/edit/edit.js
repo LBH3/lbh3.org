@@ -4,7 +4,7 @@ import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import './edit.less';
 import marked from 'marked';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import view from './edit.stache';
 
 marked.setOptions({
@@ -18,7 +18,7 @@ export const ViewModel = DefineMap.extend({
   },
   editSpecialEvent: function() {
     this.specialEvent.descriptionMd = this.descriptionMd;
-    this.specialEvent.startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
+    this.specialEvent.startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format();
     return this.editSpecialEventPromise = this.specialEvent.save();
   },
   editSpecialEventPromise: {},

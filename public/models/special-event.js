@@ -57,7 +57,7 @@ const SpecialEvent = DefineMap.extend({
     },
     serialize: false
   },
-  startDatetime: 'any',
+  startDatetime: 'string',
   title: {
     get: function() {
       const textContainer = document.createElement('div');
