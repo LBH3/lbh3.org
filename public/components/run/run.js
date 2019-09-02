@@ -16,17 +16,12 @@ import './run.less';
 export const ViewModel = DefineMap.extend({
   canViewRunAttendance: {
     get: function() {
-      const user  = this.session && this.session.user;
+      const user = this.session && this.session.user;
       if (user) {
         if (user.canViewRunAttendance) {
           return true;
         }
-        const hashers = this.hashers;
-        if (hashers) {
-          return hashers.some({
-            hasherId: user.hasherId
-          });
-        }
+        return this.didAttendThisRun;
       }
       return false;
     }
@@ -70,6 +65,16 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       return `Details about LBH3 run #${this.trailNumber}.`;
     }
+  },
+  get didAttendThisRun() {
+    const hashers = this.hashers;
+    const user = this.session && this.session.user;
+    if (hashers && user) {
+      return hashers.some({
+        hasherId: user.hasherId
+      });
+    }
+    return false;
   },
   event: Event,
   eventPromise: {

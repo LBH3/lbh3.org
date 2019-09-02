@@ -384,6 +384,15 @@
         {{/if}}
       {{/if}}
     {{/if}}
+  {{else}}
+    {{#and(event.hasProbablyEnded, this.session.user)}}
+      {{^if(didAttendThisRun)}}
+        <h3 class="mb-3 mt-5">Attendance</h3>
+        <div class="alert alert-info text-center" role="alert">
+          It doesn’t look like you attended this run.
+        </div>
+      {{/if}}
+    {{/and}}
   {{/if}}
 
 {{/if}}
