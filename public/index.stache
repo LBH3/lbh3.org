@@ -595,7 +595,7 @@
 
     <lbh3-footer class="d-print-none" />
 
-    {{#switch env.NODE_ENV}}
+    {{#switch nodeEnv}}
       {{#case "production"}}
         <script src="{{joinBase 'steal.production.js'}}"></script>
       {{/case}}

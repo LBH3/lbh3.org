@@ -62,7 +62,6 @@ const Hasher = DefineMap.extend({
   emailAddresses: emailAddressesPropDefinition,
   emailAddressesPrivate: emailAddressesPropDefinition,
   emailAddressesWithLinks: {
-    type: 'string',
     get: function() {
       const emailAddresses = this.emailAddresses || [];
       return emailAddresses.filter(value => value).map(value => {
@@ -71,7 +70,6 @@ const Hasher = DefineMap.extend({
     }
   },
   emailAddressesPrivateWithLinks: {
-    type: 'string',
     get: function() {
       const emailAddressesPrivate = this.emailAddressesPrivate || [];
       return emailAddressesPrivate.filter(value => value).map(value => {
@@ -101,7 +99,6 @@ const Hasher = DefineMap.extend({
   firstTrailNumber: 'number',
   foodPreference: 'string',
   formattedAddress: {
-    type: 'string',
     get: function() {
       return [
         this.addressStreet,
@@ -113,7 +110,6 @@ const Hasher = DefineMap.extend({
     }
   },
   formattedBirthday: {
-    type: 'string',
     get: function() {
       const birthdayAsMoment = moment({
         day: this.birthDay,
@@ -124,13 +120,11 @@ const Hasher = DefineMap.extend({
     }
   },
   formattedCreatedAt: {
-    type: 'string',
     get: function() {
       return moment(this.createdAt).format('LL');
     }
   },
   formattedPrivateAddress: {
-    type: 'string',
     get: function() {
       return [
         this.addressStreetPrivate,
@@ -142,7 +136,6 @@ const Hasher = DefineMap.extend({
     }
   },
   formattedUpdatedAt: {
-    type: 'string',
     get: function() {
       return moment(this.updatedAt).format('LL');
     }
@@ -151,7 +144,6 @@ const Hasher = DefineMap.extend({
   givenNamePrivate: 'string',
   hareCount: 'number',
   hasDied: {
-    type: 'boolean',
     serialize: false,
     get: function() {
       return !!this.died || !!this.inMemoriam || !!this.passed;
@@ -169,7 +161,6 @@ const Hasher = DefineMap.extend({
     }
   },
   hasName: {
-    type: 'boolean',
     serialize: false,
     get: function() {
       return !!this.hashName || !!this.givenName || !!this.givenNamePrivate || !!this.familyName || !!this.familyNamePrivate;

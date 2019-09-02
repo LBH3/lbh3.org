@@ -30,6 +30,12 @@ const AppViewModel = DefineMap.extend({
       return noHeadshot || undefined;
     }
   },
+  nodeEnv: {
+    get: function() {
+      return this.env && this.env.NODE_ENV || 'development';
+    },
+    serialize: false
+  },
   ogTitle: {
     default: '',
     serialize: false

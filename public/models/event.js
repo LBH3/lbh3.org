@@ -56,7 +56,6 @@ const Event = DefineMap.extend({
   snoozeTitleMd: 'string',
   snoozeUrl: 'string',
   snoozeUrlWithAuth: {
-    type: 'string',
     serialize: false,
     get: function() {
       const snoozeUrl = this.snoozeUrl;

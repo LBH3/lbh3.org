@@ -160,13 +160,11 @@ export const ViewModel = DefineMap.extend({
     }
   },
   showAttendancePrompt: {
-    type: 'boolean',
     get: function() {
       return !this.hashersPromise || !this.hashers || this.hashers.length === 0;
     }
   },
   showDonation: {
-    type: 'boolean',
     get: function() {
       const event = this.event;
       if (event) {
