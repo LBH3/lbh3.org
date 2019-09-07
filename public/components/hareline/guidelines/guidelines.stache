@@ -1,4 +1,9 @@
-<h2>Haring Guidelines</h2>
+<can-import from="~/components/hareline/nav/" />
+
+<lbh3-hareline-nav
+  secondaryPage:from="secondaryPage"
+  session:from="session"
+/>
 
 <h3>Planning the Trail</h3>
 <ul>

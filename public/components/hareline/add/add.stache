@@ -1,4 +1,9 @@
-<h2>Add a new trail</h2>
+<can-import from="~/components/hareline/nav/" />
+
+<lbh3-hareline-nav
+  secondaryPage:from="secondaryPage"
+  session:from="session"
+/>
 
 <form on:submit="createTrail()">
   <div class="form-group row">

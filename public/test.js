@@ -19,6 +19,7 @@ import 'lbh3/components/founders-2018/founders-2018-test';
 import 'lbh3/components/hareline/add/add-test';
 import 'lbh3/components/hareline/guidelines/guidelines-test';
 import 'lbh3/components/hareline/hareline-test';
+import 'lbh3/components/hareline/nav/nav-test';
 import 'lbh3/components/hasher/edit/edit-test';
 import 'lbh3/components/hasher/hasher-test';
 import 'lbh3/components/hasher-autocomplete/hasher-autocomplete-test';

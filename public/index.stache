@@ -352,6 +352,7 @@
                     <lbh3-hareline-add
                       description:to="scope.vm.description"
                       ogTitle:to="scope.vm.ogTitle"
+                      secondaryPage:from="secondaryPage"
                       title:to="scope.vm.title"
                     />
                   {{/if}}
@@ -386,6 +387,7 @@
                     class="container pl-0 pr-0"
                     description:to="scope.vm.description"
                     ogTitle:to="scope.vm.ogTitle"
+                    secondaryPage:from="secondaryPage"
                     title:to="scope.vm.title"
                   />
                 {{/if}}

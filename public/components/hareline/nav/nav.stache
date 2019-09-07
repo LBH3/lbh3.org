@@ -1,0 +1,34 @@
+<can-import from="can-stache-route-helpers" />
+
+<div class="d-flex justify-content-between mb-2">
+  <div>
+    <h2 class="text-nowrap">
+      <a href="{{routeUrl page='hareline'}}">
+        <h2>Hareline</h2>
+      </a>
+    </h2>
+  </div>
+  <div>
+    <ul class="m-0 nav nav-fill nav-pills">
+      <li class="nav-item">
+        <a
+          class="{{#eq(secondaryPage, 'guidelines')}}active{{/eq}} nav-link"
+          href="{{routeUrl page='hareline' secondaryPage='guidelines'}}"
+          title="Go to the paper guidelines page"
+        >
+          Haring Guidelines
+        </a>
+      </li>
+      {{#if session.user.canAddTrails}}
+        <li class="nav-item">
+          <a
+            class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
+            href="{{routeUrl page='hareline' secondaryPage='add'}}"
+          >
+            Add Trail
+          </a>
+        </li>
+      {{/if}}
+    </ul>
+  </div>
+</div>
