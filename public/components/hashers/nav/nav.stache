@@ -18,6 +18,9 @@
             title="Go to the early warning page"
           >
             <span class="fa fa-bell fa-lg"></span>
+            <span class="d-none d-md-inline">
+              Early Warning
+            </span>
           </a>
         </li>
         <li class="nav-item">
@@ -27,6 +30,9 @@
             title="Go to the email list"
           >
             <span class="fa fa-envelope fa-lg"></span>
+            <span class="d-none d-md-inline">
+              Email List
+            </span>
           </a>
         </li>
         <li class="nav-item">
@@ -36,6 +42,9 @@
             title="Go to the attendance records page"
           >
             <span class="fa fa-bars fa-lg"></span>
+            <span class="d-none d-md-inline">
+              Attendance Records
+            </span>
           </a>
         </li>
         {{#if session.user.canAddHashers}}
@@ -45,6 +54,9 @@
               href="{{routeUrl page='hashers' secondaryPage='add'}}"
             >
               <span class="fa fa-plus fa-lg"></span>
+              <span class="d-none d-md-inline">
+                Add Hasher
+              </span>
             </a>
           </li>
         {{/if}}

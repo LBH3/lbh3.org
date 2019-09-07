@@ -6,7 +6,7 @@
   session:from="session"
 />
 
-<h2>Attendance records</h2>
+<h2>Attendance Records</h2>
 
 <form class="mb-2" on:submit="scope.event.preventDefault()">
   <div class="form-inline">
