@@ -1,5 +1,11 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/hasher-edit-form/" />
+<can-import from="~/components/hashers/nav/" />
+
+<lbh3-hashers-nav
+  secondaryPage:from="secondaryPage"
+  session:from="session"
+/>
 
 {{#if session.user.canAddHashers}}
   <h2>Add a new hasher</h2>

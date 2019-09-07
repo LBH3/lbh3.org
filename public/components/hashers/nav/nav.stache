@@ -1,0 +1,54 @@
+<can-import from="can-stache-route-helpers" />
+
+<div class="d-flex justify-content-between mb-2">
+  <div>
+    <h2 class="text-nowrap">
+      <a href="{{routeUrl page='hashers' secondaryPage=''}}">
+        <h2>Hashers</h2>
+      </a>
+    </h2>
+  </div>
+  <div>
+    {{#if session.user.canViewHashersEmailList}}
+      <ul class="m-0 nav nav-fill nav-pills">
+        <li class="nav-item">
+          <a
+            class="{{#eq(secondaryPage, 'early-warning')}}active{{/eq}} nav-link"
+            href="{{routeUrl page='hashers' secondaryPage='early-warning'}}"
+            title="Go to the early warning page"
+          >
+            <span class="fa fa-bell fa-lg"></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="{{#eq(secondaryPage, 'email')}}active{{/eq}} nav-link"
+            href="{{routeUrl page='hashers' secondaryPage='email'}}"
+            title="Go to the email list"
+          >
+            <span class="fa fa-envelope fa-lg"></span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a
+            class="{{#eq(secondaryPage, 'attendance-records')}}active{{/eq}} nav-link"
+            href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}"
+            title="Go to the attendance records page"
+          >
+            <span class="fa fa-bars fa-lg"></span>
+          </a>
+        </li>
+        {{#if session.user.canAddHashers}}
+          <li class="nav-item">
+            <a
+              class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
+              href="{{routeUrl page='hashers' secondaryPage='add'}}"
+            >
+              <span class="fa fa-plus fa-lg"></span>
+            </a>
+          </li>
+        {{/if}}
+      </ul>
+    {{/if}}
+  </div>
+</div>

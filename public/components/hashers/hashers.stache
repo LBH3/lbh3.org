@@ -1,30 +1,12 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="~/components/hashers/nav/" />
 
-{{#if session.user.canViewHashersEmailList}}
-  <div class="mb-2 row">
-    <div class="col"></div>
-    <div class="col">
-      <h2>Hashers</h2>
-    </div>
-    <div class="col text-right">
-      <a class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" href="{{routeUrl page='hashers' secondaryPage='early-warning'}}" title="Go to the early warning page">
-        <span class="fa fa-bell fa-lg"></span>
-      </a>
-      <a class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" href="{{routeUrl page='hashers' secondaryPage='email'}}" title="Go to the email list">
-        <span class="fa fa-envelope fa-lg"></span>
-      </a>
-      <a class="d-inline-block d-print-none p-2 p-md-1 pt-md-2" href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}" title="Go to the attendance records page">
-        <span class="fa fa-bars fa-lg"></span>
-      </a>
-    </div>
-  </div>
-{{else}}
-  <h2>
-    Hashers
-  </h2>
-{{/if}}
+<lbh3-hashers-nav
+  secondaryPage:from="secondaryPage"
+  session:from="session"
+/>
 
 {{#if session.user.canViewDirectoryInfo}}
 
@@ -43,14 +25,6 @@
       <button class="btn btn-primary ml-2" type="submit">
         Search
       </button>
-
-      {{#if session.user.canAddHashers}}
-        <div class="d-print-none ml-auto">
-          <a class="btn btn-primary" href="{{routeUrl page='hashers' secondaryPage='add'}}">
-            Add hasher
-          </a>
-        </div>
-      {{/if}}
     </div>
   </form>
 

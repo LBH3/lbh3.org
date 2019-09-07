@@ -1,6 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import EventsHashers from '~/models/events-hashers';
+import Session from '~/models/session';
 import route from 'can-route';
 import view from './attendance-records.stache';
 
@@ -74,6 +75,8 @@ export const ViewModel = DefineMap.extend({
   searchText: {
     default: 'name'
   },
+
+  secondaryPage: 'string',
 
   get session() {
     return Session.current;

@@ -25,6 +25,8 @@ export const ViewModel = DefineMap.extend({
     return 'Add a new hasher';
   },
 
+  secondaryPage: 'string',
+
   get session() {
     return Session.current;
   },

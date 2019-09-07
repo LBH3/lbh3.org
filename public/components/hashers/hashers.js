@@ -85,6 +85,8 @@ export const ViewModel = DefineMap.extend({
 
   searchText: 'string',
 
+  secondaryPage: 'string',
+
   get session() {
     return Session.current;
   },

@@ -1,4 +1,10 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/hashers/nav/" />
+
+<lbh3-hashers-nav
+  secondaryPage:from="secondaryPage"
+  session:from="session"
+/>
 
 <h2>Early Warning</h2>
 
