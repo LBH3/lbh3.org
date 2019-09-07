@@ -86,7 +86,7 @@ export const darkModeStyles = [
   }
 ];
 
-const zoom = 16;
+const zoom = 14;
 
 export default Component.extend({
   tag: 'lbh3-map',
@@ -229,7 +229,7 @@ export default Component.extend({
             mapIframe.allowfullscreen = true;
             mapIframe.frameborder = 0;
             mapIframe.height = window.getComputedStyle(element).height;
-            mapIframe.src = `https://www.google.com/maps/embed/v1/place?key=${this.googleMapsKey}&q=${placeQuery}`;
+            mapIframe.src = `https://www.google.com/maps/embed/v1/place?key=${this.googleMapsKey}&q=${placeQuery}&zoom=${zoom}`;
             mapIframe.style = 'border:0';
             mapIframe.width = '100%';
             element.appendChild(mapIframe);
