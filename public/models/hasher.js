@@ -31,7 +31,7 @@ const emailAddressesPropDefinition = {
   }
 };
 
-const Hasher = DefineMap.extend({
+export const Hasher = DefineMap.extend({
   seal: false
 }, {
   id: {
@@ -77,7 +77,21 @@ const Hasher = DefineMap.extend({
       }).join(', ');
     }
   },
-  emailing: 'string',
+  emailing: {
+    get(lastSetValue) {
+      if (lastSetValue) {
+        const upperCased = lastSetValue.toUpperCase().trim();
+        if (['1', '2', '3', '4', '5', 'B', 'Y'].indexOf(upperCased) > -1 || upperCased.length > 2) {
+          return '4';
+        }
+        if (upperCased === 'C' || upperCased === 'R') {
+          return 'C';
+        }
+      }
+      return '';
+    },
+    serialize: true
+  },
   endOfYear: 'number',
   event: 'string',
   externalId: 'string',
@@ -333,21 +347,25 @@ Hasher.connection = feathersModel('/api/hashers', {
   name: 'hasher'
 });
 
+export const emailingOptions = {
+  '': 'No',
+  'C': 'Death or special event',
+  '4': 'Snooze'
+};
+
 Hasher.groupByEmailing = function(hashers) {
   let currentEmailing;
-  const hashersByEmailing = [];
+  const hashersByEmailing = {};
   hashers.forEach(function(hasher) {
     const emailing = hasher.emailing;
-    if (!currentEmailing || currentEmailing.group != emailing) {
-      currentEmailing = {
-        group: emailing,
-        hashers: []
-      };
-      hashersByEmailing.push(currentEmailing);
-    }
-    currentEmailing.hashers.push(hasher);
+    hashersByEmailing[emailing] = hashersByEmailing[emailing] || {
+      group: emailing,
+      hashers: [],
+      label: emailingOptions[emailing]
+    };
+    hashersByEmailing[emailing].hashers.push(hasher);
   });
-  return hashersByEmailing;
+  return Object.values(hashersByEmailing);
 };
 
 export default Hasher;

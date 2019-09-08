@@ -34,7 +34,17 @@
       Emailing
     </label>
     <div class="col-sm-8">
-      <input class="form-control" id="emailing" type="text" value:bind="hasher.emailing">
+      <select
+        class="form-control"
+        id="emailing"
+        value:bind="hasher.emailing"
+      >
+        {{#for(emailOption of emailOptions)}}
+          <option value="{{emailOption.key}}">
+            {{emailOption.value}}
+          </option>
+        {{/for}}
+      </select>
     </div>
   </div>
   <div class="form-group row">

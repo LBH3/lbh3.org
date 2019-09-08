@@ -1,8 +1,8 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
-import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import './hasher-edit-form.less';
+import { emailingOptions, Hasher } from '~/models/hasher';
 import { paymentRates } from '~/models/events-hashers';
 import view from './hasher-edit-form.stache';
 
@@ -47,6 +47,19 @@ export const ViewModel = DefineMap.extend({
   },
 
   editingHasherPromise: {},
+
+  emailOptions: {
+    default: () => {
+      const emailOptions = [];
+      for (let key in emailingOptions) {
+        emailOptions.push({
+          key,
+          value: emailingOptions[key]
+        });
+      }
+      return emailOptions;
+    }
+  },
 
   hasher: Hasher,
 

@@ -14,13 +14,13 @@
   </div>
 {{/if}}
 
-{{#each(emailGroups)}}
-  <h3>{{group}}</h3>
+{{#for(emailGroup of emailGroups)}}
+  <h3>{{emailGroup.label}}</h3>
   <ol>
-    {{#each(hashers)}}
-      {{#each(emailAddresses)}}
-        <li>{{this}}</li>
-      {{/each}}
-    {{/each}}
+    {{#for(hasher of emailGroup.hashers)}}
+      {{#for(emailAddress of hasher.emailAddresses)}}
+        <li>{{emailAddress}}</li>
+      {{/for}}
+    {{/for}}
   </ol>
-{{/each}}
+{{/for}}
