@@ -29,6 +29,7 @@ import 'lbh3/components/hashers/attendance-records/attendance-records-test';
 import 'lbh3/components/hashers/early-warning/early-warning-test';
 import 'lbh3/components/hashers/email/email-test';
 import 'lbh3/components/hashers/hashers-test';
+import 'lbh3/components/hashers/nav/nav-test';
 import 'lbh3/components/header/header-test';
 import 'lbh3/components/home/home-test';
 import 'lbh3/components/map/map-test';

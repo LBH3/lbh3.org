@@ -45,7 +45,8 @@
           >
             <span class="fas fa-bars fa-lg"></span>
             <span class="d-none d-md-inline">
-              Attendance Records
+              Attendance
+              <span class="d-none d-lg-inline">Records</span>
             </span>
           </a>
         </li>

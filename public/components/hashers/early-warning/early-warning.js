@@ -44,7 +44,6 @@ export const ViewModel = DefineMap.extend({
     };
     return route.url(routeParams);
   },
-  secondaryPage: 'string',
   get session() {
     return Session.current;
   },

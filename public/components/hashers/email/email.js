@@ -48,7 +48,6 @@ export const ViewModel = DefineMap.extend({
   get ogTitle() {
     return 'Email List';
   },
-  secondaryPage: 'string',
   get session() {
     return Session.current;
   },

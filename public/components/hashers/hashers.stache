@@ -1,12 +1,6 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
-<can-import from="~/components/hashers/nav/" />
-
-<lbh3-hashers-nav
-  secondaryPage:from="secondaryPage"
-  session:from="session"
-/>
 
 {{#if session.user.canViewDirectoryInfo}}
 
