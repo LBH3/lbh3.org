@@ -148,20 +148,6 @@
         <input class="form-control mb-2" id="emailAddresses" type="email" value:bind="additionalFields.emailAddress">
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="mailHashName">
-          Mail hash name
-        </label>
-        <input class="form-control" id="mailHashName" type="text" value:bind="hasher.mailHashName">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="mailName">
-          Mail name
-        </label>
-        <input class="form-control" id="mailName" type="text" value:bind="hasher.mailName">
-      </div>
-    </div>
     <div class="form-group">
       <label for="addressStreet">
         Street address

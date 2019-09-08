@@ -272,17 +272,7 @@
     </div>
 
     <div class="mb-4 row">
-      <div class="col-sm-3">
-        <b>Mail hash name:</b>
-        <br>
-        {{hasher.mailHashName}}
-      </div>
-      <div class="col-sm-3">
-        <b>Mail name:</b>
-        <br>
-        {{hasher.mailName}}
-      </div>
-      <div class="col-sm-6">
+      <div class="col-sm-12">
         <b>Address:</b>
         <br>
         {{hasher.formattedAddress}}
