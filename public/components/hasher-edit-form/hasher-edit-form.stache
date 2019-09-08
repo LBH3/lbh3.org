@@ -1,15 +1,18 @@
 <form on:submit="editHasher()">
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="hashName">
-        Hash name
-      </label>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="hashName">
+      Hash name
+    </label>
+    <div class="col-sm-8">
       <input autofocus class="form-control" id="hashName" type="text" value:bind="hasher.hashName">
     </div>
-    <div class="form-group col-md-6">
-      <label for="formattedBirthday">
-        Birthday (month/day/year)
-      </label>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="formattedBirthday">
+      Birthday (mm/dd/yy)
+    </label>
+    <div class="col-sm-8">
       <div class="birthday input-group">
         <input aria-label="Birth month" class="form-control" max="12" min="0" type="number" value:bind="hasher.birthMonth">
         <span class="input-group-append input-group-prepend">
@@ -24,227 +27,169 @@
     </div>
   </div>
 
-  <div class="form-row">
-    <div class="form-group col-md-3">
-      <label for="emailing">
-        Emailing
-      </label>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="emailing">
+      Emailing
+    </label>
+    <div class="col-sm-8">
       <input class="form-control" id="emailing" type="text" value:bind="hasher.emailing">
     </div>
-    <div class="form-group col-md-3">
-      <label for="namingTrailNumber">
-        Naming trail #
-      </label>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="namingTrailNumber">
+      Naming trail #
+    </label>
+    <div class="col-sm-8">
       <input class="form-control" id="namingTrailNumber" min="0" type="number" value:bind="hasher.namingTrailNumber">
     </div>
-    <div class="form-group col-md-3">
-      <label for="payment">
-        Payment
-      </label>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="payment">
+      Payment
+    </label>
+    <div class="col-sm-8">
       <input class="form-control" id="payment" type="text" value:bind="hasher.payment">
     </div>
-    <div class="form-group col-md-3">
-      <label for="waiver">
-        Waiver
-      </label>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="waiver">
+      Waiver
+    </label>
+    <div class="col-sm-8">
       <input class="form-control" id="waiver" type="text" value:bind="hasher.waiver">
     </div>
   </div>
 
-  <div class="form-row">
-    <div class="form-group col-md-6">
-      <label for="whoMadeYouCum">
-        Who made you cum
-      </label>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="whoMadeYouCum">
+      Who made you cum
+    </label>
+    <div class="col-sm-8">
       <input class="form-control" id="whoMadeYouCum" type="text" value:bind="hasher.whoMadeYouCum">
     </div>
-    <div class="form-group col-md-6">
-      <label for="motherHash">
-        Mother hash
-      </label>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="motherHash">
+      Mother hash
+    </label>
+    <div class="col-sm-8">
       <input class="form-control" id="motherHash" type="text" value:bind="hasher.motherHash">
     </div>
   </div>
 
-  <div class="form-group">
-    <label for="notesMd">
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="notesMd">
       Notes
     </label>
-    <textarea class="form-control" id="notesMd" value:bind="hasher.notesMd"></textarea>
+    <div class="col-sm-8">
+      <textarea class="form-control" id="notesMd" value:bind="hasher.notesMd"></textarea>
+    </div>
   </div>
 
   <fieldset class="form-group">
     <legend>
       Directory info
     </legend>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="givenName">
-          Given name
-        </label>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="givenName">
+        First (given) name
+      </label>
+      <div class="col-sm-8">
         <input class="form-control" id="givenName" type="text" value:bind="hasher.givenName">
       </div>
-      <div class="form-group col-md-6">
-        <label for="familyName">
-          Family name
-        </label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="familyName">
+        Last (family) name
+      </label>
+      <div class="col-sm-8">
         <input class="form-control" id="familyName" type="text" value:bind="hasher.familyName">
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-3">
-        <label for="cellPhone">
-          Cell phone
-        </label>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="cellPhone">
+        Cell phone
+      </label>
+      <div class="col-sm-8">
         <input class="form-control" id="cellPhone" type="text" value:bind="hasher.cellPhone">
       </div>
-      <div class="form-group col-md-3">
-        <label for="workPhone">
-          Work phone
-        </label>
-        <input class="form-control" id="workPhone" type="text" value:bind="hasher.workPhone">
-      </div>
-      <div class="form-group col-md-3">
-        <label for="homePhone">
-          Home phone
-        </label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="homePhone">
+        Home phone
+      </label>
+      <div class="col-sm-8">
         <input class="form-control" id="homePhone" type="text" value:bind="hasher.homePhone">
       </div>
-      <div class="form-group col-md-3">
-        <label for="fax">
-          Fax
-        </label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="workPhone">
+        Work phone
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" id="workPhone" type="text" value:bind="hasher.workPhone">
+      </div>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="fax">
+        Fax
+      </label>
+      <div class="col-sm-8">
         <input class="form-control" id="fax" type="text" value:bind="hasher.fax">
       </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-3">
-        <label for="emailAddresses">
-          Email addresses
-        </label>
-      </div>
-      <div class="form-group col-md-9">
-        {{#for(emailAddress of hasher.emailAddresses)}}
+
+    <div class="form-group justify-content-end row">
+      <label class="col-sm-4 col-form-label" for="emailAddresses">
+        Email {{#if(hasher.emailAddresses.length)}}addresses{{else}}address{{/if}}
+      </label>
+      {{#for(emailAddress of hasher.emailAddresses)}}
+        <div class="col-sm-8">
           <input class="form-control mb-2" type="email" value:bind="emailAddress">
-        {{/for}}
-        <input class="form-control mb-2" id="emailAddresses" type="email" value:bind="additionalFields.emailAddress">
+        </div>
+      {{/for}}
+      <div class="col-sm-8">
+        <input class="form-control" id="emailAddresses" type="email" value:bind="additionalFields.emailAddress">
       </div>
     </div>
-    <div class="form-group">
-      <label for="addressStreet">
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="addressStreet">
         Street address
       </label>
-      <input class="form-control" id="addressStreet" type="text" value:bind="hasher.addressStreet">
+      <div class="col-sm-8">
+        <input class="form-control" id="addressStreet" type="text" value:bind="hasher.addressStreet">
+      </div>
     </div>
-    <div class="form-row">
-      <div class="form-group col-md-5">
-        <label for="addressCity">
-          City
-        </label>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="addressCity">
+        City
+      </label>
+      <div class="col-sm-8">
         <input class="form-control" id="addressCity" type="text" value:bind="hasher.addressCity">
       </div>
-      <div class="form-group col-md-2">
-        <label for="addressState">
-          State
-        </label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="addressState">
+        State
+      </label>
+      <div class="col-sm-8">
         <input class="form-control" id="addressState" type="text" value:bind="hasher.addressState">
       </div>
-      <div class="form-group col-md-2">
-        <label for="addressZipCode">
-          ZIP code
-        </label>
+    </div>
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="addressZipCode">
+        ZIP code
+      </label>
+      <div class="col-sm-8">
         <input class="form-control" id="addressZipCode" type="text" value:bind="hasher.addressZipCode">
       </div>
-      <div class="form-group col-md-3">
-        <label for="addressCountry">
-          Country
-        </label>
-        <input class="form-control" id="addressCountry" type="text" value:bind="hasher.addressCountry">
-      </div>
     </div>
-  </fieldset>
-
-  <fieldset class="form-group">
-    <legend>
-      Private info
-    </legend>
-    <div class="form-row">
-      <div class="form-group col-md-6">
-        <label for="givenNamePrivate">
-          Given name
-        </label>
-        <input class="form-control" id="givenNamePrivate" type="givenNamePrivate" value:bind="hasher.givenNamePrivate">
-      </div>
-      <div class="form-group col-md-6">
-        <label for="familyNamePrivate">
-          Family name
-        </label>
-        <input class="form-control" id="familyNamePrivate" type="text" value:bind="hasher.familyNamePrivate">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-4">
-        <label for="cellPhonePrivate">
-          Cell phone
-        </label>
-        <input class="form-control" id="cellPhonePrivate" type="text" value:bind="hasher.cellPhonePrivate">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="workPhonePrivate">
-          Work phone
-        </label>
-        <input class="form-control" id="workPhonePrivate" type="text" value:bind="hasher.workPhonePrivate">
-      </div>
-      <div class="form-group col-md-4">
-        <label for="homePhonePrivate">
-          Home phone
-        </label>
-        <input class="form-control" id="homePhonePrivate" type="text" value:bind="hasher.homePhonePrivate">
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-3">
-        <label for="emailAddressesPrivate">
-          Email addresses
-        </label>
-      </div>
-      <div class="form-group col-md-9">
-        {{#for(emailAddress of hasher.emailAddressesPrivate)}}
-          <input class="form-control mb-2" type="email" value:bind="emailAddress">
-        {{/for}}
-        <input class="form-control mb-2" id="emailAddressesPrivate" type="email" value:bind="additionalFields.emailAddressPrivate">
-      </div>
-    </div>
-    <div class="form-group">
-      <label for="addressStreetPrivate">
-        Street address
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="addressCountry">
+        Country
       </label>
-      <input class="form-control" id="addressStreetPrivate" type="text" value:bind="hasher.addressStreetPrivate">
-    </div>
-    <div class="form-row">
-      <div class="form-group col-md-5">
-        <label for="addressCityPrivate">
-          City
-        </label>
-        <input class="form-control" id="addressCityPrivate" type="text" value:bind="hasher.addressCityPrivate">
-      </div>
-      <div class="form-group col-md-2">
-        <label for="addressStatePrivate">
-          State
-        </label>
-        <input class="form-control" id="addressStatePrivate" type="text" value:bind="hasher.addressStatePrivate">
-      </div>
-      <div class="form-group col-md-2">
-        <label for="addressZipCodePrivate">
-          ZIP code
-        </label>
-        <input class="form-control" id="addressZipCodePrivate" type="text" value:bind="hasher.addressZipCodePrivate">
-      </div>
-      <div class="form-group col-md-3">
-        <label for="addressCountryPrivate">
-          Country
-        </label>
-        <input class="form-control" id="addressCountryPrivate" type="text" value:bind="hasher.addressCountryPrivate">
+      <div class="col-sm-8">
+        <input class="form-control" id="addressCountry" type="text" value:bind="hasher.addressCountry">
       </div>
     </div>
   </fieldset>
@@ -252,27 +197,130 @@
   {{#if hasher.id}}
     <fieldset class="form-group">
       <legend>
+        Private info
+      </legend>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="givenNamePrivate">
+          First (given) name
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="givenNamePrivate" type="givenNamePrivate" value:bind="hasher.givenNamePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="familyNamePrivate">
+          Last (family) name
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="familyNamePrivate" type="text" value:bind="hasher.familyNamePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="cellPhonePrivate">
+          Cell phone
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="cellPhonePrivate" type="text" value:bind="hasher.cellPhonePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="homePhonePrivate">
+          Home phone
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="homePhonePrivate" type="text" value:bind="hasher.homePhonePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="workPhonePrivate">
+          Work phone
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="workPhonePrivate" type="text" value:bind="hasher.workPhonePrivate">
+        </div>
+      </div>
+      <div class="form-group justify-content-end row">
+        <label class="col-sm-4 col-form-label" for="emailAddressesPrivate">
+          Email {{#if(hasher.emailAddressesPrivate.length)}}addresses{{else}}address{{/if}}
+        </label>
+        {{#for(emailAddress of hasher.emailAddressesPrivate)}}
+          <div class="col-sm-8">
+            <input class="form-control mb-2" type="email" value:bind="emailAddress">
+          </div>
+        {{/for}}
+        <div class="col-sm-8">
+          <input class="form-control" id="emailAddressesPrivate" type="email" value:bind="additionalFields.emailAddressPrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="addressStreetPrivate">
+          Street address
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="addressStreetPrivate" type="text" value:bind="hasher.addressStreetPrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="addressCityPrivate">
+          City
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="addressCityPrivate" type="text" value:bind="hasher.addressCityPrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="addressStatePrivate">
+          State
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="addressStatePrivate" type="text" value:bind="hasher.addressStatePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="addressZipCodePrivate">
+          ZIP code
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="addressZipCodePrivate" type="text" value:bind="hasher.addressZipCodePrivate">
+        </div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="addressCountryPrivate">
+          Country
+        </label>
+        <div class="col-sm-8">
+          <input class="form-control" id="addressCountryPrivate" type="text" value:bind="hasher.addressCountryPrivate">
+        </div>
+      </div>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <legend>
         In memoriam
       </legend>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="died">
-            Died
-          </label>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="died">
+          Died
+        </label>
+        <div class="col-sm-8">
           <input class="form-control" id="died" type="text" value:bind="hasher.died">
         </div>
-        <div class="form-group col-md-6">
-          <label for="passed">
-            Passed
-          </label>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="passed">
+          Passed
+        </label>
+        <div class="col-sm-8">
           <input class="form-control" id="passed" type="text" value:bind="hasher.passed">
         </div>
       </div>
-      <div class="form-group">
-        <label for="inMemoriam">
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="inMemoriam">
           Notes
         </label>
-        <textarea class="form-control" id="inMemoriam" value:bind="hasher.inMemoriam"></textarea>
+        <div class="col-sm-8">
+          <textarea class="form-control" id="inMemoriam" value:bind="hasher.inMemoriam"></textarea>
+        </div>
       </div>
     </fieldset>
   {{/if}}
@@ -316,46 +364,4 @@
     type="submit">
     {{saveButtonLabel}}
   </button>
-
-  {{#if hasher.id}}
-    <fieldset class="mt-4">
-      <legend>
-        Automatically updated
-      </legend>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="firstTrailDate">
-            First trail date
-          </label>
-          <input class="form-control" disabled id="firstTrailDate" type="date" value:bind="hasher.firstTrailDate">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="firstTrailNumber">
-            First trail number
-          </label>
-          <input class="form-control" disabled id="firstTrailNumber" min="0" type="number" value:bind="hasher.firstTrailNumber">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="lastTrailDate">
-            Last trail date
-          </label>
-          <input class="form-control" disabled id="lastTrailDate" type="date" value:bind="hasher.lastTrailDate">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-4">
-          <label for="namingTrailDate">
-            Naming trail date
-          </label>
-          <input class="form-control" disabled id="namingTrailDate" type="date" value:bind="hasher.namingTrailDate">
-        </div>
-        <div class="form-group col-md-4">
-          <label for="runCount">
-            Run count
-          </label>
-          <input class="form-control" disabled id="runCount" min="0" type="number" value:bind="hasher.runCount">
-        </div>
-      </div>
-    </fieldset>
-  {{/if}}
 </form>

@@ -218,12 +218,12 @@
 
     <div class="mb-4 row">
       <div class="col-sm-3">
-        <b>Given name:</b>
+        <b>First (given) name:</b>
         <br>
         {{hasher.givenName}}
       </div>
       <div class="col-sm-3">
-        <b>Family name:</b>
+        <b>Last (family) name:</b>
         <br>
         {{hasher.familyName}}
       </div>
@@ -264,12 +264,12 @@
     <h3 class="mb-3 mt-5">Private info</h3>
     <div class="mb-4 row">
       <div class="col-sm-3">
-        <b>Given name:</b>
+        <b>First (given) name:</b>
         <br>
         {{hasher.givenNamePrivate}}
       </div>
       <div class="col-sm-3">
-        <b>Family name:</b>
+        <b>Last (family) name:</b>
         <br>
         {{hasher.familyNamePrivate}}
       </div>
