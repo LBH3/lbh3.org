@@ -115,7 +115,7 @@ EventsHashers.connection = feathersModel('/api/events-hashers', {
   name: 'events-hashers'
 });
 
-EventsHashers.paymentRates = [
+export const paymentRates = [
   {abbr: 'H', rate: 0, tier: 'hares', title: 'Hares (3 Run Free)'},
   {abbr: 'F', rate: 0, tier: 'founder', title: 'Founders & Comp'},
   {abbr: 'LT', rate: 0, tier: 'lt', title: 'Brewmeister Free'},
@@ -126,6 +126,7 @@ EventsHashers.paymentRates = [
   {abbr: 'D', rate: 0, tier: 'dues', title: 'Annual/Quarterly Dues'},
   {abbr: 'K', rate: 3, tier: 'kids', title: 'Kids'}
 ];
+EventsHashers.paymentRates = paymentRates;
 
 EventsHashers.roles = [
   'Hare',

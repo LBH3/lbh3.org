@@ -3,6 +3,7 @@ import DefineMap from 'can-define/map/';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import './hasher-edit-form.less';
+import { paymentRates } from '~/models/events-hashers';
 import view from './hasher-edit-form.stache';
 
 const AdditionalFields = DefineMap.extend({
@@ -48,6 +49,16 @@ export const ViewModel = DefineMap.extend({
   editingHasherPromise: {},
 
   hasher: Hasher,
+
+  paymentRates: {
+    default: () => {
+      return [...paymentRates].filter(paymentRate => {
+        return ['hares', 'lt'].indexOf(paymentRate.tier) === -1;
+      }).sort((x, y) => {
+        return x.title.localeCompare(y.title);
+      });
+    }
+  },
 
   resetEditingHasherPromise: function() {
     this.editingHasherPromise = null;

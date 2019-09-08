@@ -296,7 +296,12 @@ const Hasher = DefineMap.extend({
     },
     serialize: false
   },
-  payment: 'string',
+  payment: {
+    get(lastSetValue) {
+      return lastSetValue ? lastSetValue.toUpperCase() : lastSetValue;
+    },
+    serialize: true
+  },
   punchCard: 'number',
   runCount: 'number',
   runMileage: 'number',
