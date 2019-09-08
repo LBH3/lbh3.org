@@ -306,7 +306,13 @@ const Hasher = DefineMap.extend({
   shoeSize: 'string',
   updatedBy: 'string',
   waistSize: 'string',
-  waiver: 'string',
+  waiver: {
+    get(lastSetValue) {
+      const signed = lastSetValue && lastSetValue.toLowerCase().indexOf('n') === -1;
+      return signed ? 'W' : 'N';
+    },
+    serialize: true
+  },
   whoMadeYouCum: 'string',
   workPhone: 'string',
   workPhonePrivate: 'string'
