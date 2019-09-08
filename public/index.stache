@@ -52,6 +52,16 @@
     <main class="container-fluid {{page}}">
       {{#switch page}}
         {{#case "about"}}
+          <can-import from="~/components/about/nav/">
+            {{#if isPending}}
+              Loading the About navigation…
+            {{else}}
+              <lbh3-about-nav
+                class="container pl-0 pr-0"
+                secondaryPage:from="secondaryPage"
+              />
+            {{/if}}
+          </can-import>
           {{#switch secondaryPage}}
             {{#case "mismanagement"}}
               <can-import from="~/components/about/mismanagement/">
@@ -59,6 +69,7 @@
                   Loading Mismanagement…
                 {{else}}
                   <lbh3-about-mismanagement
+                    class="container pl-0 pr-0"
                     description:to="scope.vm.description"
                     ogTitle:to="scope.vm.ogTitle"
                     title:to="scope.vm.title"

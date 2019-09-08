@@ -1,8 +1,4 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
-
-<h2>About LBH3</h2>
 
 <p>
   The Long Beach kennel was founded over 30 years ago on
@@ -17,37 +13,11 @@
 
 <div class="no-gutters row">
   <div class="col">
-    <h3>Helpful links</h3>
+    <h3>PDFs</h3>
     <ul class="list-unstyled">
-      <!-- <li><a href="{{hashHistoryPDF}}">This Week in LBH3 Hash History</a></li> -->
-      <li><a href="{{routeUrl page='hareline' secondaryPage='guidelines'}}">
-        Haring Guidelines
-      </a></li>
       <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/LBH3SongBook.pdf">
         Song Book
       </a></li>
-      <li><a href="{{routeUrl page='about' secondaryPage='mismanagement'}}">
-        Mismanagement
-      </a></li>
-      <li><a href="{{routeUrl page='about' secondaryPage='privacy'}}">
-        Privacy Changes
-      </a></li>
-      {{#if session.user.canViewDirectoryInfo}}
-        <li><a href="{{routeUrl page='hashers' secondaryPage=''}}">
-          Hashers Directory
-        </a></li>
-      {{/if}}
-      {{#if session.user.canManageUsers}}
-        <li><a href="{{routeUrl page='users'}}">
-          Users
-        </a></li>
-        <li><a href="{{routeUrl page='special-events'}}">
-          Special Events
-        </a></li>
-        <li><a href="{{routeUrl page='erections'}}">
-          Erections
-        </a></li>
-      {{/if}}
       <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/HowLBH3Started.pdf">
         How LBH3 Started
       </a></li>
@@ -62,6 +32,22 @@
       </a></li>
     </ul>
   </div>
+  {{#if session.user.canManageUsers}}
+    <div class="col">
+      <h3>Admin</h3>
+      <ul class="list-unstyled">
+        <li><a href="{{routeUrl page='erections'}}">
+          Erections
+        </a></li>
+        <li><a href="{{routeUrl page='special-events'}}">
+          Special Events
+        </a></li>
+        <li><a href="{{routeUrl page='users'}}">
+          Users
+        </a></li>
+      </ul>
+    </div>
+  {{/if}}
   <div class="col">
     <h3>Friends of LBH3</h3>
     <ul class="list-unstyled">

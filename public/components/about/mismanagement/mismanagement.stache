@@ -1,4 +1,4 @@
-<h2>Mismanagement</h2>
+<h2 class="sr-only">Mismanagement</h2>
 
 {{#if yearsPromise.isPending}}
   <div class="alert alert-info" role="alert">

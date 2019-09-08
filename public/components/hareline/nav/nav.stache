@@ -16,7 +16,7 @@
         <a
           class="{{#eq(secondaryPage, 'guidelines')}}active{{/eq}} nav-link"
           href="{{routeUrl page='hareline' secondaryPage='guidelines'}}"
-          title="Go to the paper guidelines page"
+          title="View the haring guidelines"
         >
           <span class="fas fa-scroll fa-lg"></span>
           Guidelines
@@ -27,6 +27,7 @@
           <a
             class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
             href="{{routeUrl page='hareline' secondaryPage='add'}}"
+            title="Add a new trail"
           >
             <span class="fas fa-plus fa-lg"></span>
             <span class="d-none d-sm-inline">

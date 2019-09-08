@@ -55,6 +55,7 @@
             <a
               class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
               href="{{routeUrl page='hashers' secondaryPage='add'}}"
+              title="Add a new hasher"
             >
               <span class="fas fa-plus fa-lg"></span>
               <span class="d-none d-md-inline">

@@ -6,6 +6,7 @@ import 'lbh3/models/test';
 import 'lbh3/components/about/about-test';
 import 'lbh3/components/about/mismanagement/mismanagement-test';
 import 'lbh3/components/about/mismanagement/year/year-test';
+import 'lbh3/components/about/nav/nav-test';
 import 'lbh3/components/about/privacy/privacy-test';
 import 'lbh3/components/erection/erection-test';
 import 'lbh3/components/erection/ballots/ballots-test';

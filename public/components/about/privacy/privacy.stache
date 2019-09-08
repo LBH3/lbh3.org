@@ -1,6 +1,6 @@
 <can-import from="~/components/no-ssr/" />
 
-<h2>Privacy Changes</h2>
+<h2 class="sr-only">Privacy Changes</h2>
 
 <p class="lead">
   We recently changed lbh3.org to only show our photos &amp; Snoozes to hashers
