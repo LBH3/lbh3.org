@@ -1,3 +1,5 @@
+<h2 class="sr-only">Add Trail</h2>
+
 <form on:submit="createTrail()">
   <div class="form-group row">
     <label class="col-3 col-form-label" for="run-number">

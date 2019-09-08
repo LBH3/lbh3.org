@@ -19,6 +19,9 @@
           title="View the haring guidelines"
         >
           <span class="fas fa-scroll fa-lg"></span>
+          <span class="d-none d-sm-inline">
+            Haring
+          </span>
           Guidelines
         </a>
       </li>
