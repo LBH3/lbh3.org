@@ -6,7 +6,7 @@
       </label>
       <input autofocus class="form-control" id="hashName" type="text" value:bind="hasher.hashName">
     </div>
-    <div class="form-group col-md-4">
+    <div class="form-group col-md-6">
       <label for="formattedBirthday">
         Birthday (month/day/year)
       </label>
@@ -22,50 +22,32 @@
         <input aria-label="Birth year" class="form-control" min="0" type="number" value:bind="hasher.birthYear">
       </div>
     </div>
-    <div class="form-group col-md-2">
-      <label for="waiver">
-        Waiver
-      </label>
-      <input class="form-control" id="waiver" type="text" value:bind="hasher.waiver">
-    </div>
   </div>
 
   <div class="form-row">
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-3">
       <label for="emailing">
         Emailing
       </label>
       <input class="form-control" id="emailing" type="text" value:bind="hasher.emailing">
     </div>
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-3">
       <label for="namingTrailNumber">
         Naming trail #
       </label>
       <input class="form-control" id="namingTrailNumber" min="0" type="number" value:bind="hasher.namingTrailNumber">
     </div>
-    <div class="form-group col-md-2">
+    <div class="form-group col-md-3">
       <label for="payment">
         Payment
       </label>
       <input class="form-control" id="payment" type="text" value:bind="hasher.payment">
     </div>
-    <div class="form-group col-md-2">
-      <label for="punchCard">
-        Punch card
+    <div class="form-group col-md-3">
+      <label for="waiver">
+        Waiver
       </label>
-      <input class="form-control" id="punchCard" min="0" type="number" value:bind="hasher.punchCard">
-    </div>
-    <div class="form-group col-md-2">
-      <label for="runPatch">
-        Run patch
-      </label>
-      <input class="form-control" id="runPatch" min="0" type="number" value:bind="hasher.runPatch">
-    </div>
-    <div class="form-group col-md-2">
-      <label for="runSort">
-        Run sort
-      </label>
-      <input class="form-control" id="runSort" min="0" type="number" value:bind="hasher.runSort">
+      <input class="form-control" id="waiver" type="text" value:bind="hasher.waiver">
     </div>
   </div>
 

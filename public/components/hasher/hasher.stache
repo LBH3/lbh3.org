@@ -108,24 +108,6 @@
               {{hasher.payment}}
             </div>
             <div class="col-lg-4 mb-4">
-              <b>Punch card:</b>
-              <br>
-              {{hasher.punchCard}}
-            </div>
-            <div class="col-lg-4 mb-4">
-              <b>Run patch:</b>
-              <br>
-              {{hasher.runPatch}}
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-lg-4 mb-4">
-              <b>Run sort:</b>
-              <br>
-              {{hasher.runSort}}
-            </div>
-            <div class="col-lg-4 mb-4">
               <b>Waiver:</b>
               <br>
               {{hasher.waiver}}
