@@ -11,13 +11,17 @@ export const ViewModel = DefineMap.extend({
   },
 
   didSave: function() {
-    this.hasher = new Hasher();
+    this.hasher = new Hasher({
+      payment: ''
+    });
   },
 
   hasher: {
     Type: Hasher,
     default: function() {
-      return new Hasher();
+      return new Hasher({
+        payment: ''
+      });
     }
   },
 
