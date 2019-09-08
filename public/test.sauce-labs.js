@@ -3,12 +3,13 @@ const testSauceLabs = require('test-saucelabs');
 // https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
 
 testSauceLabs({
-  platforms: [/*{
-    'appium-version': '1.6.3',
+  platforms: [{
+    'appium-version': '1.9.1',
     browserName: 'Browser',
     deviceName: 'Android Emulator',
-    platform: 'Android 4.4'
-  }, */{
+    platform: 'Android',
+    version: '6.0'
+  }, {
     'appium-version': '1.9.1',
     browserName: 'Safari',
     deviceName: 'iPhone 7 Simulator',
