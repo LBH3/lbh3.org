@@ -1,7 +1,6 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
-import Session from '~/models/session';
 import './add.less';
 import moment from 'moment';
 import view from './add.stache';
@@ -48,10 +47,6 @@ export const ViewModel = DefineMap.extend({
   },
   get ogTitle() {
     return 'Add a new trail';
-  },
-  secondaryPage: 'string',
-  get session() {
-    return Session.current;
   },
   startDate: {
     type: 'string',

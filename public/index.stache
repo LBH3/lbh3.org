@@ -342,6 +342,15 @@
           {{/if}}
         {{/case}}
         {{#case "hareline"}}
+          <can-import from="~/components/hareline/nav/">
+            {{#if isPending}}
+              Loading the Hareline navigation…
+            {{else}}
+              <lbh3-hareline-nav
+                secondaryPage:from="secondaryPage"
+              />
+            {{/if}}
+          </can-import>
           {{#switch secondaryPage}}
             {{#case "add"}}
               <lbh3-no-ssr>

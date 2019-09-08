@@ -1,6 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 
 <p>
   Are you an LBH3 hasher? Provide your name to get special access to our site.
@@ -21,20 +21,20 @@
       />
       {{#if savingPromise}}
         {{#if savingPromise.isPending}}
-          <span class="fa fa-circle-notch fa-spin"></span>
+          <span class="fas fa-circle-notch fa-spin"></span>
           <small>
             Sending your request…
           </small>
         {{/if}}
         {{#if savingPromise.isRejected}}
-          <span class="fa fa-lg fa-exclamation-triangle"></span>
+          <span class="fas fa-exclamation-triangle fa-lg"></span>
           <small>
             <strong>Fuck!</strong> Something failed; you’ll need to try again.
             {{savingPromise.reason.xhr.message}}
           </small>
         {{/if}}
         {{#if savingPromise.isResolved}}
-          <span class="fa fa-check"></span>
+          <span class="fas fa-check"></span>
           <small>
             You’ve requested access as <strong>{{session.user.requestedName}}</strong>.
           </small>

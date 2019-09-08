@@ -1,5 +1,5 @@
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/brands.css" />
 
 <footer class="container-fluid {{^eq platform.isNode true}}d-flex flex-column flex-sm-row-reverse justify-content-sm-between{{/eq}} text-muted">
   {{^eq platform.isNode true}}

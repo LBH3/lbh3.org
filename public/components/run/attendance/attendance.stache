@@ -1,6 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 
 <h2>Run #{{trailNumber}} Check-In Sheet</h2>
 
@@ -57,7 +57,7 @@
             </td>
             <td class="text-center">
               {{#if patchesPromise.isPending}}
-                <span class="fa fa-circle-notch fa-spin"></span>
+                <span class="fas fa-circle-notch fa-spin"></span>
               {{else}}
                 {{scope.vm.patches(this)}}
               {{/if}}

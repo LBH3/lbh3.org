@@ -1,8 +1,8 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-brands.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/brands.css" />
+<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 
 {{#if session.user.canManageUsers}}
   <h2>Users</h2>
@@ -54,7 +54,7 @@
                   {{#if user.hasherPromise.isResolved}}
                     {{user.hasher.hashOrJustName}}
                   {{else}}
-                    <span class="fa fa-circle-notch fa-spin"></span>
+                    <span class="fas fa-circle-notch fa-spin"></span>
                   {{/if}}
                 {{else}}
                   {{#if user.requestedName}}

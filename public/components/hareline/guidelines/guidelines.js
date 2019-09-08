@@ -1,6 +1,5 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
-import Session from '~/models/session';
 import './guidelines.less';
 import { darkModeStyles } from '~/components/map/';
 import loader from '@loader';
@@ -21,10 +20,6 @@ export const ViewModel = DefineMap.extend({
 		default: () => {
 			return platform;
 		}
-	},
-	secondaryPage: 'string',
-	get session() {
-		return Session.current;
 	},
 	get title() {
 		return `${this.ogTitle} | LBH3`;

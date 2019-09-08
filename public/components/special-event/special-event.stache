@@ -1,6 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
 
 {{#if specialEventPromise.isPending}}
   <div class="alert alert-info" role="alert">

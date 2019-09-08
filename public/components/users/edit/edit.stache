@@ -1,6 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/hasher-autocomplete/" />
 
 {{#if session.user.canManageUsers}}
@@ -21,7 +21,7 @@
     <div class="row">
       <div class="col pt-2">
         <a href="{{routeUrl page='users'}}" title="Go back to the users list">
-          <span class="fa fa-angle-double-left fa-lg"></span>
+          <span class="fas fa-angle-double-left fa-lg"></span>
         </a>
       </div>
       <div class="col-10">

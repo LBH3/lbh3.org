@@ -1,7 +1,7 @@
 <can-import from="can-stache-converters" />
 <can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/hasher-autocomplete/" />
 <can-import from="~/components/map/" />
 
@@ -82,20 +82,20 @@
           <div class="d-flex">
             <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
             <button class="btn btn-link prevent-default" on:click="scope.vm.resetLocation()" type="button">
-              <span class="fa fa-times"></span>
+              <span class="fas fa-times"></span>
             </button>
           </div>
           {{#if locationPromise.isRejected}}
-            <span class="fa fa-exclamation-triangle"></span>
+            <span class="fas fa-exclamation-triangle"></span>
             <small>
               Save failed. Maybe try again?
             </small>
           {{else}}
             {{#if locationPromise.isPending}}
-              <span class="fa fa-circle-notch fa-spin"></span>
+              <span class="fas fa-circle-notch fa-spin"></span>
             {{/if}}
             {{#if locationPromise.isResolved}}
-              <span class="fa fa-check"></span>
+              <span class="fas fa-check"></span>
             {{/if}}
             {{#if event.locationPromise.value}}
               <small>
@@ -118,20 +118,20 @@
           <div class="d-flex">
             <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
             <button class="btn btn-link prevent-default" on:click="scope.vm.resetOnOn()" type="button">
-              <span class="fa fa-times"></span>
+              <span class="fas fa-times"></span>
             </button>
           </div>
           {{#if onOnPromise.isRejected}}
-            <span class="fa fa-exclamation-triangle"></span>
+            <span class="fas fa-exclamation-triangle"></span>
             <small>
               Save failed. Maybe try again?
             </small>
           {{else}}
             {{#if onOnPromise.isPending}}
-              <span class="fa fa-circle-notch fa-spin"></span>
+              <span class="fas fa-circle-notch fa-spin"></span>
             {{/if}}
             {{#if onOnPromise.isResolved}}
-              <span class="fa fa-check"></span>
+              <span class="fas fa-check"></span>
             {{/if}}
             {{#if event.onOnPromise.value}}
               <small>
@@ -426,7 +426,7 @@
                       on:click="scope.vm.removeHasher(hasher)"
                       type="button"
                     >
-                      <span class="fa fa-times"></span>
+                      <span class="fas fa-times"></span>
                     </button>
                   </td>
                 </tr>
@@ -492,9 +492,9 @@
                     type="submit"
                   >
                     {{#if addingHasherPromise.isRejected}}
-                      <span class="fa fa-exclamation-triangle" title="{{addingHasherPromise.reason.xhr.message}}"></span>
+                      <span class="fas fa-exclamation-triangle" title="{{addingHasherPromise.reason.xhr.message}}"></span>
                     {{else}}
-                      <span class="fa fa-plus"></span>
+                      <span class="fas fa-plus"></span>
                     {{/if}}
                   </button>
                 </td>
@@ -570,9 +570,9 @@
                       type="submit"
                     >
                       {{#if addingPatchPromise.isRejected}}
-                        <span class="fa fa-exclamation-triangle" title="{{addingPatchPromise.reason.xhr.message}}"></span>
+                        <span class="fas fa-exclamation-triangle" title="{{addingPatchPromise.reason.xhr.message}}"></span>
                       {{else}}
-                        <span class="fa fa-plus"></span>
+                        <span class="fas fa-plus"></span>
                       {{/if}}
                     </button>
                   </td>
@@ -593,7 +593,7 @@
                         on:click="scope.vm.removePatch(this)"
                         type="button"
                       >
-                        <span class="fa fa-times"></span>
+                        <span class="fas fa-times"></span>
                       </button>
                     </td>
                   </tr>

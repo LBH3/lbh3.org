@@ -1,6 +1,6 @@
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 
 {{<snoozeButtons}}
   <a class="btn btn-link p-0" href="{{event.snoozeUrlWithAuth}}" target="_blank" title="View Snooze">
@@ -19,16 +19,16 @@
 {{#if session.user.canAddSnoozes}}
   {{#if uploadPromise}}
     {{#if uploadPromise.isPending}}
-      <span class="fa fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
+      <span class="fas fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
     {{/if}}
     {{#if uploadPromise.isRejected}}
-      <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{uploadPromise.reason.xhr.message}}"></span>
+      <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{uploadPromise.reason.xhr.message}}"></span>
     {{/if}}
     {{#if uploadPromise.isResolved}}
       {{#if event.snoozeUrlWithAuth}}
         {{>snoozeButtons}}
       {{else}}
-        <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="Unknown error"></span>
+        <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="Unknown error"></span>
       {{/if}}
     {{/if}}
   {{else}}
@@ -37,14 +37,14 @@
     {{else}}
       {{#if removePromise}}
         {{#if removePromise.isPending}}
-          <span class="fa fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
+          <span class="fas fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
         {{/if}}
         {{#if removePromise.isRejected}}
-          <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{removePromise.reason.xhr.message}}"></span>
+          <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{removePromise.reason.xhr.message}}"></span>
         {{/if}}
       {{else}}
         <label class="m-0 p-0" title="Upload Snooze">
-          <span class="fa fa-upload {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
+          <span class="fas fa-upload {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
           <input accept="application/pdf" class="sr-only" type="file" />
         </label>
       {{/if}}

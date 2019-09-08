@@ -1,7 +1,7 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/run-list/" />
 <can-import from="~/components/snooze-button/" />
@@ -33,7 +33,7 @@
           href="/api/hashers/{{id}}/vcard.vcf"
           title="Download this hasher’s contact info"
         >
-          <span class="fa fa-download fa-lg"></span>
+          <span class="fas fa-download fa-lg"></span>
         </a>
         {{#if session.user.canEditHasherInfo}}
           <a class="d-inline-block d-print-none p-2 p-md-1 pl-md-3 pt-md-2" href="{{routeUrl page='hashers' id=hasher.id secondaryPage='edit'}}" title="Edit info">
@@ -156,7 +156,7 @@
             {{<uploadInput}}
               {{#if session.user.canEditHasherInfo}}
                 <label class="btn btn-primary d-print-none">
-                  <span class="fa fa-upload"></span>
+                  <span class="fas fa-upload"></span>
                   Upload head shot
                   <input accept="image/*" class="sr-only" type="file" />
                 </label>
@@ -167,10 +167,10 @@
 
             {{#if headshotPromise}}
               {{#if headshotPromise.isPending}}
-                <span class="fa fa-circle-notch fa-spin"></span>
+                <span class="fas fa-circle-notch fa-spin"></span>
               {{/if}}
               {{#if headshotPromise.isRejected}}
-                <span class="fa fa-exclamation-triangle"></span>
+                <span class="fas fa-exclamation-triangle"></span>
                 {{#if headshotPromise.reason.xhr.message}}
                   {{headshotPromise.reason.xhr.message}}
                 {{else}}
@@ -179,7 +179,7 @@
               {{/if}}
               {{#if headshotPromise.isResolved}}
                 {{^if hasher.headshotUrl}}
-                  <span class="fa fa-exclamation-triangle"></span>
+                  <span class="fas fa-exclamation-triangle"></span>
                   Unknown error
                   <br />
                 {{/if}}
@@ -486,10 +486,10 @@
                   </td>
                   <td>
                     {{#if boredPosition.positionPromise.isPending}}
-                      <span class="fa fa-circle-notch fa-spin"></span>
+                      <span class="fas fa-circle-notch fa-spin"></span>
                     {{/if}}
                     {{#if boredPosition.positionPromise.isRejected}}
-                      <span class="fa fa-exclamation-triangle"></span>
+                      <span class="fas fa-exclamation-triangle"></span>
                       {{#if boredPosition.positionPromise.reason.xhr.message}}
                         {{boredPosition.positionPromise.reason.xhr.message}}
                       {{else}}
@@ -544,10 +544,10 @@
                   <td class="text-nowrap">{{patch.number}} {{patch.type}}s</td>
                   <td>
                     {{#if patch.eventsPromise.isPending}}
-                      <span class="fa fa-circle-notch fa-spin"></span>
+                      <span class="fas fa-circle-notch fa-spin"></span>
                     {{/if}}
                     {{#if patch.eventsPromise.isRejected}}
-                      <span class="fa fa-exclamation-triangle"></span>
+                      <span class="fas fa-exclamation-triangle"></span>
                       {{#if patch.eventsPromise.reason.xhr.message}}
                         {{patch.eventsPromise.reason.xhr.message}}
                       {{else}}

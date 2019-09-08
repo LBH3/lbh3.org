@@ -1,11 +1,11 @@
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-regular.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 
 {{<photosLink}}
   {{#if event.photosUrl}}
     <a class="btn btn-link p-0" href="{{event.photosUrl}}" target="_blank" title="View photos">
-      <span class="fa fa-camera {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
+      <span class="fas fa-camera {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
     </a>
   {{/if}}
 {{/photosLink}}
@@ -14,16 +14,16 @@
   {{#if session.user.canAddPhotos}}
     {{#if savePromise}}
       {{#if savePromise.isPending}}
-        <span class="fa fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
+        <span class="fas fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
       {{/if}}
       {{#if savePromise.isRejected}}
-        <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{savePromise.reason.xhr.message}}"></span>
+        <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{savePromise.reason.xhr.message}}"></span>
       {{/if}}
       {{#if savePromise.isResolved}}
         {{#if event.photosUrl}}
           {{>photosLink}}
         {{else}}
-          <span class="fa fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="Unknown error"></span>
+          <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="Unknown error"></span>
         {{/if}}
       {{/if}}
     {{else}}

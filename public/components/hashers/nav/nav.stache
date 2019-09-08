@@ -1,3 +1,5 @@
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
 <div class="d-flex justify-content-between mb-2">
@@ -17,7 +19,7 @@
             href="{{routeUrl page='hashers' secondaryPage='early-warning'}}"
             title="Go to the early warning page"
           >
-            <span class="fa fa-bell fa-lg"></span>
+            <span class="fas fa-bell fa-lg"></span>
             <span class="d-none d-md-inline">
               Early Warning
             </span>
@@ -29,7 +31,7 @@
             href="{{routeUrl page='hashers' secondaryPage='email'}}"
             title="Go to the email list"
           >
-            <span class="fa fa-envelope fa-lg"></span>
+            <span class="fas fa-envelope fa-lg"></span>
             <span class="d-none d-md-inline">
               Email List
             </span>
@@ -41,7 +43,7 @@
             href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}"
             title="Go to the attendance records page"
           >
-            <span class="fa fa-bars fa-lg"></span>
+            <span class="fas fa-bars fa-lg"></span>
             <span class="d-none d-md-inline">
               Attendance Records
             </span>
@@ -53,7 +55,7 @@
               class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
               href="{{routeUrl page='hashers' secondaryPage='add'}}"
             >
-              <span class="fa fa-plus fa-lg"></span>
+              <span class="fas fa-plus fa-lg"></span>
               <span class="d-none d-md-inline">
                 Add Hasher
               </span>

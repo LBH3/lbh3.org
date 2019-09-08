@@ -1,5 +1,5 @@
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free-webfonts/css/fa-solid.css" />
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 
 {{#if hashersPromise.isPending}}
   <div class="alert alert-info" role="alert">
@@ -16,7 +16,7 @@
 {{#if hashersByPosition}}
   {{#if showEmailLink}}
     <p class="d-print-none">
-      Click the <span class="fa fa-envelope"></span> next to each position to email them directly, or
+      Click the <span class="fas fa-envelope"></span> next to each position to email them directly, or
       <a href="mailto:bored@lbh3.org">send an email to the entire Bored and our regular volunteers (currently just Achey Breaky Fart)</a>.
     </p>
   {{/if}}
@@ -45,7 +45,7 @@
           {{#if showEmailLink}}
             <small class="d-print-none">
               <a href="mailto:{{hasherByPosition.promise.value.emailAddress}}" title="Send an email">
-                <span class="fa fa-envelope"></span>
+                <span class="fas fa-envelope"></span>
               </a>
             </small>
           {{/if}}
