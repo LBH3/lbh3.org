@@ -6,7 +6,7 @@
   <div>
     <h2 class="text-nowrap">
       <a href="{{routeUrl page='hareline'}}">
-        <h2>Hareline</h2>
+        Hareline
       </a>
     </h2>
   </div>

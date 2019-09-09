@@ -1,4 +1,5 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/hasher/nav/" />
 <can-import from="~/components/hasher-edit-form/" />
 
 {{#if session.user.canEditHasherInfo}}
@@ -16,13 +17,15 @@
   {{/if}}
 
   {{#if hasher}}
-    <h2>
-      Edit
-      <a href="{{routeUrl page='hashers' id=hasher.id}}" title="Go back to {{hasher.hashOrJustName}}’s profile">
-        {{hasher.hashOrJustName}}
-      </a>
-    </h2>
-    <lbh3-hasher-edit-form hasher:from="hasher" />
+    <lbh3-hasher-nav
+      hasher:from="hasher"
+      secondaryPage:from="secondaryPage"
+      session:from="session"
+    />
+    <lbh3-hasher-edit-form
+      class="container pl-0 pr-0"
+      hasher:from="hasher"
+    />
   {{/if}}
 
 {{else}}

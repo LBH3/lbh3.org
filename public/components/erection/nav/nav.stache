@@ -6,7 +6,7 @@
       {{#if(election)}}
         {{election.titleMd}}
       {{else}}
-        <h2>Erection</h2>
+        Erection
       {{/if}}
     </a>
   </h2>

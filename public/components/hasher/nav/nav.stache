@@ -1,0 +1,35 @@
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="can-stache-route-helpers" />
+
+<h2>
+  <a href="{{routeUrl page='hashers' id=hasher.id}}">
+    {{hasher.hashOrJustName}}
+  </a>
+</h2>
+
+<ul class="justify-content-center mt-0 nav nav-pills">
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      download
+      href="/api/hashers/{{hasher.id}}/vcard.vcf"
+      title="Download this hasher’s contact info"
+    >
+      <span class="fas fa-download fa-lg"></span>
+      Download
+    </a>
+  </li>
+  {{#if session.user.canEditHasherInfo}}
+    <li class="nav-item">
+      <a
+        class="{{#eq(secondaryPage, 'edit')}}active{{/eq}} nav-link"
+        href="{{routeUrl page='hashers' id=hasher.id secondaryPage='edit'}}"
+        title="Edit this hasher’s info"
+      >
+        <span class="fas fa-edit fa-lg"></span>
+        Edit
+      </a>
+    </li>
+  {{/if}}
+</ul>

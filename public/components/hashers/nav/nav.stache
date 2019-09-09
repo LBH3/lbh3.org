@@ -6,7 +6,7 @@
   <div>
     <h2 class="text-nowrap">
       <a href="{{routeUrl page='hashers' secondaryPage=''}}">
-        <h2>Hashers</h2>
+        Hashers
       </a>
     </h2>
   </div>

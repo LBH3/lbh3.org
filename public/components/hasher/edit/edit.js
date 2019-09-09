@@ -39,6 +39,8 @@ export const ViewModel = DefineMap.extend({
     return `Edit hasher #${this.id}`;
   },
 
+  secondaryPage: 'string',
+
   get session() {
     return Session.current;
   },

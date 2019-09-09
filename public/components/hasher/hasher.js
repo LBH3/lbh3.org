@@ -84,7 +84,7 @@ const uploadFile = function(file, signedRequest, url) {
   });
 };
 
-const $limit = 100;
+const $limit = 50;
 
 export const ViewModel = DefineMap.extend({
   boredPositions: {
@@ -167,6 +167,23 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
+
+  get hasPrivateInfo() {
+    const hasher = this.hasher;
+    const data = [
+      hasher.cellPhonePrivate,
+      hasher.emailAddressesPrivateWithLinks,
+      hasher.familyNamePrivate,
+      hasher.formattedPrivateAddress,
+      hasher.givenNamePrivate,
+      hasher.homePhonePrivate,
+      hasher.workPhonePrivate
+    ];
+    return data.filter(info => {
+      return info;
+    }).length > 0;
+  },
+
   headshotPromise: Promise,
   id: 'number',
   get currentPage() {
@@ -263,6 +280,8 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
+
+  secondaryPage: 'string',
 
   get session() {
     return Session.current;

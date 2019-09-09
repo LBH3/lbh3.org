@@ -23,6 +23,7 @@ import 'lbh3/components/hareline/hareline-test';
 import 'lbh3/components/hareline/nav/nav-test';
 import 'lbh3/components/hasher/edit/edit-test';
 import 'lbh3/components/hasher/hasher-test';
+import 'lbh3/components/hasher/nav/nav-test';
 import 'lbh3/components/hasher-autocomplete/hasher-autocomplete-test';
 import 'lbh3/components/hasher-edit-form/hasher-edit-form-test';
 import 'lbh3/components/hashers/add/add-test';

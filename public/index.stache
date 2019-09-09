@@ -426,98 +426,30 @@
             {{/default}}
           {{/switch}}
         {{/case}}
+
         {{#case "hashers"}}
-          <can-import from="~/components/hashers/nav/">
-            {{#if isPending}}
-              Loading the Hashers navigation…
+          {{#if id}}
+            {{#if secondaryPage}}
+              {{#switch secondaryPage}}
+                {{#case "edit"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/hasher/edit/">
+                      {{#if isPending}}
+                        Loading the edit hasher page…
+                      {{else}}
+                        <lbh3-hasher-edit
+                          description:to="scope.vm.description"
+                          id:from="scope.vm.id"
+                          ogTitle:to="scope.vm.ogTitle"
+                          secondaryPage:from="secondaryPage"
+                          title:to="scope.vm.title"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+              {{/switch}}
             {{else}}
-              <lbh3-hashers-nav
-                secondaryPage:from="secondaryPage"
-              />
-            {{/if}}
-          </can-import>
-          {{#if secondaryPage}}
-            {{#switch secondaryPage}}
-              {{#case "add"}}
-                <lbh3-no-ssr>
-                  <can-import from="~/components/hashers/add/">
-                    {{#if isPending}}
-                      Loading the add hasher page…
-                    {{else}}
-                      <lbh3-hashers-add
-                        description:to="scope.vm.description"
-                        ogTitle:to="scope.vm.ogTitle"
-                        title:to="scope.vm.title"
-                      />
-                    {{/if}}
-                  </can-import>
-                </lbh3-no-ssr>
-              {{/case}}
-              {{#case "attendance-records"}}
-                <lbh3-no-ssr>
-                  <can-import from="~/components/hashers/attendance-records/">
-                    {{#if isPending}}
-                      Loading the attendance records page…
-                    {{else}}
-                      <lbh3-hashers-attendance-records
-                        description:to="scope.vm.description"
-                        ogTitle:to="scope.vm.ogTitle"
-                        title:to="scope.vm.title"
-                      />
-                    {{/if}}
-                  </can-import>
-                </lbh3-no-ssr>
-              {{/case}}
-              {{#case "early-warning"}}
-                <lbh3-no-ssr>
-                  <can-import from="~/components/hashers/early-warning/">
-                    {{#if isPending}}
-                      Loading the early warning page…
-                    {{else}}
-                      <lbh3-hashers-early-warning
-                        description:to="scope.vm.description"
-                        ogTitle:to="scope.vm.ogTitle"
-                        title:to="scope.vm.title"
-                      />
-                    {{/if}}
-                  </can-import>
-                </lbh3-no-ssr>
-              {{/case}}
-              {{#case "email"}}
-                <lbh3-no-ssr>
-                  <can-import from="~/components/hashers/email/">
-                    {{#if isPending}}
-                      Loading the hashers email page…
-                    {{else}}
-                      <lbh3-hashers-email
-                        description:to="scope.vm.description"
-                        ogTitle:to="scope.vm.ogTitle"
-                        title:to="scope.vm.title"
-                      />
-                    {{/if}}
-                  </can-import>
-                </lbh3-no-ssr>
-              {{/case}}
-              {{#case "edit"}}
-                <lbh3-no-ssr>
-                  <can-import from="~/components/hasher/edit/">
-                    {{#if isPending}}
-                      Loading the edit hasher page…
-                    {{else}}
-                      <lbh3-hasher-edit
-                        class="container pl-0 pr-0"
-                        description:to="scope.vm.description"
-                        id:from="scope.vm.id"
-                        ogTitle:to="scope.vm.ogTitle"
-                        title:to="scope.vm.title"
-                      />
-                    {{/if}}
-                  </can-import>
-                </lbh3-no-ssr>
-              {{/case}}
-            {{/switch}}
-          {{else}}
-            {{#if id}}
               <can-import from="~/components/hasher/">
                 {{#if isPending}}
                   Loading hasher page…
@@ -526,26 +458,104 @@
                     description:to="scope.vm.description"
                     id:from="scope.vm.id"
                     ogTitle:to="scope.vm.ogTitle"
+                    secondaryPage:from="secondaryPage"
                     skip:from="scope.vm.skip"
                     title:to="scope.vm.title"
                   />
                 {{/if}}
               </can-import>
+            {{/if}}
+          {{else}}
+            <can-import from="~/components/hashers/nav/">
+              {{#if isPending}}
+                Loading the Hashers navigation…
+              {{else}}
+                <lbh3-hashers-nav
+                  secondaryPage:from="secondaryPage"
+                />
+              {{/if}}
+            </can-import>
+            {{#if secondaryPage}}
+              {{#switch secondaryPage}}
+                {{#case "add"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/hashers/add/">
+                      {{#if isPending}}
+                        Loading the add hasher page…
+                      {{else}}
+                        <lbh3-hashers-add
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          title:to="scope.vm.title"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+                {{#case "attendance-records"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/hashers/attendance-records/">
+                      {{#if isPending}}
+                        Loading the attendance records page…
+                      {{else}}
+                        <lbh3-hashers-attendance-records
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          title:to="scope.vm.title"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+                {{#case "early-warning"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/hashers/early-warning/">
+                      {{#if isPending}}
+                        Loading the early warning page…
+                      {{else}}
+                        <lbh3-hashers-early-warning
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          title:to="scope.vm.title"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+                {{#case "email"}}
+                  <lbh3-no-ssr>
+                    <can-import from="~/components/hashers/email/">
+                      {{#if isPending}}
+                        Loading the hashers email page…
+                      {{else}}
+                        <lbh3-hashers-email
+                          description:to="scope.vm.description"
+                          ogTitle:to="scope.vm.ogTitle"
+                          title:to="scope.vm.title"
+                        />
+                      {{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
+              {{/switch}}
             {{else}}
-              <can-import from="~/components/hashers/">
-                {{#if isPending}}
-                  Loading Hashers page…
-                {{else}}
-                  <lbh3-hashers
-                    description:to="scope.vm.description"
-                    ogTitle:to="scope.vm.ogTitle"
-                    searchNoHeadshot:bind="scope.vm.noHeadshot"
-                    searchText:bind="scope.vm.search"
-                    skip:from="scope.vm.skip"
-                    title:to="scope.vm.title"
-                  />
-                {{/if}}
-              </can-import>
+              {{#if id}}
+              {{else}}
+                <can-import from="~/components/hashers/">
+                  {{#if isPending}}
+                    Loading Hashers page…
+                  {{else}}
+                    <lbh3-hashers
+                      description:to="scope.vm.description"
+                      ogTitle:to="scope.vm.ogTitle"
+                      searchNoHeadshot:bind="scope.vm.noHeadshot"
+                      searchText:bind="scope.vm.search"
+                      skip:from="scope.vm.skip"
+                      title:to="scope.vm.title"
+                    />
+                  {{/if}}
+                </can-import>
+              {{/if}}
             {{/if}}
           {{/if}}
         {{/case}}
