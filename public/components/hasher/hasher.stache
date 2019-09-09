@@ -40,7 +40,7 @@
 
         {{<uploadInput}}
           {{#if session.user.canEditHasherInfo}}
-            <label class="btn btn-primary d-print-none mb-0 ml-3">
+            <label class="btn btn-primary d-print-none mb-0">
               <span class="fas fa-upload"></span>
               Upload
               {{#if(hasher.headshotUrl)}}

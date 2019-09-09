@@ -93,15 +93,15 @@
 
   <dl class="row">
     {{#if event.directionsHtml}}
-      <dt class="col-md-3 text-md-right">Directions:</dt>
-      <dd class="col-md-9">{{{event.directionsHtml}}}</dd>
+      <dt class="col-sm-3 text-sm-right">Directions:</dt>
+      <dd class="col-sm-9">{{{event.directionsHtml}}}</dd>
     {{/if}}
     {{#if event.fromTheHaresHtml}}
-      <dt class="col-md-3 text-md-right">From the hares:</dt>
-      <dd class="col-md-9">{{{event.fromTheHaresHtml}}}</dd>
+      <dt class="col-sm-3 text-sm-right">From the hares:</dt>
+      <dd class="col-sm-9">{{{event.fromTheHaresHtml}}}</dd>
     {{/if}}
     {{#if event.longOnOnHtml}}
-      <dt class="col-sm-3 text-md-right">On-on:</dt>
+      <dt class="col-sm-3 text-sm-right">On-on:</dt>
       <dd class="col-sm-9">{{{event.longOnOnHtml}}}</dd>
     {{/if}}
   </dl>
@@ -119,16 +119,16 @@
 
   {{#if shouldShowPostTrailData}}
     <dl class="row">
-      <dt class="col-md-3 text-md-right">Miles:</dt>
-      <dd class="col-md-9">
+      <dt class="col-sm-3 text-sm-right">Miles:</dt>
+      <dd class="col-sm-9">
         {{#if event.miles}}
           {{event.miles}}
         {{else}}
           ?
         {{/if}}
       </dd>
-      <dt class="col-md-3 text-md-right">Total hashers:</dt>
-      <dd class="col-md-9">
+      <dt class="col-sm-3 text-sm-right">Total hashers:</dt>
+      <dd class="col-sm-9">
         {{#if hashers.length}}
           {{hashers.length}}
         {{else}}
@@ -164,47 +164,47 @@
         {{/if}}
       </dd>
       {{#if event.addedWriteupHtml}}
-        <dt class="col-md-3 text-md-right">Added writeup:</dt>
-        <dd class="col-md-9">{{{event.addedWriteupHtml}}}</dd>
+        <dt class="col-sm-3 text-sm-right">Added writeup:</dt>
+        <dd class="col-sm-9">{{{event.addedWriteupHtml}}}</dd>
       {{/if}}
       {{#if event.additionalWriteupHtml}}
-        <dt class="col-md-3 text-md-right">Additional writeup:</dt>
-        <dd class="col-md-9">{{{event.additionalWriteupHtml}}}</dd>
+        <dt class="col-sm-3 text-sm-right">Additional writeup:</dt>
+        <dd class="col-sm-9">{{{event.additionalWriteupHtml}}}</dd>
       {{/if}}
-      <dt class="col-md-3 text-md-right">New boots:</dt>
-      <dd class="col-md-9">
+      <dt class="col-sm-3 text-sm-right">New boots:</dt>
+      <dd class="col-sm-9">
         {{#if event.newBootsHtml}}
           {{{event.newBootsHtml}}}
         {{else}}
           {{valueForRole('new boot')}}
         {{/if}}
       </dd>
-      <dt class="col-md-3 text-md-right">New names:</dt>
-      <dd class="col-md-9">
+      <dt class="col-sm-3 text-sm-right">New names:</dt>
+      <dd class="col-sm-9">
         {{#if event.newNamesHtml}}
           {{{event.newNamesHtml}}}
         {{else}}
           {{valueForRole('new name')}}
         {{/if}}
       </dd>
-      <dt class="col-md-3 text-md-right">Visitors:</dt>
-      <dd class="col-md-9">
+      <dt class="col-sm-3 text-sm-right">Visitors:</dt>
+      <dd class="col-sm-9">
         {{#if event.visitorsHtml}}
           {{{event.visitorsHtml}}}
         {{else}}
           {{valueForRole('visitor')}}
         {{/if}}
       </dd>
-      <dt class="col-md-3 text-md-right">Returners:</dt>
-      <dd class="col-md-9">
+      <dt class="col-sm-3 text-sm-right">Returners:</dt>
+      <dd class="col-sm-9">
         {{#if event.returnersHtml}}
           {{{event.returnersHtml}}}
         {{else}}
           {{valueForRole('returner')}}
         {{/if}}
       </dd>
-      <dt class="col-md-3 text-md-right">Patches:</dt>
-      <dd class="col-md-9">
+      <dt class="col-sm-3 text-sm-right">Patches:</dt>
+      <dd class="col-sm-9">
         {{#if event.patchesPromise.isPending}}
           Fetching patches…
         {{/if}}
@@ -216,16 +216,16 @@
         {{/if}}
       </dd>
       {{#if session.user.canViewOldData}}
-        <dt class="col-md-3 text-md-right">Old hare patch data:</dt>
-        <dd class="col-md-9">
+        <dt class="col-sm-3 text-sm-right">Old hare patch data:</dt>
+        <dd class="col-sm-9">
           {{#if event.harePatchesHtml}}
             {{{event.harePatchesHtml}}}
           {{else}}
             None
           {{/if}}
         </dd>
-        <dt class="col-md-3 text-md-right">Old run patch data:</dt>
-        <dd class="col-md-9">
+        <dt class="col-sm-3 text-sm-right">Old run patch data:</dt>
+        <dd class="col-sm-9">
           {{#if event.patchesHtml}}
             {{{event.patchesHtml}}}
           {{else}}
