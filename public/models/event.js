@@ -493,13 +493,13 @@ Event.groupByMonth = function(events) {
   let currentMonth;
   const eventsByMonth = [];
   events.forEach(function(event) {
-    const month = event.startDate.getMonth();
+    const month = event.startDateAsMoment.month();
     if (!currentMonth || currentMonth.number != month) {
       currentMonth = {
         events: [],
         name: monthNames[month],
         number: month,
-        year: event.startDate.getFullYear()
+        year: event.startDateAsMoment.year()
       };
       eventsByMonth.push(currentMonth);
     }
