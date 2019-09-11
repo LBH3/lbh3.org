@@ -9,81 +9,6 @@ import './hasher.less';
 import route from 'can-route';
 import view from './hasher.stache';
 
-const uuid = function(a) {
-  // From https://gist.github.com/jed/982883
-  return a?(a^Math.random()*16>>a/4).toString(16):([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,uuid);
-};
-
-const deleteHeadshotAtUrl = function(url) {
-  const urlSplit = url.split('/');
-  const fileName = (urlSplit.length > 0) ? urlSplit.pop() : null;
-  console.info('About to delete filename:', fileName);
-  if (fileName) {
-    const xhr = new XMLHttpRequest();
-    xhr.open('DELETE', `/s3?file-name=${fileName}`);
-    xhr.onerror = () => {
-      console.error('Delete failed with XMLHttpRequest:', xhr);
-    };
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          console.info('Delete succeeded with XMLHttpRequest:', xhr);
-        } else {
-          console.error('Delete failed with XMLHttpRequest:', xhr);
-        }
-      }
-    };
-    xhr.send();
-  }
-};
-
-const getSignedRequest = function(file, hasher) {
-  return new Promise((resolve, reject) => {
-    const fileExtension = file.name.split('.').pop();
-    if (!fileExtension) {
-      reject('File extension could not be determined by name');
-    } else {
-      const fileName = encodeURIComponent(`${uuid()}.${fileExtension}`);
-      const xhr = new XMLHttpRequest();
-      xhr.open('GET', `/sign-s3?acl=public-read&config-bucket-name=headshotsBucketName&file-name=${fileName}&file-type=${file.type}`);
-      xhr.onerror = () => {
-        reject(xhr);
-      };
-      xhr.onreadystatechange = () => {
-        if (xhr.readyState === 4) {
-          if (xhr.status === 200) {
-            const response = JSON.parse(xhr.responseText);
-            resolve(response);
-          } else {
-            reject(xhr);
-          }
-        }
-      };
-      xhr.send();
-    }
-  });
-};
-
-const uploadFile = function(file, signedRequest, url) {
-  return new Promise((resolve, reject) => {
-    const xhr = new XMLHttpRequest();
-    xhr.open('PUT', signedRequest);
-    xhr.onerror = () => {
-      reject(xhr);
-    };
-    xhr.onreadystatechange = () => {
-      if (xhr.readyState === 4) {
-        if (xhr.status === 200) {
-          resolve(true);
-        } else {
-          reject(xhr);
-        }
-      }
-    };
-    xhr.send(file);
-  });
-};
-
 const $limit = 50;
 
 export const ViewModel = DefineMap.extend({
@@ -184,7 +109,6 @@ export const ViewModel = DefineMap.extend({
     }).length > 0;
   },
 
-  headshotPromise: Promise,
   id: 'number',
   get currentPage() {
     const runs = this.runs;
@@ -300,26 +224,5 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'lbh3-hasher',
   ViewModel,
-  view,
-  events: {
-    'input[type="file"] change': function(input) {
-      const file = (input.files && input.files[0]) ? input.files[0] : null;
-      if (file) {
-        const viewModel = this.viewModel;
-        const hasher = viewModel.hasher;
-        viewModel.headshotPromise = getSignedRequest(file, hasher).then(response => {
-          return uploadFile(file, response.signedRequest, response.url).then(() => {
-            const previousHeadshotUrl = hasher.headshotUrl;
-            hasher.headshotUrl = response.url;
-            return hasher.save().then(savedHasher => {
-              if (previousHeadshotUrl) {
-                deleteHeadshotAtUrl(previousHeadshotUrl);
-              }
-              return savedHasher;
-            });
-          });
-        });
-      }
-    }
-  }
+  view
 });

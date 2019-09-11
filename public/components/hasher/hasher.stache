@@ -28,60 +28,13 @@
       session:from="session"
     />
 
-    <form class="upload-headshot">
-      <div class="form-group text-center">
-        {{<headshotImage}}
-          {{#if hasher.headshotUrl}}
-            <a href="{{hasher.headshotUrl}}" target="_blank">
-              <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrl}}" />
-            </a>
-          {{/if}}
-        {{/headshotImage}}
-
-        {{<uploadInput}}
-          {{#if session.user.canEditHasherInfo}}
-            <label class="btn btn-primary d-print-none mb-0">
-              <span class="fas fa-upload"></span>
-              Upload
-              {{#if(hasher.headshotUrl)}}
-                <span class="d-none d-sm-inline">
-                  head shot
-                </span>
-              {{else}}
-                head shot
-              {{/if}}
-              <input accept="image/*" class="sr-only" type="file" />
-            </label>
-          {{/if}}
-        {{/uploadInput}}
-
-        {{>headshotImage}}
-
-        {{#if headshotPromise}}
-          {{#if headshotPromise.isPending}}
-            <span class="fas fa-circle-notch fa-spin"></span>
-          {{/if}}
-          {{#if headshotPromise.isRejected}}
-            <span class="fas fa-exclamation-triangle"></span>
-            {{#if headshotPromise.reason.xhr.message}}
-              {{headshotPromise.reason.xhr.message}}
-            {{else}}
-              Unknown error
-            {{/if}}
-          {{/if}}
-          {{#if headshotPromise.isResolved}}
-            {{^if hasher.headshotUrl}}
-              <span class="fas fa-exclamation-triangle"></span>
-              Unknown error
-              <br />
-            {{/if}}
-            {{>uploadInput}}
-          {{/if}}
-        {{else}}
-          {{>uploadInput}}
-        {{/if}}
+    {{#if hasher.headshotUrl}}
+      <div class="mb-3 text-center">
+        <a href="{{hasher.headshotUrl}}" target="_blank">
+          <img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" />
+        </a>
       </div>
-    </form>
+    {{/if}}
 
     <div class="row">
       <div class="col-lg">

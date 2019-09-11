@@ -1,6 +1,26 @@
 <can-import from="can-stache-converters" />
+<can-import from="~/components/hasher-upload-headshot-button/" />
 
 <form on:submit="editHasher()">
+  {{#if(hasher.id)}}
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="hashName">
+        Headshot
+      </label>
+      <div class="col-sm-8">
+        {{#if(hasher.headshotUrl)}}
+          <a href="{{hasher.headshotUrl}}" target="_blank">
+            <img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" />
+          </a>
+        {{/if}}
+        <lbh3-hasher-upload-headshot-button
+          hasher:from="hasher"
+          session:from="session"
+        />
+      </div>
+    </div>
+  {{/if}}
+
   <div class="form-group row">
     <label class="col-sm-4 col-form-label" for="hashName">
       Hash name

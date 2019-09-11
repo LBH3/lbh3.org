@@ -26,6 +26,7 @@ import 'lbh3/components/hasher/hasher-test';
 import 'lbh3/components/hasher/nav/nav-test';
 import 'lbh3/components/hasher-autocomplete/hasher-autocomplete-test';
 import 'lbh3/components/hasher-edit-form/hasher-edit-form-test';
+import 'lbh3/components/hasher-upload-headshot-button/hasher-upload-headshot-button-test';
 import 'lbh3/components/hashers/add/add-test';
 import 'lbh3/components/hashers/attendance-records/attendance-records-test';
 import 'lbh3/components/hashers/early-warning/early-warning-test';
