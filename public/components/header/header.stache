@@ -31,14 +31,14 @@
         {{#if session.user}}
           {{#if session.user.hasherId}}
             <li class="nav-item">
-              <a class="btn btn-link py-0" href="{{routeUrl page='hashers' id=session.user.hasherId}}" title="Your profile">
+              <a class="align-baseline border-0 btn btn-link py-0" href="{{routeUrl page='hashers' id=session.user.hasherId}}" title="Your profile">
                 <span class="fas fa-user-circle fa-lg"></span>
                 Your profile
               </a>
             </li>
           {{/if}}
           <li class="nav-item">
-            <button class="btn btn-link py-0" type="button" on:click="session.destroy()">
+            <button class="align-baseline border-0 btn btn-link pr-0 py-0" type="button" on:click="session.destroy()">
               <span class="fas fa-sign-out-alt fa-lg"></span>
               <span class="d-none d-md-inline">
                 Sign out
@@ -50,13 +50,13 @@
             <span class="d-none d-sm-inline">
               Sign in with
             </span>
-            <a class="align-baseline btn btn-link facebook px-sm-1" href="/auth/facebook" title="Facebook">
+            <a class="align-baseline border-0 btn btn-link facebook px-sm-1" href="/auth/facebook" title="Facebook">
               <span class="fab fa-lg fa-facebook-square"></span>
             </a>
             <span class="d-none d-sm-inline">
               or
             </span>
-            <a class="align-baseline btn btn-link pl-sm-1" href="/auth/google" title="Google">
+            <a class="align-baseline border-0 btn btn-link pl-sm-1 pr-0" href="/auth/google" title="Google">
               <span class="fab fa-lg fa-google"></span>
             </a>
           </li>

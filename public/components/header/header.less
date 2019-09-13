@@ -1,11 +1,6 @@
 lbh3-header {
   display: block;
 
-  @supports (padding: max(0px)) {
-    padding-left: ~"max(0px, env(safe-area-inset-left))";
-    padding-right: ~"max(0px, env(safe-area-inset-right))";
-  }
-
   a,
   .btn-link,
   .nav-item {
@@ -28,9 +23,19 @@ lbh3-header {
     }
 
     svg {
-      bottom: 3px;
+      bottom: 4px;
       fill: var(--link-color);
       position: relative;
+    }
+  }
+
+  .d-flex.justify-content-between {
+    padding-left: .5rem;
+    padding-right: .5rem;
+
+    @supports (padding: max(0px)) {
+      padding-left: ~"max(.5rem, env(safe-area-inset-left))";
+      padding-right: ~"max(.5rem, env(safe-area-inset-right))";
     }
   }
 
