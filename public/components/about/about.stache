@@ -11,58 +11,58 @@
   beverage. We hope to see you at LBH3. On On!!!
 </p>
 
-<div class="no-gutters row">
-  <div class="col">
-    <h3>PDFs</h3>
-    <ul class="list-unstyled">
-      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/LBH3SongBook.pdf">
-        Song Book
-      </a></li>
-      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/HowLBH3Started.pdf">
-        How LBH3 Started
-      </a></li>
-      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/FounderSkit.pdf">
-        Found&nbsp;’er&nbsp;Balls Skit
-      </a></li>
-      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/Whosleptwithbigpink.pdf">
-        Who Slept With Big Pink
-      </a></li>
-      <li><a href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/HotLips.pdf">
-        Hot Lips Adventures
-      </a></li>
-    </ul>
-  </div>
+<div class="row">
   {{#if session.user.canManageUsers}}
-    <div class="col">
-      <h3>Admin</h3>
+    <div class="col-sm">
+      <h3 class="mb-1">Admin</h3>
       <ul class="list-unstyled">
-        <li><a href="{{routeUrl page='erections'}}">
+        <li><a class="d-block py-1" href="{{routeUrl page='erections'}}">
           Erections
         </a></li>
-        <li><a href="{{routeUrl page='special-events'}}">
+        <li><a class="d-block py-1" href="{{routeUrl page='special-events'}}">
           Special Events
         </a></li>
-        <li><a href="{{routeUrl page='users'}}">
+        <li><a class="d-block py-1" href="{{routeUrl page='users'}}">
           Users
         </a></li>
       </ul>
     </div>
   {{/if}}
-  <div class="col">
-    <h3>Friends of LBH3</h3>
+  <div class="col-sm">
+    <h3 class="mb-1">Friends of LBH3</h3>
     <ul class="list-unstyled">
-      <li><a href="http://www.hash.org" target="_blank">
-        Find other local hashes and upcumming events on hash.org
+      <li><a class="d-block py-1" href="http://www.hash.org" target="_blank">
+        Hash.org: find other local hashes and upcumming events
       </a></li>
-      <li><a href="http://hashboyh3.com/" target="_blank">
-        Hash Boy—The comic hashing adventures of Hash Boy and his hash hound Foamy
+      <li><a class="d-block py-1" href="http://hashboyh3.com/" target="_blank">
+        Hash Boy: the comic hashing adventures of Hash Boy and his hash hound Foamy
+      </a></li>
+    </ul>
+  </div>
+  <div class="col-sm">
+    <h3 class="mb-1">PDFs</h3>
+    <ul class="list-unstyled">
+      <li><a class="d-block py-1" href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/LBH3SongBook.pdf">
+        Song Book
+      </a></li>
+      <li><a class="d-block py-1" href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/HowLBH3Started.pdf">
+        How LBH3 Started
+      </a></li>
+      <li><a class="d-block py-1" href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/FounderSkit.pdf">
+        Found&nbsp;’er&nbsp;Balls Skit
+      </a></li>
+      <li><a class="d-block py-1" href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/HotLips.pdf">
+        Hot Lips Adventures
+      </a></li>
+      <li><a class="d-block py-1" href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/Whosleptwithbigpink.pdf">
+        Who Slept With Big Pink
       </a></li>
     </ul>
   </div>
 </div>
 
 {{#if session.user.canExportData}}
-  <h2>Download data</h2>
+  <h2 class="text-left">Download data</h2>
   <p>Click on the links below to download parts of the database as CSV.</p>
   <div class="alert alert-danger" role="alert">
     This is sensitive, private data.
@@ -72,47 +72,47 @@
   </div>
   <ul class="list-unstyled">
     <li>
-      <a download href="/api/csv?service=bored-hashers">
+      <a class="d-block py-1" download href="/api/csv?service=bored-hashers">
         Bored Hashers
       </a>
     </li>
     <li>
-      <a download href="/api/csv?service=bored-positions">
+      <a class="d-block py-1" download href="/api/csv?service=bored-positions">
         Bored Positions
       </a>
     </li>
     <li>
-      <a download href="/api/csv?service=bored-years">
+      <a class="d-block py-1" download href="/api/csv?service=bored-years">
         Bored Years
       </a>
     </li>
     <li>
-      <a download href="/api/csv?service=events">
+      <a class="d-block py-1" download href="/api/csv?service=events">
         Events
       </a>
     </li>
     <li>
-      <a download href="/api/csv?service=events-hashers">
+      <a class="d-block py-1" download href="/api/csv?service=events-hashers">
         Events Hashers
       </a>
     </li>
     <li>
-      <a download href="/api/csv?service=hashers">
+      <a class="d-block py-1" download href="/api/csv?service=hashers">
         Hashers
       </a>
     </li>
     <li>
-      <a download href="/api/csv?service=patches">
+      <a class="d-block py-1" download href="/api/csv?service=patches">
         Patches
       </a>
     </li>
     <li>
-      <a download href="/api/csv?service=places">
+      <a class="d-block py-1" download href="/api/csv?service=places">
         Places
       </a>
     </li>
     <li>
-      <a download href="/api/csv?service=special-events">
+      <a class="d-block py-1" download href="/api/csv?service=special-events">
         Special Events
       </a>
     </li>
