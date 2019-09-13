@@ -35,7 +35,6 @@ export const ViewModel = DefineMap.extend({
     }
   },
   canViewHasher: {
-    type: 'boolean',
     get: function() {
       const user = this.session && this.session.user || {};
       return user.canViewDirectoryInfo || user.hasherId === this.id;

@@ -1,11 +1,21 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
+import Session from '~/models/session';
 import './header.less';
+import platform from 'steal-platform';
 import view from './header.stache';
 
 export const ViewModel = DefineMap.extend({
-  title: {
-    default: 'Long Beach Hash House Harriers'
+  id: 'number',
+  page: 'string',
+  platform: {
+    default: () => {
+      return platform;
+    }
+  },
+  secondaryPage: 'string',
+  get session() {
+    return Session.current;
   }
 });
 

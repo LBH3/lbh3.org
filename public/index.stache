@@ -45,7 +45,11 @@
     <can-import from="~/components/nav/" />
 
     <header>
-      <lbh3-header />
+      <lbh3-header
+        id:from="id"
+        page:from="page"
+        secondaryPage:from="secondaryPage"
+      />
       <lbh3-nav day:from="day" month:from="month" page:from="page" year:from="year" />
     </header>
 

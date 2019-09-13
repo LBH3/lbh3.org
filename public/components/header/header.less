@@ -1,45 +1,43 @@
 lbh3-header {
-	display: block;
+  display: block;
+
+  @supports (padding: max(0px)) {
+    padding-left: ~"max(0px, env(safe-area-inset-left))";
+    padding-right: ~"max(0px, env(safe-area-inset-right))";
+  }
+
+  a,
+  .btn-link,
+  .nav-item {
+    line-height: 3rem;
+    padding-bottom: 0;
+    padding-top: 0;
+  }
 
   h1 {
+    font-size: 2rem;
     margin: 0;
-    text-align: center;
-    @supports (padding: max(0px)) {
-      padding-left: ~"max(0px, env(safe-area-inset-left))";
-      padding-right: ~"max(0px, env(safe-area-inset-right))";
-    }
   }
+
   h1 a {
-    line-height: 60px;
+    &:hover {
+      text-decoration: none;
+      svg {
+        fill: var(--link-color-hover);
+      }
+    }
+
     svg {
       bottom: 3px;
       fill: var(--link-color);
       position: relative;
     }
   }
-  h1 a:hover {
-    text-decoration: none;
-    svg {
-      fill: var(--link-color-hover);
-    }
-  }
 
-  @media (max-width: 767px) {
-    h1 {
-      font-size: 1.40rem;
-    }
-  }
-  @media (max-width: 414px) {
-    h1 {
-      font-size: 1.15rem;
-    }
-  }
-  @media (max-width: 368px) {
-    h1 a {
-      line-height: 3rem;
-    }
-    h1 svg {
-      display: none;
+  .facebook {
+    color: var(--facebook-blue);
+    &:hover {
+      color: var(--facebook-blue-hover);
     }
   }
 
