@@ -42,10 +42,9 @@ const beforeFindHook = function(hook) {
       })(hook);
     } else {
       return searchHook({
-        contains: ['email_addresses', 'email_addresses_private'],
+        contains: ['emails'],
         fields: ['family_name', 'given_name', 'hash_name'],
         oldOptions: {
-          contains: ['emailAddresses', 'emailAddressesPrivate'],
           fields: ['familyName', 'givenName', 'hashName']
         }
       })(hook);

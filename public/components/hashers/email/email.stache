@@ -18,8 +18,10 @@
   <h3>{{emailGroup.label}}</h3>
   <ol>
     {{#for(hasher of emailGroup.hashers)}}
-      {{#for(emailAddress of hasher.emailAddresses)}}
-        <li>{{emailAddress}}</li>
+      {{#for(email of hasher.emails)}}
+        {{^eq(email.type, 'work')}}
+          <li>{{email.value}}</li>
+        {{/eq}}
       {{/for}}
     {{/for}}
   </ol>

@@ -1,37 +1,5 @@
-<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free/css/brands.css" />
-
-<footer class="container-fluid {{^eq platform.isNode true}}d-flex flex-column flex-sm-row-reverse justify-content-sm-between{{/eq}} text-muted">
-  {{^eq platform.isNode true}}
-    <ul class="justify-content-center nav">
-      {{#if session.user}}
-        {{#if session.user.hasherId}}
-          <li class="nav-item">
-            <a class="btn btn-link p-3" href="{{routeUrl page='hashers' id=session.user.hasherId}}" title="Your profile">
-              Your profile
-            </a>
-          </li>
-        {{/if}}
-        <li class="nav-item">
-          <button class="btn btn-link px-sm-0 py-3" type="button" on:click="session.destroy()">
-            Sign out
-          </button>
-        </li>
-      {{else}}
-        <li class="nav-item">
-          Sign in with
-          <a class="align-baseline btn btn-link facebook px-sm-0 py-3" href="/auth/facebook" title="Facebook">
-            <span class="fab fa-lg fa-facebook-square"></span>
-          </a>
-          or
-          <a class="align-baseline btn btn-link px-sm-0 py-3" href="/auth/google" title="Google">
-            <span class="fab fa-lg fa-google"></span>
-          </a>
-        </li>
-      {{/if}}
-    </ul>
-  {{/eq}}
-  <p class="pt-sm-3 text-center text-sm-left">
+<footer class="text-muted">
+  <p class="my-3 text-center">
     <a href="mailto:contact@lbh3.org">Email us</a> with any questions or comments.
   </p>
 </footer>

@@ -118,7 +118,7 @@
                 {{#if hasher.firstTrailNumber}}
                   (#{{hasher.firstTrailNumber}})
                 {{/if}}
-                {{/if}}
+              {{/if}}
             </dd>
           {{/if}}
           {{#if(hasher.lastTrailDate)}}
@@ -128,6 +128,32 @@
         </dl>
       </div>
     </div>
+
+    {{<metadataColumn}}
+      <div class="col-lg">
+        {{#if session.user.canViewDirectoryInfo}}
+          <h3>Metadata</h3>
+          <dl class="row">
+            {{#if(hasher.formattedCreatedAt)}}
+              <dt class="col-sm-4 col-lg-5">Created on:</dt>
+              <dd class="col-sm-8 col-lg-7">{{hasher.formattedCreatedAt}}</dd>
+            {{/if}}
+            {{#if(hasher.createdBy)}}
+              <dt class="col-sm-4 col-lg-5">Created by:</dt>
+              <dd class="col-sm-8 col-lg-7">{{hasher.createdBy}}</dd>
+            {{/if}}
+            {{#if(hasher.formattedUpdatedAt)}}
+              <dt class="col-sm-4 col-lg-5">Updated on:</dt>
+              <dd class="col-sm-8 col-lg-7">{{hasher.formattedUpdatedAt}}</dd>
+            {{/if}}
+            {{#if(hasher.updatedBy)}}
+              <dt class="col-sm-4 col-lg-5">Updated by:</dt>
+              <dd class="col-sm-8 col-lg-7">{{hasher.updatedBy}}</dd>
+            {{/if}}
+          </dl>
+        {{/if}}
+      </div>
+    {{/metadataColumn}}
 
     <div class="row">
       <div class="col-lg">
@@ -141,120 +167,51 @@
             <dt class="col-sm-4 col-lg-5">Last (family) name:</dt>
             <dd class="col-sm-8 col-lg-7">{{hasher.familyName}}</dd>
           {{/if}}
-          {{#if(hasher.emailAddressesWithLinks)}}
-            <dt class="col-sm-4 col-lg-5">Email:</dt>
-            <dd class="col-sm-8 col-lg-7">{{{hasher.emailAddressesWithLinks}}}</dd>
-          {{/if}}
-          {{#if(hasher.cellPhone)}}
-            <dt class="col-sm-4 col-lg-5">Cell phone:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.cellPhone}}</dd>
-          {{/if}}
-          {{#if(hasher.homePhone)}}
-            <dt class="col-sm-4 col-lg-5">Home phone:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.homePhone}}</dd>
-          {{/if}}
-          {{#if(hasher.workPhone)}}
-            <dt class="col-sm-4 col-lg-5">Work phone:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.workPhone}}</dd>
-          {{/if}}
-          {{#if(hasher.fax)}}
-            <dt class="col-sm-4 col-lg-5">Fax:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.fax}}</dd>
-          {{/if}}
-          {{#if(hasher.formattedAddress)}}
+          {{#for(email of hasher.emails)}}
+            <dt class="col-sm-4 col-lg-5">Email ({{email.type}}):</dt>
+            <dd class="col-sm-8 col-lg-7">
+              <a href="mailto:{{email.value}}">{{email.value}}</a>
+            </dd>
+          {{/for}}
+          {{#for(phone of hasher.phones)}}
+            <dt class="col-sm-4 col-lg-5">Phone ({{phone.type}}):</dt>
+            <dd class="col-sm-8 col-lg-7">{{phone.value}}</dd>
+          {{/for}}
+          {{#for(address of hasher.addresses)}}
             <dt class="col-sm-4 col-lg-5">Address:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.formattedAddress}}</dd>
-          {{/if}}
+            <dd class="col-sm-8 col-lg-7">{{address.formattedAddress}}</dd>
+          {{/for}}
         </dl>
       </div>
-      <div class="col-lg">
-        <h3>Private info</h3>
-        {{#if(hasPrivateInfo)}}
+      {{#if(hasher.hasDied)}}
+        <div class="col-lg">
+          <h3>In memoriam</h3>
           <dl class="row">
-            {{#if(hasher.givenNamePrivate)}}
-              <dt class="col-sm-4 col-lg-5">First (given) name:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.givenNamePrivate}}</dd>
+            {{#if(hasher.died)}}
+              <dt class="col-sm-4 col-lg-5">Died:</dt>
+              <dd class="col-sm-8 col-lg-7">{{hasher.died}}</dd>
             {{/if}}
-            {{#if(hasher.familyNamePrivate)}}
-              <dt class="col-sm-4 col-lg-5">Last (family) name:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.familyNamePrivate}}</dd>
+            {{#if(hasher.passed)}}
+              <dt class="col-sm-4 col-lg-5">Passed:</dt>
+              <dd class="col-sm-8 col-lg-7">{{hasher.passed}}</dd>
             {{/if}}
-            {{#if(hasher.emailAddressesPrivateWithLinks)}}
-              <dt class="col-sm-4 col-lg-5">Email:</dt>
-              <dd class="col-sm-8 col-lg-7">{{{hasher.emailAddressesPrivateWithLinks}}}</dd>
-            {{/if}}
-            {{#if(hasher.cellPhonePrivate)}}
-              <dt class="col-sm-4 col-lg-5">Cell phone:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.cellPhonePrivate}}</dd>
-            {{/if}}
-            {{#if(hasher.homePhonePrivate)}}
-              <dt class="col-sm-4 col-lg-5">Home phone:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.homePhonePrivate}}</dd>
-            {{/if}}
-            {{#if(hasher.workPhonePrivate)}}
-              <dt class="col-sm-4 col-lg-5">Work phone:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.workPhonePrivate}}</dd>
-            {{/if}}
-            {{#if(hasher.formattedPrivateAddress)}}
-              <dt class="col-sm-4 col-lg-5">Address:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.formattedPrivateAddress}}</dd>
+            {{#if(hasher.inMemoriam)}}
+              <dt class="col-sm-4 col-lg-5">Notes:</dt>
+              <dd class="col-sm-8 col-lg-7">{{hasher.inMemoriam}}</dd>
             {{/if}}
           </dl>
-        {{else}}
-          <p>No private info.</p>
-        {{/if}}
-      </div>
+        </div>
+      {{else}}
+        {{>metadataColumn}}
+      {{/if}}
     </div>
 
-    {{#or(hasher.hasDied, session.user.canViewDirectoryInfo)}}
+    {{#if(hasher.hasDied)}}
       <div class="row">
-        {{#if hasher.hasDied}}
-          <div class="col-lg">
-            <h3>In memoriam</h3>
-            <dl class="row">
-              {{#if(hasher.died)}}
-                <dt class="col-sm-4 col-lg-5">Died:</dt>
-                <dd class="col-sm-8 col-lg-7">{{hasher.died}}</dd>
-              {{/if}}
-              {{#if(hasher.passed)}}
-                <dt class="col-sm-4 col-lg-5">Passed:</dt>
-                <dd class="col-sm-8 col-lg-7">{{hasher.passed}}</dd>
-              {{/if}}
-              {{#if(hasher.inMemoriam)}}
-                <dt class="col-sm-4 col-lg-5">Notes:</dt>
-                <dd class="col-sm-8 col-lg-7">{{hasher.inMemoriam}}</dd>
-              {{/if}}
-            </dl>
-          </div>
-        {{/if}}
-        <div class="col-lg">
-          {{#if session.user.canViewDirectoryInfo}}
-            <h3>Metadata</h3>
-            <dl class="row">
-              {{#if(hasher.formattedCreatedAt)}}
-                <dt class="col-sm-4 col-lg-5">Created on:</dt>
-                <dd class="col-sm-8 col-lg-7">{{hasher.formattedCreatedAt}}</dd>
-              {{/if}}
-              {{#if(hasher.createdBy)}}
-                <dt class="col-sm-4 col-lg-5">Created by:</dt>
-                <dd class="col-sm-8 col-lg-7">{{hasher.createdBy}}</dd>
-              {{/if}}
-              {{#if(hasher.formattedUpdatedAt)}}
-                <dt class="col-sm-4 col-lg-5">Updated on:</dt>
-                <dd class="col-sm-8 col-lg-7">{{hasher.formattedUpdatedAt}}</dd>
-              {{/if}}
-              {{#if(hasher.updatedBy)}}
-                <dt class="col-sm-4 col-lg-5">Updated by:</dt>
-                <dd class="col-sm-8 col-lg-7">{{hasher.updatedBy}}</dd>
-              {{/if}}
-            </dl>
-          {{/if}}
-        </div>
-        {{^if hasher.hasDied}}
-          <div class="col-lg"></div>
-        {{/if}}
+        {{>metadataColumn}}
+        <div class="col-lg"></div>
       </div>
-    {{/or}}
+    {{/if}}
 
     <div class="row">
       <div class="col-sm">

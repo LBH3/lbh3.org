@@ -14,16 +14,7 @@ const oldSearchHook = function (options) {
       }).reduce((queries, query) => {
         return [...queries, query];
       }, []);
-      const containsQueries = (options.contains) ? options.contains.map(field => {
-        return {
-          [field]: {
-            $contains: [
-              query.search
-            ]
-          }
-        };
-      }) : [];
-      const iLikeQueries = (options.fields) ? options.fields.map(field => {
+      query.$or = (options.fields) ? options.fields.map(field => {
         return {
           [field]: {
             $iLike: {
@@ -32,10 +23,6 @@ const oldSearchHook = function (options) {
           }
         };
       }) : [];
-      query.$or = [
-        ...containsQueries,
-        ...iLikeQueries
-      ];
       delete query.search;
     }
   };
@@ -56,8 +43,8 @@ module.exports = function (options) {
         type: sequelizeClient.QueryTypes.SELECT
       };
       Utils.mapFinderOptions(queryOptions, model);
-      const countQuery = 'SELECT COUNT(*) FROM hashers';
-      const selectQuery = model.QueryInterface.QueryGenerator.selectQuery('hashers', queryOptions, model).slice(0, -1);// Slice to remove ‘;’
+      let countQuery = 'SELECT COUNT(DISTINCT id) FROM hashers';
+      let selectQuery = model.QueryInterface.QueryGenerator.selectQuery('hashers', queryOptions, model).slice(0, -1);// Slice to remove ‘;’
 
       // Build the WHERE clause
       const searchTerms = query.search.replace(/'/gi, '').replace(/-/gi, ' ').trim().split(' ').map(term => {
@@ -68,7 +55,13 @@ module.exports = function (options) {
       const fields = options.fields;
       if (options.contains) {
         options.contains.forEach(field => {
-          fields.push(`array_to_string(${field}, ' ')`);
+          if (field === 'emails') {
+            countQuery = `${countQuery}, json_array_elements(hashers.emails) email`;
+            selectQuery = `${selectQuery}, json_array_elements(hashers.emails) email`;
+            fields.push('email ->> \'value\'');
+          } else {
+            fields.push(`array_to_string(${field}, ' ')`);
+          }
         });
       }
       const tsvector = fields.map(field => {
@@ -79,6 +72,9 @@ module.exports = function (options) {
         }
       });
       const whereQuery = `WHERE ${tsvector.join(' || ')} @@ to_tsquery('english', '${searchTerms.join(' & ')}')`;
+
+      // Build the GROUP BY
+      let groupByQuery = 'GROUP BY id';
 
       // Build the ORDER BY
       let orderByQuery = '';
@@ -94,11 +90,11 @@ module.exports = function (options) {
 
       // Build the LIMIT and OFFSET
       const limit = query.$limit || hook.app.get('paginate').default;
-      const skip = query.$skip || 0;
+      const skip = query.$skip ? (parseInt(query.$skip, 10) || 0) : 0;
       const limitAndOffsetQuery = `LIMIT ${limit} OFFSET ${skip};`;
 
       // Concatenate the entire query
-      const sequelizeSelectQuery = `${selectQuery} ${whereQuery} ${orderByQuery} ${limitAndOffsetQuery}`;
+      const sequelizeSelectQuery = `${selectQuery} ${whereQuery} ${groupByQuery} ${orderByQuery} ${limitAndOffsetQuery}`;
 
       return sequelizeClient.query(sequelizeSelectQuery, queryOptions).then(data => {
         if (data.length === 0 && skip === 0) {
@@ -119,7 +115,7 @@ module.exports = function (options) {
 
         const sequelizeCountQuery = `${countQuery} ${whereQuery}`;
         return sequelizeClient.query(sequelizeCountQuery).then(result => {
-          hook.result.total = result[0][0].count;
+          hook.result.total = parseInt(result[0][0].count, 10);
           return hook;
         });
       });

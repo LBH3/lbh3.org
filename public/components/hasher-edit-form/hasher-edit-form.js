@@ -2,13 +2,31 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import './hasher-edit-form.less';
-import { emailingOptions, Hasher } from '~/models/hasher';
+import { Address, Email, emailingOptions, Hasher, Phone } from '~/models/hasher';
+import { enableAutocompleteForInput, loadGoogleMapsPlacesAPI } from '~/components/run/edit/';
 import { paymentRates } from '~/models/events-hashers';
 import view from './hasher-edit-form.stache';
 
 const AdditionalFields = DefineMap.extend({
-  emailAddress: 'string',
-  emailAddressPrivate: 'string'
+  email: {
+    default() {
+      return new Email();
+    }
+  },
+  phone: {
+    default() {
+      return new Phone();
+    }
+  }
+});
+
+const NewAddress = DefineMap.extend({
+  addressMd: 'string',
+  addressPromise: Promise,
+  reset() {
+    this.addressMd = '';
+    this.addressPromise = null;
+  }
 });
 
 export const ViewModel = DefineMap.extend({
@@ -23,24 +41,17 @@ export const ViewModel = DefineMap.extend({
     const additionalFields = this.additionalFields;
     const hasher = this.hasher;
 
-    if (!hasher.emailAddresses) {
-      hasher.emailAddresses = [];
+    if (additionalFields.email && additionalFields.email.value) {
+      hasher.emails.push(additionalFields.email);
     }
-    if (additionalFields.emailAddress) {
-      hasher.emailAddresses.push(additionalFields.emailAddress);
-    }
-    hasher.emailAddresses = hasher.emailAddresses.filter(emailAddress => emailAddress);
 
-    if (!hasher.emailAddressesPrivate) {
-      hasher.emailAddressesPrivate = [];
+    if (additionalFields.phone && additionalFields.phone.value) {
+      hasher.phones.push(additionalFields.phone);
     }
-    if (additionalFields.emailAddressPrivate) {
-      hasher.emailAddressesPrivate.push(additionalFields.emailAddressPrivate);
-    }
-    hasher.emailAddressesPrivate = hasher.emailAddressesPrivate.filter(emailAddress => emailAddress);
 
     return this.editingHasherPromise = hasher.save().then(savedHasher => {
       this.additionalFields = new AdditionalFields();
+      this.newAddress.reset();
       this.dispatch('didsave');
       return savedHasher;
     });
@@ -61,7 +72,28 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  emailTypeOptions: {
+    default() {
+      return [
+        {
+          key: 'home',
+          value: 'Home'
+        },
+        {
+          key: 'work',
+          value: 'Work'
+        }
+      ];
+    }
+  },
+
   hasher: Hasher,
+
+  newAddress: {
+    default() {
+      return new NewAddress();
+    }
+  },
 
   paymentRates: {
     default: () => {
@@ -70,6 +102,44 @@ export const ViewModel = DefineMap.extend({
       }).sort((x, y) => {
         return x.title.localeCompare(y.title);
       });
+    }
+  },
+
+  phoneTypeOptions: {
+    default() {
+      return [
+        {
+          key: 'cell',
+          value: 'Cell'
+        },
+        {
+          key: 'fax',
+          value: 'Fax'
+        },
+        {
+          key: 'home',
+          value: 'Home'
+        },
+        {
+          key: 'work',
+          value: 'Work'
+        }
+      ];
+    }
+  },
+
+  privacyOptions: {
+    default() {
+      return [
+        {
+          key: 'bored',
+          value: 'Bored'
+        },
+        {
+          key: 'directory',
+          value: 'Directory'
+        }
+      ];
     }
   },
 
@@ -87,6 +157,18 @@ export const ViewModel = DefineMap.extend({
 
   get session() {
     return Session.current;
+  },
+
+  connectedCallback() {
+    loadGoogleMapsPlacesAPI(() => {
+      enableAutocompleteForInput('newAddress', this.newAddress, 'address', savedPlace => {
+        console.info('Place', savedPlace.get());
+        const address = Address.fromPlace(savedPlace);
+        console.info('Adding address:', address.get());
+        this.hasher.addresses.unshift(address);
+        this.newAddress.reset();
+      });
+    });
   }
 });
 
@@ -95,6 +177,10 @@ export default Component.extend({
   ViewModel,
   view,
   events: {
+    '.prevent-default click': function(element, event) {
+      event.preventDefault();
+    },
+
     '{element} submit': function(element, event) {
       event.preventDefault();
     }

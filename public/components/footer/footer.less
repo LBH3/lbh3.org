@@ -2,21 +2,10 @@ lbh3-footer {
   border-top: 1px solid var(--nav-link-active-background-color);
   display: block;
 
-  footer.container-fluid {
+  footer {
     @supports(padding: max(0px)) {
       padding-left: ~"max(15px, env(safe-area-inset-left))";
       padding-right: ~"max(15px, env(safe-area-inset-right))";
-    }
-  }
-
-  p {
-    border: 1px solid transparent;
-  }
-
-  .facebook {
-    color: var(--facebook-blue);
-    &:hover {
-      color: var(--facebook-blue-hover);
     }
   }
 }

@@ -29,7 +29,7 @@
     </div>
   {{/if}}
   {{#if event}}
-    <form class="mb-4 mt-2" on:submit="editRun()">
+    <form class="mb-4 mt-2" on:submit="scope.event.preventDefault()">
       <div class="form-row">
         <div class="form-group col-md-6">
           <label for="hares">
@@ -308,7 +308,8 @@
       <button
         class="btn btn-primary mt-3"
         {{#if editingEventPromise.isPending}}disabled{{/if}}
-        type="submit">
+        on:click="editRun()"
+      >
         Edit run
       </button>
 
