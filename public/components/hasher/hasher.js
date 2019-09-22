@@ -92,22 +92,6 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  get hasPrivateInfo() {
-    const hasher = this.hasher;
-    const data = [
-      hasher.cellPhonePrivate,
-      hasher.emailAddressesPrivateWithLinks,
-      hasher.familyNamePrivate,
-      hasher.formattedPrivateAddress,
-      hasher.givenNamePrivate,
-      hasher.homePhonePrivate,
-      hasher.workPhonePrivate
-    ];
-    return data.filter(info => {
-      return info;
-    }).length > 0;
-  },
-
   id: 'number',
   get currentPage() {
     const runs = this.runs;

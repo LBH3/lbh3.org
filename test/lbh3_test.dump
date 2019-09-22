@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.5
--- Dumped by pg_dump version 10.5
+-- Dumped from database version 9.6.15
+-- Dumped by pg_dump version 11.1
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -14,20 +14,6 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
-
---
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
---
-
-CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
-
-
---
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
---
-
-COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
-
 
 --
 -- Name: postgis; Type: EXTENSION; Schema: -; Owner: 
@@ -102,6 +88,45 @@ CREATE TABLE public._migrations (
 
 
 ALTER TABLE public._migrations OWNER TO postgres;
+
+--
+-- Name: ballots; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.ballots (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2019-09-21 17:42:51.832726-05'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2019-09-21 17:42:51.832726-05'::timestamp with time zone,
+    election_id integer DEFAULT 0,
+    encrypted_ballot text DEFAULT ''::text,
+    encrypted_key text DEFAULT ''::text,
+    hasher_id integer DEFAULT 0,
+    sha256 character varying(255) DEFAULT ''::character varying
+);
+
+
+ALTER TABLE public.ballots OWNER TO postgres;
+
+--
+-- Name: ballots_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.ballots_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.ballots_id_seq OWNER TO postgres;
+
+--
+-- Name: ballots_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.ballots_id_seq OWNED BY public.ballots.id;
+
 
 --
 -- Name: bored_hashers; Type: TABLE; Schema: public; Owner: postgres
@@ -214,6 +239,51 @@ ALTER TABLE public.bored_years_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE public.bored_years_id_seq OWNED BY public.bored_years.id;
+
+
+--
+-- Name: elections; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.elections (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2019-09-21 17:42:51.824781-05'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2019-09-21 17:42:51.824781-05'::timestamp with time zone,
+    advertise boolean DEFAULT false,
+    advertisement_md character varying(255) DEFAULT ''::character varying,
+    description_md text DEFAULT ''::text,
+    end_datetime timestamp with time zone,
+    ended_notice_md character varying(255) DEFAULT ''::character varying,
+    public_key text DEFAULT ''::text,
+    schema json,
+    start_datetime timestamp with time zone,
+    title_md character varying(255) DEFAULT ''::character varying,
+    url_id character varying(255) DEFAULT ''::character varying,
+    year integer DEFAULT 0
+);
+
+
+ALTER TABLE public.elections OWNER TO postgres;
+
+--
+-- Name: elections_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.elections_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.elections_id_seq OWNER TO postgres;
+
+--
+-- Name: elections_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.elections_id_seq OWNED BY public.elections.id;
 
 
 --
@@ -426,7 +496,22 @@ CREATE TABLE public.hashers (
     waiver character varying(255) DEFAULT ''::character varying,
     who_made_you_cum text DEFAULT ''::text,
     work_phone character varying(255) DEFAULT ''::character varying,
-    work_phone_private character varying(255) DEFAULT ''::character varying
+    work_phone_private character varying(255) DEFAULT ''::character varying,
+    addresses json,
+    birth_day_privacy character varying(255) DEFAULT 'bored'::character varying,
+    birth_month_privacy character varying(255) DEFAULT 'bored'::character varying,
+    birth_year_privacy character varying(255) DEFAULT 'bored'::character varying,
+    died_privacy character varying(255) DEFAULT 'bored'::character varying,
+    emails json,
+    family_name_privacy character varying(255) DEFAULT 'bored'::character varying,
+    given_name_privacy character varying(255) DEFAULT 'bored'::character varying,
+    headshot_privacy character varying(255) DEFAULT 'bored'::character varying,
+    in_memoriam_privacy character varying(255) DEFAULT 'bored'::character varying,
+    mother_hash_privacy character varying(255) DEFAULT 'bored'::character varying,
+    naming_trail_privacy character varying(255) DEFAULT 'bored'::character varying,
+    passed_privacy character varying(255) DEFAULT 'bored'::character varying,
+    phones json,
+    who_made_you_cum_privacy character varying(255) DEFAULT 'bored'::character varying
 );
 
 
@@ -451,6 +536,44 @@ ALTER TABLE public.hashers_id_seq OWNER TO postgres;
 --
 
 ALTER SEQUENCE public.hashers_id_seq OWNED BY public.hashers.id;
+
+
+--
+-- Name: paper_ballots; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE public.paper_ballots (
+    id integer NOT NULL,
+    created_at timestamp with time zone DEFAULT '2019-09-21 17:42:51.851757-05'::timestamp with time zone,
+    updated_at timestamp with time zone DEFAULT '2019-09-21 17:42:51.851757-05'::timestamp with time zone,
+    added_by_id integer DEFAULT 0,
+    date_taken date,
+    election_id integer DEFAULT 0,
+    hasher_id integer DEFAULT 0
+);
+
+
+ALTER TABLE public.paper_ballots OWNER TO postgres;
+
+--
+-- Name: paper_ballots_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE public.paper_ballots_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.paper_ballots_id_seq OWNER TO postgres;
+
+--
+-- Name: paper_ballots_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE public.paper_ballots_id_seq OWNED BY public.paper_ballots.id;
 
 
 --
@@ -501,7 +624,11 @@ CREATE TABLE public.special_events (
     updated_at timestamp with time zone DEFAULT '2018-04-17 01:18:23.28147-05'::timestamp with time zone,
     description_md text DEFAULT ''::text,
     url_id character varying(255) DEFAULT ''::character varying,
-    year integer DEFAULT 0
+    year integer DEFAULT 0,
+    location_google_place_id character varying(255) DEFAULT ''::character varying,
+    location_md text DEFAULT ''::text,
+    photos_url text DEFAULT ''::text,
+    start_datetime timestamp with time zone
 );
 
 
@@ -569,6 +696,13 @@ ALTER SEQUENCE public.users_id_seq OWNED BY public.users.id;
 
 
 --
+-- Name: ballots id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ballots ALTER COLUMN id SET DEFAULT nextval('public.ballots_id_seq'::regclass);
+
+
+--
 -- Name: bored_hashers id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -590,6 +724,13 @@ ALTER TABLE ONLY public.bored_years ALTER COLUMN id SET DEFAULT nextval('public.
 
 
 --
+-- Name: elections id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.elections ALTER COLUMN id SET DEFAULT nextval('public.elections_id_seq'::regclass);
+
+
+--
 -- Name: events id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -608,6 +749,13 @@ ALTER TABLE ONLY public.events_hashers ALTER COLUMN id SET DEFAULT nextval('publ
 --
 
 ALTER TABLE ONLY public.hashers ALTER COLUMN id SET DEFAULT nextval('public.hashers_id_seq'::regclass);
+
+
+--
+-- Name: paper_ballots id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.paper_ballots ALTER COLUMN id SET DEFAULT nextval('public.paper_ballots_id_seq'::regclass);
 
 
 --
@@ -643,6 +791,19 @@ COPY public._migrations (name) FROM stdin;
 20180417045506-special-events.js
 20180716181522-events-associate-special-events.js
 20180806221522-places-reference.js
+20181118175018-election.js
+20181225110800-paper-ballots.js
+20190305185800-events-hashers-index.js
+20190706221815-special-events-start-date.js
+20190914221815-hashers-new-fields.js
+\.
+
+
+--
+-- Data for Name: ballots; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.ballots (id, created_at, updated_at, election_id, encrypted_ballot, encrypted_key, hasher_id, sha256) FROM stdin;
 \.
 
 
@@ -1251,6 +1412,14 @@ COPY public.bored_years (id, created_at, updated_at, end_date, start_date, year)
 
 
 --
+-- Data for Name: elections; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.elections (id, created_at, updated_at, advertise, advertisement_md, description_md, end_datetime, ended_notice_md, public_key, schema, start_datetime, title_md, url_id, year) FROM stdin;
+\.
+
+
+--
 -- Data for Name: events; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -1278,13 +1447,21 @@ COPY public.google_places (id, address_components, created_at, updated_at, forma
 -- Data for Name: hashers; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.hashers (id, created_at, updated_at, address_country, address_country_private, address_city, address_city_private, address_state, address_state_private, address_street, address_street_private, address_zip_code, address_zip_code_private, alerts, award_count, birth_day, birth_month, birth_year, cell_phone, cell_phone_private, created_by, created_by_user_id, died, email_addresses, email_addresses_private, emailing, end_of_year, event, external_id, family_name, family_name_private, fax, first_trail_date, first_trail_number, food_preference, given_name, given_name_private, hash_name, headshot_url, history, home_phone, home_phone_private, in_memoriam, last_trail_date, mail_hash_name, mail_name, mia, mother_hash, naming_trail_date, naming_trail_number, notes_md, owes, passed, payment, punch_card, run_count, run_patch, run_sort, shirt_size, shoe_size, updated_by, updated_by_user_id, waist_size, waiver, who_made_you_cum, work_phone, work_phone_private) FROM stdin;
-14	2018-01-03 14:00:00-06	2018-09-10 11:49:00.951-05												0	0	0	0				0		{}	{}		0						\N	\N				Last Train To Cuntsville						2018-09-07					\N	\N					0	0	0	0				0					
-38	2018-01-03 14:00:00-06	2018-09-30 15:43:16.251-05												0	0	0	0				0		{}	{}		0						\N	\N				6-9 Split						2018-09-28					\N	\N					0	0	0	0				0					
-25	2018-01-03 14:00:00-06	2018-09-30 15:45:32.312-05												0	0	0	0				0		{}	{}		0						\N	\N				Hi-Speed Copulator						2018-09-28					\N	\N					0	0	0	0				0					
-10	2018-01-03 14:00:00-06	2018-09-30 15:43:35.485-05												0	0	0	0				0		{}	{}		0						\N	\N				Alouette						2018-09-28					\N	\N					0	0	0	0				0					
-5425	2008-03-04 14:00:00-06	2018-09-23 18:55:36.988-05												0	0	0	0				0		{}	{}		0						\N	\N				Wrect Him						2018-09-21					\N	\N					0	0	0	0				0					
-6394	\N	2018-10-08 18:56:41.475-05	United States	\N	Long Beach	\N	CA	\N	\N	\N	90808	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	{chasen@chasenlehara.com}	\N	y	\N	\N	\N	Le Hara	Le Hara	\N	\N	\N	\N	Chasen	Chasen	I'm Fucking Matt Damon	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Chasen Le Hara	1	\N	y	\N	\N	\N
+COPY public.hashers (id, created_at, updated_at, address_country, address_country_private, address_city, address_city_private, address_state, address_state_private, address_street, address_street_private, address_zip_code, address_zip_code_private, alerts, award_count, birth_day, birth_month, birth_year, cell_phone, cell_phone_private, created_by, created_by_user_id, died, email_addresses, email_addresses_private, emailing, end_of_year, event, external_id, family_name, family_name_private, fax, first_trail_date, first_trail_number, food_preference, given_name, given_name_private, hash_name, headshot_url, history, home_phone, home_phone_private, in_memoriam, last_trail_date, mail_hash_name, mail_name, mia, mother_hash, naming_trail_date, naming_trail_number, notes_md, owes, passed, payment, punch_card, run_count, run_patch, run_sort, shirt_size, shoe_size, updated_by, updated_by_user_id, waist_size, waiver, who_made_you_cum, work_phone, work_phone_private, addresses, birth_day_privacy, birth_month_privacy, birth_year_privacy, died_privacy, emails, family_name_privacy, given_name_privacy, headshot_privacy, in_memoriam_privacy, mother_hash_privacy, naming_trail_privacy, passed_privacy, phones, who_made_you_cum_privacy) FROM stdin;
+14	2018-01-03 14:00:00-06	2018-09-10 11:49:00.951-05												0	0	0	0				0		{}	{}		0						\N	\N				Last Train To Cuntsville						2018-09-07					\N	\N					0	0	0	0				0						[]	bored	bored	bored	bored	[]	bored	bored	bored	bored	bored	bored	bored	[]	bored
+38	2018-01-03 14:00:00-06	2018-09-30 15:43:16.251-05												0	0	0	0				0		{}	{}		0						\N	\N				6-9 Split						2018-09-28					\N	\N					0	0	0	0				0						[]	bored	bored	bored	bored	[]	bored	bored	bored	bored	bored	bored	bored	[]	bored
+25	2018-01-03 14:00:00-06	2018-09-30 15:45:32.312-05												0	0	0	0				0		{}	{}		0						\N	\N				Hi-Speed Copulator						2018-09-28					\N	\N					0	0	0	0				0						[]	bored	bored	bored	bored	[]	bored	bored	bored	bored	bored	bored	bored	[]	bored
+10	2018-01-03 14:00:00-06	2018-09-30 15:43:35.485-05												0	0	0	0				0		{}	{}		0						\N	\N				Alouette						2018-09-28					\N	\N					0	0	0	0				0						[]	bored	bored	bored	bored	[]	bored	bored	bored	bored	bored	bored	bored	[]	bored
+5425	2008-03-04 14:00:00-06	2018-09-23 18:55:36.988-05												0	0	0	0				0		{}	{}		0						\N	\N				Wrect Him						2018-09-21					\N	\N					0	0	0	0				0						[]	bored	bored	bored	bored	[]	bored	bored	bored	bored	bored	bored	bored	[]	bored
+6394	\N	2018-10-08 18:56:41.475-05	United States	\N	Long Beach	\N	CA	\N	\N	\N	90808	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	{chasen@chasenlehara.com}	\N	y	\N	\N	\N	Le Hara	Le Hara	\N	\N	\N	\N	Chasen	Chasen	I'm Fucking Matt Damon	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	\N	Chasen Le Hara	1	\N	y	\N	\N	\N	[{"city":"Long Beach","country":"United States","privacy":"bored","state":"CA","street":null,"zip":"90808"}]	bored	bored	bored	bored	[{"privacy":"bored","type":"home","value":"chasen@chasenlehara.com"}]	bored	bored	bored	bored	bored	bored	bored	[]	bored
+\.
+
+
+--
+-- Data for Name: paper_ballots; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+COPY public.paper_ballots (id, created_at, updated_at, added_by_id, date_taken, election_id, hasher_id) FROM stdin;
 \.
 
 
@@ -1308,10 +1485,10 @@ COPY public.spatial_ref_sys (srid, auth_name, auth_srid, srtext, proj4text) FROM
 -- Data for Name: special_events; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY public.special_events (id, created_at, updated_at, description_md, url_id, year) FROM stdin;
-1	2018-04-17 01:20:09.039-05	2018-04-17 01:20:09.039-05	## Jesus Cuervo 1800 Trail\n\nJoin us for three days of hashing for our 1800<sup>th</sup> run!\n\nWe’ll have our regular Thursday evening trail at 6:30 p.m. on April 13<sup>th</sup>, then a pre-lube on Friday the 14<sup>th</sup> before the main event on Saturday April 15<sup>th</sup>!\n\nSaturday will include:\n\n- Mimosa &amp; bagel or muffin breakfast\n- An AWESOME trail\n- Lunch\n- A custom patch made for the event!\n\nSaturday’s trail is dog and stroller friendly. Bring shiggy socks!\n\n<hr>\n\n<p class="text-center"><a href="https://goo.gl/forms/BZrhlNjZL4KIJQMG2">Register now for Saturday’s trail!</a></p>\n\n<hr>\n\n### Zombie Bunny Pub Crawl and Drinking Practice\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Friday 4/14 ~ 6:00 p.m. drinking practice (bring rare songs!), 6:30 hares off, 6:45 pack away</dd>\n  <dt class="col-sm-3 text-sm-right">Start:</dt>\n  <dd class="col-sm-9">5000 E Ocean Blvd, Long Beach, CA 90803</dd>\n  <dt class="col-sm-3 text-sm-right">Hares:</dt>\n  <dd class="col-sm-9">Bicunninglingual and Hairy Twatter</dd>\n  <dt class="col-sm-3 text-sm-right">Donation:</dt>\n  <dd class="col-sm-9">$10 for the run</dd>\n</dl>\n<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3317.2021796615873!2d-118.14188568479271!3d33.75544098068765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd30489bd87857%3A0x48469c4f1cd33641!2s5000+E+Ocean+Blvd%2C+Long+Beach%2C+CA+90803!5e0!3m2!1sen!2sus!4v1489636960459" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>\n\n<hr>\n\n### Jesus Cuervo 1800 Trail\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Saturday 4/15 ~ 10:00 a.m. breakfast, 10:15 hares off, pack away at 10:30</dd>\n  <dt class="col-sm-3 text-sm-right">Start:</dt>\n  <dd class="col-sm-9">532 Paseo Del Mar, Palos Verdes Estates, CA 90274</dd>\n  <dt class="col-sm-3 text-sm-right">Hares:</dt>\n  <dd class="col-sm-9">Spitty Spitty Gang Bang, Shitter Splitter, and Hokey Tokey</dd>\n  <dt class="col-sm-3 text-sm-right">Donation:</dt>\n  <dd class="col-sm-9"><a href="https://goo.gl/forms/BZrhlNjZL4KIJQMG2">$15 for the run (rego!)</a></dd>\n</dl>\n<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.4808874799787!2d-118.40555518479165!3d33.799901180675356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd4c9836adf071%3A0x7890dbb1bf713a47!2s532+Paseo+Del+Mar%2C+Palos+Verdes+Estates%2C+CA+90274!5e0!3m2!1sen!2sus!4v1491963000461" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>	jesus-cuervo	2017
-2	2018-04-17 01:20:42.397-05	2018-07-20 10:07:07.852-05	## Ortega Campout 2018\n\nJoin LBH3 as we cummemorate our 1869<sup>th</sup> run with a jam-packed campout!\n\nThere will be shiggalicious trails, Tent-to-tent, Talent Show, Chili-Cookoff Contest, Beer-Kilted Yoga, Hash Olympics, swimming, beer all weekend, and&nbsp;more!&nbsp;🍻\n\n<hr><a class="d-block text-center" href="https://docs.google.com/forms/d/e/1FAIpQLSf0Q6w5azD4Xg2SBZx7jVcg2FHnesr5o7D4zOnl1bOiIsuI3w/viewform" target="_blank">Fill out your rego form online right now!</a><hr>\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Dates:</dt>\n  <dd class="col-sm-9">Friday July 20<sup>th</sup> – Sunday July 22<sup>nd</sup></dd>\n  <dt class="col-sm-3 text-sm-right">Price:</dt>\n  <dd class="col-sm-9">$79.69 through June 14<sup>th</sup>\n$89.69 through July 13<sup>th</sup>\n<strong>$99.69 through the day of the event</strong></dd>\n  <dt class="col-sm-3 text-sm-right">Where:</dt>\n  <dd class="col-sm-9">[Ortega Oaks RV Park & Campground](http://www.ortegaoaks.com)\n34040 Ortega Hwy, Lake Elsinore, CA 92530</dd>\n</dl>\n<iframe width="100%" height="200" frameborder="0" style="border:0" allowfullscreen="" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEED9iCwz71U-gtb7Ulk3pb7SfAS-gtTQ&amp;q=place_id:ChIJh3mG4wuR3IARRQMYx548lQM&amp;zoom=9"></iframe>\n\n<hr>\n\n### Directions from the I-5\n\n- Exit CA-74/Ortega Highway.\n- Head east on Ortega Hwy for 19 miles.\n- Campground entrance will be on the right-hand side (turn near the candy store’s parking lot).\n\n### Schedule\n\n**Times are subject to change because we may be drunk and/or hungover.**\n\n#### Friday\n\n<table class="table"><tbody><tr><th scope="row">Anytime</th><td>Cum! Organizers will arrive ~2pm</td></tr><tr><th scope="row">3 pm</th><td>Kegs tapped</td></tr><tr><th scope="row">5 pm – 7 pm</th><td>Check in</td></tr><tr><th scope="row">7 pm</th><td>Potluck & chili cook-off</td></tr><tr><th scope="row">9 pm</th><td>Tent-to-tent</td></tr></tbody></table><hr>\n\nChili Cook-Off Contest, Potluck, and Tent-to-Tent crawl! Sign up to prepare your famous chili, otherwise bring your favorite camping side dish or dessert to share with others. This does not mean drop food off for someone else to cook/prepare!\n\nAfter dinner there will be a tent-to-tent drink crawl. NO, you do not have to host the entire hash inside your tent. You can set up outside your tent or anywhere you choose in our very large, very private campground. If you are interested in hosting the hash at your tent, prepare a libation for others to enjoy. The best tent gets a prize!\n\n#### Saturday morning\n\n<table class="table"><tbody><tr><th scope="row">8 am or sooner</th><td>Breakfast</td></tr><tr><th scope="row">9 am</th><td>Beer-kilted yoga</td></tr><tr><th scope="row">11 am</th><td>1869<sup>th</sup> run (hares away at 10:45)</td></tr></tbody></table><hr>\n\nBreakfast followed by Beer-Kilted Yoga! Bring your mat, kilt, and vessel to breathe in your beer and breathe out your responsibilities.\n\n#### Saturday afternoon\n\n<table class="table"><tbody><tr><th scope="row">After trail</th><td>Lunch</td></tr><tr><th scope="row">After lunch</th><td>Circle</td></tr><tr><th scope="row">4 pm</th><td>Hash olympics</td></tr></tbody></table><hr>\n\nHares off at 11 am for a shiggalicious trail. Down downs and lunch after trail. Take a nap or hang by the pool and get ready for Hasholympics. \n\n#### Saturday night\n\n<table class="table"><tbody><tr><th scope="row">6:30 pm</th><td>Dinner</td></tr><tr><th scope="row">8 pm</th><td>Talent show</td></tr><tr><th scope="row">9 pm</th><td>Movie</td></tr><tr><th scope="row">Midnight or sooner</th><td>Midnight naked run</td></tr></tbody></table><hr>\n\nCatered BBQ dinner and then enjoy the sights and sounds of our talented hashers in our very own Hasher Talent Show.\n\n#### Sunday morning\n\n<table class="table"><tbody><tr><th scope="row">8 am or sooner</th><td>Breakfast</td></tr><tr><th scope="row">11 am</th><td>Hangover trail (hares away at 10:45)</td></tr><tr><td></td><td>No set checkout time from the campground</td></tr></tbody></table><hr>\n\nBreakfast and Hangover Hash.\n\n<hr><a class="d-block text-center" href="https://docs.google.com/forms/d/e/1FAIpQLSf0Q6w5azD4Xg2SBZx7jVcg2FHnesr5o7D4zOnl1bOiIsuI3w/viewform" target="_blank">Fill out your rego form online right now!</a><hr>\n\n### FAQ\n\n#### What do I get for the rego cost?\n\nThe weekend price includes camping fees, BEER flowing all weekend at the campground and the end of each run,  Saturday and Sunday morning Cuntinental Breakfast, lunch after trail on Saturday, and catered dinner on Saturday night.  The campground has BBQs, water, toilets, & showers. Dogs and kids are allowed, but must be leashed at all times.\n\n#### What should I bring?\n\nYour own tent (unless you enjoy sleeping under the stars or you’re smooth enough to talk someone into sharing their tent with you), any food or alcohol you personally require that is not listed above and thereby will not be provided by the event. **Bring an item for potluck. You will need water for the Saturday trail… it will be HOT!**\n\n**Full packing list:** camping gear, tent, sleeping bag, WATER, vessel, sunblock, bug spray, toiletries, towel, swimsuit, soap, water bottle/hydration pack for Saturday’s trail, hat, sunglasses, kilt/sarong/wrap for kilted beer yoga, flashlight/headlamps, jacket, pants for night-time, WATER, 2 pairs of running clothes, and serving utensils for your potluck item.\n\n**Suggested items:** toilet paper (there are 2 toilets with running water and 2 porta potties), munchies (there are 3 meals on Saturday and breakfast Sunday provided), condoms, baby wipes, tent lights, battery-operated fans, booze, soda, onesie, food/coals to grill (there are a few small grills), firewood, s’mores, Tecnu, rubbing alcohol, and a first-aid kit.\n\n#### Is there a pool?\n\nYes.\n\n#### What’s the parking situation?\n\nVery limited—try to carpool.\n\nYou **cannot** bring an RV.\n\n#### What’s cellphone service like?\n\nDepending on your carrier, there is little to no reception once you drive up the mountain. \n\n#### Can I show up and pay for just one of the trails or activities?\n\nNo.\n\n#### Is this a kid-friendly event?\n\nBring at your own risk… this is an uncensored hash event. Price for kids is $50.\n\n#### What do the chili cook-off participants need to know?\n\nLet Lick Me Tender know if you are entering the cook-off with another person (so we know how many entries we will have). You are responsible for heating your chili. There is not a power source. We have a small supply of dixie cups and spoons. We suggest bringing your own small cups to pass out your chili.\n\n#### What do the tent-to-tent participants need to know?\n\nPlease let Lick Me Tender know if you are joining up with someone else for your shot check (so we know how many tents we will have). The GMs will be haring this trail. Have your shot/drink poured and ready to quickly distribute. Bring a table or a surface to place your shots on. Keep in mind, some people are impressed by the presentation and others are impressed by the taste of the drink.	ortega	2018
-3	2018-09-04 01:41:49.482-05	2018-09-04 01:45:02.233-05	## Hash Memorial Service\n\nIt has become a Long Beach Hash House Harriers tradition to plant a tree as a living memorial for Long Beach connected hashers who have died. We will conduct such a service at the site of the 18 trees that have been planted.\n\nFollowing the service, we will continue on to the El Dorado Park Golf Course Bar and Restaurant where hashers can buy their own drinks and a toast will be given for those that have gone on.\n\nWe look forward to seeing you there. Please note that we will start right at **6 p.m.**\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Friday 10/12 at 6:00 p.m.</dd>\n  <dt class="col-sm-3 text-sm-right">Location:</dt>\n  <dd class="col-sm-9">**El Dorado Duck Pond** near 2400 N Studebaker Rd, Long Beach, CA 90815</dd>\n</dl><iframe title="Map of the El Dorado Duck Pond’s location" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6630.949547786434!2d-118.09498299999998!3d33.800059000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf8ecc25c9b4e8ac3!2sEl+Dorado+Park+East+Duck+Pond!5e0!3m2!1sen!2sus!4v1506905976355" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Directions:</dt>\n  <dd class="col-sm-9">The cross street for the Duck Pond is Los Arcos. Go North on Studebaker Rd. from the San Diego Fwy (405). Turn into the golf course parking lot and go north to free parking.</dd>\n    <dt class="col-sm-3 text-sm-right">Reception (on on):</dt>\n    <dd class="col-sm-9">El Dorado Park Golf Course Bar and Restaurant</dd>\n</dl>	memorial-service	2018
+COPY public.special_events (id, created_at, updated_at, description_md, url_id, year, location_google_place_id, location_md, photos_url, start_datetime) FROM stdin;
+1	2018-04-17 01:20:09.039-05	2018-04-17 01:20:09.039-05	## Jesus Cuervo 1800 Trail\n\nJoin us for three days of hashing for our 1800<sup>th</sup> run!\n\nWe’ll have our regular Thursday evening trail at 6:30 p.m. on April 13<sup>th</sup>, then a pre-lube on Friday the 14<sup>th</sup> before the main event on Saturday April 15<sup>th</sup>!\n\nSaturday will include:\n\n- Mimosa &amp; bagel or muffin breakfast\n- An AWESOME trail\n- Lunch\n- A custom patch made for the event!\n\nSaturday’s trail is dog and stroller friendly. Bring shiggy socks!\n\n<hr>\n\n<p class="text-center"><a href="https://goo.gl/forms/BZrhlNjZL4KIJQMG2">Register now for Saturday’s trail!</a></p>\n\n<hr>\n\n### Zombie Bunny Pub Crawl and Drinking Practice\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Friday 4/14 ~ 6:00 p.m. drinking practice (bring rare songs!), 6:30 hares off, 6:45 pack away</dd>\n  <dt class="col-sm-3 text-sm-right">Start:</dt>\n  <dd class="col-sm-9">5000 E Ocean Blvd, Long Beach, CA 90803</dd>\n  <dt class="col-sm-3 text-sm-right">Hares:</dt>\n  <dd class="col-sm-9">Bicunninglingual and Hairy Twatter</dd>\n  <dt class="col-sm-3 text-sm-right">Donation:</dt>\n  <dd class="col-sm-9">$10 for the run</dd>\n</dl>\n<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3317.2021796615873!2d-118.14188568479271!3d33.75544098068765!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd30489bd87857%3A0x48469c4f1cd33641!2s5000+E+Ocean+Blvd%2C+Long+Beach%2C+CA+90803!5e0!3m2!1sen!2sus!4v1489636960459" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>\n\n<hr>\n\n### Jesus Cuervo 1800 Trail\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Saturday 4/15 ~ 10:00 a.m. breakfast, 10:15 hares off, pack away at 10:30</dd>\n  <dt class="col-sm-3 text-sm-right">Start:</dt>\n  <dd class="col-sm-9">532 Paseo Del Mar, Palos Verdes Estates, CA 90274</dd>\n  <dt class="col-sm-3 text-sm-right">Hares:</dt>\n  <dd class="col-sm-9">Spitty Spitty Gang Bang, Shitter Splitter, and Hokey Tokey</dd>\n  <dt class="col-sm-3 text-sm-right">Donation:</dt>\n  <dd class="col-sm-9"><a href="https://goo.gl/forms/BZrhlNjZL4KIJQMG2">$15 for the run (rego!)</a></dd>\n</dl>\n<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3315.4808874799787!2d-118.40555518479165!3d33.799901180675356!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80dd4c9836adf071%3A0x7890dbb1bf713a47!2s532+Paseo+Del+Mar%2C+Palos+Verdes+Estates%2C+CA+90274!5e0!3m2!1sen!2sus!4v1491963000461" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>	jesus-cuervo	2017				\N
+2	2018-04-17 01:20:42.397-05	2018-07-20 10:07:07.852-05	## Ortega Campout 2018\n\nJoin LBH3 as we cummemorate our 1869<sup>th</sup> run with a jam-packed campout!\n\nThere will be shiggalicious trails, Tent-to-tent, Talent Show, Chili-Cookoff Contest, Beer-Kilted Yoga, Hash Olympics, swimming, beer all weekend, and&nbsp;more!&nbsp;🍻\n\n<hr><a class="d-block text-center" href="https://docs.google.com/forms/d/e/1FAIpQLSf0Q6w5azD4Xg2SBZx7jVcg2FHnesr5o7D4zOnl1bOiIsuI3w/viewform" target="_blank">Fill out your rego form online right now!</a><hr>\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Dates:</dt>\n  <dd class="col-sm-9">Friday July 20<sup>th</sup> – Sunday July 22<sup>nd</sup></dd>\n  <dt class="col-sm-3 text-sm-right">Price:</dt>\n  <dd class="col-sm-9">$79.69 through June 14<sup>th</sup>\n$89.69 through July 13<sup>th</sup>\n<strong>$99.69 through the day of the event</strong></dd>\n  <dt class="col-sm-3 text-sm-right">Where:</dt>\n  <dd class="col-sm-9">[Ortega Oaks RV Park & Campground](http://www.ortegaoaks.com)\n34040 Ortega Hwy, Lake Elsinore, CA 92530</dd>\n</dl>\n<iframe width="100%" height="200" frameborder="0" style="border:0" allowfullscreen="" src="https://www.google.com/maps/embed/v1/place?key=AIzaSyAEED9iCwz71U-gtb7Ulk3pb7SfAS-gtTQ&amp;q=place_id:ChIJh3mG4wuR3IARRQMYx548lQM&amp;zoom=9"></iframe>\n\n<hr>\n\n### Directions from the I-5\n\n- Exit CA-74/Ortega Highway.\n- Head east on Ortega Hwy for 19 miles.\n- Campground entrance will be on the right-hand side (turn near the candy store’s parking lot).\n\n### Schedule\n\n**Times are subject to change because we may be drunk and/or hungover.**\n\n#### Friday\n\n<table class="table"><tbody><tr><th scope="row">Anytime</th><td>Cum! Organizers will arrive ~2pm</td></tr><tr><th scope="row">3 pm</th><td>Kegs tapped</td></tr><tr><th scope="row">5 pm – 7 pm</th><td>Check in</td></tr><tr><th scope="row">7 pm</th><td>Potluck & chili cook-off</td></tr><tr><th scope="row">9 pm</th><td>Tent-to-tent</td></tr></tbody></table><hr>\n\nChili Cook-Off Contest, Potluck, and Tent-to-Tent crawl! Sign up to prepare your famous chili, otherwise bring your favorite camping side dish or dessert to share with others. This does not mean drop food off for someone else to cook/prepare!\n\nAfter dinner there will be a tent-to-tent drink crawl. NO, you do not have to host the entire hash inside your tent. You can set up outside your tent or anywhere you choose in our very large, very private campground. If you are interested in hosting the hash at your tent, prepare a libation for others to enjoy. The best tent gets a prize!\n\n#### Saturday morning\n\n<table class="table"><tbody><tr><th scope="row">8 am or sooner</th><td>Breakfast</td></tr><tr><th scope="row">9 am</th><td>Beer-kilted yoga</td></tr><tr><th scope="row">11 am</th><td>1869<sup>th</sup> run (hares away at 10:45)</td></tr></tbody></table><hr>\n\nBreakfast followed by Beer-Kilted Yoga! Bring your mat, kilt, and vessel to breathe in your beer and breathe out your responsibilities.\n\n#### Saturday afternoon\n\n<table class="table"><tbody><tr><th scope="row">After trail</th><td>Lunch</td></tr><tr><th scope="row">After lunch</th><td>Circle</td></tr><tr><th scope="row">4 pm</th><td>Hash olympics</td></tr></tbody></table><hr>\n\nHares off at 11 am for a shiggalicious trail. Down downs and lunch after trail. Take a nap or hang by the pool and get ready for Hasholympics. \n\n#### Saturday night\n\n<table class="table"><tbody><tr><th scope="row">6:30 pm</th><td>Dinner</td></tr><tr><th scope="row">8 pm</th><td>Talent show</td></tr><tr><th scope="row">9 pm</th><td>Movie</td></tr><tr><th scope="row">Midnight or sooner</th><td>Midnight naked run</td></tr></tbody></table><hr>\n\nCatered BBQ dinner and then enjoy the sights and sounds of our talented hashers in our very own Hasher Talent Show.\n\n#### Sunday morning\n\n<table class="table"><tbody><tr><th scope="row">8 am or sooner</th><td>Breakfast</td></tr><tr><th scope="row">11 am</th><td>Hangover trail (hares away at 10:45)</td></tr><tr><td></td><td>No set checkout time from the campground</td></tr></tbody></table><hr>\n\nBreakfast and Hangover Hash.\n\n<hr><a class="d-block text-center" href="https://docs.google.com/forms/d/e/1FAIpQLSf0Q6w5azD4Xg2SBZx7jVcg2FHnesr5o7D4zOnl1bOiIsuI3w/viewform" target="_blank">Fill out your rego form online right now!</a><hr>\n\n### FAQ\n\n#### What do I get for the rego cost?\n\nThe weekend price includes camping fees, BEER flowing all weekend at the campground and the end of each run,  Saturday and Sunday morning Cuntinental Breakfast, lunch after trail on Saturday, and catered dinner on Saturday night.  The campground has BBQs, water, toilets, & showers. Dogs and kids are allowed, but must be leashed at all times.\n\n#### What should I bring?\n\nYour own tent (unless you enjoy sleeping under the stars or you’re smooth enough to talk someone into sharing their tent with you), any food or alcohol you personally require that is not listed above and thereby will not be provided by the event. **Bring an item for potluck. You will need water for the Saturday trail… it will be HOT!**\n\n**Full packing list:** camping gear, tent, sleeping bag, WATER, vessel, sunblock, bug spray, toiletries, towel, swimsuit, soap, water bottle/hydration pack for Saturday’s trail, hat, sunglasses, kilt/sarong/wrap for kilted beer yoga, flashlight/headlamps, jacket, pants for night-time, WATER, 2 pairs of running clothes, and serving utensils for your potluck item.\n\n**Suggested items:** toilet paper (there are 2 toilets with running water and 2 porta potties), munchies (there are 3 meals on Saturday and breakfast Sunday provided), condoms, baby wipes, tent lights, battery-operated fans, booze, soda, onesie, food/coals to grill (there are a few small grills), firewood, s’mores, Tecnu, rubbing alcohol, and a first-aid kit.\n\n#### Is there a pool?\n\nYes.\n\n#### What’s the parking situation?\n\nVery limited—try to carpool.\n\nYou **cannot** bring an RV.\n\n#### What’s cellphone service like?\n\nDepending on your carrier, there is little to no reception once you drive up the mountain. \n\n#### Can I show up and pay for just one of the trails or activities?\n\nNo.\n\n#### Is this a kid-friendly event?\n\nBring at your own risk… this is an uncensored hash event. Price for kids is $50.\n\n#### What do the chili cook-off participants need to know?\n\nLet Lick Me Tender know if you are entering the cook-off with another person (so we know how many entries we will have). You are responsible for heating your chili. There is not a power source. We have a small supply of dixie cups and spoons. We suggest bringing your own small cups to pass out your chili.\n\n#### What do the tent-to-tent participants need to know?\n\nPlease let Lick Me Tender know if you are joining up with someone else for your shot check (so we know how many tents we will have). The GMs will be haring this trail. Have your shot/drink poured and ready to quickly distribute. Bring a table or a surface to place your shots on. Keep in mind, some people are impressed by the presentation and others are impressed by the taste of the drink.	ortega	2018				\N
+3	2018-09-04 01:41:49.482-05	2018-09-04 01:45:02.233-05	## Hash Memorial Service\n\nIt has become a Long Beach Hash House Harriers tradition to plant a tree as a living memorial for Long Beach connected hashers who have died. We will conduct such a service at the site of the 18 trees that have been planted.\n\nFollowing the service, we will continue on to the El Dorado Park Golf Course Bar and Restaurant where hashers can buy their own drinks and a toast will be given for those that have gone on.\n\nWe look forward to seeing you there. Please note that we will start right at **6 p.m.**\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Date:</dt>\n  <dd class="col-sm-9">Friday 10/12 at 6:00 p.m.</dd>\n  <dt class="col-sm-3 text-sm-right">Location:</dt>\n  <dd class="col-sm-9">**El Dorado Duck Pond** near 2400 N Studebaker Rd, Long Beach, CA 90815</dd>\n</dl><iframe title="Map of the El Dorado Duck Pond’s location" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6630.949547786434!2d-118.09498299999998!3d33.800059000000005!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf8ecc25c9b4e8ac3!2sEl+Dorado+Park+East+Duck+Pond!5e0!3m2!1sen!2sus!4v1506905976355" width="100%" height="276" frameborder="0" style="border:0" allowfullscreen></iframe>\n\n<dl class="row">\n  <dt class="col-sm-3 text-sm-right">Directions:</dt>\n  <dd class="col-sm-9">The cross street for the Duck Pond is Los Arcos. Go North on Studebaker Rd. from the San Diego Fwy (405). Turn into the golf course parking lot and go north to free parking.</dd>\n    <dt class="col-sm-3 text-sm-right">Reception (on on):</dt>\n    <dd class="col-sm-9">El Dorado Park Golf Course Bar and Restaurant</dd>\n</dl>	memorial-service	2018				\N
 \.
 
 
@@ -1322,6 +1499,13 @@ COPY public.special_events (id, created_at, updated_at, description_md, url_id, 
 COPY public.users (id, created_at, updated_at, facebook_id, facebook_profile, google_id, google_profile, hasher_id, requested_name) FROM stdin;
 1	2017-07-23 14:05:31.025-05	2018-10-08 18:55:25.093-05		\N	111979573134746438460	{"id":"111979573134746438460","displayName":"Chasen Le Hara","name":{"familyName":"Le Hara","givenName":"Chasen"},"emails":[{"value":"chasen@chasenlehara.com","type":"account"}],"photos":[{"value":"https://lh3.googleusercontent.com/-NxZ5HzQCe4Q/AAAAAAAAAAI/AAAAAAAAAFM/KhnqDoSdHGE/photo.jpg?sz=50"}],"gender":"male","provider":"google"}	6394	
 \.
+
+
+--
+-- Name: ballots_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.ballots_id_seq', 1, false);
 
 
 --
@@ -1346,6 +1530,13 @@ SELECT pg_catalog.setval('public.bored_years_id_seq', 34, true);
 
 
 --
+-- Name: elections_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.elections_id_seq', 1, false);
+
+
+--
 -- Name: events_hashers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
@@ -1364,6 +1555,13 @@ SELECT pg_catalog.setval('public.events_id_seq', 1981, true);
 --
 
 SELECT pg_catalog.setval('public.hashers_id_seq', 8014, true);
+
+
+--
+-- Name: paper_ballots_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('public.paper_ballots_id_seq', 1, false);
 
 
 --
@@ -1396,6 +1594,14 @@ ALTER TABLE ONLY public._migrations
 
 
 --
+-- Name: ballots ballots_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.ballots
+    ADD CONSTRAINT ballots_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: bored_hashers bored_hashers_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1417,6 +1623,14 @@ ALTER TABLE ONLY public.bored_positions
 
 ALTER TABLE ONLY public.bored_years
     ADD CONSTRAINT bored_years_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: elections elections_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.elections
+    ADD CONSTRAINT elections_pkey PRIMARY KEY (id);
 
 
 --
@@ -1452,6 +1666,14 @@ ALTER TABLE ONLY public.hashers
 
 
 --
+-- Name: paper_ballots paper_ballots_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY public.paper_ballots
+    ADD CONSTRAINT paper_ballots_pkey PRIMARY KEY (id);
+
+
+--
 -- Name: patches patches_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1473,6 +1695,13 @@ ALTER TABLE ONLY public.special_events
 
 ALTER TABLE ONLY public.users
     ADD CONSTRAINT users_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: events_hashers_hasher_id_role; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX events_hashers_hasher_id_role ON public.events_hashers USING btree (hasher_id, role);
 
 
 --

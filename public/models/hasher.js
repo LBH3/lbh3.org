@@ -31,6 +31,117 @@ const emailAddressesPropDefinition = {
   }
 };
 
+const privacyDefault = {
+  default: 'bored'
+};
+
+export const Address = DefineMap.extend({
+  fromPlace(place) {
+    const addressProps = {
+      formattedAddress: place.formattedAddress,
+      googlePlaceId: place.id
+    };
+    const values = {};
+    place.addressComponents.forEach(addressComponent => {
+      addressComponent.types.forEach(type => {
+        values[type] = addressComponent;
+      });
+    });
+
+    if (values.postal_town) {
+      addressProps.city = values.postal_town.long_name;
+    } else if (values.locality) {
+      addressProps.city = values.locality.long_name;
+    } else if (values.neighborhood) {
+      addressProps.city = values.neighborhood.long_name;
+    } else if (values.administrative_area_level_2) {
+      addressProps.city = values.administrative_area_level_2.long_name;
+    }
+
+    if (values.country) {
+      addressProps.country = values.country.long_name;
+    }
+
+    if (values.administrative_area_level_1) {
+      if (values.administrative_area_level_1.long_name === values.administrative_area_level_1.short_name && values.administrative_area_level_2) {
+        addressProps.state =  [values.administrative_area_level_2.long_name, values.administrative_area_level_1.long_name].join(', ');
+      } else {
+        addressProps.state = values.administrative_area_level_1.short_name;
+      }
+    }
+
+    const streetAddress = place.formattedAddress.split(',')[0].trim();
+    if (!values.street_number || streetAddress.includes(values.street_number.long_name)) {
+      addressProps.street = streetAddress;
+    } else {
+      addressProps.street = place.name;
+    }
+
+    if (values.subpremise) {
+      addressProps.subpremise = values.subpremise.long_name;
+      if (addressProps.subpremise && addressProps.street.indexOf(addressProps.subpremise) > -1) {
+        addressProps.street = addressProps.street.replace(addressProps.subpremise, '').trim();
+      }
+    }
+
+    if (values.postal_code) {
+      addressProps.zip = values.postal_code.long_name;
+    }
+
+    return new this.constructor(addressProps);
+  }
+}, {
+  city: 'string',
+  country: 'string',
+  formattedAddress: {
+    get: function(lastSetValue) {
+      if (lastSetValue && (this.subpremise == null || lastSetValue.indexOf(this.subpremise) > -1)) {
+        return lastSetValue;
+      }
+      return [
+        this.street,
+        this.subpremise,
+        this.city,
+        this.state,
+        this.zip,
+        this.country
+      ].filter(value => value).join(', ');
+    },
+    serialize: true
+  },
+  googlePlaceId: 'string',
+  privacy: privacyDefault,
+  state: 'string',
+  street: 'string',
+  subpremise: 'string',
+  zip: 'string'
+});
+Address.List = DefineList.extend({
+  '#': Address
+});
+
+export const Email = DefineMap.extend({
+  privacy: privacyDefault,
+  type: {
+    default: 'home'
+  },
+  value: 'string'
+});
+Email.List = DefineList.extend({
+  '#': Email
+});
+
+export const Phone = DefineMap.extend({
+  privacy: privacyDefault,
+  type: {
+    default: 'home'
+  },
+  value: 'string'
+});
+Phone.List = DefineList.extend({
+  '#': Phone
+});
+
 export const Hasher = DefineMap.extend({
   seal: false
 }, {
@@ -44,6 +155,13 @@ export const Hasher = DefineMap.extend({
   addressCountryPrivate: 'string',
   addressCity: 'string',
   addressCityPrivate: 'string',
+  addresses: {
+    get(lastSetValue) {
+      return lastSetValue || new Address.List();
+    },
+    serialize: true,
+    Type: Address.List
+  },
   addressState: 'string',
   addressStatePrivate: 'string',
   addressStreet: 'string',
@@ -53,30 +171,18 @@ export const Hasher = DefineMap.extend({
   alerts: 'string',
   awardCount: 'number',
   birthDay: 'number',
+  birthDayPrivacy: privacyDefault,
   birthMonth: 'number',
+  birthMonthPrivacy: privacyDefault,
   birthYear: 'number',
+  birthYearPrivacy: privacyDefault,
   cellPhone: 'string',
   cellPhonePrivate: 'string',
   createdBy: 'string',
   died: 'string',
+  diedPrivacy: privacyDefault,
   emailAddresses: emailAddressesPropDefinition,
   emailAddressesPrivate: emailAddressesPropDefinition,
-  emailAddressesWithLinks: {
-    get: function() {
-      const emailAddresses = this.emailAddresses || [];
-      return emailAddresses.filter(value => value).map(value => {
-        return '<a href="mailto:' + value + '">' + value + '</a>';
-      }).join(', ');
-    }
-  },
-  emailAddressesPrivateWithLinks: {
-    get: function() {
-      const emailAddressesPrivate = this.emailAddressesPrivate || [];
-      return emailAddressesPrivate.filter(value => value).map(value => {
-        return '<a href="mailto:' + value + '">' + value + '</a>';
-      }).join(', ');
-    }
-  },
   emailing: {
     get(lastSetValue) {
       if (lastSetValue) {
@@ -92,10 +198,12 @@ export const Hasher = DefineMap.extend({
     },
     serialize: true
   },
+  emails: Email.List,
   endOfYear: 'number',
   event: 'string',
   externalId: 'string',
   familyName: 'string',
+  familyNamePrivacy: privacyDefault,
   familyNamePrivate: 'string',
   fax: 'string',
   firstTrailDate: datePropDefinition,
@@ -112,17 +220,6 @@ export const Hasher = DefineMap.extend({
   },
   firstTrailNumber: 'number',
   foodPreference: 'string',
-  formattedAddress: {
-    get: function() {
-      return [
-        this.addressStreet,
-        this.addressCity,
-        this.addressState,
-        this.addressZipCode,
-        this.addressCountry
-      ].filter(value => value).join(', ');
-    }
-  },
   formattedBirthday: {
     get: function() {
       const birthdayAsMoment = moment({
@@ -155,6 +252,7 @@ export const Hasher = DefineMap.extend({
     }
   },
   givenName: 'string',
+  givenNamePrivacy: privacyDefault,
   givenNamePrivate: 'string',
   hareCount: 'number',
   hasDied: {
@@ -180,15 +278,19 @@ export const Hasher = DefineMap.extend({
       return !!this.hashName || !!this.givenName || !!this.givenNamePrivate || !!this.familyName || !!this.familyNamePrivate;
     }
   },
+  headshotPrivacy: privacyDefault,
+  headshotUrl: 'string',
   history: 'string',
   homePhone: 'string',
   homePhonePrivate: 'string',
   inMemoriam: 'string',
+  inMemoriamPrivacy: privacyDefault,
   lastTrailDate: datePropDefinition,
   mailHashName: 'string',
   mailName: 'string',
   mia: 'string',
   motherHash: 'string',
+  motherHashPrivacy: privacyDefault,
   namingTrailDate: datePropDefinition,
   namingTrailDateParts: {
     get: function() {
@@ -202,6 +304,7 @@ export const Hasher = DefineMap.extend({
     serialize: false
   },
   namingTrailNumber: 'number',
+  namingTrailPrivacy: privacyDefault,
   notesHtml: {
     get: function() {
       return marked(this.notesMd || '');
@@ -211,6 +314,7 @@ export const Hasher = DefineMap.extend({
   notesMd: 'string',
   owes: 'string',
   passed: 'string',
+  passedPrivacy: privacyDefault,
   patches: {
     get: function(lastValue, setValue) {
       if (lastValue) {
@@ -316,6 +420,7 @@ export const Hasher = DefineMap.extend({
     },
     serialize: true
   },
+  phones: Phone.List,
   punchCard: 'number',
   runCount: 'number',
   runMileage: 'number',
@@ -333,6 +438,7 @@ export const Hasher = DefineMap.extend({
     serialize: true
   },
   whoMadeYouCum: 'string',
+  whoMadeYouCumPrivacy: privacyDefault,
   workPhone: 'string',
   workPhonePrivate: 'string'
 });

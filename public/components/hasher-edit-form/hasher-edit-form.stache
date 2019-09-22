@@ -1,7 +1,33 @@
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-converters" />
 <can-import from="~/components/hasher-upload-headshot-button/" />
 
-<form on:submit="editHasher()">
+{{<emailTypeOptionsTemplate}}
+  {{#for(emailTypeOption of emailTypeOptions)}}
+    <option value="{{emailTypeOption.key}}">
+      {{emailTypeOption.value}}
+    </option>
+  {{/for}}
+{{/emailTypeOptionsTemplate}}
+
+{{<phoneTypeOptionsTemplate}}
+  {{#for(phoneTypeOption of phoneTypeOptions)}}
+    <option value="{{phoneTypeOption.key}}">
+      {{phoneTypeOption.value}}
+    </option>
+  {{/for}}
+{{/phoneTypeOptionsTemplate}}
+
+{{<privacyOptionsTemplate}}
+  {{#for(privacyOption of privacyOptions)}}
+    <option value="{{privacyOption.key}}">
+      {{privacyOption.value}}
+    </option>
+  {{/for}}
+{{/privacyOptionsTemplate}}
+
+<form on:submit="scope.event.preventDefault()">
   {{#if(hasher.id)}}
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="hashName">
@@ -9,14 +35,26 @@
       </label>
       <div class="col-sm-8">
         {{#if(hasher.headshotUrl)}}
-          <a href="{{hasher.headshotUrl}}" target="_blank">
+          <a class="d-block mb-2" href="{{hasher.headshotUrl}}" target="_blank">
             <img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" />
           </a>
         {{/if}}
-        <lbh3-hasher-upload-headshot-button
-          hasher:from="hasher"
-          session:from="session"
-        />
+        <div class="row">
+          <div class="col">
+            <lbh3-hasher-upload-headshot-button
+              class="d-block w-100"
+              hasher:from="hasher"
+              session:from="session"
+            />
+          </div>
+          {{#if(hasher.headshotUrl)}}
+            <div class="col">
+              <select class="float-right form-control w-auto" value:bind="hasher.headshotPrivacy">
+                {{>privacyOptionsTemplate}}
+              </select>
+            </div>
+          {{/if}}
+        </div>
       </div>
     </div>
   {{/if}}
@@ -32,30 +70,74 @@
 
   <div class="form-group row">
     <label class="col-sm-4 col-form-label" for="formattedBirthday">
-      Birthday (mm/dd/yy)
+      Birthday (mm/dd)
     </label>
     <div class="col-sm-8">
-      <div class="birthday input-group">
+      <div class="birthday float-left input-group w-50">
         <input aria-label="Birth month" class="form-control" max="12" min="0" type="number" value:bind="hasher.birthMonth">
         <span class="input-group-append input-group-prepend">
           <span class="input-group-text">/</span>
         </span>
         <input aria-label="Birth day" class="form-control" max="31" min="0" type="number" value:bind="hasher.birthDay">
-        <span class="input-group-append input-group-prepend">
-          <span class="input-group-text">/</span>
-        </span>
-        <input aria-label="Birth year" class="form-control" min="0" type="number" value:bind="hasher.birthYear">
       </div>
+      <select class="float-right form-control w-auto" value:bind="hasher.birthDayPrivacy">
+        {{>privacyOptionsTemplate}}
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="birthYear">
+      Birth year
+    </label>
+    <div class="col-sm-8">
+      <input aria-label="Birth year" class="float-left form-control w-50" id="birthYear" min="0" type="number" value:bind="hasher.birthYear">
+      <select class="float-right form-control w-auto" value:bind="hasher.birthYearPrivacy">
+        {{>privacyOptionsTemplate}}
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="motherHash">
+      Mother hash
+    </label>
+    <div class="col-sm-8 d-flex">
+      <input class="flex-grow-1 form-control mr-2" id="motherHash" type="text" value:bind="hasher.motherHash">
+      <select class="form-control w-auto" value:bind="hasher.motherHashPrivacy">
+        {{>privacyOptionsTemplate}}
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="namingTrailNumber">
+      Naming trail #
+    </label>
+    <div class="col-sm-8">
+      <input class="float-left form-control w-50" id="namingTrailNumber" min="0" type="number" value:bind="hasher.namingTrailNumber">
+      <select class="float-right form-control w-auto" value:bind="hasher.namingTrailPrivacy">
+        {{>privacyOptionsTemplate}}
+      </select>
+    </div>
+  </div>
+  <div class="form-group row">
+    <label class="col-sm-4 col-form-label" for="whoMadeYouCum">
+      Who made you cum
+    </label>
+    <div class="col-sm-8 d-flex">
+      <input class="flex-grow-1 form-control mr-2" id="whoMadeYouCum" type="text" value:bind="hasher.whoMadeYouCum">
+      <select class="form-control w-auto" value:bind="hasher.whoMadeYouCumPrivacy">
+        {{>privacyOptionsTemplate}}
+      </select>
     </div>
   </div>
 
   <div class="form-group row">
     <label class="col-sm-4 col-form-label" for="emailing">
-      Emailing
+      Email?
     </label>
     <div class="col-sm-8">
       <select
-        class="form-control"
+        class="form-control w-auto"
         id="emailing"
         value:bind="hasher.emailing"
       >
@@ -65,14 +147,6 @@
           </option>
         {{/for}}
       </select>
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-4 col-form-label" for="namingTrailNumber">
-      Naming trail #
-    </label>
-    <div class="col-sm-8">
-      <input class="form-control" id="namingTrailNumber" min="0" type="number" value:bind="hasher.namingTrailNumber">
     </div>
   </div>
   <div class="form-group row">
@@ -108,23 +182,6 @@
   </div>
 
   <div class="form-group row">
-    <label class="col-sm-4 col-form-label" for="whoMadeYouCum">
-      Who made you cum
-    </label>
-    <div class="col-sm-8">
-      <input class="form-control" id="whoMadeYouCum" type="text" value:bind="hasher.whoMadeYouCum">
-    </div>
-  </div>
-  <div class="form-group row">
-    <label class="col-sm-4 col-form-label" for="motherHash">
-      Mother hash
-    </label>
-    <div class="col-sm-8">
-      <input class="form-control" id="motherHash" type="text" value:bind="hasher.motherHash">
-    </div>
-  </div>
-
-  <div class="form-group row">
     <label class="col-sm-4 col-form-label" for="notesMd">
       Notes
     </label>
@@ -135,212 +192,160 @@
 
   <fieldset class="form-group">
     <legend>
-      Directory info
+      Info
     </legend>
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="givenName">
         First (given) name
       </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="givenName" type="text" value:bind="hasher.givenName">
+      <div class="col-sm-8 d-flex">
+        <input class="flex-grow-1 form-control mr-2" id="givenName" type="text" value:bind="hasher.givenName">
+        <select class="form-control w-auto" value:bind="hasher.givenNamePrivacy">
+          {{>privacyOptionsTemplate}}
+        </select>
       </div>
     </div>
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="familyName">
         Last (family) name
       </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="familyName" type="text" value:bind="hasher.familyName">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="cellPhone">
-        Cell phone
-      </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="cellPhone" type="text" value:bind="hasher.cellPhone">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="homePhone">
-        Home phone
-      </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="homePhone" type="text" value:bind="hasher.homePhone">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="workPhone">
-        Work phone
-      </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="workPhone" type="text" value:bind="hasher.workPhone">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="fax">
-        Fax
-      </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="fax" type="text" value:bind="hasher.fax">
+      <div class="col-sm-8 d-flex">
+        <input class="flex-grow-1 form-control mr-2" id="familyName" type="text" value:bind="hasher.familyName">
+        <select class="form-control w-auto" value:bind="hasher.familyNamePrivacy">
+          {{>privacyOptionsTemplate}}
+        </select>
       </div>
     </div>
 
     <div class="form-group justify-content-end row">
-      <label class="col-sm-4 col-form-label" for="emailAddresses">
-        Email {{#if(hasher.emailAddresses.length)}}addresses{{else}}address{{/if}}
+      <label class="col-sm-4 col-form-label">
+        Phone {{#if(hasher.phones.length)}}numbers{{else}}number{{/if}}
       </label>
-      {{#for(emailAddress of hasher.emailAddresses)}}
-        <div class="col-sm-8">
-          <input class="form-control mb-2" type="email" value:bind="emailAddress">
+      {{#for(phone of hasher.phones)}}
+        <div class="col-sm-8 d-flex flex-column flex-sm-row">
+          <input class="flex-grow-1 form-control mb-2 mr-sm-2" type="phone" value:bind="phone.value">
+          <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
+            <select class="form-control w-auto mb-2 mr-sm-2" value:bind="phone.type">
+              {{>phoneTypeOptionsTemplate}}
+            </select>
+            <select class="form-control w-auto" value:bind="phone.privacy">
+              {{>privacyOptionsTemplate}}
+            </select>
+          </div>
         </div>
       {{/for}}
-      <div class="col-sm-8">
-        <input class="form-control" id="emailAddresses" type="email" value:bind="additionalFields.emailAddress">
+      <div class="col-sm-8 d-flex flex-column flex-sm-row">
+        <input class="flex-grow-1 form-control mb-2 mb-sm-0 mr-sm-2" type="phone" value:bind="additionalFields.phone.value">
+        <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
+          <select class="form-control w-auto mb-2 mb-sm-0 mr-sm-2" value:bind="additionalFields.phone.type">
+            {{>phoneTypeOptionsTemplate}}
+          </select>
+          <select class="form-control w-auto" value:bind="additionalFields.phone.privacy">
+            {{>privacyOptionsTemplate}}
+          </select>
+        </div>
       </div>
     </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="addressStreet">
-        Street address
+
+    <div class="form-group justify-content-end row">
+      <label class="col-sm-4 col-form-label">
+        Email {{#if(hasher.emails.length)}}addresses{{else}}address{{/if}}
       </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="addressStreet" type="text" value:bind="hasher.addressStreet">
+      {{#for(email of hasher.emails)}}
+        <div class="col-sm-8 d-flex flex-column flex-sm-row">
+          <input class="flex-grow-1 form-control mb-2 mr-sm-2" type="email" value:bind="email.value">
+          <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
+            <select class="form-control w-auto mb-2 mr-sm-2" value:bind="email.type">
+              {{>emailTypeOptionsTemplate}}
+            </select>
+            <select class="form-control w-auto" value:bind="email.privacy">
+              {{>privacyOptionsTemplate}}
+            </select>
+          </div>
+        </div>
+      {{/for}}
+      <div class="col-sm-8 d-flex flex-column flex-sm-row">
+        <input class="flex-grow-1 form-control mb-2 mb-sm-0 mr-sm-2" type="email" value:bind="additionalFields.email.value">
+        <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
+          <select class="form-control w-auto mb-2 mb-sm-0 mr-sm-2" value:bind="additionalFields.email.type">
+            {{>emailTypeOptionsTemplate}}
+          </select>
+          <select class="form-control w-auto" value:bind="additionalFields.email.privacy">
+            {{>privacyOptionsTemplate}}
+          </select>
+        </div>
       </div>
     </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="addressCity">
-        City
+
+    <div class="form-group justify-content-end row">
+      <label class="col-sm-4 col-form-label" for="newAddress">
+        {{#if(hasher.addresses.length)}}Addresses{{else}}Address{{/if}}
       </label>
       <div class="col-sm-8">
-        <input class="form-control" id="addressCity" type="text" value:bind="hasher.addressCity">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="addressState">
-        State
-      </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="addressState" type="text" value:bind="hasher.addressState">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="addressZipCode">
-        ZIP code
-      </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="addressZipCode" type="text" value:bind="hasher.addressZipCode">
-      </div>
-    </div>
-    <div class="form-group row">
-      <label class="col-sm-4 col-form-label" for="addressCountry">
-        Country
-      </label>
-      <div class="col-sm-8">
-        <input class="form-control" id="addressCountry" type="text" value:bind="hasher.addressCountry">
+        <input class="form-control" disabled id="newAddress" placeholder="Street or city" type="address" value:bind="newAddress.addressMd">
+        {{#for(address of hasher.addresses)}}
+          {{let i=scope.index}}
+          <div class="card mt-3">
+            <div class="card-header">
+              <div class="d-inline">
+                <label class="mr-1" for="privacy-{{i}}">Privacy</label>
+                <select class="d-inline form-control w-auto" id="privacy-{{i}}" value:bind="address.privacy">
+                  {{>privacyOptionsTemplate}}
+                </select>
+              </div>
+              <button class="btn btn-danger float-right prevent-default" on:click="hasher.addresses.splice(i, 1)" type="button">
+                <span class="fas fa-times"></span>
+              </button>
+            </div>
+            <div class="card-body">
+              <div class="form-row">
+                <div class="col-md-8 form-group mb-1">
+                  <label class="col-form-label" for="street-{{i}}">
+                    Street
+                  </label>
+                  <input class="flex-grow-1 form-control" id="street-{{i}}" type="text" value:bind="address.street">
+                </div>
+                <div class="col-md-4 form-group mb-1">
+                  <label class="col-form-label" for="subpremise-{{i}}">
+                    Unit (e.g. #69)
+                  </label>
+                  <input class="form-control" id="subpremise-{{i}}" type="text" value:bind="address.subpremise">
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="col-md-4 form-group mb-1">
+                  <label class="col-form-label" for="city-{{i}}">
+                    City
+                  </label>
+                  <input class="flex-grow-1 form-control" id="city-{{i}}" type="text" value:bind="address.city">
+                </div>
+                <div class="col-md-2 form-group mb-1">
+                  <label class="col-form-label" for="state-{{i}}">
+                    State
+                  </label>
+                  <input class="flex-grow-1 form-control" id="state-{{i}}" type="text" value:bind="address.state">
+                </div>
+                <div class="col-md-3 form-group mb-1">
+                  <label class="col-form-label" for="zip-{{i}}">
+                    ZIP code
+                  </label>
+                  <input class="flex-grow-1 form-control" id="zip-{{i}}" type="text" value:bind="address.zip">
+                </div>
+                <div class="col-md-3 form-group mb-1">
+                  <label class="col-form-label" for="country-{{i}}">
+                    Country
+                  </label>
+                  <input class="flex-grow-1 form-control" id="country-{{i}}" type="text" value:bind="address.country">
+                </div>
+              </div>
+            </div>
+          </div>
+        {{/for}}
       </div>
     </div>
   </fieldset>
 
   {{#if hasher.id}}
-    <fieldset class="form-group">
-      <legend>
-        Private info
-      </legend>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="givenNamePrivate">
-          First (given) name
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="givenNamePrivate" type="givenNamePrivate" value:bind="hasher.givenNamePrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="familyNamePrivate">
-          Last (family) name
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="familyNamePrivate" type="text" value:bind="hasher.familyNamePrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="cellPhonePrivate">
-          Cell phone
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="cellPhonePrivate" type="text" value:bind="hasher.cellPhonePrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="homePhonePrivate">
-          Home phone
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="homePhonePrivate" type="text" value:bind="hasher.homePhonePrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="workPhonePrivate">
-          Work phone
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="workPhonePrivate" type="text" value:bind="hasher.workPhonePrivate">
-        </div>
-      </div>
-      <div class="form-group justify-content-end row">
-        <label class="col-sm-4 col-form-label" for="emailAddressesPrivate">
-          Email {{#if(hasher.emailAddressesPrivate.length)}}addresses{{else}}address{{/if}}
-        </label>
-        {{#for(emailAddress of hasher.emailAddressesPrivate)}}
-          <div class="col-sm-8">
-            <input class="form-control mb-2" type="email" value:bind="emailAddress">
-          </div>
-        {{/for}}
-        <div class="col-sm-8">
-          <input class="form-control" id="emailAddressesPrivate" type="email" value:bind="additionalFields.emailAddressPrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="addressStreetPrivate">
-          Street address
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="addressStreetPrivate" type="text" value:bind="hasher.addressStreetPrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="addressCityPrivate">
-          City
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="addressCityPrivate" type="text" value:bind="hasher.addressCityPrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="addressStatePrivate">
-          State
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="addressStatePrivate" type="text" value:bind="hasher.addressStatePrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="addressZipCodePrivate">
-          ZIP code
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="addressZipCodePrivate" type="text" value:bind="hasher.addressZipCodePrivate">
-        </div>
-      </div>
-      <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="addressCountryPrivate">
-          Country
-        </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="addressCountryPrivate" type="text" value:bind="hasher.addressCountryPrivate">
-        </div>
-      </div>
-    </fieldset>
-
     <fieldset class="form-group">
       <legend>
         In memoriam
@@ -349,24 +354,33 @@
         <label class="col-sm-4 col-form-label" for="died">
           Died
         </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="died" type="text" value:bind="hasher.died">
+        <div class="col-sm-8 d-flex">
+          <input class="flex-grow-1 form-control mr-2" id="died" type="text" value:bind="hasher.died">
+          <select class="float-right form-control w-auto" value:bind="hasher.diedPrivacy">
+            {{>privacyOptionsTemplate}}
+          </select>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-4 col-form-label" for="passed">
           Passed
         </label>
-        <div class="col-sm-8">
-          <input class="form-control" id="passed" type="text" value:bind="hasher.passed">
+        <div class="col-sm-8 d-flex">
+          <input class="flex-grow-1 form-control mr-2" id="passed" type="text" value:bind="hasher.passed">
+          <select class="float-right form-control w-auto" value:bind="hasher.passedPrivacy">
+            {{>privacyOptionsTemplate}}
+          </select>
         </div>
       </div>
       <div class="form-group row">
         <label class="col-sm-4 col-form-label" for="inMemoriam">
           Notes
         </label>
-        <div class="col-sm-8">
-          <textarea class="form-control" id="inMemoriam" value:bind="hasher.inMemoriam"></textarea>
+        <div class="col-sm-8 d-flex">
+          <textarea class="flex-grow-1 form-control mr-2" id="inMemoriam" value:bind="hasher.inMemoriam"></textarea>
+          <select class="float-right form-control w-auto" value:bind="hasher.inMemoriamPrivacy">
+            {{>privacyOptionsTemplate}}
+          </select>
         </div>
       </div>
     </fieldset>
@@ -408,7 +422,8 @@
   <button
     class="btn btn-primary"
     {{#if editingHasherPromise.isPending}}disabled{{/if}}
-    type="submit">
+    on:click="editHasher()"
+  >
     {{saveButtonLabel}}
   </button>
 </form>

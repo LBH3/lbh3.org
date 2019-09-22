@@ -17,6 +17,42 @@ import moment from 'moment-timezone';
 import route from 'can-route';
 import view from './edit.stache';
 
+export const enableAutocompleteForInput = (id, viewModel, vmProperty, callback) => {
+  const interval = setInterval(() => {// Make sure the element is in the DOM
+    const locationInput = document.getElementById(id);
+    if (locationInput) {
+      clearInterval(interval);
+      locationInput.disabled = false;
+      const autocomplete = new google.maps.places.Autocomplete(locationInput, {
+        bounds: new google.maps.LatLngBounds(
+          new google.maps.LatLng(33.5, -118.5),
+          new google.maps.LatLng(34.1, -117.7)
+        )
+      });
+      autocomplete.addListener('place_changed', () => {
+        const place = Place.fromGoogle(autocomplete.getPlace());
+        const vmPromiseProperty = `${vmProperty}Promise`;
+        viewModel[vmPromiseProperty] = place.save().then(callback);
+      });
+    }
+  }, 10);
+};
+
+export const loadGoogleMapsPlacesAPI = (callback) => {
+  const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${loader.googleMapsKey}&libraries=places`;
+  const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
+
+  if (existingScript) {
+    callback();
+  } else {
+    const mapsScript = document.createElement('script');
+    mapsScript.onload = callback;
+    mapsScript.src = scriptSrc;
+    mapsScript.type = 'text/javascript';
+    document.getElementsByTagName('head')[0].appendChild(mapsScript);
+  }
+};
+
 export const ViewModel = DefineMap.extend({
   addHasherToRun: function() {
     const newHasherForRun = this.newHasherForRun;
@@ -90,10 +126,6 @@ export const ViewModel = DefineMap.extend({
         });
       }
     }
-  },
-
-  get googleMapsKey() {
-    return loader.googleMapsKey;
   },
 
   hashers: {
@@ -347,29 +379,16 @@ export default Component.extend({
   view,
   events: {
     '{viewModel} event': function() {
-      const onloadHandler = () => {
-        var options = {
-          bounds: new google.maps.LatLngBounds(
-            new google.maps.LatLng(33.5, -118.5),
-            new google.maps.LatLng(34.1, -117.7)
-          )
-        };
-        this.enableAutocompleteForInput('location', 'location', options);
-        this.enableAutocompleteForInput('on-on', 'onOn', options);
-      }
-
-      const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${this.viewModel.googleMapsKey}&libraries=places`;
-      const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
-
-      if (existingScript) {
-        onloadHandler();
-      } else {
-        const mapsScript = document.createElement('script');
-        mapsScript.onload = onloadHandler;
-        mapsScript.src = scriptSrc;
-        mapsScript.type = 'text/javascript';
-        document.getElementsByTagName('head')[0].appendChild(mapsScript);
-      }
+      loadGoogleMapsPlacesAPI(() => {
+        enableAutocompleteForInput('location', this.viewModel, 'location', this.viewModel.event, savedPlace => {
+          this.viewModel.event.locationGooglePlaceId = savedPlace.id;
+          this.viewModel.event.locationMd = savedPlace.name || savedPlace.formattedAddress;
+        });
+        enableAutocompleteForInput('on-on', this.viewModel, 'onOn', savedPlace => {
+          this.viewModel.event.onOnGooglePlaceId = savedPlace.id;
+          this.viewModel.event.onOnMd = savedPlace.name || savedPlace.formattedAddress;
+        });
+      });
     },
 
     '{viewModel} newHasherForRun': function() {
@@ -429,27 +448,6 @@ export default Component.extend({
           newHasherForRun.role = newRole;
         }
       }
-    },
-
-    enableAutocompleteForInput: function(id, vmProperty, options) {
-      const interval = setInterval(() => {// Make sure the element is in the DOM
-        const locationInput = document.getElementById(id);
-        if (locationInput) {
-          clearInterval(interval);
-          locationInput.disabled = false;
-          const autocomplete = new google.maps.places.Autocomplete(locationInput, options);
-          autocomplete.addListener('place_changed', () => {
-            const place = Place.fromGoogle(autocomplete.getPlace());
-            const vmPromiseProperty = `${vmProperty}Promise`;
-            this.viewModel[vmPromiseProperty] = place.save().then(savedPlace => {
-              const vmPropertyGPId = `${vmProperty}GooglePlaceId`;
-              const vmPropertyMd = `${vmProperty}Md`;
-              this.viewModel.event[vmPropertyGPId] = savedPlace.id;
-              this.viewModel.event[vmPropertyMd] = savedPlace.name || savedPlace.formattedAddress;
-            });
-          });
-        }
-      }, 10);
     },
 
     '{viewModel} selectedHasher': function(viewModel) {

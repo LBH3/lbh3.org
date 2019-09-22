@@ -116,57 +116,29 @@ module.exports = function (app) {
       if (hasher.headshotUrl) {
         vcardLines.push(`PHOTO:${hasher.headshotUrl}`);
       }
-      if (hasher.emailAddresses && hasher.emailAddresses.length) {
-        hasher.emailAddresses.forEach(emailAddress => {
-          vcardLines.push(`EMAIL:${emailAddress}`);
+      if (hasher.emails && hasher.emails.length > 0) {
+        hasher.emails.forEach(email => {
+          vcardLines.push(`EMAIL;type=INTERNET;type=${email.type.toUpperCase()}:${email.value}`);
         });
       }
-      if (hasher.emailAddressesPrivate && hasher.emailAddressesPrivate.length) {
-        hasher.emailAddressesPrivate.forEach(emailAddress => {
-          vcardLines.push(`EMAIL:${emailAddress}`);
+      if (hasher.phones && hasher.phones.length > 0) {
+        hasher.phones.forEach(phone => {
+          vcardLines.push(`TEL;TYPE=${phone.type.toUpperCase()},VOICE:${phone.value}`);
         });
       }
-      if (hasher.cellPhone) {
-        vcardLines.push(`TEL;TYPE=CELL,VOICE:${hasher.cellPhone}`);
-      }
-      if (hasher.cellPhonePrivate) {
-        vcardLines.push(`TEL;TYPE=CELL,VOICE:${hasher.cellPhonePrivate}`);
-      }
-      if (hasher.homePhone) {
-        vcardLines.push(`TEL;TYPE=HOME,VOICE:${hasher.homePhone}`);
-      }
-      if (hasher.homePhonePrivate) {
-        vcardLines.push(`TEL;TYPE=HOME,VOICE:${hasher.homePhonePrivate}`);
-      }
-      if (hasher.workPhone) {
-        vcardLines.push(`TEL;TYPE=WORK,VOICE:${hasher.workPhone}`);
-      }
-      if (hasher.workPhonePrivate) {
-        vcardLines.push(`TEL;TYPE=WORK,VOICE:${hasher.workPhonePrivate}`);
-      }
-      if (hasher.addressStreet) {
-        vcardLines.push([
-          'ADR',
-          ':',
-          '',
-          hasher.addressStreet,
-          hasher.addressCity,
-          hasher.addressState,
-          hasher.addressZipCode,
-          hasher.addressCountry
-        ].join(';'));
-      }
-      if (hasher.addressStreetPrivate) {
-        vcardLines.push([
-          'ADR',
-          ':',
-          '',
-          hasher.addressStreetPrivate,
-          hasher.addressCityPrivate,
-          hasher.addressStatePrivate,
-          hasher.addressZipCodePrivate,
-          hasher.addressCountryPrivate
-        ].join(';'));
+      if (hasher.addresses && hasher.addresses.length > 0) {
+        hasher.addresses.forEach(address => {
+          vcardLines.push([
+            'ADR',
+            ':',
+            '',
+            `${address.street} ${address.subpremise == null ? '' : address.subpremise}`.trim(),
+            address.city,
+            address.state,
+            address.zip,
+            address.country
+          ].join(';'));
+        });
       }
       if (hasher.updatedAt) {
         vcardLines.push(`REV:${hasher.updatedAt.toISOString()}`);
