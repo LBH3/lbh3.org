@@ -31,6 +31,12 @@ const emailAddressesPropDefinition = {
   }
 };
 
+const listSerializer = (list) => {
+  return list.filter(member => {
+    return member.value;
+  }).serialize();
+};
+
 const privacyDefault = {
   default: 'bored'
 };
@@ -198,7 +204,10 @@ export const Hasher = DefineMap.extend({
     },
     serialize: true
   },
-  emails: Email.List,
+  emails: {
+    serialize: listSerializer,
+    Type: Email.List
+  },
   endOfYear: 'number',
   event: 'string',
   externalId: 'string',
@@ -420,7 +429,10 @@ export const Hasher = DefineMap.extend({
     },
     serialize: true
   },
-  phones: Phone.List,
+  phones: {
+    serialize: listSerializer,
+    Type: Phone.List
+  },
   punchCard: 'number',
   runCount: 'number',
   runMileage: 'number',
