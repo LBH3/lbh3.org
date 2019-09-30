@@ -1,3 +1,5 @@
+<can-import from="~/components/alert/" />
+
 <h2 class="sr-only">Add Trail</h2>
 
 <form on:submit="createTrail()">
@@ -27,9 +29,7 @@
   </div>
 
   {{#if creatingTrailPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Saving trail…</strong>
-    </div>
+    <lbh3-alert message:from="'Saving the trail…'" />
   {{/if}}
   {{#if creatingTrailPromise.isRejected}}
     <div class="alert alert-danger" role="alert">

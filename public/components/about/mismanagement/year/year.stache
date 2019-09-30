@@ -1,10 +1,9 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="~/components/alert/" />
 
 {{#if hashersPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching Mismanagement…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching the Mismanagement…'" />
 {{/if}}
 
 {{#if hashersPromise.isRejected}}
@@ -24,9 +23,7 @@
   {{#for(hasherByPosition of hashersByPosition)}}
     {{#if hasherByPosition.promise}}
       {{#if hasherByPosition.promise.isPending}}
-        <div class="alert alert-info" role="alert">
-          <strong>Fetching position…</strong>
-        </div>
+        <lbh3-alert message:from="'Fetching their position…'" />
       {{/if}}
 
       {{#if hasherByPosition.promise.isRejected}}

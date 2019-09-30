@@ -1,6 +1,7 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="~/components/alert/" />
 
 {{#if session.user.canViewDirectoryInfo}}
 
@@ -23,9 +24,7 @@
   </form>
 
   {{#if hashersPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching hashers…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching hashers…'" />
   {{/if}}
 
   {{#if hashersPromise.isRejected}}

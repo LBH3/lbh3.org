@@ -1,13 +1,12 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="~/components/alert/" />
 
 <h2>Run #{{trailNumber}} Check-In Sheet</h2>
 
 {{#if hashersPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching the check-in sheet…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching the check-in sheet…'" />
 {{/if}}
 
 {{#if hashersPromise.isRejected}}

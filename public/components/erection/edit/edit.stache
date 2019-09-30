@@ -1,4 +1,5 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/erection/nav/" />
 
 <lbh3-erection-nav
@@ -10,9 +11,7 @@
 
 {{#if session.user.canManageUsers}}
   {{#if erectionPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Loading erection…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the erection…'" />
   {{/if}}
 
   {{#if erectionPromise.isRejected}}
@@ -141,18 +140,16 @@
       </div>
 
       {{#if editErectionPromise.isPending}}
-        <div class="alert alert-info" role="alert">
-          <strong>Saving special erection…</strong>
-        </div>
+        <lbh3-alert message:from="'Saving the erection…'" />
       {{/if}}
       {{#if editErectionPromise.isRejected}}
         <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> The special erection failed to save. {{editErectionPromise.reason.xhr.message}}
+          <strong>Fuck!</strong> The erection failed to save. {{editErectionPromise.reason.xhr.message}}
         </div>
       {{/if}}
       {{#if editErectionPromise.isResolved}}
         <div class="alert alert-success" role="alert">
-          <strong>On on!</strong> You successfully edited the special erection.
+          <strong>On on!</strong> You successfully edited the erection.
         </div>
       {{/if}}
 
@@ -160,7 +157,7 @@
         class="btn btn-primary"
         {{#if editErectionPromise.isPending}}disabled{{/if}}
         type="submit">
-        Edit special erection
+        Edit erection
       </button>
     </form>
   {{/if}}

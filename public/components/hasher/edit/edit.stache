@@ -1,13 +1,12 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/hasher/nav/" />
 <can-import from="~/components/hasher-edit-form/" />
 
 {{#if session.user.canEditHasherInfo}}
 
   {{#if hasherPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching hasher…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the hasher…'" />
   {{/if}}
 
   {{#if hasherPromise.isRejected}}

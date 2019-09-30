@@ -1,4 +1,5 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
 
 <h2>
   Edit
@@ -9,9 +10,7 @@
 
 {{#if session.user.canEditFutureSpecialEvents}}
   {{#if specialEventPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Loading event…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the event…'" />
   {{/if}}
 
   {{#if specialEventPromise.isRejected}}
@@ -54,9 +53,7 @@
           </div>
 
           {{#if editSpecialEventPromise.isPending}}
-            <div class="alert alert-info" role="alert">
-              <strong>Saving special event…</strong>
-            </div>
+            <lbh3-alert message:from="'Saving the special event…'" />
           {{/if}}
           {{#if editSpecialEventPromise.isRejected}}
             <div class="alert alert-danger" role="alert">

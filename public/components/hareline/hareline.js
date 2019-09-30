@@ -17,7 +17,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   get description() {
-    return 'Check out our upcuming trails and sign up to hare for LBH3!';
+    return 'Check out our upcumming trails and sign up to hare for LBH3!';
   },
 
   get eventQuery() {

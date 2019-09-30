@@ -1,14 +1,13 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/hasher-autocomplete/" />
 
 {{#if session.user.canManageUsers}}
 
   {{#if userPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching user…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the user…'" />
   {{/if}}
 
   {{#if userPromise.isRejected}}
@@ -73,9 +72,7 @@
       </div>
 
       {{#if editingUserPromise.isPending}}
-        <div class="alert alert-info mt-3" role="alert">
-          <strong>Saving user…</strong>
-        </div>
+        <lbh3-alert message:from="'Saving the user…'" />
       {{/if}}
 
       {{#if editingUserPromise.isRejected}}

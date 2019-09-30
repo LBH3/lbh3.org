@@ -2,6 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/regular.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/hasher/nav/" />
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/run-list/" />
@@ -10,9 +11,7 @@
 {{#if canViewHasher}}
 
   {{#if hasherPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching hasher…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the hasher…'" />
   {{/if}}
 
   {{#if hasherPromise.isRejected}}
@@ -218,9 +217,7 @@
         <h3>Patches</h3>
 
         {{#if patchesPromise.isPending}}
-          <div class="alert alert-info" role="alert">
-            <strong>Fetching patches…</strong>
-          </div>
+          <lbh3-alert message:from="'Fetching their patches…'" />
         {{/if}}
 
         {{#if patchesPromise.isRejected}}
@@ -280,9 +277,7 @@
         <h3>Bored positions</h3>
 
         {{#if boredPositionsPromise.isPending}}
-          <div class="alert alert-info" role="alert">
-            <strong>Fetching Bored positions…</strong>
-          </div>
+          <lbh3-alert message:from="'Fetching Mismanagement…'" />
         {{/if}}
 
         {{#if boredPositionsPromise.isRejected}}
@@ -340,9 +335,7 @@
     <h3>Runs</h3>
 
     {{#if eventsPromise.isPending}}
-      <div class="alert alert-info" role="alert">
-        <strong>Fetching runs…</strong>
-      </div>
+      <lbh3-alert message:from="'Fetching their runs…'" />
     {{/if}}
 
     {{#if eventsPromise.isRejected}}

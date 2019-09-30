@@ -1,9 +1,9 @@
+<can-import from="~/components/alert/" />
+
 <h2 class="sr-only">Mismanagement</h2>
 
 {{#if yearsPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching Mismanagement…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching the Mismanagement…'" />
 {{/if}}
 
 {{#if yearsPromise.isRejected}}

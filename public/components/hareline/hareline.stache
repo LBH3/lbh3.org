@@ -1,5 +1,6 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/run-list/" />
+<can-import from="~/components/alert/" />
 
 <p class="d-print-none">
   <a href="mailto:trailmasters@lbh3.org">Email our Trail Masters</a>
@@ -7,9 +8,7 @@
 </p>
 
 {{#if eventsPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching runs…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching upcumming runs…'" />
 {{/if}}
 
 {{#if eventsPromise.isRejected}}

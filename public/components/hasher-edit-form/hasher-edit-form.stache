@@ -1,6 +1,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-converters" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/hasher-upload-headshot-button/" />
 
 {{<emailTypeOptionsTemplate}}
@@ -387,9 +388,7 @@
   {{/if}}
 
   {{#if editingHasherPromise.isPending}}
-    <div class="alert alert-info mt-3" role="alert">
-      <strong>Saving hasher…</strong>
-    </div>
+    <lbh3-alert class="mt-3" message:from="'Saving the hasher…'" />
   {{/if}}
 
   {{#if editingHasherPromise.isRejected}}

@@ -1,9 +1,8 @@
+<can-import from="~/components/alert/" />
 <can-import from="~/components/run-list/" />
 
 {{#if allEventsPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching runs…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching the runs…'" />
 {{/if}}
 
 {{#if allEventsPromise.isRejected}}

@@ -2,6 +2,7 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/hasher-autocomplete/" />
 <can-import from="~/components/map/" />
 
@@ -19,9 +20,7 @@
 {{#if canEditEvent}}
 
   {{#if eventPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Loading trail…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the run…'" />
   {{/if}}
   {{#if eventPromise.isRejected}}
     <div class="alert alert-danger" role="alert">
@@ -279,9 +278,7 @@
       {{/if}}
 
       {{#if editingEventPromise.isPending}}
-        <div class="alert alert-info mt-3" role="alert">
-          <strong>Saving trail…</strong>
-        </div>
+        <lbh3-alert message:from="'Saving the run…'" />
       {{/if}}
       {{#if editingEventPromise.isRejected}}
         <div class="alert alert-danger mt-3" role="alert">
@@ -365,9 +362,7 @@
       <h3>Attendance</h3>
 
       {{#if hashersPromise.isPending}}
-        <div class="alert alert-info" role="alert">
-          <strong>Fetching attendance sheet…</strong>
-        </div>
+        <lbh3-alert message:from="'Fetching the attendance sheet…'" />
       {{/if}}
 
       {{#if hashersPromise.isRejected}}

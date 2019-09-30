@@ -1,4 +1,5 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
 
 <h2>Attendance Records</h2>
 
@@ -13,9 +14,7 @@
 </form>
 
 {{#if hashersPromises.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching attendance records…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching the Attendance Records…'" />
 {{/if}}
 
 {{#if hashersPromises.isRejected}}

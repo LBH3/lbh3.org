@@ -1,14 +1,13 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/regular.css" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/map/" />
 <can-import from="~/components/photos-button/" />
 <can-import from="~/components/snooze-button/" />
 
 {{#if eventPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching run…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching the run…'" />
 {{/if}}
 
 {{#if eventPromise.isRejected}}
@@ -76,9 +75,7 @@
 
   {{#if event.locationPromise}}
     {{#if event.locationPromise.isPending}}
-      <div class="alert alert-info" role="alert">
-        <strong>Loading map…</strong>
-      </div>
+      <lbh3-alert message:from="'Fetching the location…'" />
     {{/if}}
     {{#if event.locationPromise.isResolved}}
       {{#if event.locationPromise.value.placeId}}
@@ -107,9 +104,7 @@
   </dl>
 
   {{#if event.onOnPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Loading map…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the location…'" />
   {{/if}}
   {{#if event.onOnPromise.isResolved}}
     {{#if event.onOnPromise.value.placeId}}
@@ -252,9 +247,7 @@
     {{/if}}
 
     {{#if hashersPromise.isPending}}
-      <div class="alert alert-info" role="alert">
-        <strong>Fetching attendance sheet…</strong>
-      </div>
+      <lbh3-alert message:from="'Fetching the attendance sheet…'" />
     {{/if}}
 
     {{#if hashersPromise.isRejected}}

@@ -1,11 +1,10 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/regular.css" />
+<can-import from="~/components/alert/" />
 
 {{#if specialEventPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching event…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching the event…'" />
 {{/if}}
 
 {{#if specialEventPromise.isRejected}}

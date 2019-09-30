@@ -1,4 +1,5 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
 
 <h2>Early Warning</h2>
 
@@ -7,9 +8,7 @@
 {{#if session.user.canViewDirectoryInfo}}
 
   {{#if hashersPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching early warning report…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the Early Warning report…'" />
   {{/if}}
 
   {{#if hashersPromise.isRejected}}

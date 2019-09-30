@@ -1,3 +1,4 @@
+<can-import from="~/components/alert/" />
 <can-import from="~/components/no-ssr/" />
 
 <h2 class="sr-only">Privacy Changes</h2>
@@ -33,9 +34,7 @@
       </p>
 
       {{#if savingPromise.isPending}}
-        <div class="alert alert-info" role="alert">
-          <strong>Saving your request…</strong>
-        </div>
+        <lbh3-alert message:from="'Saving your request for access…'" />
       {{else}}
         {{#if session.user.requestedName}}
           <div class="alert alert-primary" role="alert">

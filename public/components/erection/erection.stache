@@ -1,6 +1,7 @@
 <can-import from="can-stache-converters" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/erection/nav/" />
 <can-import from="~/components/hasher-autocomplete/" />
 <can-import from="~/components/no-ssr/" />
@@ -14,9 +15,7 @@
   />
 
   {{#if electionPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching your ballot…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching your ballot…'" />
   {{/if}}
 
   {{#if electionPromise.isRejected}}
@@ -47,9 +46,7 @@
       {{#if session.user.hasherId}}
 
         {{#if electionEligibilityPromise.isPending}}
-          <div class="alert alert-info" role="alert">
-            <strong>Determining your eligibility to vote…</strong>
-          </div>
+          <lbh3-alert message:from="'Determining your eligibility to vote…'" />
         {{/if}}
 
         {{#if electionEligibilityPromise.isRejected}}
@@ -66,9 +63,7 @@
           {{#if electionEligibility.eligible}}
 
             {{#if paperBallotsPromise.isPending}}
-              <div class="alert alert-info" role="alert">
-                <strong>Determining your eligibility to vote…</strong>
-              </div>
+              <lbh3-alert message:from="'Determining your eligibility to vote…'" />
             {{/if}}
 
             {{#if paperBallotsPromise.isRejected}}
@@ -104,9 +99,7 @@
                 {{else}}
 
                   {{#if savingPromise.isPending}}
-                    <div class="alert alert-info" role="alert">
-                      <strong>Submitting your ballot…</strong>
-                    </div>
+                    <lbh3-alert message:from="'Submitting your ballot…'" />
                   {{/if}}
 
                   {{#if savingPromise.isRejected}}
@@ -241,9 +234,7 @@
                     {{/if}}
 
                     {{#if ballotsPromise.isPending}}
-                      <div class="alert alert-info" role="alert">
-                        <strong>Fetching submitted ballots…</strong>
-                      </div>
+                      <lbh3-alert message:from="'Fetching submitted ballots…'" />
                     {{/if}}
 
                     {{#if ballotsPromise.isRejected}}
@@ -621,9 +612,7 @@
           </p>
 
           {{#if savingPromise.isPending}}
-            <div class="alert alert-info" role="alert">
-              <strong>Saving your request…</strong>
-            </div>
+            <lbh3-alert message:from="'Saving your request for access…'" />
           {{else}}
             {{#if session.user.requestedName}}
               <div class="alert alert-success" role="alert">

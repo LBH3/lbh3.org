@@ -1,11 +1,10 @@
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
 
 <h2>Email List</h2>
 
 {{#if hashersPromise.isPending}}
-  <div class="alert alert-info" role="alert">
-    <strong>Fetching email list…</strong>
-  </div>
+  <lbh3-alert message:from="'Fetching the Email List…'" />
 {{/if}}
 
 {{#if hashersPromise.isRejected}}

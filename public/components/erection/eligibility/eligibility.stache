@@ -1,6 +1,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-converters" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/erection/nav/" />
 <can-import from="~/components/hasher-autocomplete/" />
 
@@ -13,9 +14,7 @@
   />
 
   {{#if electionEligibilityPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching eligible hashers…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching eligible hashers…'" />
   {{/if}}
 
   {{#if electionEligibilityPromise.isRejected}}

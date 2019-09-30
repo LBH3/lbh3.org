@@ -2,6 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-converters" />
 <can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
 <can-import from="~/components/erection/nav/" />
 <can-import from="~/components/hasher-autocomplete/" />
 
@@ -14,9 +15,7 @@
   />
 
   {{#if paperBallotsPromise.isPending}}
-    <div class="alert alert-info" role="alert">
-      <strong>Fetching paper ballots…</strong>
-    </div>
+    <lbh3-alert message:from="'Fetching the paper ballots…'" />
   {{/if}}
 
   {{#if paperBallotsPromise.isRejected}}
@@ -70,9 +69,7 @@
     <h3>Record a paper ballot was taken</h3>
 
     {{#if newPaperBallotPromise.isPending}}
-      <div class="alert alert-info mt-3" role="alert">
-        <strong>Saving paper ballot…</strong>
-      </div>
+      <lbh3-alert message:from="'Saving the paper ballot…'" />
     {{else}}
       {{#if newPaperBallotPromise.isRejected}}
         <div class="alert alert-danger mt-3" role="alert">

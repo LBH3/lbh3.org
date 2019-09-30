@@ -1,3 +1,4 @@
+<can-import from="~/components/alert/" />
 <can-import from="~/components/no-ssr/" />
 <can-import from="~/components/run/" />
 
@@ -27,14 +28,12 @@
 <lbh3-no-ssr>
   {{#if electionsPromise}}
     {{#if electionsPromise.isPending}}
-      <div class="alert alert-info" role="alert">
-        <strong>Fetching erections…</strong>
-      </div>
+      <lbh3-alert message:from="'Fetching elections…'" />
     {{/if}}
 
     {{#if electionsPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The upcuming erections couldn’t be fetched.
+        <strong>Fuck!</strong> The upcumming erections couldn’t be fetched.
         {{electionsPromise.reason.xhr.message}}
       </div>
     {{/if}}
