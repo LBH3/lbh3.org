@@ -27,7 +27,9 @@
   </div>
   <div>
     {{#eq platform.isNode true}}
-      <span class="fas fa-circle-notch fa-lg fa-spin"></span>
+      <div class="align-items-center d-flex" style="height: 100%">
+        <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
+      </div>
     {{else}}
       <ul class="nav">
         {{#if session.user}}
