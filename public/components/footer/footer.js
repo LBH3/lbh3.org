@@ -1,13 +1,14 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './footer.less';
-import view from './footer.stache';
-
-export const ViewModel = DefineMap.extend({
-});
 
 export default Component.extend({
   tag: 'lbh3-footer',
-  ViewModel,
-  view
+  view: `
+    <footer class="text-muted">
+      <p class="my-3 text-center">
+        <a href="mailto:contact@lbh3.org">Email us</a> with any questions or comments.
+      </p>
+    </footer>
+  `
 });

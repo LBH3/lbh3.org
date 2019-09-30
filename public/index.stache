@@ -40,6 +40,7 @@
   <body>
     <can-import from="~/styles.less" />
     <can-import from="~/app" export-as="viewModel" />
+    <can-import from="~/components/alert/" />
     <can-import from="~/components/footer/" />
     <can-import from="~/components/header/" />
     <can-import from="~/components/nav/" />
@@ -58,7 +59,7 @@
         {{#case "about"}}
           <can-import from="~/components/about/nav/">
             {{#if isPending}}
-              Loading the About navigation…
+              <lbh3-alert message:from="'Loading the About nav…'" />
             {{else}}
               <lbh3-about-nav
                 class="container pl-0 pr-0"
@@ -70,14 +71,14 @@
             {{#case "mismanagement"}}
               <can-import from="~/components/about/mismanagement/">
                 {{#if isPending}}
-                  Loading Mismanagement…
+                  <lbh3-alert message:from="'Loading the Mismanagement page…'" />
                 {{else}}
                   <lbh3-about-mismanagement
                     class="container pl-0 pr-0"
-                    description:to="scope.vm.description"
-                    ogTitle:to="scope.vm.ogTitle"
-                    title:to="scope.vm.title"
-                    year:from="scope.vm.year"
+                    description:to="description"
+                    ogTitle:to="ogTitle"
+                    title:to="title"
+                    year:from="year"
                   />
                 {{/if}}
               </can-import>
@@ -85,13 +86,13 @@
             {{#case "privacy"}}
               <can-import from="~/components/about/privacy/">
                 {{#if isPending}}
-                  Loading page…
+                  <lbh3-alert message:from="'Loading the Privacy page…'" />
                 {{else}}
                   <lbh3-about-privacy
                     class="container pl-0 pr-0"
-                    description:to="scope.vm.description"
-                    ogTitle:to="scope.vm.ogTitle"
-                    title:to="scope.vm.title"
+                    description:to="description"
+                    ogTitle:to="ogTitle"
+                    title:to="title"
                   />
                 {{/if}}
               </can-import>
@@ -99,14 +100,14 @@
             {{#default}}
               <can-import from="~/components/about/">
                 {{#if isPending}}
-                  Loading about page…
+                  <lbh3-alert message:from="'Loading the About page…'" />
                 {{else}}
                   <lbh3-about
                     class="container pl-0 pr-0"
-                    description:to="scope.vm.description"
-                    ogTitle:to="scope.vm.ogTitle"
+                    description:to="description"
+                    ogTitle:to="ogTitle"
                     secondaryPage:from="secondaryPage"
-                    title:to="scope.vm.title"
+                    title:to="title"
                   />
                 {{/if}}
               </can-import>
@@ -121,15 +122,15 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/erection/ballots/">
                       {{#if isPending}}
-                        Loading the erection ballots page…
+                        <lbh3-alert message:from="'Loading the Erection Ballots page…'" />
                       {{else}}
                         <lbh3-erection-ballots
                           class="container pl-0 pr-0"
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          secondaryPage:from="scope.vm.secondaryPage"
-                          title:to="scope.vm.title"
-                          urlId:from="scope.vm.urlId"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          secondaryPage:from="secondaryPage"
+                          title:to="title"
+                          urlId:from="urlId"
                         />
                       {{/if}}
                     </can-import>
@@ -139,15 +140,15 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/erection/edit/">
                       {{#if isPending}}
-                        Loading the edit erection page…
+                        <lbh3-alert message:from="'Loading the Edit Erection page…'" />
                       {{else}}
                         <lbh3-erection-edit
                           class="container pl-0 pr-0"
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          secondaryPage:from="scope.vm.secondaryPage"
-                          title:to="scope.vm.title"
-                          urlId:from="scope.vm.urlId"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          secondaryPage:from="secondaryPage"
+                          title:to="title"
+                          urlId:from="urlId"
                         />
                       {{/if}}
                     </can-import>
@@ -157,14 +158,14 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/erection/eligibility/">
                       {{#if isPending}}
-                        Loading the erection eligibility page…
+                        <lbh3-alert message:from="'Loading the Erection Eligibility page…'" />
                       {{else}}
                         <lbh3-erection-eligibility
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          secondaryPage:from="scope.vm.secondaryPage"
-                          title:to="scope.vm.title"
-                          urlId:from="scope.vm.urlId"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          secondaryPage:from="secondaryPage"
+                          title:to="title"
+                          urlId:from="urlId"
                         />
                       {{/if}}
                     </can-import>
@@ -174,14 +175,14 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/erection/results/">
                       {{#if isPending}}
-                        Loading the erection results page…
+                        <lbh3-alert message:from="'Loading the Erection Results page…'" />
                       {{else}}
                         <lbh3-erection-results
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          secondaryPage:from="scope.vm.secondaryPage"
-                          title:to="scope.vm.title"
-                          urlId:from="scope.vm.urlId"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          secondaryPage:from="secondaryPage"
+                          title:to="title"
+                          urlId:from="urlId"
                         />
                       {{/if}}
                     </can-import>
@@ -191,15 +192,15 @@
             {{else}}
               <can-import from="~/components/erection/">
                 {{#if isPending}}
-                  Loading the erection page…
+                  <lbh3-alert message:from="'Loading the Erection page…'" />
                 {{else}}
                   <lbh3-erection
                     class="container pl-0 pr-0"
-                    description:to="scope.vm.description"
-                    ogTitle:to="scope.vm.ogTitle"
-                    secondaryPage:from="scope.vm.secondaryPage"
-                    title:to="scope.vm.title"
-                    urlId:from="scope.vm.urlId"
+                    description:to="description"
+                    ogTitle:to="ogTitle"
+                    secondaryPage:from="secondaryPage"
+                    title:to="title"
+                    urlId:from="urlId"
                   />
                 {{/if}}
               </can-import>
@@ -207,12 +208,12 @@
           {{else}}
             <can-import from="~/components/erections/">
               {{#if isPending}}
-                Loading the erections page…
+                <lbh3-alert message:from="'Loading the Erections page…'" />
               {{else}}
                 <lbh3-erections
-                  description:to="scope.vm.description"
-                  ogTitle:to="scope.vm.ogTitle"
-                  title:to="scope.vm.title"
+                  description:to="description"
+                  ogTitle:to="ogTitle"
+                  title:to="title"
                 />
               {{/if}}
             </can-import>
@@ -225,16 +226,16 @@
                 <lbh3-no-ssr>
                   <can-import from="~/components/run/attendance/">
                     {{#if isPending}}
-                      Loading the run attendance sheet page…
+                      <lbh3-alert message:from="'Loading the Run Attendance Sheet…'" />
                     {{else}}
                       <lbh3-run-attendance
-                        day:from="scope.vm.day"
-                        description:to="scope.vm.description"
-                        month:from="scope.vm.month"
-                        ogTitle:to="scope.vm.ogTitle"
-                        title:to="scope.vm.title"
-                        trailNumber:from="scope.vm.trailNumber"
-                        year:from="scope.vm.year"
+                        day:from="day"
+                        description:to="description"
+                        month:from="month"
+                        ogTitle:to="ogTitle"
+                        title:to="title"
+                        trailNumber:from="trailNumber"
+                        year:from="year"
                       />
                     {{/if}}
                   </can-import>
@@ -245,77 +246,51 @@
                   {{#if urlId}}
                     <can-import from="~/components/special-event/edit/">
                       {{#if isPending}}
-                        Loading the edit page…
+                        <lbh3-alert message:from="'Loading the Edit Special Event page…'" />
                       {{else}}
                         <lbh3-special-event-edit
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          title:to="scope.vm.title"
-                          urlId:from="scope.vm.urlId"
-                          year:from="scope.vm.year"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          title:to="title"
+                          urlId:from="urlId"
+                          year:from="year"
                         />
                       {{/if}}
                     </can-import>
                   {{else}}
                     <can-import from="~/components/run/edit/">
                       {{#if isPending}}
-                        Loading the edit run page…
+                        <lbh3-alert message:from="'Loading the Edit Run page…'" />
                       {{else}}
                         <lbh3-run-edit
-                          day:from="scope.vm.day"
-                          description:to="scope.vm.description"
-                          month:from="scope.vm.month"
-                          ogTitle:to="scope.vm.ogTitle"
-                          title:to="scope.vm.title"
-                          trailNumber:from="scope.vm.trailNumber"
-                          year:from="scope.vm.year"
+                          day:from="day"
+                          description:to="description"
+                          month:from="month"
+                          ogTitle:to="ogTitle"
+                          title:to="title"
+                          trailNumber:from="trailNumber"
+                          year:from="year"
                         />
                       {{/if}}
                     </can-import>
                   {{/if}}
                 </lbh3-no-ssr>
               {{/case}}
-              {{#case "founders"}}
-                <can-import from="~/components/founders-2018/">
-                  {{#if isPending}}
-                    Loading…
-                  {{else}}
-                    <lbh3-founders-2018
-                      description:to="scope.vm.description"
-                      ogTitle:to="scope.vm.ogTitle"
-                      title:to="scope.vm.title"
-                    />
-                  {{/if}}
-                </can-import>
-              {{/case}}
-              {{#case "memorial-service"}}
-                <can-import from="~/components/memorial-service/">
-                  {{#if isPending}}
-                    Loading…
-                  {{else}}
-                    <lbh3-memorial-service
-                      description:to="scope.vm.description"
-                      ogTitle:to="scope.vm.ogTitle"
-                      title:to="scope.vm.title"
-                    />
-                  {{/if}}
-                </can-import>
-              {{/case}}
             {{/switch}}
           {{else}}
             {{#if trailNumber}}
               <can-import from="~/components/run/">
                 {{#if isPending}}
-                  Loading trail #{{scope.vm.trailNumber}}…
+                  <lbh3-alert message:from="'Loading the Run page…'" />
                 {{else}}
                   <lbh3-run
-                    day:from="scope.vm.day"
-                    description:to="scope.vm.description"
-                    month:from="scope.vm.month"
-                    ogTitle:to="scope.vm.ogTitle"
-                    title:to="scope.vm.title"
-                    trailNumber:from="scope.vm.trailNumber"
-                    year:from="scope.vm.year"
+                    day:from="day"
+                    description:to="description"
+                    month:from="month"
+                    ogTitle:to="ogTitle"
+                    title:to="title"
+                    trailNumber:from="trailNumber"
+                    year:from="year"
                   />
                 {{/if}}
               </can-import>
@@ -323,32 +298,32 @@
               {{#if urlId}}
                 <can-import from="~/components/special-event/">
                   {{#if isPending}}
-                    Loading…
+                    <lbh3-alert message:from="'Loading the Special Event page…'" />
                   {{else}}
                     <lbh3-special-event
                       class="container pl-0 pr-0"
-                      description:to="scope.vm.description"
-                      ogTitle:to="scope.vm.ogTitle"
-                      title:to="scope.vm.title"
-                      urlId:from="scope.vm.urlId"
-                      year:from="scope.vm.year"
+                      description:to="description"
+                      ogTitle:to="ogTitle"
+                      title:to="title"
+                      urlId:from="urlId"
+                      year:from="year"
                     />
                   {{/if}}
                 </can-import>
               {{else}}
                 <can-import from="~/components/past-runs/">
                   {{#if isPending}}
-                    Loading Past Runs…
+                    <lbh3-alert message:from="'Loading Past Runs…'" />
                   {{else}}
                     <lbh3-past-runs
-                      description:to="scope.vm.description"
-                      ogTitle:to="scope.vm.ogTitle"
-                      showHashit:bind="scope.vm.showHashit"
-                      showNotes:bind="scope.vm.showNotes"
-                      showOnOn:bind="scope.vm.showOnOn"
-                      showScribe:bind="scope.vm.showScribe"
-                      title:to="scope.vm.title"
-                      year:from="scope.vm.year"
+                      description:to="description"
+                      ogTitle:to="ogTitle"
+                      showHashit:bind="showHashit"
+                      showNotes:bind="showNotes"
+                      showOnOn:bind="showOnOn"
+                      showScribe:bind="showScribe"
+                      title:to="title"
+                      year:from="year"
                     />
                   {{/if}}
                 </can-import>
@@ -359,7 +334,7 @@
         {{#case "hareline"}}
           <can-import from="~/components/hareline/nav/">
             {{#if isPending}}
-              Loading the Hareline navigation…
+              <lbh3-alert message:from="'Loading the Hareline nav…'" />
             {{else}}
               <lbh3-hareline-nav
                 secondaryPage:from="secondaryPage"
@@ -371,12 +346,12 @@
               <lbh3-no-ssr>
                 <can-import from="~/components/hareline/add/">
                   {{#if isPending}}
-                    Loading the Hareline add page…
+                    <lbh3-alert message:from="'Loading the Add Run page…'" />
                   {{else}}
                     <lbh3-hareline-add
-                      description:to="scope.vm.description"
-                      ogTitle:to="scope.vm.ogTitle"
-                      title:to="scope.vm.title"
+                      description:to="description"
+                      ogTitle:to="ogTitle"
+                      title:to="title"
                     />
                   {{/if}}
                 </can-import>
@@ -386,16 +361,16 @@
               <lbh3-no-ssr>
                 <can-import from="~/components/run/edit/">
                   {{#if isPending}}
-                    Loading the edit run page…
+                    <lbh3-alert message:from="'Loading the Edit Run page…'" />
                   {{else}}
                     <lbh3-run-edit
-                      day:from="scope.vm.day"
-                      description:to="scope.vm.description"
-                      month:from="scope.vm.month"
-                      ogTitle:to="scope.vm.ogTitle"
-                      title:to="scope.vm.title"
-                      trailNumber:from="scope.vm.trailNumber"
-                      year:from="scope.vm.year"
+                      day:from="day"
+                      description:to="description"
+                      month:from="month"
+                      ogTitle:to="ogTitle"
+                      title:to="title"
+                      trailNumber:from="trailNumber"
+                      year:from="year"
                     />
                   {{/if}}
                 </can-import>
@@ -404,13 +379,13 @@
             {{#case "guidelines"}}
               <can-import from="~/components/hareline/guidelines/">
                 {{#if isPending}}
-                  Loading haring guidelines…
+                  <lbh3-alert message:from="'Loading the Haring Guidelines…'" />
                 {{else}}
                   <lbh3-hareline-guidelines
                     class="container pl-0 pr-0"
-                    description:to="scope.vm.description"
-                    ogTitle:to="scope.vm.ogTitle"
-                    title:to="scope.vm.title"
+                    description:to="description"
+                    ogTitle:to="ogTitle"
+                    title:to="title"
                   />
                 {{/if}}
               </can-import>
@@ -418,12 +393,12 @@
             {{#default}}
               <can-import from="~/components/hareline/">
                 {{#if isPending}}
-                  Loading the Hareline…
+                  <lbh3-alert message:from="'Loading the Hareline…'" />
                 {{else}}
                   <lbh3-hareline
-                    description:to="scope.vm.description"
-                    ogTitle:to="scope.vm.ogTitle"
-                    title:to="scope.vm.title"
+                    description:to="description"
+                    ogTitle:to="ogTitle"
+                    title:to="title"
                   />
                 {{/if}}
               </can-import>
@@ -439,14 +414,14 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/hasher/edit/">
                       {{#if isPending}}
-                        Loading the edit hasher page…
+                        <lbh3-alert message:from="'Loading the Edit Hasher page…'" />
                       {{else}}
                         <lbh3-hasher-edit
-                          description:to="scope.vm.description"
-                          id:from="scope.vm.id"
-                          ogTitle:to="scope.vm.ogTitle"
+                          description:to="description"
+                          id:from="id"
+                          ogTitle:to="ogTitle"
                           secondaryPage:from="secondaryPage"
-                          title:to="scope.vm.title"
+                          title:to="title"
                         />
                       {{/if}}
                     </can-import>
@@ -456,15 +431,15 @@
             {{else}}
               <can-import from="~/components/hasher/">
                 {{#if isPending}}
-                  Loading hasher page…
+                  <lbh3-alert message:from="'Loading the Hasher page…'" />
                 {{else}}
                   <lbh3-hasher
-                    description:to="scope.vm.description"
-                    id:from="scope.vm.id"
-                    ogTitle:to="scope.vm.ogTitle"
+                    description:to="description"
+                    id:from="id"
+                    ogTitle:to="ogTitle"
                     secondaryPage:from="secondaryPage"
-                    skip:from="scope.vm.skip"
-                    title:to="scope.vm.title"
+                    skip:from="skip"
+                    title:to="title"
                   />
                 {{/if}}
               </can-import>
@@ -472,7 +447,7 @@
           {{else}}
             <can-import from="~/components/hashers/nav/">
               {{#if isPending}}
-                Loading the Hashers navigation…
+                <lbh3-alert message:from="'Loading the Hashers nav…'" />
               {{else}}
                 <lbh3-hashers-nav
                   secondaryPage:from="secondaryPage"
@@ -485,12 +460,12 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/hashers/add/">
                       {{#if isPending}}
-                        Loading the add hasher page…
+                        <lbh3-alert message:from="'Loading the Add Hasher page…'" />
                       {{else}}
                         <lbh3-hashers-add
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          title:to="scope.vm.title"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          title:to="title"
                         />
                       {{/if}}
                     </can-import>
@@ -500,12 +475,12 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/hashers/attendance-records/">
                       {{#if isPending}}
-                        Loading the attendance records page…
+                        <lbh3-alert message:from="'Loading the Attendance Records page…'" />
                       {{else}}
                         <lbh3-hashers-attendance-records
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          title:to="scope.vm.title"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          title:to="title"
                         />
                       {{/if}}
                     </can-import>
@@ -515,12 +490,12 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/hashers/early-warning/">
                       {{#if isPending}}
-                        Loading the early warning page…
+                        <lbh3-alert message:from="'Loading the Early Warning page…'" />
                       {{else}}
                         <lbh3-hashers-early-warning
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          title:to="scope.vm.title"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          title:to="title"
                         />
                       {{/if}}
                     </can-import>
@@ -530,12 +505,12 @@
                   <lbh3-no-ssr>
                     <can-import from="~/components/hashers/email/">
                       {{#if isPending}}
-                        Loading the hashers email page…
+                        <lbh3-alert message:from="'Loading the Email List page…'" />
                       {{else}}
                         <lbh3-hashers-email
-                          description:to="scope.vm.description"
-                          ogTitle:to="scope.vm.ogTitle"
-                          title:to="scope.vm.title"
+                          description:to="description"
+                          ogTitle:to="ogTitle"
+                          title:to="title"
                         />
                       {{/if}}
                     </can-import>
@@ -547,15 +522,15 @@
               {{else}}
                 <can-import from="~/components/hashers/">
                   {{#if isPending}}
-                    Loading Hashers page…
+                    <lbh3-alert message:from="'Loading the Hashers page…'" />
                   {{else}}
                     <lbh3-hashers
-                      description:to="scope.vm.description"
-                      ogTitle:to="scope.vm.ogTitle"
-                      searchNoHeadshot:bind="scope.vm.noHeadshot"
-                      searchText:bind="scope.vm.search"
-                      skip:from="scope.vm.skip"
-                      title:to="scope.vm.title"
+                      description:to="description"
+                      ogTitle:to="ogTitle"
+                      searchNoHeadshot:bind="noHeadshot"
+                      searchText:bind="search"
+                      skip:from="skip"
+                      title:to="title"
                     />
                   {{/if}}
                 </can-import>
@@ -566,9 +541,7 @@
         {{#case "home"}}
           <can-import from="~/components/home/">
             {{#if isPending}}
-              <div class="alert alert-info" role="alert">
-                <strong>Fetching the next run…</strong>
-              </div>
+              <lbh3-alert message:from="'Loading the Home page…'" />
             {{else}}
               {{#if isRejected}}
                 <div class="alert alert-danger" role="alert">
@@ -578,9 +551,9 @@
               {{else}}
                 <lbh3-home
                   class="container pl-0 pr-0"
-                  description:to="scope.vm.description"
-                  ogTitle:to="scope.vm.ogTitle"
-                  title:to="scope.vm.title"
+                  description:to="description"
+                  ogTitle:to="ogTitle"
+                  title:to="title"
                 />
               {{/if}}
             {{/if}}
@@ -589,12 +562,12 @@
         {{#case "special-events"}}
           <can-import from="~/components/special-events/">
             {{#if isPending}}
-              Loading special events page…
+              <lbh3-alert message:from="'Loading the Special Events page…'" />
             {{else}}
               <lbh3-special-events
-                description:to="scope.vm.description"
-                ogTitle:to="scope.vm.ogTitle"
-                title:to="scope.vm.title"
+                description:to="description"
+                ogTitle:to="ogTitle"
+                title:to="title"
               />
             {{/if}}
           </can-import>
@@ -606,13 +579,13 @@
                 <lbh3-no-ssr>
                   <can-import from="~/components/users/edit/">
                     {{#if isPending}}
-                      Loading the edit user page…
+                      <lbh3-alert message:from="'Loading the Edit User page…'" />
                     {{else}}
                       <lbh3-user-edit
-                        description:to="scope.vm.description"
-                        id:from="scope.vm.id"
-                        ogTitle:to="scope.vm.ogTitle"
-                        title:to="scope.vm.title"
+                        description:to="description"
+                        id:from="id"
+                        ogTitle:to="ogTitle"
+                        title:to="title"
                       />
                     {{/if}}
                   </can-import>
@@ -622,13 +595,13 @@
           {{else}}
             <can-import from="~/components/users/">
               {{#if isPending}}
-                Loading users page…
+                <lbh3-alert message:from="'Loading the Users page…'" />
               {{else}}
                 <lbh3-users
-                  description:to="scope.vm.description"
-                  ogTitle:to="scope.vm.ogTitle"
+                  description:to="description"
+                  ogTitle:to="ogTitle"
                   secondaryPage:from="secondaryPage"
-                  title:to="scope.vm.title"
+                  title:to="title"
                 />
               {{/if}}
             </can-import>

@@ -2,7 +2,6 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import './nav.less';
-import view from './nav.stache';
 
 export const ViewModel = DefineMap.extend({
   day: 'number',
@@ -44,5 +43,28 @@ export const ViewModel = DefineMap.extend({
 export default Component.extend({
   tag: 'lbh3-nav',
   ViewModel,
-  view
+  view: `
+    <can-import from="can-stache-route-helpers" />
+    <nav>
+      <ul class="container-fluid nav nav-fill">
+        <li class="{{#if isActive('home')}}active{{/if}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='home'}}">Home</a>
+        </li>
+        <li class="{{#if isActive('hareline')}}active{{/if}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='hareline'}}">Hareline</a>
+        </li>
+        <li class="{{#if isActive('events')}}active{{/if}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='events'}}">Past Runs</a>
+        </li>
+        {{#if session.user.canViewDirectoryInfo}}
+          <li class="{{#if isActive('hashers')}}active{{/if}} nav-item">
+            <a class="nav-link" href="{{routeUrl page='hashers' secondaryPage=''}}">Hashers</a>
+          </li>
+        {{/if}}
+        <li class="{{#if isActive('about')}}active{{/if}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='about'}}">About</a>
+        </li>
+      </ul>
+    </nav>
+  `
 });

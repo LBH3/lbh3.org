@@ -3,7 +3,6 @@ import Place from '~/models/place';
 import './map.less';
 import loader from '@loader';
 import platform from 'steal-platform';
-import view from './map.stache';
 
 export const darkModeStyles = [
   {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
@@ -90,7 +89,7 @@ const zoom = 14;
 
 export default Component.extend({
   tag: 'lbh3-map',
-  view,
+  view: '',
   ViewModel: {
     get googleMapsKey() {
       return loader.googleMapsKey;

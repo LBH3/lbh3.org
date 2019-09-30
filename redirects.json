@@ -2,6 +2,8 @@
   "/index.html": "/",
   "/index.php": "/",
   "/about/aboutus.php": "/about/",
+  "/events/founders/2018/": "/events/2018/founders/",
+  "/events/jesus-cuervo-1800-trail/": "/events/2017/jesus-cuervo/",
   "/mismanage/": "/about/mismanagement/",
   "/mismanage/index.html": "/about/mismanagement/",
   "/mismanage/mismanage.php": "/about/mismanagement/",
