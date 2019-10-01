@@ -96,6 +96,30 @@
       "maxSize": "25 kB"
     },
     {
+      "path": "./public/dist/bundles/edit-add-edit.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/edit-add-edit.js",
+      "maxSize": "29 kB"
+    },
+    {
+      "path": "./public/dist/bundles/hareline-hasher--*.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/hareline-hasher--*.js",
+      "maxSize": "42 kB"
+    },
+    {
+      "path": "./public/dist/bundles/mismanagement-na-*.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/mismanagement-na-*.js",
+      "maxSize": "10 kB"
+    },
+    {
       "path": "./public/dist/bundles/lbh3/index.css",
       "maxSize": "15 kB"
     },
@@ -104,12 +128,48 @@
       "maxSize": "212 kB"
     },
     {
+      "path": "./public/dist/bundles/lbh3/components/hareline/hareline.js",
+      "maxSize": "5 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hasher/hasher.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hasher/hasher.js",
+      "maxSize": "12 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hashers/hashers.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hashers/hashers.js",
+      "maxSize": "7 kB"
+    },
+    {
       "path": "./public/dist/bundles/lbh3/components/home/home.css",
       "maxSize": "1 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/home/home.js",
       "maxSize": "7 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/past-runs/past-runs.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/past-runs/past-runs.js",
+      "maxSize": "8 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/special-event/special-event.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/special-event/special-event.js",
+      "maxSize": "5 kB"
     }
   ]
 }
