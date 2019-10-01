@@ -380,7 +380,7 @@ export default Component.extend({
   events: {
     '{viewModel} event': function() {
       loadGoogleMapsPlacesAPI(() => {
-        enableAutocompleteForInput('location', this.viewModel, 'location', this.viewModel.event, savedPlace => {
+        enableAutocompleteForInput('location', this.viewModel, 'location', savedPlace => {
           this.viewModel.event.locationGooglePlaceId = savedPlace.id;
           this.viewModel.event.locationMd = savedPlace.name || savedPlace.formattedAddress;
         });
