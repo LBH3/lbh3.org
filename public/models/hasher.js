@@ -32,9 +32,9 @@ const emailAddressesPropDefinition = {
 };
 
 const listSerializer = (list) => {
-  return list.filter(member => {
+  return list ? list.filter(member => {
     return member.value;
-  }).serialize();
+  }).serialize() : [];
 };
 
 const privacyDefault = {
