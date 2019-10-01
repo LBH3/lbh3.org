@@ -2,7 +2,6 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/brands.css" />
 <can-import from="@fortawesome/fontawesome-free/css/regular.css" />
-<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/alert/" />
 
 {{#if session.user.canManageUsers}}
@@ -53,7 +52,7 @@
                   {{#if user.hasherPromise.isResolved}}
                     {{user.hasher.hashOrJustName}}
                   {{else}}
-                    <span class="fas fa-circle-notch fa-spin"></span>
+                    <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
                   {{/if}}
                 {{else}}
                   {{#if user.requestedName}}

@@ -19,7 +19,7 @@ export const ViewModel = DefineMap.extend({
         event.photosUrl = answer;
         this.savePromise = event.save();
       } else {
-        alert(`Sorry, ${answer} is not a valid photo URL.`);
+        alert(`Sorry, ${answer} is not a valid photo URL. It should start with ${https}`);
       }
     }
   },

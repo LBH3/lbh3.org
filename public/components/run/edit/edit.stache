@@ -91,7 +91,7 @@
             </small>
           {{else}}
             {{#if locationPromise.isPending}}
-              <span class="fas fa-circle-notch fa-spin"></span>
+              <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
             {{/if}}
             {{#if locationPromise.isResolved}}
               <span class="fas fa-check"></span>
@@ -127,7 +127,7 @@
             </small>
           {{else}}
             {{#if onOnPromise.isPending}}
-              <span class="fas fa-circle-notch fa-spin"></span>
+              <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
             {{/if}}
             {{#if onOnPromise.isResolved}}
               <span class="fas fa-check"></span>

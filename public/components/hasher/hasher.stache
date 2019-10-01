@@ -1,6 +1,5 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/alert/" />
 <can-import from="~/components/hasher/nav/" />
@@ -242,7 +241,7 @@
                       <td class="text-nowrap">{{patch.number}} {{patch.type}}s</td>
                       <td>
                         {{#if patch.eventsPromise.isPending}}
-                          <span class="fas fa-circle-notch fa-spin"></span>
+                          <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
                         {{/if}}
                         {{#if patch.eventsPromise.isRejected}}
                           <span class="fas fa-exclamation-triangle"></span>
@@ -304,7 +303,7 @@
                       </td>
                       <td>
                         {{#if boredPosition.positionPromise.isPending}}
-                          <span class="fas fa-circle-notch fa-spin"></span>
+                          <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
                         {{/if}}
                         {{#if boredPosition.positionPromise.isRejected}}
                           <span class="fas fa-exclamation-triangle"></span>

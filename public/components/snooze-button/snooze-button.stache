@@ -19,7 +19,7 @@
 {{#if session.user.canAddSnoozes}}
   {{#if uploadPromise}}
     {{#if uploadPromise.isPending}}
-      <span class="fas fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
+      <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
     {{/if}}
     {{#if uploadPromise.isRejected}}
       <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{uploadPromise.reason.xhr.message}}"></span>
@@ -37,7 +37,7 @@
     {{else}}
       {{#if removePromise}}
         {{#if removePromise.isPending}}
-          <span class="fas fa-circle-notch fa-spin {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
+          <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
         {{/if}}
         {{#if removePromise.isRejected}}
           <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{removePromise.reason.xhr.message}}"></span>

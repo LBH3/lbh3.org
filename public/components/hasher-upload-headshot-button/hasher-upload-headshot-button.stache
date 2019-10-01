@@ -20,7 +20,7 @@
 
 {{#if headshotPromise}}
   {{#if headshotPromise.isPending}}
-    <span class="fas fa-circle-notch fa-spin"></span>
+    <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
   {{/if}}
   {{#if headshotPromise.isRejected}}
     <span class="fas fa-exclamation-triangle"></span>
