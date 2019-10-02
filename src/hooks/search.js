@@ -53,25 +53,10 @@ module.exports = function (options) {
         return term.length > 0;
       });
       const fields = options.fields;
-      if (options.contains) {
-        options.contains.forEach(field => {
-          if (field === 'emails') {
-            countQuery = `${countQuery}, json_array_elements(hashers.emails) email`;
-            selectQuery = `${selectQuery}, json_array_elements(hashers.emails) email`;
-            fields.push('email ->> \'value\'');
-          } else {
-            fields.push(`array_to_string(${field}, ' ')`);
-          }
-        });
-      }
-      const tsvector = fields.map(field => {
-        if (field === 'hash_name') {
-          return `to_tsvector('english', replace(replace(coalesce(${field}, ''), '''', ''), '-', ' '))`;
-        } else {
-          return `to_tsvector('english', coalesce(${field}, ''))`;
-        }
-      });
-      const whereQuery = `WHERE ${tsvector.join(' || ')} @@ to_tsquery('english', '${searchTerms.join(' & ')}')`;
+
+      const tsvector = `to_tsvector('english', coalesce(concat(${fields.join(',\' \',')}), ''))`;
+      const tsquery = `to_tsquery('english', '${searchTerms.join(' & ')}')`;
+      const whereQuery = `WHERE ${tsvector} @@ ${tsquery}`;
 
       // Build the GROUP BY
       const groupByQuery = 'GROUP BY id';

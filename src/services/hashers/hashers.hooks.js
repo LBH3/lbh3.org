@@ -42,8 +42,7 @@ const beforeFindHook = function(hook) {
       })(hook);
     } else {
       return searchHook({
-        contains: ['emails'],
-        fields: ['family_name', 'given_name', 'hash_name'],
+        fields: ['emails', 'family_name', 'given_name', 'hash_name'],
         oldOptions: {
           fields: ['familyName', 'givenName', 'hashName']
         }

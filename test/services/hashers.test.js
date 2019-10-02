@@ -8,6 +8,8 @@ const indexOfHasherInResults = function(hasherId, results) {
   });
 };
 
+const itRunsLocally = process.env.DATABASE_URL === 'postgres://chasen:@localhost:5432/lbh3' ? it : it.skip;
+
 describe('\'hashers\' service', () => {
   it('registered the service', () => {
     assert.ok(service, 'Registered the service');
@@ -44,6 +46,13 @@ describe('\'hashers\' service', () => {
     it('can search by hash name', () => {
       return service.find({ query: {search: 'matt damon'}, user }).then(result => {
         assert.equal(result.data[0].id, 6394, 'Found Matt Damon');
+      });
+    });
+
+    itRunsLocally('can search by partial hash name', () => {
+      return service.find({ query: {search: 'buttd'}, user }).then(result => {
+        assert.ok(result.data.length > 0, 'Found results');
+        assert.equal(result.data[0].id, 977, 'Correct id');
       });
     });
   });
@@ -87,7 +96,7 @@ describe('\'hashers\' service', () => {
       });
     });
 
-    it.skip('will fall back to old search if no results', () => {
+    itRunsLocally('will fall back to old search if no results', () => {
       return service.find({ query: {search: 'off'} }).then(result => {
         assert.ok(result.data.length > 0, 'Found results');
       });
