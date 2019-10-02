@@ -30,8 +30,11 @@ export default Component.extend({
         });
       }
     },
-    get isBeforeAugust25() {
-      return new Date() < new Date('Aug 25 2019 07:00:00 UTC');
+    get isBeforeMarathonRun() {
+      return new Date() < new Date('Oct 13 2019 19:00:00 UTC');
+    },
+    get isBeforeOctober19() {
+      return new Date() < new Date('Oct 19 2019 07:00:00 UTC');
     },
     get ogTitle() {
       return this.title;

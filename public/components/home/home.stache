@@ -50,10 +50,18 @@
   {{/if}}
 </lbh3-no-ssr>
 
-{{#if isBeforeAugust25}}
+{{#if isBeforeMarathonRun}}
   <p class="border mt-3 py-3 rounded text-center">
-    <a class="d-block" href="events/2019/hashstock/">
-      Save the date! Hashstock is cumming back on Saturday, August&nbsp;24<sup>th</sup>
+    <a class="d-block" href="events/2019/marathon/">
+      Help us support LB Marathon racists on Sunday, October&nbsp;13<sup>th</sup>
+    </a>
+  </p>
+{{/if}}
+
+{{#if isBeforeOctober19}}
+  <p class="border mt-3 py-3 rounded text-center">
+    <a class="d-block" href="events/2019/memorial-service/">
+      Join us for our yearly memorial service on Friday, October&nbsp;18<sup>th</sup>
     </a>
   </p>
 {{/if}}
