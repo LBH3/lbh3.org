@@ -1,4 +1,3 @@
-import '~/polyfills';
 import ajax from 'can-ajax';
 import auth from 'feathers-authentication-client';
 import feathers from 'feathers/client';
