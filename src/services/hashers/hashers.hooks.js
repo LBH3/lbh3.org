@@ -136,46 +136,83 @@ const boredPositions = [
 ];
 
 const createAndUpdateFields = function(hook) {
-  const profile = hook.params.user.facebookProfile || hook.params.user.googleProfile || {};
-  let displayName = profile.displayName || '';
-  if (!displayName) {
-    if (typeof profile.name === 'object') {
-      const familyName = profile.name.familyName || '';
-      const givenName = profile.name.givenName || '';
-      displayName = `${givenName} ${familyName}`.trim();
+  return hook.app.service('api/hashers').get(hook.id, {user: hook.params.user}).then(hasher => {
+
+    // Restrict what hashers can edit in their own profile
+    if (hook.id == hook.params.user.hasherId && !hook.params.user.canEditHasherInfo) {
+      const whitelist = [
+        'addresses',
+        'birthDay',
+        'birthDayPrivacy',
+        'birthMonth',
+        'birthMonthPrivacy',
+        'birthYear',
+        'birthYearPrivacy',
+        'emailing',
+        'emails',
+        'familyName',
+        'familyNamePrivacy',
+        'givenName',
+        'givenNamePrivacy',
+        'headshotPrivacy',
+        'headshotUrl',
+        'motherHash',
+        'motherHashPrivacy',
+        'phones',
+        'whoMadeYouCum',
+        'whoMadeYouCumPrivacy'
+      ];
+      const filteredData = Object.assign({}, hasher);
+      whitelist.forEach(field => {
+        filteredData[field] = hook.data[field];
+      });
+      hook.data = filteredData;
     }
-    if (!displayName && profile.emails && profile.emails.length > 0) {
-      const firstEmail = profile.emails[0];
-      if (firstEmail && firstEmail.value) {
-        displayName = firstEmail.value;
+
+    // Created & updated fields
+    const profile = hook.params.user.facebookProfile || hook.params.user.googleProfile || {};
+    let displayName = profile.displayName || '';
+    if (!displayName) {
+      if (typeof profile.name === 'object') {
+        const familyName = profile.name.familyName || '';
+        const givenName = profile.name.givenName || '';
+        displayName = `${givenName} ${familyName}`.trim();
+      }
+      if (!displayName && profile.emails && profile.emails.length > 0) {
+        const firstEmail = profile.emails[0];
+        if (firstEmail && firstEmail.value) {
+          displayName = firstEmail.value;
+        }
       }
     }
-  }
+    if (hook.method === 'create' && !hook.data.createdBy && !hook.data.createdByUserId) {
+      hook.data.createdBy = displayName;
+      hook.data.createdByUserId = hook.params.user.id || 0;
+    }
+    hook.data.updatedBy = displayName;
+    hook.data.updatedByUserId = hook.params.user.id || 0;
 
-  if (hook.method === 'create' && !hook.data.createdBy && !hook.data.createdByUserId) {
-    hook.data.createdBy = displayName;
-    hook.data.createdByUserId = hook.params.user.id || 0;
-  }
+    // Naming trail
+    if (hook.params.user.canEditHasherInfo) {
+      const namingTrailNumber = hook.data.namingTrailNumber;
+      if (namingTrailNumber) {
+        return new Promise(function(resolve, reject) {
+          const findEvent = {query: {trailNumber: namingTrailNumber}};
+          hook.app.service('api/events').find(findEvent).then(events => {
+            if (events.data.length === 1) {
+              hook.data.namingTrailDate = events.data[0].startDatetime;
+              resolve(hook);
+            } else {
+              reject(new errors.NotFound(`Could not find trail #${namingTrailNumber}`));
+            }
+          }, reject);
+        });
+      } else if (hook.data.namingTrailDate) {// Reset namingTrailDate if namingTrailNumber is not set
+        hook.data.namingTrailDate = null;
+      }
+    }
 
-  hook.data.updatedBy = displayName;
-  hook.data.updatedByUserId = hook.params.user.id || 0;
-
-  const namingTrailNumber = hook.data.namingTrailNumber;
-  if (namingTrailNumber) {
-    return new Promise(function(resolve, reject) {
-      const findEvent = {query: {trailNumber: namingTrailNumber}};
-      hook.app.service('api/events').find(findEvent).then(events => {
-        if (events.data.length === 1) {
-          hook.data.namingTrailDate = events.data[0].startDatetime;
-          resolve(hook);
-        } else {
-          reject(new errors.NotFound(`Could not find trail #${namingTrailNumber}`));
-        }
-      }, reject);
-    });
-  } else if (hook.data.namingTrailDate) {// Reset namingTrailDate if namingTrailNumber is not set
-    hook.data.namingTrailDate = null;
-  }
+  });
 };
 
 const filterData = function(data) {
