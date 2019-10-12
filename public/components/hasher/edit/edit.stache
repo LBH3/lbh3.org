@@ -3,7 +3,7 @@
 <can-import from="~/components/hasher/nav/" />
 <can-import from="~/components/hasher-edit-form/" />
 
-{{#if session.user.canEditHasherInfo}}
+{{#if canEditThisHasher}}
 
   {{#if hasherPromise.isPending}}
     <lbh3-alert message:from="'Fetching the hasher…'" />

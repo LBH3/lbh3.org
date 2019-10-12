@@ -71,6 +71,29 @@ const restrictToUser = restrictToOwner({
   ownerField: 'id'
 });
 
+const restrictToUserOrPositions = function(...boredPositions) {
+  return function(hook) {
+    return new Promise(function(resolve, reject) {
+      const restrictToPositions = restrictTo(...boredPositions);
+      try {
+        const authForUser = restrictToOwner({
+          idField: 'hasherId',
+          ownerField: 'id'
+        })(hook);
+        if (authForUser === hook) {
+          restrictToPositions(hook).then(resolve, reject);
+        } else {
+          authForUser.then(resolve, error => { // eslint-disable-line no-unused-vars
+            restrictToPositions(hook).then(resolve, reject);
+          });
+        }
+      } catch (error) { // eslint-disable-line no-unused-vars
+        restrictToPositions(hook).then(resolve, reject);
+      }
+    });
+  };
+};
+
 const restrictToUserOrWebmaster = function(hook) {
   return new Promise(function(resolve, reject) {
     try {
@@ -95,6 +118,7 @@ module.exports = {
   restrictTo,
   restrictToSignedInHashers,
   restrictToUser,
+  restrictToUserOrPositions,
   restrictToUserOrWebmaster,
   restrictToWebmaster
 };

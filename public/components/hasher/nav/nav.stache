@@ -20,7 +20,7 @@
       Download
     </a>
   </li>
-  {{#if session.user.canEditHasherInfo}}
+  {{#if canEditThisHasher}}
     <li class="nav-item">
       <a
         class="{{#eq(secondaryPage, 'edit')}}active{{/eq}} nav-link"

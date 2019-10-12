@@ -197,7 +197,7 @@ module.exports = {
     ],
     get: [ attachAuthInfo ],
     create: [ jwtAuthentication, authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
-    update: [ jwtAuthentication, authHook.restrictTo(...boredPositions), createAndUpdateFields, makeRaw ],
+    update: [ jwtAuthentication, authHook.restrictToUserOrPositions(...boredPositions), createAndUpdateFields, makeRaw ],
     patch: [ jwtAuthentication, authHook.restrictTo() ],
     remove: [ jwtAuthentication, authHook.restrictTo() ]
   },

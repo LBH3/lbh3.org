@@ -7,11 +7,34 @@ import view from './edit.stache';
 import './edit.less';
 
 export const ViewModel = DefineMap.extend({
+
+  get canEditThisHasher() {
+    const user = this.session && this.session.user;
+    if (user && user.hasherId) {
+      if (user.canEditHasherInfo === true) {
+        return true;
+      } else {
+        const hasher = this.hasher;
+        if (hasher && hasher.id) {
+          return hasher.id === user.hasherId;
+        }
+      }
+    }
+    return false;
+  },
+
   description: {
     default: ''
   },
 
-  hasher: Hasher,
+  hasher: {
+    get: function(lastValue, setValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      this.hasherPromise.then(setValue);
+    }
+  },
 
   hasherPromise: {
     get: function() {
@@ -19,9 +42,6 @@ export const ViewModel = DefineMap.extend({
       if (id) {
         return Hasher.connection.get({
           id
-        }).then(hasher => {
-          this.hasher = hasher;
-          return hasher;
         });
       }
     }
