@@ -210,6 +210,9 @@ export const Hasher = DefineMap.extend({
     serialize: true
   },
   emails: {
+    get(lastSetValue) {
+      return lastSetValue || new Email.List();
+    },
     serialize: listSerializer,
     Type: Email.List
   },
@@ -472,6 +475,9 @@ export const Hasher = DefineMap.extend({
     serialize: true
   },
   phones: {
+    get(lastSetValue) {
+      return lastSetValue || new Phone.List();
+    },
     serialize: listSerializer,
     Type: Phone.List
   },

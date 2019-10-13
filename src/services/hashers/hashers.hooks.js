@@ -141,7 +141,13 @@ const boredPositions = [
 ];
 
 const createAndUpdateFields = function(hook) {
-  return hook.app.service('api/hashers').get(hook.id, {user: hook.params.user}).then(hasher => {
+  return new Promise((resolve, reject) => {
+    if (hook.method === 'create') {
+      resolve({});
+    } else {
+      hook.app.service('api/hashers').get(hook.id, {user: hook.params.user}).then(resolve, reject);
+    }
+  }).then(hasher => {
 
     // Restrict what hashers can edit in their own profile
     if (hook.id == hook.params.user.hasherId && !hook.params.user.canEditHasherInfo) {

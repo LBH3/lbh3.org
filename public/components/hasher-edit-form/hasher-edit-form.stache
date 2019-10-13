@@ -231,7 +231,7 @@
       </label>
       {{#for(phone of hasher.phones)}}
         <div class="col-sm-8 d-flex flex-column flex-sm-row">
-          <input class="flex-grow-1 form-control mb-2 mr-sm-2" type="phone" value:bind="phone.value">
+          <input class="flex-grow-1 form-control mb-2 mr-sm-2" type="tel" value:bind="phone.value">
           <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
             <select class="form-control w-auto mb-2 mr-sm-2" value:bind="phone.type">
               {{>phoneTypeOptionsTemplate}}
@@ -243,7 +243,7 @@
         </div>
       {{/for}}
       <div class="col-sm-8 d-flex flex-column flex-sm-row">
-        <input class="flex-grow-1 form-control mb-2 mb-sm-0 mr-sm-2" type="phone" value:bind="additionalFields.phone.value">
+        <input class="flex-grow-1 form-control mb-2 mb-sm-0 mr-sm-2" type="tel" value:bind="additionalFields.phone.value">
         <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
           <select class="form-control w-auto mb-2 mb-sm-0 mr-sm-2" value:bind="additionalFields.phone.type">
             {{>phoneTypeOptionsTemplate}}
@@ -427,6 +427,7 @@
 
   <button
     class="btn btn-primary"
+    {{#if(not(hasher.hashName))}}disabled{{/if}}
     {{#if editingHasherPromise.isPending}}disabled{{/if}}
     on:click="editHasher()"
   >
