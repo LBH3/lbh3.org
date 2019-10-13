@@ -163,6 +163,7 @@ const createAndUpdateFields = function(hook) {
         'headshotUrl',
         'motherHash',
         'motherHashPrivacy',
+        'namingTrailPrivacy',
         'phones',
         'whoMadeYouCum',
         'whoMadeYouCumPrivacy'
@@ -237,6 +238,8 @@ const filterData = function(data, filterState) {
         givenName: 'givenNamePrivacy',
         headshotUrl: 'headshotPrivacy',
         motherHash: 'motherHashPrivacy',
+        namingTrailDate: 'namingTrailPrivacy',
+        namingTrailNumber: 'namingTrailPrivacy',
         whoMadeYouCum: 'whoMadeYouCumPrivacy'
       };
       for (let [field, privacy] of Object.entries(potentialFields)) {
