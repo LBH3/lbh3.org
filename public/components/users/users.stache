@@ -38,11 +38,15 @@
                 {{#if user.googleProfile}}
                   <span class="fab fa-lg fa-google"></span>
                 {{/if}}
-                {{user.email}}
+                <a href="{{routeUrl page='hashers' search=user.email secondaryPage=''}}">
+                  {{user.email}}
+                </a>
               </td>
               <td>
                 {{#if user.displayName}}
-                  {{user.displayName}}
+                  <a href="{{routeUrl page='hashers' search=user.displayName secondaryPage=''}}">
+                    {{user.displayName}}
+                  </a>
                 {{else}}
                   {{user.givenName}} {{user.familyName}}
                 {{/if}}
@@ -50,13 +54,18 @@
               <td>
                 {{#if user.hasherPromise}}
                   {{#if user.hasherPromise.isResolved}}
-                    {{user.hasher.hashOrJustName}}
+                    <a href="{{routeUrl page='hashers' id=user.hasher.id}}">
+                      {{user.hasher.hashOrJustName}}
+                    </a>
                   {{else}}
                     <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
                   {{/if}}
                 {{else}}
                   {{#if user.requestedName}}
-                    Requested: <strong>{{user.requestedName}}</strong>
+                    Requested:
+                    <a href="{{routeUrl page='hashers' search=user.requestedName secondaryPage=''}}">
+                      <strong>{{user.requestedName}}</strong>
+                    </a>
                   {{/if}}
                 {{/if}}
               </td>
