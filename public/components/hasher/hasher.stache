@@ -12,20 +12,14 @@
 {{/if}}
 
 {{#if hasherPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.xhr.message}}
-  </div>
+  <div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.xhr.message}}</div>
 {{/if}}
 
 {{#if hasher}}
   <lbh3-hasher-nav hasher:from="hasher" secondaryPage:from="secondaryPage" session:from="session" />
 
   {{#if hasher.headshotUrl}}
-    <div class="mb-3 text-center">
-      <a href="{{hasher.headshotUrl}}" target="_blank">
-        <img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" />
-      </a>
-    </div>
+    <div class="mb-3 text-center"><a href="{{hasher.headshotUrl}}" target="_blank"><img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" /></a></div>
   {{/if}}
 
   <div class="row">
@@ -84,33 +78,35 @@
         {{/if}}
       </dl>
     </div>
-    <div class="col-lg">
-      <h3>Stats</h3>
-      <dl class="row">
-        <dt class="col-sm-4 col-lg-5">Run count:</dt>
-        <dd class="col-sm-8 col-lg-7">{{hasher.runCount}}</dd>
-        <dt class="col-sm-4 col-lg-5">Miles:</dt>
-        <dd class="col-sm-8 col-lg-7">{{hasher.runMileage}}</dd>
-        <dt class="col-sm-4 col-lg-5">Hare count:</dt>
-        <dd class="col-sm-8 col-lg-7">{{hasher.hareCount}}</dd>
-        {{#if(hasher.firstTrailDate)}}
-          <dt class="col-sm-4 col-lg-5">First trail:</dt>
-          <dd class="col-sm-8 col-lg-7">
-            {{#if hasher.firstTrailDateParts}}
-              <a href="{{routeUrl page='events' year=hasher.firstTrailDateParts.year month=hasher.firstTrailDateParts.month day=hasher.firstTrailDateParts.day trailNumber=hasher.firstTrailNumber}}" title="View trail">
-                {{hasher.firstTrailDate}} (#{{hasher.firstTrailNumber}})
-              </a>
-            {{else}}
-              {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
-            {{/if}}
-          </dd>
-        {{/if}}
-        {{#if(hasher.lastTrailDate)}}
-          <dt class="col-sm-4 col-lg-5">Last trail:</dt>
-          <dd class="col-sm-8 col-lg-7">{{hasher.lastTrailDate}}</dd>
-        {{/if}}
-      </dl>
-    </div>
+    {{#if(hasher.hasStats)}}
+      <div class="col-lg">
+        <h3>Stats</h3>
+        <dl class="row">
+          <dt class="col-sm-4 col-lg-5">Run count:</dt>
+          <dd class="col-sm-8 col-lg-7">{{hasher.runCount}}</dd>
+          <dt class="col-sm-4 col-lg-5">Miles:</dt>
+          <dd class="col-sm-8 col-lg-7">{{hasher.runMileage}}</dd>
+          <dt class="col-sm-4 col-lg-5">Hare count:</dt>
+          <dd class="col-sm-8 col-lg-7">{{hasher.hareCount}}</dd>
+          {{#if(hasher.firstTrailDate)}}
+            <dt class="col-sm-4 col-lg-5">First trail:</dt>
+            <dd class="col-sm-8 col-lg-7">
+              {{#if hasher.firstTrailDateParts}}
+                <a href="{{routeUrl page='events' year=hasher.firstTrailDateParts.year month=hasher.firstTrailDateParts.month day=hasher.firstTrailDateParts.day trailNumber=hasher.firstTrailNumber}}" title="View trail">
+                  {{hasher.firstTrailDate}} (#{{hasher.firstTrailNumber}})
+                </a>
+              {{else}}
+                {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
+              {{/if}}
+            </dd>
+          {{/if}}
+          {{#if(hasher.lastTrailDate)}}
+            <dt class="col-sm-4 col-lg-5">Last trail:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.lastTrailDate}}</dd>
+          {{/if}}
+        </dl>
+      </div>
+    {{/if}}
   </div>
 
   {{<metadataColumn}}
@@ -204,14 +200,10 @@
       <div class="col-sm">
         <h3>Patches</h3>
 
-        {{#if patchesPromise.isPending}}
-          <lbh3-alert message:from="'Fetching their patches…'" />
-        {{/if}}
+        {{#if patchesPromise.isPending}}<lbh3-alert message:from="'Fetching their patches…'" />{{/if}}
 
         {{#if patchesPromise.isRejected}}
-          <div class="alert alert-danger" role="alert">
-            <strong>Fuck!</strong> The hasher’s patches couldn’t be retrieved. {{patchesPromise.reason.xhr.message}}
-          </div>
+          <div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The hasher’s patches couldn’t be retrieved. {{patchesPromise.reason.xhr.message}}</div>
         {{/if}}
 
         {{#if patchesPromise.isResolved}}
@@ -224,16 +216,10 @@
                     <tr>
                       <td class="text-nowrap">{{patch.number}} {{patch.type}}s</td>
                       <td>
-                        {{#if patch.eventsPromise.isPending}}
-                          <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-                        {{/if}}
+                        {{#if patch.eventsPromise.isPending}}<div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>{{/if}}
                         {{#if patch.eventsPromise.isRejected}}
                           <span class="fas fa-exclamation-triangle"></span>
-                          {{#if patch.eventsPromise.reason.xhr.message}}
-                            {{patch.eventsPromise.reason.xhr.message}}
-                          {{else}}
-                            Unknown error
-                          {{/if}}
+                          {{#if patch.eventsPromise.reason.xhr.message}}{{patch.eventsPromise.reason.xhr.message}}{{else}}Unknown error{{/if}}
                         {{/if}}
                         {{#if patch.eventsPromise.isResolved}}
                           {{#if patch.trailNumber}}
@@ -251,7 +237,7 @@
               </table>
             </div>
           {{else}}
-            <p>It doesn’t look like this hasher has any patches.</p>
+            <p>It doesn’t look like {{#eq(id, session.user.hasherId)}}you have{{else}}this hasher has{{/eq}} any patches.</p>
           {{/if}}
         {{/if}}
       </div>
@@ -260,15 +246,9 @@
     <div class="col-sm">
       <h3>Bored positions</h3>
 
-      {{#if boredPositionsPromise.isPending}}
-        <lbh3-alert message:from="'Fetching Mismanagement…'" />
-      {{/if}}
+      {{#if boredPositionsPromise.isPending}}<lbh3-alert message:from="'Fetching Mismanagement…'" />{{/if}}
 
-      {{#if boredPositionsPromise.isRejected}}
-        <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> Couldn’t retrieve when this hasher has served on the Bored. {{boredPositionsPromise.reason.xhr.message}}
-        </div>
-      {{/if}}
+      {{#if boredPositionsPromise.isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> Couldn’t retrieve when {{#eq(id, session.user.hasherId)}}you have{{else}}this hasher has{{/eq}} served on the Bored. {{boredPositionsPromise.reason.xhr.message}}</div>{{/if}}
 
       {{#if boredPositionsPromise.isResolved}}
         {{#if boredPositions.length}}
@@ -278,20 +258,12 @@
               <tbody>
                 {{#for(boredPosition of boredPositions)}}
                   <tr>
+                    <td>{{boredPosition.startYear}}</td>
                     <td>
-                      {{boredPosition.startYear}}
-                    </td>
-                    <td>
-                      {{#if boredPosition.positionPromise.isPending}}
-                        <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-                      {{/if}}
+                      {{#if boredPosition.positionPromise.isPending}}<div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>{{/if}}
                       {{#if boredPosition.positionPromise.isRejected}}
                         <span class="fas fa-exclamation-triangle"></span>
-                        {{#if boredPosition.positionPromise.reason.xhr.message}}
-                          {{boredPosition.positionPromise.reason.xhr.message}}
-                        {{else}}
-                          Unknown error
-                        {{/if}}
+                        {{#if boredPosition.positionPromise.reason.xhr.message}}{{boredPosition.positionPromise.reason.xhr.message}}{{else}}Unknown error{{/if}}
                       {{/if}}
                       {{#if boredPosition.positionPromise.isResolved}}
                         <a href="{{routeUrl page='about' secondaryPage='mismanagement' year=boredPosition.startYear}}">
@@ -305,7 +277,7 @@
             </table>
           </div>
         {{else}}
-          <p>It doesn’t look like this hasher has served on the Bored.</p>
+          <p>It doesn’t look like {{#eq(id, session.user.hasherId)}}you have{{else}}this hasher has{{/eq}} served on the Bored.</p>
         {{/if}}
       {{/if}}
     </div>
@@ -314,9 +286,7 @@
   {{#if(eventsPromise)}}
     <h3>Runs</h3>
 
-    {{#if eventsPromise.isPending}}
-      <lbh3-alert message:from="'Fetching their runs…'" />
-    {{/if}}
+    {{#if eventsPromise.isPending}}<lbh3-alert message:from="'Fetching their runs…'" />{{/if}}
 
     {{#if eventsPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
@@ -330,16 +300,14 @@
       {{#if events.length}}
         <lbh3-run-list events:from="events" showYear:raw="true" />
       {{else}}
-        <p>It doesn’t look like this person has actually hashed with LBH3.</p>
+        <p>It doesn’t look like {{#eq(id, session.user.hasherId)}}you have{{else}}this hasher has{{/eq}} actually hashed with LBH3.</p>
       {{/if}}
     {{/if}}
 
     {{#if pages.length}}
       <nav class="mt-0 nav nav-pills">
         {{#for(page of pages)}}
-          <a class="{{#is currentPage page}}active{{/is}} nav-link text-sm-center" href="{{routeForPage(page)}}">
-            {{page}}
-          </a>
+          <a class="{{#is currentPage page}}active{{/is}} nav-link text-sm-center" href="{{routeForPage(page)}}">{{page}}</a>
         {{/for}}
       </nav>
     {{/if}}

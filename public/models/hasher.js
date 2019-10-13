@@ -315,6 +315,20 @@ export const Hasher = DefineMap.extend({
       return !!this.hashName || !!this.givenName || !!this.givenNamePrivate || !!this.familyName || !!this.familyNamePrivate;
     }
   },
+  hasStats: {
+    get: function() {
+      const fields = [
+        'hareCount',
+        'runCount',
+        'runMileage'
+      ];
+      const found = fields.find(field => {
+        return this[field] > 0;
+      });
+      return !!found;
+    },
+    serialize: false
+  },
   headshotPrivacy: privacyDefault,
   headshotUrl: 'string',
   history: 'string',
