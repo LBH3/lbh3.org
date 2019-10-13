@@ -50,14 +50,6 @@
   {{/if}}
 </lbh3-no-ssr>
 
-{{#if isBeforeMarathonRun}}
-  <p class="border mt-3 py-3 rounded text-center">
-    <a class="d-block" href="events/2019/marathon/">
-      Help us support LB Marathon racists on Sunday, October&nbsp;13<sup>th</sup>
-    </a>
-  </p>
-{{/if}}
-
 {{#if isBeforeOctober19}}
   <p class="border mt-3 py-3 rounded text-center">
     <a class="d-block" href="events/2019/memorial-service/">
