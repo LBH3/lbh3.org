@@ -179,7 +179,12 @@ export const Hasher = DefineMap.extend({
   birthDay: 'number',
   birthDayPrivacy: privacyDefault,
   birthMonth: 'number',
-  birthMonthPrivacy: privacyDefault,
+  birthMonthPrivacy: {
+    get() {
+      return this.birthDayPrivacy;
+    },
+    serialize: true
+  },
   birthYear: 'number',
   birthYearPrivacy: privacyDefault,
   cellPhone: 'string',
@@ -236,7 +241,13 @@ export const Hasher = DefineMap.extend({
         month: this.birthMonth - 1,
         year: this.birthYear
       });
-      return (birthdayAsMoment.isValid()) ? birthdayAsMoment.format('LL') : '';
+      if (birthdayAsMoment.isValid()) {
+        if (this.birthYear) {
+          return birthdayAsMoment.format('LL');
+        }
+        return birthdayAsMoment.format('MMMM D');
+      }
+      return '';
     }
   },
   formattedCreatedAt: {
@@ -269,6 +280,23 @@ export const Hasher = DefineMap.extend({
     get: function() {
       return !!this.died || !!this.inMemoriam || !!this.passed;
     }
+  },
+  hasDirectoryInfo: {
+    get: function() {
+      const fields = [
+        'addresses',
+        'emails',
+        'familyName',
+        'givenName',
+        'phones'
+      ];
+      const found = fields.find(field => {
+        const value = this[field];
+        return value && value.length > 0;
+      });
+      return !!found;
+    },
+    serialize: false
   },
   hashName: 'string',
   hashOrJustName: {

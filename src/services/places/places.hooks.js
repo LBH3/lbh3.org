@@ -10,11 +10,11 @@ module.exports = {
     get: [],
     create: [
       authenticate('jwt'),
-      authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.TRAILMASTERS, authHook.WEBMASTERS)
+      authHook.restrictToSignedInHashers
     ],
     update: [
       authenticate('jwt'),
-      authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.TRAILMASTERS, authHook.WEBMASTERS),
+      authHook.restrictToSignedInHashers,
       makeRaw,
       function(hook) {
         return new Promise(function(resolve, reject) {

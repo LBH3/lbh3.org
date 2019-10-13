@@ -7,6 +7,12 @@ const jwtAuthentication = authenticate('jwt');
 const makeRaw = require('../../utils/make-raw');
 const searchHook = require('../../hooks/search');
 
+const filterStates = {
+  UNVERIFIED: 1,
+  VERIFIED: 2,
+  BORED: 3
+};
+
 const shouldFilterData = function(hook) {
   return new Promise(function(resolve) {
     const user = hook.params.user;
@@ -14,37 +20,37 @@ const shouldFilterData = function(hook) {
       const hasherId = hook.result ? hook.result.id : null;
       if (hasherId === user.hasherId) {
         // Ok to not filter the data and include the hasher’s mileage
-        resolve(false);
+        resolve(filterStates.BORED);
       } else {
         getBoredHasher(hook.app, user).then(boredHashers => {
           const found = boredHashers.data.find(boredHasher => {
             return boredPositions.includes(boredHasher.positionId);
           });
-          resolve(!found);
+          resolve(found ? filterStates.BORED : (user.hasherId ? filterStates.VERIFIED : filterStates.UNVERIFIED));
         }, () => {
-          resolve(true);
+          resolve(user.hasherId ? filterStates.VERIFIED : filterStates.UNVERIFIED);
         });
       }
     } else {
-      resolve(true);
+      resolve(filterStates.UNVERIFIED);
     }
   });
 };
 
 const beforeFindHook = function(hook) {
   return shouldFilterData(hook).then(filter => {
-    if (filter) {
-      return searchHook({
-        fields: ['hash_name'],
-        oldOptions: {
-          fields: ['hashName']
-        }
-      })(hook);
-    } else {
+    if (filter === filterStates.BORED) {
       return searchHook({
         fields: ['emails', 'family_name', 'given_name', 'hash_name'],
         oldOptions: {
           fields: ['familyName', 'givenName', 'hashName']
+        }
+      })(hook);
+    } else {
+      return searchHook({
+        fields: ['hash_name'],
+        oldOptions: {
+          fields: ['hashName']
         }
       })(hook);
     }
@@ -54,9 +60,9 @@ const beforeFindHook = function(hook) {
 const afterFindHook = function(hook) {
   return shouldFilterData(hook).then(filter => {
     const hashers = hook.result.data;
-    if (filter) {
+    if (filter < filterStates.BORED) {
       hook.result.data = hashers.map(hasher => {
-        return filterData(hasher);
+        return filterData(hasher, filter);
       });
     }
     const sequelizeClient = hook.app.get('sequelizeClient');
@@ -86,9 +92,8 @@ const updateHookResultWithHasherStats = function(hook) {
 
 const afterGetHook = function(hook) {
   return shouldFilterData(hook).then(filter => {
-    if (filter) {
-      hook.result = filterData(hook.result);
-    } else {
+    hook.result = filterData(hook.result, filter);
+    if (filter === filterStates.BORED || filter === filterStates.VERIFIED) {
       return updateHookResultWithHasherStats(hook);
     }
   });
@@ -215,13 +220,38 @@ const createAndUpdateFields = function(hook) {
   });
 };
 
-const filterData = function(data) {
-  const allowedFields = ['hashName', 'id'];
-  const filteredFields = {};
-  allowedFields.forEach(field => {
-    filteredFields[field] = data[field];
-  });
-  return filteredFields;
+const filterData = function(data, filterState) {
+  if (filterState === filterStates.BORED) {
+    return data;
+  } else {
+    const filteredFields = {
+      hashName: data.hashName,
+      id: data.id
+    };
+    if (filterState === filterStates.VERIFIED) {
+      const potentialFields = {
+        birthDay: 'birthDayPrivacy',
+        birthMonth: 'birthMonthPrivacy',
+        birthYear: 'birthYearPrivacy',
+        familyName: 'familyNamePrivacy',
+        givenName: 'givenNamePrivacy',
+        headshotUrl: 'headshotPrivacy',
+        motherHash: 'motherHashPrivacy',
+        whoMadeYouCum: 'whoMadeYouCumPrivacy'
+      };
+      for (let [field, privacy] of Object.entries(potentialFields)) {
+        if (data[privacy] === 'directory') {
+          filteredFields[field] = data[field];
+        }
+      }
+      ['addresses', 'emails', 'phones'].forEach(baseField => {
+        filteredFields[baseField] = data[baseField] ? data[baseField].filter(value => {
+          return value.privacy === 'directory' ? value : false;
+        }) : [];
+      });
+    }
+    return filteredFields;
+  }
 };
 
 module.exports = {
@@ -234,7 +264,7 @@ module.exports = {
     ],
     get: [ attachAuthInfo ],
     create: [ jwtAuthentication, authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
-    update: [ jwtAuthentication, authHook.restrictToUserOrPositions(...boredPositions), createAndUpdateFields, makeRaw ],
+    update: [ jwtAuthentication, authHook.restrictToUserOrPositions({ idField: 'hasherId', ownerField: 'id' }, ...boredPositions), createAndUpdateFields, makeRaw ],
     patch: [ jwtAuthentication, authHook.restrictTo() ],
     remove: [ jwtAuthentication, authHook.restrictTo() ]
   },

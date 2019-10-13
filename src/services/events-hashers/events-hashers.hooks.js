@@ -1,5 +1,65 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const authHook = require('../../hooks/auth');
+const errors = require('@feathersjs/errors');
+const getBoredHasher = require('../../utils/get-bored-hasher');
+
+const afterFindHook = function(hook) {
+  return shouldFilterData(hook).then(filter => {
+    const hashers = hook.result.data;
+    if (filter < filterStates.BORED) {
+      hook.result.data = hashers.map(hasher => {
+        return filterData(hasher, filter);
+      });
+    }
+  });
+};
+
+const afterGetHook = function(hook) {
+  return shouldFilterData(hook).then(filter => {
+    hook.result = filterData(hook.result, filter);
+  });
+};
+
+const boredPositions = [authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS];
+
+const filterData = function(data, filterState) {
+  if (filterState === filterStates.BORED) {
+    return data;
+  } else {
+    const allowedFields = filterState === filterStates.VERIFIED ? [
+      'createdAt',
+      'hashName',
+      'hasherId',
+      'id',
+      'role',
+      'trailNumber',
+      'updatedAt'
+    ] : [
+      'createdAt',
+      'id',
+      'trailNumber',
+      'updatedAt'
+    ];
+    const filteredFields = {};
+    allowedFields.forEach(field => {
+      filteredFields[field] = data[field];
+    });
+    if (!filteredFields.hashName) {
+      if (data.givenName) {
+        filteredFields.givenName = data.givenName;
+      } else {
+        filteredFields.familyName = data.familyName;
+      }
+    }
+    return filteredFields;
+  }
+};
+
+const filterStates = {
+  UNVERIFIED: 1,
+  VERIFIED: 2,
+  BORED: 3
+};
 
 const getFirstOrLastTrailForHasher = function(sequelize, hasherId, first) {
   const sortDirection = first ? 'ASC' : 'DESC';
@@ -105,21 +165,86 @@ const removeHook = function(hook) {
   });
 };
 
+const restrictHook = function(hook) {
+
+  // Skip this hook if it’s an internal call
+  if (!hook.params.provider) {
+    return hook;
+  }
+
+  // Check that the user is authenticated
+  const user = hook.params.user;
+  if (!user || !user.hasherId) {
+    throw new errors.NotAuthenticated('You are not authenticated.');
+  }
+
+  // Check if the user is requesting their own info
+  if (hook.params.query.hasherId == user.hasherId) {
+    return hook;
+  }
+
+  // Check if the user is querying for a run they attended
+  if (!hook.params.query.hasherId && hook.params.query.trailNumber) {
+    return new Promise((resolve, reject) => {
+      hook.service.find({
+        query: {
+          hasherId: user.hasherId,
+          trailNumber: hook.params.query.trailNumber
+        }
+      }).then(result => {
+        if (result.total === 1) {
+          resolve(hook);
+        } else {
+          resolve(restrictToBored(hook));
+        }
+      }, reject);
+    });
+  }
+
+  return restrictToBored(hook);
+};
+
+const restrictToBored = authHook.restrictToUserOrPositions(...boredPositions);
+
+const shouldFilterData = function(hook) {
+  return new Promise(function(resolve) {
+    const user = hook.params.user;
+    if (user) {
+      const hasherId = hook.result ? hook.result.id : null;
+      if (hasherId === user.hasherId) {
+        // Ok to not filter the data and include the hasher’s mileage
+        resolve(filterStates.BORED);
+      } else {
+        getBoredHasher(hook.app, user).then(boredHashers => {
+          const found = boredHashers.data.find(boredHasher => {
+            return boredPositions.includes(boredHasher.positionId);
+          });
+          resolve(found ? filterStates.BORED : (user.hasherId ? filterStates.VERIFIED : filterStates.UNVERIFIED));
+        }, () => {
+          resolve(user.hasherId ? filterStates.VERIFIED : filterStates.UNVERIFIED);
+        });
+      }
+    } else {
+      resolve(filterStates.UNVERIFIED);
+    }
+  });
+};
+
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
-    find: [ authHook.restrictToSignedInHashers ],
-    get: [ authHook.restrictToSignedInHashers ],
-    create: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createHook ],
+    find: [ restrictHook ],
+    get: [ restrictHook ],
+    create: [ authHook.restrictTo(...boredPositions), createHook ],
     update: [ authHook.restrictTo() ],
     patch: [ authHook.restrictTo() ],
-    remove: [ authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), removeHook ]
+    remove: [ authHook.restrictTo(...boredPositions), removeHook ]
   },
 
   after: {
     all: [],
-    find: [],
-    get: [],
+    find: [ afterFindHook ],
+    get: [ afterGetHook ],
     create: [],
     update: [],
     patch: [],

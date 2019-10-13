@@ -71,15 +71,12 @@ const restrictToUser = restrictToOwner({
   ownerField: 'id'
 });
 
-const restrictToUserOrPositions = function(...boredPositions) {
+const restrictToUserOrPositions = function(owner, ...boredPositions) {
   return function(hook) {
     return new Promise(function(resolve, reject) {
       const restrictToPositions = restrictTo(...boredPositions);
       try {
-        const authForUser = restrictToOwner({
-          idField: 'hasherId',
-          ownerField: 'id'
-        })(hook);
+        const authForUser = restrictToOwner(owner)(hook);
         if (authForUser === hook) {
           restrictToPositions(hook).then(resolve, reject);
         } else {

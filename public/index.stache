@@ -429,20 +429,22 @@
                 {{/case}}
               {{/switch}}
             {{else}}
-              <can-import from="~/components/hasher/">
-                {{#if isPending}}
-                  <lbh3-alert message:from="'Loading the Hasher page…'" />
-                {{else}}
-                  <lbh3-hasher
-                    description:to="description"
-                    id:from="id"
-                    ogTitle:to="ogTitle"
-                    secondaryPage:from="secondaryPage"
-                    skip:from="skip"
-                    title:to="title"
-                  />
-                {{/if}}
-              </can-import>
+              <lbh3-no-ssr>
+                <can-import from="~/components/hasher/">
+                  {{#if isPending}}
+                    <lbh3-alert message:from="'Loading the Hasher page…'" />
+                  {{else}}
+                    <lbh3-hasher
+                      description:to="description"
+                      id:from="id"
+                      ogTitle:to="ogTitle"
+                      secondaryPage:from="secondaryPage"
+                      skip:from="skip"
+                      title:to="title"
+                    />
+                  {{/if}}
+                </can-import>
+              </lbh3-no-ssr>
             {{/if}}
           {{else}}
             <can-import from="~/components/hashers/nav/">
@@ -518,8 +520,7 @@
                 {{/case}}
               {{/switch}}
             {{else}}
-              {{#if id}}
-              {{else}}
+              <lbh3-no-ssr>
                 <can-import from="~/components/hashers/">
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading the Hashers page…'" />
@@ -534,7 +535,7 @@
                     />
                   {{/if}}
                 </can-import>
-              {{/if}}
+              </lbh3-no-ssr>
             {{/if}}
           {{/if}}
         {{/case}}

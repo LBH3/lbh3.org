@@ -282,39 +282,43 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each sortedHashers}}
+                {{#for(eventHasher of sortedHashers)}}
                   <tr>
-                    <td>{{scope.vm.plusOne(scope.index)}}</td>
-                    <td>{{role}}</td>
+                    <td>{{plusOne(scope.index)}}</td>
+                    <td>{{eventHasher.role}}</td>
                     <td>
-                      {{paymentNotesAndType}}
+                      {{eventHasher.paymentNotesAndType}}
                     </td>
                     <td>
-                      <a href="{{scope.vm.routeForHasher(this)}}">
-                        {{hashName}}
+                      <a href="{{routeForHasher(eventHasher)}}">
+                        {{eventHasher.hashName}}
                       </a>
                     </td>
                     <td>
-                      <a href="{{scope.vm.routeForHasher(this)}}">
-                        {{familyName}}
+                      <a href="{{routeForHasher(eventHasher)}}">
+                        {{eventHasher.familyName}}
                       </a>
                     </td>
                     <td>
-                      <a href="{{scope.vm.routeForHasher(this)}}">
-                        {{givenName}}
+                      <a href="{{routeForHasher(eventHasher)}}">
+                        {{eventHasher.givenName}}
                       </a>
                     </td>
                   </tr>
-                {{/each}}
+                {{/for}}
               </tbody>
             </table>
           </div>
         {{else}}
           <h3>Attendance</h3>
           <ol class="attendance-list">
-            {{#each sortedHashers}}
-              <li>{{hashOrJustName}}</li>
-            {{/each}}
+            {{#for(eventHasher of sortedHashers)}}
+              <li>
+                <a href="{{routeForHasher(eventHasher)}}">
+                  {{eventHasher.hashOrJustName}}
+                </a>
+              </li>
+            {{/for}}
           </ol>
         {{/if}}
 

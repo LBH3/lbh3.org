@@ -1,6 +1,5 @@
 import BoredHasher from '~/models/bored-hasher';
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
 import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';
 import Patch from '~/models/patch';
@@ -11,20 +10,22 @@ import view from './hasher.stache';
 
 const $limit = 50;
 
-export const ViewModel = DefineMap.extend({
-  boredPositions: {
-    get: function(lastSetValue, resolve) {
-      if (lastSetValue) {
-        return lastSetValue;
+export default Component.extend({
+  tag: 'lbh3-hasher',
+  view,
+  ViewModel: {
+    boredPositions: {
+      get: function(lastSetValue, resolve) {
+        if (lastSetValue) {
+          return lastSetValue;
+        }
+        const boredPositionsPromise = this.boredPositionsPromise;
+        if (boredPositionsPromise) {
+          boredPositionsPromise.then(resolve);
+        }
       }
-      const boredPositionsPromise = this.boredPositionsPromise;
-      if (boredPositionsPromise) {
-        boredPositionsPromise.then(resolve);
-      }
-    }
-  },
-  boredPositionsPromise: {
-    get: function() {
+    },
+    get boredPositionsPromise() {
       return BoredHasher.getList({
         hasherId: this.id,
         $limit: 500,
@@ -32,109 +33,105 @@ export const ViewModel = DefineMap.extend({
           startDate: -1
         }
       });
-    }
-  },
-  canViewHasher: {
-    get: function() {
+    },
+    get canViewDetailedInfo() {
+      const hasher = this.hasher || {};
       const user = this.session && this.session.user || {};
-      return user.canViewDirectoryInfo || user.hasherId === this.id;
-    }
-  },
-  description: {
-    get: function() {
+      if (hasher.id && user.hasherId) {
+        return (hasher.id === user.hasherId || user.canViewDirectoryInfo === true);
+      }
+      return false;
+    },
+    get description() {
       const hasher = this.hasher;
       if (hasher && hasher.hashOrJustName) {
         return `View the profile for ${hasher.hashOrJustName}.`;
       }
       return `View the profile for hasher #${this.id}.`;
-    }
-  },
-  events: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
+    },
+    events: {
+      get: function(lastValue, setValue) {
+        if (lastValue) {
+          return lastValue;
+        }
+        const eventsPromise = this.eventsPromise;
+        if (eventsPromise) {
+          eventsPromise.then(results => {
+            setValue(results.map(result => {
+              return result[0];
+            }));
+          });
+        }
       }
-      const eventsPromise = this.eventsPromise;
-      if (eventsPromise) {
-        eventsPromise.then(results => {
-          setValue(results.map(result => {
-            return result[0];
-          }));
+    },
+    get eventsPromise() {
+      const runsPromise = this.runsPromise;
+      if (runsPromise) {
+        return runsPromise.then(runs => {
+          if (runs) {
+            return Promise.all(runs.map(run => {
+              return run.eventsPromise;
+            }));
+          }
         });
       }
-    }
-  },
-  get eventsPromise() {
-    const runsPromise = this.runsPromise;
-    if (runsPromise) {
-      return runsPromise.then(runs => {
-        if (runs) {
-          return Promise.all(runs.map(run => {
-            return run.eventsPromise;
-          }));
+    },
+    hasher: {
+      get: function(lastValue, setValue) {
+        if (lastValue) {
+          return lastValue;
         }
-      });
-    }
-  },
-  hasher: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
+        this.hasherPromise.then(setValue);
       }
-      this.hasherPromise.then(setValue);
-    }
-  },
-  hasherPromise: {
-    get: function() {
+    },
+    get hasherPromise() {
       return Hasher.connection.get({
         id: this.id
       });
-    }
-  },
+    },
 
-  id: 'number',
-  get currentPage() {
-    const runs = this.runs;
-    const skip = runs.skip;
-    return (skip / $limit) + 1;
-  },
-  get ogTitle() {
-    const hasher = this.hasher;
-    if (hasher && hasher.hashOrJustName) {
-      return `${hasher.hashOrJustName}`;
-    }
-    return `Hasher #${this.id}`;
-  },
-  get pages() {
-    const runs = this.runs;
-    const pages = [];
+    id: 'number',
+    get currentPage() {
+      const runs = this.runs;
+      const skip = runs.skip;
+      return (skip / $limit) + 1;
+    },
+    get ogTitle() {
+      const hasher = this.hasher;
+      if (hasher && hasher.hashOrJustName) {
+        return `${hasher.hashOrJustName}`;
+      }
+      return `Hasher #${this.id}`;
+    },
+    get pages() {
+      const runs = this.runs;
+      const pages = [];
 
-    if (!runs) {
+      if (!runs) {
+        return pages;
+      }
+
+      const total = runs.total;
+      const numberOfPages = Math.round(total / $limit);
+      for (let i = 1; i <= numberOfPages; i++) {
+        pages.push(i);
+      }
       return pages;
-    }
-
-    const total = runs.total;
-    const numberOfPages = Math.round(total / $limit);
-    for (let i = 1; i <= numberOfPages; i++) {
-      pages.push(i);
-    }
-    return pages;
-  },
-  patches: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
+    },
+    patches: {
+      get: function(lastValue, setValue) {
+        if (lastValue) {
+          return lastValue;
+        }
+        const patchesPromise = this.patchesPromise;
+        if (patchesPromise) {
+          patchesPromise.then(setValue);
+        }
       }
-      const patchesPromise = this.patchesPromise;
-      if (patchesPromise) {
-        patchesPromise.then(setValue);
-      }
-    }
-  },
-  patchesPromise: {
-    get: function() {
+    },
+    get patchesPromise() {
       const hasherId = this.hasher.id;
-      if (hasherId) {
+      if (hasherId && this.canViewDetailedInfo === true) {
         return Patch.getList({
           hasherId,
           $limit: 500,
@@ -144,38 +141,29 @@ export const ViewModel = DefineMap.extend({
           }
         });
       }
-    }
-  },
-  routeForHasher: function(hasher) {
-    const routeParams = {
-      id: this.hasher.id,
-      page: 'hashers'
-    };
-    return route.url(routeParams);
-  },
-  routeForPage: function(page) {
-    const routeParams = {
-      id: this.hasher.id,
-      page: 'hashers',
-      skip: $limit * (page - 1)
-    };
-    return route.url(routeParams);
-  },
-  runs: {
-    get: function(lastValue, setValue) {
-      if (lastValue) {
-        return lastValue;
+    },
+    routeForPage: function(page) {
+      const routeParams = {
+        id: this.hasher.id,
+        page: 'hashers',
+        skip: $limit * (page - 1)
+      };
+      return route.url(routeParams);
+    },
+    runs: {
+      get: function(lastValue, setValue) {
+        if (lastValue) {
+          return lastValue;
+        }
+        const runsPromise = this.runsPromise;
+        if (runsPromise) {
+          runsPromise.then(setValue);
+        }
       }
-      const runsPromise = this.runsPromise;
-      if (runsPromise) {
-        runsPromise.then(setValue);
-      }
-    }
-  },
-  runsPromise: {
-    get: function() {
+    },
+    get runsPromise() {
       const hasherId = this.hasher.id;
-      if (hasherId) {
+      if (hasherId && this.canViewDetailedInfo === true) {
         return EventsHashers.getList({
           hasherId,
           $limit,
@@ -185,27 +173,20 @@ export const ViewModel = DefineMap.extend({
           }
         });
       }
+    },
+
+    secondaryPage: 'string',
+
+    get session() {
+      return Session.current;
+    },
+
+    skip: {
+      default: 0
+    },
+
+    get title() {
+      return `${this.ogTitle} | Hashers | LBH3`;
     }
-  },
-
-  secondaryPage: 'string',
-
-  get session() {
-    return Session.current;
-  },
-
-  skip: {
-    default: 0,
-    type: 'number'
-  },
-
-  get title() {
-    return `${this.ogTitle} | Hashers | LBH3`;
   }
-});
-
-export default Component.extend({
-  tag: 'lbh3-hasher',
-  ViewModel,
-  view
 });

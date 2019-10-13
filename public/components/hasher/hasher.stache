@@ -7,53 +7,48 @@
 <can-import from="~/components/run-list/" />
 <can-import from="~/components/snooze-button/" />
 
-{{#if canViewHasher}}
+{{#if hasherPromise.isPending}}
+  <lbh3-alert message:from="'Fetching the hasher…'" />
+{{/if}}
 
-  {{#if hasherPromise.isPending}}
-    <lbh3-alert message:from="'Fetching the hasher…'" />
-  {{/if}}
+{{#if hasherPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.xhr.message}}
+  </div>
+{{/if}}
 
-  {{#if hasherPromise.isRejected}}
-    <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.xhr.message}}
+{{#if hasher}}
+  <lbh3-hasher-nav hasher:from="hasher" secondaryPage:from="secondaryPage" session:from="session" />
+
+  {{#if hasher.headshotUrl}}
+    <div class="mb-3 text-center">
+      <a href="{{hasher.headshotUrl}}" target="_blank">
+        <img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" />
+      </a>
     </div>
   {{/if}}
 
-  {{#if hasher}}
-    <lbh3-hasher-nav
-      hasher:from="hasher"
-      secondaryPage:from="secondaryPage"
-      session:from="session"
-    />
-
-    {{#if hasher.headshotUrl}}
-      <div class="mb-3 text-center">
-        <a href="{{hasher.headshotUrl}}" target="_blank">
-          <img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" />
-        </a>
-      </div>
-    {{/if}}
-
-    <div class="row">
-      <div class="col-lg">
-        <h3>Overview</h3>
-        <dl class="row">
-          {{#if(hasher.hashName)}}
-            <dt class="col-sm-4 col-lg-5">Hash name:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.hashName}}</dd>
-          {{/if}}
-          {{#if(hasher.motherHash)}}
-            <dt class="col-sm-4 col-lg-5">Mother hash:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.motherHash}}</dd>
-          {{/if}}
-          {{#if(hasher.whoMadeYouCum)}}
-            <dt class="col-sm-4 col-lg-5">Who made you cum:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.whoMadeYouCum}}</dd>
-          {{/if}}
-          {{#if(hasher.formattedBirthday)}}
-            <dt class="col-sm-4 col-lg-5">Birthday:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.formattedBirthday}}</dd>
-          {{/if}}
+  <div class="row">
+    <div class="col-lg">
+      <h3>Overview</h3>
+      <dl class="row">
+        {{#if(hasher.hashName)}}
+          <dt class="col-sm-4 col-lg-5">Hash name:</dt>
+          <dd class="col-sm-8 col-lg-7">{{hasher.hashName}}</dd>
+        {{/if}}
+        {{#if(hasher.motherHash)}}
+          <dt class="col-sm-4 col-lg-5">Mother hash:</dt>
+          <dd class="col-sm-8 col-lg-7">{{hasher.motherHash}}</dd>
+        {{/if}}
+        {{#if(hasher.whoMadeYouCum)}}
+          <dt class="col-sm-4 col-lg-5">Who made you cum:</dt>
+          <dd class="col-sm-8 col-lg-7">{{hasher.whoMadeYouCum}}</dd>
+        {{/if}}
+        {{#if(hasher.formattedBirthday)}}
+          <dt class="col-sm-4 col-lg-5">Birthday:</dt>
+          <dd class="col-sm-8 col-lg-7">{{hasher.formattedBirthday}}</dd>
+        {{/if}}
+        {{#or(hasher.namingTrailNumber, eq(session.user.hasherId, id), session.user.canViewDirectoryInfo)}}
           <dt class="col-sm-4 col-lg-5">Naming trail:</dt>
           <dd class="col-sm-8 col-lg-7">
             {{#if hasher.namingTrailDateParts}}
@@ -62,98 +57,90 @@
               </a>
             {{else}}
               {{#if hasher.namingTrailDate}}
-                {{hasher.namingTrailDate}}
-                {{#if hasher.namingTrailNumber}}
-                  (#{{hasher.namingTrailNumber}})
-                {{/if}}
+                {{hasher.namingTrailDate}} {{#if hasher.namingTrailNumber}}(#{{hasher.namingTrailNumber}}){{/if}}
               {{else}}
-                {{#if hasher.namingTrailNumber}}
-                  #{{hasher.namingTrailNumber}}
-                {{else}}
-                  Not named at LBH3
-                {{/if}}
+                {{#if hasher.namingTrailNumber}}#{{hasher.namingTrailNumber}}{{else}}Not named at LBH3{{/if}}
               {{/if}}
             {{/if}}
           </dd>
-          {{#if(session.user.canViewDirectoryInfo)}}
-            {{#if(hasher.emailing)}}
-              <dt class="col-sm-4 col-lg-5">Emailing:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.emailing}}</dd>
-            {{/if}}
-            {{#if(hasher.payment)}}
-              <dt class="col-sm-4 col-lg-5">Payment:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.payment}}</dd>
-            {{/if}}
-            {{#if(hasher.waiver)}}
-              <dt class="col-sm-4 col-lg-5">Waiver:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.waiver}}</dd>
-            {{/if}}
-            {{#if(hasher.notesHtml)}}
-              <dt class="col-sm-4 col-lg-5">Notes:</dt>
-              <dd class="col-sm-8 col-lg-7">{{{hasher.notesHtml}}}</dd>
-            {{/if}}
+        {{/or}}
+        {{#if(session.user.canViewDirectoryInfo)}}
+          {{#if(hasher.emailing)}}
+            <dt class="col-sm-4 col-lg-5">Emailing:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.emailing}}</dd>
           {{/if}}
-        </dl>
-      </div>
-      <div class="col-lg">
-        <h3>Stats</h3>
-        <dl class="row">
-          <dt class="col-sm-4 col-lg-5">Run count:</dt>
-          <dd class="col-sm-8 col-lg-7">{{hasher.runCount}}</dd>
-          <dt class="col-sm-4 col-lg-5">Miles:</dt>
-          <dd class="col-sm-8 col-lg-7">{{hasher.runMileage}}</dd>
-          <dt class="col-sm-4 col-lg-5">Hare count:</dt>
-          <dd class="col-sm-8 col-lg-7">{{hasher.hareCount}}</dd>
-          {{#if(hasher.firstTrailDate)}}
-            <dt class="col-sm-4 col-lg-5">First trail:</dt>
-            <dd class="col-sm-8 col-lg-7">
-              {{#if hasher.firstTrailDateParts}}
-                <a href="{{routeUrl page='events' year=hasher.firstTrailDateParts.year month=hasher.firstTrailDateParts.month day=hasher.firstTrailDateParts.day trailNumber=hasher.firstTrailNumber}}" title="View trail">
-                  {{hasher.firstTrailDate}} (#{{hasher.firstTrailNumber}})
-                </a>
-              {{else}}
-                {{hasher.firstTrailDate}}
-                {{#if hasher.firstTrailNumber}}
-                  (#{{hasher.firstTrailNumber}})
-                {{/if}}
-              {{/if}}
-            </dd>
+          {{#if(hasher.payment)}}
+            <dt class="col-sm-4 col-lg-5">Payment:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.payment}}</dd>
           {{/if}}
-          {{#if(hasher.lastTrailDate)}}
-            <dt class="col-sm-4 col-lg-5">Last trail:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.lastTrailDate}}</dd>
+          {{#if(hasher.waiver)}}
+            <dt class="col-sm-4 col-lg-5">Waiver:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.waiver}}</dd>
           {{/if}}
-        </dl>
-      </div>
-    </div>
-
-    {{<metadataColumn}}
-      <div class="col-lg">
-        {{#if session.user.canViewDirectoryInfo}}
-          <h3>Metadata</h3>
-          <dl class="row">
-            {{#if(hasher.formattedCreatedAt)}}
-              <dt class="col-sm-4 col-lg-5">Created on:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.formattedCreatedAt}}</dd>
-            {{/if}}
-            {{#if(hasher.createdBy)}}
-              <dt class="col-sm-4 col-lg-5">Created by:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.createdBy}}</dd>
-            {{/if}}
-            {{#if(hasher.formattedUpdatedAt)}}
-              <dt class="col-sm-4 col-lg-5">Updated on:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.formattedUpdatedAt}}</dd>
-            {{/if}}
-            {{#if(hasher.updatedBy)}}
-              <dt class="col-sm-4 col-lg-5">Updated by:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.updatedBy}}</dd>
-            {{/if}}
-          </dl>
+          {{#if(hasher.notesHtml)}}
+            <dt class="col-sm-4 col-lg-5">Notes:</dt>
+            <dd class="col-sm-8 col-lg-7">{{{hasher.notesHtml}}}</dd>
+          {{/if}}
         {{/if}}
-      </div>
-    {{/metadataColumn}}
+      </dl>
+    </div>
+    <div class="col-lg">
+      <h3>Stats</h3>
+      <dl class="row">
+        <dt class="col-sm-4 col-lg-5">Run count:</dt>
+        <dd class="col-sm-8 col-lg-7">{{hasher.runCount}}</dd>
+        <dt class="col-sm-4 col-lg-5">Miles:</dt>
+        <dd class="col-sm-8 col-lg-7">{{hasher.runMileage}}</dd>
+        <dt class="col-sm-4 col-lg-5">Hare count:</dt>
+        <dd class="col-sm-8 col-lg-7">{{hasher.hareCount}}</dd>
+        {{#if(hasher.firstTrailDate)}}
+          <dt class="col-sm-4 col-lg-5">First trail:</dt>
+          <dd class="col-sm-8 col-lg-7">
+            {{#if hasher.firstTrailDateParts}}
+              <a href="{{routeUrl page='events' year=hasher.firstTrailDateParts.year month=hasher.firstTrailDateParts.month day=hasher.firstTrailDateParts.day trailNumber=hasher.firstTrailNumber}}" title="View trail">
+                {{hasher.firstTrailDate}} (#{{hasher.firstTrailNumber}})
+              </a>
+            {{else}}
+              {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
+            {{/if}}
+          </dd>
+        {{/if}}
+        {{#if(hasher.lastTrailDate)}}
+          <dt class="col-sm-4 col-lg-5">Last trail:</dt>
+          <dd class="col-sm-8 col-lg-7">{{hasher.lastTrailDate}}</dd>
+        {{/if}}
+      </dl>
+    </div>
+  </div>
 
-    <div class="row">
+  {{<metadataColumn}}
+    <div class="col-lg">
+      {{#if session.user.canViewDirectoryInfo}}
+        <h3>Metadata</h3>
+        <dl class="row">
+          {{#if(hasher.formattedCreatedAt)}}
+            <dt class="col-sm-4 col-lg-5">Created on:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.formattedCreatedAt}}</dd>
+          {{/if}}
+          {{#if(hasher.createdBy)}}
+            <dt class="col-sm-4 col-lg-5">Created by:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.createdBy}}</dd>
+          {{/if}}
+          {{#if(hasher.formattedUpdatedAt)}}
+            <dt class="col-sm-4 col-lg-5">Updated on:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.formattedUpdatedAt}}</dd>
+          {{/if}}
+          {{#if(hasher.updatedBy)}}
+            <dt class="col-sm-4 col-lg-5">Updated by:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.updatedBy}}</dd>
+          {{/if}}
+        </dl>
+      {{/if}}
+    </div>
+  {{/metadataColumn}}
+
+  <div class="row">
+    {{#if(hasher.hasDirectoryInfo)}}
       <div class="col-lg">
         <h3>Directory info</h3>
         <dl class="row">
@@ -181,37 +168,39 @@
           {{/for}}
         </dl>
       </div>
-      {{#if(hasher.hasDied)}}
-        <div class="col-lg">
-          <h3>In memoriam</h3>
-          <dl class="row">
-            {{#if(hasher.died)}}
-              <dt class="col-sm-4 col-lg-5">Died:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.died}}</dd>
-            {{/if}}
-            {{#if(hasher.passed)}}
-              <dt class="col-sm-4 col-lg-5">Passed:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.passed}}</dd>
-            {{/if}}
-            {{#if(hasher.inMemoriam)}}
-              <dt class="col-sm-4 col-lg-5">Notes:</dt>
-              <dd class="col-sm-8 col-lg-7">{{hasher.inMemoriam}}</dd>
-            {{/if}}
-          </dl>
-        </div>
-      {{else}}
-        {{>metadataColumn}}
-      {{/if}}
-    </div>
-
-    {{#if(hasher.hasDied)}}
-      <div class="row">
-        {{>metadataColumn}}
-        <div class="col-lg"></div>
-      </div>
     {{/if}}
+    {{#if(hasher.hasDied)}}
+      <div class="col-lg">
+        <h3>In memoriam</h3>
+        <dl class="row">
+          {{#if(hasher.died)}}
+            <dt class="col-sm-4 col-lg-5">Died:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.died}}</dd>
+          {{/if}}
+          {{#if(hasher.passed)}}
+            <dt class="col-sm-4 col-lg-5">Passed:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.passed}}</dd>
+          {{/if}}
+          {{#if(hasher.inMemoriam)}}
+            <dt class="col-sm-4 col-lg-5">Notes:</dt>
+            <dd class="col-sm-8 col-lg-7">{{hasher.inMemoriam}}</dd>
+          {{/if}}
+        </dl>
+      </div>
+    {{else}}
+      {{>metadataColumn}}
+    {{/if}}
+  </div>
 
+  {{#if(hasher.hasDied)}}
     <div class="row">
+      {{>metadataColumn}}
+      <div class="col-lg"></div>
+    </div>
+  {{/if}}
+
+  <div class="row">
+    {{#if(patchesPromise)}}
       <div class="col-sm">
         <h3>Patches</h3>
 
@@ -229,12 +218,7 @@
           {{#if patches.length}}
             <div class="table-responsive">
               <table class="table table-sm table-striped">
-                <thead>
-                  <tr>
-                    <th>Patch</th>
-                    <th>Date</th>
-                  </tr>
-                </thead>
+                <thead><tr><th>Patch</th><th>Date</th></tr></thead>
                 <tbody>
                   {{#for(patch of patches)}}
                     <tr>
@@ -271,66 +255,63 @@
           {{/if}}
         {{/if}}
       </div>
+    {{/if}}
 
-      <div class="col-sm">
-        <h3>Bored positions</h3>
+    <div class="col-sm">
+      <h3>Bored positions</h3>
 
-        {{#if boredPositionsPromise.isPending}}
-          <lbh3-alert message:from="'Fetching Mismanagement…'" />
-        {{/if}}
+      {{#if boredPositionsPromise.isPending}}
+        <lbh3-alert message:from="'Fetching Mismanagement…'" />
+      {{/if}}
 
-        {{#if boredPositionsPromise.isRejected}}
-          <div class="alert alert-danger" role="alert">
-            <strong>Fuck!</strong> Couldn’t retrieve when this hasher has served on the Bored. {{boredPositionsPromise.reason.xhr.message}}
-          </div>
-        {{/if}}
+      {{#if boredPositionsPromise.isRejected}}
+        <div class="alert alert-danger" role="alert">
+          <strong>Fuck!</strong> Couldn’t retrieve when this hasher has served on the Bored. {{boredPositionsPromise.reason.xhr.message}}
+        </div>
+      {{/if}}
 
-        {{#if boredPositionsPromise.isResolved}}
-          {{#if boredPositions.length}}
-            <div class="table-responsive">
-              <table class="table table-sm table-striped">
-                <thead>
+      {{#if boredPositionsPromise.isResolved}}
+        {{#if boredPositions.length}}
+          <div class="table-responsive">
+            <table class="table table-sm table-striped">
+              <thead><tr><th>Year</th><th>Position</th></tr></thead>
+              <tbody>
+                {{#for(boredPosition of boredPositions)}}
                   <tr>
-                    <th>Year</th>
-                    <th>Position</th>
+                    <td>
+                      {{boredPosition.startYear}}
+                    </td>
+                    <td>
+                      {{#if boredPosition.positionPromise.isPending}}
+                        <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
+                      {{/if}}
+                      {{#if boredPosition.positionPromise.isRejected}}
+                        <span class="fas fa-exclamation-triangle"></span>
+                        {{#if boredPosition.positionPromise.reason.xhr.message}}
+                          {{boredPosition.positionPromise.reason.xhr.message}}
+                        {{else}}
+                          Unknown error
+                        {{/if}}
+                      {{/if}}
+                      {{#if boredPosition.positionPromise.isResolved}}
+                        <a href="{{routeUrl page='about' secondaryPage='mismanagement' year=boredPosition.startYear}}">
+                          {{boredPosition.positionPromise.value.singularName}}
+                        </a>
+                      {{/if}}
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                  {{#for(boredPosition of boredPositions)}}
-                    <tr>
-                      <td>
-                        {{boredPosition.startYear}}
-                      </td>
-                      <td>
-                        {{#if boredPosition.positionPromise.isPending}}
-                          <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-                        {{/if}}
-                        {{#if boredPosition.positionPromise.isRejected}}
-                          <span class="fas fa-exclamation-triangle"></span>
-                          {{#if boredPosition.positionPromise.reason.xhr.message}}
-                            {{boredPosition.positionPromise.reason.xhr.message}}
-                          {{else}}
-                            Unknown error
-                          {{/if}}
-                        {{/if}}
-                        {{#if boredPosition.positionPromise.isResolved}}
-                          <a href="{{routeUrl page='about' secondaryPage='mismanagement' year=boredPosition.startYear}}">
-                            {{boredPosition.positionPromise.value.singularName}}
-                          </a>
-                        {{/if}}
-                      </td>
-                    </tr>
-                  {{/for}}
-                </tbody>
-              </table>
-            </div>
-          {{else}}
-            <p>It doesn’t look like this hasher has served on the Bored.</p>
-          {{/if}}
+                {{/for}}
+              </tbody>
+            </table>
+          </div>
+        {{else}}
+          <p>It doesn’t look like this hasher has served on the Bored.</p>
         {{/if}}
-      </div>
+      {{/if}}
     </div>
+  </div>
 
+  {{#if(eventsPromise)}}
     <h3>Runs</h3>
 
     {{#if eventsPromise.isPending}}
@@ -347,11 +328,7 @@
 
     {{#if eventsPromise.isResolved}}
       {{#if events.length}}
-        {{#for(event of events)}}{{/for}}
-        <lbh3-run-list
-          events:from="events"
-          showYear:raw="true"
-        />
+        <lbh3-run-list events:from="events" showYear:raw="true" />
       {{else}}
         <p>It doesn’t look like this person has actually hashed with LBH3.</p>
       {{/if}}
@@ -360,14 +337,12 @@
     {{#if pages.length}}
       <nav class="mt-0 nav nav-pills">
         {{#for(page of pages)}}
-          <a
-            class="{{#is scope.vm.currentPage page}}active{{/is}} nav-link text-sm-center"
-            href="{{scope.vm.routeForPage(page)}}"
-          >
+          <a class="{{#is currentPage page}}active{{/is}} nav-link text-sm-center" href="{{routeForPage(page)}}">
             {{page}}
           </a>
         {{/for}}
       </nav>
     {{/if}}
   {{/if}}
+
 {{/if}}

@@ -59,13 +59,9 @@
               {{/if}}
 
               {{#if hasherPromise.isResolved}}
-                {{#if session.user.canViewDirectoryInfo}}
-                  <a href="{{routeForHasher(hasherPromise.value)}}">
-                    {{hasherPromise.value.hashName}}
-                  </a>
-                {{else}}
+                <a href="{{routeForHasher(hasherPromise.value)}}">
                   {{hasherPromise.value.hashName}}
-                {{/if}}
+                </a>
                 {{addendum(year, positionForHasher(hasherPromise.value))}}
               {{/if}}
             </li>
