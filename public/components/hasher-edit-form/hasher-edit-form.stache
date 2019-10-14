@@ -427,7 +427,6 @@
 
   <button
     class="btn btn-primary"
-    {{#if(not(hasher.hashName))}}disabled{{/if}}
     {{#if editingHasherPromise.isPending}}disabled{{/if}}
     on:click="editHasher()"
   >
