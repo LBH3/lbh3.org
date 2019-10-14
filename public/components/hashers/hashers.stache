@@ -43,7 +43,7 @@
             {{/if}}
           </div>
           <div class="col p-0">
-            <div class="row">
+            <div class="mr-0 row">
               <div class="col-sm-7 col-lg-5">
                 <p class="h5 m-0">
                   {{hasher.hashName}}
