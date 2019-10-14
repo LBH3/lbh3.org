@@ -417,6 +417,7 @@
                         <lbh3-alert message:from="'Loading the Edit Hasher page…'" />
                       {{else}}
                         <lbh3-hasher-edit
+                          class="container pl-0 pr-0"
                           description:to="description"
                           id:from="id"
                           ogTitle:to="ogTitle"
@@ -452,6 +453,7 @@
                 <lbh3-alert message:from="'Loading the Hashers nav…'" />
               {{else}}
                 <lbh3-hashers-nav
+                  class="container pl-0 pr-0"
                   secondaryPage:from="secondaryPage"
                 />
               {{/if}}
@@ -465,6 +467,7 @@
                         <lbh3-alert message:from="'Loading the Add Hasher page…'" />
                       {{else}}
                         <lbh3-hashers-add
+                          class="container pl-0 pr-0"
                           description:to="description"
                           ogTitle:to="ogTitle"
                           title:to="title"
@@ -480,6 +483,7 @@
                         <lbh3-alert message:from="'Loading the Attendance Records page…'" />
                       {{else}}
                         <lbh3-hashers-attendance-records
+                          class="container pl-0 pr-0"
                           description:to="description"
                           ogTitle:to="ogTitle"
                           title:to="title"
@@ -495,6 +499,7 @@
                         <lbh3-alert message:from="'Loading the Early Warning page…'" />
                       {{else}}
                         <lbh3-hashers-early-warning
+                          class="container pl-0 pr-0"
                           description:to="description"
                           ogTitle:to="ogTitle"
                           title:to="title"
@@ -510,6 +515,7 @@
                         <lbh3-alert message:from="'Loading the Email List page…'" />
                       {{else}}
                         <lbh3-hashers-email
+                          class="container pl-0 pr-0"
                           description:to="description"
                           ogTitle:to="ogTitle"
                           title:to="title"
@@ -526,6 +532,7 @@
                     <lbh3-alert message:from="'Loading the Hashers page…'" />
                   {{else}}
                     <lbh3-hashers
+                      class="container pl-0 pr-0"
                       description:to="description"
                       ogTitle:to="ogTitle"
                       searchNoHeadshot:bind="noHeadshot"

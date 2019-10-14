@@ -145,7 +145,7 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/components/hashers/hashers.js",
-      "maxSize": "6 kB"
+      "maxSize": "7 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/home/home.css",

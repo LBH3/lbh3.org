@@ -64,7 +64,13 @@ module.exports = function (options) {
       // Build the ORDER BY
       let orderByQuery = '';
       if (query.$sort) {
-        if (query.$sort.lastTrailDate) {
+        if (query.$sort.hashName) {
+          if (Number(query.$sort.hashName) === -1) {
+            orderByQuery = 'ORDER BY NULLIF(hash_name, \'\') DESC NULLS LAST';
+          } else {
+            orderByQuery = 'ORDER BY NULLIF(hash_name, \'\') ASC NULLS LAST';
+          }
+        } else if (query.$sort.lastTrailDate) {
           if (Number(query.$sort.lastTrailDate) === -1) {
             orderByQuery = 'ORDER BY last_trail_date DESC';
           } else {

@@ -3,10 +3,11 @@ import DefineMap from 'can-define/map/';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import './hashers.less';
+import moment from 'moment';
 import route from 'can-route';
 import view from './hashers.stache';
 
-const $limit = 100;
+const $limit = 50;
 
 export const ViewModel = DefineMap.extend({
   description: {
@@ -25,16 +26,26 @@ export const ViewModel = DefineMap.extend({
   },
   hashersPromise: {
     get: function() {
-      const searchText = (this.searchText) ? this.searchText.trim() : '';
-      return Hasher.getList({
+      const searchParams = {
         headshotUrl: this.searchNoHeadshot ? '' : undefined,
         $limit,
-        search: searchText || undefined,
         $skip: this.skip,
         $sort: {
-          lastTrailDate: -1
+          hashName: 1
         }
-      });
+      };
+      const searchText = (this.searchText) ? this.searchText.trim() : '';
+      if (searchText) {
+        searchParams.search = searchText;
+      } else {
+        searchParams.hashName = {
+          $nin: ['']
+        };
+        searchParams.lastTrailDate = {
+          $gte: moment().tz('America/Los_Angeles').subtract(1, 'year').startOf('day').format()
+        };
+      }
+      return Hasher.getList(searchParams);
     }
   },
   get currentPage() {
@@ -68,30 +79,41 @@ export const ViewModel = DefineMap.extend({
     return route.url(routeParams);
   },
   routeForPage: function(page) {
-    const searchText = (this.searchText) ? this.searchText.trim() : '';
     const routeParams = {
-      noHeadshot: this.searchNoHeadshot,
       page: 'hashers',
       secondaryPage: '',
-      search: searchText,
       skip: $limit * (page - 1)
     };
+    if (this.searchNoHeadshot) {
+      routeParams.noHeadshot = this.searchNoHeadshot;
+    }
+    const searchText = (this.searchText) ? this.searchText.trim() : '';
+    if (searchText) {
+      routeParams.search = searchText;
+    }
     return route.url(routeParams);
   },
 
   searchNoHeadshot: {
-    type: 'boolean'
+    type: 'boolean',
+    set(searchNoHeadshot) {
+      return searchNoHeadshot || false;
+    }
   },
 
-  searchText: 'string',
+  searchText: {
+    type: 'string',
+    set(searchText) {
+      return searchText || '';
+    }
+  },
 
   get session() {
     return Session.current;
   },
 
   skip: {
-    default: 0,
-    type: 'number'
+    default: 0
   },
 
   get title() {

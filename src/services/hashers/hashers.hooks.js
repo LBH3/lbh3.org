@@ -59,15 +59,14 @@ const beforeFindHook = function(hook) {
 
 const afterFindHook = function(hook) {
   return shouldFilterData(hook).then(filter => {
-    const hashers = hook.result.data;
     if (filter < filterStates.BORED) {
-      hook.result.data = hashers.map(hasher => {
+      hook.result.data = hook.result.data.map(hasher => {
         return filterData(hasher, filter);
       });
     }
     const sequelizeClient = hook.app.get('sequelizeClient');
 
-    const sequentialPromise = hashers.reduce((promise, hasher) => {
+    const sequentialPromise = hook.result.data.reduce((promise, hasher) => {
       return promise.then(() => {
         return addStatsToHasher(hasher, sequelizeClient);
       });
@@ -112,9 +111,10 @@ const addStatsToHasher = function(hasher, sequelize) {
       type: sequelize.QueryTypes.SELECT
     }).then(result => {
       if (result && result[0]) {
-        hasher.hareCount = parseFloat(result[0].count) || 0;
-        hasher.runCount = parseFloat(result[1].count) || 0;
-        hasher.runMileage = parseFloat(result[2].count) || 0;
+        hasher.dataValues = hasher.dataValues || {};
+        hasher.hareCount = hasher.dataValues.hareCount = parseFloat(result[0].count) || 0;
+        hasher.runCount = hasher.dataValues.runCount = parseFloat(result[1].count) || 0;
+        hasher.runMileage = hasher.dataValues.runMileage = parseFloat(result[2].count) || 0;
       }
       resolve(hasher);
     }, reject);
