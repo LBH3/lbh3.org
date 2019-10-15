@@ -47,13 +47,15 @@ const EventsHashers = DefineMap.extend({
   familyName: {
     get(lastSetValue) {
       return lastSetValue && lastSetValue.length ? lastSetValue : '';
-    }
+    },
+    serialize: true
   },
   foodPreference: 'string',
   givenName: {
     get(lastSetValue) {
       return lastSetValue && lastSetValue.length ? lastSetValue : '';
-    }
+    },
+    serialize: true
   },
   hasherId: 'number',
   hasherPromise: {
