@@ -93,11 +93,11 @@ const getFirstAndLastTrailData = function({event, hasher, hook}) {
 
 const getRequiredData = function(hook) {
   return new Promise(function(resolve, reject) {
-    new Promise(function(resolve, reject) {
+    new Promise((internalResolve, internalReject) => {
       if (hook.data.hasherId) {
-        resolve(hook.data);
+        internalResolve(hook.data);
       } else {
-        hook.service.get(hook.id).then(resolve, reject);
+        hook.service.get(hook.id, hook.params).then(internalResolve, internalReject);
       }
     }).then(eventHasher => {
       const findParams = Object.assign({}, hook.params, {
