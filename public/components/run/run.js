@@ -33,7 +33,7 @@ export const ViewModel = DefineMap.extend({
       }
       const hashersPromise = this.hashersPromise;
       const user  = this.session && this.session.user || {};
-      if (hashersPromise && user.canViewRunAttendance) {
+      if (hashersPromise && user.canViewCashReport) {
         hashersPromise.then(hashers => {
           const hashersByPaymentTier = {};
           hashers.forEach(hasher => {
@@ -138,26 +138,9 @@ export const ViewModel = DefineMap.extend({
     };
     return route.url(routeParams);
   },
+  secondaryPage: 'string',
   get session() {
     return Session.current;
-  },
-  shouldShowEditButton: {
-    get: function() {
-      const session = this.session;
-      if (session) {
-        const event = this.event;
-        const user = session.user;
-        if (event && user) {
-          return (
-            (user.canEditPreTrailInfo && !event.hasProbablyEnded) ||
-            (user.canEditPostTrailInfo && event.hasStartedOrIsCloseToStarting)
-          );
-        }
-        // Loading event or user
-        return true;
-      }
-      return false;
-    }
   },
   shouldShowPostTrailData: {
     get: function() {

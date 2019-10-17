@@ -20,7 +20,7 @@ const afterGetHook = function(hook) {
   });
 };
 
-const boredPositions = [authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS];
+const boredPositions = [authHook.HASH_CASH, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.TRAILMASTERS, authHook.WEBMASTERS];
 
 const filterData = function(data, filterState) {
   if (filterState === filterStates.BORED) {

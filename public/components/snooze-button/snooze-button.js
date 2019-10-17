@@ -50,8 +50,25 @@ const uploadFile = function(file, signedRequest, url) {
 };
 
 export const ViewModel = DefineMap.extend({
+  deleteSnooze() {
+    this.event.snoozeUrl = '';
+    this.uploadPromise = null;
+  },
   event: Event,
-  faSize: 'string',
+  get eventsPromise() {
+    return Event.getList({
+      $limit: 5,
+      $sort: {
+        startDatetime: -1
+      },
+      snoozeUrl: {
+        $nin: ['']
+      },
+      startDatetime: {
+        $lte: this.event.startDateAsMoment.format()
+      }
+    });
+  },
   removePromise: Promise,
   get session() {
     return Session.current;
@@ -64,22 +81,6 @@ export default Component.extend({
   ViewModel,
   view,
   events: {
-    'button click': function(button, event) {
-      event.preventDefault();
-
-      const viewModel = this.viewModel;
-      const trail = viewModel.event;
-      const trailName = (trail.nameMd) ? `“${trail.nameMd}”` : `the trail on ${trail.startDateWithYearString}`;
-      const question = `Are you sure you want to delete the Snooze for ${trailName}?`;
-
-      if (window.confirm(question)) {
-        trail.snoozeUrl = '';
-        viewModel.uploadPromise = null;
-        viewModel.removePromise = trail.save().then(function() {
-          viewModel.removePromise = null;
-        });
-      }
-    },
     'input[type="file"] change': function(input) {
       const file = (input.files && input.files[0]) ? input.files[0] : null;
       if (file) {
@@ -88,7 +89,6 @@ export default Component.extend({
         viewModel.uploadPromise = getSignedRequest(file, event).then(response => {
           return uploadFile(file, response.signedRequest, response.url).then(() => {
             event.snoozeUrl = response.url;
-            return event.save();
           }, error => {
             console.error('Error uploading file:', error);
           });

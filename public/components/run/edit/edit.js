@@ -100,8 +100,10 @@ export const ViewModel = DefineMap.extend({
         const user = session.user;
         if (event && user) {
           return (
-            (user.canEditPreTrailInfo && !event.hasProbablyEnded) ||
-            (user.canEditPostTrailInfo && event.hasStartedOrIsCloseToStarting)
+            (user.canEditFutureTrails && !event.hasProbablyEnded) ||
+            (user.canEditPostTrailInfo && event.hasStartedOrIsCloseToStarting) ||
+            (user.canAddPhotos && event.hasProbablyEnded) ||
+            (user.canAddSnoozes && event.hasProbablyEnded)
           );
         }
         // Loading event or user
@@ -306,16 +308,12 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  secondaryPage: 'string',
+
   selectedHasher: Hasher,
 
   get session() {
     return Session.current;
-  },
-
-  showPostTrailFields: {
-    get: function() {
-      return this.event.hasStartedOrIsCloseToStarting && this.session && this.session.user.canEditPostTrailInfo;
-    }
   },
 
   specialEventPromise: {

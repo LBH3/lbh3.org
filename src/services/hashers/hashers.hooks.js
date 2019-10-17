@@ -132,6 +132,7 @@ const attachAuthInfo = function(hook) {
 };
 
 const boredPositions = [
+  authHook.GRANDMASTERS,
   authHook.HASH_CASH,
   authHook.HASH_HISTORIANS,
   authHook.ON_DISK,

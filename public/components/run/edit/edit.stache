@@ -5,17 +5,10 @@
 <can-import from="~/components/alert/" />
 <can-import from="~/components/hasher-autocomplete/" />
 <can-import from="~/components/map/" />
+<can-import from="~/components/run/nav/" />
+<can-import from="~/components/snooze-button/" />
 
-<h2>
-  Edit
-  {{#if event}}
-    <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}" title="View trail">
-      Run #{{trailNumber}}
-    </a>
-  {{else}}
-    Run #{{trailNumber}}
-  {{/if}}
-</h2>
+<lbh3-run-nav event:from="event" secondaryPage:from="secondaryPage" session:from="session" />
 
 {{#if canEditEvent}}
 
@@ -29,230 +22,240 @@
   {{/if}}
   {{#if event}}
     <form class="mb-4 mt-2" on:submit="scope.event.preventDefault()">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="hares">
-            Date &amp; time
-          </label>
-          <div class="input-group">
-            <input
-              class="form-control"
-              {{#if event.hasStartedOrIsCloseToStarting}}disabled{{/if}}
-              {{^if session.user.canAddTrails}}disabled{{/if}}
-              id="start-date"
-              type="date"
-              value:bind="startDate"
-            />
-            <input
-              class="form-control"
-              {{^if session.user.canAddTrails}}disabled{{/if}}
-              id="start-time"
-              type="time"
-              value:bind="startTime"
-            />
-          </div>
-        </div>
-        <div class="form-group col-md-6">
-          <label for="hares">
-            Hares
-          </label>
-          <input autofocus class="form-control" id="hares" type="text" value:bind="event.haresMd">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="name">
-            Name
-          </label>
-          <input class="form-control" id="name" type="text" value:bind="event.nameMd">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="bring">
-            Bring
-          </label>
-          <input class="form-control" id="bring" type="text" value:bind="event.bringMd">
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="location">
-            Location
-          </label>
-          <div class="d-flex">
-            <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
-            <button class="btn btn-link prevent-default" on:click="scope.vm.resetLocation()" type="button">
-              <span class="fas fa-times"></span>
-            </button>
-          </div>
-          {{#if locationPromise.isRejected}}
-            <span class="fas fa-exclamation-triangle"></span>
-            <small>
-              Save failed. Maybe try again?
-            </small>
-          {{else}}
-            {{#if locationPromise.isPending}}
-              <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-            {{/if}}
-            {{#if locationPromise.isResolved}}
-              <span class="fas fa-check"></span>
-            {{/if}}
-            {{#if event.locationPromise.value}}
-              <small>
-                {{{event.locationPromise.value.formattedAddress}}}
-              </small>
-            {{/if}}
-          {{/if}}
-          {{#if event.locationPromise.value.placeId}}
-            <lbh3-map placeId:from="event.locationPromise.value.placeId" style="height: 208px" />
-          {{else}}
-            {{#if event.locationMd}}
-              <lbh3-map q:from="event.locationMd" style="height: 208px" />
-            {{/if}}
-          {{/if}}
-        </div>
-        <div class="form-group col-md-6">
-          <label for="on-on">
-            On-On
-          </label>
-          <div class="d-flex">
-            <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
-            <button class="btn btn-link prevent-default" on:click="scope.vm.resetOnOn()" type="button">
-              <span class="fas fa-times"></span>
-            </button>
-          </div>
-          {{#if onOnPromise.isRejected}}
-            <span class="fas fa-exclamation-triangle"></span>
-            <small>
-              Save failed. Maybe try again?
-            </small>
-          {{else}}
-            {{#if onOnPromise.isPending}}
-              <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-            {{/if}}
-            {{#if onOnPromise.isResolved}}
-              <span class="fas fa-check"></span>
-            {{/if}}
-            {{#if event.onOnPromise.value}}
-              <small>
-                {{{event.onOnPromise.value.formattedAddress}}}
-              </small>
-            {{/if}}
-          {{/if}}
-          {{#if event.onOnPromise.value.placeId}}
-            <lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 208px" />
-          {{/if}}
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label for="directions">
-            Directions
-            <small>
-              (<strong>**bold**</strong> <em>*italics*</em> ~~<strike>strike</strike>~~)
-            </small>
-          </label>
-          <textarea
-            class="form-control"
-            id="directions"
-            value:bind="event.directionsMd">
-          </textarea>
-          {{^if event.hasEnded}}
-            {{#if event.directionsHtml}}
-              <div class="bg-light border mt-2 p-2 rounded">
-                {{{event.directionsHtml}}}
-              </div>
-            {{/if}}
-          {{/if}}
-        </div>
-        <div class="form-group col-md-6">
-          <label for="from-the-hares">
-            From the Hares
-            <small>
-              (<strong>**bold**</strong> <em>*italics*</em> ~~<strike>strike</strike>~~)
-            </small>
-          </label>
-          <textarea
-            class="form-control"
-            id="from-the-hares"
-            value:bind="event.fromTheHaresMd">
-          </textarea>
-          {{^if event.hasEnded}}
-            {{#if event.fromTheHaresHtml}}
-              <div class="bg-light border mt-2 p-2 rounded">
-                {{{event.fromTheHaresHtml}}}
-              </div>
-            {{/if}}
-          {{/if}}
-        </div>
-      </div>
-
-      {{#if showPostTrailFields}}
+      {{#if(session.user.canEditPreTrailInfo)}}
         <div class="form-row">
-          <div class="form-group col-md-9">
-            <label for="scribe">
-              Scribe
+          <div class="form-group col-md-6">
+            <label for="hares">
+              Date &amp; time
             </label>
-            <input
-              class="form-control"
-              id="scribe"
-              type="text"
-              value:bind="event.scribesMd"
-              {{^if event.scribesMd}}
-                {{#if scribes.length}}
-                  placeholder="{{scribeNames}}"
-                {{else}}
-                  disabled
-                  placeholder="Add the scribe under Attendance"
-                {{/if}}
+            <div class="input-group">
+              <input
+                class="form-control"
+                {{#if(event.hasStartedOrIsCloseToStarting)}}disabled{{/if}}
+                {{^if session.user.canAddTrails}}disabled{{/if}}
+                id="start-date"
+                type="date"
+                value:bind="startDate"
+              />
+              <input
+                class="form-control"
+                {{^if session.user.canAddTrails}}disabled{{/if}}
+                id="start-time"
+                type="time"
+                value:bind="startTime"
+              />
+            </div>
+          </div>
+          <div class="form-group col-md-6">
+            <label for="hares">
+              Hares
+            </label>
+            <input autofocus class="form-control" id="hares" type="text" value:bind="event.haresMd">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="name">
+              Name
+            </label>
+            <input class="form-control" id="name" type="text" value:bind="event.nameMd">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="bring">
+              Bring
+            </label>
+            <input class="form-control" id="bring" type="text" value:bind="event.bringMd">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="location">
+              Location
+            </label>
+            <div class="d-flex">
+              <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="event.locationMd">
+              {{#if(event.locationMd)}}
+                <button class="btn btn-link prevent-default" on:click="resetLocation()" type="button">
+                  <span class="fas fa-times"></span>
+                </button>
               {{/if}}
-            />
+            </div>
+            {{#if locationPromise.isRejected}}
+              <span class="fas fa-exclamation-triangle"></span>
+              <small>
+                Save failed. Maybe try again?
+              </small>
+            {{else}}
+              {{#if locationPromise.isPending}}
+                <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
+              {{/if}}
+              {{#if locationPromise.isResolved}}
+                <span class="fas fa-check"></span>
+              {{/if}}
+              {{#if event.locationPromise.value}}
+                <small>
+                  {{{event.locationPromise.value.formattedAddress}}}
+                </small>
+              {{/if}}
+            {{/if}}
+            {{#if event.locationPromise.value.placeId}}
+              <lbh3-map placeId:from="event.locationPromise.value.placeId" style="height: 208px" />
+            {{else}}
+              {{#if event.locationMd}}
+                <lbh3-map q:from="event.locationMd" style="height: 208px" />
+              {{/if}}
+            {{/if}}
           </div>
-          <div class="form-group col-md-3">
-            <label for="miles">
-              Miles
+          <div class="form-group col-md-6">
+            <label for="on-on">
+              On-On
             </label>
-            <input
+            <div class="d-flex">
+              <input class="form-control" disabled id="on-on" placeholder="" type="text" value:bind="event.onOnMd">
+              {{#if(event.onOnMd)}}
+                <button class="btn btn-link prevent-default" on:click="resetOnOn()" type="button">
+                  <span class="fas fa-times"></span>
+                </button>
+              {{/if}}
+            </div>
+            {{#if onOnPromise.isRejected}}
+              <span class="fas fa-exclamation-triangle"></span>
+              <small>
+                Save failed. Maybe try again?
+              </small>
+            {{else}}
+              {{#if onOnPromise.isPending}}
+                <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
+              {{/if}}
+              {{#if onOnPromise.isResolved}}
+                <span class="fas fa-check"></span>
+              {{/if}}
+              {{#if event.onOnPromise.value}}
+                <small>
+                  {{{event.onOnPromise.value.formattedAddress}}}
+                </small>
+              {{/if}}
+            {{/if}}
+            {{#if event.onOnPromise.value.placeId}}
+              <lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 208px" />
+            {{/if}}
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="directions">
+              Directions
+              <small>
+                (<strong>**bold**</strong> <em>*italics*</em> ~~<strike>strike</strike>~~)
+              </small>
+            </label>
+            <textarea
               class="form-control"
-              id="miles"
-              min="0"
-              step="0.01"
-              type="number"
-              value:bind="event.miles"
-            />
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="form-group col-md-6">
-            <label for="hashit-reason">
-              Hashit
-            </label>
-            <textarea class="form-control" id="hashit-reason" value:bind="event.hashitReasonMd"></textarea>
+              id="directions"
+              value:bind="event.directionsMd">
+            </textarea>
+            {{^if event.hasEnded}}
+              {{#if event.directionsHtml}}
+                <div class="bg-light border mt-2 p-2 rounded">
+                  {{{event.directionsHtml}}}
+                </div>
+              {{/if}}
+            {{/if}}
           </div>
           <div class="form-group col-md-6">
-            <label for="run-notes">
-              Run Notes
+            <label for="from-the-hares">
+              From the Hares
+              <small>
+                (<strong>**bold**</strong> <em>*italics*</em> ~~<strike>strike</strike>~~)
+              </small>
             </label>
-            <textarea class="form-control" id="run-notes" value:bind="event.trailCommentsMd"></textarea>
+            <textarea
+              class="form-control"
+              id="from-the-hares"
+              value:bind="event.fromTheHaresMd">
+            </textarea>
+            {{^if event.hasEnded}}
+              {{#if event.fromTheHaresHtml}}
+                <div class="bg-light border mt-2 p-2 rounded">
+                  {{{event.fromTheHaresHtml}}}
+                </div>
+              {{/if}}
+            {{/if}}
           </div>
         </div>
-        <div class="form-row">
-          {{#if session.user.canAddPhotos}}
-            <div class="form-group col-md-6">
-              <label for="photos-url">
-                Photos URL
+      {{/if}}
+
+      {{#if(event.hasStartedOrIsCloseToStarting)}}
+        {{#if(session.user.canEditPostTrailInfo)}}
+          <div class="form-row">
+            <div class="form-group col-md-9">
+              <label for="scribe">
+                Scribe
               </label>
-              <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
+              <input
+                class="form-control"
+                id="scribe"
+                type="text"
+                value:bind="event.scribesMd"
+                {{^if event.scribesMd}}
+                  {{#if scribes.length}}
+                    placeholder="{{scribeNames}}"
+                  {{else}}
+                    disabled
+                    placeholder="Add the scribe under Attendance"
+                  {{/if}}
+                {{/if}}
+              />
             </div>
-          {{/if}}
-          {{#if session.user.canAddSnoozes}}
-            <div class="form-group col-md-6">
-              <label for="snooze-url">
-                Snooze URL
+            <div class="form-group col-md-3">
+              <label for="miles">
+                Miles
               </label>
-              <input class="form-control" id="snooze-url" type="text" value:bind="event.snoozeUrl">
+              <input
+                class="form-control"
+                id="miles"
+                min="0"
+                step="0.01"
+                type="number"
+                value:bind="event.miles"
+              />
             </div>
-          {{/if}}
-        </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="hashit-reason">
+                Hashit
+              </label>
+              <textarea class="form-control" id="hashit-reason" value:bind="event.hashitReasonMd"></textarea>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="run-notes">
+                Run Notes
+              </label>
+              <textarea class="form-control" id="run-notes" value:bind="event.trailCommentsMd"></textarea>
+            </div>
+          </div>
+        {{/if}}
+        {{#or(session.user.canAddPhotos, session.user.canAddSnoozes)}}
+          <div class="form-row">
+            {{#if(session.user.canAddPhotos)}}
+              <div class="form-group col-md-{{#if(session.user.canAddSnoozes)}}6{{else}}12{{/if}}">
+                <label for="photos-url">
+                  Photos URL
+                </label>
+                <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
+              </div>
+            {{/if}}
+            {{#if(session.user.canAddSnoozes)}}
+              <div class="form-group col-md-{{#if(session.user.canAddPhotos)}}6{{else}}12{{/if}}">
+                <label for="snooze-url">
+                  Snooze
+                </label>
+                <lbh3-snooze-button event:from="event" />
+              </div>
+            {{/if}}
+          </div>
+        {{/or}}
       {{else}}
         {{#if session.user.canManageUsers}}
           <div class="form-row">
@@ -307,10 +310,10 @@
         {{#if editingEventPromise.isPending}}disabled{{/if}}
         on:click="editRun()"
       >
-        Edit run
+        Save
       </button>
 
-      {{#if showPostTrailFields}}
+      {{#and(event.hasStartedOrIsCloseToStarting, session.user.canEditPostTrailInfo)}}
         <div class="form-row mt-4">
           <div class="form-group col-md-6">
             <label for="added-writeup">
@@ -353,12 +356,12 @@
             <textarea class="form-control" disabled id="visitors" value:bind="event.visitorsMd"></textarea>
           </div>
         </div>
-      {{/if}}
+      {{/and}}
     </form>
   {{/if}}
 
-  {{#if session.user.canViewRunAttendance}}
-    {{#if event.hasStartedOrIsCloseToStarting}}
+  {{#and(session.user.canEditPostTrailInfo, session.user.canViewRunAttendance)}}
+    {{#if(event.hasStartedOrIsCloseToStarting)}}
       <h3>Attendance</h3>
 
       {{#if hashersPromise.isPending}}
@@ -403,9 +406,9 @@
             <tbody>
               {{#for(hasher of hashers)}}
                 <tr>
-                  <td>{{scope.vm.plusOne(scope.index)}}</td>
+                  <td>{{plusOne(scope.index)}}</td>
                   <td>
-                    <a href="{{scope.vm.routeForHasher(hasher)}}">
+                    <a href="{{routeForHasher(hasher)}}">
                       {{hasher.hashOrJustName}}
                     </a>
                   </td>
@@ -419,7 +422,7 @@
                   <td class="text-center">
                     <button
                       class="btn btn-danger btn-sm prevent-default"
-                      on:click="scope.vm.removeHasher(hasher)"
+                      on:click="removeHasher(hasher)"
                       type="button"
                     >
                       <span class="fas fa-times"></span>
@@ -443,19 +446,19 @@
                   </lbh3-hasher-autocomplete>
                 </td>
                 <td>
-                  {{#each rolesSplitUp}}
+                  {{#for(role of rolesSplitUp)}}
                     <div class="form-check form-check-inline">
-                      <label class="form-check-label {{^if ../newHasherForRun.hasherId}}text-muted{{/if}}">
+                      <label class="form-check-label {{^if newHasherForRun.hasherId}}text-muted{{/if}}">
                         <input
-                          checked:bind="boolean-to-inList(this, ../newHasherRoleSplitUp)"
+                          checked:bind="boolean-to-inList(role, newHasherRoleSplitUp)"
                           class="form-check-input"
-                          {{^if ../newHasherForRun.hasherId}}disabled{{/if}}
+                          {{^if newHasherForRun.hasherId}}disabled{{/if}}
                           type="checkbox"
                         />
-                        {{this}}
+                        {{role}}
                       </label>
                     </div>
-                  {{/each}}
+                  {{/for}}
                 </td>
                 <td>
                   <select
@@ -573,27 +576,27 @@
                     </button>
                   </td>
                 </tr>
-                {{#each patches}}
+                {{#for(patch of patches)}}
                   <tr>
-                    <td>{{scope.vm.plusOne(scope.index)}}</td>
+                    <td>{{plusOne(scope.index)}}</td>
                     <td>
-                      {{#if hasher}}
-                        {{hasher.hashOrJustName}}
+                      {{#if patch.hasher}}
+                        {{patch.hasher.hashOrJustName}}
                       {{/if}}
                     </td>
-                    <td>{{number}}</td>
-                    <td>{{type}}s</td>
+                    <td>{{patch.number}}</td>
+                    <td>{{patch.type}}s</td>
                     <td class="text-center">
                       <button
                         class="btn btn-danger btn-sm prevent-default"
-                        on:click="scope.vm.removePatch(this)"
+                        on:click="removePatch(patch)"
                         type="button"
                       >
                         <span class="fas fa-times"></span>
                       </button>
                     </td>
                   </tr>
-                {{/each}}
+                {{/for}}
               </tbody>
             </table>
           </form>
@@ -604,7 +607,7 @@
         {{/if}}
       {{/if}}
     {{/if}}
-  {{/if}}
+  {{/and}}
 
 {{else}}
   <div class="alert alert-danger" role="alert">

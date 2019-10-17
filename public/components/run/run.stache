@@ -3,8 +3,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/regular.css" />
 <can-import from="~/components/alert/" />
 <can-import from="~/components/map/" />
-<can-import from="~/components/photos-button/" />
-<can-import from="~/components/snooze-button/" />
+<can-import from="~/components/run/nav/" />
 
 {{#if eventPromise.isPending}}
   <lbh3-alert message:from="'Fetching the run…'" />
@@ -17,40 +16,7 @@
 {{/if}}
 
 {{#if event}}
-  <h2>
-    {{#if event.nameHtml}}
-      {{{event.nameHtml}}}
-      <br>
-      <small class="text-muted">Run #{{event.trailNumber}}</small>
-    {{else}}
-      Run #{{event.trailNumber}}
-    {{/if}}
-  </h2>
-  <div class="d-flex justify-content-center mb-3">
-    {{#if shouldShowEditButton}}
-      <a
-        class="d-inline-block d-print-none mx-5"
-        href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}"
-        title="Edit trail"
-      >
-        <span class="far fa-edit fa-lg"></span>
-      </a>
-    {{/if}}
-    {{#if event.hasProbablyEnded}}
-      {{#if session.user.hasherId}}
-        <lbh3-photos-button
-          class="d-inline-block d-print-none mx-5"
-          event:from="event"
-          faSize:from="'lg'"
-        />
-        <lbh3-snooze-button
-          class="d-inline-block d-print-none mx-5"
-          event:from="event"
-          faSize:from="'lg'"
-        />
-      {{/if}}
-    {{/if}}
-  </div>
+  <lbh3-run-nav event:from="event" secondaryPage:from="secondaryPage" session:from="session" />
 
   <dl class="row">
     <dt class="col-sm-3 text-sm-right">Date:</dt>

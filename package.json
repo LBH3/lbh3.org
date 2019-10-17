@@ -101,15 +101,15 @@
     },
     {
       "path": "./public/dist/bundles/edit-add-edit.js",
-      "maxSize": "29 kB"
+      "maxSize": "31 kB"
     },
     {
-      "path": "./public/dist/bundles/hareline-hasher--*.css",
+      "path": "./public/dist/bundles/hareline-hasher-*.css",
       "maxSize": "1 kB"
     },
     {
-      "path": "./public/dist/bundles/hareline-hasher--*.js",
-      "maxSize": "43 kB"
+      "path": "./public/dist/bundles/hareline-hasher-*.js",
+      "maxSize": "40 kB"
     },
     {
       "path": "./public/dist/bundles/mismanagement-na-*.css",
@@ -132,6 +132,22 @@
       "maxSize": "5 kB"
     },
     {
+      "path": "./public/dist/bundles/lbh3/components/hareline/guidelines/guidelines.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hareline/guidelines/guidelines.js",
+      "maxSize": "14 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hareline/nav/nav.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hareline/nav/nav.js",
+      "maxSize": "5 kB"
+    },
+    {
       "path": "./public/dist/bundles/lbh3/components/hasher/hasher.css",
       "maxSize": "1 kB"
     },
@@ -146,6 +162,14 @@
     {
       "path": "./public/dist/bundles/lbh3/components/hashers/hashers.js",
       "maxSize": "7 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hashers/nav/nav.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/hashers/nav/nav.js",
+      "maxSize": "5 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/home/home.css",

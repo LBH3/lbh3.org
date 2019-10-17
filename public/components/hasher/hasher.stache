@@ -3,9 +3,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/alert/" />
 <can-import from="~/components/hasher/nav/" />
-<can-import from="~/components/photos-button/" />
 <can-import from="~/components/run-list/" />
-<can-import from="~/components/snooze-button/" />
 
 {{#if hasherPromise.isPending}}
   <lbh3-alert message:from="'Fetching the hasher…'" />

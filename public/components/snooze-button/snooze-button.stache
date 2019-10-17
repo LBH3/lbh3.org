@@ -3,55 +3,54 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 
 {{<snoozeButtons}}
-  <a class="btn btn-link p-0" href="{{event.snoozeUrlWithAuth}}" target="_blank" title="View Snooze">
-    <span class="far fa-newspaper {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
-  </a>
-  {{#if session.user.canAddSnoozes}}
-    {{#if faSize}}
-      <br>
-    {{/if}}
-    <button class="btn btn-link p-0" type="button">
-      <span class="far fa-trash-alt {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
-    </button>
-  {{/if}}
+  <input class="form-control mr-2" id="snooze-url" type="text" value:bind="event.snoozeUrl">
+  <button class="btn btn-danger text-nowrap" on:click="deleteSnooze()" type="button">
+    <span class="far fa-trash-alt"></span>
+    Reset
+  </button>
 {{/snoozeButtons}}
 
-{{#if session.user.canAddSnoozes}}
-  {{#if uploadPromise}}
-    {{#if uploadPromise.isPending}}
-      <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-    {{/if}}
-    {{#if uploadPromise.isRejected}}
-      <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{uploadPromise.reason.xhr.message}}"></span>
-    {{/if}}
-    {{#if uploadPromise.isResolved}}
-      {{#if event.snoozeUrlWithAuth}}
-        {{>snoozeButtons}}
-      {{else}}
-        <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="Unknown error"></span>
-      {{/if}}
-    {{/if}}
-  {{else}}
+{{#or(event.snoozeUrl, uploadPromise)}}
+  {{#if uploadPromise.isPending}}
+    <div aria-hidden="true" class="spinner-border" role="status"></div>
+  {{/if}}
+  {{#if uploadPromise.isRejected}}
+    <p>
+      <span class="fas fa-exclamation-triangle"></span>
+      {{uploadPromise.reason.xhr.message}}
+    </p>
+  {{/if}}
+  {{#if(event.snoozeUrl)}}
     {{#if event.snoozeUrlWithAuth}}
       {{>snoozeButtons}}
     {{else}}
-      {{#if removePromise}}
-        {{#if removePromise.isPending}}
-          <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-        {{/if}}
-        {{#if removePromise.isRejected}}
-          <span class="fas fa-exclamation-triangle {{#if faSize}}fa-{{faSize}}{{/if}}" title="{{removePromise.reason.xhr.message}}"></span>
-        {{/if}}
-      {{else}}
-        <label class="m-0 p-0" title="Upload Snooze">
-          <span class="fas fa-upload {{#if faSize}}fa-{{faSize}}{{/if}}"></span>
-          <input accept="application/pdf" class="sr-only" type="file" />
-        </label>
-      {{/if}}
+      <p>
+        <span class="fas fa-exclamation-triangle"></span>
+        Unknown error
+      </p>
     {{/if}}
   {{/if}}
 {{else}}
   {{#if event.snoozeUrlWithAuth}}
     {{>snoozeButtons}}
+  {{else}}
+    <label class="btn btn-primary mr-2 text-nowrap">
+      <span class="fas fa-upload"></span>
+      Upload
+      <input accept="application/pdf" class="sr-only" type="file" />
+    </label>
+    <select class="form-control" on:change:value:to="event.snoozeUrl">
+      <option disabled selected>Or select a recent trail</option>
+      {{#for(recentTrail of eventsPromise.value)}}
+        <option value="{{recentTrail.snoozeUrl}}">
+          {{#if(recentTrail.namePlaintext)}}
+            {{recentTrail.namePlaintext}}
+          {{else}}
+            Run #{{recentTrail.trailNumber}}
+          {{/if}}
+          ({{recentTrail.startDateWithYearString}})
+        </option>
+      {{/for}}
+    </select>
   {{/if}}
-{{/if}}
+{{/or}}
