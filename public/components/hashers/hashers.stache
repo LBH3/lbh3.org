@@ -39,7 +39,7 @@
         <a class="border-top mt-3 pt-3 row text-decoration-none" href="{{routeForHasher(hasher)}}">
           <div class="col col-auto headshot-container text-center">
             {{#if hasher.headshotUrl}}
-              <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrl}}" />
+              <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrlForSize(112, 112)}}" />
             {{/if}}
           </div>
           <div class="col p-0">

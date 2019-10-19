@@ -17,7 +17,7 @@
   <lbh3-hasher-nav hasher:from="hasher" secondaryPage:from="secondaryPage" session:from="session" />
 
   {{#if hasher.headshotUrl}}
-    <div class="mb-3 text-center"><a href="{{hasher.headshotUrl}}" target="_blank"><img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" /></a></div>
+    <div class="mb-3 text-center"><a href="{{hasher.headshotUrl}}" target="_blank"><img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrlForSize(null, 224)}}" /></a></div>
   {{/if}}
 
   <div class="row">

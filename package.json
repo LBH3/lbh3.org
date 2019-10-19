@@ -76,6 +76,7 @@
     "sequelize": "^4.31.2",
     "sequelize-cli": "^4.0.0",
     "serve-favicon": "^2.4.3",
+    "sharp": "^0.23.1",
     "striptags": "^3.0.1",
     "winston": "^2.3.1"
   },
@@ -125,7 +126,7 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/index.js",
-      "maxSize": "207 kB"
+      "maxSize": "208 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/hareline/hareline.js",

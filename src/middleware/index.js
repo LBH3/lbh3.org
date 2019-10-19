@@ -6,6 +6,8 @@ const env = process.env.NODE_ENV || 'development';
 const eol = require('os').EOL;
 const fs = require('fs');
 const json2csv = require('json2csv');
+const request = require('request');
+const sharp = require('sharp');
 const ssr = require('done-ssr-middleware');
 
 module.exports = function (app) {
@@ -151,6 +153,47 @@ module.exports = function (app) {
       res.status(500);
       res.write(JSON.stringify(error));
       res.end();
+    });
+  });
+
+  app.get('/image', (req, res) => {
+    const params = req.query;
+    const height = params.height ? Number(params.height) : null;
+    const width = params.width ? Number(params.width) : null;
+    console.time(`Fetch ${params.url} for sizing ${width}, ${height}`);
+    request({
+      encoding: null,
+      method: 'GET',
+      url: params.url
+    }, (error, response, body) => {
+      console.timeEnd(`Fetch ${params.url} for sizing ${width}, ${height}`);
+      if (response && response.statusCode === 200) {
+        console.time(`Resize ${params.url} for sizing ${width}, ${height}`);
+        sharp(body)
+          .resize(width, height, {
+            fit: sharp.fit.inside,
+            withoutEnlargement: true
+          })
+          .toFormat('jpeg')
+          .toBuffer()
+          .then(data => {
+            console.timeEnd(`Resize ${params.url} for sizing ${width}, ${height}`);
+            res.send(data);
+            res.end();
+          })
+          .catch(error => {
+            console.error(`Error running sharp for image at URL ${params.url}:`, error);
+            res.send(body);
+            res.end();
+          });
+      } else {
+        if (error) {
+          console.error(`Error fetching image at URL ${params.url}:`, error);
+        }
+        res.status(response && response.statusCode || 500);
+        res.send(body);
+        res.end();
+      }
     });
   });
 

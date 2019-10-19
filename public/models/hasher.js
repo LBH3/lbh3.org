@@ -334,6 +334,19 @@ export const Hasher = DefineMap.extend({
   },
   headshotPrivacy: privacyDefault,
   headshotUrl: 'string',
+  headshotUrlForSize(width, height) {
+    const params = [
+      `url=${encodeURIComponent(this.headshotUrl)}`
+    ];
+    const ratio = devicePixelRatio || 1;
+    if (height) {
+      params.push(`height=${ratio * height}`)
+    }
+    if (width) {
+      params.push(`width=${ratio * width}`)
+    }
+    return `/image?${params.join('&')}`;
+  },
   history: 'string',
   homePhone: 'string',
   homePhonePrivate: 'string',

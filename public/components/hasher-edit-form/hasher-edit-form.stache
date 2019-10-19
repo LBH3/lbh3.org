@@ -37,7 +37,7 @@
       <div class="col-sm-8">
         {{#if(hasher.headshotUrl)}}
           <a class="d-block mb-2" href="{{hasher.headshotUrl}}" target="_blank">
-            <img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrl}}" />
+            <img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrlForSize(null, 112)}}" />
           </a>
         {{/if}}
         <div class="row">
