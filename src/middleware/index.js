@@ -178,6 +178,13 @@ module.exports = function (app) {
           .toBuffer()
           .then(data => {
             console.timeEnd(`Resize ${params.url} for sizing ${width}, ${height}`);
+            res.setHeader('Cache-Control', 'public,max-age=31536000,immutable');
+            if (response.headers.etag) {
+              res.setHeader('ETag', response.headers.etag);
+            }
+            if (response.headers['last-modified']) {
+              res.setHeader('Last-Modified', response.headers['last-modified']);
+            }
             res.send(data);
             res.end();
           })
