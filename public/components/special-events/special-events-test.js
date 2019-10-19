@@ -4,7 +4,7 @@ import { ViewModel } from './special-events';
 // ViewModel unit tests
 QUnit.module('~/components/special-events');
 
-QUnit.test('Has title', function(){
+QUnit.test('Has title', function(assert) {
   var vm = new ViewModel();
-  QUnit.equal(vm.title, 'Special Events | LBH3');
+  assert.equal(vm.title, 'Special Events | LBH3');
 });

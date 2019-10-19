@@ -3,11 +3,11 @@ import Place from './place';
 
 QUnit.module('models/place');
 
-QUnit.skip('getList', function(){
-  stop();
+QUnit.skip('getList', function(assert) {
+  const done = assert.async();
   Place.getList().then(function(items) {
-    QUnit.equal(items.length, 2);
-    QUnit.equal(items.item(0).description, 'First item');
-    start();
+    assert.equal(items.length, 2);
+    assert.equal(items.item(0).description, 'First item');
+    done();
   });
 });

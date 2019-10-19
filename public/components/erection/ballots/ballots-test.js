@@ -4,7 +4,7 @@ import { ViewModel } from './ballots';
 // ViewModel unit tests
 QUnit.module('~/components/erection/ballots');
 
-QUnit.test('Has title', function(){
+QUnit.test('Has title', function(assert) {
   var vm = new ViewModel();
-  QUnit.equal(vm.title, 'Ballots | Erection | LBH3');
+  assert.equal(vm.title, 'Ballots | Erection | LBH3');
 });

@@ -3,11 +3,11 @@ import Election from './election';
 
 QUnit.module('models/election');
 
-QUnit.test('getList', function(){
-  stop();
+QUnit.test('getList', function(assert) {
+  const done = assert.async();
   Election.getList().then(function(items) {
-    QUnit.equal(items.length, 2);
-    QUnit.equal(items.item(0).urlId, '2017');
-    start();
+    assert.equal(items.length, 2);
+    assert.equal(items.item(0).urlId, '2017');
+    done();
   });
 });
