@@ -25,7 +25,7 @@
     "build:tests": "cd public && node build-tests && cd ..",
     "bundlesize": "node ./node_modules/.bin/bundlesize",
     "ci": "node install-ci",
-    "eslint": "eslint src/. test/. --config .eslintrc.json",
+    "eslint": "eslint src/. test/. --config .eslintrc.json --fix",
     "heroku-postbuild": "npm run build",
     "install": "node install",
     "mocha": "mocha test/ --recursive --exit",
