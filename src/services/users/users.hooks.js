@@ -9,7 +9,7 @@ const userInfo = function(hook) {
       const facebookProfile = hook.data.facebook.profile;
       const profileData = {};
       for (key in facebookProfile) {
-        if (facebookProfile.hasOwnProperty(key) && key[0] !== '_') {
+        if (Object.prototype.hasOwnProperty.call(facebookProfile, key) && key[0] !== '_') {
           profileData[key] = facebookProfile[key];
         }
       }
@@ -18,7 +18,7 @@ const userInfo = function(hook) {
       const googleProfile = hook.data.google.profile;
       const profileData = {};
       for (key in googleProfile) {
-        if (googleProfile.hasOwnProperty(key) && key[0] !== '_') {
+        if (Object.prototype.hasOwnProperty.call(googleProfile, key) && key[0] !== '_') {
           profileData[key] = googleProfile[key];
         }
       }
