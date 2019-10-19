@@ -148,7 +148,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   saveButtonLabel: {
-    default: 'Edit hasher',
+    default: 'Save',
   },
 
   saveSuccessMessage: {

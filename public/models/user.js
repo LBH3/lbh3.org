@@ -86,6 +86,39 @@ var User = DefineMap.extend('User', {
     },
     serialize: false
   },
+  get hasSharedInfo() {
+    const hasher = this.hasher;
+    if (hasher) {
+      const notPrivate = [
+        'birthDayPrivacy',
+        'birthMonthPrivacy',
+        'birthYearPrivacy',
+        'familyNamePrivacy',
+        'givenNamePrivacy',
+        'headshotPrivacy',
+        'motherHashPrivacy',
+        'namingTrailPrivacy',
+        'whoMadeYouCumPrivacy'
+      ].filter(field => {
+        return hasher[field] === 'directory';
+      });
+      if (notPrivate.length > 0) {
+        return true;
+      } else {
+        const multiNotPrivate = [
+          'addresses',
+          'emails',
+          'phones',
+        ].filter(field => {
+          const internalPrivate = hasher[field].filter(value => {
+            return value.privacy === 'directory';
+          });
+          return internalPrivate.length > 0;
+        });
+        return multiNotPrivate.length > 0;
+      }
+    }
+  },
   profile: {
     get: function() {
       return this.facebookProfile || this.googleProfile;

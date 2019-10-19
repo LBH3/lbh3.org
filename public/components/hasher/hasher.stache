@@ -16,6 +16,22 @@
 {{#if hasher}}
   <lbh3-hasher-nav hasher:from="hasher" secondaryPage:from="secondaryPage" session:from="session" />
 
+  {{#eq(hasher.id, session.user.hasherId)}}
+    {{^if(session.user.hasSharedInfo)}}
+      <div class="alert alert-info" role="alert">
+        <p>
+          <strong>Hello {{hasher.hashName}}!</strong>
+        </p>
+        <p>
+          Welcome to your profile in our <a href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a>.
+        </p>
+        <p class="mb-0">
+          You can <a href="{{routeUrl id=hasher.id page='hashers' secondaryPage='edit'}}">edit</a> some of the info that appears here and share your info in our Directory.
+        </p>
+      </div>
+    {{/if}}
+  {{/eq}}
+
   {{#if hasher.headshotUrl}}
     <div class="mb-3 text-center"><a href="{{hasher.headshotUrl}}" target="_blank"><img alt="" class="headshot img-fluid rounded" src="{{hasher.headshotUrlForSize(null, 224)}}" /></a></div>
   {{/if}}

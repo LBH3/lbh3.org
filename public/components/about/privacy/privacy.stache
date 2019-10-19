@@ -39,7 +39,7 @@
   <li>“Snooze” newsletters for each run</li>
   <li>Who else attended the same runs they did</li>
   <li>Every hasher’s first trail, hare count, run count, and run mileage</li>
-  <li>Whatever other information a hasher chooses to share in the “directory”</li>
+  <li>Whatever other information a hasher chooses to share in the Directory</li>
 </ul>
 
 <p>
@@ -47,7 +47,7 @@
   Members of the Bored can see everything in a hasher’s profile.
 </p>
 
-<p>Hashers may also choose to share any of the following info with other verified hashers in the directory:</p>
+<p>Hashers may also choose to share any of the following info with other verified hashers in the Directory:</p>
 
 <ul>
   <li>Birthday</li>
@@ -69,7 +69,7 @@
       Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
       Go grab yourself a beer because you’ve done everything required to see
       <a href="{{routeUrl page='hashers' id=session.user.hasherId}}">your&nbsp;profile</a>,
-      <a href="{{routeUrl page='hashers' secondaryPage=''}}">the&nbsp;directory</a>,
+      <a href="{{routeUrl page='hashers' secondaryPage=''}}">the&nbsp;Directory</a>,
       and the photos &amp; Snoozes on the <a href="{{routeUrl page='events'}}">Past&nbsp;Runs</a> page.
     </p>
 

@@ -3,7 +3,23 @@
 <can-import from="~/components/run/" />
 
 {{#if session.user}}
-  {{^if session.user.hasherId}}
+  {{#if session.user.hasherId}}
+    {{#if session.user.hasher}}
+      {{^if session.user.hasSharedInfo}}
+        <div class="alert alert-info" role="alert">
+          <p>
+            <strong>Hello {{session.user.hasher.hashName}}!</strong>
+          </p>
+          <p>
+            We have a new <a href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a> where you can find every hasher’s first trail, hare count, run count, and run mileage.
+          </p>
+          <p class="mb-0">
+            You can <a href="{{routeUrl page='hashers' id=session.user.hasherId secondaryPage='edit'}}">edit your profile</a> to share more of your info in our Directory.
+          </p>
+        </div>
+      {{/if}}
+    {{/if}}
+  {{else}}
     <lbh3-no-ssr class="d-print-none">
       <can-import from="~/components/request-access/" />
       <lbh3-request-access />

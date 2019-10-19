@@ -5,6 +5,22 @@
 
 {{#if session.user.hasherId}}
 
+  {{#if session.user.hasher}}
+    {{^if session.user.hasSharedInfo}}
+      <div class="alert alert-info" role="alert">
+        <p>
+          <strong>Hello {{session.user.hasher.hashName}}!</strong>
+        </p>
+        <p>
+          Below you can find every hasher’s first trail, hare count, run count, and run mileage.
+        </p>
+        <p class="mb-0">
+          You can <a href="{{routeUrl page='hashers' id=session.user.hasherId secondaryPage='edit'}}">edit your profile</a> to share more of your info in our Directory.
+        </p>
+      </div>
+    {{/if}}
+  {{/if}}
+
   <form class="align-items-sm-baseline d-sm-flex mb-3">
     <div class="form-group mr-sm-3">
       <label class="sr-only" for="searchText">Name or email</label>
@@ -37,60 +53,62 @@
 
   {{#if hashersPromise.isResolved}}
     {{#if hashers.length}}
-      {{#for(hasher of hashers)}}
-        <a class="border-top mt-3 pt-3 row text-decoration-none" href="{{routeForHasher(hasher)}}">
-          <div class="col col-auto headshot-container text-center">
-            {{#if hasher.headshotUrl}}
-              <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrlForSize(112, 112)}}" />
-            {{/if}}
-          </div>
-          <div class="col p-0">
-            <div class="mr-0 row">
-              <div class="col-sm-7 col-lg-5">
-                <p class="h5 m-0">
-                  {{hasher.hashName}}
-                </p>
-                <p class="m-0">
-                  {{hasher.givenName}} {{hasher.familyName}}
-                </p>
-                <p class="d-none d-sm-block m-0 text-muted">
-                  {{#if(hasher.addresses[0])}}
-                    {{hasher.addresses[0].city}}
-                  {{/if}}
-                </p>
-              </div>
-              <div class="col-sm-5 col-lg-2">
-                <dl class="mb-0 row">
-                  <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Runs:</dt>
-                  <dd class="col-9 col-sm-7 m-0">{{hasher.runCount}}</dd>
-                  <dt class="col-3 col-sm-5 d-none d-sm-block font-weight-normal m-0 px-sm-0 text-sm-right">Mileage:</dt>
-                  <dd class="col-9 col-sm-7 d-none d-sm-block m-0">{{hasher.runMileage}}</dd>
-                  <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Hares:</dt>
-                  <dd class="col-9 col-sm-7 m-0">{{hasher.hareCount}}</dd>
-                </dl>
-              </div>
-              <div class="col-lg-5 d-none d-lg-block">
-                <dl class="mb-0 row">
-                  {{#if(hasher.firstTrailDate)}}
-                    <dt class="col-5 font-weight-normal m-0 px-0 text-right">First trail:</dt>
-                    <dd class="col-7 m-0">
-                      {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
-                    </dd>
-                  {{/if}}
-                  {{#if(hasher.motherHash)}}
-                    <dt class="col-5 font-weight-normal m-0 px-0 text-right">Mother hash:</dt>
-                    <dd class="col-7 m-0">{{hasher.motherHash}}</dd>
-                  {{/if}}
-                  {{#if(hasher.whoMadeYouCum)}}
-                    <dt class="col-5 font-weight-normal m-0 px-0 text-right">Who made you cum:</dt>
-                    <dd class="col-7 m-0">{{hasher.whoMadeYouCum}}</dd>
-                  {{/if}}
-                </dl>
+      <div class="container hashers-list">
+        {{#for(hasher of hashers)}}
+          <a class="border-top mt-3 pt-3 row text-decoration-none" href="{{routeForHasher(hasher)}}">
+            <div class="col col-auto headshot-container pl-0 text-center">
+              {{#if hasher.headshotUrl}}
+                <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrlForSize(112, 112)}}" />
+              {{/if}}
+            </div>
+            <div class="col p-0">
+              <div class="mr-0 row">
+                <div class="col-sm-7 col-lg-5">
+                  <p class="h5 m-0">
+                    {{hasher.hashName}}
+                  </p>
+                  <p class="m-0">
+                    {{hasher.givenName}} {{hasher.familyName}}
+                  </p>
+                  <p class="d-none d-sm-block m-0 text-muted">
+                    {{#if(hasher.addresses[0])}}
+                      {{hasher.addresses[0].city}}
+                    {{/if}}
+                  </p>
+                </div>
+                <div class="col-sm-5 col-lg-2">
+                  <dl class="mb-0 row">
+                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Runs:</dt>
+                    <dd class="col-9 col-sm-7 m-0">{{hasher.runCount}}</dd>
+                    <dt class="col-3 col-sm-5 d-none d-sm-block font-weight-normal m-0 px-sm-0 text-sm-right">Mileage:</dt>
+                    <dd class="col-9 col-sm-7 d-none d-sm-block m-0">{{hasher.runMileage}}</dd>
+                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Hares:</dt>
+                    <dd class="col-9 col-sm-7 m-0">{{hasher.hareCount}}</dd>
+                  </dl>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block">
+                  <dl class="mb-0 row">
+                    {{#if(hasher.firstTrailDate)}}
+                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">First trail:</dt>
+                      <dd class="col-7 m-0">
+                        {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
+                      </dd>
+                    {{/if}}
+                    {{#if(hasher.motherHash)}}
+                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Mother hash:</dt>
+                      <dd class="col-7 m-0">{{hasher.motherHash}}</dd>
+                    {{/if}}
+                    {{#if(hasher.whoMadeYouCum)}}
+                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Who made you cum:</dt>
+                      <dd class="col-7 m-0">{{hasher.whoMadeYouCum}}</dd>
+                    {{/if}}
+                  </dl>
+                </div>
               </div>
             </div>
-          </div>
-        </a>
-      {{/for}}
+          </a>
+        {{/for}}
+      </div>
 
       {{#if pages}}
         <nav class="nav nav-pills">

@@ -21,6 +21,7 @@
 {{/phoneTypeOptionsTemplate}}
 
 {{<privacyOptionsTemplate}}
+  <option disabled>Privacy</option>
   {{#for(privacyOption of privacyOptions)}}
     <option value="{{privacyOption.key}}">
       {{privacyOption.value}}
