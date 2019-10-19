@@ -1,20 +1,69 @@
 <can-import from="~/components/alert/" />
 <can-import from="~/components/no-ssr/" />
 
-<h2 class="sr-only">Privacy Changes</h2>
+<h2 class="sr-only">Privacy</h2>
 
-<p class="lead">
-  We recently changed lbh3.org to only show our photos &amp; Snoozes to hashers
-  who have signed in, requested access, and had their identity verified.
-</p>
+<p>The Long Beach Hash House Harriers (LBH3) maintains a database that includes:</p>
+
+<ul>
+  <li>Basic info about each run (datetime, hares, on-on, start, etc.)</li>
+  <li>Who attends each run</li>
+  <li>If anyone received a patch at that run</li>
+  <li>Basic info about each hasher, which includes but is not limited to their name, hash name, run stats, contact info, etc.</li>
+  <li>A photo (headshot) of each hasher</li>
+  <li>Whether a hasher has served on the Bored (Mismanagement)</li>
+  <li>Photos from each run (hosted on Google Photos)</li>
+  <li>“Snooze” newsletters for each run</li>
+</ul>
+
+<p>The sections below outline who can see what from the database.</p>
+
+<h3>The public</h3>
+
+<p>Anyone on the Internet can see the following:</p>
+
+<ul>
+  <li>Basic info about each run: datetime, directions, “from the hares,” hares, on-on, and start location</li>
+  <li>Hash names (which are shown on run pages and the Mismanagement page)</li>
+  <li>Whether a hasher has served on the Bored (Mismanagement)</li>
+</ul>
+
+<h3>Verified hashers</h3>
+
+<p>A “verified” hasher is someone who has signed into lbh3.org (with Facebook or Google) and had their identity verified by the Webmaster.</p>
+
+<p>In addition to what the public can see, verified hashers can see the following:</p>
+
+<ul>
+  <li>Photos from each run</li>
+  <li>“Snooze” newsletters for each run</li>
+  <li>Who else attended the same runs they did</li>
+  <li>Every hasher’s first trail, hare count, run count, and run mileage</li>
+  <li>Whatever other information a hasher chooses to share in the “directory”</li>
+</ul>
 
 <p>
-  After signing in and being verified, you’ll be able to see your entry in the
-  directory that Alouette and every On Disk volunteer have meticulously kept for
-  decades.
+  Every hasher has a profile with their basic info, headshot, and contact info.
+  Members of the Bored can see everything in a hasher’s profile.
 </p>
 
+<p>Hashers may also choose to share any of the following info with other verified hashers in the directory:</p>
+
+<ul>
+  <li>Birthday</li>
+  <li>Email addresses</li>
+  <li>First and last name</li>
+  <li>Headshot</li>
+  <li>Mailing addresses</li>
+  <li>Mother hash</li>
+  <li>Naming trail</li>
+  <li>Phone numbers</li>
+  <li>Who made you cum</li>
+</ul>
+
 <lbh3-no-ssr>
+  <h4>Getting verified</h4>
+
   {{#if session.user.hasherId}}
     <p>
       Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
@@ -24,14 +73,10 @@
     </p>
 
   {{else}}
-    <p>
-      <i>How do I sign in and request access?</i>
-    </p>
+    <p><i>How do I sign in and get verified?</i></p>
 
     {{#if session.user}}
-      <p>
-        Fill out the form below and I’m Fucking Matt Damon can get you access.
-      </p>
+      <p>Fill out the form below and I’m Fucking Matt Damon will verify your account.</p>
 
       {{#if savingPromise.isPending}}
         <lbh3-alert message:from="'Saving your request for access…'" />
@@ -80,3 +125,24 @@
     {{/if}}
   {{/if}}
 </lbh3-no-ssr>
+
+<h3>Mismanagement</h3>
+
+<p>Some members of the Bored have access to everything in the database. This includes:</p>
+
+<ul>
+  <li>Grandmasters</li>
+  <li>Hash Cash</li>
+  <li>Hash Historian</li>
+  <li>On Disk</li>
+  <li>On Sec</li>
+  <li>Trailmasters</li>
+  <li>Webmaster</li>
+</ul>
+
+<p>These Bored members are given access to everything to help them do their job.</p>
+
+<p>
+  If you have any comments, concerns, or questions about this privacy policy, please
+  <a href="mailto:webmaster@lbh3.org">email I’m Fucking Matt Damon</a>.
+</p>
