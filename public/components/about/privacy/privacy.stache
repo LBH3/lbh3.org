@@ -68,7 +68,8 @@
     <p>
       Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
       Go grab yourself a beer because you’ve done everything required to see
-      <a href="{{routeUrl page='hashers' id=session.user.hasherId}}">your&nbsp;profile</a>
+      <a href="{{routeUrl page='hashers' id=session.user.hasherId}}">your&nbsp;profile</a>,
+      <a href="{{routeUrl page='hashers' secondaryPage=''}}">the&nbsp;directory</a>,
       and the photos &amp; Snoozes on the <a href="{{routeUrl page='events'}}">Past&nbsp;Runs</a> page.
     </p>
 

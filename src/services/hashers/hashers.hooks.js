@@ -237,6 +237,8 @@ const filterData = function(data, filterState) {
       id: data.id
     };
     if (filterState === filterStates.VERIFIED) {
+      filteredFields.firstTrailDate = data.firstTrailDate;
+      filteredFields.firstTrailNumber = data.firstTrailNumber;
       const potentialFields = {
         birthDay: 'birthDayPrivacy',
         birthMonth: 'birthMonthPrivacy',

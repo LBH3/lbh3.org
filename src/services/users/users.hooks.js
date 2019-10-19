@@ -73,7 +73,8 @@ const getBoredInfo = function(hook) {
       }
       if (boredPositions.includes(authHook.GRANDMASTERS)) {
         permission = Object.assign(permission, {
-          canEditFutureSpecialEvents: true
+          canEditFutureSpecialEvents: true,
+          canViewDirectoryInfo: true
         });
       }
       if (boredPositions.includes(authHook.HASH_CASH)) {

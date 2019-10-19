@@ -3,25 +3,33 @@
 
 <h2>Email List</h2>
 
-{{#if hashersPromise.isPending}}
-  <lbh3-alert message:from="'Fetching the Email List…'" />
-{{/if}}
+{{#if session.user.canViewDirectoryInfo}}
 
-{{#if hashersPromise.isRejected}}
+  {{#if hashersPromise.isPending}}
+    <lbh3-alert message:from="'Fetching the Email List…'" />
+  {{/if}}
+
+  {{#if hashersPromise.isRejected}}
+    <div class="alert alert-danger" role="alert">
+      <strong>Fuck!</strong> The email list couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
+    </div>
+  {{/if}}
+
+  {{#for(emailGroup of emailGroups)}}
+    <h3>{{emailGroup.label}}</h3>
+    <ol>
+      {{#for(hasher of emailGroup.hashers)}}
+        {{#for(email of hasher.emails)}}
+          {{^eq(email.type, 'work')}}
+            <li>{{email.value}}</li>
+          {{/eq}}
+        {{/for}}
+      {{/for}}
+    </ol>
+  {{/for}}
+
+{{else}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The email list couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
+    Sorry, you don’t have permission to see this page.
   </div>
 {{/if}}
-
-{{#for(emailGroup of emailGroups)}}
-  <h3>{{emailGroup.label}}</h3>
-  <ol>
-    {{#for(hasher of emailGroup.hashers)}}
-      {{#for(email of hasher.emails)}}
-        {{^eq(email.type, 'work')}}
-          <li>{{email.value}}</li>
-        {{/eq}}
-      {{/for}}
-    {{/for}}
-  </ol>
-{{/for}}

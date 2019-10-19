@@ -3,7 +3,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/alert/" />
 
-{{#if session.user.canViewDirectoryInfo}}
+{{#if session.user.hasherId}}
 
   <form class="align-items-sm-baseline d-sm-flex mb-3">
     <div class="form-group mr-sm-3">
@@ -11,14 +11,16 @@
       <input autocomplete="off" autofocus class="form-control" id="searchText" placeholder="Name or email" type="text" value:bind="searchText">
     </div>
 
-    <div class="form-check form-group">
-      <input class="form-check-input" id="noHeadshot" type="checkbox" checked:bind="searchNoHeadshot">
-      <label class="form-check-label" for="noHeadshot">
-        No headshot
-      </label>
-    </div>
+    {{#if(session.user.canViewDirectoryInfo)}}
+      <div class="form-check form-group mr-sm-3">
+        <input class="form-check-input" id="noHeadshot" type="checkbox" checked:bind="searchNoHeadshot">
+        <label class="form-check-label" for="noHeadshot">
+          No headshot
+        </label>
+      </div>
+    {{/if}}
 
-    <button class="btn btn-primary ml-sm-3" type="submit">
+    <button class="btn btn-primary" type="submit">
       Search
     </button>
   </form>
