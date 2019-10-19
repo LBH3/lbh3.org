@@ -334,17 +334,20 @@
           {{/if}}
         {{/case}}
         {{#case "hareline"}}
-          <can-import from="~/components/hareline/nav/">
-            {{#if isPending}}
-              <lbh3-alert message:from="'Loading the Hareline nav…'" />
-            {{else}}
-              <lbh3-hareline-nav
-                secondaryPage:from="secondaryPage"
-              />
-            {{/if}}
-          </can-import>
+          {{<harelineNav}}
+            <can-import from="~/components/hareline/nav/">
+              {{#if isPending}}
+                <lbh3-alert message:from="'Loading the Hareline nav…'" />
+              {{else}}
+                <lbh3-hareline-nav
+                  secondaryPage:from="secondaryPage"
+                />
+              {{/if}}
+            </can-import>
+          {{/harelineNav}}
           {{#switch secondaryPage}}
             {{#case "add"}}
+              {{>harelineNav}}
               <lbh3-no-ssr>
                 <can-import from="~/components/hareline/add/">
                   {{#if isPending}}
@@ -379,6 +382,7 @@
               </lbh3-no-ssr>
             {{/case}}
             {{#case "guidelines"}}
+              {{>harelineNav}}
               <can-import from="~/components/hareline/guidelines/">
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Haring Guidelines…'" />
@@ -393,6 +397,7 @@
               </can-import>
             {{/case}}
             {{#default}}
+              {{>harelineNav}}
               <can-import from="~/components/hareline/">
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Hareline…'" />
