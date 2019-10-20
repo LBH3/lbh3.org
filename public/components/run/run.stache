@@ -199,6 +199,7 @@
 
   {{#if canViewRunAttendance}}
     {{#if showAttendancePrompt}}
+      <hr>
       {{#if event.hasProbablyEnded}}
         <div class="alert alert-info text-center" role="alert">
           Attendance data hasn’t been added yet.
