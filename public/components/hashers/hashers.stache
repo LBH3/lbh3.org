@@ -137,8 +137,11 @@
     <h3 class="h4">How do I sign in and request access?</h3>
     {{#if session.user}}
       <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
-      <can-import from="~/components/request-access/" />
-      <lbh3-request-access />
+      <can-import from="~/components/request-access/">
+        {{#if isResolved}}
+          <lbh3-request-access />
+        {{/if}}
+      </can-import>
     {{else}}
       <p>
         Get started by signing in with <a href="/auth/facebook">Facebook</a> or

@@ -4,7 +4,7 @@
 
 <form on:submit="save()">
   <div class="form-row">
-    <div class="col form-group">
+    <div class="col form-group mb-sm-0">
       <input
         autocomplete="off"
         class="form-control"
