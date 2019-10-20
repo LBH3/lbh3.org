@@ -89,7 +89,7 @@
     "steal-conditional": "^1.0.0",
     "steal-qunit": "^1.0.1",
     "steal-tools": "^2.0.9",
-    "test-saucelabs": "0.0.2",
+    "test-saucelabs": "0.0.6",
     "testee": "^0.9.1"
   }
 }
