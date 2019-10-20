@@ -52,7 +52,7 @@ const SpecialEvent = DefineMap.extend({
   },
   startDateString: {
     get: function() {
-      const options = {day: 'numeric', month: 'numeric', timeZone};
+      const options = {day: 'numeric', month: 'numeric', timeZone, weekday: 'short'};
       return localizedStringForDate(this.startDate, defaultLocale, options);
     },
     serialize: false

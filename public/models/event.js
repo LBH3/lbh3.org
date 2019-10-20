@@ -370,14 +370,14 @@ const Event = DefineMap.extend({
   },
   startDateString: {
     get: function() {
-      const options = {day: 'numeric', month: 'numeric', timeZone};
+      const options = {day: 'numeric', month: 'numeric', timeZone, weekday: 'short'};
       return localizedStringForDate(this.startDate, defaultLocale, options);
     },
     serialize: false
   },
   startDateWithYearString: {
     get: function() {
-      const options = {day: 'numeric', month: 'numeric', timeZone, year: '2-digit'};
+      const options = {day: 'numeric', month: 'numeric', timeZone, weekday: 'short', year: '2-digit'};
       return localizedStringForDate(this.startDate, defaultLocale, options);
     },
     serialize: false
