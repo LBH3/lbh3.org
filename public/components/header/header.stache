@@ -35,8 +35,12 @@
         {{#if session.user}}
           {{#if session.user.hasherId}}
             <li class="nav-item">
-              <a class="align-baseline border-0 btn btn-link py-0" href="{{routeUrl page='hashers' id=session.user.hasherId}}" title="Your profile">
-                <span class="fas fa-user-circle fa-lg"></span>
+              <a class="align-baseline align-items-center border-0 btn btn-link d-flex py-0" href="{{routeUrl page='hashers' id=session.user.hasherId}}">
+                {{#if(session.user.hasher.headshotUrl)}}
+                  <img alt="" class="img-fluid mr-2 rounded" src="{{session.user.hasher.headshotUrlForSize(null, 40)}}" />
+                {{else}}
+                  <span class="fas fa-user-circle fa-lg mr-1"></span>
+                {{/if}}
                 Your profile
               </a>
             </li>
