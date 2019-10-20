@@ -61,7 +61,7 @@ const afterFindHook = function(hook) {
   return shouldFilterData(hook).then(filter => {
     if (filter < filterStates.BORED) {
       hook.result.data = hook.result.data.map(hasher => {
-        return filterData(hasher, filter);
+        return filterData(hasher, filter, hook.params.user);
       });
     }
     const sequelizeClient = hook.app.get('sequelizeClient');
@@ -228,8 +228,8 @@ const createAndUpdateFields = function(hook) {
   });
 };
 
-const filterData = function(data, filterState) {
-  if (filterState === filterStates.BORED) {
+const filterData = function(data, filterState, user) {
+  if (filterState === filterStates.BORED || (user && user.hasherId === data.id)) {
     return data;
   } else {
     const filteredFields = {
