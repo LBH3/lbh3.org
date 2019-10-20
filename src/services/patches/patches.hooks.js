@@ -2,7 +2,15 @@ const { authenticate } = require('@feathersjs/authentication').hooks;
 const authHook = require('../../hooks/auth');
 const errors = require('@feathersjs/errors');
 
-const boredPositions = [authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.ON_SEC, authHook.TRAILMASTERS, authHook.WEBMASTERS];
+const boredPositions = [
+  authHook.GRANDMASTERS,
+  authHook.HASH_CASH,
+  authHook.HASH_HISTORIANS,
+  authHook.ON_DISK,
+  authHook.ON_SEC,
+  authHook.TRAILMASTERS,
+  authHook.WEBMASTERS
+];
 const restrictToBored = authHook.restrictToUserOrPositions(...boredPositions);
 
 const restrictHook = function(hook) {
