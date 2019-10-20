@@ -373,6 +373,7 @@
                       description:to="description"
                       month:from="month"
                       ogTitle:to="ogTitle"
+                      secondaryPage:from="secondaryPage"
                       title:to="title"
                       trailNumber:from="trailNumber"
                       year:from="year"
