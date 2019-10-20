@@ -2,6 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/alert/" />
+<can-import from="~/components/no-ssr/" />
 
 {{#if session.user.hasherId}}
 
@@ -131,7 +132,19 @@
   {{/if}}
 
 {{else}}
-  <div class="alert alert-danger" role="alert">
-    Sorry, you don’t have permission to see this page.
-  </div>
+  <p>LBH3’s directory is available to hashers who have signed in, requested access, and had their identity verified.</p>
+  <lbh3-no-ssr>
+    <h3 class="h4">How do I sign in and request access?</h3>
+    {{#if session.user}}
+      <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
+      <can-import from="~/components/request-access/" />
+      <lbh3-request-access />
+    {{else}}
+      <p>
+        Get started by signing in with <a href="/auth/facebook">Facebook</a> or
+        <a href="/auth/google">Google</a>, then
+        <strong>cum back to this page</strong> to request access.
+      </p>
+    {{/if}}
+  </lbh3-no-ssr>
 {{/if}}

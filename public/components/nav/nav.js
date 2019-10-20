@@ -56,11 +56,9 @@ export default Component.extend({
         <li class="{{#if isActive('events')}}active{{/if}} nav-item">
           <a class="nav-link" href="{{routeUrl page='events'}}">Past Runs</a>
         </li>
-        {{#if session.user.hasherId}}
-          <li class="{{#if isActive('hashers')}}active{{/if}} nav-item">
-            <a class="nav-link" href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a>
-          </li>
-        {{/if}}
+        <li class="{{#if isActive('hashers')}}active{{/if}} nav-item">
+          <a class="nav-link" href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a>
+        </li>
         <li class="{{#if isActive('about')}}active{{/if}} nav-item">
           <a class="nav-link" href="{{routeUrl page='about'}}">About</a>
         </li>

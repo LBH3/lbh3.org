@@ -54,7 +54,7 @@ export const ViewModel = DefineMap.extend({
     return (skip / $limit) + 1;
   },
   get ogTitle() {
-    return 'Hashers';
+    return 'Directory';
   },
   get pages() {
     const hashers = this.hashers;

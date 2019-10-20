@@ -83,7 +83,7 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
   get title() {
-    return `${this.ogTitle} | Hashers | LBH3`;
+    return `${this.ogTitle} | Directory | LBH3`;
   }
 });
 
