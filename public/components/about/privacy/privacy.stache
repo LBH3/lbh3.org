@@ -74,54 +74,15 @@
     </p>
 
   {{else}}
-    <p><i>How do I sign in and get verified?</i></p>
-
     {{#if session.user}}
-      <p>Fill out the form below and I’m Fucking Matt Damon will verify your account.</p>
-
-      {{#if savingPromise.isPending}}
-        <lbh3-alert message:from="'Saving your request for access…'" />
-      {{else}}
-        {{#if session.user.requestedName}}
-          <div class="alert alert-primary" role="alert">
-            You’ve requested access as <strong>{{session.user.requestedName}}</strong>.
-          </div>
-        {{/if}}
-      {{/if}}
-
-      {{#if savingPromise.isRejected}}
-        <div class="alert alert-danger" role="alert">
-          <strong>Fuck!</strong> Something failed; you’ll need to try again.
-          {{savingPromise.reason.xhr.message}}
-        </div>
-      {{/if}}
-
-      <form class="mb-3" on:submit="save()">
-        <div class="form-group">
-          <label for="requestedName">
-            Hash name <small>(or Just name if you’re not a named hasher)</small>
-          </label>
-          <input autocomplete="off" class="form-control" id="requestedName" type="text" value:bind="requestedName">
-        </div>
-        <button
-          class="btn btn-primary"
-          {{#if savingPromise.isPending}}disabled{{/if}}
-          type="submit">
-          Request access
-        </button>
-      </form>
+      <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
+      <can-import from="~/components/request-access/" />
+      <lbh3-request-access />
     {{else}}
       <p>
         Get started by signing in with <a href="/auth/facebook">Facebook</a> or
         <a href="/auth/google">Google</a>, then
-        <strong>cum back to this page to request access.</strong>
-      </p>
-      <p>
-        Don’t have a Facebook or Google account? You <em>might</em> be able to
-        <a href="mailto:webmaster@lbh3.org" title="Email I’m Fucking Matt Damon">
-          bribe I’m Fucking Matt Damon
-        </a>
-        with a beer to add support for Twitter or whatever bullshit you use.
+        <strong>cum back to this page</strong> to request access.
       </p>
     {{/if}}
   {{/if}}

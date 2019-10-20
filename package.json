@@ -21,7 +21,7 @@
     "npm": "6.x"
   },
   "scripts": {
-    "build": "cd public && node build && cd ..",
+    "build": "cd public && rm -rf ./dist && node build && cd ..",
     "build:tests": "cd public && node build-tests && cd ..",
     "bundlesize": "node ./node_modules/.bin/bundlesize",
     "ci": "node install-ci",
@@ -97,20 +97,12 @@
       "maxSize": "25 kB"
     },
     {
-      "path": "./public/dist/bundles/edit-add-edit.css",
+      "path": "./public/dist/bundles/edit-add-edit-er-*.css",
       "maxSize": "1 kB"
     },
     {
-      "path": "./public/dist/bundles/edit-add-edit.js",
-      "maxSize": "31 kB"
-    },
-    {
-      "path": "./public/dist/bundles/hareline-hasher-*.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/hareline-hasher-*.js",
-      "maxSize": "40 kB"
+      "path": "./public/dist/bundles/edit-add-edit-er-*.js",
+      "maxSize": "65 kB"
     },
     {
       "path": "./public/dist/bundles/mismanagement-na-*.css",
@@ -118,7 +110,7 @@
     },
     {
       "path": "./public/dist/bundles/mismanagement-na-*.js",
-      "maxSize": "11 kB"
+      "maxSize": "17 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/index.css",
