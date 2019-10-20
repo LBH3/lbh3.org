@@ -112,7 +112,7 @@ export default Component.extend({
       }
 
       const total = runs.total;
-      const numberOfPages = Math.round(total / $limit);
+      const numberOfPages = Math.ceil(total / $limit);
       for (let i = 1; i <= numberOfPages; i++) {
         pages.push(i);
       }
