@@ -57,6 +57,19 @@ const EventsHashers = DefineMap.extend({
     },
     serialize: true
   },
+  hasher: {
+    get: function(lastValue, setValue) {
+      const hasherPromise = this.hasherPromise;
+      if (hasherPromise) {
+        hasherPromise.then(hashers => {
+          if (hashers && hashers.length > 0) {
+            setValue(hashers[0]);
+          }
+        });
+      }
+    },
+    serialize: false
+  },
   hasherId: 'number',
   hasherPromise: {
     get: function() {

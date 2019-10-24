@@ -242,7 +242,8 @@
                 <tr>
                   <th></th>
                   <th>Role</th>
-                  <th>Payment</th>
+                  <th>Pay</th>
+                  <th></th>
                   <th>Hash Name</th>
                   <th>Last Name</th>
                   <th>First Name</th>
@@ -255,6 +256,11 @@
                     <td>{{eventHasher.role}}</td>
                     <td>
                       {{eventHasher.paymentNotesAndType}}
+                    </td>
+                    <td class="text-center">
+                      {{#if(eventHasher.hasher.headshotUrl)}}
+                        <img alt="" class="rounded" src="{{eventHasher.hasher.headshotUrlForSize(null, 20)}}" />
+                      {{/if}}
                     </td>
                     <td>
                       <a href="{{routeForHasher(eventHasher)}}">

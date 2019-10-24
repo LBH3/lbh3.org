@@ -1,7 +1,7 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 
-<h2>Run #{{trailNumber}} Check-In Sheet</h2>
+<h2 class="h3">Run #{{trailNumber}} Check-In Sheet</h2>
 
 {{#if hashersPromise.isPending}}
   <lbh3-alert message:from="'Fetching the check-in sheet…'" />
@@ -19,6 +19,7 @@
       <thead>
         <tr>
           <th class="text-center" scope="col">Pay</th>
+          <th class="d-print-none" scope="col"></th>
           <th scope="col">Hash Name</th>
           <th scope="col">Last Name</th>
           <th scope="col">First Name</th>
@@ -29,44 +30,49 @@
         </tr>
       </thead>
       <tbody>
-        {{#each(hashers)}}
+        {{#for(hasher of hashers)}}
           <tr>
             <td class="text-center">
-              {{payment}}
+              {{hasher.payment}}
+            </td>
+            <td class="d-print-none text-center">
+              {{#if(hasher.headshotUrl)}}
+                <img alt="" class="rounded" src="{{hasher.headshotUrlForSize(null, 20)}}" />
+              {{/if}}
             </td>
             <td class="text-uppercase">
-              <a href="{{scope.vm.routeForHasher(this)}}">
-                {{hashName}}
+              <a href="{{routeForHasher(hasher)}}">
+                {{hasher.hashName}}
               </a>
             </td>
             <td class="text-capitalize">
-              <a href="{{scope.vm.routeForHasher(this)}}">
-                {{familyName}}
+              <a href="{{routeForHasher(hasher)}}">
+                {{hasher.familyName}}
               </a>
             </td>
             <td class="text-capitalize">
-              <a href="{{scope.vm.routeForHasher(this)}}">
-                {{givenName}}
+              <a href="{{routeForHasher(hasher)}}">
+                {{hasher.givenName}}
               </a>
             </td>
             <td class="text-center">
-              {{scope.vm.birthday(this)}}
+              {{birthday(hasher)}}
             </td>
             <td class="text-center">
               {{#if patchesPromise.isPending}}
                 <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
               {{else}}
-                {{scope.vm.patches(this)}}
+                {{patches(hasher)}}
               {{/if}}
             </td>
             <td class="text-center">
-              {{runCount}}
+              {{hasher.runCount}}
             </td>
             <td class="text-center">
-              {{hareCount}}
+              {{hasher.hareCount}}
             </td>
           </tr>
-        {{/each}}
+        {{/for}}
       </tbody>
     </table>
   </div>
