@@ -380,6 +380,7 @@
             <thead>
               <tr>
                 <th></th>
+                <th></th>
                 <th>
                   <label for="hasher-name">
                     Name
@@ -392,12 +393,12 @@
                 </th>
                 <th>
                   <label for="payment-tier">
-                    Payment tier
+                    Tier
                   </label>
                 </th>
                 <th>
                   <label for="payment-notes">
-                    Payment notes
+                    Notes
                   </label>
                 </th>
                 <th></th>
@@ -407,6 +408,11 @@
               {{#for(hasher of hashers)}}
                 <tr>
                   <td>{{plusOne(scope.index)}}</td>
+                  <td class="text-center">
+                    {{#if(hasher.hasher.headshotUrl)}}
+                      <img alt="" class="rounded" src="{{hasher.hasher.headshotUrlForSize(null, 28)}}" />
+                    {{/if}}
+                  </td>
                   <td>
                     <a href="{{routeForHasher(hasher)}}">
                       {{hasher.hashOrJustName}}
@@ -431,6 +437,7 @@
                 </tr>
               {{/for}}
               <tr>
+                <td></td>
                 <td></td>
                 <td>
                   <lbh3-hasher-autocomplete
@@ -516,6 +523,7 @@
               <thead>
                 <tr>
                   <th></th>
+                  <th></th>
                   <th><label for="patch-hasher-name">Hasher name</label></th>
                   <th><label for="patch-number">Patch number</label></th>
                   <th><label for="patch-type">Patch type</label></th>
@@ -524,6 +532,7 @@
               </thead>
               <tbody>
                 <tr>
+                  <td></td>
                   <td></td>
                   <td>
                     <select
@@ -579,6 +588,11 @@
                 {{#for(patch of patches)}}
                   <tr>
                     <td>{{plusOne(scope.index)}}</td>
+                    <td class="text-center">
+                      {{#if(patch.hasher.headshotUrl)}}
+                        <img alt="" class="rounded" src="{{patch.hasher.headshotUrlForSize(null, 28)}}" />
+                      {{/if}}
+                    </td>
                     <td>
                       {{#if patch.hasher}}
                         {{patch.hasher.hashOrJustName}}
