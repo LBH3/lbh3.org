@@ -1,7 +1,7 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 
-<h2>Early Warning</h2>
+<h2 class="sr-only">Early Warning</h2>
 
 <p>This page lists all the hashers with 490 or more runs that are within 10 runs of the next multiple of 100.</p>
 

@@ -62,7 +62,7 @@
 </div>
 
 {{#if session.user.canExportData}}
-  <h2 class="text-left">Download data</h2>
+  <h3>Download data</h3>
   <p>Click on the links below to download parts of the database as CSV.</p>
   <div class="alert alert-danger" role="alert">
     This is sensitive, private data.

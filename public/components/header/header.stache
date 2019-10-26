@@ -4,7 +4,7 @@
 
 <div class="d-flex justify-content-between">
   <div>
-    <h1>
+    <h1 class="h2 m-0">
       <a href="{{routeUrl page='home'}}">
         <svg height="37px" preserveAspectRatio="xMidYMid meet" viewBox="0 0 676 355" width="70px" xmlns="http://www.w3.org/2000/svg">
           <g transform="matrix(.1 0 0 -.1 0 355)">

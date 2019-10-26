@@ -1,7 +1,7 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 
-<h2>Email List</h2>
+<h2 class="sr-only">Email List</h2>
 
 {{#if session.user.canViewDirectoryInfo}}
 

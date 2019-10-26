@@ -1,5 +1,5 @@
 <can-import from="~/components/alert/" />
-<h2>Add an erection</h2>
+<h2 class="h3">Add an erection</h2>
 
 {{#if session.user.canManageUsers}}
   <form on:submit="createElection()">

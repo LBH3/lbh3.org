@@ -1,6 +1,6 @@
 <can-import from="~/components/alert/" />
 
-<h2>Add a special event</h2>
+<h2 class="h3">Add a special event</h2>
 
 {{#if session.user.canManageUsers}}
   <form on:submit="createSpecialEvent()">

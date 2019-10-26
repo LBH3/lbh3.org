@@ -2,7 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
-<h2>
+<h2 class="h3">
   <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}" title="View trail">
     {{#if event.nameHtml}}
       {{{event.nameHtml}}}
