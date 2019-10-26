@@ -8,8 +8,6 @@
 <can-import from="~/components/run/nav/" />
 <can-import from="~/components/snooze-button/" />
 
-<lbh3-run-nav event:from="event" secondaryPage:from="secondaryPage" session:from="session" />
-
 {{#if canEditEvent}}
 
   {{#if eventPromise.isPending}}
@@ -21,6 +19,7 @@
     </div>
   {{/if}}
   {{#if event}}
+    <lbh3-run-nav event:from="event" secondaryPage:from="secondaryPage" session:from="session" />
     <form class="mb-4 mt-2" on:submit="scope.event.preventDefault()">
       {{#if(session.user.canEditPreTrailInfo)}}
         <div class="form-row">
