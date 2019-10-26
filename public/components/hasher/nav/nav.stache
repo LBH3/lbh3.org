@@ -9,17 +9,6 @@
 </h2>
 
 <ul class="justify-content-center mt-0 nav nav-pills">
-  <li class="nav-item">
-    <a
-      class="nav-link"
-      download
-      href="/api/hashers/{{hasher.id}}/vcard.vcf"
-      title="Download this hasher’s contact info"
-    >
-      <span class="fas fa-download fa-lg"></span>
-      Download
-    </a>
-  </li>
   {{#if canEditThisHasher}}
     <li class="nav-item">
       <a
@@ -32,4 +21,15 @@
       </a>
     </li>
   {{/if}}
+  <li class="nav-item">
+    <a
+      class="nav-link"
+      download
+      href="/api/hashers/{{hasher.id}}/vcard.vcf"
+      title="Download this hasher’s contact info"
+    >
+      <span class="fas fa-download fa-lg"></span>
+      vCard
+    </a>
+  </li>
 </ul>
