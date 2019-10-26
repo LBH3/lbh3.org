@@ -2,10 +2,12 @@
 const { authenticate } = require('@feathersjs/authentication').express;
 const aws = require('aws-sdk');
 const cookieParser = require('cookie-parser');
+const crypto = require('crypto');
 const env = process.env.NODE_ENV || 'development';
 const eol = require('os').EOL;
 const fs = require('fs');
 const json2csv = require('json2csv');
+const path = require('path');
 const request = require('request');
 const sharp = require('sharp');
 const ssr = require('done-ssr-middleware');
@@ -156,52 +158,137 @@ module.exports = function (app) {
     });
   });
 
-  app.get('/image', (req, res) => {
+  function createDirectory(directory) {
+    return new Promise((resolve, reject) => {
+      console.info(`Creating “${directory}” directory`);
+      console.time(`Created “${directory}” directory`);
+      fs.mkdir(directory, (error) => {
+        console.timeEnd(`Created “${directory}” directory`);
+        if (error && error.code !== 'EEXIST') {
+          console.error(`Error creating directory ${directory}:`, error);
+          reject(error);
+        } else {
+          resolve();
+        }
+      });
+    });
+  }
+
+  app.get('/image', function(req, res) {
     const params = req.query;
     const height = params.height ? Number(params.height) : null;
     const width = params.width ? Number(params.width) : null;
-    console.time(`Fetch ${params.url} for sizing ${width}, ${height}`);
-    request({
-      encoding: null,
-      method: 'GET',
-      url: params.url
-    }, (error, response, body) => {
-      console.timeEnd(`Fetch ${params.url} for sizing ${width}, ${height}`);
-      if (response && response.statusCode === 200) {
-        console.time(`Resize ${params.url} for sizing ${width}, ${height}`);
-        sharp(body)
-          .resize(width, height, {
-            fit: sharp.fit.inside,
-            withoutEnlargement: true
-          })
-          .toFormat('jpeg')
-          .toBuffer()
-          .then(data => {
-            console.timeEnd(`Resize ${params.url} for sizing ${width}, ${height}`);
-            res.setHeader('Cache-Control', 'public,max-age=31536000,immutable');
-            if (response.headers.etag) {
-              res.setHeader('ETag', response.headers.etag);
+
+    // Create the data folder if it doesn’t exist
+    const cacheDirectory = 'data';
+    createDirectory(cacheDirectory).then(() => {
+
+      const hash = crypto.createHash('sha256');
+      hash.update(params.url);
+
+      const fullFileName = hash.digest('hex');
+
+      const thumbnailFileName = `${fullFileName}-${width}-${height}`;
+      const thumbnailFilePath = path.join(cacheDirectory, thumbnailFileName);
+
+      console.time(`Read file: ${thumbnailFilePath}`);
+      fs.readFile(thumbnailFilePath, (thumbnailFileError, data) => {
+        console.timeEnd(`Read file: ${thumbnailFilePath}`);
+        if (thumbnailFileError) {
+          console.error(`Error reading file ${thumbnailFilePath}:`, thumbnailFileError);
+          // Need to check whether the full image is cached
+          const fullFilePath = path.join(cacheDirectory, fullFileName);
+          console.time(`Read file: ${fullFilePath}`);
+          fs.readFile(fullFilePath, (fullFileError, data) => {
+            console.timeEnd(`Read file: ${fullFilePath}`);
+            if (fullFileError) {
+              console.error(`Error reading file ${fullFilePath}:`, fullFileError);
+              // Need to fetch the image over the network
+              fetchImage(fullFilePath, thumbnailFilePath);
+            } else {
+              // Have the cached image, can generate the thumbnail from it
+              resizeImage(data, thumbnailFilePath);
             }
-            if (response.headers['last-modified']) {
-              res.setHeader('Last-Modified', response.headers['last-modified']);
-            }
-            res.send(data);
-            res.end();
-          })
-          .catch(error => {
-            console.error(`Error running sharp for image at URL ${params.url}:`, error);
-            res.send(body);
-            res.end();
           });
-      } else {
-        if (error) {
-          console.error(`Error fetching image at URL ${params.url}:`, error);
+        } else {
+          // Have the cached thumbnail, can respond directly with it
+          respondWithData(data);
         }
-        res.status(response && response.statusCode || 500);
-        res.send(body);
-        res.end();
-      }
+      });
+    }, () => {
+      fetchImage();
     });
+
+    function fetchImage(fullFilePath, thumbnailFilePath) {
+      console.info(`Fetching image at URL: ${params.url}`);
+      console.time(`Fetched image at URL: ${params.url}`);
+      request({
+        encoding: null,
+        method: 'GET',
+        url: params.url
+      }, (error, response, fullSizeImage) => {
+        console.timeEnd(`Fetched image at URL: ${params.url}`);
+        if (response && response.statusCode === 200) {
+          resizeImage(fullSizeImage, thumbnailFilePath);
+          if (fullFilePath) {
+            cacheDataAtPath(fullSizeImage, fullFilePath);
+          }
+        } else {
+          if (error) {
+            console.error(`Error fetching image at URL ${params.url}:`, error);
+          } else if (response && response.statusCode !== 200) {
+            console.error(`Error status code while fetching image at URL ${params.url}: ${response.statusCode}`);
+          }
+          res.status(response && response.statusCode || 500);
+          res.send(fullSizeImage);
+          res.end();
+        }
+      });
+    }
+
+    function cacheDataAtPath(imageData, cachePath) {
+      console.info(`Caching image to path: ${cachePath}`);
+      console.time(`Cached file: ${cachePath}`);
+      fs.writeFile(cachePath, imageData, (error) => {
+        console.timeEnd(`Cached file: ${cachePath}`);
+        if (error) {
+          console.error(`Error writing file ${cachePath}:`, error);
+        } else {
+          console.info(`Successfully wrote file: ${cachePath}`);
+        }
+      });
+    }
+
+    function resizeImage(fullSizeImage, thumbnailFilePath) {
+      console.info(`Resizing ${params.url} for sizing (${width}, ${height})`);
+      console.time(`Resize ${params.url} for sizing (${width}, ${height})`);
+      sharp(fullSizeImage)
+        .resize(width, height, {
+          fit: sharp.fit.inside,
+          withoutEnlargement: true
+        })
+        .toFormat('jpeg')
+        .toBuffer()
+        .then(imageData => {
+          console.timeEnd(`Resize ${params.url} for sizing (${width}, ${height})`);
+          respondWithData(imageData);
+          if (thumbnailFilePath) {
+            cacheDataAtPath(imageData, thumbnailFilePath);
+          }
+        })
+        .catch(error => {
+          console.error(`Error running sharp for image at URL ${params.url}:`, error);
+          res.send(fullSizeImage);
+          res.end();
+        });
+    }
+
+    function respondWithData(imageData) {
+      console.info('Responding with data');
+      res.setHeader('Cache-Control', 'public,max-age=31536000,immutable');
+      res.send(imageData);
+      res.end();
+    }
   });
 
   app.get('/pastruns/runs/lbh3_:trailNumber\\_:date.php', function(req, res) {
