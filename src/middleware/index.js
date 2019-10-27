@@ -195,14 +195,18 @@ module.exports = function (app) {
       fs.readFile(thumbnailFilePath, (thumbnailFileError, data) => {
         console.timeEnd(`Read file: ${thumbnailFilePath}`);
         if (thumbnailFileError) {
-          console.error(`Error reading file ${thumbnailFilePath}:`, thumbnailFileError);
+          if (thumbnailFileError.code !== 'ENOENT') {
+            console.error(`Error reading file ${thumbnailFilePath}:`, thumbnailFileError);
+          }
           // Need to check whether the full image is cached
           const fullFilePath = path.join(cacheDirectory, fullFileName);
           console.time(`Read file: ${fullFilePath}`);
           fs.readFile(fullFilePath, (fullFileError, data) => {
             console.timeEnd(`Read file: ${fullFilePath}`);
             if (fullFileError) {
-              console.error(`Error reading file ${fullFilePath}:`, fullFileError);
+              if (fullFileError.code !== 'ENOENT') {
+                console.error(`Error reading file ${fullFilePath}:`, fullFileError);
+              }
               // Need to fetch the image over the network
               fetchImage(fullFilePath, thumbnailFilePath);
             } else {
