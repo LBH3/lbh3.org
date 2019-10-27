@@ -56,22 +56,6 @@
           <dt class="col-sm-4 col-lg-5">Birthday:</dt>
           <dd class="col-sm-8 col-lg-7">{{hasher.formattedBirthday}}</dd>
         {{/if}}
-        {{#or(hasher.namingTrailNumber, eq(session.user.hasherId, id), session.user.canViewDirectoryInfo)}}
-          <dt class="col-sm-4 col-lg-5">Naming trail:</dt>
-          <dd class="col-sm-8 col-lg-7">
-            {{#if hasher.namingTrailDateParts}}
-              <a href="{{routeUrl page='events' year=hasher.namingTrailDateParts.year month=hasher.namingTrailDateParts.month day=hasher.namingTrailDateParts.day trailNumber=hasher.namingTrailNumber}}" title="View trail">
-                {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
-              </a>
-            {{else}}
-              {{#if hasher.namingTrailDate}}
-                {{hasher.namingTrailDate}} {{#if hasher.namingTrailNumber}}(#{{hasher.namingTrailNumber}}){{/if}}
-              {{else}}
-                {{#if hasher.namingTrailNumber}}#{{hasher.namingTrailNumber}}{{else}}Not named at LBH3{{/if}}
-              {{/if}}
-            {{/if}}
-          </dd>
-        {{/or}}
         {{#if(session.user.canViewDirectoryInfo)}}
           {{#if(hasher.emailing)}}
             <dt class="col-sm-4 col-lg-5">Emailing:</dt>
@@ -114,6 +98,22 @@
               {{/if}}
             </dd>
           {{/if}}
+          {{#or(hasher.namingTrailNumber, eq(session.user.hasherId, id), session.user.canViewDirectoryInfo)}}
+            <dt class="col-sm-4 col-lg-5">Naming trail:</dt>
+            <dd class="col-sm-8 col-lg-7">
+              {{#if hasher.namingTrailDateParts}}
+                <a href="{{routeUrl page='events' year=hasher.namingTrailDateParts.year month=hasher.namingTrailDateParts.month day=hasher.namingTrailDateParts.day trailNumber=hasher.namingTrailNumber}}" title="View trail">
+                  {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
+                </a>
+              {{else}}
+                {{#if hasher.namingTrailDate}}
+                  {{hasher.namingTrailDate}} {{#if hasher.namingTrailNumber}}(#{{hasher.namingTrailNumber}}){{/if}}
+                {{else}}
+                  {{#if hasher.namingTrailNumber}}#{{hasher.namingTrailNumber}}{{else}}Not named at LBH3{{/if}}
+                {{/if}}
+              {{/if}}
+            </dd>
+          {{/or}}
           {{#if(hasher.lastTrailDate)}}
             <dt class="col-sm-4 col-lg-5">Last trail:</dt>
             <dd class="col-sm-8 col-lg-7">{{hasher.lastTrailDate}}</dd>
