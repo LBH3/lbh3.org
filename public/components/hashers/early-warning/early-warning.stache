@@ -23,24 +23,30 @@
         <table class="table table-sm table-striped">
           <thead>
             <tr>
+              <th class="headshot"></th>
               <th scope="col">Hash Name</th>
               <th scope="col">Current Run Count</th>
               <th scope="col">Upcumming Patch</th>
             </tr>
           </thead>
           <tbody>
-            {{#each upcummingPatches}}
+            {{#for(patch of upcummingPatches)}}
               <tr>
+                <td class="headshot text-center">
+                  {{#if(patch.hasher.headshotUrl)}}
+                    <img alt="" class="rounded" src="{{patch.hasher.headshotUrlForSize(null, 20)}}" />
+                  {{/if}}
+                </td>
                 <td>
-                  <a href="{{scope.vm.routeForHasher(hasher)}}">
-                    {{hasher.hashName}}
+                  <a href="{{routeForHasher(patch.hasher)}}">
+                    {{patch.hasher.hashName}}
                   </a>
                 </td>
                 <td>
-                  {{hasher.runCount}}
+                  {{patch.hasher.runCount}}
                 </td>
                 <td>
-                  {{patchNumber}}
+                  {{patch.patchNumber}}
                 </td>
               </tr>
             {{/each}}
