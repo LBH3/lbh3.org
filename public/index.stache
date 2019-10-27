@@ -48,24 +48,20 @@
     <main class="container-fluid {{page}}">
       {{#switch page}}
         {{#case "about"}}
-          <can-import from="~/components/about/nav/">
+          <can-import class="container d-block pl-0 pr-0" from="~/components/about/nav/">
             {{#if isPending}}
               <lbh3-alert message:from="'Loading the About nav…'" />
             {{else}}
-              <lbh3-about-nav
-                class="container pl-0 pr-0"
-                secondaryPage:from="secondaryPage"
-              />
+              <lbh3-about-nav secondaryPage:from="secondaryPage" />
             {{/if}}
           </can-import>
           {{#switch secondaryPage}}
             {{#case "mismanagement"}}
-              <can-import from="~/components/about/mismanagement/">
+              <can-import class="container d-block pl-0 pr-0" from="~/components/about/mismanagement/">
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Mismanagement page…'" />
                 {{else}}
                   <lbh3-about-mismanagement
-                    class="container pl-0 pr-0"
                     description:to="description"
                     ogTitle:to="ogTitle"
                     title:to="title"
@@ -75,12 +71,11 @@
               </can-import>
             {{/case}}
             {{#case "privacy"}}
-              <can-import from="~/components/about/privacy/">
+              <can-import class="container d-block pl-0 pr-0" from="~/components/about/privacy/">
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Privacy page…'" />
                 {{else}}
                   <lbh3-about-privacy
-                    class="container pl-0 pr-0"
                     description:to="description"
                     ogTitle:to="ogTitle"
                     title:to="title"
@@ -89,12 +84,11 @@
               </can-import>
             {{/case}}
             {{#default}}
-              <can-import from="~/components/about/">
+              <can-import class="container d-block pl-0 pr-0" from="~/components/about/">
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the About page…'" />
                 {{else}}
                   <lbh3-about
-                    class="container pl-0 pr-0"
                     description:to="description"
                     ogTitle:to="ogTitle"
                     secondaryPage:from="secondaryPage"
@@ -111,12 +105,11 @@
               {{#switch secondaryPage}}
                 {{#case "ballots"}}
                   <lbh3-no-ssr>
-                    <can-import from="~/components/erection/ballots/">
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/erection/ballots/">
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Erection Ballots page…'" />
                       {{else}}
                         <lbh3-erection-ballots
-                          class="container pl-0 pr-0"
                           description:to="description"
                           ogTitle:to="ogTitle"
                           secondaryPage:from="secondaryPage"
@@ -129,12 +122,11 @@
                 {{/case}}
                 {{#case "edit"}}
                   <lbh3-no-ssr>
-                    <can-import from="~/components/erection/edit/">
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/erection/edit/">
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Edit Erection page…'" />
                       {{else}}
                         <lbh3-erection-edit
-                          class="container pl-0 pr-0"
                           description:to="description"
                           ogTitle:to="ogTitle"
                           secondaryPage:from="secondaryPage"
@@ -181,12 +173,11 @@
                 {{/case}}
               {{/switch}}
             {{else}}
-              <can-import from="~/components/erection/">
+              <can-import class="container d-block pl-0 pr-0" from="~/components/erection/">
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Erection page…'" />
                 {{else}}
                   <lbh3-erection
-                    class="container pl-0 pr-0"
                     description:to="description"
                     ogTitle:to="ogTitle"
                     secondaryPage:from="secondaryPage"
@@ -289,12 +280,11 @@
               </can-import>
             {{else}}
               {{#if urlId}}
-                <can-import from="~/components/special-event/">
+                <can-import class="container d-block pl-0 pr-0" from="~/components/special-event/">
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading the Special Event page…'" />
                   {{else}}
                     <lbh3-special-event
-                      class="container pl-0 pr-0"
                       description:to="description"
                       ogTitle:to="ogTitle"
                       title:to="title"
@@ -375,16 +365,11 @@
             {{/case}}
             {{#case "guidelines"}}
               {{>harelineNav}}
-              <can-import from="~/components/hareline/guidelines/">
+              <can-import class="container d-block pl-0 pr-0" from="~/components/hareline/guidelines/">
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Haring Guidelines…'" />
                 {{else}}
-                  <lbh3-hareline-guidelines
-                    class="container pl-0 pr-0"
-                    description:to="description"
-                    ogTitle:to="ogTitle"
-                    title:to="title"
-                  />
+                  <lbh3-hareline-guidelines description:to="description" ogTitle:to="ogTitle" title:to="title" />
                 {{/if}}
               </can-import>
             {{/case}}
@@ -394,11 +379,7 @@
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Hareline…'" />
                 {{else}}
-                  <lbh3-hareline
-                    description:to="description"
-                    ogTitle:to="ogTitle"
-                    title:to="title"
-                  />
+                  <lbh3-hareline description:to="description" ogTitle:to="ogTitle" title:to="title" />
                 {{/if}}
               </can-import>
             {{/default}}
@@ -411,12 +392,11 @@
               {{#switch secondaryPage}}
                 {{#case "edit"}}
                   <lbh3-no-ssr>
-                    <can-import from="~/components/hasher/edit/">
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/hasher/edit/">
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Edit Hasher page…'" />
                       {{else}}
                         <lbh3-hasher-edit
-                          class="container pl-0 pr-0"
                           description:to="description"
                           id:from="id"
                           ogTitle:to="ogTitle"
@@ -447,78 +427,55 @@
               </lbh3-no-ssr>
             {{/if}}
           {{else}}
-            <can-import from="~/components/hashers/nav/">
+            <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/nav/">
               {{#if isPending}}
-                <lbh3-alert message:from="'Loading the Hashers nav…'" />
+                <lbh3-alert message:from="'Loading the Directory nav…'" />
               {{else}}
-                <lbh3-hashers-nav
-                  class="container pl-0 pr-0"
-                  secondaryPage:from="secondaryPage"
-                />
+                <lbh3-hashers-nav secondaryPage:from="secondaryPage" />
               {{/if}}
             </can-import>
             {{#if secondaryPage}}
               {{#switch secondaryPage}}
                 {{#case "add"}}
                   <lbh3-no-ssr>
-                    <can-import from="~/components/hashers/add/">
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/add/">
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Add Hasher page…'" />
                       {{else}}
-                        <lbh3-hashers-add
-                          class="container pl-0 pr-0"
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          title:to="title"
-                        />
+                        <lbh3-hashers-add description:to="description" ogTitle:to="ogTitle" title:to="title" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
                 {{/case}}
                 {{#case "attendance-records"}}
                   <lbh3-no-ssr>
-                    <can-import from="~/components/hashers/attendance-records/">
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/attendance-records/">
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Attendance Records page…'" />
                       {{else}}
-                        <lbh3-hashers-attendance-records
-                          class="container pl-0 pr-0"
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          title:to="title"
-                        />
+                        <lbh3-hashers-attendance-records description:to="description" ogTitle:to="ogTitle" title:to="title" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
                 {{/case}}
                 {{#case "early-warning"}}
                   <lbh3-no-ssr>
-                    <can-import from="~/components/hashers/early-warning/">
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/early-warning/">
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Early Warning page…'" />
                       {{else}}
-                        <lbh3-hashers-early-warning
-                          class="container pl-0 pr-0"
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          title:to="title"
-                        />
+                        <lbh3-hashers-early-warning description:to="description" ogTitle:to="ogTitle" title:to="title" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
                 {{/case}}
                 {{#case "email"}}
                   <lbh3-no-ssr>
-                    <can-import from="~/components/hashers/email/">
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/email/">
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Email List page…'" />
                       {{else}}
-                        <lbh3-hashers-email
-                          class="container pl-0 pr-0"
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          title:to="title"
-                        />
+                        <lbh3-hashers-email description:to="description" ogTitle:to="ogTitle" title:to="title" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -526,12 +483,11 @@
               {{/switch}}
             {{else}}
               <lbh3-no-ssr>
-                <can-import from="~/components/hashers/">
+                <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/">
                   {{#if isPending}}
-                    <lbh3-alert message:from="'Loading the Hashers page…'" />
+                    <lbh3-alert message:from="'Loading the Directory page…'" />
                   {{else}}
                     <lbh3-hashers
-                      class="container pl-0 pr-0"
                       description:to="description"
                       ogTitle:to="ogTitle"
                       searchNoHeadshot:bind="noHeadshot"
@@ -546,7 +502,7 @@
           {{/if}}
         {{/case}}
         {{#case "home"}}
-          <can-import from="~/components/home/">
+          <can-import class="container d-block pl-0 pr-0" from="~/components/home/">
             {{#if isPending}}
               <lbh3-alert message:from="'Loading the Home page…'" />
             {{else}}
@@ -556,12 +512,7 @@
                   Check <a href="http://www.hash.org" target="_blank">hash.org</a> for the next run.
                 </div>
               {{else}}
-                <lbh3-home
-                  class="container pl-0 pr-0"
-                  description:to="description"
-                  ogTitle:to="ogTitle"
-                  title:to="title"
-                />
+                <lbh3-home description:to="description" ogTitle:to="ogTitle" title:to="title" />
               {{/if}}
             {{/if}}
           </can-import>
@@ -571,11 +522,7 @@
             {{#if isPending}}
               <lbh3-alert message:from="'Loading the Special Events page…'" />
             {{else}}
-              <lbh3-special-events
-                description:to="description"
-                ogTitle:to="ogTitle"
-                title:to="title"
-              />
+              <lbh3-special-events description:to="description" ogTitle:to="ogTitle" title:to="title" />
             {{/if}}
           </can-import>
         {{/case}}
@@ -588,12 +535,7 @@
                     {{#if isPending}}
                       <lbh3-alert message:from="'Loading the Edit User page…'" />
                     {{else}}
-                      <lbh3-user-edit
-                        description:to="description"
-                        id:from="id"
-                        ogTitle:to="ogTitle"
-                        title:to="title"
-                      />
+                      <lbh3-user-edit description:to="description" id:from="id" ogTitle:to="ogTitle" title:to="title" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -604,12 +546,7 @@
               {{#if isPending}}
                 <lbh3-alert message:from="'Loading the Users page…'" />
               {{else}}
-                <lbh3-users
-                  description:to="description"
-                  ogTitle:to="ogTitle"
-                  secondaryPage:from="secondaryPage"
-                  title:to="title"
-                />
+                <lbh3-users description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" />
               {{/if}}
             </can-import>
           {{/if}}
