@@ -2,6 +2,7 @@ import BoredYear from '~/models/bored-year';
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './mismanagement.less';
+import platform from 'steal-platform';
 import route from 'can-route';
 import view from './mismanagement.stache';
 
@@ -17,12 +18,17 @@ export const ViewModel = DefineMap.extend({
     get: function() {
       const years = this.years;
       if (years && years.length) {
-        return years[0].year;
+        return years[years.length - 1].year;
       }
     }
   },
   get ogTitle() {
     return `${this.year} Mismanagement`;
+  },
+  platform: {
+    default: () => {
+      return platform;
+    }
   },
   routeForYear: function(year) {
     const routeParams = {page: 'about', secondaryPage: 'mismanagement'};
@@ -39,7 +45,7 @@ export const ViewModel = DefineMap.extend({
       const filteredYears = years.filter(function(yearObject) {
         return yearObject.year === year;
       });
-      return (filteredYears && filteredYears.length) ? filteredYears[0] : null;
+      return (filteredYears && filteredYears.length) ? filteredYears[filteredYears.length - 1] : null;
     }
   },
   showEmailLink: {
@@ -70,7 +76,7 @@ export const ViewModel = DefineMap.extend({
       return BoredYear.getList({
         $limit: 100,
         $sort: {
-          year: -1
+          year: 1
         }
       });
     }

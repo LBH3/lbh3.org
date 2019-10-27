@@ -65,7 +65,7 @@
                     description:to="description"
                     ogTitle:to="ogTitle"
                     title:to="title"
-                    year:from="year"
+                    year:bind="year"
                   />
                 {{/if}}
               </can-import>

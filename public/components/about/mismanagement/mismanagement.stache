@@ -14,16 +14,27 @@
 
 {{#if yearsPromise.isResolved}}
   {{#if years.length}}
-    <nav class="nav nav-pills">
-      {{#for(yearObject of years)}}
-        <a
-          class="{{#is yearObject.year this.year}}active{{/is}} nav-link text-sm-center"
-          href="{{this.routeForYear(yearObject.year)}}"
-        >
-          {{yearObject.year}}
-        </a>
-      {{/for}}
-    </nav>
+    {{#if(platform.isNode)}}
+      <nav class="nav nav-pills">
+        {{#for(yearObject of years)}}
+          <a
+            class="{{#is yearObject.year year}}active{{/is}} nav-link text-sm-center"
+            href="{{routeForYear(yearObject.year)}}"
+          >
+            {{yearObject.year}}
+          </a>
+        {{/for}}
+      </nav>
+    {{else}}
+      <form class="align-items-baseline form-inline">
+        <label class="font-weight-bold mr-2" for="year-selector">Year</label>
+        <select class="form-control mb-3 w-auto" id="year-selector" value:bind="year">
+          {{#for(yearObject of years)}}
+            <option value="{{yearObject.year}}">{{yearObject.year}}</option>
+          {{/for}}
+        </select>
+      </form>
+    {{/if}}
   {{else}}
     <div class="alert alert-info" role="alert">
       <strong>Hm, no Mismanagement found.</strong>
