@@ -306,7 +306,7 @@
                       showOnOn:bind="showOnOn"
                       showScribe:bind="showScribe"
                       title:to="title"
-                      year:from="year"
+                      year:bind="year"
                     />
                   {{/if}}
                 </can-import>

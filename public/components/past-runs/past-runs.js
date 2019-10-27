@@ -1,6 +1,7 @@
 import Component from 'can-component';
 import Session from '~/models/session';
 import Year from '~/models/year';
+import platform from 'steal-platform';
 import route from 'can-route';
 import view from './past-runs.stache';
 
@@ -18,6 +19,11 @@ export default Component.extend({
     },
     get ogTitle() {
       return 'Past Runs';
+    },
+    platform: {
+      default: () => {
+        return platform;
+      }
     },
     routeForYear: function(year) {
       const routeParams = {
@@ -77,7 +83,7 @@ export default Component.extend({
       default: () => {
         return Year.getList({
           $sort: {
-            id: -1
+            id: 1
           }
         });
       }
