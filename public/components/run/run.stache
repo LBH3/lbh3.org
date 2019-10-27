@@ -80,7 +80,7 @@
 
   {{#if shouldShowPostTrailData}}
     <dl class="row">
-      <dt class="col-sm-3 text-sm-right">Miles:</dt>
+      <dt class="col-sm-3 text-sm-right">Mileage:</dt>
       <dd class="col-sm-9">
         {{#if event.miles}}
           {{event.miles}}
