@@ -151,6 +151,8 @@ mark {
 
   &:disabled {
     background-color: var(--form-control-disabled-background-color);
+    border-color: var(--form-control-disabled-border-color);
+    color: var(--form-control-disabled-text-color);
   }
 
   &:focus {
@@ -307,6 +309,8 @@ mark {
   --form-control-border-color: #ced4da;
   --form-control-text-color: #495057;
   --form-control-disabled-background-color: #e9ecef;
+  --form-control-disabled-border-color: #ced4da;
+  --form-control-disabled-text-color: #212529;
   --form-control-focus-background-color: #fff;
   --form-control-focus-border-color: #80bdff;
   --form-control-focus-text-color: #495057;
@@ -367,11 +371,13 @@ mark {
     --dark: #f8f9fa;
     --facebook-blue-hover: lighten(#4267B2, 10%);
     --figure-caption-color: #bbb;
-    --form-control-background-color: #666;
+    --form-control-background-color: transparent;
     --form-control-border-color: #777;
     --form-control-text-color: #ccc;
-    --form-control-disabled-background-color: #333;
-    --form-control-focus-background-color: #666;
+    --form-control-disabled-background-color: transparent;
+    --form-control-disabled-border-color: #555;
+    --form-control-disabled-text-color: #555;
+    --form-control-focus-background-color: transparent;
     --form-control-focus-border-color: #074180;
     --form-control-focus-box-shadow: 0 0 0 0.2rem rgba(60, 88, 128, 0.75);
     --form-control-focus-text-color: #ccc;
