@@ -305,7 +305,7 @@
       {{/if}}
 
       <button
-        class="btn btn-primary mt-3"
+        class="btn btn-primary my-3"
         {{#if editingEventPromise.isPending}}disabled{{/if}}
         on:click="editRun()"
       >
@@ -313,20 +313,22 @@
       </button>
 
       {{#and(event.hasStartedOrIsCloseToStarting, session.user.canEditPostTrailInfo)}}
-        <div class="form-row mt-4">
-          <div class="form-group col-md-6">
-            <label for="added-writeup">
-              Added writeup
-            </label>
-            <textarea class="form-control" disabled id="added-writeup" value:bind="event.addedWriteupMd"></textarea>
+        {{#or(event.addedWriteupMd, event.additionalWriteupMd)}}
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="added-writeup">
+                Added writeup
+              </label>
+              <textarea class="form-control" disabled id="added-writeup" value:bind="event.addedWriteupMd"></textarea>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="additional-writeup">
+                Additional writeup
+              </label>
+              <textarea class="form-control" disabled id="additional-writeup" value:bind="event.additionalWriteupMd"></textarea>
+            </div>
           </div>
-          <div class="form-group col-md-6">
-            <label for="additional-writeup">
-              Additional writeup
-            </label>
-            <textarea class="form-control" disabled id="additional-writeup" value:bind="event.additionalWriteupMd"></textarea>
-          </div>
-        </div>
+        {{/or}}
         <div class="form-row">
           <div class="form-group col-md-6">
             <label for="new-boots">
