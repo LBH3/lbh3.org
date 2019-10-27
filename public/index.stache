@@ -330,7 +330,7 @@
             {{#case "add"}}
               {{>harelineNav}}
               <lbh3-no-ssr>
-                <can-import from="~/components/hareline/add/">
+                <can-import class="container d-block pl-0 pr-0" from="~/components/hareline/add/">
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading the Add Run page…'" />
                   {{else}}
