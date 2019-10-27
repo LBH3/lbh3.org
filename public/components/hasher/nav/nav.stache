@@ -2,7 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
-<h2>
+<h2 class="h3">
   <a href="{{routeUrl page='hashers' id=hasher.id}}">
     {{hasher.hashOrJustName}}
   </a>
