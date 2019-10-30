@@ -47,7 +47,7 @@ module.exports = function (options) {
       let selectQuery = model.QueryInterface.QueryGenerator.selectQuery('hashers', queryOptions, model).slice(0, -1);// Slice to remove ‘;’
 
       // Build the WHERE clause
-      const searchTerms = query.search.replace(/'/gi, '').replace(/-/gi, ' ').trim().split(' ').map(term => {
+      const searchTerms = query.search.replace(/'/gi, '').trim().split(' ').map(term => {
         return `${term.trim()}:*`;
       }).filter(term => {
         return term.length > 0;

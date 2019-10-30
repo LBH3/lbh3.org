@@ -49,6 +49,12 @@ describe('\'hashers\' service', () => {
       });
     });
 
+    it('can search for hash names with numbers', () => {
+      return service.find({ query: {search: '6-9'}, user }).then(result => {
+        assert.equal(result.data[0].id, 38, 'Found 6-9');
+      });
+    });
+
     itRunsLocally('can search by partial hash name', () => {
       return service.find({ query: {search: 'buttd'}, user }).then(result => {
         assert.ok(result.data.length > 0, 'Found results');
