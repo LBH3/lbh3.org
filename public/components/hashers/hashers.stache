@@ -127,7 +127,7 @@
       {{/if}}
 
     {{else}}
-      <div class="alert alert-info" role="alert">
+      <div class="alert alert-info mt-3" role="alert">
         <strong>No hashers found.</strong>
       </div>
     {{/if}}
