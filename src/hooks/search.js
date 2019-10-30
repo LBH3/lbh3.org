@@ -64,19 +64,18 @@ module.exports = function (options) {
       // Build the ORDER BY
       let orderByQuery = '';
       if (query.$sort) {
-        if (query.$sort.hashName) {
-          if (Number(query.$sort.hashName) === -1) {
-            orderByQuery = 'ORDER BY NULLIF(hash_name, \'\') DESC NULLS LAST';
-          } else {
-            orderByQuery = 'ORDER BY NULLIF(hash_name, \'\') ASC NULLS LAST';
-          }
-        } else if (query.$sort.lastTrailDate) {
-          if (Number(query.$sort.lastTrailDate) === -1) {
-            orderByQuery = 'ORDER BY last_trail_date DESC';
-          } else {
-            orderByQuery = 'ORDER BY last_trail_date ASC';
-          }
+        const mapping = {
+          familyName: 'family_name',
+          givenName: 'given_name',
+          hashName: 'NULLIF(hash_name, \'\')',
+          lastTrailDate: 'last_trail_date'
+        };
+        const orderByQueries = [];
+        for (let field in query.$sort) {
+          const direction = Number(query.$sort[field]) === -1 ? 'DESC' : 'ASC';
+          orderByQueries.push(`${mapping[field]} ${direction} NULLS LAST`);
         }
+        orderByQuery = `ORDER BY ${orderByQueries.join(', ')}`;
       }
 
       // Build the LIMIT and OFFSET

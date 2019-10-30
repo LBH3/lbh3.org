@@ -31,7 +31,9 @@ export const ViewModel = DefineMap.extend({
         $limit,
         $skip: this.skip,
         $sort: {
-          hashName: 1
+          hashName: 1,
+          familyName: 1,
+          givenName: 1
         }
       };
       const searchText = (this.searchText) ? this.searchText.trim() : '';
