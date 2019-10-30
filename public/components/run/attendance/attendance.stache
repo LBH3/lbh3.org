@@ -59,7 +59,7 @@
               {{birthday(hasher)}}
             </td>
             <td class="text-center">
-              {{#if patchesPromise.isPending}}
+              {{#if hasher.patchesPromise.isPending}}
                 <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
               {{else}}
                 {{patches(hasher)}}
