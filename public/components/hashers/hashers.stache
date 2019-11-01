@@ -101,6 +101,16 @@
                       <dt class="col-5 font-weight-normal m-0 px-0 text-right">Mother hash:</dt>
                       <dd class="col-7 m-0">{{hasher.motherHash}}</dd>
                     {{/if}}
+                    {{#or(hasher.namingTrailDate, hasher.namingTrailNumber)}}
+                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Naming trail:</dt>
+                      <dd class="col-7 m-0">
+                        {{#if(hasher.namingTrailDate)}}
+                          {{hasher.namingTrailDate}} {{#if hasher.namingTrailNumber}}(#{{hasher.namingTrailNumber}}){{/if}}
+                        {{else}}
+                          #{{hasher.namingTrailNumber}}
+                        {{/if}}
+                      </dd>
+                    {{/or}}
                     {{#if(hasher.whoMadeYouCum)}}
                       <dt class="col-5 font-weight-normal m-0 px-0 text-right">Who made you cum:</dt>
                       <dd class="col-7 m-0">{{hasher.whoMadeYouCum}}</dd>

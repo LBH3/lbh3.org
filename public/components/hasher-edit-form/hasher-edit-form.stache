@@ -113,21 +113,6 @@
     </div>
   </div>
   <div class="form-group row">
-    <label class="col-sm-4 col-form-label" for="namingTrailNumber">
-      Naming trail #
-    </label>
-    <div class="col-sm-8">
-      {{#if(session.user.canEditHasherInfo)}}
-        <input class="float-left form-control w-50" id="namingTrailNumber" min="0" type="number" value:bind="hasher.namingTrailNumber">
-      {{else}}
-        <input class="float-left form-control-plaintext w-50" id="namingTrailNumber" readonly type="text" value:from="hasher.namingTrailNumber">
-      {{/if}}
-      <select class="float-right form-control w-auto" value:bind="hasher.namingTrailPrivacy">
-        {{>privacyOptionsTemplate}}
-      </select>
-    </div>
-  </div>
-  <div class="form-group row">
     <label class="col-sm-4 col-form-label" for="whoMadeYouCum">
       Who made you cum
     </label>

@@ -97,7 +97,6 @@ var User = DefineMap.extend('User', {
         'givenNamePrivacy',
         'headshotPrivacy',
         'motherHashPrivacy',
-        'namingTrailPrivacy',
         'whoMadeYouCumPrivacy'
       ].filter(field => {
         return hasher[field] === 'directory';

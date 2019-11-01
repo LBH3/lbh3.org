@@ -38,7 +38,7 @@
   <li>Photos from each run</li>
   <li>“Snooze” newsletters for each run</li>
   <li>Who else attended the same runs they did</li>
-  <li>Every hasher’s first trail, hare count, run count, and run mileage</li>
+  <li>Every hasher’s first trail, hare count, naming trail, run count, and run mileage</li>
   <li>Whatever other information a hasher chooses to share in the Directory</li>
 </ul>
 
@@ -56,7 +56,6 @@
   <li>Headshot</li>
   <li>Mailing addresses</li>
   <li>Mother hash</li>
-  <li>Naming trail</li>
   <li>Phone numbers</li>
   <li>Who made you cum</li>
 </ul>
@@ -76,7 +75,7 @@
   {{else}}
     {{#if session.user}}
       <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
-      <can-import from="~/components/request-access/">
+      <can-import class="d-block my-3" from="~/components/request-access/">
         {{#if isResolved}}
           <lbh3-request-access />
         {{/if}}
@@ -111,3 +110,18 @@
   If you have any comments, concerns, or questions about this privacy policy, please
   <a href="mailto:webmaster@lbh3.org">email I’m Fucking Matt Damon</a>.
 </p>
+
+<h3>Updates</h3>
+
+<dl>
+  <dt>2019-10-31</dt>
+  <dd>
+    Previously, a hasher’s naming trail had a privacy option so it could be selectively shared with other verified hashers.
+    However, this information is available in the Snooze, so other verified hashers can already see this.
+    A hasher’s naming trail is now shared with all verified hashers.
+  </dd>
+  <dt>2019-10-19</dt>
+  <dd>
+    First version with info about the Directory.
+  </dd>
+</dl>
