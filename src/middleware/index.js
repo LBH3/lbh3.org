@@ -12,6 +12,89 @@ const request = require('request');
 const sharp = require('sharp');
 const ssr = require('done-ssr-middleware');
 
+const cacheDirectory = 'data';
+const createCacheDirectory = createDirectory(cacheDirectory);
+
+function cacheDataAtPath(imageData, cachePath) {
+  createCacheDirectory.then(() => {
+    console.info(`Caching image to path: ${cachePath}`);
+    console.time(`Cached file: ${cachePath}`);
+    fs.writeFile(cachePath, imageData, (error) => {
+      console.timeEnd(`Cached file: ${cachePath}`);
+      if (error) {
+        console.error(`Error writing file ${cachePath}:`, error);
+      } else {
+        console.info(`Successfully wrote file: ${cachePath}`);
+      }
+    });
+  });
+}
+
+function createDirectory(directory) {
+  return new Promise((resolve, reject) => {
+    console.info(`Creating “${directory}” directory`);
+    console.time(`Created “${directory}” directory`);
+    fs.mkdir(directory, (error) => {
+      console.timeEnd(`Created “${directory}” directory`);
+      if (error && error.code !== 'EEXIST') {
+        console.error(`Error creating directory ${directory}:`, error);
+        reject(error);
+      } else {
+        resolve();
+      }
+    });
+  });
+}
+
+function getImage(url, fullFilePath) {
+  return new Promise((resolve, reject) => {
+    if (!fullFilePath) {
+      const hash = crypto.createHash('sha256');
+      hash.update(url);
+      const fullFileName = hash.digest('hex');
+      fullFilePath = path.join(cacheDirectory, fullFileName);
+    }
+
+    console.time(`Read file: ${fullFilePath}`);
+    fs.readFile(fullFilePath, (fullFileError, data) => {
+      console.timeEnd(`Read file: ${fullFilePath}`);
+
+      if (fullFileError) {
+        if (fullFileError.code !== 'ENOENT') {
+          console.error(`Error reading file ${fullFilePath}:`, fullFileError);
+        }
+
+        // Need to fetch the image over the network
+        console.info(`Fetching image at URL: ${url}`);
+        console.time(`Fetched image at URL: ${url}`);
+        request({
+          encoding: null,
+          method: 'GET',
+          url: url
+        }, (error, response, fullSizeImage) => {
+          console.timeEnd(`Fetched image at URL: ${url}`);
+
+          if (response && response.statusCode === 200) {
+            resolve(fullSizeImage);
+            if (fullFilePath) {
+              cacheDataAtPath(fullSizeImage, fullFilePath);
+            }
+          } else {
+            if (error) {
+              console.error(`Error fetching image at URL ${url}:`, error);
+            } else if (response && response.statusCode !== 200) {
+              console.error(`Error status code while fetching image at URL ${url}: ${response.statusCode}`);
+            }
+            reject(response);
+          }
+        });
+      } else {
+        resolve(data);
+      }
+    });
+  });
+}
+
 module.exports = function (app) {
 
   app.use(function(req, res, next) {
@@ -97,59 +180,82 @@ module.exports = function (app) {
 
     const hasherId = params.hasherId;
     app.service('api/hashers').get(hasherId, {user: req.user}).then(hasher => {
-      res.setHeader('Content-Type', 'text/vcard');
-      const vcardLines = [
-        'BEGIN:VCARD',
-        'VERSION:3.0'
-      ];
-      if (hasher.familyName || hasher.givenName) {
-        vcardLines.push(`N:${hasher.familyName};${hasher.givenName};;;`);
-        vcardLines.push(`FN:${hasher.givenName} ${hasher.familyName}`);
-      }
-      if (hasher.hashName) {
-        vcardLines.push(`NICKNAME:${hasher.hashName}`);
-      }
-      if (hasher.birthDay && hasher.birthMonth) {
-        let birthDay = hasher.birthDay.toString();
-        birthDay = birthDay.length === 1 ? `0${birthDay}` : birthDay;
-        let birthMonth = hasher.birthMonth.toString();
-        birthMonth = birthMonth.length === 1 ? `0${birthMonth}` : birthMonth;
-        const birthYear = hasher.birthYear || '--';
-        vcardLines.push(`BDAY:${birthYear}${birthMonth}${birthDay}`);
-      }
-      if (hasher.headshotUrl) {
-        vcardLines.push(`PHOTO:${hasher.headshotUrl}`);
-      }
-      if (hasher.emails && hasher.emails.length > 0) {
-        hasher.emails.forEach(email => {
-          vcardLines.push(`EMAIL;type=INTERNET;type=${email.type.toUpperCase()}:${email.value}`);
-        });
-      }
-      if (hasher.phones && hasher.phones.length > 0) {
-        hasher.phones.forEach(phone => {
-          vcardLines.push(`TEL;TYPE=${phone.type.toUpperCase()},VOICE:${phone.value}`);
-        });
-      }
-      if (hasher.addresses && hasher.addresses.length > 0) {
-        hasher.addresses.forEach(address => {
-          vcardLines.push([
-            'ADR',
-            ':',
-            '',
-            `${address.street} ${address.subpremise == null ? '' : address.subpremise}`.trim(),
-            address.city,
-            address.state,
-            address.zip,
-            address.country
-          ].join(';'));
-        });
-      }
-      if (hasher.updatedAt) {
-        vcardLines.push(`REV:${hasher.updatedAt.toISOString()}`);
-      }
-      vcardLines.push('END:VCARD');
-      res.write(vcardLines.join('\n'));
-      res.end();
+      new Promise(resolve => {
+        if (hasher.headshotUrl) {
+          getImage(hasher.headshotUrl).then(fullSizeImage => {
+            sharp(fullSizeImage)
+              .resize(1024, 1024, {
+                fit: sharp.fit.inside,
+                withoutEnlargement: true
+              })
+              .toFormat('jpeg')
+              .toBuffer()
+              .then(resolve, error => {
+                console.error(`Error resizing image at ${hasher.headshotUrl}:`, error);
+                resolve();
+              });
+          }, error => {
+            console.error(`Error getting image at ${hasher.headshotUrl}:`, error);
+            resolve();
+          });
+        } else {
+          resolve();
+        }
+      }).then(headshotImage => {
+        res.setHeader('Content-Type', 'text/vcard');
+        const vcardLines = [
+          'BEGIN:VCARD',
+          'VERSION:3.0'
+        ];
+        if (hasher.familyName || hasher.givenName) {
+          vcardLines.push(`N:${hasher.familyName};${hasher.givenName};;;`);
+          vcardLines.push(`FN:${hasher.givenName} ${hasher.familyName}`);
+        }
+        if (hasher.hashName) {
+          vcardLines.push(`NICKNAME:${hasher.hashName}`);
+        }
+        if (hasher.birthDay && hasher.birthMonth) {
+          let birthDay = hasher.birthDay.toString();
+          birthDay = birthDay.length === 1 ? `0${birthDay}` : birthDay;
+          let birthMonth = hasher.birthMonth.toString();
+          birthMonth = birthMonth.length === 1 ? `0${birthMonth}` : birthMonth;
+          const birthYear = hasher.birthYear || '--';
+          vcardLines.push(`BDAY:${birthYear}${birthMonth}${birthDay}`);
+        }
+        if (headshotImage) {
+          vcardLines.push(`PHOTO;ENCODING=b;TYPE=JPEG:${headshotImage.toString('base64')}`);
+        }
+        if (hasher.emails && hasher.emails.length > 0) {
+          hasher.emails.forEach(email => {
+            vcardLines.push(`EMAIL;type=INTERNET;type=${email.type.toUpperCase()}:${email.value}`);
+          });
+        }
+        if (hasher.phones && hasher.phones.length > 0) {
+          hasher.phones.forEach(phone => {
+            vcardLines.push(`TEL;TYPE=${phone.type.toUpperCase()},VOICE:${phone.value}`);
+          });
+        }
+        if (hasher.addresses && hasher.addresses.length > 0) {
+          hasher.addresses.forEach(address => {
+            vcardLines.push([
+              'ADR',
+              ':',
+              '',
+              `${address.street} ${address.subpremise == null ? '' : address.subpremise}`.trim(),
+              address.city,
+              address.state,
+              address.zip,
+              address.country
+            ].join(';'));
+          });
+        }
+        if (hasher.updatedAt) {
+          vcardLines.push(`REV:${hasher.updatedAt.toISOString()}`);
+        }
+        vcardLines.push('END:VCARD');
+        res.write(vcardLines.join('\n'));
+        res.end();
+      });
     }, error => {
       console.error(`Error fetching vCard for hasher #${hasherId}:`, error);
       res.status(500);
@@ -158,30 +264,13 @@ module.exports = function (app) {
     });
   });
 
-  function createDirectory(directory) {
-    return new Promise((resolve, reject) => {
-      console.info(`Creating “${directory}” directory`);
-      console.time(`Created “${directory}” directory`);
-      fs.mkdir(directory, (error) => {
-        console.timeEnd(`Created “${directory}” directory`);
-        if (error && error.code !== 'EEXIST') {
-          console.error(`Error creating directory ${directory}:`, error);
-          reject(error);
-        } else {
-          resolve();
-        }
-      });
-    });
-  }
-
   app.get('/image', function(req, res) {
     const params = req.query;
     const height = params.height ? Number(params.height) : null;
     const width = params.width ? Number(params.width) : null;
 
     // Create the data folder if it doesn’t exist
-    const cacheDirectory = 'data';
-    createDirectory(cacheDirectory).then(() => {
+    createCacheDirectory.then(() => {
 
       const hash = crypto.createHash('sha256');
       hash.update(params.url);
@@ -198,22 +287,8 @@ module.exports = function (app) {
           if (thumbnailFileError.code !== 'ENOENT') {
             console.error(`Error reading file ${thumbnailFilePath}:`, thumbnailFileError);
           }
-          // Need to check whether the full image is cached
           const fullFilePath = path.join(cacheDirectory, fullFileName);
-          console.time(`Read file: ${fullFilePath}`);
-          fs.readFile(fullFilePath, (fullFileError, data) => {
-            console.timeEnd(`Read file: ${fullFilePath}`);
-            if (fullFileError) {
-              if (fullFileError.code !== 'ENOENT') {
-                console.error(`Error reading file ${fullFilePath}:`, fullFileError);
-              }
-              // Need to fetch the image over the network
-              fetchImage(fullFilePath, thumbnailFilePath);
-            } else {
-              // Have the cached image, can generate the thumbnail from it
-              resizeImage(data, thumbnailFilePath);
-            }
-          });
+          fetchImage(fullFilePath, thumbnailFilePath);
         } else {
           // Have the cached thumbnail, can respond directly with it
           respondWithData(data);
@@ -224,42 +299,11 @@ module.exports = function (app) {
     });
 
     function fetchImage(fullFilePath, thumbnailFilePath) {
-      console.info(`Fetching image at URL: ${params.url}`);
-      console.time(`Fetched image at URL: ${params.url}`);
-      request({
-        encoding: null,
-        method: 'GET',
-        url: params.url
-      }, (error, response, fullSizeImage) => {
-        console.timeEnd(`Fetched image at URL: ${params.url}`);
-        if (response && response.statusCode === 200) {
-          resizeImage(fullSizeImage, thumbnailFilePath);
-          if (fullFilePath) {
-            cacheDataAtPath(fullSizeImage, fullFilePath);
-          }
-        } else {
-          if (error) {
-            console.error(`Error fetching image at URL ${params.url}:`, error);
-          } else if (response && response.statusCode !== 200) {
-            console.error(`Error status code while fetching image at URL ${params.url}: ${response.statusCode}`);
-          }
-          res.status(response && response.statusCode || 500);
-          res.send(fullSizeImage);
-          res.end();
-        }
-      });
-    }
-
-    function cacheDataAtPath(imageData, cachePath) {
-      console.info(`Caching image to path: ${cachePath}`);
-      console.time(`Cached file: ${cachePath}`);
-      fs.writeFile(cachePath, imageData, (error) => {
-        console.timeEnd(`Cached file: ${cachePath}`);
-        if (error) {
-          console.error(`Error writing file ${cachePath}:`, error);
-        } else {
-          console.info(`Successfully wrote file: ${cachePath}`);
-        }
+      getImage(params.url, fullFilePath).then(fullSizeImage => {
+        resizeImage(fullSizeImage, thumbnailFilePath);
+      }, response => {
+        res.status(response && response.statusCode || 500);
+        res.end();
       });
     }
 
