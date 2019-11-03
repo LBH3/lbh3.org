@@ -1,5 +1,6 @@
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
+import Place from './place';
 import { defaultLocale, localizedStringForDate, timeZone } from './event';
 import feathersModel from './feathers-model';
 import marked from 'marked';
@@ -26,6 +27,18 @@ const SpecialEvent = DefineMap.extend({
     serialize: false
   },
   descriptionMd: 'string',
+  locationGooglePlaceId: 'string',
+  locationMd: 'string',
+  locationPromise: {
+    get: function() {
+      const id = this.locationGooglePlaceId;
+      if (id) {
+        return Place.connection.get({
+          id
+        });
+      }
+    }
+  },
   nameHtml: {
     get: function() {
       return this.title;
@@ -37,6 +50,11 @@ const SpecialEvent = DefineMap.extend({
       return this.title;
     },
     serialize: false
+  },
+  photosUrl: 'string',
+  resetLocation: function() {
+    this.locationGooglePlaceId = null;
+    this.locationMd = '';
   },
   startDate: {
     get: function() {

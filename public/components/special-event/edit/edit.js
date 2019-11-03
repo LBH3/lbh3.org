@@ -3,6 +3,7 @@ import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import './edit.less';
+import { enableAutocompleteForInput, loadGoogleMapsPlacesAPI } from '~/components/run/edit/';
 import marked from 'marked';
 import moment from 'moment-timezone';
 import view from './edit.stache';
@@ -13,25 +14,25 @@ marked.setOptions({
 });
 
 export const ViewModel = DefineMap.extend({
-  description: {
-    default: ''
-  },
   editSpecialEvent: function() {
-    this.specialEvent.descriptionMd = this.descriptionMd;
     this.specialEvent.startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format();
     return this.editSpecialEventPromise = this.specialEvent.save();
   },
   editSpecialEventPromise: {},
   get descriptionHtml() {
-    return marked(this.descriptionMd || '');
+    return marked(this.specialEvent.descriptionMd || '');
   },
-  descriptionMd: 'string',
+  locationPromise: Promise,
   get ogTitle() {
     const specialEvent = this.specialEvent || {};
     if (specialEvent.title) {
       return `Edit ${specialEvent.title}`;
     }
     return 'Edit a Special Event';
+  },
+  resetLocation: function() {
+    this.specialEvent.resetLocation();
+    this.locationPromise = null;
   },
   get session() {
     return Session.current;
@@ -47,7 +48,6 @@ export const ViewModel = DefineMap.extend({
           year
         }).then(specialEvents => {
           this.specialEvent = specialEvents[0];
-          this.descriptionMd = this.specialEvent.descriptionMd;
         });
       }
     }
@@ -77,7 +77,16 @@ export const ViewModel = DefineMap.extend({
     return `${this.ogTitle} | Special Events | LBH3`;
   },
   urlId: 'string',
-  year: 'number'
+  year: 'number',
+
+  connectedCallback() {
+    loadGoogleMapsPlacesAPI(() => {
+      enableAutocompleteForInput('location', this, 'location', savedPlace => {
+        this.specialEvent.locationGooglePlaceId = savedPlace.id;
+        this.specialEvent.locationMd = savedPlace.name || savedPlace.formattedAddress;
+      });
+    });
+  }
 });
 
 export default Component.extend({

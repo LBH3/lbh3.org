@@ -31,8 +31,10 @@ export const enableAutocompleteForInput = (id, viewModel, vmProperty, callback) 
       });
       autocomplete.addListener('place_changed', () => {
         const place = Place.fromGoogle(autocomplete.getPlace());
+        const promise = place.save();
         const vmPromiseProperty = `${vmProperty}Promise`;
-        viewModel[vmPromiseProperty] = place.save().then(callback);
+        viewModel[vmPromiseProperty] = promise;
+        promise.then(callback);
       });
     }
   }, 10);

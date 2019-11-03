@@ -1,5 +1,8 @@
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
+<can-import from="~/components/map/" />
 
 <h2 class="h3">
   Edit
@@ -21,24 +24,77 @@
 
   {{#if specialEvent}}
     <form on:submit="editSpecialEvent()">
-      <div class="form-group row">
-        <label class="col-3 col-form-label" for="start-date">
-          Date
-        </label>
-        <div class="col-9">
-          <input class="form-control" id="start-date" type="date" value:bind="startDate">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="start-date">
+            Date &amp; time
+          </label>
+          <div class="input-group">
+            <input class="form-control" id="start-date" type="date" value:bind="startDate" />
+            <input class="form-control" id="start-time" type="time" value:bind="startTime" />
+          </div>
+        </div>
+        <div class="form-group col-md-3">
+          <label for="url-id">
+            URL ID
+          </label>
+          <input class="form-control" id="url-id" type="text" value:bind="specialEvent.urlId" />
+        </div>
+        <div class="form-group col-md-3">
+          <label for="year">
+            Year
+          </label>
+          <input class="form-control" id="year" type="number" value:bind="specialEvent.year" />
         </div>
       </div>
-      <div class="form-group row">
-        <label class="col-3 col-form-label" for="start-time">
-          Time
-        </label>
-        <div class="col-9">
-          <input class="form-control" id="start-time" type="time" value:bind="startTime">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="location">
+            Location
+          </label>
+          <div class="d-flex">
+            <input class="form-control" disabled id="location" placeholder="" type="text" value:bind="specialEvent.locationMd">
+            {{#if(specialEvent.locationMd)}}
+              <button class="btn btn-link prevent-default" on:click="resetLocation()" type="button">
+                <span class="fas fa-times"></span>
+              </button>
+            {{/if}}
+          </div>
+          {{#if locationPromise.isRejected}}
+            <span class="fas fa-exclamation-triangle"></span>
+            <small>
+              Save failed. Maybe try again?
+            </small>
+          {{else}}
+            {{#if locationPromise.isPending}}
+              <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
+            {{/if}}
+            {{#if locationPromise.isResolved}}
+              <span class="fas fa-check"></span>
+            {{/if}}
+            {{#if specialEvent.locationPromise.value}}
+              <small>
+                {{{specialEvent.locationPromise.value.formattedAddress}}}
+              </small>
+            {{/if}}
+          {{/if}}
+          {{#if locationPromise.value.placeId}}
+            <lbh3-map placeId:from="locationPromise.value.placeId" style="height: 208px" />
+          {{else}}
+            {{#if specialEvent.locationMd}}
+              <lbh3-map q:from="specialEvent.locationMd" style="height: 208px" />
+            {{/if}}
+          {{/if}}
+        </div>
+        <div class="form-group col-md-6">
+          <label for="photos-url">
+            Photos URL
+          </label>
+          <input class="form-control" id="photos-url" type="text" value:bind="specialEvent.photosUrl">
         </div>
       </div>
 
-      <div class="row">
+      <div class="form-row">
         <div class="col-lg mb-3">
           <div class="form-group">
             <label class="sr-only" for="description">
@@ -48,7 +104,7 @@
               class="border-primary form-control main-content"
               id="description"
               rows="8"
-              value:bind="descriptionMd"
+              value:bind="specialEvent.descriptionMd"
             ></textarea>
           </div>
 
