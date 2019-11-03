@@ -2,7 +2,7 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
 import './add.less';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import view from './add.stache';
 
 const oneWeekFromDate = function(date) {
@@ -89,7 +89,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   createTrail: function() {
-    const startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
+    const startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format();
     const newTrailData = {
       startDatetime: startDatetime,
       trailNumber: this.trailNumber

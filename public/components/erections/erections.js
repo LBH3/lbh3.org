@@ -1,7 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Election from '~/models/election';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import Session from '~/models/session';
 
 import './erections.less';
@@ -15,11 +15,11 @@ export const ViewModel = DefineMap.extend({
       advertise: this.advertise,
       advertisementMd: this.advertisementMd,
       descriptionMd: this.descriptionMd,
-      endDatetime: moment(`${this.endDate} ${this.endTime}`).format(),
+      endDatetime: moment.tz(`${this.endDate} ${this.endTime}`, 'America/Los_Angeles').format(),
       endedNoticeMd: this.endedNoticeMd,
       publicKey: this.publicKey,
       schema: eval(`(${this.schema})`),
-      startDatetime: moment(`${this.startDate} ${this.startTime}`).format(),
+      startDatetime: moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format(),
       titleMd: this.titleMd,
       urlId: this.urlId,
       year: this.year

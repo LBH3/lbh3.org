@@ -3,12 +3,12 @@ import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import './special-events.less';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import view from './special-events.stache';
 
 export const ViewModel = DefineMap.extend({
   createSpecialEvent: function() {
-    const startDatetime = moment(`${this.startDate} ${this.startTime}`).format();
+    const startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format();
     const newData = {
       descriptionMd: this.descriptionMd,
       startDatetime,
