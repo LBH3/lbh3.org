@@ -78,8 +78,8 @@
               </small>
             {{/if}}
           {{/if}}
-          {{#if locationPromise.value.placeId}}
-            <lbh3-map placeId:from="locationPromise.value.placeId" style="height: 208px" />
+          {{#if specialEvent.locationPromise.value.placeId}}
+            <lbh3-map placeId:from="specialEvent.locationPromise.value.placeId" style="height: 208px" />
           {{else}}
             {{#if specialEvent.locationMd}}
               <lbh3-map q:from="specialEvent.locationMd" style="height: 208px" />
