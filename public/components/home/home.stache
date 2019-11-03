@@ -73,10 +73,10 @@
   {{/if}}
 </lbh3-no-ssr>
 
-{{#if isBeforeOctober19}}
+{{#if isBeforeFebruary9}}
   <p class="border mt-3 py-3 rounded text-center">
-    <a class="d-block" href="events/2019/memorial-service/">
-      Join us for our yearly memorial service on Friday, October&nbsp;18<sup>th</sup>
+    <a class="d-block" href="events/2020/founders/">
+      Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;8<sup>th</sup>
     </a>
   </p>
 {{/if}}
