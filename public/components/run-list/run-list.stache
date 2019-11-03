@@ -47,7 +47,7 @@
               <span class="far fa-edit"></span>
             </a>
           {{/if}}
-        {{/and}}
+        {{/if}}
       {{else}}
         {{#if session.user.hasherId}}
           {{#if(event.photosUrl)}}

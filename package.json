@@ -97,20 +97,12 @@
       "maxSize": "25 kB"
     },
     {
-      "path": "./public/dist/bundles/edit-add-edit-edit.css",
+      "path": "./public/dist/bundles/edit-add-edit-ed-*.css",
       "maxSize": "1 kB"
     },
     {
-      "path": "./public/dist/bundles/edit-add-edit-edit.js",
-      "maxSize": "31 kB"
-    },
-    {
-      "path": "./public/dist/bundles/hareline-hasher-*.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/hareline-hasher-*.js",
-      "maxSize": "40 kB"
+      "path": "./public/dist/bundles/edit-add-edit-ed-*.js",
+      "maxSize": "65 kB"
     },
     {
       "path": "./public/dist/bundles/mismanagement-na-*.css",
@@ -118,7 +110,7 @@
     },
     {
       "path": "./public/dist/bundles/mismanagement-na-*.js",
-      "maxSize": "11 kB"
+      "maxSize": "16 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/index.css",

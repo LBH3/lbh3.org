@@ -56,6 +56,28 @@ const SpecialEvent = DefineMap.extend({
     this.locationGooglePlaceId = null;
     this.locationMd = '';
   },
+  shortLocationHtml: {
+    get: function(lastSetValue, resolve) {
+      if (this.locationPromise) {
+        this.locationPromise.then(location => {
+          const localities = location.addressComponents.filter(addressComponent => {
+            return addressComponent.types.indexOf('locality') > -1;
+          });
+          let name = '';
+          if (localities[0] && localities[0].long_name) {
+            name = localities[0].long_name;
+          } else if (location.vicinity) {
+            name = location.vicinity;
+          } else if (location.name) {
+            name = location.name;
+          }
+          resolve(name);
+        });
+      }
+      return this.locationHtml;
+    },
+    serialize: false
+  },
   startDate: {
     get: function() {
       return new Date(this.startDatetime);
