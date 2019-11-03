@@ -418,6 +418,7 @@
                       description:to="description"
                       id:from="id"
                       ogTitle:to="ogTitle"
+                      role:bind="role"
                       secondaryPage:from="secondaryPage"
                       skip:from="skip"
                       title:to="title"

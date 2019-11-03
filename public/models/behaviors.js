@@ -5,7 +5,6 @@ import constructorCallbacksOnce from 'can-connect/constructor/callbacks-once/';
 import constructorStore from 'can-connect/constructor/store/';
 import dataCallbacks from 'can-connect/data/callbacks/';
 import dataParse from 'can-connect/data/parse/';
-import realtime from 'can-connect/real-time/';
 
 const behaviors = [
   dataParse,
@@ -14,8 +13,7 @@ const behaviors = [
   constructorCallbacksOnce,
   canMap,
   canRef,
-  dataCallbacks,
-  realtime
+  dataCallbacks
 ];
 
 export default behaviors;

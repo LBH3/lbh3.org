@@ -6,6 +6,24 @@ import Hasher from './hasher';
 import loader from '@loader';
 import QueryLogic from 'can-query-logic';
 
+const roles = [
+  'Hare',
+  'Hare/New Name',
+  'Hare/Returner',
+  'Hare/hashit',
+  'Hare/scribe',
+  'Hashit',
+  'New Boot',
+  'New Name',
+  'Returner',
+  'Runner',
+  'Scribe',
+  'Scribe/Hashit',
+  'Scribe/New Name',
+  'Visitor',
+  ''
+];
+
 const EventsHashers = DefineMap.extend({
   seal: false
 }, {
@@ -123,7 +141,7 @@ const EventsHashers = DefineMap.extend({
   },
   paymentTier: QueryLogic.makeEnum(['5', 'baby', 'bored', 'c', 'dues', 'hares', 'kids', 'lt', 'punch']),
   paymentType: QueryLogic.makeEnum(['both', 'cash', 'check', 'no_charge']),
-  role: 'string',
+  role: QueryLogic.makeEnum(roles),
   runPatch: 'string',
   trailNumber: 'number'
 });
@@ -151,23 +169,7 @@ export const paymentRates = [
 ];
 EventsHashers.paymentRates = paymentRates;
 
-EventsHashers.roles = [
-  'Hare',
-  'Hare/New Name',
-  'Hare/Returner',
-  'Hare/hashit',
-  'Hare/scribe',
-  'Hashit',
-  'New Boot',
-  'New Name',
-  'Returner',
-  'Runner',
-  'Scribe',
-  'Scribe/Hashit',
-  'Scribe/New Name',
-  'Visitor',
-  ''
-];
+EventsHashers.roles = roles;
 
 EventsHashers.rolesSplitUp = [
   'Hare',

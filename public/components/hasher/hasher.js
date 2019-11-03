@@ -142,12 +142,19 @@ export default Component.extend({
         });
       }
     },
+    role: {
+      default: ''
+    },
     routeForPage: function(page) {
       const routeParams = {
         id: this.hasher.id,
         page: 'hashers',
         skip: $limit * (page - 1)
       };
+      const role = this.role;
+      if (role) {
+        routeParams.role = role;
+      }
       return route.url(routeParams);
     },
     runs: {
@@ -164,14 +171,23 @@ export default Component.extend({
     get runsPromise() {
       const hasherId = this.hasher.id;
       if (hasherId && this.canViewDetailedInfo === true) {
-        return EventsHashers.getList({
+        const query = {
           hasherId,
           $limit,
           $skip: this.skip,
           $sort: {
             trailNumber: -1
           }
-        });
+        };
+        const role = this.role;
+        if (role) {
+          query.role = {
+            $iLike: {
+              $any: [`%${role}`, `${role}%`]
+            }
+          };
+        }
+        return EventsHashers.getList(query);
       }
     },
 

@@ -298,13 +298,24 @@
   </div>
 
   {{#if(eventsPromise)}}
-    <h3>Runs</h3>
+    <div class="align-items-center d-flex justify-content-between mb-2">
+      <h3 class="mb-0">Trails</h3>
+      <form class="form-inline">
+        <label class="font-weight-bold mb-0 mr-2" for="year-selector">View</label>
+        <select class="form-control mb-0 w-auto" value:bind="role">
+          <option value="">All runs</option>
+          <option value="hare">Hares</option>
+          <option value="hashit">Hashits</option>
+          <option value="scribe">Scribes</option>
+        </select>
+      </form>
+    </div>
 
-    {{#if eventsPromise.isPending}}<lbh3-alert message:from="'Fetching their runs…'" />{{/if}}
+    {{#if eventsPromise.isPending}}<lbh3-alert message:from="'Fetching…'" />{{/if}}
 
     {{#if eventsPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The hasher’s runs couldn’t be retrieved.
+        <strong>Fuck!</strong> The trails couldn’t be retrieved.
         {{runsPromise.reason.xhr.message}}
         {{eventsPromise.reason.xhr.message}}
       </div>
@@ -314,7 +325,7 @@
       {{#if events.length}}
         <lbh3-run-list events:from="events" showYear:raw="true" />
       {{else}}
-        <p>It doesn’t look like {{#eq(id, session.user.hasherId)}}you have{{else}}this hasher has{{/eq}} actually hashed with LBH3.</p>
+        <p>None found.</p>
       {{/if}}
     {{/if}}
 

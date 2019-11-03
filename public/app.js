@@ -44,10 +44,16 @@ const AppViewModel = DefineMap.extend({
     default: defaultPage,
     type: 'string'
   },
+  role: {
+    type: 'string',
+    serialize: function(role) {
+      return role || undefined;
+    }
+  },
   search: {
     type: 'string',
     serialize: function(search) {
-      return (search) ? search : undefined;
+      return search || undefined;
     }
   },
   secondaryPage: 'string',
@@ -55,25 +61,25 @@ const AppViewModel = DefineMap.extend({
   showHashit: {
     type: 'boolean',
     serialize: function(search) {
-      return (search) ? search : undefined;
+      return search || undefined;
     }
   },
   showNotes: {
     type: 'boolean',
     serialize: function(search) {
-      return (search) ? search : undefined;
+      return search || undefined;
     }
   },
   showOnOn: {
     type: 'boolean',
     serialize: function(search) {
-      return (search) ? search : undefined;
+      return search || undefined;
     }
   },
   showScribe: {
     type: 'boolean',
     serialize: function(search) {
-      return (search) ? search : undefined;
+      return search || undefined;
     }
   },
   title: {
