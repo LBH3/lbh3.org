@@ -226,11 +226,11 @@
     {{#if hashersPromise.isResolved}}
       {{#if hashers.length}}
         {{#if session.user.canViewRunAttendance}}
-          <div class="d-flex justify-content-between mb-2">
-            <h3 class="mb-0 mt-2">Attendance</h3>
+          <div class="align-items-center d-flex justify-content-between mb-2 mt-3">
+            <h3 class="mb-0">Attendance</h3>
             <div class="form-inline">
-              <label class="pr-2" for="sort-by">Sort by</label>
-              <select class="form-control" id="sort-by" value:bind="sortAttendanceBy">
+              <label class="font-weight-bold mb-0 pr-2" for="sort-by">Sort</label>
+              <select class="form-control mb-0 w-auto" id="sort-by" value:bind="sortAttendanceBy">
                 <option value="name">Name</option>
                 <option value="payment">Payment</option>
               </select>
