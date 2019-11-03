@@ -13,7 +13,7 @@ export const ViewModel = DefineMap.extend({
 
   get eventHashersPromise() {
     const query = {
-      $limit: 200,
+      $limit: 50,
       $sort: {
         trailNumber: -1
       }
