@@ -14,22 +14,13 @@
             <path d="m550 809c-96-15-235-31-309-35-131-7-135-8-169-38-20-17-44-50-54-74-16-36-17-48-8-77 29-89 177-155 344-155 117 0 201 21 372 94 79 33 170 63 228 75 52 10 120 30 150 44 44 21 56 31 66 61 14 43-2 76-48 100-90 46-312 48-572 5z"/>
           </g>
         </svg>
-        {{^if session.user.hasherId}}
-          <span class="d-inline d-sm-none">
-            LBH3
-          </span>
-        {{/if}}
-        <span class="d-none d-sm-inline">
-          Long Beach H3
-        </span>
+        <span class="d-none d-sm-inline">Long Beach H3</span>
       </a>
     </h1>
   </div>
   <div>
     {{#eq platform.isNode true}}
-      <div class="align-items-center d-flex" style="height: 100%">
-        <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-      </div>
+      <div class="align-items-center d-flex" style="height: 100%"><div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div></div>
     {{else}}
       <ul class="nav">
         {{#if session.user}}
@@ -48,25 +39,15 @@
           <li class="nav-item">
             <button class="align-baseline border-0 btn btn-link pr-0 py-0" type="button" on:click="session.destroy()">
               <span class="fas fa-sign-out-alt fa-lg"></span>
-              <span class="d-none d-md-inline">
-                Sign out
-              </span>
+              <span class="d-none d-md-inline">Sign out</span>
             </button>
           </li>
         {{else}}
           <li class="nav-item">
-            <span class="d-none d-sm-inline">
-              Sign in with
-            </span>
-            <a class="align-baseline border-0 btn btn-link facebook px-sm-1" href="/auth/facebook" title="Facebook">
-              <span class="fab fa-lg fa-facebook-square"></span>
-            </a>
-            <span class="d-none d-sm-inline">
-              or
-            </span>
-            <a class="align-baseline border-0 btn btn-link pl-sm-1 pr-0" href="/auth/google" title="Google">
-              <span class="fab fa-lg fa-google"></span>
-            </a>
+            Sign in with
+            <a class="align-baseline border-0 btn btn-link facebook px-1" href="/auth/facebook" title="Facebook"><span class="fab fa-lg fa-facebook-square"></span></a>
+            or
+            <a class="align-baseline border-0 btn btn-link pl-1 pr-0" href="/auth/google" title="Google"><span class="fab fa-lg fa-google"></span></a>
           </li>
         {{/if}}
       </ul>
