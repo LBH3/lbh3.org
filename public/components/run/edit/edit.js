@@ -415,11 +415,6 @@ export default Component.extend({
       });
       if (paymentRate) {
         newHasherForRun.paymentNotes = paymentRate.abbr;
-      } else {
-        const paymentNotesSelect = document.getElementById('payment-notes');
-        if (paymentNotesSelect) {
-          paymentNotesSelect.focus();
-        }
       }
     }, 250),
 

@@ -382,26 +382,9 @@
               <tr>
                 <th></th>
                 <th></th>
-                <th>
-                  <label for="hasher-name">
-                    Name
-                  </label>
-                </th>
-                <th>
-                  <label for="role">
-                    Role
-                  </label>
-                </th>
-                <th>
-                  <label for="payment-tier">
-                    Tier
-                  </label>
-                </th>
-                <th>
-                  <label for="payment-notes">
-                    Notes
-                  </label>
-                </th>
+                <th><label for="hasher-name">Name</label></th>
+                <th><label for="role">Role</label></th>
+                <th><label for="payment-tier">Payment</label></th>
                 <th></th>
               </tr>
             </thead>
@@ -421,10 +404,11 @@
                   </td>
                   <td>{{hasher.role}}</td>
                   <td>
-                    {{hasher.paymentTier}}
-                  </td>
-                  <td>
-                    {{hasher.paymentNotes}}
+                    {{#if(hasher.paymentNotes)}}
+                      {{hasher.paymentNotes}} {{#if(hasher.paymentTier)}}({{hasher.paymentTier}}){{/if}}
+                    {{else}}
+                      {{hasher.paymentTier}}
+                    {{/if}}
                   </td>
                   <td class="text-center">
                     <button
@@ -477,19 +461,10 @@
                   >
                     {{#for(paymentRate of paymentRates)}}
                       <option value="{{paymentRate.tier}}">
-                        {{paymentRate.title}}
+                        {{paymentRate.title}} {{#if(paymentRate.abbr)}}({{paymentRate.abbr}}){{/if}}
                       </option>
                     {{/for}}
                   </select>
-                </td>
-                <td>
-                  <input
-                    class="form-control"
-                    {{^if newHasherForRun.hasherId}}disabled{{/if}}
-                    id="payment-notes"
-                    value:bind="newHasherForRun.paymentNotes"
-                    type="text"
-                  />
                 </td>
                 <td class="text-center">
                   <button
