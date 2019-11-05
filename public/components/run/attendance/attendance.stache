@@ -3,17 +3,17 @@
 
 <h2 class="h3">Run #{{trailNumber}} Check-In Sheet</h2>
 
-{{#if hashersPromise.isPending}}
+{{#or(hashersPromise.isPending, patchesPromise.isPending)}}
   <lbh3-alert message:from="'Fetching the check-in sheet…'" />
-{{/if}}
+{{/or}}
 
-{{#if hashersPromise.isRejected}}
+{{#or(hashersPromise.isRejected, patchesPromise.isRejected)}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The check-in sheet couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
+    <strong>Fuck!</strong> The check-in sheet couldn’t be retrieved. {{hashersPromise.reason.xhr.message}} {{patchesPromise.reason.xhr.message}}
   </div>
-{{/if}}
+{{/or}}
 
-{{#if hashersPromise.isResolved}}
+{{#and(hashersPromise.isResolved, patchesPromise.isResolved)}}
   <div class="table-responsive">
     <table class="table table-sm table-striped">
       <thead>
@@ -32,48 +32,18 @@
       <tbody>
         {{#for(hasher of hashers)}}
           <tr>
-            <td class="text-center">
-              {{hasher.payment}}
-            </td>
-            <td class="d-print-none text-center">
-              {{#if(hasher.headshotUrl)}}
-                <img alt="" class="rounded" src="{{hasher.headshotUrlForSize(null, 20)}}" />
-              {{/if}}
-            </td>
-            <td class="text-uppercase">
-              <a href="{{routeForHasher(hasher)}}">
-                {{hasher.hashName}}
-              </a>
-            </td>
-            <td class="text-capitalize">
-              <a href="{{routeForHasher(hasher)}}">
-                {{hasher.familyName}}
-              </a>
-            </td>
-            <td class="text-capitalize">
-              <a href="{{routeForHasher(hasher)}}">
-                {{hasher.givenName}}
-              </a>
-            </td>
-            <td class="text-center">
-              {{birthday(hasher)}}
-            </td>
-            <td class="text-center">
-              {{#if hasher.patchesPromise.isPending}}
-                <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-              {{else}}
-                {{patches(hasher)}}
-              {{/if}}
-            </td>
-            <td class="text-center">
-              {{hasher.runCount}}
-            </td>
-            <td class="text-center">
-              {{hasher.hareCount}}
-            </td>
+            <td class="text-center">{{hasher.payment}}</td>
+            <td class="d-print-none text-center">{{#if(hasher.headshotUrl)}}<img alt="" class="rounded" src="{{hasher.headshotUrlForSize(null, 20)}}" />{{/if}}</td>
+            <td class="text-uppercase"><a href="{{routeForHasher(hasher)}}">{{hasher.hashName}}</a></td>
+            <td class="text-capitalize"><a href="{{routeForHasher(hasher)}}">{{hasher.familyName}}</a></td>
+            <td class="text-capitalize"><a href="{{routeForHasher(hasher)}}">{{hasher.givenName}}</a></td>
+            <td class="text-center">{{birthday(hasher)}}</td>
+            <td class="text-center">{{patches(hasher)}}</td>
+            <td class="text-center">{{hasher.runCount}}</td>
+            <td class="text-center">{{hasher.hareCount}}</td>
           </tr>
         {{/for}}
       </tbody>
     </table>
   </div>
-{{/if}}
+{{/and}}

@@ -28,7 +28,7 @@ const PaperBallot = DefineMap.extend({
     get: function() {
       const id = this.addedById;
       if (id) {
-        return Hasher.connection.getList({
+        return Hasher.getList({
           id
         });
       }
@@ -64,7 +64,7 @@ const PaperBallot = DefineMap.extend({
     get: function() {
       const id = this.hasherId;
       if (id) {
-        return Hasher.connection.getList({
+        return Hasher.getList({
           id
         });
       }

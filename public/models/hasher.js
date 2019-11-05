@@ -474,7 +474,7 @@ export const Hasher = DefineMap.extend({
   },
   patchesPromise: {
     get: function() {
-      return Patch.connection.getList({
+      return Patch.getList({
         $limit: 500,
         hasherId: this.id
       });

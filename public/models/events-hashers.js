@@ -54,7 +54,7 @@ const EventsHashers = DefineMap.extend({
     get: function() {
       const trailNumber = this.trailNumber;
       if (trailNumber) {
-        return Event.connection.getList({
+        return Event.getList({
           trailNumber
         });
       }
@@ -93,7 +93,7 @@ const EventsHashers = DefineMap.extend({
     get: function() {
       const id = this.hasherId;
       if (id) {
-        return Hasher.connection.getList({
+        return Hasher.getList({
           id
         });
       }

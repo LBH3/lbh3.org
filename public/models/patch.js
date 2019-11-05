@@ -25,7 +25,7 @@ const Patch = DefineMap.extend({
     get: function() {
       const trailNumber = this.trailNumber;
       if (trailNumber) {
-        return Event.connection.getList({
+        return Event.getList({
           trailNumber
         });
       }

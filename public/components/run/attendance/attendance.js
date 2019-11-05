@@ -31,20 +31,15 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  hashersPromise: {
-    get: function() {
-      const trailDate = this.trailDateAsMoment;
-      if (trailDate.isValid()) {
-        return Hasher.getList({
-          $limit: 500,
-          lastTrailDate: {
-            $gte: trailDate.clone().subtract(6, 'weeks').toDate()
-          },
-          $sort: {
-            lastTrailDate: -1
-          }
-        });
-      }
+  get hashersPromise() {
+    const trailDate = this.trailDateAsMoment;
+    if (trailDate.isValid()) {
+      return Hasher.getList({
+        $limit: 500,
+        lastTrailDate: {
+          $gte: trailDate.clone().subtract(6, 'weeks').toDate()
+        }
+      });
     }
   },
 
@@ -52,6 +47,15 @@ export const ViewModel = DefineMap.extend({
 
   get ogTitle() {
     return `Check-In Sheet For Run #${this.trailNumber}`;
+  },
+
+  get patchesPromise() {
+    const hashers = this.hashers;
+    if (hashers) {
+      return Promise.all(hashers.map(hasher => {
+        return hasher.patchesPromise;
+      }));
+    }
   },
 
   routeForHasher: function(hasher) {
