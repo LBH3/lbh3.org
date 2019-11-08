@@ -226,13 +226,14 @@
               {{#case "edit"}}
                 <lbh3-no-ssr>
                   {{#if urlId}}
-                    <can-import from="~/components/special-event/edit/">
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/special-event/edit/">
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Edit Special Event page…'" />
                       {{else}}
                         <lbh3-special-event-edit
                           description:to="description"
                           ogTitle:to="ogTitle"
+                          secondaryPage:from="secondaryPage"
                           title:to="title"
                           urlId:from="urlId"
                           year:from="year"

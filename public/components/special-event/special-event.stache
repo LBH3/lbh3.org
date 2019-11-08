@@ -2,6 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/regular.css" />
 <can-import from="~/components/alert/" />
+<can-import from="~/components/special-event/nav/" />
 
 {{#if specialEventPromise.isPending}}
   <lbh3-alert message:from="'Fetching the event…'" />
@@ -13,14 +14,11 @@
   </div>
 {{/if}}
 
-{{#if session.user.canEditFutureSpecialEvents}}
-  <nav class="justify-content-center nav">
-    <a class="nav-link" href="{{routeUrl page='events' year=year urlId=urlId secondaryPage='edit'}}" title="Edit info">
-      <span class="far fa-edit fa-lg"></span>
-    </a>
-  </nav>
-{{/if}}
-
 {{#if specialEvent}}
-  {{{specialEvent.descriptionHtml}}}
+  {{#if session.user.canEditFutureSpecialEvents}}
+    <lbh3-special-event-nav specialEvent:from="specialEvent" secondaryPage:from="secondaryPage" session:from="session" urlId:from="urlId" year:from="year" />
+    {{{specialEvent.descriptionWithoutTitleHtml}}}
+  {{else}}
+    {{{specialEvent.descriptionHtml}}}
+  {{/if}}
 {{/if}}

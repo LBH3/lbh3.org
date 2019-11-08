@@ -27,6 +27,13 @@ const SpecialEvent = DefineMap.extend({
     serialize: false
   },
   descriptionMd: 'string',
+  descriptionWithoutTitleHtml: {
+    get: function() {
+      const descriptionHtml = this.descriptionHtml;
+      return descriptionHtml.slice(descriptionHtml.indexOf('</h2>') + 5).trim();
+    },
+    serialize: false
+  },
   locationGooglePlaceId: 'string',
   locationMd: 'string',
   locationPromise: {

@@ -3,13 +3,7 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 <can-import from="~/components/map/" />
-
-<h2 class="h3">
-  Edit
-  <a href="{{routeUrl page='events' year=year urlId=urlId}}" title="Back to the event page">
-    {{specialEvent.title}}
-  </a>
-</h2>
+<can-import from="~/components/special-event/nav/" />
 
 {{#if session.user.canEditFutureSpecialEvents}}
   {{#if specialEventPromise.isPending}}
@@ -23,6 +17,7 @@
   {{/if}}
 
   {{#if specialEvent}}
+    <lbh3-special-event-nav specialEvent:from="specialEvent" secondaryPage:from="secondaryPage" session:from="session" urlId:from="urlId" year:from="year" />
     <form on:submit="editSpecialEvent()">
       <div class="form-row">
         <div class="form-group col-md-6">

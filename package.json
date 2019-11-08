@@ -106,7 +106,7 @@
     },
     {
       "path": "./public/dist/bundles/mismanagement-na-*.css",
-      "maxSize": "1 kB"
+      "maxSize": "2 kB"
     },
     {
       "path": "./public/dist/bundles/mismanagement-na-*.js",
