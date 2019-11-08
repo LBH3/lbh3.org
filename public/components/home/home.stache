@@ -76,7 +76,7 @@
 {{#if isBeforeFebruary9}}
   <p class="border mt-3 py-3 rounded text-center">
     <a class="d-block" href="events/2020/founders/">
-      Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;8<sup>th</sup>
+      Join us for our annual Found&nbsp;’er&nbsp;Balls on <strong>Saturday, February&nbsp;15<sup>th</sup></strong>
     </a>
   </p>
 {{/if}}
