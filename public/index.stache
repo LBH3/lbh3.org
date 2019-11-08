@@ -421,6 +421,10 @@
                       ogTitle:to="ogTitle"
                       role:bind="role"
                       secondaryPage:from="secondaryPage"
+                      showHashit:bind="showHashit"
+                      showNotes:bind="showNotes"
+                      showOnOn:bind="showOnOn"
+                      showScribe:bind="showScribe"
                       skip:from="skip"
                       title:to="title"
                     />

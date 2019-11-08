@@ -143,7 +143,9 @@ export default Component.extend({
       }
     },
     role: {
-      default: ''
+      get(lastSetValue) {
+        return lastSetValue || '';
+      }
     },
     routeForPage: function(page) {
       const routeParams = {
@@ -190,17 +192,29 @@ export default Component.extend({
         return EventsHashers.getList(query);
       }
     },
-
     secondaryPage: 'string',
-
     get session() {
       return Session.current;
     },
-
+    showHashit: {
+      default: false,
+      type: 'boolean'
+    },
+    showNotes: {
+      default: false,
+      type: 'boolean'
+    },
+    showOnOn: {
+      default: false,
+      type: 'boolean'
+    },
+    showScribe: {
+      default: false,
+      type: 'boolean'
+    },
     skip: {
       default: 0
     },
-
     get title() {
       return `${this.ogTitle} | Hashers | LBH3`;
     }
