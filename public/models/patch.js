@@ -69,6 +69,7 @@ const Patch = DefineMap.extend({
     type: 'number'
   },
   number: 'number',
+  savingPromise: Promise,
   trailNumber: 'number',
   type: QueryLogic.makeEnum(['hare', 'run'])
 });

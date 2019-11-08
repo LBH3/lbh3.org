@@ -10,7 +10,7 @@ import Place from '~/models/place';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import './edit.less';
-import { sortByHashOrJustName } from '~/components/run/sort-hashers';
+import { sortByHashOrJustName, sortByName } from '~/components/run/sort-hashers';
 import debounce from 'lodash.debounce';
 import loader from '@loader';
 import moment from 'moment-timezone';
@@ -64,14 +64,40 @@ export const loadGoogleMapsPlacesAPI = (callback) => {
 };
 
 export const ViewModel = DefineMap.extend({
+
+  addHasherFromCheckInSheet: function(hasher) {
+    if (hasher.paymentTier === '5' || hasher.paymentTier === 'founder') {
+      hasher.paymentTier = null;
+    }
+    hasher.savingPromise = hasher.save();
+    hasher.savingPromise.then(result => {
+
+      // Remove the hasher from the check-in sheet
+      const checkInSheetHashers = this.checkInSheetHashers
+      checkInSheetHashers.splice(checkInSheetHashers.indexOf(hasher), 1);
+
+      // Reset the Promise
+      hasher.savingPromise = null;
+
+      // Update run info
+      if (EventsHashers.rolesThatUpdateRunInfo.indexOf(result.role) > -1) {
+        const needsSaving = this.event.updateWithHashers(this.hashers);
+        if (needsSaving) {
+          this.editRun();
+        }
+      }
+    });
+  },
+
   addHasherToRun: function() {
     const newHasherForRun = this.newHasherForRun;
     if (newHasherForRun.hasherId) {
       if (newHasherForRun.paymentTier === '5' || newHasherForRun.paymentTier === 'founder') {
         newHasherForRun.paymentTier = null;
       }
-      return this.addingHasherPromise = newHasherForRun.save().then(result => {
-        this.addingHasherPromise = null;
+      newHasherForRun.savingPromise = newHasherForRun.save();
+      newHasherForRun.savingPromise.then(result => {
+        newHasherForRun.savingPromise = null;
         this.newHasherForRun = null;
 
         // Update run info
@@ -81,23 +107,17 @@ export const ViewModel = DefineMap.extend({
             this.editRun();
           }
         }
-
-        return result;
       });
     }
   },
 
-  addingHasherPromise: {},
-
-  addingPatchPromise: {},
-
   addPatch: function() {
     const newPatch = this.newPatch;
     if (newPatch.hasherId && newPatch.number && newPatch.trailNumber && newPatch.type) {
-      return this.addingPatchPromise = newPatch.save().then(result => {
-        this.addingPatchPromise = null;
+      newPatch.savingPromise = newPatch.save();
+      newPatch.savingPromise.then(() => {
+        newPatch.savingPromise = null;
         this.newPatch = null;
-        return result;
       });
     }
   },
@@ -123,7 +143,51 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
+  checkInSheetHashers: {
+    get: function(lastValue, setValue) {
+      const checkInSheetHashersPromise = this.checkInSheetHashersPromise;
+      if (checkInSheetHashersPromise) {
+        checkInSheetHashersPromise.then(hashers => {
+          const existingHasherIds = this.hashers.map(eventHasher => {
+            return eventHasher.hasherId;
+          });
+          setValue(hashers.filter(hasher => {
+            return existingHasherIds.indexOf(hasher.id) === -1;
+          }).sort(sortByName).map(hasher => {
+            return EventsHashers.fromHasher(hasher, this.trailNumber);
+          }));
+        });
+      }
+    }
+  },
+
+  get checkInSheetHashersPromise() {
+    const trailDate = this.event.startDateAsMoment;
+    return Hasher.getList({
+      $limit: 500,
+      lastTrailDate: {
+        $gte: trailDate.clone().subtract(6, 'weeks').toDate(),
+        $lte: trailDate.toDate()
+      }
+    });
+  },
+
   day: 'string',
+
+  didChangeRoleForHasher(role, hasher) {
+    if (role === 'Hare') {
+      const role = hasher.role;
+      const didHare = role && role.substr(0, 4) === 'Hare';
+      if (didHare) {
+        const hares = this.hashers.filter(hasher => {
+          return hasher.paymentTier === 'hares';
+        });
+        if (hares.length < 3) {
+          hasher.paymentTier = 'hares';
+        }
+      }
+    }
+  },
 
   event: Event,
 
@@ -174,7 +238,6 @@ export const ViewModel = DefineMap.extend({
     default: null,
     set: function(newHasherForRun) {
       if (!newHasherForRun) {
-        this.newHasherRoleSplitUp = [];
         newHasherForRun = new EventsHashers({
           paymentTier: '5',
           role: 'Runner',
@@ -184,8 +247,6 @@ export const ViewModel = DefineMap.extend({
       return newHasherForRun;
     }
   },
-
-  newHasherRoleSplitUp: {},
 
   newPatch: {
     default: null,
@@ -256,7 +317,9 @@ export const ViewModel = DefineMap.extend({
   },
 
   removeHasher: function(hasher) {
-    return hasher.destroy().then(hasher => {
+    hasher.savingPromise = hasher.destroy();
+    hasher.savingPromise.then(hasher => {
+      hasher.savingPromise = null;
 
       // Update run info
       if (EventsHashers.rolesThatUpdateRunInfo.indexOf(hasher.role) > -1) {
@@ -265,8 +328,6 @@ export const ViewModel = DefineMap.extend({
           this.editRun();
         }
       }
-
-      return hasher;
     });
   },
 
@@ -326,6 +387,8 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
 
+  showCheckInSheet: 'boolean',
+
   specialEventPromise: {
     get: function() {
       return SpecialEvent.getList({
@@ -366,19 +429,17 @@ export const ViewModel = DefineMap.extend({
 
   year: 'number',
 
-  editingEventPromise: {
-  },
-
   editRun: function() {
+    const event = this.event;
     if (this.session.user.canAddTrails) {
-      this.event.startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format();
+      const startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles');
+      if (startDatetime.isSame(event.startDateAsMoment) === false) {
+        event.startDatetime = startDatetime.format();
+      }
     }
-    return this.editingEventPromise = this.event.save();
-  },
-
-  resetEditingEventPromise: function() {
-    this.editingEventPromise = null;
+    event.savingPromise = event.save();
   }
+
 });
 
 export default Component.extend({
@@ -417,15 +478,6 @@ export default Component.extend({
       }
     },
 
-    '{newHasherForRun} paymentTier': debounce(function(newHasherForRun) {
-      const paymentRate = EventsHashers.paymentRates.find(paymentRate => {
-        return paymentRate.tier === newHasherForRun.paymentTier;
-      });
-      if (paymentRate) {
-        newHasherForRun.paymentNotes = paymentRate.abbr;
-      }
-    }, 250),
-
     '{newHasherForRun} role': debounce(function(newHasherForRun) {
       const role = newHasherForRun.role;
       const didHare = role && role.substr(0, 4) === 'Hare';
@@ -438,20 +490,6 @@ export default Component.extend({
         }
       }
     }, 250),
-
-    '{newHasherRoleSplitUp} length': function(newHasherRoleSplitUp) {
-      const viewModel = this.viewModel;
-      const newHasherForRun = viewModel.newHasherForRun;
-      if (newHasherForRun) {
-        let newRole = 'Runner';
-        if (newHasherRoleSplitUp && newHasherRoleSplitUp.length) {
-          newRole = newHasherRoleSplitUp.sort().join('/');
-        }
-        if (newRole !== newHasherForRun.role) {
-          newHasherForRun.role = newRole;
-        }
-      }
-    },
 
     '{viewModel} selectedHasher': function(viewModel) {
       const hasher = viewModel.selectedHasher;

@@ -51,6 +51,7 @@ const Event = DefineMap.extend({
   onOnGooglePlaceId: 'string',
   onOnMd: 'string',
   photosUrl: 'string',
+  savingPromise: Promise,
   scribesMd: 'string',
   startDatetime: 'any',
   snoozeTitleMd: 'string',

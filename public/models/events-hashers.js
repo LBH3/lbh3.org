@@ -119,7 +119,13 @@ const EventsHashers = DefineMap.extend({
     serialize: false
   },
   paymentNotes: {
-    type: 'string',
+    get(lastSetValue) {
+      const paymentTier = this.paymentTier;
+      const paymentRate = EventsHashers.paymentRates.find(paymentRate => {
+        return paymentRate.tier === paymentTier;
+      });
+      return paymentRate ? paymentRate.abbr : lastSetValue;
+    },
     set: function(paymentNotes) {
       return paymentNotes && paymentNotes.toUpperCase ? paymentNotes.toUpperCase() : paymentNotes;
     }
@@ -142,9 +148,56 @@ const EventsHashers = DefineMap.extend({
   paymentTier: QueryLogic.makeEnum(['5', 'baby', 'bored', 'c', 'dues', 'hares', 'kids', 'lt', 'punch']),
   paymentType: QueryLogic.makeEnum(['both', 'cash', 'check', 'no_charge']),
   role: QueryLogic.makeEnum(roles),
+  roleSplitUp: {
+    serialize: false,
+    value({lastSet, listenTo, resolve}) {
+      const roleSplitUp = new DefineList();
+      resolve(roleSplitUp);
+      listenTo(roleSplitUp, 'length', () => {
+        let newRole = 'Runner';
+        if (roleSplitUp.length > 0) {
+          newRole = roleSplitUp.sort().join('/');
+        }
+        if (newRole !== this.role) {
+          this.role = newRole;
+        }
+      });
+    }
+  },
   runPatch: 'string',
+  savingPromise: Promise,
   trailNumber: 'number'
 });
+
+EventsHashers.fromHasher = function(hasher, trailNumber) {
+
+  // Special case for Jock
+  let paymentRate;
+  let paymentTier = '5';
+  if (hasher.id === 1) {
+    paymentTier = 'founder';
+  } else if (hasher.payment) {
+    paymentRate = EventsHashers.paymentRates.find(paymentRate => {
+      return paymentRate.abbr === hasher.payment;
+    });
+    if (paymentRate) {
+      paymentTier = paymentRate.tier;
+    }
+  }
+  const paymentNotes = paymentRate ? paymentRate.abbr : '';
+
+  const data = {
+    familyName: hasher.familyName,
+    givenName: hasher.givenName,
+    hasherId: hasher.id,
+    hashName: hasher.hashName,
+    paymentNotes,
+    paymentTier,
+    role: 'Runner',
+    trailNumber
+  };
+  return new EventsHashers(data);
+};
 
 EventsHashers.List = DefineList.extend({
   '#': EventsHashers
