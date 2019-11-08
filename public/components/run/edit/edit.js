@@ -45,7 +45,15 @@ export const loadGoogleMapsPlacesAPI = (callback) => {
   const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
 
   if (existingScript) {
-    callback();
+    if (window.google) {
+      callback();
+    } else {
+      const existingScriptOnload = existingScript.onload;
+      existingScript.onload = function() {
+        existingScriptOnload.apply(this, arguments);
+        callback();
+      };
+    }
   } else {
     const mapsScript = document.createElement('script');
     mapsScript.onload = callback;
