@@ -27,15 +27,36 @@ export const ViewModel = DefineMap.extend({
   hashersPromise: {
     get: function() {
       const searchParams = {
-        headshotUrl: this.searchNoHeadshot ? '' : undefined,
-        $limit,
-        $skip: this.skip,
-        $sort: {
+        $limit
+      };
+
+      // Headshot
+      if (this.searchNoHeadshot) {
+        searchParams.headshotUrl = this.searchNoHeadshot;
+      }
+
+      // Skip
+      if (this.skip) {
+        searchParams.$skip = this.skip;
+      }
+
+      // Sort
+      const searchSort = this.searchSort;
+      if (searchSort) {
+        if (searchSort === 'runs') {
+          searchParams.$sort = {
+            runCount: -1
+          };
+        }
+      } else {
+        searchParams.$sort = {
           hashName: 1,
           familyName: 1,
           givenName: 1
-        }
-      };
+        };
+      }
+
+      // Text
       const searchText = (this.searchText) ? this.searchText.trim() : '';
       if (searchText) {
         searchParams.search = searchText;
@@ -47,6 +68,7 @@ export const ViewModel = DefineMap.extend({
           $gte: moment().tz('America/Los_Angeles').subtract(1, 'year').startOf('day').format()
         };
       }
+
       return Hasher.getList(searchParams);
     }
   },
@@ -83,16 +105,31 @@ export const ViewModel = DefineMap.extend({
   routeForPage: function(page) {
     const routeParams = {
       page: 'hashers',
-      secondaryPage: '',
-      skip: $limit * (page - 1)
+      secondaryPage: ''
     };
+
+    // Headshot
     if (this.searchNoHeadshot) {
       routeParams.noHeadshot = this.searchNoHeadshot;
     }
+
+    // Skip
+    const skip = $limit * (page - 1);
+    if (skip > 0) {
+      routeParams.skip = skip;
+    }
+
+    // Sort
+    if (this.searchSort) {
+      routeParams.sort = this.searchSort;
+    }
+
+    // Text
     const searchText = (this.searchText) ? this.searchText.trim() : '';
     if (searchText) {
       routeParams.search = searchText;
     }
+
     return route.url(routeParams);
   },
 
@@ -100,6 +137,13 @@ export const ViewModel = DefineMap.extend({
     type: 'boolean',
     set(searchNoHeadshot) {
       return searchNoHeadshot || false;
+    }
+  },
+
+  searchSort: {
+    type: 'string',
+    set(searchSort) {
+      return searchSort || '';
     }
   },
 
@@ -115,7 +159,10 @@ export const ViewModel = DefineMap.extend({
   },
 
   skip: {
-    default: 0
+    type: 'number',
+    set(skip) {
+      return skip || 0;
+    }
   },
 
   get title() {

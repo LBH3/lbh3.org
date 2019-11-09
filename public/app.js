@@ -25,13 +25,13 @@ const AppViewModel = DefineMap.extend({
   id: 'number',
   month: 'string',
   noHeadshot: {
-    type: 'boolean',
-    serialize: function(noHeadshot) {
+    default: false,
+    serialize(noHeadshot) {
       return noHeadshot || undefined;
     }
   },
   nodeEnv: {
-    get: function() {
+    get() {
       return this.env && this.env.NODE_ENV || 'development';
     },
     serialize: false
@@ -42,44 +42,54 @@ const AppViewModel = DefineMap.extend({
   },
   page: {
     default: defaultPage,
-    type: 'string'
   },
   role: {
-    type: 'string',
-    serialize: function(role) {
+    default: '',
+    serialize(role) {
       return role || undefined;
     }
   },
   search: {
-    type: 'string',
-    serialize: function(search) {
+    default: '',
+    serialize(search) {
       return search || undefined;
     }
   },
   secondaryPage: 'string',
-  skip: 'number',
+  skip: {
+    default: 0,
+    serialize(skip) {
+      return skip || undefined;
+    }
+  },
   showHashit: {
-    type: 'boolean',
-    serialize: function(search) {
+    default: false,
+    serialize(search) {
       return search || undefined;
     }
   },
   showNotes: {
-    type: 'boolean',
-    serialize: function(search) {
+    default: false,
+    serialize(search) {
       return search || undefined;
     }
   },
   showOnOn: {
-    type: 'boolean',
-    serialize: function(search) {
+    default: false,
+    serialize(search) {
       return search || undefined;
     }
   },
   showScribe: {
-    type: 'boolean',
-    serialize: function(search) {
+    default: false,
+    serialize(search) {
       return search || undefined;
+    }
+  },
+  sort: {
+    default: '',
+    serialize(sort) {
+      return sort || undefined;
     }
   },
   title: {

@@ -28,6 +28,14 @@
       <input autocomplete="off" autofocus class="form-control" id="searchText" placeholder="{{#if(session.user.canViewDirectoryInfo)}}Name or email{{else}}Hash name{{/if}}" type="text" value:bind="searchText">
     </div>
 
+    <div class="align-items-center d-flex form-group mb-sm-0 mr-sm-3">
+      <label class="mb-0 mr-2" for="sort-by">Sort</label>
+      <select class="form-control w-auto" id="sort-by" value:bind="searchSort">
+        <option value="">Name</option>
+        <option value="runs">Runs</option>
+      </select>
+    </div>
+
     {{#if(session.user.canViewDirectoryInfo)}}
       <div class="form-check form-group mb-sm-0 mr-sm-3">
         <input class="form-check-input" id="noHeadshot" type="checkbox" checked:bind="searchNoHeadshot">

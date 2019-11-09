@@ -68,7 +68,8 @@ module.exports = function (options) {
           familyName: 'family_name',
           givenName: 'given_name',
           hashName: 'NULLIF(hash_name, \'\')',
-          lastTrailDate: 'last_trail_date'
+          lastTrailDate: 'last_trail_date',
+          runCount: 'run_count'
         };
         const orderByQueries = [];
         for (let field in query.$sort) {
