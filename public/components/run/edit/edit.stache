@@ -292,7 +292,7 @@
       {{/if}}
       {{#if event.savingPromise.isResolved}}
         <div class="alert alert-success mt-3" role="alert">
-          <button aria-label="Close" class="close" type="button" on:click="resetEditingEventPromise()">
+          <button aria-label="Close" class="close" type="button" on:click="event.savingPromise = null">
             <span aria-hidden="true">&times;</span>
           </button>
           <strong>On on!</strong>
