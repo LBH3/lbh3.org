@@ -165,7 +165,9 @@ const EventsHashers = DefineMap.extend({
     }
   },
   runPatch: 'string',
-  savingPromise: Promise,
+  savingPromise: {
+    serialize: false
+  },
   trailNumber: 'number'
 });
 
