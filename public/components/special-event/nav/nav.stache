@@ -2,26 +2,13 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
-<div class="d-flex justify-content-between mb-2">
-  <div>
-    <h2 class="text-nowrap">
-      <a href="{{routeUrl page='events' year=year urlId=urlId}}" title="Back to the event page">
-        {{specialEvent.title}}
-      </a>
-    </h2>
-  </div>
-  <div>
-    <ul class="m-0 nav nav-fill nav-pills">
-      <li class="nav-item">
-        <a
-          class="{{#eq(secondaryPage, 'edit')}}active{{/eq}} nav-link"
-          href="{{routeUrl page='events' year=year urlId=urlId secondaryPage='edit'}}"
-          title="View the haring guidelines"
-        >
-          <span class="fas fa-scroll fa-lg"></span>
-          Edit
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+<h2 class="h3"><a href="{{routeUrl page='events' year=year urlId=urlId}}">{{specialEvent.title}}</a></h2>
+
+<ul class="justify-content-center mt-0 nav nav-pills">
+  <li class="nav-item">
+    <a class="{{#eq(secondaryPage, 'edit')}}active{{/eq}} nav-link" href="{{routeUrl page='events' year=year urlId=urlId secondaryPage='edit'}}">
+      <span class="fas fa-scroll fa-lg"></span>
+      Edit
+    </a>
+  </li>
+</ul>
