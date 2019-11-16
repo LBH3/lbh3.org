@@ -1,7 +1,5 @@
-<can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
 <can-import from="~/components/alert/" />
+<can-import from="~/components/map/" />
 <can-import from="~/components/special-event/nav/" />
 
 {{#if specialEventPromise.isPending}}
@@ -14,11 +12,6 @@
   </div>
 {{/if}}
 
-{{#if specialEvent}}
-  {{#if session.user.canEditFutureSpecialEvents}}
-    <lbh3-special-event-nav specialEvent:from="specialEvent" secondaryPage:from="secondaryPage" session:from="session" urlId:from="urlId" year:from="year" />
-    {{{specialEvent.descriptionWithoutTitleHtml}}}
-  {{else}}
-    {{{specialEvent.descriptionHtml}}}
-  {{/if}}
-{{/if}}
+{{#and(specialEvent, session.user.canEditFutureSpecialEvents)}}
+  <lbh3-special-event-nav specialEvent:from="specialEvent" secondaryPage:from="secondaryPage" session:from="session" urlId:from="urlId" year:from="year" />
+{{/and}}
