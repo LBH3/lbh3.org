@@ -12,6 +12,9 @@
     "."
   ],
   "steal": {
+    "bundle": [
+      "~/components/run/post/post"
+    ],
     "main": "lbh3/index.stache!done-autorender",
     "ext": {
       "html": "steal-stache"

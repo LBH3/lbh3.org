@@ -189,6 +189,14 @@
       "maxSize": "8 kB"
     },
     {
+      "path": "./public/dist/bundles/lbh3/components/run/post/post.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/run/post/post.js",
+      "maxSize": "8 kB"
+    },
+    {
       "path": "./public/dist/bundles/lbh3/components/special-event/special-event.css",
       "maxSize": "1 kB"
     },
