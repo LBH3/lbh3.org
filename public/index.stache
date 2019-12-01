@@ -37,11 +37,7 @@
     <can-import from="~/components/nav/" />
 
     <header>
-      <lbh3-header
-        id:from="id"
-        page:from="page"
-        secondaryPage:from="secondaryPage"
-      />
+      <lbh3-header id:from="id" page:from="page" secondaryPage:from="secondaryPage" />
       <lbh3-nav day:from="day" month:from="month" page:from="page" year:from="year" />
     </header>
 
@@ -61,12 +57,7 @@
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Mismanagement page…'" />
                 {{else}}
-                  <lbh3-about-mismanagement
-                    description:to="description"
-                    ogTitle:to="ogTitle"
-                    title:to="title"
-                    year:bind="year"
-                  />
+                  <lbh3-about-mismanagement description:to="description" ogTitle:to="ogTitle" title:to="title" year:bind="year" />
                 {{/if}}
               </can-import>
             {{/case}}
@@ -75,11 +66,7 @@
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Privacy page…'" />
                 {{else}}
-                  <lbh3-about-privacy
-                    description:to="description"
-                    ogTitle:to="ogTitle"
-                    title:to="title"
-                  />
+                  <lbh3-about-privacy description:to="description" ogTitle:to="ogTitle" title:to="title" />
                 {{/if}}
               </can-import>
             {{/case}}
@@ -88,12 +75,7 @@
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the About page…'" />
                 {{else}}
-                  <lbh3-about
-                    description:to="description"
-                    ogTitle:to="ogTitle"
-                    secondaryPage:from="secondaryPage"
-                    title:to="title"
-                  />
+                  <lbh3-about description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" />
                 {{/if}}
               </can-import>
             {{/default}}
@@ -109,13 +91,7 @@
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Erection Ballots page…'" />
                       {{else}}
-                        <lbh3-erection-ballots
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          secondaryPage:from="secondaryPage"
-                          title:to="title"
-                          urlId:from="urlId"
-                        />
+                        <lbh3-erection-ballots description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -126,13 +102,7 @@
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Edit Erection page…'" />
                       {{else}}
-                        <lbh3-erection-edit
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          secondaryPage:from="secondaryPage"
-                          title:to="title"
-                          urlId:from="urlId"
-                        />
+                        <lbh3-erection-edit description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -143,13 +113,7 @@
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Erection Eligibility page…'" />
                       {{else}}
-                        <lbh3-erection-eligibility
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          secondaryPage:from="secondaryPage"
-                          title:to="title"
-                          urlId:from="urlId"
-                        />
+                        <lbh3-erection-eligibility description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -160,13 +124,7 @@
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Erection Results page…'" />
                       {{else}}
-                        <lbh3-erection-results
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          secondaryPage:from="secondaryPage"
-                          title:to="title"
-                          urlId:from="urlId"
-                        />
+                        <lbh3-erection-results description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -177,13 +135,7 @@
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Erection page…'" />
                 {{else}}
-                  <lbh3-erection
-                    description:to="description"
-                    ogTitle:to="ogTitle"
-                    secondaryPage:from="secondaryPage"
-                    title:to="title"
-                    urlId:from="urlId"
-                  />
+                  <lbh3-erection description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />
                 {{/if}}
               </can-import>
             {{/if}}
@@ -192,11 +144,7 @@
               {{#if isPending}}
                 <lbh3-alert message:from="'Loading the Erections page…'" />
               {{else}}
-                <lbh3-erections
-                  description:to="description"
-                  ogTitle:to="ogTitle"
-                  title:to="title"
-                />
+                <lbh3-erections description:to="description" ogTitle:to="ogTitle" title:to="title" />
               {{/if}}
             </can-import>
           {{/if}}
@@ -210,15 +158,7 @@
                     {{#if isPending}}
                       <lbh3-alert message:from="'Loading the Run Attendance Sheet…'" />
                     {{else}}
-                      <lbh3-run-attendance
-                        day:from="day"
-                        description:to="description"
-                        month:from="month"
-                        ogTitle:to="ogTitle"
-                        title:to="title"
-                        trailNumber:from="trailNumber"
-                        year:from="year"
-                      />
+                      <lbh3-run-attendance day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" title:to="title" trailNumber:from="trailNumber" year:from="year" />
                     {{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -230,14 +170,7 @@
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Edit Special Event page…'" />
                       {{else}}
-                        <lbh3-special-event-edit
-                          description:to="description"
-                          ogTitle:to="ogTitle"
-                          secondaryPage:from="secondaryPage"
-                          title:to="title"
-                          urlId:from="urlId"
-                          year:from="year"
-                        />
+                        <lbh3-special-event-edit description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" year:from="year" />
                       {{/if}}
                     </can-import>
                   {{else}}
@@ -245,16 +178,7 @@
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Edit Run page…'" />
                       {{else}}
-                        <lbh3-run-edit
-                          day:from="day"
-                          description:to="description"
-                          month:from="month"
-                          ogTitle:to="ogTitle"
-                          secondaryPage:from="secondaryPage"
-                          title:to="title"
-                          trailNumber:from="trailNumber"
-                          year:from="year"
-                        />
+                        <lbh3-run-edit day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />
                       {{/if}}
                     </can-import>
                   {{/if}}
@@ -267,16 +191,7 @@
                 {{#if isPending}}
                   <lbh3-alert message:from="'Loading the Run page…'" />
                 {{else}}
-                  <lbh3-run
-                    day:from="day"
-                    description:to="description"
-                    month:from="month"
-                    ogTitle:to="ogTitle"
-                    secondaryPage:from="secondaryPage"
-                    title:to="title"
-                    trailNumber:from="trailNumber"
-                    year:from="year"
-                  />
+                  <lbh3-run day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />
                 {{/if}}
               </can-import>
             {{else}}
@@ -285,13 +200,7 @@
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading the Special Event page…'" />
                   {{else}}
-                    <lbh3-special-event
-                      description:to="description"
-                      ogTitle:to="ogTitle"
-                      title:to="title"
-                      urlId:from="urlId"
-                      year:from="year"
-                    />
+                    <lbh3-special-event description:to="description" ogTitle:to="ogTitle" title:to="title" urlId:from="urlId" year:from="year" />
                   {{/if}}
                 </can-import>
               {{else}}
@@ -299,16 +208,7 @@
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading Past Runs…'" />
                   {{else}}
-                    <lbh3-past-runs
-                      description:to="description"
-                      ogTitle:to="ogTitle"
-                      showHashit:bind="showHashit"
-                      showNotes:bind="showNotes"
-                      showOnOn:bind="showOnOn"
-                      showScribe:bind="showScribe"
-                      title:to="title"
-                      year:bind="year"
-                    />
+                    <lbh3-past-runs description:to="description" ogTitle:to="ogTitle" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" title:to="title" year:bind="year" />
                   {{/if}}
                 </can-import>
               {{/if}}
@@ -321,9 +221,7 @@
               {{#if isPending}}
                 <lbh3-alert message:from="'Loading the Hareline nav…'" />
               {{else}}
-                <lbh3-hareline-nav
-                  secondaryPage:from="secondaryPage"
-                />
+                <lbh3-hareline-nav secondaryPage:from="secondaryPage" />
               {{/if}}
             </can-import>
           {{/harelineNav}}
@@ -335,11 +233,7 @@
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading the Add Run page…'" />
                   {{else}}
-                    <lbh3-hareline-add
-                      description:to="description"
-                      ogTitle:to="ogTitle"
-                      title:to="title"
-                    />
+                    <lbh3-hareline-add description:to="description" ogTitle:to="ogTitle" title:to="title" />
                   {{/if}}
                 </can-import>
               </lbh3-no-ssr>
@@ -350,16 +244,7 @@
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading the Edit Run page…'" />
                   {{else}}
-                    <lbh3-run-edit
-                      day:from="day"
-                      description:to="description"
-                      month:from="month"
-                      ogTitle:to="ogTitle"
-                      secondaryPage:from="secondaryPage"
-                      title:to="title"
-                      trailNumber:from="trailNumber"
-                      year:from="year"
-                    />
+                    <lbh3-run-edit day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />
                   {{/if}}
                 </can-import>
               </lbh3-no-ssr>
@@ -397,13 +282,7 @@
                       {{#if isPending}}
                         <lbh3-alert message:from="'Loading the Edit Hasher page…'" />
                       {{else}}
-                        <lbh3-hasher-edit
-                          description:to="description"
-                          id:from="id"
-                          ogTitle:to="ogTitle"
-                          secondaryPage:from="secondaryPage"
-                          title:to="title"
-                        />
+                        <lbh3-hasher-edit description:to="description" id:from="id" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" />
                       {{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -415,19 +294,7 @@
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading the Hasher page…'" />
                   {{else}}
-                    <lbh3-hasher
-                      description:to="description"
-                      id:from="id"
-                      ogTitle:to="ogTitle"
-                      role:bind="role"
-                      secondaryPage:from="secondaryPage"
-                      showHashit:bind="showHashit"
-                      showNotes:bind="showNotes"
-                      showOnOn:bind="showOnOn"
-                      showScribe:bind="showScribe"
-                      skip:from="skip"
-                      title:to="title"
-                    />
+                    <lbh3-hasher description:to="description" id:from="id" ogTitle:to="ogTitle" role:bind="role" secondaryPage:from="secondaryPage" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" skip:from="skip" title:to="title" />
                   {{/if}}
                 </can-import>
               </lbh3-no-ssr>
@@ -493,15 +360,7 @@
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading the Directory page…'" />
                   {{else}}
-                    <lbh3-hashers
-                      description:to="description"
-                      ogTitle:to="ogTitle"
-                      searchNoHeadshot:bind="noHeadshot"
-                      searchSort:bind="sort"
-                      searchText:bind="search"
-                      skip:from="skip"
-                      title:to="title"
-                    />
+                    <lbh3-hashers description:to="description" ogTitle:to="ogTitle" searchNoHeadshot:bind="noHeadshot" searchSort:bind="sort" searchText:bind="search" skip:from="skip" title:to="title" />
                   {{/if}}
                 </can-import>
               </lbh3-no-ssr>
@@ -511,7 +370,7 @@
         {{#case "home"}}
           <can-import class="container d-block pl-0 pr-0" from="~/components/home/">
             {{#if isPending}}
-              <lbh3-alert message:from="'Loading the Home page…'" />
+              <lbh3-alert message:from="'Loading the next run…'" />
             {{else}}
               {{#if isRejected}}
                 <div class="alert alert-danger" role="alert">

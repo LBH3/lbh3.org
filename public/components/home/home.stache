@@ -7,15 +7,9 @@
     {{#if session.user.hasher}}
       {{^if session.user.hasSharedInfo}}
         <div class="alert alert-info" role="alert">
-          <p>
-            <strong>Hello {{session.user.hasher.hashName}}!</strong>
-          </p>
-          <p>
-            We have a new <a href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a> where you can find every hasher and some of their run stats.
-          </p>
-          <p class="mb-0">
-            You can <a href="{{routeUrl page='hashers' id=session.user.hasherId secondaryPage='edit'}}">edit your profile</a> to share more of your info in our Directory.
-          </p>
+          <p><strong>Hello {{session.user.hasher.hashName}}!</strong></p>
+          <p>We have a new <a href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a> where you can find every hasher and some of their run stats.</p>
+          <p class="mb-0">You can <a href="{{routeUrl page='hashers' id=session.user.hasherId secondaryPage='edit'}}">edit your profile</a> to share more of your info in our Directory.</p>
         </div>
       {{/if}}
     {{/if}}
@@ -23,10 +17,7 @@
     <lbh3-no-ssr class="d-print-none">
       <can-import from="~/components/request-access/">
         {{#if isResolved}}
-          <p>
-            Are you an LBH3 hasher? Provide your name to get special access to our site.
-            <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a>
-          </p>
+          <p>Are you an LBH3 hasher? Provide your name to get special access to our site. <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a></p>
           <lbh3-request-access />
           <hr>
         {{/if}}
@@ -34,18 +25,7 @@
     </lbh3-no-ssr>
   {{/if}}
 {{else}}
-  <p>
-    <small>
-      The Long Beach kennel was founded over 30 years ago.
-      We run Thursday evening during Spring/Summer &amp; Sunday morning in the Fall/Winter.
-      We often have an attendance of 75+.
-      Visitors &amp; Virgins are always welcome!
-      Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies.
-      Please bring a vessel for your beverage.
-      We hope to see you at LBH3.
-      On On!!!
-    </small>
-  </p>
+  <p><small> The Long Beach kennel was founded over 30 years ago. We run Thursday evening during Spring/Summer &amp; Sunday morning in the Fall/Winter. We often have an attendance of 75+. Visitors &amp; Virgins are always welcome! Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies. Please bring a vessel for your beverage. We hope to see you at LBH3. On On!!!</small></p>
 {{/if}}
 
 <lbh3-no-ssr>
@@ -53,32 +33,26 @@
     {{#if electionsPromise.isPending}}
       <lbh3-alert message:from="'Fetching elections…'" />
     {{/if}}
-
     {{#if electionsPromise.isRejected}}
       <div class="alert alert-danger" role="alert">
         <strong>Fuck!</strong> The upcumming erections couldn’t be fetched.
         {{electionsPromise.reason.xhr.message}}
       </div>
     {{/if}}
-
     {{#if electionsPromise.isResolved}}
-      {{#each(electionsPromise.value)}}
+      {{#for(election of electionsPromise.value)}}
         <p class="border mt-3 py-3 rounded text-center">
-          <a class="d-block" href="erections/{{urlId}}/">
-            {{{advertisementHtml}}}
+          <a class="d-block" href="erections/{{election.urlId}}/">
+            {{{election.advertisementHtml}}}
           </a>
         </p>
-      {{/each}}
+      {{/for}}
     {{/if}}
   {{/if}}
 </lbh3-no-ssr>
 
 {{#if isBeforeFebruary9}}
-  <p class="border mt-3 py-3 rounded text-center">
-    <a class="d-block" href="events/2020/founders/">
-      Join us for our annual Found&nbsp;’er&nbsp;Balls on <strong>Saturday, February&nbsp;15<sup>th</sup></strong>
-    </a>
-  </p>
+  <p class="border mt-3 py-3 rounded text-center"><a class="d-block" href="events/2020/founders/">Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;15<sup>th</sup></a></p>
 {{/if}}
 
 <lbh3-run />

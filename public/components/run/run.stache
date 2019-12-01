@@ -1,368 +1,51 @@
-<can-import from="can-stache-route-helpers" />
-<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
 <can-import from="~/components/alert/" />
 <can-import from="~/components/map/" />
 <can-import from="~/components/run/nav/" />
 
-{{#if eventPromise.isPending}}
-  <lbh3-alert message:from="'Fetching the run…'" />
-{{/if}}
+{{#if eventPromise.isPending}}<lbh3-alert message:from="'Fetching the run…'" />{{/if}}
 
-{{#if eventPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The run couldn’t be retrieved. {{eventPromise.reason.xhr.message}}
-  </div>
-{{/if}}
+{{#if eventPromise.isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The run couldn’t be retrieved. {{eventPromise.reason.xhr.message}}</div>{{/if}}
 
 {{#if event}}
   <lbh3-run-nav event:from="event" secondaryPage:from="secondaryPage" session:from="session" />
 
   <dl class="row">
-    <dt class="col-sm-3 text-sm-right">Date:</dt>
-    <dd class="col-sm-9">{{event.startDateTimeString}}</dd>
-    {{#if event.longLocationHtml}}
-      <dt class="col-sm-3 text-sm-right">Start:</dt>
-      <dd class="col-sm-9">{{{event.longLocationHtml}}}</dd>
-    {{/if}}
-    {{#if event.haresHtml}}
-      <dt class="col-sm-3 text-sm-right">Hares:</dt>
-      <dd class="col-sm-9">{{{event.haresHtml}}}</dd>
-    {{/if}}
-    {{#if showDonation}}
-      <dt class="col-sm-3 text-sm-right">Donation:</dt>
-      <dd class="col-sm-9">$5 for the run</dd>
-    {{/if}}
-    {{#if event.bringHtml}}
-      <dt class="col-sm-3 text-sm-right">Bring:</dt>
-      <dd class="col-sm-9">{{{event.bringHtml}}}</dd>
-    {{/if}}
+    <dt class="col-sm-3 text-sm-right">Date:</dt><dd class="col-sm-9">{{event.startDateTimeString}}</dd>
+    {{#if event.longLocationHtml}}<dt class="col-sm-3 text-sm-right">Start:</dt><dd class="col-sm-9">{{{event.longLocationHtml}}}</dd>{{/if}}
+    {{#if event.haresHtml}}<dt class="col-sm-3 text-sm-right">Hares:</dt><dd class="col-sm-9">{{{event.haresHtml}}}</dd>{{/if}}
+    {{#if showDonation}}<dt class="col-sm-3 text-sm-right">Donation:</dt><dd class="col-sm-9">$5 for the run</dd>{{/if}}
+    {{#if event.bringHtml}}<dt class="col-sm-3 text-sm-right">Bring:</dt><dd class="col-sm-9">{{{event.bringHtml}}}</dd>{{/if}}
   </dl>
 
   {{#if event.locationPromise}}
-    {{#if event.locationPromise.isPending}}
-      <lbh3-alert message:from="'Fetching the location…'" />
-    {{/if}}
-    {{#if event.locationPromise.isResolved}}
-      {{#if event.locationPromise.value.placeId}}
-        <lbh3-map placeId:from="event.locationPromise.value.placeId" />
-      {{/if}}
-    {{/if}}
+    {{#if event.locationPromise.isPending}}<lbh3-alert message:from="'Fetching the location…'" />{{/if}}
+    {{#and(event.locationPromise.isResolved, event.locationPromise.value.placeId)}}<lbh3-map placeId:from="event.locationPromise.value.placeId" />{{/and}}
   {{else}}
-    {{#if event.locationMd}}
-      <lbh3-map q:from="event.locationMd" />
-    {{/if}}
+    {{#if event.locationMd}}<lbh3-map q:from="event.locationMd" />{{/if}}
   {{/if}}
 
   <dl class="row">
-    {{#if event.directionsHtml}}
-      <dt class="col-sm-3 text-sm-right">Directions:</dt>
-      <dd class="col-sm-9">{{{event.directionsHtml}}}</dd>
-    {{/if}}
-    {{#if event.fromTheHaresHtml}}
-      <dt class="col-sm-3 text-sm-right">From the hares:</dt>
-      <dd class="col-sm-9">{{{event.fromTheHaresHtml}}}</dd>
-    {{/if}}
-    {{#if event.longOnOnHtml}}
-      <dt class="col-sm-3 text-sm-right">On-on:</dt>
-      <dd class="col-sm-9">{{{event.longOnOnHtml}}}</dd>
-    {{/if}}
+    {{#if event.directionsHtml}}<dt class="col-sm-3 text-sm-right">Directions:</dt><dd class="col-sm-9">{{{event.directionsHtml}}}</dd>{{/if}}
+    {{#if event.fromTheHaresHtml}}<dt class="col-sm-3 text-sm-right">From the hares:</dt><dd class="col-sm-9">{{{event.fromTheHaresHtml}}}</dd>{{/if}}
+    {{#if event.longOnOnHtml}}<dt class="col-sm-3 text-sm-right">On-on:</dt><dd class="col-sm-9">{{{event.longOnOnHtml}}}</dd>{{/if}}
   </dl>
 
-  {{#if event.onOnPromise.isPending}}
-    <lbh3-alert message:from="'Fetching the location…'" />
-  {{/if}}
-  {{#if event.onOnPromise.isResolved}}
-    {{#if event.onOnPromise.value.placeId}}
-      <lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 200px" />
-    {{/if}}
-  {{/if}}
+  {{#if event.onOnPromise.isPending}}<lbh3-alert message:from="'Fetching the location…'" />{{/if}}
+  {{#and(event.onOnPromise.isResolved, event.onOnPromise.value.placeId)}}<lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 200px" />{{/and}}
 
-  {{#if shouldShowPostTrailData}}
-    <dl class="row">
-      <dt class="col-sm-3 text-sm-right">Mileage:</dt>
-      <dd class="col-sm-9">
-        {{#if event.miles}}
-          {{event.miles}}
-        {{else}}
-          ?
-        {{/if}}
-      </dd>
-      <dt class="col-sm-3 text-sm-right">Total hashers:</dt>
-      <dd class="col-sm-9">
-        {{#if hashers.length}}
-          {{hashers.length}}
-        {{else}}
-          ?
-        {{/if}}
-      </dd>
-      <dt class="col-sm-3 text-sm-right">Hashit:</dt>
-      <dd class="col-sm-9">
-        {{#if event.hashitReasonHtml}}
-          {{{event.hashitReasonHtml}}}
-        {{else}}
-          {{valueForRole('hashit')}}
-        {{/if}}
-      </dd>
-      <dt class="col-sm-3 text-sm-right">Scribe:</dt>
-      <dd class="col-sm-9">
-        {{#if event.scribesHtml}}
-          {{{event.scribesHtml}}}
-        {{else}}
-          {{valueForRole('scribe')}}
-        {{/if}}
-      </dd>
-      <dt class="col-sm-3 text-sm-right">Run notes:</dt>
-      <dd class="col-sm-9">
-        {{#if event.trailCommentsHtml}}
-          {{{event.trailCommentsHtml}}}
-        {{else}}
-          {{#if hashers.length}}
-            None
-          {{else}}
-            ?
-          {{/if}}
-        {{/if}}
-      </dd>
-      {{#if event.addedWriteupHtml}}
-        <dt class="col-sm-3 text-sm-right">Added writeup:</dt>
-        <dd class="col-sm-9">{{{event.addedWriteupHtml}}}</dd>
-      {{/if}}
-      {{#if event.additionalWriteupHtml}}
-        <dt class="col-sm-3 text-sm-right">Additional writeup:</dt>
-        <dd class="col-sm-9">{{{event.additionalWriteupHtml}}}</dd>
-      {{/if}}
-      <dt class="col-sm-3 text-sm-right">New boots:</dt>
-      <dd class="col-sm-9">
-        {{#if event.newBootsHtml}}
-          {{{event.newBootsHtml}}}
-        {{else}}
-          {{valueForRole('new boot')}}
-        {{/if}}
-      </dd>
-      <dt class="col-sm-3 text-sm-right">New names:</dt>
-      <dd class="col-sm-9">
-        {{#if event.newNamesHtml}}
-          {{{event.newNamesHtml}}}
-        {{else}}
-          {{valueForRole('new name')}}
-        {{/if}}
-      </dd>
-      <dt class="col-sm-3 text-sm-right">Visitors:</dt>
-      <dd class="col-sm-9">
-        {{#if event.visitorsHtml}}
-          {{{event.visitorsHtml}}}
-        {{else}}
-          {{valueForRole('visitor')}}
-        {{/if}}
-      </dd>
-      <dt class="col-sm-3 text-sm-right">Returners:</dt>
-      <dd class="col-sm-9">
-        {{#if event.returnersHtml}}
-          {{{event.returnersHtml}}}
-        {{else}}
-          {{valueForRole('returner')}}
-        {{/if}}
-      </dd>
-      <dt class="col-sm-3 text-sm-right">Patches:</dt>
-      <dd class="col-sm-9">
-        {{#if event.patchesPromise.isPending}}
-          Fetching patches…
-        {{/if}}
-        {{#if event.patchesPromise.isRejected}}
-          <strong>Fuck!</strong> The patches couldn’t be retrieved. {{event.patchesPromise.reason.xhr.message}}
-        {{/if}}
-        {{#if event.patchesPromise.isResolved}}
-          {{event.patchesFormatted}}
-        {{/if}}
-      </dd>
-      {{#if session.user.canViewOldData}}
-        <dt class="col-sm-3 text-sm-right">Old hare patch data:</dt>
-        <dd class="col-sm-9">
-          {{#if event.harePatchesHtml}}
-            {{{event.harePatchesHtml}}}
-          {{else}}
-            None
-          {{/if}}
-        </dd>
-        <dt class="col-sm-3 text-sm-right">Old run patch data:</dt>
-        <dd class="col-sm-9">
-          {{#if event.patchesHtml}}
-            {{{event.patchesHtml}}}
-          {{else}}
-            None
-          {{/if}}
-        </dd>
-      {{/if}}
-    </dl>
+  {{#if showPostTrailData}}
+    <can-import from="~/components/run/post/">
+      {{#if isPending}}<lbh3-alert message:from="'Loading post-run data…'" />{{/if}}
+      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The post-run data failed to load.</div>{{/if}}
+      {{#if isResolved}}<lbh3-run-post canViewRunAttendance:from="canViewRunAttendance" event:from="event" hashers:from="hashers" hashersPromise:from="hashersPromise" session:from="session" showAttendancePrompt:from="showAttendancePrompt" />{{/if}}
+    </can-import>
   {{/if}}
 
-  {{#if canViewRunAttendance}}
-    {{#if showAttendancePrompt}}
-      <hr>
-      {{#if event.hasProbablyEnded}}
-        <div class="alert alert-info text-center" role="alert">
-          Attendance data hasn’t been added yet.
-        </div>
-      {{else}}
-        <div class="alert alert-info d-print-none text-center" role="alert">
-          <a class="alert-link" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='attendance'}}" title="Edit trail">
-            Need to print the check-in sheet?
-          </a>
-        </div>
-      {{/if}}
+  {{#and(canViewRunAttendance, showAttendancePrompt}}
+    {{#if event.hasProbablyEnded}}
+      {{#if(trailNumber)}}<hr><div class="alert alert-info text-center" role="alert">Attendance data hasn’t been added yet.</div>{{/if}}
+    {{else}}
+      <hr><div class="alert alert-info d-print-none text-center" role="alert"><a class="alert-link" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='attendance'}}" title="Edit trail">Need to print the check-in sheet?</a></div>
     {{/if}}
-
-    {{#if hashersPromise.isPending}}
-      <lbh3-alert message:from="'Fetching the attendance sheet…'" />
-    {{/if}}
-
-    {{#if hashersPromise.isRejected}}
-      <div class="alert alert-danger" role="alert">
-        <strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
-      </div>
-    {{/if}}
-
-    {{#if hashersPromise.isResolved}}
-      {{#if hashers.length}}
-        {{#if session.user.canViewRunAttendance}}
-          <div class="align-items-center d-flex justify-content-between mb-2 mt-3">
-            <h3 class="mb-0">Attendance</h3>
-            <div class="form-inline">
-              <label class="font-weight-bold mb-0 pr-2" for="sort-by">Sort</label>
-              <select class="form-control mb-0 w-auto" id="sort-by" value:bind="sortAttendanceBy">
-                <option value="name">Name</option>
-                <option value="payment">Payment</option>
-              </select>
-            </div>
-          </div>
-          <div class="table-responsive">
-            <table class="table table-sm table-striped">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>Role</th>
-                  <th>Pay</th>
-                  <th></th>
-                  <th>Hash Name</th>
-                  <th>Last Name</th>
-                  <th>First Name</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#for(eventHasher of sortedHashers)}}
-                  <tr>
-                    <td>{{plusOne(scope.index)}}</td>
-                    <td>{{eventHasher.role}}</td>
-                    <td>
-                      {{eventHasher.paymentNotesAndType}}
-                    </td>
-                    <td class="text-center">
-                      {{#if(eventHasher.hasher.headshotUrl)}}
-                        <img alt="" class="rounded" src="{{eventHasher.hasher.headshotUrlForSize(null, 20)}}" />
-                      {{/if}}
-                    </td>
-                    <td>
-                      <a href="{{routeForHasher(eventHasher)}}">
-                        {{eventHasher.hashName}}
-                      </a>
-                    </td>
-                    <td>
-                      <a href="{{routeForHasher(eventHasher)}}">
-                        {{eventHasher.familyName}}
-                      </a>
-                    </td>
-                    <td>
-                      <a href="{{routeForHasher(eventHasher)}}">
-                        {{eventHasher.givenName}}
-                      </a>
-                    </td>
-                  </tr>
-                {{/for}}
-              </tbody>
-            </table>
-          </div>
-        {{else}}
-          <h3>Attendance</h3>
-          <ol class="attendance-list">
-            {{#for(eventHasher of sortedHashers)}}
-              <li>
-                <a href="{{routeForHasher(eventHasher)}}">
-                  {{eventHasher.hashOrJustName}}
-                </a>
-              </li>
-            {{/for}}
-          </ol>
-        {{/if}}
-
-        {{#if cashReport}}
-          <h3>Cash Report</h3>
-          <div class="table-responsive">
-            <table class="table table-sm table-striped">
-              <thead>
-                <tr>
-                  <th>Payment</th>
-                  <th>Count</th>
-                  <th>Rate</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                {{#for(record of cashReport.records)}}
-                  <tr>
-                    <td>{{record.title}}</td>
-                    <td>
-                      {{#eq record.count 0}}
-                        {{record.count}}
-                      {{else}}
-                        <mark>
-                          {{record.count}}
-                        </mark>
-                      {{/eq}}
-                    </td>
-                    <td>${{record.rate}}</td>
-                    <td>
-                      {{#eq record.total 0}}
-                        ${{record.total}}
-                      {{else}}
-                        <mark>
-                          ${{record.total}}
-                        </mark>
-                      {{/eq}}
-                    </td>
-                  </tr>
-                {{/for}}
-              </tbody>
-              <tfoot>
-                <tr>
-                  <td></td>
-                  <th scope="col">
-                    <mark>
-                      {{cashReport.totalCount}}
-                    </mark>
-                  </th>
-                  <td></td>
-                  <th scope="col">
-                    <mark>
-                      ${{cashReport.totalAmount}}
-                    </mark>
-                  </th>
-                </tr>
-              </tfoot>
-            </table>
-          </div>
-        {{/if}}
-      {{/if}}
-    {{/if}}
-  {{else}}
-    {{#and(event.hasProbablyEnded, this.session.user)}}
-      {{^if(didAttendThisRun)}}
-        <h3 class="mb-3 mt-5">Attendance</h3>
-        <div class="alert alert-info text-center" role="alert">
-          It doesn’t look like you attended this run.
-        </div>
-      {{/if}}
-    {{/and}}
-  {{/if}}
-
+  {{/and}}
 {{/if}}

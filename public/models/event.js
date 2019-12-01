@@ -3,7 +3,6 @@ import DefineMap from 'can-define/map/';
 import feathersModel from './feathers-model';
 import marked from 'marked';
 import moment from 'moment-timezone';
-import Patch from './patch';
 import Place from './place';
 import platform from 'steal-platform';
 
@@ -26,11 +25,11 @@ export const localizedStringForDate = function(date, locales, options) {
   return date.toString();
 };
 
-const oneLine = (markdown) => {
+export const oneLine = (markdown) => {
   return marked(markdown).replace(/<p>/g, ' ').replace(/<\/p>/g, ' ').trim();
 };
 
-const Event = DefineMap.extend({
+export const Event = DefineMap.extend({
   seal: false
 }, {
   id: {
@@ -248,45 +247,6 @@ const Event = DefineMap.extend({
       if (id) {
         return Place.connection.get({
           id
-        });
-      }
-    }
-  },
-  patches: {
-    get: function(lastSetValue, resolve) {
-      if (lastSetValue) {
-        return lastSetValue;
-      }
-      if (this.patchesPromise) {
-        this.patchesPromise.then(resolve);
-      }
-    },
-    serialize: false
-  },
-  patchesFormatted: {
-    get: function(lastSetValue, resolve) {
-      const patches = this.patches;
-      if (patches && patches.length > 0) {
-        return patches.map(patch => {
-          return patch.formattedDescription;
-        }).join('; ');
-      }
-      return 'None';
-    },
-    serialize: false
-  },
-  patchesHtml: {
-    get: function() {
-      return oneLine(this.patchesMd || '');
-    },
-    serialize: false
-  },
-  patchesPromise: {
-    get: function() {
-      const trailNumber = this.trailNumber;
-      if (trailNumber) {
-        return Patch.getList({
-          trailNumber
         });
       }
     }

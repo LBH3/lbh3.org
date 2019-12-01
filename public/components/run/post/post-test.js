@@ -1,4 +1,4 @@
 import QUnit from 'steal-qunit';
 
 // ViewModel unit tests
-QUnit.module('lbh3/components/run');
+QUnit.module('~/components/run/post');
