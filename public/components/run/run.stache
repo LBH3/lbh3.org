@@ -33,19 +33,20 @@
   {{#if event.onOnPromise.isPending}}<lbh3-alert message:from="'Fetching the location…'" />{{/if}}
   {{#and(event.onOnPromise.isResolved, event.onOnPromise.value.placeId)}}<lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 200px" />{{/and}}
 
-  {{#if showPostTrailData}}
-    <can-import from="~/components/run/post/">
-      {{#if isPending}}<lbh3-alert message:from="'Loading post-run data…'" />{{/if}}
-      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The post-run data failed to load.</div>{{/if}}
-      {{#if isResolved}}<lbh3-run-post canViewRunAttendance:from="canViewRunAttendance" event:from="event" hashers:from="hashers" hashersPromise:from="hashersPromise" session:from="session" showAttendancePrompt:from="showAttendancePrompt" />{{/if}}
-    </can-import>
-  {{/if}}
-
-  {{#and(canViewRunAttendance, showAttendancePrompt}}
-    {{#if event.hasProbablyEnded}}
-      {{#if(trailNumber)}}<hr><div class="alert alert-info text-center" role="alert">Attendance data hasn’t been added yet.</div>{{/if}}
-    {{else}}
-      <hr><div class="alert alert-info d-print-none text-center" role="alert"><a class="alert-link" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='attendance'}}" title="Edit trail">Need to print the check-in sheet?</a></div>
+  {{#if(canViewRunAttendance)}}
+    {{#or(event.hasEnded, hashers.length)}}
+      <can-import from="~/components/run/post/">
+        {{#if isPending}}<lbh3-alert message:from="'Loading post-run data…'" />{{/if}}
+        {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The post-run data failed to load.</div>{{/if}}
+        {{#if isResolved}}<lbh3-run-post canViewRunAttendance:from="canViewRunAttendance" event:from="event" hashers:from="hashers" hashersPromise:from="hashersPromise" session:from="session" showAttendancePrompt:from="showAttendancePrompt" />{{/if}}
+      </can-import>
+    {{/or}}
+    {{#if(showAttendancePrompt)}}
+      {{#if event.hasProbablyEnded}}
+        {{#if(trailNumber)}}<hr><div class="alert alert-info text-center" role="alert">Attendance data hasn’t been added yet.</div>{{/if}}
+      {{else}}
+        <hr><div class="alert alert-info d-print-none text-center" role="alert"><a class="alert-link" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='attendance'}}" title="Edit trail">Need to print the check-in sheet?</a></div>
+      {{/if}}
     {{/if}}
-  {{/and}}
+  {{/if}}
 {{/if}}

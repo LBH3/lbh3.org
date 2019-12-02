@@ -98,10 +98,6 @@ export default Component.extend({
       }
       return false;
     },
-    get showPostTrailData() {
-      const event = this.event;
-      return event && event.hasEnded && this.canViewRunAttendance;
-    },
     get title() {
       return `${this.ogTitle} | LBH3`;
     },
