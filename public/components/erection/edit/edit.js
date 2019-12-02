@@ -31,16 +31,14 @@ export const ViewModel = DefineMap.extend({
     }
   },
   erection: Erection,
-  erectionPromise: {
-    get: function() {
-      const urlId = this.urlId;
-      if (urlId) {
-        return Erection.getList({
-          urlId
-        }).then(erections => {
-          this.erection = erections[0];
-        });
-      }
+  get erectionPromise() {
+    const urlId = this.urlId;
+    if (urlId) {
+      return Erection.getList({
+        urlId
+      }).then(erections => {
+        this.erection = erections[0];
+      });
     }
   },
   get ogTitle() {

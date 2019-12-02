@@ -85,7 +85,7 @@ export default Component.extend({
       }
     },
     get hasherPromise() {
-      return Hasher.connection.get({
+      return Hasher.get({
         id: this.id
       });
     },

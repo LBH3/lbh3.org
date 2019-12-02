@@ -1,6 +1,5 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
-import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import User from '~/models/user';
 import './users.less';
@@ -28,15 +27,13 @@ export const ViewModel = DefineMap.extend({
       this.usersPromise.then(setValue);
     }
   },
-  usersPromise: {
-    get: function() {
-      return User.getList({
-        $limit: 50,
-        $sort: {
-          updatedAt: -1
-        }
-      });
-    }
+  get usersPromise() {
+    return User.getList({
+      $limit: 50,
+      $sort: {
+        updatedAt: -1
+      }
+    });
   }
 });
 

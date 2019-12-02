@@ -15,19 +15,17 @@ import './results.less';
 import view from './results.stache';
 
 export const ViewModel = DefineMap.extend({
-  ballotsPromise: {
-    get: function() {
-      return this.electionPromise.then(elections => {
-        const election = elections[0];
-        return Ballot.getList({
-          $limit: 500,
-          $sort: {
-            createdAt: -1
-          },
-          electionId: election.id
-        });
+  get ballotsPromise() {
+    return this.electionPromise.then(elections => {
+      const election = elections[0];
+      return Ballot.getList({
+        $limit: 500,
+        $sort: {
+          createdAt: -1
+        },
+        electionId: election.id
       });
-    }
+    });
   },
 
   decryptedBallots: {
@@ -141,7 +139,7 @@ export const ViewModel = DefineMap.extend({
       const promises = hasherIds.filter(id => {
         return id;
       }).map(id => {
-        return Hasher.connection.get({
+        return Hasher.get({
           id
         });
       });

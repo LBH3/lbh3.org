@@ -40,12 +40,10 @@ export const ViewModel = DefineMap.extend({
       this.userPromise.then(setValue);
     }
   },
-  userPromise: {
-    get: function() {
-      return User.connection.get({
-        id: this.id
-      });
-    }
+  get userPromise() {
+    return User.get({
+      id: this.id
+    });
   }
 });
 

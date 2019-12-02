@@ -24,53 +24,51 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
-  hashersPromise: {
-    get: function() {
-      const searchParams = {
-        $limit
-      };
+  get hashersPromise() {
+    const searchParams = {
+      $limit
+    };
 
-      // Headshot
-      if (this.searchNoHeadshot) {
-        searchParams.headshotUrl = this.searchNoHeadshot;
-      }
-
-      // Skip
-      if (this.skip) {
-        searchParams.$skip = this.skip;
-      }
-
-      // Sort
-      const searchSort = this.searchSort;
-      if (searchSort) {
-        if (searchSort === 'runs') {
-          searchParams.$sort = {
-            runCount: -1
-          };
-        }
-      } else {
-        searchParams.$sort = {
-          hashName: 1,
-          familyName: 1,
-          givenName: 1
-        };
-      }
-
-      // Text
-      const searchText = (this.searchText) ? this.searchText.trim() : '';
-      if (searchText) {
-        searchParams.search = searchText;
-      } else {
-        searchParams.hashName = {
-          $nin: ['']
-        };
-        searchParams.lastTrailDate = {
-          $gte: moment().tz('America/Los_Angeles').subtract(1, 'year').startOf('day').format()
-        };
-      }
-
-      return Hasher.getList(searchParams);
+    // Headshot
+    if (this.searchNoHeadshot) {
+      searchParams.headshotUrl = this.searchNoHeadshot;
     }
+
+    // Skip
+    if (this.skip) {
+      searchParams.$skip = this.skip;
+    }
+
+    // Sort
+    const searchSort = this.searchSort;
+    if (searchSort) {
+      if (searchSort === 'runs') {
+        searchParams.$sort = {
+          runCount: -1
+        };
+      }
+    } else {
+      searchParams.$sort = {
+        hashName: 1,
+        familyName: 1,
+        givenName: 1
+      };
+    }
+
+    // Text
+    const searchText = (this.searchText) ? this.searchText.trim() : '';
+    if (searchText) {
+      searchParams.search = searchText;
+    } else {
+      searchParams.hashName = {
+        $nin: ['']
+      };
+      searchParams.lastTrailDate = {
+        $gte: moment().tz('America/Los_Angeles').subtract(1, 'year').startOf('day').format()
+      };
+    }
+
+    return Hasher.getList(searchParams);
   },
   get currentPage() {
     const hashers = this.hashers;

@@ -35,15 +35,13 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
-  lastTrailPromise: {
-    get: function() {
-      return Event.getList({
-        $limit: 1,
-        $sort: {
-          startDatetime: -1
-        }
-      });
-    }
+  get lastTrailPromise() {
+    return Event.getList({
+      $limit: 1,
+      $sort: {
+        startDatetime: -1
+      }
+    });
   },
   get ogTitle() {
     return 'Add a new trail';

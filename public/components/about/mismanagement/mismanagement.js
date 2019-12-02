@@ -9,17 +9,13 @@ import view from './mismanagement.stache';
 import '~/components/about/mismanagement/year/';
 
 export const ViewModel = DefineMap.extend({
-  description: {
-    get: function() {
-      return `LBH3 Mismanagement for the ${this.year} Bored year.`;
-    }
+  get description() {
+    return `LBH3 Mismanagement for the ${this.year} Bored year.`;
   },
-  mostRecentYear: {
-    get: function() {
-      const years = this.years;
-      if (years && years.length) {
-        return years[years.length - 1].year;
-      }
+  get mostRecentYear() {
+    const years = this.years;
+    if (years && years.length) {
+      return years[years.length - 1].year;
     }
   },
   get ogTitle() {
@@ -37,22 +33,16 @@ export const ViewModel = DefineMap.extend({
     }
     return route.url(routeParams);
   },
-  selectedYear: {
-    Type: BoredYear,
-    get: function() {
-      const year = this.year;
-      const years = this.years || [];
-      const filteredYears = years.filter(function(yearObject) {
-        return yearObject.year === year;
-      });
-      return (filteredYears && filteredYears.length) ? filteredYears[filteredYears.length - 1] : null;
-    }
+  get selectedYear() {
+    const year = this.year;
+    const years = this.years || [];
+    const filteredYears = years.filter(function(yearObject) {
+      return yearObject.year === year;
+    });
+    return (filteredYears && filteredYears.length) ? filteredYears[filteredYears.length - 1] : null;
   },
-  showEmailLink: {
-    type: 'boolean',
-    get: function() {
-      return this.mostRecentYear === this.year;
-    }
+  get showEmailLink() {
+    return this.mostRecentYear === this.year;
   },
   get title() {
     return `${this.ogTitle} | About | LBH3`;

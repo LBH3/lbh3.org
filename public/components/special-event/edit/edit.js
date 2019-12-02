@@ -38,18 +38,16 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
   specialEvent: SpecialEvent,
-  specialEventPromise: {
-    get: function() {
-      const urlId = this.urlId;
-      const year = this.year;
-      if (urlId && year) {
-        return SpecialEvent.getList({
-          urlId,
-          year
-        }).then(specialEvents => {
-          this.specialEvent = specialEvents[0];
-        });
-      }
+  get specialEventPromise() {
+    const urlId = this.urlId;
+    const year = this.year;
+    if (urlId && year) {
+      return SpecialEvent.getList({
+        urlId,
+        year
+      }).then(specialEvents => {
+        this.specialEvent = specialEvents[0];
+      });
     }
   },
 

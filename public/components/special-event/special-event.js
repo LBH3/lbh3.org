@@ -7,14 +7,12 @@ import stache from 'can-stache';
 import view from './special-event.stache';
 
 export const ViewModel = DefineMap.extend({
-  description: {
-    get: function() {
-      const specialEvent = this.specialEvent || {};
-      if (specialEvent.title) {
-        return `Learn more about LBH3’s ${specialEvent.title}.`;
-      }
-      return '';
+  get description() {
+    const specialEvent = this.specialEvent || {};
+    if (specialEvent.title) {
+      return `Learn more about LBH3’s ${specialEvent.title}.`;
     }
+    return '';
   },
   get ogTitle() {
     const specialEvent = this.specialEvent || {};
@@ -34,14 +32,12 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
-  specialEventPromise: {
-    get: function() {
-      const params = {
-        urlId: this.urlId,
-        year: this.year
-      };
-      return SpecialEvent.getList(params);
-    }
+  get specialEventPromise() {
+    const params = {
+      urlId: this.urlId,
+      year: this.year
+    };
+    return SpecialEvent.getList(params);
   },
   get title() {
     return `${this.ogTitle} | LBH3`;

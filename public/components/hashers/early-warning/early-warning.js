@@ -21,18 +21,16 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
-  hashersPromise: {
-    get: function() {
-      return Hasher.getList({
-        $limit: 500,
-        $sort: {
-          runCount: -1
-        },
-        runCount: {
-          $gte: 490
-        }
-      });
-    }
+  get hashersPromise() {
+    return Hasher.getList({
+      $limit: 500,
+      $sort: {
+        runCount: -1
+      },
+      runCount: {
+        $gte: 490
+      }
+    });
   },
   get ogTitle() {
     return 'Early Warning';
@@ -50,19 +48,17 @@ export const ViewModel = DefineMap.extend({
   get title() {
     return `${this.ogTitle} | Directory | LBH3`;
   },
-  upcummingPatches: {
-    get: function() {
-      const hashers = this.hashers || [];
-      return hashers.filter(hasher => {
-        const lastTwoCharsOfRunCount = hasher.runCount.toString().slice(-2);
-        return lastTwoCharsOfRunCount >= 90;
-      }).map(hasher => {
-        return {
-          hasher,
-          patchNumber: Math.round(hasher.runCount / 100) * 100
-        };
-      });
-    }
+  get upcummingPatches() {
+    const hashers = this.hashers || [];
+    return hashers.filter(hasher => {
+      const lastTwoCharsOfRunCount = hasher.runCount.toString().slice(-2);
+      return lastTwoCharsOfRunCount >= 90;
+    }).map(hasher => {
+      return {
+        hasher,
+        patchNumber: Math.round(hasher.runCount / 100) * 100
+      };
+    });
   }
 });
 

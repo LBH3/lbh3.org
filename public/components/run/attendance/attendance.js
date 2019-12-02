@@ -11,10 +11,8 @@ import view from './attendance.stache';
 export const ViewModel = DefineMap.extend({
   day: 'string',
 
-  description: {
-    get: function() {
-      return `Check-in sheet for run #${this.trailNumber}.`;
-    }
+  get description() {
+    return `Check-in sheet for run #${this.trailNumber}.`;
   },
 
   hashers: {
@@ -66,16 +64,14 @@ export const ViewModel = DefineMap.extend({
     return route.url(routeParams);
   },
 
-  runPatchNumbers: {
-    get: function() {
-      const runPatchNumbers = [25, 50];
-      let patchNumber = 69;
-      while (patchNumber <= this.trailNumber) {
-        runPatchNumbers.push(patchNumber);
-        patchNumber += (patchNumber % 100 === 0) ? 69 : 31;
-      }
-      return runPatchNumbers;
+  get runPatchNumbers() {
+    const runPatchNumbers = [25, 50];
+    let patchNumber = 69;
+    while (patchNumber <= this.trailNumber) {
+      runPatchNumbers.push(patchNumber);
+      patchNumber += (patchNumber % 100 === 0) ? 69 : 31;
     }
+    return runPatchNumbers;
   },
 
   get session() {
@@ -86,14 +82,12 @@ export const ViewModel = DefineMap.extend({
     return `${this.ogTitle} | LBH3`;
   },
 
-  trailDateAsMoment: {
-    get: function() {
-      return moment({
-        day: this.day,
-        month: this.month - 1,
-        year: this.year
-      });
-    }
+  get trailDateAsMoment() {
+    return moment({
+      day: this.day,
+      month: this.month - 1,
+      year: this.year
+    });
   },
 
   trailNumber: 'number',

@@ -122,25 +122,23 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  canEditEvent: {
-    get: function() {
-      const session = this.session;
-      if (session) {
-        const event = this.event;
-        const user = session.user;
-        if (event && user) {
-          return (
-            (user.canEditFutureTrails && !event.hasProbablyEnded) ||
-            (user.canEditPostTrailInfo && event.hasStartedOrIsCloseToStarting) ||
-            (user.canAddPhotos && event.hasProbablyEnded) ||
-            (user.canAddSnoozes && event.hasProbablyEnded)
-          );
-        }
-        // Loading event or user
-        return true;
+  get canEditEvent() {
+    const session = this.session;
+    if (session) {
+      const event = this.event;
+      const user = session.user;
+      if (event && user) {
+        return (
+          (user.canEditFutureTrails && !event.hasProbablyEnded) ||
+          (user.canEditPostTrailInfo && event.hasStartedOrIsCloseToStarting) ||
+          (user.canAddPhotos && event.hasProbablyEnded) ||
+          (user.canAddSnoozes && event.hasProbablyEnded)
+        );
       }
-      return false;
+      // Loading event or user
+      return true;
     }
+    return false;
   },
 
   checkInSheetHashers: {
@@ -191,16 +189,14 @@ export const ViewModel = DefineMap.extend({
 
   event: Event,
 
-  eventPromise: {
-    get: function() {
-      const trailNumber = this.trailNumber;
-      if (trailNumber) {
-        return Event.getList({
-          trailNumber
-        }).then(events => {
-          this.event = events[0];
-        });
-      }
+  get eventPromise() {
+    const trailNumber = this.trailNumber;
+    if (trailNumber) {
+      return Event.getList({
+        trailNumber
+      }).then(events => {
+        this.event = events[0];
+      });
     }
   },
 
@@ -218,15 +214,13 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  hashersPromise: {
-    get: function() {
-      const trailNumber = this.trailNumber;
-      if (trailNumber) {
-        return EventsHashers.getList({
-          $limit: 500,
-          trailNumber
-        });
-      }
+  get hashersPromise() {
+    const trailNumber = this.trailNumber;
+    if (trailNumber) {
+      return EventsHashers.getList({
+        $limit: 500,
+        trailNumber
+      });
     }
   },
 
@@ -279,25 +273,21 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  patchesPromise: {
-    get: function() {
-      const trailNumber = this.trailNumber;
-      if (trailNumber) {
-        return Patch.getList({
-          $limit: 500,
-          trailNumber
-        });
-      }
+  get patchesPromise() {
+    const trailNumber = this.trailNumber;
+    if (trailNumber) {
+      return Patch.getList({
+        $limit: 500,
+        trailNumber
+      });
     }
   },
 
-  patchHashers: {
-    get: function() {
-      const hashers = this.hashers.map(hasher => {
-        return hasher;
-      }) || [];
-      return hashers.sort(sortByHashOrJustName);
-    }
+  get patchHashers() {
+    const hashers = this.hashers.map(hasher => {
+      return hasher;
+    }) || [];
+    return hashers.sort(sortByHashOrJustName);
   },
 
   paymentRates: {
@@ -361,22 +351,18 @@ export const ViewModel = DefineMap.extend({
     return route.url(routeParams);
   },
 
-  scribeNames: {
-    get: function() {
-      const scribes = this.scribes || [];
-      return scribes.map(scribe => {
-        return scribe.hashOrJustName;
-      }).join('; ');
-    }
+  get scribeNames() {
+    const scribes = this.scribes || [];
+    return scribes.map(scribe => {
+      return scribe.hashOrJustName;
+    }).join('; ');
   },
 
-  scribes: {
-    get: function() {
-      const hashers = this.hashers || [];
-      return hashers.filter(hasher => {
-        return hasher.role.toLowerCase().indexOf('scribe') > -1;
-      });
-    }
+  get scribes() {
+    const hashers = this.hashers || [];
+    return hashers.filter(hasher => {
+      return hasher.role.toLowerCase().indexOf('scribe') > -1;
+    });
   },
 
   secondaryPage: 'string',
@@ -389,16 +375,14 @@ export const ViewModel = DefineMap.extend({
 
   showCheckInSheet: 'boolean',
 
-  specialEventPromise: {
-    get: function() {
-      return SpecialEvent.getList({
-        $limit: 500,
-        $sort: {
-          year: -1,
-          startDatetime: -1
-        }
-      });
-    }
+  get specialEventPromise() {
+    return SpecialEvent.getList({
+      $limit: 500,
+      $sort: {
+        year: -1,
+        startDatetime: -1
+      }
+    });
   },
 
   startDate: {

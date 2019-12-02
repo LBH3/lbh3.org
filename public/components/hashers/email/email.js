@@ -47,34 +47,32 @@ export const ViewModel = DefineMap.extend({
       });
     }
   },
-  hashersPromise: {
-    get: function() {
-      return new Promise((resolve, reject) => {
-        let hashers = [];
-        let result = getHashers(0);
+  get hashersPromise() {
+    return new Promise((resolve, reject) => {
+      let hashers = [];
+      let result = getHashers(0);
 
-        result.then(initialResults => {
+      result.then(initialResults => {
 
-          // Add the first set to the array
-          hashers = [...hashers, ...initialResults];
+        // Add the first set to the array
+        hashers = [...hashers, ...initialResults];
 
-          const total = initialResults.total;
-          const numberOfPages = Math.ceil(total / $limit);
+        const total = initialResults.total;
+        const numberOfPages = Math.ceil(total / $limit);
 
-          for (let i = 1; i < numberOfPages; i++) {
-            result = result.then(() => {
-              return getHashers($limit * i).then(results => {
-                hashers = [...hashers, ...results];
-              }, reject);
+        for (let i = 1; i < numberOfPages; i++) {
+          result = result.then(() => {
+            return getHashers($limit * i).then(results => {
+              hashers = [...hashers, ...results];
             }, reject);
-          }
-
-          result.then(() => {
-            resolve(hashers);
           }, reject);
+        }
+
+        result.then(() => {
+          resolve(hashers);
         }, reject);
-      });
-    }
+      }, reject);
+    });
   },
   get ogTitle() {
     return 'Email List';

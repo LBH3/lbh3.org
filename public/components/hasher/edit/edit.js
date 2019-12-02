@@ -36,20 +36,16 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  hasherPromise: {
-    get: function() {
-      const id = this.id;
-      if (id) {
-        return Hasher.connection.get({
-          id
-        });
-      }
+  get hasherPromise() {
+    const id = this.id;
+    if (id) {
+      return Hasher.get({
+        id
+      });
     }
   },
 
-  id: {
-    type: 'number'
-  },
+  id: 'number',
 
   get ogTitle() {
     const hasher = this.hasher;
