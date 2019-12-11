@@ -485,17 +485,11 @@ export default Component.extend({
       newHasherForRun.hasherId = hasher.id;
       newHasherForRun.hashName = hasher.hashName;
 
-      // Special case for Jock
-      if (hasher.id === 1) {
-        newHasherForRun.paymentTier = 'founder';
-
-      } else if (hasher.payment) {
-        const paymentRate = EventsHashers.paymentRates.find(paymentRate => {
-          return paymentRate.abbr === hasher.payment;
-        });
-        if (paymentRate) {
-          newHasherForRun.paymentTier = paymentRate.tier;
-        }
+      const paymentRate = EventsHashers.paymentRates.find(paymentRate => {
+        return paymentRate.abbr === hasher.payment;
+      });
+      if (paymentRate) {
+        newHasherForRun.paymentTier = paymentRate.tier;
       }
     },
 

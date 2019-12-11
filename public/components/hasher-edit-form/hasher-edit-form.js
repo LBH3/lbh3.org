@@ -98,7 +98,7 @@ export const ViewModel = DefineMap.extend({
   paymentRates: {
     default: () => {
       return [...paymentRates].filter(paymentRate => {
-        return ['hares', 'lt'].indexOf(paymentRate.tier) === -1;
+        return ['hares'].indexOf(paymentRate.tier) === -1;
       }).sort((x, y) => {
         return x.title.localeCompare(y.title);
       });

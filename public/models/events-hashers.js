@@ -120,7 +120,7 @@ const EventsHashers = DefineMap.extend({
   },
   paymentNotes: {
     get(lastSetValue) {
-      const paymentTier = this.paymentTier;
+      const paymentTier = this.paymentTier || this.hasherId === 1 && 'founder';
       const paymentRate = EventsHashers.paymentRates.find(paymentRate => {
         return paymentRate.tier === paymentTier;
       });
@@ -172,13 +172,9 @@ const EventsHashers = DefineMap.extend({
 });
 
 EventsHashers.fromHasher = function(hasher, trailNumber) {
-
-  // Special case for Jock
   let paymentRate;
   let paymentTier = '5';
-  if (hasher.id === 1) {
-    paymentTier = 'founder';
-  } else if (hasher.payment) {
+  if (hasher.payment) {
     paymentRate = EventsHashers.paymentRates.find(paymentRate => {
       return paymentRate.abbr === hasher.payment;
     });
