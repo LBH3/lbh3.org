@@ -2,43 +2,23 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
-<div class="d-flex justify-content-between mb-2">
-  <div>
-    <h2 class="text-nowrap">
-      <a href="{{routeUrl page='about'}}">
-        About
-      </a>
-    </h2>
-  </div>
-  <div>
-    <ul class="m-0 nav nav-fill nav-pills">
-      <li class="nav-item">
-        <a
-          class="{{#eq(secondaryPage, 'mismanagement')}}active{{/eq}} nav-link"
-          href="{{routeUrl page='about' secondaryPage='mismanagement'}}"
-          title="Go to the mismanagement page"
-        >
-          <span class="fas fa-users fa-lg"></span>
-          <span class="d-inline d-sm-none">
-            Bored
-          </span>
-          <span class="d-none d-sm-inline">
-            Mismanagement
-          </span>
-        </a>
-      </li>
-      <li class="nav-item">
-        <a
-          class="{{#eq(secondaryPage, 'privacy')}}active{{/eq}} nav-link"
-          href="{{routeUrl page='about' secondaryPage='privacy'}}"
-          title="Go to the privacy page"
-        >
-          <span class="fas fa-user-secret fa-lg"></span>
-          <span class="d-none d-sm-inline">
-            Privacy
-          </span>
-        </a>
-      </li>
-    </ul>
-  </div>
-</div>
+<ul class="border-bottom justify-content-center mt-0 pb-2 nav nav-pills">
+  <li class="nav-item">
+    <a
+      class="{{#eq(secondaryPage, 'mismanagement')}}active{{/eq}} nav-link"
+      href="{{routeUrl page='about' secondaryPage='mismanagement'}}"
+      title="Go to the mismanagement page"
+    >
+      <span class="fas fa-users fa-lg"></span> Mismanagement
+    </a>
+  </li>
+  <li class="nav-item">
+    <a
+      class="{{#eq(secondaryPage, 'privacy')}}active{{/eq}} nav-link"
+      href="{{routeUrl page='about' secondaryPage='privacy'}}"
+      title="Go to the privacy page"
+    >
+      <span class="fas fa-user-secret fa-lg"></span> Privacy
+    </a>
+  </li>
+</ul>

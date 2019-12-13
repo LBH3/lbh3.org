@@ -2,69 +2,45 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
-<div class="d-flex justify-content-between mb-2">
-  <div>
-    <h2 class="text-nowrap">
-      <a href="{{routeUrl page='hashers' secondaryPage=''}}">
-        Directory
-      </a>
-    </h2>
-  </div>
-  <div>
-    {{#if session.user.canViewHashersEmailList}}
-      <ul class="m-0 nav nav-fill nav-pills">
-        <li class="nav-item">
-          <a
-            class="{{#eq(secondaryPage, 'early-warning')}}active{{/eq}} nav-link"
-            href="{{routeUrl page='hashers' secondaryPage='early-warning'}}"
-            title="Go to the early warning page"
-          >
-            <span class="fas fa-bell fa-lg"></span>
-            <span class="d-none d-md-inline">
-              Early Warning
-            </span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="{{#eq(secondaryPage, 'email')}}active{{/eq}} nav-link"
-            href="{{routeUrl page='hashers' secondaryPage='email'}}"
-            title="Go to the email list"
-          >
-            <span class="fas fa-envelope fa-lg"></span>
-            <span class="d-none d-md-inline">
-              Email List
-            </span>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a
-            class="{{#eq(secondaryPage, 'attendance-records')}}active{{/eq}} nav-link"
-            href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}"
-            title="Go to the attendance records page"
-          >
-            <span class="fas fa-bars fa-lg"></span>
-            <span class="d-none d-md-inline">
-              Attendance
-              <span class="d-none d-lg-inline">Records</span>
-            </span>
-          </a>
-        </li>
-        {{#if session.user.canAddHashers}}
-          <li class="nav-item">
-            <a
-              class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
-              href="{{routeUrl page='hashers' secondaryPage='add'}}"
-              title="Add a new hasher"
-            >
-              <span class="fas fa-plus fa-lg"></span>
-              <span class="d-none d-md-inline">
-                Add Hasher
-              </span>
-            </a>
-          </li>
-        {{/if}}
-      </ul>
+{{#if session.user.canViewHashersEmailList}}
+  <ul class="border-bottom justify-content-center mt-0 pb-2 nav nav-pills">
+    {{#if session.user.canAddHashers}}
+      <li class="nav-item">
+        <a
+          class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
+          href="{{routeUrl page='hashers' secondaryPage='add'}}"
+          title="Add a new hasher"
+        >
+          <span class="fas fa-plus fa-lg"></span> Add Hasher
+        </a>
+      </li>
     {{/if}}
-  </div>
-</div>
+    <li class="nav-item">
+      <a
+        class="{{#eq(secondaryPage, 'attendance-records')}}active{{/eq}} nav-link"
+        href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}"
+        title="Go to the attendance records page"
+      >
+        <span class="fas fa-bars fa-lg"></span> Attendance Records
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="{{#eq(secondaryPage, 'early-warning')}}active{{/eq}} nav-link"
+        href="{{routeUrl page='hashers' secondaryPage='early-warning'}}"
+        title="Go to the early warning page"
+      >
+        <span class="fas fa-bell fa-lg"></span> Early Warning
+      </a>
+    </li>
+    <li class="nav-item">
+      <a
+        class="{{#eq(secondaryPage, 'email')}}active{{/eq}} nav-link"
+        href="{{routeUrl page='hashers' secondaryPage='email'}}"
+        title="Go to the email list"
+      >
+        <span class="fas fa-envelope fa-lg"></span> Email List
+      </a>
+    </li>
+  </ul>
+{{/if}}

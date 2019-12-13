@@ -146,7 +146,7 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/components/hareline/nav/nav.js",
-      "maxSize": "5 kB"
+      "maxSize": "4 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/hasher/hasher.css",

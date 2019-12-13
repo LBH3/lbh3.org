@@ -2,43 +2,25 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
-<div class="d-flex justify-content-between mb-2">
-  <div>
-    <h2 class="text-nowrap">
-      <a href="{{routeUrl page='hareline'}}">
-        Hareline
+<ul class="border-bottom justify-content-center mt-0 pb-2 nav nav-pills">
+  {{#if session.user.canAddTrails}}
+    <li class="nav-item">
+      <a
+        class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
+        href="{{routeUrl page='hareline' secondaryPage='add'}}"
+        title="Add a new trail"
+      >
+        <span class="fas fa-plus fa-lg"></span> Add Trail
       </a>
-    </h2>
-  </div>
-  <div>
-    <ul class="m-0 nav nav-fill nav-pills">
-      <li class="nav-item">
-        <a
-          class="{{#eq(secondaryPage, 'guidelines')}}active{{/eq}} nav-link"
-          href="{{routeUrl page='hareline' secondaryPage='guidelines'}}"
-          title="View the haring guidelines"
-        >
-          <span class="fas fa-scroll fa-lg"></span>
-          <span class="d-none d-sm-inline">
-            Haring
-          </span>
-          Guidelines
-        </a>
-      </li>
-      {{#if session.user.canAddTrails}}
-        <li class="nav-item">
-          <a
-            class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
-            href="{{routeUrl page='hareline' secondaryPage='add'}}"
-            title="Add a new trail"
-          >
-            <span class="fas fa-plus fa-lg"></span>
-            <span class="d-none d-sm-inline">
-              Add Trail
-            </span>
-          </a>
-        </li>
-      {{/if}}
-    </ul>
-  </div>
-</div>
+    </li>
+  {{/if}}
+  <li class="nav-item">
+    <a
+      class="{{#eq(secondaryPage, 'guidelines')}}active{{/eq}} nav-link"
+      href="{{routeUrl page='hareline' secondaryPage='guidelines'}}"
+      title="View the haring guidelines"
+    >
+      <span class="fas fa-scroll fa-lg"></span> Haring Guidelines
+    </a>
+  </li>
+</ul>

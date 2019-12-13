@@ -5,9 +5,7 @@
 <h2 class="h3">
   <a href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber}}" title="View trail">
     {{#if event.nameHtml}}
-      {{{event.nameHtml}}}
-      <br>
-      <small class="text-muted">Run #{{event.trailNumber}}</small>
+      {{{event.nameHtml}}} <br> <small class="text-muted">Run #{{event.trailNumber}}</small>
     {{else}}
       Run #{{event.trailNumber}}
     {{/if}}
@@ -18,10 +16,7 @@
   {{#if shouldShowEditButton}}
     <li class="nav-item">
       <a class="{{#eq(secondaryPage, 'edit')}}active{{/eq}} nav-link" href="{{routeUrl page='events' year=event.startDateParts.year month=event.startDateParts.month day=event.startDateParts.day trailNumber=event.trailNumber secondaryPage='edit'}}">
-        <span class="fas fa-edit fa-lg"></span>
-        <span class="d-none d-sm-inline">
-          Edit
-        </span>
+        <span class="fas fa-edit fa-lg"></span> Edit
       </a>
     </li>
   {{/if}}
@@ -29,16 +24,14 @@
     {{#if(event.photosUrl)}}
       <li class="nav-item">
         <a class="nav-link" href="{{event.photosUrl}}" target="_blank">
-          <span class="fas fa-camera fa-lg"></span>
-          Photos
+          <span class="fas fa-camera fa-lg"></span> Photos
         </a>
       </li>
     {{/if}}
     {{#if(event.snoozeUrlWithAuth)}}
       <li class="nav-item">
         <a class="nav-link" href="{{event.snoozeUrlWithAuth}}" target="_blank">
-          <span class="fas fa-newspaper fa-lg"></span>
-          Snooze
+          <span class="fas fa-newspaper fa-lg"></span> Snooze
         </a>
       </li>
     {{/if}}
