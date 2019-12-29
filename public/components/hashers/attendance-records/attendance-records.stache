@@ -24,7 +24,7 @@
 {{/if}}
 
 {{#if hashersPromises.isResolved}}
-  {{#eq hashersPromises.value.length 0}}
+  {{#eq hashers.length 0}}
     <div class="alert alert-info" role="alert">
       No attendance records found.
     </div>
@@ -36,27 +36,39 @@
             <th scope="col">Name</th>
             <th scope="col">Runs</th>
             <th scope="col">First trail</th>
+            <th scope="col">Naming trail</th>
           </tr>
         </thead>
         <tbody>
-          {{#each(hashers)}}
+          {{#for(hasher of hashers)}}
             <tr>
               <td>
-                <a href="{{scope.vm.routeForHasher(this)}}">
-                  {{hashName}}
+                <a href="{{routeForHasher(hasher)}}">
+                  {{hasher.hashName}}
                 </a>
               </td>
               <td>
-                {{runCount}}
-                {{^eq(hareCount, 0)}}
-                  + {{hareCount}} Hare{{^eq(hareCount, 1)}}s{{/eq}}
+                {{hasher.runCount}}
+                {{^eq(hasher.hareCount, 0)}}
+                  + {{hasher.hareCount}} Hare{{^eq(hasher.hareCount, 1)}}s{{/eq}}
                 {{/eq}}
               </td>
               <td>
-                {{firstTrailDate}} (#{{firstTrailNumber}})
+                {{hasher.firstTrailDate}} (#{{hasher.firstTrailNumber}})
+              </td>
+              <td>
+                {{#if hasher.namingTrailDateParts}}
+                  {{hasher.namingTrailDate}} (#{{hasher.namingTrailNumber}})
+                {{else}}
+                  {{#if hasher.namingTrailDate}}
+                    {{hasher.namingTrailDate}} {{#if hasher.namingTrailNumber}}(#{{hasher.namingTrailNumber}}){{/if}}
+                  {{else}}
+                    {{#if hasher.namingTrailNumber}}#{{hasher.namingTrailNumber}}{{else}}Not named at LBH3{{/if}}
+                  {{/if}}
+                {{/if}}
               </td>
             </tr>
-          {{/each}}
+          {{/for}}
         </tbody>
       </table>
     </div>
