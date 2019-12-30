@@ -1,3 +1,4 @@
+import canReflect from 'can-reflect';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import Event from './event';
@@ -23,6 +24,15 @@ const roles = [
   'Visitor',
   ''
 ];
+
+const RoleEnum = QueryLogic.makeEnum(roles);
+canReflect.assignSymbols(RoleEnum[Symbol.for("can.SetType")].prototype, {
+  // Returns if the name on an object is actually a member of the set.
+  "can.isMember": function(value) {
+    // TODO: this should be implemented
+    return true;
+  }
+});
 
 const EventsHashers = DefineMap.extend({
   seal: false
@@ -147,7 +157,7 @@ const EventsHashers = DefineMap.extend({
   },
   paymentTier: QueryLogic.makeEnum(['5', 'baby', 'bored', 'c', 'dues', 'hares', 'kids', 'lt', 'punch']),
   paymentType: QueryLogic.makeEnum(['both', 'cash', 'check', 'no_charge']),
-  role: QueryLogic.makeEnum(roles),
+  role: RoleEnum,
   roleSplitUp: {
     serialize: false,
     value({lastSet, listenTo, resolve}) {

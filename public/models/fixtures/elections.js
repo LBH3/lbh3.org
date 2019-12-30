@@ -416,6 +416,215 @@ You can submit this form until February 3<sup>rd</sup>. Cum to [Found ’er Ball
         ]
       }
     }
+  },
+  {
+    id: 3,
+    createdAt: '2019-12-27T15:22:19.890Z',
+    updatedAt: '2019-12-27T15:22:19.890Z',
+    advertise: true,
+    advertisementMd: 'It’s erection time! Vote for members of the 2020 Bored. 🗳',
+    descriptionMd: `#### Instructions
+
+- Vote for the number of positions as noted in each category.
+- Select the checkbox or radio button next to your choice.
+- You don’t have to vote in every race.
+- <a href="https://www.lbh3.org/events/2019/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Use the Past Runs page to write in your nominations for the Best and Worst of 2019.</a>
+
+##### Write-in candidates
+
+- To add a candidate, use the search text box to find your candidate, then select their name.
+- Once their name appears next to the other candidates, select the checkbox next to their name (if it is not already checked).
+- Do not write-in a candidate whose name already appears on the ballot.
+
+You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Balls on February 15<sup>th</sup>](https://www.lbh3.org/events/2020/founders/) to find out the results of the Bored Erection and to celebrate the ups & downs of 2019!`,
+    endDatetime: tomorrow,
+    endedNoticeMd: 'This erection ended on February 2<sup>nd</sup>. Cum to Found ’er Balls on February 15<sup>th</sup> to find out the results and to celebrate the ups & downs of 2019!',
+    publicKey: `
+      -----BEGIN PUBLIC KEY-----
+      MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAzs4jXfo7MUy15xt1oPDp
+      J+x9EF39rPwUiKthzPQfs+1oe/k9ccztKQo+wLvTE0VvQzsSk2qk2fklSpyASLCV
+      Mu3u2WbfblwLQItS+lOeKtH9ylIDUpASX0VaBK95VXtxELnbMvoAkCNmo9E/uMZf
+      NP+IPQULyt0D9lumrw4yl3vssetA3gmf2x5FuSdClj5wsVVbQojH8M054Agt3L80
+      AlIV5SAOrGypn8LswaZIgLc6BtnS8bPXYSSriFDF7Z8FSXga5wAHyEcXjBzrYa04
+      wGoDlPhUeBf8LVx+qUwefIbgeSt29MMaLvS7u6drkwLOwm1opsfYZcnxA30qmPhI
+      gO2UvZWMsVJLyshgx1OVg2QJ02UgKA0Erw8cUY68iBVDm5nPNYsqJx3QS53m7W7M
+      HWEZ7fN0raTWWOX+CgrzxQgreOd9L+JDmw/LkYV0uSUNXCYw8HXzbp6nZu9gjobf
+      7nINxD6WwOkttCKRljTrftPkQvBOt8VmlAG/pILF4Z1b6vteuUP0rSb4RRjI/XdS
+      wv2rqKEV4QyaO7bTAZmPl4dVvALkJ22OouuL2xQ0rWiizN32XHZaor5cUlrpbJUP
+      Y7ugiaEg+ikseA71xDSbuZSb94KoAlr2E6bkIvuZpEd9MDP2xG1HQ73h+CUtPe1o
+      9+oFFyfxSvLfXDtawwYqXHECAwEAAQ==
+      -----END PUBLIC KEY-----
+    `,
+    startDatetime: '2019-12-27T15:22:19.890Z',
+    titleMd: '2019 Ballot',
+    urlId: '2019',
+    year: 2019,
+    schema: {
+      awards: {
+        title: 'Awards for 2019',
+        races: [
+          {
+            id: 'best-trail',
+            title: 'Best Trail (Run) of 2019',
+            type: 'run'
+          },
+          {
+            id: 'worst-trail',
+            title: 'Worst Trail (Run) of 2019',
+            type: 'run'
+          },
+          {
+            id: 'best-on-on',
+            title: 'Best On-On of 2019',
+            type: 'on-on'
+          },
+          {
+            id: 'most-deserved-hashit',
+            title: 'Most Deserved Hashit of 2019',
+            type: 'hashit'
+          },
+          {
+            id: 'biggest-whiner',
+            title: 'Biggest Whiner of 2019',
+            type: 'hasher'
+          },
+          {
+            id: 'best-scribe',
+            title: 'Best Scribe Write-Up of 2019',
+            type: 'scribe'
+          },
+          {
+            description: 'Select one',
+            id: 'best-rookie-harrier',
+            options: [
+              {id: 7036, name: '3 Strikes & Urine', runs: '32 + 2 Hares'},
+              {id: 7873, name: '6 Down 9 Across', runs: '17 + 1 Hare'},
+              {id: 7957, name: 'Funyun', runs: '19 + 1 Hare'},
+              {id: 7741, name: 'Wrong Hole, Bundy', runs: '26'}
+            ],
+            title: 'Best Rookie Harrier of 2019',
+            type: 'hasher'
+          },
+          {
+            description: 'Select one',
+            id: 'best-rookie-harriette',
+            options: [
+              {id: 7963, name: 'Badunka Drunk', runs: '10'},
+              {id: 7251, name: 'Bukkake Barbie', runs: '11'},
+              {id: 7931, name: 'Don’t A Salt Me', runs: '23'},
+              {id: 7993, name: 'Guten Taco', runs: '11'},
+              {id: 6852, name: 'Krakk Lipp', runs: '11'},
+              {id: 7706, name: 'Likes It RUFF!', runs: '7'},
+              {id: 7932, name: 'Stockholm Syndrome', runs: '14'}
+            ],
+            title: 'Best Rookie Harriette of 2019',
+            type: 'hasher'
+          },
+          {
+            description: 'Up to the GMs’ discretion—so be clever and fun',
+            id: 'write-in-awards',
+            title: 'Write-in Awards',
+            type: 'textarea'
+          }
+        ]
+      },
+      positions: {
+        title: '2020 Mismanagement Positions',
+        races: [
+          {
+            id: 'grandmaster',
+            maxSelection: 2,
+            options: [
+              {id: 38, name: '6-9 Split'},
+              {id: 7273, name: 'Lick Me Tender Lick Me Deep'},
+              {id: 502, name: 'Stumbelina'},
+              {id: 7303, name: 'Yoko Anal'}
+            ],
+            title: 'Grandmaster'
+          },
+          {
+            id: 'trailmaster',
+            maxSelection: 2,
+            options: [
+              {id: 7186, name: 'Curbfeeler'}
+            ],
+            title: 'Trailmaster'
+          },
+          {
+            id: 'haberdasher',
+            maxSelection: 2,
+            options: [
+              {id: 148, name: 'Victoria’s Secretion'}
+            ],
+            title: 'Haberdasher'
+          },
+          {
+            id: 'on-disc',
+            maxSelection: 2,
+            options: [
+              {id: 6143, name: 'Mounds of Joy'},
+              {id: 7559, name: 'Spitty Spitty Gangbang'}
+            ],
+            title: 'On Disc'
+          },
+          {
+            id: 'hash-cash',
+            maxSelection: 2,
+            options: [
+              {id: 3167, name: 'Dr. Strange Glove'},
+              {id: 25, name: 'Hi-Speed Copulator'}
+            ],
+            title: 'Hash Cash'
+          },
+          {
+            id: 'brewmeister',
+            maxSelection: 2,
+            options: [
+              {id: 7313, name: 'Bi-Cunnilingual'},
+              {id: 14, name: 'Last Train To Cuntsville'}
+            ],
+            title: 'Brewmeister'
+          },
+          {
+            id: 'munchmeister',
+            maxSelection: 2,
+            options: [
+              {id: 134, name: 'Just Jam It'},
+              {id: 189, name: 'Special Head'}
+            ],
+            title: 'Munchmeister'
+          },
+          {
+            id: 'hash-flash',
+            maxSelection: 2,
+            options: [
+              {id: 312, name: 'Beefeater'},
+              {id: 977, name: 'Buttdart'},
+              {id: 7931, name: 'Don’t A Salt Me'},
+              {id: 5756, name: 'Princess of Incest'}
+            ],
+            title: 'Hash Flash'
+          },
+          {
+            id: 'on-sec',
+            maxSelection: 2,
+            options: [
+              {id: 44, name: 'Corn Hole Hussie'},
+              {id: 5908, name: 'Splitting Adams'}
+            ],
+            title: 'On Sec'
+          },
+          {
+            id: 'webmeister',
+            maxSelection: 1,
+            options: [
+              {id: 6394, name: 'I’m Fucking Matt Damon'}
+            ],
+            title: 'Webmeister'
+          }
+        ]
+      }
+    }
   }
 ];
 

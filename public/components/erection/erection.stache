@@ -35,14 +35,6 @@
       </div>
       {{{election.endedNoticeHtml}}}
     {{else}}
-      <p class="lead">
-        For the first time ever, we’re taking our erection and putting it online!
-        The online ballot is the same as the ballot you can receive in person.
-        You’re still required to have at least six runs in the last year to vote.
-      </p>
-
-      <hr>
-
       {{#if session.user.hasherId}}
 
         {{#if electionEligibilityPromise.isPending}}
@@ -120,33 +112,33 @@
                       <div class="row">
                         <div class="col-md">
                           <h5>{{election.schema.positions.title}}</h5>
-                          {{#each(election.schema.positions.races)}}
+                          {{#for(race of election.schema.positions.races)}}
                             <hr>
-                            <h6>{{title}}</h6>
-                            {{#eq(../savingUnencryptedBallot[id].length, 0)}}
+                            <h6>{{race.title}}</h6>
+                            {{#eq(savingUnencryptedBallot[race.id].length, 0)}}
                               <p><i>None selected</i></p>
                             {{else}}
                               <ul>
-                                {{#each(../savingUnencryptedBallot[id])}}
-                                  <li>{{name}}</li>
-                                {{/each}}
+                                {{#for(option of savingUnencryptedBallot[race.id])}}
+                                  <li>{{option.name}}</li>
+                                {{/for}}
                               </ul>
                             {{/eq}}
-                          {{/each}}
+                          {{/for}}
                         </div>
                         <div class="col-md">
                           <h5>{{election.schema.awards.title}}</h5>
-                          {{#for(award of election.schema.awards.races)}}
+                          {{#for(race of election.schema.awards.races)}}
                             <hr>
-                            <h6>{{title}}</h6>
-                            {{#switch(type)}}
+                            <h6>{{race.title}}</h6>
+                            {{#switch(race.type)}}
                               {{#case('hasher')}}
                                 <p>
-                                  {{#if(scope.vm.savingUnencryptedBallot[id])}}
-                                    {{#if(options)}}
-                                      {{scope.vm.hasherWithIdInOptions(scope.vm.savingUnencryptedBallot[id], options)}}
+                                  {{#if(savingUnencryptedBallot[race.id])}}
+                                    {{#if(race.options)}}
+                                      {{hasherWithIdInOptions(savingUnencryptedBallot[race.id], race.options)}}
                                     {{else}}
-                                      {{#with(scope.vm.cachedHashers[scope.vm.savingUnencryptedBallot[id]])}}
+                                      {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
                                         {{./hashOrJustName}}
                                       {{/with}}
                                     {{/if}}
@@ -157,8 +149,8 @@
                               {{/case}}
                               {{#case('hashit')}}
                                 <p>
-                                  {{#if(scope.vm.savingUnencryptedBallot[id])}}
-                                    {{#with(scope.vm.cachedHashers[scope.vm.savingUnencryptedBallot[id]])}}
+                                  {{#if(savingUnencryptedBallot[race.id])}}
+                                    {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
                                       {{./hashOrJustName}}
                                     {{/with}}
                                   {{else}}
@@ -168,7 +160,7 @@
                               {{/case}}
                               {{#case('on-on')}}
                                 <p>
-                                  {{#with(scope.vm.runWithTrailNumber(scope.vm.savingUnencryptedBallot[id]))}}
+                                  {{#with(runWithTrailNumber(savingUnencryptedBallot[race.id]))}}
                                     {{#if(trailNumber)}}
                                       {{trailNumber}} — {{#if(onOnMd)}}{{onOnMd}}{{else}}?{{/if}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
                                     {{else}}
@@ -179,7 +171,7 @@
                               {{/case}}
                               {{#case('run')}}
                                 <p>
-                                  {{#with(scope.vm.runWithTrailNumber(scope.vm.savingUnencryptedBallot[id]))}}
+                                  {{#with(runWithTrailNumber(savingUnencryptedBallot[race.id]))}}
                                     {{#if(trailNumber)}}
                                       {{trailNumber}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
                                     {{else}}
@@ -190,8 +182,8 @@
                               {{/case}}
                               {{#case('scribe')}}
                                 <p>
-                                  {{#if(scope.vm.savingUnencryptedBallot[id])}}
-                                    {{#with(scope.vm.cachedHashers[scope.vm.savingUnencryptedBallot[id]])}}
+                                  {{#if(savingUnencryptedBallot[race.id])}}
+                                    {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
                                       {{./hashOrJustName}}
                                     {{/with}}
                                   {{else}}
@@ -200,9 +192,9 @@
                                 </p>
                               {{/case}}
                               {{#case('textarea')}}
-                                {{#if(scope.vm.savingUnencryptedBallot[id])}}
+                                {{#if(savingUnencryptedBallot[race.id])}}
                                   <p>
-                                    {{scope.vm.savingUnencryptedBallot[id]}}
+                                    {{savingUnencryptedBallot[race.id]}}
                                   </p>
                                 {{else}}
                                   <p><i>None</i></p>
@@ -270,16 +262,16 @@
                               </tr>
                             </thead>
                             <tbody>
-                              {{#each(ballotsPromise.value)}}
+                              {{#for(ballot of ballotsPromise.value)}}
                                 <tr class="{{#eq(scope.index, 0)}}text-success{{else}}text-muted{{/eq}}">
                                   <td class="text-nowrap">
-                                    {{createdAtFormatted}}
+                                    {{ballot.createdAtFormatted}}
                                   </td>
                                   <td>
-                                    {{sha256}}
+                                    {{ballot.sha256}}
                                   </td>
                                 </tr>
-                              {{/each}}
+                              {{/for}}
                             </tbody>
                           </table>
                         </div>
@@ -301,37 +293,37 @@
                       <div class="row">
                         <div class="col-md">
                           <h4>{{election.schema.positions.title}}</h4>
-                          {{#each(election.schema.positions.races)}}
+                          {{#for(race of election.schema.positions.races)}}
                             <fieldset class="form-group">
                               <legend class="col-form-label col-form-label-lg pb-0">
-                                {{title}}
+                                {{race.title}}
                                 <small class="text-muted">
-                                  {{#eq(maxSelection, 1)}}
-                                    Vote for One
+                                  {{#eq(race.maxSelection, 1)}}
+                                    Vote for one
                                   {{else}}
-                                    Vote for Two
+                                    Vote for two
                                   {{/eq}}
                                 </small>
                               </legend>
-                              {{#each(hasherOptions)}}
+                              {{#for(option of race.hasherOptions)}}
                                 <div class="form-check mt-1">
                                   <label class="form-check-label">
                                     <input
-                                      checked:from="../../hasherListContains(scope.vm.ballot[../id], ./id)"
+                                      checked:from="hasherListContains(ballot[race.id], option.id)"
                                       class="form-check-input"
-                                      on:click="../../toggleHasherInList(this, scope.vm.ballot[../id], ../maxSelection, ../options, scope.element)"
+                                      on:click="toggleHasherInList(option, ballot[race.id], race.maxSelection, race.options, scope.element)"
                                       type="checkbox"
                                     />
-                                    {{name}}
+                                    {{option.name}}
                                   </label>
                                 </div>
-                              {{/each}}
-                              {{#if(showWriteInOption)}}
+                              {{/for}}
+                              {{#if(race.showWriteInOption)}}
                                 <div class="form-check mt-1">
                                   <label class="form-check-label">
                                     Write-in search
                                     <lbh3-hasher-autocomplete
-                                      on:selected="../didSelectHasher(scope.element, ../ballot[./id], hasherOptions, maxSelection, options)"
+                                      on:selected="didSelectHasher(scope.element, ballot[race.id], race.hasherOptions, race.maxSelection, race.options)"
                                     >
                                       <input
                                         autocapitalize="off"
@@ -346,19 +338,19 @@
                                 </div>
                               {{/if}}
                             </fieldset>
-                          {{/each}}
+                          {{/for}}
                         </div>
                         <div class="col-md">
                           <h4>{{election.schema.awards.title}}</h4>
-                          {{#for(award of election.schema.awards.races)}}
-                            {{#switch(type)}}
+                          {{#for(race of election.schema.awards.races)}}
+                            {{#switch(race.type)}}
                               {{#case('hasher')}}
-                                {{#if(options)}}
+                                {{#if(race.options)}}
                                   <fieldset class="form-group">
                                     <legend class="col-form-label col-form-label-lg mb-0 w-100">
-                                      {{title}}
+                                      {{race.title}}
                                       <small class="text-muted">
-                                        {{description}}
+                                        {{race.description}}
                                       </small>
                                     </legend>
                                     <div class="table-responsive">
@@ -370,35 +362,35 @@
                                           </tr>
                                         </thead>
                                         <tbody>
-                                          {{#each(hasherOptions)}}
+                                          {{#for(option of race.hasherOptions)}}
                                             <tr>
                                               <td>
                                                 <label class="form-check-label">
                                                   <input
-                                                    checked:bind="equal(scope.vm.ballot[../award.id], id)"
-                                                    name="{{../award.id}}"
+                                                    checked:bind="equal(ballot[race.id], option.id)"
+                                                    name="{{race.id}}"
                                                     type="radio"
                                                   />
-                                                  {{name}}
+                                                  {{option.name}}
                                                 </label>
                                               </td>
                                               <td class="text-nowrap">
-                                                {{runs}}
+                                                {{option.runs}}
                                               </td>
                                             </tr>
-                                          {{/each}}
+                                          {{/for}}
                                         </tbody>
                                       </table>
                                     </div>
                                   </fieldset>
                                 {{else}}
                                   <div class="form-group">
-                                    <label class="col-form-label col-form-label-lg w-100" for="{{./id}}">
-                                      {{title}}
+                                    <label class="col-form-label col-form-label-lg w-100" for="{{race.id}}">
+                                      {{race.title}}
                                     </label>
-                                    {{^if(scope.vm.ballot[award.id])}}
+                                    {{^if(ballot[race.id])}}
                                       <lbh3-hasher-autocomplete
-                                        on:selected="scope.vm.selectHasherForAward(scope.element, ./id)"
+                                        on:selected="selectHasherForAward(scope.element, race.id)"
                                         showNameAfterSelection:from="false"
                                       >
                                         <input
@@ -406,22 +398,22 @@
                                           autocomplete="off"
                                           autocorrect="off"
                                           class="form-control"
-                                          id="{{./id}}"
+                                          id="{{race.id}}"
                                           placeholder="Type a hash name here"
                                           type="text"
                                         />
                                       </lbh3-hasher-autocomplete>
                                     {{/if}}
-                                    {{#if(scope.vm.ballot[./id])}}
+                                    {{#if(ballot[race.id])}}
                                       <div class="form-check">
                                         <label class="form-check-label">
                                           <input
                                             checked:from="true"
                                             class="form-check-input"
-                                            on:click="scope.vm.deselectHasherForAward(./id)"
+                                            on:click="deselectHasherForAward(race.id)"
                                             type="checkbox"
                                           />
-                                          {{#with(scope.vm.cachedHashers[scope.vm.ballot[./id]])}}
+                                          {{#with(cachedHashers[ballot[race.id]])}}
                                             {{./hashOrJustName}}
                                           {{/with}}
                                         </label>
@@ -433,19 +425,19 @@
                               {{#case('hashit')}}
                                 <div class="form-group">
                                   <label class="col-form-label col-form-label-lg w-100">
-                                    {{title}}
+                                    {{race.title}}
                                     <select
                                       class="form-control"
-                                      id="{{award.id}}"
-                                      on:change="scope.vm.didSelectEventHasher(scope.element, scope.vm.hashits)"
-                                      value:bind="scope.vm.ballot[award.id]"
+                                      id="{{race.id}}"
+                                      on:change="didSelectEventHasher(scope.element, hashits)"
+                                      value:bind="ballot[race.id]"
                                     >
                                       <option value="0">Select one</option>
-                                      {{#each(scope.vm.hashits)}}
-                                        <option value="{{hasherId}}">
-                                          {{hashOrJustName}}
+                                      {{#for(hashit of hashits)}}
+                                        <option value="{{hashit.hasherId}}">
+                                          {{hashit.hashOrJustName}}
                                         </option>
-                                      {{/each}}
+                                      {{/for}}
                                     </select>
                                   </label>
                                 </div>
@@ -453,18 +445,18 @@
                               {{#case('on-on')}}
                                 <div class="form-group">
                                   <label class="col-form-label col-form-label-lg w-100">
-                                    {{title}}
+                                    {{race.title}}
                                     <select
                                       class="form-control"
-                                      id="{{award.id}}"
-                                      value:bind="scope.vm.ballot[award.id]"
+                                      id="{{race.id}}"
+                                      value:bind="ballot[race.id]"
                                     >
                                       <option value="0">Select one</option>
-                                      {{#each(scope.vm.allRunsPromise.value)}}
-                                        <option value="{{trailNumber}}">
-                                          {{trailNumber}} — {{#if(onOnMd)}}{{onOnMd}}{{else}}?{{/if}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
+                                      {{#for(run of allRunsPromise.value)}}
+                                        <option value="{{run.trailNumber}}">
+                                          {{run.trailNumber}} — {{#if(run.onOnMd)}}{{run.onOnMd}}{{else}}?{{/if}} — {{#if(run.namePlaintext)}}{{run.namePlaintext}} —{{/if}} {{run.haresMd}} — {{run.locationMd}}
                                         </option>
-                                      {{/each}}
+                                      {{/for}}
                                     </select>
                                   </label>
                                 </div>
@@ -472,18 +464,18 @@
                               {{#case('run')}}
                                 <div class="form-group">
                                   <label class="col-form-label col-form-label-lg w-100">
-                                    {{title}}
+                                    {{race.title}}
                                     <select
                                       class="form-control"
-                                      id="{{award.id}}"
-                                      value:bind="scope.vm.ballot[award.id]"
+                                      id="{{race.id}}"
+                                      value:bind="ballot[race.id]"
                                     >
                                       <option value="0">Select one</option>
-                                      {{#each(scope.vm.allRunsPromise.value)}}
-                                        <option value="{{trailNumber}}">
-                                          {{trailNumber}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
+                                      {{#for(run of allRunsPromise.value)}}
+                                        <option value="{{run.trailNumber}}">
+                                          {{run.trailNumber}} — {{#if(run.namePlaintext)}}{{run.namePlaintext}} —{{/if}} {{run.haresMd}} — {{run.locationMd}}
                                         </option>
-                                      {{/each}}
+                                      {{/for}}
                                     </select>
                                   </label>
                                 </div>
@@ -491,35 +483,35 @@
                               {{#case('scribe')}}
                                 <div class="form-group">
                                   <label class="col-form-label col-form-label-lg w-100">
-                                    {{title}}
+                                    {{race.title}}
                                     <select
                                       class="form-control"
-                                      id="{{award.id}}"
-                                      on:change="scope.vm.didSelectEventHasher(scope.element, scope.vm.scribes)"
-                                      value:bind="scope.vm.ballot[award.id]"
+                                      id="{{race.id}}"
+                                      on:change="didSelectEventHasher(scope.element, scribes)"
+                                      value:bind="ballot[race.id]"
                                     >
                                       <option value="0">Select one</option>
-                                      {{#each(scope.vm.scribes)}}
-                                        <option value="{{hasherId}}">
-                                          {{hashOrJustName}}
+                                      {{#for(scribe of scribes)}}
+                                        <option value="{{scribe.hasherId}}">
+                                          {{scribe.hashOrJustName}}
                                         </option>
-                                      {{/each}}
+                                      {{/for}}
                                     </select>
                                   </label>
                                 </div>
                               {{/case}}
                               {{#case('textarea')}}
                                 <div class="form-group">
-                                  <label class="col-form-label col-form-label-lg w-100" for="{{award.id}}">
-                                    {{title}}
+                                  <label class="col-form-label col-form-label-lg w-100" for="{{race.id}}">
+                                    {{race.title}}
                                     <small class="text-muted">
-                                      ({{description}})
+                                      ({{race.description}})
                                     </small>
                                   </label>
                                   <textarea
                                     class="form-control"
-                                    id="{{award.id}}"
-                                    value:bind="scope.vm.ballot[award.id]"
+                                    id="{{race.id}}"
+                                    value:bind="ballot[race.id]"
                                   ></textarea>
                                 </div>
                               {{/case}}

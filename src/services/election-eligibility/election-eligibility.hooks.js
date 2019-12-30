@@ -9,7 +9,7 @@ const beforeFindHook = function(hook) {
   }
 
   // Special exception
-  if (hook.params.user.hasherId === 70 || hook.params.user.hasherId === 3435) {
+  if ([977, 3435, 5908].indexOf(hook.params.user.hasherId) > -1) {
     return hook;
   }
 

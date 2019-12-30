@@ -4,54 +4,34 @@
 <can-import from="~/components/hasher-autocomplete/" />
 
 {{#if session.user.canAdministerElections}}
-  <lbh3-erection-nav
-    election:from="election"
-    secondaryPage:from="secondaryPage"
-    session:from="session"
-    urlId:from="urlId"
-  />
+  <lbh3-erection-nav election:from="election" secondaryPage:from="secondaryPage" session:from="session" urlId:from="urlId" />
 
   <form class="mb-3" on:submit="scope.event.preventDefault()">
     <div class="form-group">
       <label for="private-key">Private key</label>
-      <textarea
-        class="form-control"
-        id="private-key"
-        value:to="privateKey"
-      ></textarea>
+      <textarea class="form-control" id="private-key" value:to="privateKey"></textarea>
     </div>
     <button class="btn btn-primary" type="submit">Decrypt</button>
   </form>
 
-  {{#if ballotsPromise.isPending}}
-    <lbh3-alert message:from="'Fetching the ballots…'" />
-  {{/if}}
+  {{#if ballotsPromise.isPending}}<lbh3-alert message:from="'Fetching the ballots…'" />{{/if}}
 
-  {{#if ballotsPromise.isRejected}}
-    <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The ballots couldn’t be retrieved. {{ballotsPromise.reason.xhr.message}}
-    </div>
-  {{/if}}
+  {{#if ballotsPromise.isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The ballots couldn’t be retrieved. {{ballotsPromise.reason.xhr.message}}</div>{{/if}}
 
   {{#if ballotsPromise.isResolved}}
     {{#eq ballotsPromise.value.length 0}}
-      <div class="alert alert-info" role="alert">
-        No ballots found.
-      </div>
+      <div class="alert alert-info" role="alert">No ballots found.</div>
     {{else}}
 
       {{#if(decrypter)}}
         <hr>
         <h3>Results</h3>
-        <p>
-          Below are the summed results of the erection.
-          The nominees are <em>roughly</em> ordered by the number of votes they received.
-        </p>
+        <p>Below are the summed results of the erection. The nominees are <em>roughly</em> ordered by the number of votes they received.</p>
         <div class="row">
           <div class="col-md">
             <h4>{{election.schema.positions.title}}</h4>
-            {{#each(election.schema.positions.races)}}
-              <h5>{{title}}</h5>
+            {{#for(race of election.schema.positions.races)}}
+              <h5>{{race.title}}</h5>
               <div class="table-responsive">
                 <table class="table table-sm table-striped">
                   <thead>
@@ -61,35 +41,27 @@
                     </tr>
                   </thead>
                   <tbody>
-                    {{#each(../sortVotes(../talliedVotes[id]))}}
+                    {{#for(vote of sortVotes(talliedVotes[race.id]))}}
                       <tr>
-                        <td>
-                          {{scope.vm.nameForHasherWithID(key)}}
-                        </td>
-                        <td>
-                          {{value}}
-                        </td>
+                        <td>{{nameForHasherWithID(vote.key)}}</td>
+                        <td>{{vote.value}}</td>
                       </tr>
-                    {{/each}}
+                    {{/for}}
                   </tbody>
                 </table>
               </div>
-            {{/each}}
+            {{/for}}
           </div>
           <div class="col-md">
             <h4>{{election.schema.awards.title}}</h4>
-            {{#each(election.schema.awards.races)}}
-              <h5>{{title}}</h5>
+            {{#for(race of election.schema.awards.races)}}
+              <h5>{{race.title}}</h5>
 
-              {{#eq(type, 'textarea')}}
+              {{#eq(race.type, 'textarea')}}
                 <ul>
-                  {{#each(../sortVotes(../talliedVotes[id]))}}
-                    <li>
-                      <p>
-                        {{key}}
-                      </p>
-                    </li>
-                  {{/each}}
+                  {{#for(vote of sortVotes(talliedVotes[race.id]))}}
+                    <li><p>{{vote.key}}</p></li>
+                  {{/for}}
                 </ul>
 
               {{else}}
@@ -102,57 +74,37 @@
                       </tr>
                     </thead>
                     <tbody>
-                      {{#each(../sortVotes(../talliedVotes[id]))}}
+                      {{#for(vote of sortVotes(talliedVotes[race.id]))}}
                         <tr>
-                          {{#switch(../type)}}
+                          {{#switch(race.type)}}
                             {{#case('hasher')}}
-                              <td>
-                                {{scope.vm.nameForHasherWithID(key)}}
-                              </td>
-                              <td>
-                                {{value}}
-                              </td>
+                              <td>{{nameForHasherWithID(vote.key)}}</td>
+                              <td>{{vote.value}}</td>
                             {{/case}}
                             {{#case('hashit')}}
-                              <td>
-                                {{scope.vm.nameForHasherWithID(key)}}
-                              </td>
-                              <td>
-                                {{value}}
-                              </td>
+                              <td>{{nameForHasherWithID(vote.key)}}</td>
+                              <td>{{vote.value}}</td>
                             {{/case}}
                             {{#case('on-on')}}
-                              <td>
-                                Run #{{scope.vm.nameForRunWithTrailNumber(key)}}
-                              </td>
-                              <td>
-                                {{value}}
-                              </td>
+                              <td>Run #{{nameForRunWithTrailNumber(vote.key)}}</td>
+                              <td>{{vote.value}}</td>
                             {{/case}}
                             {{#case('run')}}
-                              <td>
-                                Run #{{scope.vm.nameForRunWithTrailNumber(key)}}
-                              </td>
-                              <td>
-                                {{value}}
-                              </td>
+                              <td>Run #{{nameForRunWithTrailNumber(vote.key)}}</td>
+                              <td>{{vote.value}}</td>
                             {{/case}}
                             {{#case('scribe')}}
-                              <td>
-                                {{scope.vm.nameForHasherWithID(key)}}
-                              </td>
-                              <td>
-                                {{value}}
-                              </td>
+                              <td>{{nameForHasherWithID(vote.key)}}</td>
+                              <td>{{vote.value}}</td>
                             {{/case}}
                           {{/switch}}
                         </tr>
-                      {{/each}}
+                      {{/for}}
                     </tbody>
                   </table>
                 </div>
               {{/eq}}
-            {{/each}}
+            {{/for}}
           </div>
         </div>
       {{/if}}
@@ -162,67 +114,55 @@
       <h3>Individual ballots</h3>
       <ol>
         {{#if(privateKey)}}
-          {{#each(decryptedBallots)}}
+          {{#for(ballot of decryptedBallots)}}
             <li class="mb-4">
-              <p class="mb-0">
-                {{sha256}}
-              </p>
-              {{#if(duplicateBallot)}}
-                <p class="mb-0 text-danger">
-                  Duplicate ballot (not counted in the results above)
-                </p>
+              <p class="mb-0">{{ballot.sha256}}</p>
+              {{#if(ballot.duplicateBallot)}}
+                <p class="mb-0 text-danger">Duplicate ballot (not counted in the results above)</p>
               {{else}}
-                {{#if(hasherTookPaperBallot)}}
-                  <p class="mb-0 text-danger">
-                    Hasher took a paper ballot (this online ballot is not counted in the results above)
-                  </p>
+                {{#if(ballot.hasherTookPaperBallot)}}
+                  <p class="mb-0 text-danger">Hasher took a paper ballot (this online ballot is not counted in the results above)</p>
                 {{else}}
-                  {{#if(decryptionError)}}
-                    <p class="mb-0 text-danger">
-                      {{decryptionError}}
-                    </p>
+                  {{#if(ballot.decryptionError)}}
+                    <p class="mb-0 text-danger">{{ballot.decryptionError}}</p>
                   {{else}}
-                    {{#if(decryptedBallot.errors)}}
+                    {{#if(ballot.decryptedBallot.errors)}}
                       <ul class="text-danger">
-                        {{#each(decryptedBallot.errors)}}
-                          <li>{{value}}</li>
-                        {{/each}}
+                        {{#for(error of decryptedBallot.errors)}}
+                          <li>{{error.value}}</li>
+                        {{/for}}
                       </ul>
                     {{else}}
-                      <p class="mb-0 text-success">
-                        No errors
-                      </p>
+                      <p class="mb-0 text-success">No errors</p>
                     {{/if}}
                     <details>
                       <summary>Decrypted ballot</summary>
-                      {{decryptedBallotJSON}}
+                      {{ballot.decryptedBallotJSON}}
                     </details>
                   {{/if}}
                 {{/if}}
               {{/if}}
             </li>
-          {{/each}}
+          {{/for}}
         {{else}}
-          {{#each(ballotsPromise.value)}}
+          {{#for(ballot of ballotsPromise.value)}}
             <li>
               <p>
-                {{#if(../session.user.canManageUsers)}}
-                  {{#if hasherPromise.isResolved}}
-                    {{hasher.hashOrJustName}}
+                {{#if(session.user.canManageUsers)}}
+                  {{#if ballot.hasherPromise.isResolved}}
+                    {{ballot.hasher.hashOrJustName}}
                   {{else}}
                     <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
                   {{/if}}
-                  <span class="text-muted">
-                    {{sha256}}
-                  </span>
+                  <span class="text-muted">{{ballot.sha256}}</span>
                 {{else}}
-                  {{sha256}}
+                  {{ballot.sha256}}
                 {{/if}}
               </p>
             </li>
           {{else}}
             <li>No ballots</li>
-          {{/each}}
+          {{/for}}
         {{/if}}
       </ol>
 
@@ -230,7 +170,5 @@
   {{/if}}
 
 {{else}}
-  <div class="alert alert-danger" role="alert">
-    Sorry, you don’t have permission to see this page.
-  </div>
+  <div class="alert alert-danger" role="alert">Sorry, you don’t have permission to see this page.</div>
 {{/if}}

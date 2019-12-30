@@ -22,7 +22,8 @@ module.exports = function () {
               $gte: new Date(election.year, 0),
               $lte: new Date(election.year + 1, 0)
             }
-          }
+          },
+          user: params.user
         }).then(events => {
 
           // Get the attendance for each of those runs
@@ -32,7 +33,8 @@ module.exports = function () {
               query: {
                 $limit,
                 trailNumber: event.trailNumber
-              }
+              },
+              user: params.user
             });
           });
           return Promise.all(promises).then(allResults => {
