@@ -22,7 +22,7 @@ export const ViewModel = DefineMap.extend({
     if (searchText) {
       query.role = {
         $iLike: {
-          $any: [`%${searchText}`, `${searchText}%`]
+          $any: [`%${searchText}`, `${searchText}%`, `%${searchText}%`]
         }
       };
     }
