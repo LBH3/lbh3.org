@@ -495,29 +495,14 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
           },
           {
             description: 'Select one',
-            id: 'best-rookie-harrier',
+            id: 'best-rookie',
             options: [
-              {id: 7036, name: '3 Strikes & Urine', runs: '32 + 2 Hares'},
-              {id: 7873, name: '6 Down 9 Across', runs: '17 + 1 Hare'},
-              {id: 7957, name: 'Funyun', runs: '19 + 1 Hare'},
-              {id: 7741, name: 'Wrong Hole, Bundy', runs: '26'}
+              {id: 7747, name: 'Butt Dial', runs: '9'},
+              {id: 6710, name: 'Dead In Bed', runs: '16'},
+              {id: 8142, name: 'Eats, Shits, & Snares', runs: '5'},
+              {id: 8191, name: 'Sleeping Booty', runs: '13'}
             ],
-            title: 'Best Rookie Harrier of 2019',
-            type: 'hasher'
-          },
-          {
-            description: 'Select one',
-            id: 'best-rookie-harriette',
-            options: [
-              {id: 7963, name: 'Badunka Drunk', runs: '10'},
-              {id: 7251, name: 'Bukkake Barbie', runs: '11'},
-              {id: 7931, name: 'Don’t A Salt Me', runs: '23'},
-              {id: 7993, name: 'Guten Taco', runs: '11'},
-              {id: 6852, name: 'Krakk Lipp', runs: '11'},
-              {id: 7706, name: 'Likes It RUFF!', runs: '7'},
-              {id: 7932, name: 'Stockholm Syndrome', runs: '14'}
-            ],
-            title: 'Best Rookie Harriette of 2019',
+            title: 'Best Rookie of 2019',
             type: 'hasher'
           },
           {
@@ -535,10 +520,8 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             id: 'grandmaster',
             maxSelection: 2,
             options: [
-              {id: 38, name: '6-9 Split'},
-              {id: 7273, name: 'Lick Me Tender Lick Me Deep'},
-              {id: 502, name: 'Stumbelina'},
-              {id: 7303, name: 'Yoko Anal'}
+              {id: 7164, name: 'Hokey Tokey'},
+              {id: 27, name: 'Sin D Bare'}
             ],
             title: 'Grandmaster'
           },
@@ -546,7 +529,8 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             id: 'trailmaster',
             maxSelection: 2,
             options: [
-              {id: 7186, name: 'Curbfeeler'}
+              {id: 7186, name: 'Curbfeeler'},
+              {id: 67, name: 'Pillsbury Blow Boy'}
             ],
             title: 'Trailmaster'
           },
@@ -554,7 +538,8 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             id: 'haberdasher',
             maxSelection: 2,
             options: [
-              {id: 148, name: 'Victoria’s Secretion'}
+              {id: 7066, name: 'Damn It & Damn It'},
+              {id: 6535, name: 'Transcuntinental'}
             ],
             title: 'Haberdasher'
           },
@@ -580,8 +565,8 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             id: 'brewmeister',
             maxSelection: 2,
             options: [
-              {id: 7313, name: 'Bi-Cunnilingual'},
-              {id: 14, name: 'Last Train To Cuntsville'}
+              {id: 14, name: 'Last Train To Cuntsville'},
+              {id: 16, name: 'Mr. Rats Ass'}
             ],
             title: 'Brewmeister'
           },
@@ -589,8 +574,7 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             id: 'munchmeister',
             maxSelection: 2,
             options: [
-              {id: 134, name: 'Just Jam It'},
-              {id: 189, name: 'Special Head'}
+              {id: 33, name: 'Kammonawannaleia'}
             ],
             title: 'Munchmeister'
           },
@@ -598,10 +582,8 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             id: 'hash-flash',
             maxSelection: 2,
             options: [
-              {id: 312, name: 'Beefeater'},
-              {id: 977, name: 'Buttdart'},
-              {id: 7931, name: 'Don’t A Salt Me'},
-              {id: 5756, name: 'Princess of Incest'}
+              {id: 8168, name: 'Tainted Lipz on Dead Dix'},
+              {id: 5425, name: 'Wrect Him'}
             ],
             title: 'Hash Flash'
           },
@@ -610,7 +592,8 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             maxSelection: 2,
             options: [
               {id: 44, name: 'Corn Hole Hussie'},
-              {id: 5908, name: 'Splitting Adams'}
+              {id: 7520, name: 'How About Anal'},
+              {id: 7303, name: 'Yoko Anal'}
             ],
             title: 'On Sec'
           },

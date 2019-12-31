@@ -31,6 +31,7 @@ const UnencryptedBallot = DefineMap.extend({
     type: 'number'
   },
   'best-on-on': 'number',
+  'best-rookie': 'number',
   'best-rookie-harrier': 'number',
   'best-rookie-harriette': 'number',
   'best-scribe': 'number',
@@ -53,6 +54,7 @@ const UnencryptedBallot = DefineMap.extend({
             break;
 
           // Rookies (should be a rookie)
+          case 'best-rookie':
           case 'best-rookie-harrier':
           case 'best-rookie-harriette':
             const hasherIds = race.options.map(option => {

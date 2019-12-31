@@ -564,20 +564,20 @@
                   <thead>
                     <tr>
                       <th>Date</th>
-                      <th>Hash#</th>
+                      <th class="text-center">#</th>
+                      <th>Name</th>
                       <th>Hares</th>
                       <th>Location</th>
-                      <th>Name</th>
                     </tr>
                   </thead>
                   <tbody>
                     {{#for(run of electionEligibility.runs)}}
                       <tr>
                         <td>{{run.event.startDateWithYearString}}</td>
-                        <td>{{run.trailNumber}}</td>
+                        <td class="text-center">{{run.trailNumber}}</td>
+                        <td>{{{run.event.nameHtml}}}</td>
                         <td>{{{run.event.haresHtml}}}</td>
                         <td>{{{run.event.shortLocationHtml}}}</td>
-                        <td>{{{run.event.nameHtml}}}</td>
                       </tr>
                     {{/for}}
                   </tbody>
