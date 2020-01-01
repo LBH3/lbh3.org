@@ -22,6 +22,17 @@
   {{/if}}
 {{/if}}
 
+{{#if yearsPromise.isPending}}
+  <lbh3-alert message:from="'Fetching Past Runs…'" />
+{{/if}}
+
+{{#if yearsPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The runs couldn’t be retrieved.
+    {{yearsPromise.reason.xhr.message}}
+  </div>
+{{/if}}
+
 {{#if(years.length)}}
   {{#if(platform.isNode)}}
     <nav class="nav nav-pills">
@@ -67,11 +78,11 @@
       </div>
     </form>
   </details>
-{{/if}}
 
-<lbh3-year showHashit:from="showHashit" showNotes:from="showNotes" showOnOn:from="showOnOn" showScribe:from="showScribe" year:from="year" />
+  <lbh3-year showHashit:from="showHashit" showNotes:from="showNotes" showOnOn:from="showOnOn" showScribe:from="showScribe" year:from="year" />
 
-{{#if session.user.hasherId}}
-  <p><strong>Share your pics with us!</strong> On any of our Google Photos pages, click the <em>Add to album</em> icon/button to upload from your device.</p>
-  <p class="d-print-none"><a href="mailto:hashflash@lbh3.org">Email our Hash Flash</a> if you see a picture you’d like removed.</p>
+  {{#if session.user.hasherId}}
+    <p><strong>Share your pics with us!</strong> On any of our Google Photos pages, click the <em>Add to album</em> icon/button to upload from your device.</p>
+    <p class="d-print-none"><a href="mailto:hashflash@lbh3.org">Email our Hash Flash</a> if you see a picture you’d like removed.</p>
+  {{/if}}
 {{/if}}

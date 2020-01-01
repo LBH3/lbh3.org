@@ -64,11 +64,8 @@ export default Component.extend({
         const years = this.years;
         if (years) {
           const filtered = years.filter({id: currentYear});
-          if (filtered.length === 0) {
-            return currentYear - 1;
-          }
+          return filtered.length === 0 ? currentYear - 1 : currentYear;
         }
-        return currentYear;
       }
     },
     years: {
