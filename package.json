@@ -129,6 +129,14 @@
       "maxSize": "208 kB"
     },
     {
+      "path": "./public/dist/bundles/lbh3/components/erection/erection.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/erection/erection.js",
+      "maxSize": "21 kB"
+    },
+    {
       "path": "./public/dist/bundles/lbh3/components/hareline/hareline.js",
       "maxSize": "5 kB"
     },
