@@ -3,6 +3,7 @@ import DefineList from 'can-define/list/';
 import feathersModel from './feathers-model';
 import marked from 'marked';
 import moment from 'moment-timezone';
+import { oneLine } from '~/models/event';
 
 export const randomize = (list) => {
   const array = [...list];
@@ -96,7 +97,14 @@ export const Election = DefineMap.extend({
       return moment(this.startDatetime).tz(timeZone);
     },
     serialize: false
-  }
+  },
+  titleHtml: {
+    get: function() {
+      return oneLine(this.titleMd || '');
+    },
+    serialize: false
+  },
+  titleMd: 'string'
 });
 
 Election.List = DefineList.extend({

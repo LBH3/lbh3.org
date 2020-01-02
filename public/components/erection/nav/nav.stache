@@ -3,9 +3,9 @@
 <h2 class="h3">
   <a href="{{routeUrl page='erections' urlId=urlId}}">
     {{#if(election)}}
-      {{election.titleMd}}
+      {{{election.titleHtml}}}
     {{else}}
-      Erection
+      Awards &amp; Bored&nbsp;Positions
     {{/if}}
   </a>
 </h2>
