@@ -204,6 +204,9 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
       }
     }
   },
+  get hashitsAndScribesFetchingFailedEmailLink() {
+    return `mailto:webmaster@lbh3.org?subject=LBH3 erection options could not be fetched&body=[Keep this] browser: ${navigator.userAgent}`;
+  },
   get hashitsAndScribesPromise() {
     const allRuns = this.allRuns;
     if (allRuns) {
