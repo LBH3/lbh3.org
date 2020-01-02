@@ -192,15 +192,20 @@ const restrictHook = function(hook) {
   }
 
   // Check if the user is querying for a run they attended
-  if (!hook.params.query.hasherId && hook.params.query.trailNumber) {
+  const query = hook.params.query;
+  const trailNumberQuery = query.trailNumber;
+  if (!query.hasherId && trailNumberQuery) {
     return new Promise((resolve, reject) => {
       hook.service.find({
         query: {
           hasherId: user.hasherId,
-          trailNumber: hook.params.query.trailNumber
+          trailNumber: trailNumberQuery
         }
       }).then(result => {
         if (result.total === 1) {
+          resolve(hook);
+        } else if (query.role && trailNumberQuery.$gte && trailNumberQuery.$lte) {
+          // Query for hashits & scribes for an election ballot
           resolve(hook);
         } else {
           resolve(restrictToBored(hook));
