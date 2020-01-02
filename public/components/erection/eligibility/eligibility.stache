@@ -6,32 +6,31 @@
 <can-import from="~/components/hasher-autocomplete/" />
 
 {{#if session.user.canAdministerElections}}
-  <lbh3-erection-nav
-    election:from="election"
-    secondaryPage:from="secondaryPage"
-    session:from="session"
-    urlId:from="urlId"
-  />
-
-  {{#if electionEligibilityPromise.isPending}}
+  {{#or(electionPromise.isPending, eligibilityPromise.isPending)}}
     <lbh3-alert message:from="'Fetching eligible hashers…'" />
   {{/if}}
 
-  {{#if electionEligibilityPromise.isRejected}}
+  {{#or(electionPromise.isRejected, eligibilityPromise.isRejected)}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The eligible hashers couldn’t be retrieved. {{electionEligibilityPromise.reason.xhr.message}}
+      <strong>Fuck!</strong> The eligible hashers couldn’t be retrieved. {{eligibilityPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
-  {{#if electionEligibilityPromise.isResolved}}
-    {{#eq electionEligibilityPromise.value.length 0}}
+  {{#if eligibilityPromise.isResolved}}
+    <lbh3-erection-nav
+      election:from="election"
+      secondaryPage:from="secondaryPage"
+      session:from="session"
+      urlId:from="urlId"
+    />
+    {{#eq eligibilityPromise.value.length 0}}
       <div class="alert alert-info" role="alert">
         No eligible hashers found.
       </div>
     {{else}}
       <div class="row">
         <div class="col-sm">
-          <h3>Eligible ({{electionEligibilityPromise.value.eligible.length}})</h3>
+          <h3>Eligible ({{eligibilityPromise.value.eligible.length}})</h3>
           <div class="table-responsive">
             <table class="table table-sm table-striped">
               <thead>
@@ -41,7 +40,7 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each(electionEligibilityPromise.value.eligible)}}
+                {{#each(eligibilityPromise.value.eligible)}}
                   <tr>
                     <td class="text-success">
                       {{hashOrJustName}}
@@ -56,7 +55,7 @@
           </div>
         </div>
         <div class="col-sm">
-          <h3>Not eligible ({{electionEligibilityPromise.value.notEligible.length}})</h3>
+          <h3>Not eligible ({{eligibilityPromise.value.notEligible.length}})</h3>
           <div class="table-responsive">
             <table class="table table-sm table-striped">
               <thead>
@@ -66,7 +65,7 @@
                 </tr>
               </thead>
               <tbody>
-                {{#each(electionEligibilityPromise.value.notEligible)}}
+                {{#each(eligibilityPromise.value.notEligible)}}
                   <tr>
                     <td class="text-danger">
                       {{hashOrJustName}}

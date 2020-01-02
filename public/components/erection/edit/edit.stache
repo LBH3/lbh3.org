@@ -2,13 +2,6 @@
 <can-import from="~/components/alert/" />
 <can-import from="~/components/erection/nav/" />
 
-<lbh3-erection-nav
-  election:from="election"
-  secondaryPage:from="secondaryPage"
-  session:from="session"
-  urlId:from="urlId"
-/>
-
 {{#if session.user.canManageUsers}}
   {{#if erectionPromise.isPending}}
     <lbh3-alert message:from="'Fetching the erection…'" />
@@ -21,6 +14,13 @@
   {{/if}}
 
   {{#if erection}}
+    <lbh3-erection-nav
+      election:from="erection"
+      secondaryPage:from="secondaryPage"
+      session:from="session"
+      urlId:from="urlId"
+    />
+
     <form class="mb-3" on:submit="editErection()">
 
       <div class="form-group row">

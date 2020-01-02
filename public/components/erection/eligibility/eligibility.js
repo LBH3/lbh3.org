@@ -21,19 +21,19 @@ export const ViewModel = DefineMap.extend({
     }
   },
 
-  get electionEligibilityPromise() {
+  get electionPromise() {
+    return Election.getList({
+      urlId: this.urlId
+    });
+  },
+
+  get eligibilityPromise() {
     const election = this.election;
     if (election) {
       return ElectionEligibility.getList({
         electionId: election.id
       });
     }
-  },
-
-  get electionPromise() {
-    return Election.getList({
-      urlId: this.urlId
-    });
   },
 
   get ogTitle() {

@@ -7,13 +7,6 @@
 <can-import from="~/components/no-ssr/" />
 
 <lbh3-no-ssr>
-  <lbh3-erection-nav
-    election:from="election"
-    secondaryPage:from="secondaryPage"
-    session:from="session"
-    urlId:from="urlId"
-  />
-
   {{#if electionPromise.isPending}}
     <lbh3-alert message:from="'Fetching your ballot…'" />
   {{/if}}
@@ -29,6 +22,12 @@
   {{/if}}
 
   {{#if electionPromise.isResolved}}
+    <lbh3-erection-nav
+      election:from="election"
+      secondaryPage:from="secondaryPage"
+      session:from="session"
+      urlId:from="urlId"
+    />
     {{#if election.hasEnded}}
       <div class="alert alert-info" role="alert">
         <strong>This erection has ended.</strong>

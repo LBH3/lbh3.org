@@ -5,24 +5,23 @@
 <can-import from="~/components/hasher-autocomplete/" />
 
 {{#if session.user.canAdministerElections}}
-  <lbh3-erection-nav
-    election:from="election"
-    secondaryPage:from="secondaryPage"
-    session:from="session"
-    urlId:from="urlId"
-  />
-
-  {{#if paperBallotsPromise.isPending}}
+  {{#or(electionPromise.isPending, paperBallotsPromise.isPending)}}
     <lbh3-alert message:from="'Fetching the paper ballots…'" />
   {{/if}}
 
-  {{#if paperBallotsPromise.isRejected}}
+  {{#or(electionPromise.isRejected, paperBallotsPromise.isRejected)}}
     <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The paper ballots couldn’t be retrieved. {{paperBallotsPromise.reason.xhr.message}}
+      <strong>Fuck!</strong> The paper ballots couldn’t be retrieved. {{electionPromise.reason.xhr.message}} {{paperBallotsPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
   {{#if paperBallotsPromise.isResolved}}
+    <lbh3-erection-nav
+      election:from="election"
+      secondaryPage:from="secondaryPage"
+      session:from="session"
+      urlId:from="urlId"
+    />
     {{#eq paperBallotsPromise.value.length 0}}
       <div class="alert alert-info" role="alert">
         No paper ballots found.
