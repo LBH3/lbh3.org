@@ -11,23 +11,32 @@ export const ViewModel = DefineMap.extend({
     default: ''
   },
   editErection: function() {
-    return this.editErectionPromise = this.erection.save();
+    const erection = this.erection;
+    const endDatetime = moment.tz(`${this.endDate} ${this.endTime}`, 'America/Los_Angeles');
+    if (endDatetime.isSame(erection.endDateAsMoment) === false) {
+      erection.endDatetime = endDatetime.format();
+    }
+    const startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles');
+    if (startDatetime.isSame(erection.startDateAsMoment) === false) {
+      erection.startDatetime = startDatetime.format();
+    }
+    return this.editErectionPromise = erection.save();
   },
   editErectionPromise: {},
   endDate: {
-    get() {
-      return this.erection.endDateAsMoment.format('YYYY-MM-DD');
-    },
-    set(newValue) {
-      this.erection.endDatetime = moment(`${newValue} ${this.endTime}`).format();
+    get: function(lastValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      return this.erection.endDateAsMoment.format().substr(0, 10);
     }
   },
   endTime: {
-    get() {
-      return this.erection.endDateAsMoment.format('HH:mm:ss');
-    },
-    set(newValue) {
-      this.erection.endDatetime = moment(`${this.endDate} ${newValue}`).format();
+    get: function(lastValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      return this.erection.endDateAsMoment.format().substr(11, 8);
     }
   },
   erection: Erection,
@@ -60,19 +69,19 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
   startDate: {
-    get() {
-      return this.erection.startDateAsMoment.format('YYYY-MM-DD');
-    },
-    set(newValue) {
-      this.erection.startDatetime = moment(`${newValue} ${this.startTime}`).format();
+    get: function(lastValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      return this.erection.startDateAsMoment.format().substr(0, 10);
     }
   },
   startTime: {
-    get() {
-      return this.erection.startDateAsMoment.format('HH:mm:ss');
-    },
-    set(newValue) {
-      this.erection.startDatetime = moment(`${this.startDate} ${newValue}`).format();
+    get: function(lastValue) {
+      if (lastValue) {
+        return lastValue;
+      }
+      return this.erection.startDateAsMoment.format().substr(11, 8);
     }
   },
   get title() {
