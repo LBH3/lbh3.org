@@ -50,7 +50,7 @@ export const ViewModel = DefineMap.extend({
   year: {
     type: 'number',
     get: function(year) {
-      return year || this.mostRecentYear || (new Date()).getFullYear();
+      return year || this.mostRecentYear;
     }
   },
   years: {
