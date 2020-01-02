@@ -289,7 +289,7 @@
                     {{{election.descriptionHtml}}}
 
                     {{#if hashitsAndScribesPromise.isPending}}
-                      <lbh3-alert message:from="'Fetching submitted ballots…'" />
+                      <lbh3-alert message:from="'Fetching the ballot options…'" />
                     {{/if}}
 
                     {{#if hashitsAndScribesPromise.isRejected}}
