@@ -154,7 +154,7 @@
                   {{else}}
                     <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
                   {{/if}}
-                  <span class="text-muted">{{ballot.sha256}}</span>
+                  <span class="text-break text-muted">{{ballot.sha256}}</span>
                 {{else}}
                   {{ballot.sha256}}
                 {{/if}}
