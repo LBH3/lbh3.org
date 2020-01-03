@@ -299,7 +299,7 @@
           {{#if event.hasProbablyEnded}}
             You successfully saved trail #{{event.trailNumber}}.
           {{else}}
-            Both hash.org and lbh3.org have been updated.
+            Both hash.beer and lbh3.org have been updated.
           {{/if}}
         </div>
       {{/if}}

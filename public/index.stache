@@ -375,7 +375,7 @@
               {{#if isRejected}}
                 <div class="alert alert-danger" role="alert">
                   <strong>Fuck!</strong> The next run failed to load.
-                  Check <a href="http://www.hash.org" target="_blank">hash.org</a> for the next run.
+                  Check <a href="https://hash.beer" target="_blank">hash.beer</a> for the next run.
                 </div>
               {{else}}
                 <lbh3-home description:to="description" ogTitle:to="ogTitle" title:to="title" />
