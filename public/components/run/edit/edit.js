@@ -80,7 +80,7 @@ export const ViewModel = DefineMap.extend({
       hasher.savingPromise = null;
 
       // Update run info
-      if (EventsHashers.rolesThatUpdateRunInfo.indexOf(result.role) > -1) {
+      if (result.role) {
         const needsSaving = this.event.updateWithHashers(this.hashers);
         if (needsSaving) {
           this.editRun();
@@ -101,7 +101,7 @@ export const ViewModel = DefineMap.extend({
         this.newHasherForRun = null;
 
         // Update run info
-        if (EventsHashers.rolesThatUpdateRunInfo.indexOf(result.role) > -1) {
+        if (result.role) {
           const needsSaving = this.event.updateWithHashers(this.hashers);
           if (needsSaving) {
             this.editRun();
@@ -312,7 +312,7 @@ export const ViewModel = DefineMap.extend({
       hasher.savingPromise = null;
 
       // Update run info
-      if (EventsHashers.rolesThatUpdateRunInfo.indexOf(hasher.role) > -1) {
+      if (hasher.role) {
         const needsSaving = this.event.updateWithHashers(this.hashers);
         if (needsSaving) {
           this.editRun();

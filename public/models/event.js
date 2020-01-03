@@ -5,6 +5,7 @@ import marked from 'marked';
 import moment from 'moment-timezone';
 import Place from './place';
 import platform from 'steal-platform';
+import { sortByHashOrJustName } from '~/components/run/sort-hashers';
 
 export const defaultLocale = (platform.isNode) ? 'en-US' : undefined;
 export const timeZone = 'America/Los_Angeles';
@@ -390,7 +391,7 @@ export const Event = DefineMap.extend({
     const updateProperty = (property, searchTerm) => {
       const newPropertyValue = hashers.filter(hasher => {
         return hasher.role.toLowerCase().indexOf(searchTerm) > -1;
-      }).map(hasher => {
+      }).sort(sortByHashOrJustName).map(hasher => {
         return hasher.hashOrJustName;
       }).join('; ');
       if (this[property] !== newPropertyValue) {

@@ -7,33 +7,6 @@ import Hasher from './hasher';
 import loader from '@loader';
 import QueryLogic from 'can-query-logic';
 
-const roles = [
-  'Hare',
-  'Hare/New Name',
-  'Hare/Returner',
-  'Hare/hashit',
-  'Hare/scribe',
-  'Hashit',
-  'New Boot',
-  'New Name',
-  'Returner',
-  'Runner',
-  'Scribe',
-  'Scribe/Hashit',
-  'Scribe/New Name',
-  'Visitor',
-  ''
-];
-
-const RoleEnum = QueryLogic.makeEnum(roles);
-canReflect.assignSymbols(RoleEnum[Symbol.for("can.SetType")].prototype, {
-  // Returns if the name on an object is actually a member of the set.
-  "can.isMember": function(value) {
-    // TODO: this should be implemented
-    return true;
-  }
-});
-
 const EventsHashers = DefineMap.extend({
   seal: false
 }, {
@@ -157,7 +130,7 @@ const EventsHashers = DefineMap.extend({
   },
   paymentTier: QueryLogic.makeEnum(['5', 'baby', 'bored', 'c', 'dues', 'hares', 'kids', 'lt', 'punch']),
   paymentType: QueryLogic.makeEnum(['both', 'cash', 'check', 'no_charge']),
-  role: RoleEnum,
+  role: 'string',
   roleSplitUp: {
     serialize: false,
     value({lastSet, listenTo, resolve}) {
@@ -230,8 +203,6 @@ export const paymentRates = [
 ];
 EventsHashers.paymentRates = paymentRates;
 
-EventsHashers.roles = roles;
-
 EventsHashers.rolesSplitUp = [
   'Hare',
   'Hashit',
@@ -239,21 +210,6 @@ EventsHashers.rolesSplitUp = [
   'New Name',
   'Returner',
   'Scribe',
-  'Visitor'
-];
-
-EventsHashers.rolesThatUpdateRunInfo = [
-  'Hare',
-  'Hare/New Name',
-  'Hare/Returner',
-  'Hare/hashit',
-  'Hare/scribe',
-  'New Boot',
-  'New Name',
-  'Returner',
-  'Scribe',
-  'Scribe/Hashit',
-  'Scribe/New Name',
   'Visitor'
 ];
 
