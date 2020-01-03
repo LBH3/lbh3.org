@@ -7,13 +7,13 @@
   to hare a run.
 </p>
 
-{{#if eventsPromise.isPending}}
+{{#if allEventsPromise.isPending}}
   <lbh3-alert message:from="'Fetching upcumming runs…'" />
 {{/if}}
 
-{{#if eventsPromise.isRejected}}
+{{#if allEventsPromise.isRejected}}
   <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The runs couldn’t be retrieved. {{eventsPromise.reason.xhr.message}}
+    <strong>Fuck!</strong> The runs couldn’t be retrieved. {{allEventsPromise.reason.xhr.message}}
   </div>
 {{/if}}
 
