@@ -101,15 +101,14 @@ export const Address = DefineMap.extend({
   country: 'string',
   formattedAddress: {
     get: function(lastSetValue) {
-      if (lastSetValue && (this.subpremise == null || lastSetValue.indexOf(this.subpremise) > -1)) {
+      if (lastSetValue && this.subpremise == null) {
         return lastSetValue;
       }
+      const formattedSubpremise = (!this.subpremise || this.subpremise.indexOf('#') > -1) ? this.subpremise : `Unit ${this.subpremise}`;
       return [
-        this.street,
-        this.subpremise,
+        formattedSubpremise ? `${this.street} ${formattedSubpremise}` : this.street,
         this.city,
-        this.state,
-        this.zip,
+        this.state && this.zip ? `${this.state} ${this.zip}` : this.state || this.zip,
         this.country
       ].filter(value => value).join(', ');
     },

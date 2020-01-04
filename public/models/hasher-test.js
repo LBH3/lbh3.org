@@ -17,7 +17,7 @@ QUnit.test('Address.fromPlace in the USA', function(assert) {
   const address = Address.fromPlace(place);
   assert.equal(address.city, 'Bellflower');
   assert.equal(address.country, 'United States');
-  assert.equal(address.formattedAddress, '9604 Artesia Blvd # 200, Bellflower, CA 90706, USA');
+  assert.equal(address.formattedAddress, '9604 Artesia Blvd # 200, Bellflower, CA 90706, United States');
   assert.equal(address.googlePlaceId, 'e908d10310c7f20c5da5e71eb2d81e290b58fbe3');
   assert.equal(address.state, 'CA');
   assert.equal(address.street, '9604 Artesia Blvd');
@@ -88,4 +88,28 @@ QUnit.test('Address.fromPlace in China', function(assert) {
   assert.equal(address.street, '15 Sau Wa Fong');
   assert.equal(address.subpremise, undefined);
   assert.equal(address.zip, undefined);
+});
+
+QUnit.test('Address formattedAddress with a unit letter', function(assert) {
+  const place = JSON.parse(`{"city":"Long Beach","country":"United States","formattedAddress":"1234 La Verne Ave Unit C, Long Beach, CA, 90803, United States","privacy":"bored","state":"CA","street":"1234 La Verne Ave","subpremise":"C","zip":"90803"}`);
+  const address = new Address(place);
+  assert.equal(address.city, 'Long Beach');
+  assert.equal(address.country, 'United States');
+  assert.equal(address.formattedAddress, '1234 La Verne Ave Unit C, Long Beach, CA 90803, United States');
+  assert.equal(address.state, 'CA');
+  assert.equal(address.street, '1234 La Verne Ave');
+  assert.equal(address.subpremise, 'C');
+  assert.equal(address.zip, '90803');
+});
+
+QUnit.test('Address formattedAddress with a unit number', function(assert) {
+  const place = JSON.parse(`{"city":"Long Beach","country":"United States","formattedAddress":"4321 Nieto Ave #4, Long Beach, CA, 90803, United States","privacy":"bored","state":"CA","street":"4321 Nieto Ave","subpremise":"#4","zip":"90803"}`);
+  const address = new Address(place);
+  assert.equal(address.city, 'Long Beach');
+  assert.equal(address.country, 'United States');
+  assert.equal(address.formattedAddress, '4321 Nieto Ave #4, Long Beach, CA 90803, United States');
+  assert.equal(address.state, 'CA');
+  assert.equal(address.street, '4321 Nieto Ave');
+  assert.equal(address.subpremise, '#4');
+  assert.equal(address.zip, '90803');
 });
