@@ -292,47 +292,39 @@
               </button>
             </div>
             <div class="card-body">
-              <div class="form-row">
-                <div class="col-md-8 form-group mb-1">
-                  <label class="col-form-label" for="street-{{i}}">
-                    Street
-                  </label>
-                  <input class="flex-grow-1 form-control" id="street-{{i}}" type="text" value:bind="address.street">
+              {{#if(address.hasBeenSaved)}}
+                {{address.formattedAddress}}
+              {{else}}
+                <div class="form-row">
+                  <div class="col-md-8 form-group mb-1">
+                    <label class="col-form-label" for="street-{{i}}">Street</label>
+                    <input class="flex-grow-1 form-control" id="street-{{i}}" type="text" value:bind="address.street">
+                  </div>
+                  <div class="col-md-4 form-group mb-1">
+                    <label class="col-form-label" for="subpremise-{{i}}">Unit (e.g. #69)</label>
+                    <input class="form-control" id="subpremise-{{i}}" type="text" value:bind="address.subpremise">
+                  </div>
                 </div>
-                <div class="col-md-4 form-group mb-1">
-                  <label class="col-form-label" for="subpremise-{{i}}">
-                    Unit (e.g. #69)
-                  </label>
-                  <input class="form-control" id="subpremise-{{i}}" type="text" value:bind="address.subpremise">
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="col-md-4 form-group mb-1">
-                  <label class="col-form-label" for="city-{{i}}">
-                    City
-                  </label>
-                  <input class="flex-grow-1 form-control" id="city-{{i}}" type="text" value:bind="address.city">
-                </div>
-                <div class="col-md-2 form-group mb-1">
-                  <label class="col-form-label" for="state-{{i}}">
-                    State
-                  </label>
-                  <input class="flex-grow-1 form-control" id="state-{{i}}" type="text" value:bind="address.state">
-                </div>
-                <div class="col-md-3 form-group mb-1">
-                  <label class="col-form-label" for="zip-{{i}}">
-                    ZIP code
-                  </label>
-                  <input class="flex-grow-1 form-control" id="zip-{{i}}" type="text" value:bind="address.zip">
-                </div>
-                <div class="col-md-3 form-group mb-1">
-                  <label class="col-form-label" for="country-{{i}}">
-                    Country
-                  </label>
-                  <input class="flex-grow-1 form-control" id="country-{{i}}" type="text" value:bind="address.country">
+                <div class="form-row">
+                  <div class="col-md-4 form-group mb-1">
+                    <label class="col-form-label" for="city-{{i}}">City</label>
+                    <input class="flex-grow-1 form-control" id="city-{{i}}" type="text" value:bind="address.city">
+                  </div>
+                  <div class="col-md-2 form-group mb-1">
+                    <label class="col-form-label" for="state-{{i}}">State</label>
+                    <input class="flex-grow-1 form-control" id="state-{{i}}" type="text" value:bind="address.state">
+                  </div>
+                  <div class="col-md-3 form-group mb-1">
+                    <label class="col-form-label" for="zip-{{i}}">ZIP code</label>
+                    <input class="flex-grow-1 form-control" id="zip-{{i}}" type="text" value:bind="address.zip">
+                  </div>
+                  <div class="col-md-3 form-group mb-1">
+                    <label class="col-form-label" for="country-{{i}}">Country</label>
+                    <input class="flex-grow-1 form-control" id="country-{{i}}" type="text" value:bind="address.country">
+                  </div>
                 </div>
               </div>
-            </div>
+              {{/if}}
           </div>
         {{/for}}
       </div>

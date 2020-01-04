@@ -116,6 +116,10 @@ export const Address = DefineMap.extend({
     serialize: true
   },
   googlePlaceId: 'string',
+  hasBeenSaved: {
+    default: true,
+    serialize: false
+  },
   privacy: privacyDefault,
   state: 'string',
   street: 'string',

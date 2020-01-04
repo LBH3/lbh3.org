@@ -50,6 +50,9 @@ export const ViewModel = DefineMap.extend({
     }
 
     return this.editingHasherPromise = hasher.save().then(savedHasher => {
+      savedHasher.addresses.forEach(address => {
+        address.hasBeenSaved = true;
+      });
       this.additionalFields = new AdditionalFields();
       this.newAddress.reset();
       this.dispatch('didsave');
@@ -165,6 +168,7 @@ export const ViewModel = DefineMap.extend({
         console.info('Place', savedPlace.get());
         const address = Address.fromPlace(savedPlace);
         console.info('Adding address:', address.get());
+        address.hasBeenSaved = false;
         this.hasher.addresses.unshift(address);
         this.newAddress.reset();
       });
