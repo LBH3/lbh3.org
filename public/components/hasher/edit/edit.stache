@@ -4,29 +4,20 @@
 <can-import from="~/components/hasher-edit-form/" />
 
 {{#if canEditThisHasher}}
-
   {{#if hasherPromise.isPending}}
     <lbh3-alert message:from="'Fetching the hasher…'" />
   {{/if}}
 
   {{#if hasherPromise.isRejected}}
-    <div class="alert alert-danger" role="alert">
-      <strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.xhr.message}}
-    </div>
+    <div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The hasher couldn’t be retrieved. {{hasherPromise.reason.xhr.message}}</div>
   {{/if}}
 
   {{#if hasher}}
-    <lbh3-hasher-nav
-      hasher:from="hasher"
-      secondaryPage:from="secondaryPage"
-      session:from="session"
-    />
+    <lbh3-hasher-nav hasher:from="hasher" secondaryPage:from="secondaryPage" session:from="session" />
     {{#eq(hasher.id, session.user.hasherId)}}
       {{^if(session.user.hasSharedInfo)}}
         <div class="alert alert-info" role="alert">
-          <p>
-            <strong>Hello {{hasher.hashName}}!</strong>
-          </p>
+          <p><strong>Hello {{hasher.hashName}}!</strong></p>
           <p>
             Below you can edit your profile in our <a href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a>.
             Change the privacy option for each field from “Bored” to “Directory” if you want other hashers to see it.
@@ -39,10 +30,6 @@
         </div>
       {{/if}}
     {{/eq}}
-    <lbh3-hasher-edit-form
-      class="container pl-0 pr-0"
-      hasher:from="hasher"
-    />
+    <lbh3-hasher-edit-form class="container pl-0 pr-0" hasher:from="hasher" saveSuccessMessage:from="saveSuccessMessage" />
   {{/if}}
-
 {{/if}}

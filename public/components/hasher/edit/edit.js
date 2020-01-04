@@ -55,6 +55,15 @@ export const ViewModel = DefineMap.extend({
     return `Edit hasher #${this.id}`;
   },
 
+  get saveSuccessMessage() {
+    const hasher = this.hasher;
+    const user = this.session && this.session.user;
+    if (hasher && hasher.id && user && user.hasherId && hasher.id === user.hasherId) {
+      return 'Your profile has been updated.';
+    }
+    return 'The hasher’s profile has been updated.';
+  },
+
   secondaryPage: 'string',
 
   get session() {

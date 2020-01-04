@@ -155,7 +155,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   saveSuccessMessage: {
-    default: 'The hasher’s info has been updated.'
+    default: 'The hasher’s profile has been updated.'
   },
 
   get session() {
