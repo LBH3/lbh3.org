@@ -517,49 +517,22 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
         title: '2020 Mismanagement Positions',
         races: [
           {
-            id: 'grandmaster',
+            id: 'on-sec',
             maxSelection: 2,
             options: [
-              {id: 7164, name: 'Hokey Tokey'},
-              {id: 27, name: 'Sin D Bare'}
+              {id: 44, name: 'Corn Hole Hussie'},
+              {id: 7520, name: 'How About Anal'},
+              {id: 7303, name: 'Yoko Anal'}
             ],
-            title: 'Grandmaster'
+            title: 'On Sec'
           },
           {
-            id: 'trailmaster',
+            id: 'munchmeister',
             maxSelection: 2,
             options: [
-              {id: 7186, name: 'Curbfeeler'},
-              {id: 67, name: 'Pillsbury Blow Boy'}
+              {id: 33, name: 'Kammonawannaleia'}
             ],
-            title: 'Trailmaster'
-          },
-          {
-            id: 'haberdasher',
-            maxSelection: 2,
-            options: [
-              {id: 7066, name: 'Damn It & Damn It'},
-              {id: 6535, name: 'Transcuntinental'}
-            ],
-            title: 'Haberdasher'
-          },
-          {
-            id: 'on-disc',
-            maxSelection: 2,
-            options: [
-              {id: 6143, name: 'Mounds of Joy'},
-              {id: 7559, name: 'Spitty Spitty Gangbang'}
-            ],
-            title: 'On Disc'
-          },
-          {
-            id: 'hash-cash',
-            maxSelection: 2,
-            options: [
-              {id: 3167, name: 'Dr. Strange Glove'},
-              {id: 25, name: 'Hi-Speed Copulator'}
-            ],
-            title: 'Hash Cash'
+            title: 'Munchmeister'
           },
           {
             id: 'brewmeister',
@@ -571,12 +544,31 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             title: 'Brewmeister'
           },
           {
-            id: 'munchmeister',
+            id: 'grandmaster',
             maxSelection: 2,
             options: [
-              {id: 33, name: 'Kammonawannaleia'}
+              {id: 7164, name: 'Hokey Tokey'},
+              {id: 27, name: 'Sin D Bare'}
             ],
-            title: 'Munchmeister'
+            title: 'Grandmaster'
+          },
+          {
+            id: 'haberdasher',
+            maxSelection: 2,
+            options: [
+              {id: 7066, name: 'Damn It & Damn It'},
+              {id: 6535, name: 'Transcuntinental'}
+            ],
+            title: 'Haberdasher'
+          },
+          {
+            id: 'hash-cash',
+            maxSelection: 2,
+            options: [
+              {id: 3167, name: 'Dr. Strange Glove'},
+              {id: 25, name: 'Hi-Speed Copulator'}
+            ],
+            title: 'Hash Cash'
           },
           {
             id: 'hash-flash',
@@ -588,14 +580,22 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
             title: 'Hash Flash'
           },
           {
-            id: 'on-sec',
+            id: 'on-disc',
             maxSelection: 2,
             options: [
-              {id: 44, name: 'Corn Hole Hussie'},
-              {id: 7520, name: 'How About Anal'},
-              {id: 7303, name: 'Yoko Anal'}
+              {id: 6143, name: 'Mounds of Joy'},
+              {id: 7559, name: 'Spitty Spitty Gangbang'}
             ],
-            title: 'On Sec'
+            title: 'On Disc'
+          },
+          {
+            id: 'trailmaster',
+            maxSelection: 2,
+            options: [
+              {id: 7186, name: 'Curbfeeler'},
+              {id: 67, name: 'Pillsbury Blow Boy'}
+            ],
+            title: 'Trailmaster'
           },
           {
             id: 'webmeister',
