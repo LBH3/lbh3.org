@@ -43,11 +43,9 @@
   {{#eq(view, "map")}}
     <hr>
     <can-import from="~/components/past-runs/map/">
-      {{#if isPending}}
-        <lbh3-alert message:from="'Loading the map…'" />
-      {{else}}
-        <lbh3-past-runs-map allEventsPromise:from="allEventsPromise" session:from="session" />
-      {{/if}}
+      {{#if isPending}}<lbh3-alert message:from="'Loading the map…'" />{{/if}}
+      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The map failed to load.</div>{{/if}}
+      {{#if isResolved}}<lbh3-past-runs-map allEventsPromise:from="allEventsPromise" session:from="session" />{{/if}}
     </can-import>
   {{else}}
     <details class="mb-2 mt-2">
