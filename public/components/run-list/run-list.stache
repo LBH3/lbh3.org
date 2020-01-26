@@ -83,15 +83,15 @@
     {{#and(event.haresMd, event.nameHtml)}}
       <p class="hares">
         <small class="text-muted">
-          {{#if this.showingAdditionalInfo}}
+          {{#if showingAdditionalInfo}}
             <strong>Hares:</strong>
           {{/if}}
           {{event.haresMd}}
         </small>
       </p>
     {{/and}}
-    {{#if this.session.user.hasherId}}
-      {{#if this.showScribe}}
+    {{#if session.user.hasherId}}
+      {{#if showScribe}}
         {{#if event.scribesMd}}
           <p class="hares">
             <small class="text-muted">
@@ -100,7 +100,7 @@
           </p>
         {{/if}}
       {{/if}}
-      {{#if this.showHashit}}
+      {{#if showHashit}}
         {{#if event.hashitReasonMd}}
           <p class="hares">
             <small class="text-muted">
@@ -109,7 +109,7 @@
           </p>
         {{/if}}
       {{/if}}
-      {{#if this.showNotes}}
+      {{#if showNotes}}
         {{#if event.trailCommentsMd}}
           <p class="hares">
             <small class="text-muted">
@@ -119,7 +119,7 @@
         {{/if}}
       {{/if}}
     {{/if}}
-    {{#if this.showOnOn}}
+    {{#if showOnOn}}
       {{#if event.onOnMd}}
         <p class="hares">
           <small class="text-muted">
@@ -264,22 +264,22 @@
               {{/if}}
             </td>
             <td>{{{event.shortLocationHtml}}}</td>
-            {{#if this.session.user.hasherId}}
-              {{#if this.showScribe}}
+            {{#if session.user.hasherId}}
+              {{#if showScribe}}
                 <td>
                   {{#if event.scribesHtml}}
                     {{{event.scribesHtml}}}
                   {{/if}}
                 </td>
               {{/if}}
-              {{#if this.showHashit}}
+              {{#if showHashit}}
                 <td>
                   {{#if event.hashitReasonHtml}}
                     {{{event.hashitReasonHtml}}}
                   {{/if}}
                 </td>
               {{/if}}
-              {{#if this.showNotes}}
+              {{#if showNotes}}
                 <td>
                   {{#if event.trailCommentsHtml}}
                     {{{event.trailCommentsHtml}}}
@@ -287,7 +287,7 @@
                 </td>
               {{/if}}
             {{/if}}
-            {{#if this.showOnOn}}
+            {{#if showOnOn}}
               <td>
                 {{#if event.onOnHtml}}
                   {{{event.onOnHtml}}}

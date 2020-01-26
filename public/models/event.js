@@ -153,6 +153,18 @@ export const Event = DefineMap.extend({
     },
     serialize: false
   },
+  location: {
+    get: function(lastSetValue, resolve) {
+      if (lastSetValue) {
+        return lastSetValue;
+      }
+      const locationPromise = this.locationPromise;
+      if (locationPromise) {
+        locationPromise.then(resolve);
+      }
+    },
+    serialize: false
+  },
   locationPromise: {
     get: function() {
       const id = this.locationGooglePlaceId;
@@ -163,27 +175,23 @@ export const Event = DefineMap.extend({
       }
     }
   },
-  longLocationHtml: {
-    get: function(lastSetValue, resolve) {
-      if (this.locationPromise) {
-        this.locationPromise.then(location => {
-          if (location.formattedAddress) {
-            let formattedAddress = location.formattedAddress;
-            if (formattedAddress.indexOf(location.name) === -1) {
-              formattedAddress = `${location.name}, ${formattedAddress}`;
-            }
-            if (formattedAddress.indexOf(this.locationMd) === -1) {
-              formattedAddress = `${this.locationMd}, ${formattedAddress}`;
-            }
-            resolve(formattedAddress.replace(', USA', ''));
-          } else {
-            resolve(this.shortLocationHtml);
-          }
-        });
+  get longLocationHtml() {
+    const location = this.location;
+    if (location) {
+      if (location.formattedAddress) {
+        let formattedAddress = location.formattedAddress;
+        if (formattedAddress.indexOf(location.name) === -1) {
+          formattedAddress = `${location.name}, ${formattedAddress}`;
+        }
+        if (formattedAddress.indexOf(this.locationMd) === -1) {
+          formattedAddress = `${this.locationMd}, ${formattedAddress}`;
+        }
+        return formattedAddress.replace(', USA', '');
+      } else {
+        return this.shortLocationHtml;
       }
-      return this.locationHtml;
-    },
-    serialize: false
+    }
+    return this.locationHtml;
   },
   longOnOnHtml: {
     get: function(lastSetValue, resolve) {
@@ -272,27 +280,23 @@ export const Event = DefineMap.extend({
     },
     serialize: false
   },
-  shortLocationHtml: {
-    get: function(lastSetValue, resolve) {
-      if (this.locationPromise) {
-        this.locationPromise.then(location => {
-          const localities = location.addressComponents.filter(addressComponent => {
-            return addressComponent.types.indexOf('locality') > -1;
-          });
-          let name = '';
-          if (localities[0] && localities[0].long_name) {
-            name = localities[0].long_name;
-          } else if (location.vicinity) {
-            name = location.vicinity;
-          } else if (location.name) {
-            name = location.name;
-          }
-          resolve(name);
-        });
+  get shortLocationHtml() {
+    const location = this.location;
+    if (location) {
+      const localities = location.addressComponents.filter(addressComponent => {
+        return addressComponent.types.indexOf('locality') > -1;
+      });
+      let name = '';
+      if (localities[0] && localities[0].long_name) {
+        name = localities[0].long_name;
+      } else if (location.vicinity) {
+        name = location.vicinity;
+      } else if (location.name) {
+        name = location.name;
       }
-      return this.locationHtml;
-    },
-    serialize: false
+      return name;
+    }
+    return this.locationHtml;
   },
   shortOnOnHtml: {
     get: function(lastSetValue, resolve) {

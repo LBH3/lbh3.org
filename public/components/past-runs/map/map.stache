@@ -1,0 +1,23 @@
+<can-import from="~/components/alert/" />
+<can-import from="~/components/past-runs/map/attr" />
+
+{{#if locationsPromise.isPending}}
+  <lbh3-alert message:from="'Fetching the run locations…'" />
+{{/if}}
+
+{{#if locationsPromise.isRejected}}
+  <div class="alert alert-danger" role="alert">
+    <strong>Fuck!</strong> The run locations couldn’t be retrieved.
+    {{locationsPromise.reason.xhr.message}}
+  </div>
+{{/if}}
+
+{{#if(locationsPromise.isResolved)}}
+  {{#if(locationsPromise.value.length)}}
+    <div class="map" lbh3-map-attr></div>
+  {{else}}
+    <div class="alert alert-info" role="alert">
+      <strong>No runs with locations were found.</strong>
+    </div>
+  {{/if}}
+{{/if}}

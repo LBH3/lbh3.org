@@ -208,7 +208,7 @@
                   {{#if isPending}}
                     <lbh3-alert message:from="'Loading Past Runs…'" />
                   {{else}}
-                    <lbh3-past-runs description:to="description" ogTitle:to="ogTitle" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" title:to="title" year:bind="year" />
+                    <lbh3-past-runs description:to="description" ogTitle:to="ogTitle" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" title:to="title" view:bind="view" year:bind="year" />
                   {{/if}}
                 </can-import>
               {{/if}}

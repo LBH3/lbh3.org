@@ -97,6 +97,11 @@ const AppViewModel = DefineMap.extend({
   },
   trailNumber: 'number',
   urlId: 'string',
+  view: {
+    serialize: function(view) {
+      return view || undefined;
+    }
+  },
   year: 'number'
 });
 
