@@ -25,6 +25,19 @@ QUnit.test('Address.fromPlace in the USA', function(assert) {
   assert.equal(address.zip, '90706');
 });
 
+QUnit.test('Address.fromPlace for a city in the USA', function(assert) {
+  const place = JSON.parse(`{"id":"71b374acb987b8be875a091969db9d11158f8712","addressComponents":[{"long_name":"Long Beach","short_name":"Long Beach","types":["locality","political"]},{"long_name":"Los Angeles County","short_name":"Los Angeles County","types":["administrative_area_level_2","political"]},{"long_name":"California","short_name":"CA","types":["administrative_area_level_1","political"]},{"long_name":"United States","short_name":"US","types":["country","political"]}],"formattedAddress":"Long Beach, CA, USA","formattedPhoneNumber":null,"geometryLocation":{"type":"Point","coordinates":[33.7700504,-118.1937395]},"icon":"https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png","internationalPhoneNumber":null,"name":"Long Beach","placeId":"ChIJWdeZQOjKwoARqo8qxPo6AKE","reference":"ChIJWdeZQOjKwoARqo8qxPo6AKE","scope":"GOOGLE","types":["locality","political"],"url":"https://maps.google.com/?q=Long+Beach,+CA,+USA&ftid=0x80c2cae84099d759:0xa1003afac42a8faa","vicinity":"Long Beach","website":"http://www.ci.long-beach.ca.us/","geometryViewport":{"type":"Polygon","coordinates":[[[33.8854591,-118.063253],[33.714957,-118.248966]]]},"createdAt":"2017-10-30T14:21:41.295Z","updatedAt":"2020-01-26T09:13:45.078Z","created_at":"2017-10-30T14:21:41.295Z","updated_at":"2020-01-26T09:13:45.078Z"}`);
+  const address = Address.fromPlace(place);
+  assert.equal(address.city, 'Long Beach');
+  assert.equal(address.country, 'United States');
+  assert.equal(address.formattedAddress, 'Long Beach, CA, USA');
+  assert.equal(address.googlePlaceId, '71b374acb987b8be875a091969db9d11158f8712');
+  assert.equal(address.state, 'CA');
+  assert.equal(address.street, null);
+  assert.equal(address.subpremise, undefined);
+  assert.equal(address.zip, undefined);
+});
+
 QUnit.test('Address.fromPlace in Spain', function(assert) {
   const place = JSON.parse(`{"id":"7ff0db371bce51f482ba411485edbc3c104d6ba6","addressComponents":[{"long_name":"27","short_name":"27","types":["street_number"]},{"long_name":"Calle Luis Morote","short_name":"Calle Luis Morote","types":["route"]},{"long_name":"Las Palmas de Gran Canaria","short_name":"Las Palmas de Gran Canaria","types":["locality","political"]},{"long_name":"Las Palmas","short_name":"Las Palmas","types":["administrative_area_level_2","political"]},{"long_name":"Canarias","short_name":"CN","types":["administrative_area_level_1","political"]},{"long_name":"Spain","short_name":"ES","types":["country","political"]},{"long_name":"35007","short_name":"35007","types":["postal_code"]}],"formattedAddress":"Calle Luis Morote, 27, 35007 Las Palmas de Gran Canaria, Las Palmas, Spain","formattedPhoneNumber":null,"geometryLocation":{"type":"Point","coordinates":[28.1411467,-15.432766799999968]},"icon":"https://maps.gstatic.com/mapfiles/place_api/icons/geocode-71.png","internationalPhoneNumber":null,"name":"Calle Luis Morote, 27","placeId":"ChIJBdpkrj-VQAwRBWCcTx9qToU","reference":"ChIJBdpkrj-VQAwRBWCcTx9qToU","scope":"GOOGLE","types":["premise"],"url":"https://maps.google.com/?q=Calle+Luis+Morote,+27,+35007+Las+Palmas+de+Gran+Canaria,+Las+Palmas,+Spain&ftid=0xc40953fae64da05:0x854e6a1f4f9c6005","vicinity":"Las Palmas de Gran Canaria","website":null,"geometryViewport":{"type":"Polygon","coordinates":[[[28.1425799802915,-15.431344969708562],[28.1398820197085,-15.434042930291525]]]},"createdAt":"2019-09-15T21:06:46.743Z","updatedAt":"2019-09-15T21:25:01.123Z","created_at":"2019-09-15T21:06:46.743Z","updated_at":"2019-09-15T21:25:01.123Z"}`);
   const address = Address.fromPlace(place);

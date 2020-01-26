@@ -88,6 +88,8 @@ export const Address = DefineMap.extend({
       if (addressProps.subpremise && addressProps.street.indexOf(addressProps.subpremise) > -1) {
         addressProps.street = addressProps.street.replace(addressProps.subpremise, '').trim();
       }
+    } else if (addressProps.city === addressProps.street) {
+      addressProps.street = null;
     }
 
     if (values.postal_code) {
