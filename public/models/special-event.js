@@ -34,16 +34,26 @@ const SpecialEvent = DefineMap.extend({
     },
     serialize: false
   },
+  location: {
+    get: function(lastSetValue, resolve) {
+      if (lastSetValue) {
+        return lastSetValue;
+      }
+      const locationPromise = this.locationPromise;
+      if (locationPromise) {
+        locationPromise.then(resolve);
+      }
+    },
+    serialize: false
+  },
   locationGooglePlaceId: 'string',
   locationMd: 'string',
-  locationPromise: {
-    get: function() {
-      const id = this.locationGooglePlaceId;
-      if (id) {
-        return Place.connection.get({
-          id
-        });
-      }
+  get locationPromise() {
+    const id = this.locationGooglePlaceId;
+    if (id) {
+      return Place.connection.get({
+        id
+      });
     }
   },
   nameHtml: {
@@ -63,27 +73,23 @@ const SpecialEvent = DefineMap.extend({
     this.locationGooglePlaceId = null;
     this.locationMd = '';
   },
-  shortLocationHtml: {
-    get: function(lastSetValue, resolve) {
-      if (this.locationPromise) {
-        this.locationPromise.then(location => {
-          const localities = location.addressComponents.filter(addressComponent => {
-            return addressComponent.types.indexOf('locality') > -1;
-          });
-          let name = '';
-          if (localities[0] && localities[0].long_name) {
-            name = localities[0].long_name;
-          } else if (location.vicinity) {
-            name = location.vicinity;
-          } else if (location.name) {
-            name = location.name;
-          }
-          resolve(name);
-        });
+  get shortLocationHtml() {
+    const location = this.location;
+    if (location) {
+      const localities = location.addressComponents.filter(addressComponent => {
+        return addressComponent.types.indexOf('locality') > -1;
+      });
+      let name = '';
+      if (localities[0] && localities[0].long_name) {
+        name = localities[0].long_name;
+      } else if (location.vicinity) {
+        name = location.vicinity;
+      } else if (location.name) {
+        name = location.name;
       }
-      return this.locationHtml;
-    },
-    serialize: false
+      return name;
+    }
+    return this.locationHtml;
   },
   startDate: {
     get: function() {
@@ -105,6 +111,21 @@ const SpecialEvent = DefineMap.extend({
     serialize: false
   },
   startDatetime: 'string',
+  startDateTimeString: {
+    get: function() {
+      const options = {
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        month: 'numeric',
+        timeZone,
+        weekday: 'long',
+        year: '2-digit'
+      };
+      return localizedStringForDate(this.startDate, defaultLocale, options);
+    },
+    serialize: false
+  },
   title: {
     get: function() {
       const textContainer = document.createElement('div');

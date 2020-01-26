@@ -28,20 +28,20 @@ callbacks.attr('lbh3-map-attr', (mapElement, data) => {
         infoWindow = new google.maps.InfoWindow();
       }
       infoWindow.setContent(`<div class="info-window">
-        <h6>${event.nameHtml ? `${event.nameHtml} (#${event.trailNumber})` : `Run #${event.trailNumber}`}</h6>
+        <h6>${event.nameHtml ? `${event.nameHtml}${event.trailNumber ? ` (#${event.trailNumber})` : ''}` : `Run #${event.trailNumber}`}</h6>
         <p>${event.startDateTimeString}</p>
-        <p><b>Hare(s):</b> ${event.haresHtml || '?'}</p>
-        <p><b>Location:</b> ${event.longLocationHtml}</p>
-        ${userIsHasher ? `
+        ${event.trailNumber ? `<p><b>Hare(s):</b> ${event.haresHtml || '?'}</p>` : ''}
+        <p><b>Location:</b> ${event.longLocationHtml || event.shortLocationHtml}</p>
+        ${(event.trailNumber && userIsHasher) ? `
           <p><b>Scribe:</b> ${event.scribesMd || '?'}</p>
           <p><b>Hashit:</b> ${event.hashitReasonMd || '?'}</p>
           <p><b>Notes:</b> ${event.trailCommentsMd || '?'}</p>
           <p><b>On-on:</b> ${event.onOnMd || '?'}</p>
           ${event.snoozeUrlWithAuth ? `<p><a href="${event.snoozeUrlWithAuth}" target="_blank">Download the Snooze</a></p>` : ''}
           ${event.photosUrl ? `<p><a href="${event.photosUrl}" target="_blank">View the photos on Google Photos</a></p>` : ''}
-        ` : `
+        ` : event.trailNumber ? `
           <p><b>On-on:</b> ${event.onOnMd}</p>
-        `}
+        ` : ''}
         ${place.url ? `<p class="mb-0"><a href="${place.url}" target="_blank">View on Google Maps</a></p>` : ''}
       </div>`);
       infoWindow.open(map, this);
