@@ -6,5 +6,6 @@ var buildPromise = stealTools.build({
   bundleAssets: {
     glob: 'assets/*',
     infer: false
-  }
+  },
+  maxBundleRequests: 6
 });
