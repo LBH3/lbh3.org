@@ -61,13 +61,13 @@ callbacks.attr('lbh3-map-attr', (mapElement, data) => {
   };
 
   const mediaQueryListener = () => {
-    const isDarkMode = mediaQueryList.matches;
+    const styles = mediaQueryList.matches ? darkModeStyles : [];
 
     // If there’s already a map…
     if (map) {
       // Just change the styles
       map.setOptions({
-        styles: isDarkMode ? darkModeStyles : []
+        styles
       });
     } else if (mapElement) {
 
@@ -76,56 +76,43 @@ callbacks.attr('lbh3-map-attr', (mapElement, data) => {
         mapElement.removeChild(mapElement.firstChild);
       }
 
-      if (isDarkMode) {
-        const onloadHandler = () => {
-          data.scope.vm.locationsPromise.then(locations => {
-            const position = {lat: 33.78348, lng: -118.15354};
-            map = new google.maps.Map(mapElement, {
-              center: position,
-              zoom,
-              styles: darkModeStyles
-            });
-            data.scope.vm.allEvents.filter(event => !!event.location).forEach(event => {
-              setUpMarker(event, data.scope.vm.session);
-            });
+      const onloadHandler = () => {
+        data.scope.vm.locationsPromise.then(locations => {
+          const position = {lat: 33.78348, lng: -118.15354};
+          map = new google.maps.Map(mapElement, {
+            center: position,
+            styles,
+            zoom
           });
-        };
+          data.scope.vm.allEvents.filter(event => !!event.location).forEach(event => {
+            setUpMarker(event, data.scope.vm.session);
+          });
+        });
+      };
 
-        const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${data.scope.vm.googleMapsKey}&libraries=places`;
-        const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
+      const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${data.scope.vm.googleMapsKey}&libraries=places`;
+      const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
 
-        // Check if thet script’s already been loaded
-        if (existingScript) {
-          // If it has and window.google is defined…
-          if (window.google) {
-            // …immediately call the handler
-            onloadHandler();
-          } else {
-            // …wait for the script to load and call the original handler too
-            const originalOnload = existingScript.onload;
-            existingScript.onload = function() {
-              originalOnload.apply(this, arguments);
-              onloadHandler();
-            };
-          }
+      // Check if thet script’s already been loaded
+      if (existingScript) {
+        // If it has and window.google is defined…
+        if (window.google) {
+          // …immediately call the handler
+          onloadHandler();
         } else {
-          const mapsScript = document.createElement('script');
-          mapsScript.onload = onloadHandler;
-          mapsScript.src = scriptSrc;
-          mapsScript.type = 'text/javascript';
-          document.getElementsByTagName('head')[0].appendChild(mapsScript);
+          // …wait for the script to load and call the original handler too
+          const originalOnload = existingScript.onload;
+          existingScript.onload = function() {
+            originalOnload.apply(this, arguments);
+            onloadHandler();
+          };
         }
       } else {
-        // The plain HTML iframe embed
-        const placeQuery = data.scope.vm.placeId ? `place_id:${data.scope.vm.placeId}` : data.scope.vm.q;
-        const mapIframe = document.createElement('iframe');
-        mapIframe.allowfullscreen = true;
-        mapIframe.frameborder = 0;
-        mapIframe.height = window.getComputedStyle(mapElement).height;
-        mapIframe.src = `https://www.google.com/maps/embed/v1/place?key=${data.scope.vm.googleMapsKey}&q=${placeQuery}&zoom=${zoom}`;
-        mapIframe.style = 'border:0';
-        mapIframe.width = '100%';
-        mapElement.appendChild(mapIframe);
+        const mapsScript = document.createElement('script');
+        mapsScript.onload = onloadHandler;
+        mapsScript.src = scriptSrc;
+        mapsScript.type = 'text/javascript';
+        document.getElementsByTagName('head')[0].appendChild(mapsScript);
       }
     }
   };

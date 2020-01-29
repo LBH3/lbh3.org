@@ -141,13 +141,13 @@ export default Component.extend({
       };
 
       const mediaQueryListener = () => {
-        const isDarkMode = mediaQueryList.matches;
+        const styles = mediaQueryList.matches ? darkModeStyles : [];
 
         // If there’s already a map…
         if (map) {
           // Just change the styles
           map.setOptions({
-            styles: isDarkMode ? darkModeStyles : []
+            styles
           });
         } else {
 
@@ -156,82 +156,69 @@ export default Component.extend({
             element.removeChild(element.firstChild);
           }
 
-          if (isDarkMode) {
-            const onloadHandler = () => {
-              if (this.placeId) {
-                // The preferred case… get the place info and create the map
-                this.placesPromise.then(places => {
-                  const place = places[0];
-                  const position = {lat: place.geometryLocation.coordinates[0], lng: place.geometryLocation.coordinates[1]};
+          const onloadHandler = () => {
+            if (this.placeId) {
+              // The preferred case… get the place info and create the map
+              this.placesPromise.then(places => {
+                const place = places[0];
+                const position = {lat: place.geometryLocation.coordinates[0], lng: place.geometryLocation.coordinates[1]};
 
-                  map = new google.maps.Map(element, {
-                    center: position,
-                    zoom,
-                    styles: darkModeStyles
-                  });
-                  setUpMarker(place, position);
+                map = new google.maps.Map(element, {
+                  center: position,
+                  styles,
+                  zoom
                 });
+                setUpMarker(place, position);
+              });
 
-              } else if (this.q) {
-                // The undesirable case… have to create a map, query Google for the info, and then update the map
-                if (!map) {
-                  map = new google.maps.Map(element, {
-                    center: {lat: 33.842088, lng: -118.094914},// Kind of the center of our area
-                    zoom: 10,
-                    styles: darkModeStyles
-                  });
+            } else if (this.q) {
+              // The undesirable case… have to create a map, query Google for the info, and then update the map
+              if (!map) {
+                map = new google.maps.Map(element, {
+                  center: {lat: 33.842088, lng: -118.094914},// Kind of the center of our area
+                  styles,
+                  zoom: 10
+                });
+              }
+              const service = new google.maps.places.PlacesService(map);
+              const request = {
+                query: this.q,
+                fields: ['formatted_address', 'geometry', 'name']
+              };
+              service.findPlaceFromQuery(request, (results, status) => {
+                if (results && results.length > 0 && status === google.maps.places.PlacesServiceStatus.OK) {
+                  const place = Place.fromGoogle(results[0]);
+                  map.setCenter(results[0].geometry.location);
+                  map.setZoom(zoom);
+                  setUpMarker(place, results[0].geometry.location);
                 }
-                const service = new google.maps.places.PlacesService(map);
-                const request = {
-                  query: this.q,
-                  fields: ['formatted_address', 'geometry', 'name']
-                };
-                service.findPlaceFromQuery(request, (results, status) => {
-                  if (results && results.length > 0 && status === google.maps.places.PlacesServiceStatus.OK) {
-                    const place = Place.fromGoogle(results[0]);
-                    map.setCenter(results[0].geometry.location);
-                    map.setZoom(zoom);
-                    setUpMarker(place, results[0].geometry.location);
-                  }
-                });
-              }
-            };
+              });
+            }
+          };
 
-            const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${this.googleMapsKey}&libraries=places`;
-            const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
+          const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${this.googleMapsKey}&libraries=places`;
+          const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
 
-            // Check if thet script’s already been loaded
-            if (existingScript) {
-              // If it has and window.google is defined…
-              if (window.google) {
-                // …immediately call the handler
-                onloadHandler();
-              } else {
-                // …wait for the script to load and call the original handler too
-                const originalOnload = existingScript.onload;
-                existingScript.onload = function() {
-                  originalOnload.apply(this, arguments);
-                  onloadHandler();
-                };
-              }
+          // Check if thet script’s already been loaded
+          if (existingScript) {
+            // If it has and window.google is defined…
+            if (window.google) {
+              // …immediately call the handler
+              onloadHandler();
             } else {
-              const mapsScript = document.createElement('script');
-              mapsScript.onload = onloadHandler;
-              mapsScript.src = scriptSrc;
-              mapsScript.type = 'text/javascript';
-              document.getElementsByTagName('head')[0].appendChild(mapsScript);
+              // …wait for the script to load and call the original handler too
+              const originalOnload = existingScript.onload;
+              existingScript.onload = function() {
+                originalOnload.apply(this, arguments);
+                onloadHandler();
+              };
             }
           } else {
-            // The plain HTML iframe embed
-            const placeQuery = this.placeId ? `place_id:${this.placeId}` : this.q;
-            const mapIframe = document.createElement('iframe');
-            mapIframe.allowfullscreen = true;
-            mapIframe.frameborder = 0;
-            mapIframe.height = window.getComputedStyle(element).height;
-            mapIframe.src = `https://www.google.com/maps/embed/v1/place?key=${this.googleMapsKey}&q=${placeQuery}&zoom=${zoom}`;
-            mapIframe.style = 'border:0';
-            mapIframe.width = '100%';
-            element.appendChild(mapIframe);
+            const mapsScript = document.createElement('script');
+            mapsScript.onload = onloadHandler;
+            mapsScript.src = scriptSrc;
+            mapsScript.type = 'text/javascript';
+            document.getElementsByTagName('head')[0].appendChild(mapsScript);
           }
         }
       };
