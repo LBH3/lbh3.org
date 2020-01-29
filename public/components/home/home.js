@@ -41,8 +41,9 @@ export default Component.extend({
     get showUpcomingElections() {
       const session = this.session || {};
       const user = session.user || {};
-      const allowedHashers = [3435, 7313, 14, 38, 7303, 6535, 148, 3167, 25, 977, 5756, 10, 134, 189, 6143, 7559, 44, 5908, 7186, 67, 6394];
-      return true || allowedHashers.indexOf(user.hasherId) > -1;
+      const allowedHashers = [] || [3435, 7313, 14, 38, 7303, 6535, 148, 3167, 25, 977, 5756, 10, 134, 189, 6143, 7559, 44, 5908, 7186, 67, 6394];
+      const isBeforeElectionEnd = new Date() < new Date('Feb 3 2020 08:00:00 UTC');
+      return isBeforeElectionEnd || allowedHashers.indexOf(user.hasherId) > -1;
     },
     get title() {
       return 'LBH3';
