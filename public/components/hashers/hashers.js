@@ -31,7 +31,7 @@ export const ViewModel = DefineMap.extend({
 
     // Headshot
     if (this.searchNoHeadshot) {
-      searchParams.headshotUrl = this.searchNoHeadshot;
+      searchParams.headshotUrl = '';
     }
 
     // Skip
