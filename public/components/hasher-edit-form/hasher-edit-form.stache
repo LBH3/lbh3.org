@@ -73,12 +73,12 @@
   {{/if}}
 
   <div class="form-group row">
-    <label class="col-sm-4 col-form-label" for="formattedBirthday">
+    <label class="col-sm-4 col-form-label" for="birthMonth">
       Birthday (mm/dd)
     </label>
     <div class="col-sm-8">
       <div class="birthday float-left input-group w-50">
-        <input aria-label="Birth month" class="form-control" max="12" min="0" type="number" value:bind="hasher.birthMonth">
+        <input aria-label="Birth month" class="form-control" id="birthMonth" max="12" min="0" type="number" value:bind="hasher.birthMonth">
         <span class="input-group-append input-group-prepend">
           <span class="input-group-text">/</span>
         </span>
@@ -212,12 +212,12 @@
     </div>
 
     <div class="form-group justify-content-end row">
-      <label class="col-sm-4 col-form-label">
+      <label class="col-sm-4 col-form-label" for="first-phone">
         Phone {{#if(hasher.phones.length)}}numbers{{else}}number{{/if}}
       </label>
       {{#for(phone of hasher.phones)}}
         <div class="col-sm-8 d-flex flex-column flex-sm-row">
-          <input class="flex-grow-1 form-control mb-2 mr-sm-2" type="tel" value:bind="phone.value">
+          <input class="flex-grow-1 form-control mb-2 mr-sm-2" {{#eq(scope.index, 0)}}id="first-phone"{{/eq}} type="tel" value:bind="phone.value">
           <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
             <select class="form-control w-auto mb-2 mr-sm-2" value:bind="phone.type">
               {{>phoneTypeOptionsTemplate}}
@@ -229,7 +229,7 @@
         </div>
       {{/for}}
       <div class="col-sm-8 d-flex flex-column flex-sm-row">
-        <input class="flex-grow-1 form-control mb-2 mb-sm-0 mr-sm-2" type="tel" value:bind="additionalFields.phone.value">
+        <input class="flex-grow-1 form-control mb-2 mb-sm-0 mr-sm-2" {{#eq(hasher.phones.length, 0)}}id="first-phone"{{/eq}} type="tel" value:bind="additionalFields.phone.value">
         <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
           <select class="form-control w-auto mb-2 mb-sm-0 mr-sm-2" value:bind="additionalFields.phone.type">
             {{>phoneTypeOptionsTemplate}}
@@ -242,12 +242,12 @@
     </div>
 
     <div class="form-group justify-content-end row">
-      <label class="col-sm-4 col-form-label">
+      <label class="col-sm-4 col-form-label" for="first-email">
         Email {{#if(hasher.emails.length)}}addresses{{else}}address{{/if}}
       </label>
       {{#for(email of hasher.emails)}}
         <div class="col-sm-8 d-flex flex-column flex-sm-row">
-          <input class="flex-grow-1 form-control mb-2 mr-sm-2" type="email" value:bind="email.value">
+          <input class="flex-grow-1 form-control mb-2 mr-sm-2" {{#eq(scope.index, 0)}}id="first-email"{{/eq}} type="email" value:bind="email.value">
           <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
             <select class="form-control w-auto mb-2 mr-sm-2" value:bind="email.type">
               {{>emailTypeOptionsTemplate}}
@@ -259,7 +259,7 @@
         </div>
       {{/for}}
       <div class="col-sm-8 d-flex flex-column flex-sm-row">
-        <input class="flex-grow-1 form-control mb-2 mb-sm-0 mr-sm-2" type="email" value:bind="additionalFields.email.value">
+        <input class="flex-grow-1 form-control mb-2 mb-sm-0 mr-sm-2" {{#eq(hasher.emails.length, 0)}}id="first-email"{{/eq}} type="email" value:bind="additionalFields.email.value">
         <div class="d-sm-inline-flex flex-sm-nowrap justify-content-between no-gutters row">
           <select class="form-control w-auto mb-2 mb-sm-0 mr-sm-2" value:bind="additionalFields.email.type">
             {{>emailTypeOptionsTemplate}}
