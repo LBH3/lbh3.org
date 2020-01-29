@@ -31,7 +31,7 @@
   </dl>
 
   {{#if event.onOnPromise.isPending}}<lbh3-alert message:from="'Fetching the location…'" />{{/if}}
-  {{#and(event.onOnPromise.isResolved, event.onOnPromise.value.placeId)}}<lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 200px" />{{/and}}
+  {{#and(event.onOnPromise.isResolved, event.onOnPromise.value.placeId)}}<lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 260px" />{{/and}}
 
   {{#if(canViewRunAttendance)}}
     {{#or(event.hasEnded, hashers.length)}}
