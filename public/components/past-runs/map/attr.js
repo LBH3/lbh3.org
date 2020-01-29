@@ -2,6 +2,7 @@ import { darkModeStyles } from '~/components/map/';
 import callbacks from 'can-view-callbacks';
 import loader from '@loader';
 import platform from 'steal-platform';
+import route from 'can-route';
 
 const zoom = 9;
 
@@ -27,8 +28,19 @@ callbacks.attr('lbh3-map-attr', (mapElement, data) => {
       if (!infoWindow) {
         infoWindow = new google.maps.InfoWindow();
       }
+      const urlParams = event.urlId ? {
+        page: 'events',
+        urlId: event.urlId,
+        year: event.year
+      } : {
+        day: event.startDateParts.day,
+        month: event.startDateParts.month,
+        page: 'events',
+        trailNumber: event.trailNumber,
+        year: event.startDateParts.year
+      };
       infoWindow.setContent(`<div class="info-window">
-        <h6>${event.nameHtml ? `${event.nameHtml}${event.trailNumber ? ` (#${event.trailNumber})` : ''}` : `Run #${event.trailNumber}`}</h6>
+        <h6><a href="${route.url(urlParams)}" target="_blank">${event.nameHtml ? `${event.nameHtml}${event.trailNumber ? ` (#${event.trailNumber})` : ''}` : `Run #${event.trailNumber}`}</a></h6>
         <p>${event.startDateTimeString}</p>
         ${event.trailNumber ? `<p><b>Hare(s):</b> ${event.haresHtml || '?'}</p>` : ''}
         <p><b>Location:</b> ${event.longLocationHtml || event.shortLocationHtml}</p>
