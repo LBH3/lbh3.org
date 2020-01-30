@@ -4,7 +4,7 @@
 <h2 class="h3">Run #{{trailNumber}} Check-In Sheet</h2>
 
 {{#or(hashersPromise.isPending, patchesPromise.isPending)}}
-  <lbh3-alert message:from="'Fetching the check-in sheet. This may take a while…'" />
+  <lbh3-alert class="mt-3" message:from="'Fetching the check-in sheet. This may take a while…'" />
 {{/or}}
 
 {{#or(hashersPromise.isRejected, patchesPromise.isRejected)}}

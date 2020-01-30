@@ -6,7 +6,7 @@
 {{#if session.user.canViewDirectoryInfo}}
 
   {{#if hashersPromise.isPending}}
-    <lbh3-alert message:from="'Fetching the Email List…'" />
+    <lbh3-alert class="mt-3" message:from="'Fetching the Email List…'" />
   {{/if}}
 
   {{#if hashersPromise.isRejected}}

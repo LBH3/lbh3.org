@@ -2,7 +2,7 @@
 <can-import from="~/components/run-list/" />
 
 {{#if allEventsPromise.isPending}}
-  <lbh3-alert message:from="'Fetching the runs…'" />
+  <lbh3-alert class="mt-3" message:from="'Fetching the runs…'" />
 {{/if}}
 
 {{#if allEventsPromise.isRejected}}

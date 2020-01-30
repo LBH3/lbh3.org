@@ -45,29 +45,29 @@
       {{#switch page}}
         {{#case "about"}}
           <can-import class="container d-block pl-0 pr-0" from="~/components/about/nav/">
-            {{#if isPending}}<lbh3-alert message:from="'Loading the About nav…'" />{{/if}}
-            {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The About navigation failed to load.</div>{{/if}}
+            {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the About nav…'" />{{/if}}
+            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The About navigation failed to load.</div>{{/if}}
             {{#if isResolved}}<lbh3-about-nav secondaryPage:from="secondaryPage" />{{/if}}
           </can-import>
           {{#switch secondaryPage}}
             {{#case "mismanagement"}}
               <can-import class="container d-block pl-0 pr-0" from="~/components/about/mismanagement/">
-                {{#if isPending}}<lbh3-alert message:from="'Loading the Mismanagement page…'" />{{/if}}
-                {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Mismanagement page failed to load.</div>{{/if}}
+                {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Mismanagement page…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Mismanagement page failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-about-mismanagement description:to="description" ogTitle:to="ogTitle" title:to="title" year:bind="year" />{{/if}}
               </can-import>
             {{/case}}
             {{#case "privacy"}}
               <can-import class="container d-block pl-0 pr-0" from="~/components/about/privacy/">
-                {{#if isPending}}<lbh3-alert message:from="'Loading the Privacy page…'" />{{/if}}
-                {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Privacy page failed to load.</div>{{/if}}
+                {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Privacy page…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Privacy page failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-about-privacy description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
               </can-import>
             {{/case}}
             {{#default}}
               <can-import class="container d-block pl-0 pr-0" from="~/components/about/">
-                {{#if isPending}}<lbh3-alert message:from="'Loading the About page…'" />{{/if}}
-                {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The About page failed to load.</div>{{/if}}
+                {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the About page…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The About page failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-about description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" />{{/if}}
               </can-import>
             {{/default}}
@@ -80,8 +80,8 @@
                 {{#case "ballots"}}
                   <lbh3-no-ssr>
                     <can-import class="container d-block pl-0 pr-0" from="~/components/erection/ballots/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Erection Ballots page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Erection Ballots page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Erection Ballots page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Erection Ballots page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-erection-ballots description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -89,8 +89,8 @@
                 {{#case "edit"}}
                   <lbh3-no-ssr>
                     <can-import class="container d-block pl-0 pr-0" from="~/components/erection/edit/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Edit Erection page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Edit Erection page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Edit Erection page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Erection page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-erection-edit description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -98,8 +98,8 @@
                 {{#case "eligibility"}}
                   <lbh3-no-ssr>
                     <can-import from="~/components/erection/eligibility/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Erection Eligibility page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Erection Eligibility page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Erection Eligibility page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Erection Eligibility page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-erection-eligibility description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -107,8 +107,8 @@
                 {{#case "results"}}
                   <lbh3-no-ssr>
                     <can-import from="~/components/erection/results/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Erection Results page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Erection Results page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Erection Results page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Erection Results page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-erection-results description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -116,15 +116,15 @@
               {{/switch}}
             {{else}}
               <can-import class="container d-block pl-0 pr-0" from="~/components/erection/">
-                {{#if isPending}}<lbh3-alert message:from="'Loading the Erection page…'" />{{/if}}
-                {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Erection page failed to load.</div>{{/if}}
+                {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Erection page…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Erection page failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-erection description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" />{{/if}}
               </can-import>
             {{/if}}
           {{else}}
             <can-import from="~/components/erections/">
-              {{#if isPending}}<lbh3-alert message:from="'Loading the Erections page…'" />{{/if}}
-              {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Erections page failed to load.</div>{{/if}}
+              {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Erections page…'" />{{/if}}
+              {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Erections page failed to load.</div>{{/if}}
               {{#if isResolved}}<lbh3-erections description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
             </can-import>
           {{/if}}
@@ -135,8 +135,8 @@
               {{#case "attendance"}}
                 <lbh3-no-ssr>
                   <can-import from="~/components/run/attendance/">
-                    {{#if isPending}}<lbh3-alert message:from="'Loading the Run Attendance Sheet…'" />{{/if}}
-                    {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Run Attendance Sheet failed to load.</div>{{/if}}
+                    {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Run Attendance Sheet…'" />{{/if}}
+                    {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Run Attendance Sheet failed to load.</div>{{/if}}
                     {{#if isResolved}}<lbh3-run-attendance day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -145,14 +145,14 @@
                 <lbh3-no-ssr>
                   {{#if urlId}}
                     <can-import class="container d-block pl-0 pr-0" from="~/components/special-event/edit/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Edit Special Event page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Edit Special Event page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Edit Special Event page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Special Event page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-special-event-edit description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" year:from="year" />{{/if}}
                     </can-import>
                   {{else}}
                     <can-import from="~/components/run/edit/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Edit Run page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Edit Run page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Edit Run page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Run page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-run-edit day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
                     </can-import>
                   {{/if}}
@@ -162,21 +162,21 @@
           {{else}}
             {{#if trailNumber}}
               <can-import from="~/components/run/">
-                {{#if isPending}}<lbh3-alert message:from="'Loading the Run page…'" />{{/if}}
-                {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Run page failed to load.</div>{{/if}}
+                {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Run page…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Run page failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-run day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
               </can-import>
             {{else}}
               {{#if urlId}}
                 <can-import class="container d-block pl-0 pr-0" from="~/components/special-event/">
-                  {{#if isPending}}<lbh3-alert message:from="'Loading the Special Event page…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Special Event page failed to load.</div>{{/if}}
+                  {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Special Event page…'" />{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Special Event page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-special-event description:to="description" ogTitle:to="ogTitle" title:to="title" urlId:from="urlId" year:from="year" />{{/if}}
                 </can-import>
               {{else}}
                 <can-import from="~/components/past-runs/">
-                  {{#if isPending}}<lbh3-alert message:from="'Loading Past Runs…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The map page failed to load.</div>{{/if}}
+                  {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading Past Runs…'" />{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The map page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-past-runs description:to="description" ogTitle:to="ogTitle" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" title:to="title" view:bind="view" year:bind="year" />{{/if}}
                 </can-import>
               {{/if}}
@@ -186,8 +186,8 @@
         {{#case "hareline"}}
           {{<harelineNav}}
             <can-import from="~/components/hareline/nav/">
-              {{#if isPending}}<lbh3-alert message:from="'Loading the Hareline nav…'" />{{/if}}
-              {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Hareline navigation failed to load.</div>{{/if}}
+              {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Hareline nav…'" />{{/if}}
+              {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Hareline navigation failed to load.</div>{{/if}}
               {{#if isResolved}}<lbh3-hareline-nav secondaryPage:from="secondaryPage" />{{/if}}
             </can-import>
           {{/harelineNav}}
@@ -196,8 +196,8 @@
               {{>harelineNav}}
               <lbh3-no-ssr>
                 <can-import class="container d-block pl-0 pr-0" from="~/components/hareline/add/">
-                  {{#if isPending}}<lbh3-alert message:from="'Loading the Add Run page…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Add Run page failed to load.</div>{{/if}}
+                  {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Add Run page…'" />{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Add Run page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-hareline-add description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
                 </can-import>
               </lbh3-no-ssr>
@@ -205,8 +205,8 @@
             {{#case "edit"}}
               <lbh3-no-ssr>
                 <can-import from="~/components/run/edit/">
-                  {{#if isPending}}<lbh3-alert message:from="'Loading the Edit Run page…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Edit Run page failed to load.</div>{{/if}}
+                  {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Edit Run page…'" />{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Run page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-run-edit day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
                 </can-import>
               </lbh3-no-ssr>
@@ -214,16 +214,16 @@
             {{#case "guidelines"}}
               {{>harelineNav}}
               <can-import class="container d-block pl-0 pr-0" from="~/components/hareline/guidelines/">
-                {{#if isPending}}<lbh3-alert message:from="'Loading the Haring Guidelines…'" />{{/if}}
-                {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Haring Guidelines failed to load.</div>{{/if}}
+                {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Haring Guidelines…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Haring Guidelines failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-hareline-guidelines description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
               </can-import>
             {{/case}}
             {{#default}}
               {{>harelineNav}}
               <can-import from="~/components/hareline/">
-                {{#if isPending}}<lbh3-alert message:from="'Loading the Hareline…'" />{{/if}}
-                {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Hareline failed to load.</div>{{/if}}
+                {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Hareline…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Hareline failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-hareline description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
               </can-import>
             {{/default}}
@@ -237,8 +237,8 @@
                 {{#case "edit"}}
                   <lbh3-no-ssr>
                     <can-import class="container d-block pl-0 pr-0" from="~/components/hasher/edit/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Edit Hasher page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Edit Hasher page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Edit Hasher page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Hasher page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-hasher-edit description:to="description" id:from="id" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -247,16 +247,16 @@
             {{else}}
               <lbh3-no-ssr>
                 <can-import from="~/components/hasher/">
-                  {{#if isPending}}<lbh3-alert message:from="'Loading the Hasher page…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Hasher page failed to load.</div>{{/if}}
+                  {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Hasher page…'" />{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Hasher page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-hasher description:to="description" id:from="id" ogTitle:to="ogTitle" role:bind="role" secondaryPage:from="secondaryPage" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" skip:from="skip" title:to="title" />{{/if}}
                 </can-import>
               </lbh3-no-ssr>
             {{/if}}
           {{else}}
             <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/nav/">
-              {{#if isPending}}<lbh3-alert message:from="'Loading the Directory nav…'" />{{/if}}
-              {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Directory navigation failed to load.</div>{{/if}}
+              {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Directory nav…'" />{{/if}}
+              {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Directory navigation failed to load.</div>{{/if}}
               {{#if isResolved}}<lbh3-hashers-nav secondaryPage:from="secondaryPage" />{{/if}}
             </can-import>
             {{#if secondaryPage}}
@@ -264,8 +264,8 @@
                 {{#case "add"}}
                   <lbh3-no-ssr>
                     <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/add/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Add Hasher page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Add Hasher page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Add Hasher page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Add Hasher page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-hashers-add description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -273,8 +273,8 @@
                 {{#case "attendance-records"}}
                   <lbh3-no-ssr>
                     <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/attendance-records/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Attendance Records page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Attendance Records page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Attendance Records page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Attendance Records page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-hashers-attendance-records description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -282,8 +282,8 @@
                 {{#case "early-warning"}}
                   <lbh3-no-ssr>
                     <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/early-warning/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Early Warning page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Early Warning page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Early Warning page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Early Warning page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-hashers-early-warning description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -291,8 +291,8 @@
                 {{#case "email"}}
                   <lbh3-no-ssr>
                     <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/email/">
-                      {{#if isPending}}<lbh3-alert message:from="'Loading the Email List page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Email List page failed to load.</div>{{/if}}
+                      {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Email List page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Email List page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-hashers-email description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
@@ -301,8 +301,8 @@
             {{else}}
               <lbh3-no-ssr>
                 <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/">
-                  {{#if isPending}}<lbh3-alert message:from="'Loading the Directory page…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Directory page failed to load.</div>{{/if}}
+                  {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Directory page…'" />{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Directory page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-hashers description:to="description" ogTitle:to="ogTitle" searchNoHeadshot:bind="noHeadshot" searchSort:bind="sort" searchText:bind="search" skip:from="skip" title:to="title" />{{/if}}
                 </can-import>
               </lbh3-no-ssr>
@@ -311,15 +311,15 @@
         {{/case}}
         {{#case "home"}}
           <can-import class="container d-block pl-0 pr-0" from="~/components/home/">
-            {{#if isPending}}<lbh3-alert message:from="'Loading the next run…'" />{{/if}}
-            {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The next run failed to load. Check <a href="https://hash.beer" target="_blank">hash.beer</a> for the next run.</div>{{/if}}
+            {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the next run…'" />{{/if}}
+            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The next run failed to load. Check <a href="https://hash.beer" target="_blank">hash.beer</a> for the next run.</div>{{/if}}
             {{#if isResolved}}<lbh3-home description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
           </can-import>
         {{/case}}
         {{#case "special-events"}}
           <can-import from="~/components/special-events/">
-            {{#if isPending}}<lbh3-alert message:from="'Loading the Special Events page…'" />{{/if}}
-            {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Special Events page failed to load.</div>{{/if}}
+            {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Special Events page…'" />{{/if}}
+            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Special Events page failed to load.</div>{{/if}}
             {{#if isResolved}}<lbh3-special-events description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
           </can-import>
         {{/case}}
@@ -329,8 +329,8 @@
               {{#case "edit"}}
                 <lbh3-no-ssr>
                   <can-import from="~/components/users/edit/">
-                    {{#if isPending}}<lbh3-alert message:from="'Loading the Edit User page…'" />{{/if}}
-                    {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Edit User page failed to load.</div>{{/if}}
+                    {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Edit User page…'" />{{/if}}
+                    {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit User page failed to load.</div>{{/if}}
                     {{#if isResolved}}<lbh3-user-edit description:to="description" id:from="id" ogTitle:to="ogTitle" title:to="title" />{{/if}}
                   </can-import>
                 </lbh3-no-ssr>
@@ -338,8 +338,8 @@
             {{/switch}}
           {{else}}
             <can-import from="~/components/users/">
-              {{#if isPending}}<lbh3-alert message:from="'Loading the Users page…'" />{{/if}}
-              {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Users page failed to load.</div>{{/if}}
+              {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the Users page…'" />{{/if}}
+              {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Users page failed to load.</div>{{/if}}
               {{#if isResolved}}<lbh3-users description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" />{{/if}}
             </can-import>
           {{/if}}

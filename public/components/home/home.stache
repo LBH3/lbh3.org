@@ -31,7 +31,7 @@
 <lbh3-no-ssr>
   {{#if electionsPromise}}
     {{#if electionsPromise.isPending}}
-      <lbh3-alert message:from="'Fetching elections…'" />
+      <lbh3-alert class="mt-3" message:from="'Fetching elections…'" />
     {{/if}}
     {{#if electionsPromise.isRejected}}
       <div class="alert alert-danger" role="alert">

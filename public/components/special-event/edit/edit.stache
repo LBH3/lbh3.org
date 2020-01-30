@@ -7,7 +7,7 @@
 
 {{#if session.user.canEditFutureSpecialEvents}}
   {{#if specialEventPromise.isPending}}
-    <lbh3-alert message:from="'Fetching the event…'" />
+    <lbh3-alert class="mt-3" message:from="'Fetching the event…'" />
   {{/if}}
 
   {{#if specialEventPromise.isRejected}}

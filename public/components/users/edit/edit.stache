@@ -7,7 +7,7 @@
 {{#if session.user.canManageUsers}}
 
   {{#if userPromise.isPending}}
-    <lbh3-alert message:from="'Fetching the user…'" />
+    <lbh3-alert class="mt-3" message:from="'Fetching the user…'" />
   {{/if}}
 
   {{#if userPromise.isRejected}}

@@ -14,7 +14,7 @@
     <button class="btn btn-primary" type="submit">Decrypt</button>
   </form>
 
-  {{#if ballotsPromise.isPending}}<lbh3-alert message:from="'Fetching the ballots…'" />{{/if}}
+  {{#if ballotsPromise.isPending}}<lbh3-alert class="mt-3" message:from="'Fetching the ballots…'" />{{/if}}
 
   {{#if ballotsPromise.isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The ballots couldn’t be retrieved. {{ballotsPromise.reason.xhr.message}}</div>{{/if}}
 

@@ -7,7 +7,7 @@
 
 {{#if session.user.canAdministerElections}}
   {{#or(electionPromise.isPending, eligibilityPromise.isPending)}}
-    <lbh3-alert message:from="'Fetching eligible hashers…'" />
+    <lbh3-alert class="mt-3" message:from="'Fetching eligible hashers…'" />
   {{/if}}
 
   {{#or(electionPromise.isRejected, eligibilityPromise.isRejected)}}

@@ -5,7 +5,7 @@
 
 {{#if canEditThisHasher}}
   {{#if hasherPromise.isPending}}
-    <lbh3-alert message:from="'Fetching the hasher…'" />
+    <lbh3-alert class="mt-3" message:from="'Fetching the hasher…'" />
   {{/if}}
 
   {{#if hasherPromise.isRejected}}

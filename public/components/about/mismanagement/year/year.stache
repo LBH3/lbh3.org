@@ -23,7 +23,7 @@
   {{#for(hasherByPosition of hashersByPosition)}}
     {{#if hasherByPosition.promise}}
       {{#if hasherByPosition.promise.isPending}}
-        <lbh3-alert message:from="'Fetching their position…'" />
+        <lbh3-alert class="mt-3" message:from="'Fetching their position…'" />
       {{/if}}
 
       {{#if hasherByPosition.promise.isRejected}}

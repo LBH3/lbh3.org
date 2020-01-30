@@ -6,7 +6,7 @@
 <can-import from="~/components/run-list/" />
 
 {{#if hasherPromise.isPending}}
-  <lbh3-alert message:from="'Fetching the hasher…'" />
+  <lbh3-alert class="mt-3" message:from="'Fetching the hasher…'" />
 {{/if}}
 
 {{#if hasherPromise.isRejected}}
@@ -214,7 +214,7 @@
       <div class="col-sm">
         <h3>Patches</h3>
 
-        {{#if patchesPromise.isPending}}<lbh3-alert message:from="'Fetching their patches…'" />{{/if}}
+        {{#if patchesPromise.isPending}}<lbh3-alert class="mt-3" message:from="'Fetching their patches…'" />{{/if}}
 
         {{#if patchesPromise.isRejected}}
           <div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The hasher’s patches couldn’t be retrieved. {{patchesPromise.reason.xhr.message}}</div>
@@ -260,7 +260,7 @@
     <div class="col-sm">
       <h3>Bored positions</h3>
 
-      {{#if boredPositionsPromise.isPending}}<lbh3-alert message:from="'Fetching Mismanagement…'" />{{/if}}
+      {{#if boredPositionsPromise.isPending}}<lbh3-alert class="mt-3" message:from="'Fetching Mismanagement…'" />{{/if}}
 
       {{#if boredPositionsPromise.isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> Couldn’t retrieve when {{#eq(id, session.user.hasherId)}}you have{{else}}this hasher has{{/eq}} served on the Bored. {{boredPositionsPromise.reason.xhr.message}}</div>{{/if}}
 
@@ -311,7 +311,7 @@
       </form>
     </div>
 
-    {{#if eventsPromise.isPending}}<lbh3-alert message:from="'Fetching…'" />{{/if}}
+    {{#if eventsPromise.isPending}}<lbh3-alert class="mt-3" message:from="'Fetching…'" />{{/if}}
 
     {{#if eventsPromise.isRejected}}
       <div class="alert alert-danger" role="alert">

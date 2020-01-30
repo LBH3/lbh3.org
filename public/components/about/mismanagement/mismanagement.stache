@@ -3,7 +3,7 @@
 <h2 class="sr-only">Mismanagement</h2>
 
 {{#if yearsPromise.isPending}}
-  <lbh3-alert message:from="'Fetching the Mismanagement…'" />
+  <lbh3-alert class="mt-3" message:from="'Fetching the Mismanagement…'" />
 {{/if}}
 
 {{#if yearsPromise.isRejected}}

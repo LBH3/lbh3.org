@@ -5,7 +5,7 @@
 <h2 class="sr-only">Past Runs</h2>
 
 {{#if yearsPromise.isPending}}
-  <lbh3-alert message:from="'Fetching Past Runs…'" />
+  <lbh3-alert class="mt-3" message:from="'Fetching Past Runs…'" />
 {{/if}}
 
 {{#if yearsPromise.isRejected}}

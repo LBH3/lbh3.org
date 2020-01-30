@@ -8,7 +8,7 @@
 
 <lbh3-no-ssr>
   {{#if electionPromise.isPending}}
-    <lbh3-alert message:from="'Fetching your ballot…'" />
+    <lbh3-alert class="mt-3" message:from="'Fetching your ballot…'" />
   {{/if}}
 
   {{#if electionPromise.isRejected}}
@@ -225,7 +225,7 @@
                     {{/if}}
 
                     {{#if ballotsPromise.isPending}}
-                      <lbh3-alert message:from="'Fetching submitted ballots…'" />
+                      <lbh3-alert class="mt-3" message:from="'Fetching submitted ballots…'" />
                     {{/if}}
 
                     {{#if ballotsPromise.isRejected}}
@@ -289,7 +289,7 @@
                     {{{election.descriptionHtml}}}
 
                     {{#if hashitsAndScribesPromise.isPending}}
-                      <lbh3-alert message:from="'Fetching the ballot options…'" />
+                      <lbh3-alert class="mt-3" message:from="'Fetching the ballot options…'" />
                     {{/if}}
 
                     {{#if hashitsAndScribesPromise.isRejected}}

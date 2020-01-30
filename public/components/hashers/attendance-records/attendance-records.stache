@@ -3,7 +3,7 @@
 
 <h2 class="sr-only">Attendance Records</h2>
 
-<form class="mb-2" on:submit="scope.event.preventDefault()">
+<form class="mb-3" on:submit="scope.event.preventDefault()">
   <div class="form-inline">
     <label class="sr-only" for="searchText">Role</label>
     <input autocomplete="off" autofocus class="form-control" id="searchText" placeholder="Role" type="text" value:bind="searchText">
@@ -14,7 +14,7 @@
 </form>
 
 {{#if hashersPromises.isPending}}
-  <lbh3-alert message:from="'Fetching the Attendance Records…'" />
+  <lbh3-alert class="mt-3" message:from="'Fetching the Attendance Records…'" />
 {{/if}}
 
 {{#if hashersPromises.isRejected}}

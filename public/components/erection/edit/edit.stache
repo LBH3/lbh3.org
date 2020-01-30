@@ -4,7 +4,7 @@
 
 {{#if session.user.canManageUsers}}
   {{#if erectionPromise.isPending}}
-    <lbh3-alert message:from="'Fetching the erection…'" />
+    <lbh3-alert class="mt-3" message:from="'Fetching the erection…'" />
   {{/if}}
 
   {{#if erectionPromise.isRejected}}
