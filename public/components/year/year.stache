@@ -1,27 +1,6 @@
-<can-import from="~/components/alert/" />
 <can-import from="~/components/run-list/" />
 
-{{#if allEventsPromise.isPending}}
-  <lbh3-alert class="mt-3" message:from="'Fetching the runs…'" />
-{{/if}}
-
-{{#if allEventsPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The runs couldn’t be retrieved.
-    {{eventsPromise.reason.xhr.message}}
-    {{specialEventsPromise.reason.xhr.message}}
-  </div>
-{{/if}}
-
-{{#if(allEventsPromise.isResolved)}}
-  {{#for(month of eventsByMonth)}}
-    <h3>{{month.name}} {{year}}</h3>
-    <lbh3-run-list
-      events:from="month.events"
-      showHashit:from="showHashit"
-      showNotes:from="showNotes"
-      showOnOn:from="showOnOn"
-      showScribe:from="showScribe"
-    />
-  {{/for}}
-{{/if}}
+{{#for(month of eventsByMonth)}}
+  <h3>{{month.name}} {{year}}</h3>
+  <lbh3-run-list events:from="month.events" showHashit:from="showHashit" showNotes:from="showNotes" showOnOn:from="showOnOn" showScribe:from="showScribe" />
+{{/for}}

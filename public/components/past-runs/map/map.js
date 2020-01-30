@@ -9,18 +9,7 @@ export default Component.extend({
   tag: 'lbh3-past-runs-map',
   view,
   ViewModel: {
-    allEvents: {
-      get(lastSetValue, resolve) {
-        const allEventsPromise = this.allEventsPromise;
-        allEventsPromise.then(values => {
-          resolve([
-            ...values[0],
-            ...values[1]
-          ]);
-        });
-      }
-    },
-    allEventsPromise: Promise,
+    allEvents: 'any',
     get googleMapsKey() {
       return loader.googleMapsKey;
     },

@@ -17,6 +17,17 @@ export default Component.extend({
   tag: 'lbh3-past-runs',
   view,
   ViewModel: {
+    allEvents: {
+      get(lastSetValue, resolve) {
+        const allEventsPromise = this.allEventsPromise;
+        allEventsPromise.then(values => {
+          resolve([
+            ...values[0],
+            ...values[1]
+          ]);
+        });
+      }
+    },
     get allEventsPromise() {
       return Promise.all([
         this.eventsPromise,

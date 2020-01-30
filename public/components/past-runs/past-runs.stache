@@ -40,14 +40,7 @@
     </form>
   {{/if}}
 
-  {{#eq(view, "map")}}
-    <hr>
-    <can-import from="~/components/past-runs/map/">
-      {{#if isPending}}<lbh3-alert message:from="'Loading the map…'" />{{/if}}
-      {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The map failed to load.</div>{{/if}}
-      {{#if isResolved}}<lbh3-past-runs-map allEventsPromise:from="allEventsPromise" session:from="session" />{{/if}}
-    </can-import>
-  {{else}}
+  {{^eq(view, "map")}}
     <details class="mb-2 mt-2">
       <summary>Display options</summary>
       <form>
@@ -75,30 +68,46 @@
         </div>
       </form>
     </details>
-    <hr>
-    {{^if session.user.hasherId}}
-      {{#if session.user}}
-        <lbh3-no-ssr class="d-print-none">
-          <can-import from="~/components/request-access/">
-            {{#if isResolved}}
-              <p>Are you an LBH3 hasher? Provide your name to get special access to our site. <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a></p>
-              <lbh3-request-access />
-              <hr />
-            {{/if}}
-          </can-import>
-        </lbh3-no-ssr>
-      {{else}}
-        <div class="alert alert-info d-print-none" role="alert">
-          <p><strong>Looking for our photos or the Snooze?</strong></p>
-          <p class="mb-0">Get started by signing in with <a href="/auth/facebook">Facebook</a> or <a href="/auth/google">Google</a>, then <strong>cum back to this page</strong> to request access.</p>
-        </div>
-      {{/if}}
-    {{/if}}
-    <lbh3-year allEventsPromise:from="allEventsPromise" eventsPromise:from="eventsPromise" showHashit:from="showHashit" showNotes:from="showNotes" showOnOn:from="showOnOn" showScribe:from="showScribe" specialEventsPromise:from="specialEventsPromise" year:from="year" />
-    {{#if session.user.hasherId}}
-      <hr>
-      <p><strong>Share your pics with us!</strong> On any of our Google Photos pages, click the <em>Add to album</em> icon/button to upload from your device.</p>
-      <p class="d-print-none"><a href="mailto:hashflash@lbh3.org">Email our Hash Flash</a> if you see a picture you’d like removed.</p>
-    {{/if}}
   {{/eq}}
+
+  <hr>
+
+  {{#if allEventsPromise.isPending}}<lbh3-alert class="mt-3" message:from="'Fetching the runs…'" />{{/if}}
+
+  {{#if allEventsPromise.isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The runs couldn’t be retrieved. {{allEventsPromise.reason.xhr.message}}</div>{{/if}}
+
+  {{#if(allEventsPromise.isResolved)}}
+    {{#eq(view, "map")}}
+      <can-import from="~/components/past-runs/map/">
+        {{#if isPending}}<lbh3-alert message:from="'Loading the map…'" />{{/if}}
+        {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The map failed to load.</div>{{/if}}
+        {{#if isResolved}}<lbh3-past-runs-map allEvents:from="allEvents" session:from="session" />{{/if}}
+      </can-import>
+    {{else}}
+      {{^if session.user.hasherId}}
+        {{#if session.user}}
+          <lbh3-no-ssr class="d-print-none">
+            <can-import from="~/components/request-access/">
+              {{#if isResolved}}
+                <p>Are you an LBH3 hasher? Provide your name to get special access to our site. <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a></p>
+                <lbh3-request-access />
+                <hr />
+              {{/if}}
+            </can-import>
+          </lbh3-no-ssr>
+        {{else}}
+          <div class="alert alert-info d-print-none" role="alert">
+            <p><strong>Looking for our photos or the Snooze?</strong></p>
+            <p class="mb-0">Get started by signing in with <a href="/auth/facebook">Facebook</a> or <a href="/auth/google">Google</a>, then <strong>cum back to this page</strong> to request access.</p>
+          </div>
+        {{/if}}
+      {{/if}}
+      <lbh3-year allEvents:from="allEvents" showHashit:from="showHashit" showNotes:from="showNotes" showOnOn:from="showOnOn" showScribe:from="showScribe" year:from="year" />
+      {{#if session.user.hasherId}}
+        <hr>
+        <p><strong>Share your pics with us!</strong> On any of our Google Photos pages, click the <em>Add to album</em> icon/button to upload from your device.</p>
+        <p class="d-print-none"><a href="mailto:hashflash@lbh3.org">Email our Hash Flash</a> if you see a picture you’d like removed.</p>
+      {{/if}}
+    {{/eq}}
+  {{/if}}
 {{/if}}
