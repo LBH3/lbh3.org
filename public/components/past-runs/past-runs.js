@@ -3,7 +3,7 @@ import Event from '~/models/event';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import Year from '~/models/year';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import platform from 'steal-platform';
 import route from 'can-route';
 import view from './past-runs.stache';
@@ -12,6 +12,7 @@ import './past-runs.less';
 import '~/components/year/';
 
 const currentYear = (new Date()).getFullYear();
+const timeZone = 'America/Los_Angeles';
 
 export default Component.extend({
   tag: 'lbh3-past-runs',
@@ -34,14 +35,17 @@ export default Component.extend({
         this.specialEventsPromise
       ]);
     },
+    currentTime: {
+      default: () => {
+        return new Date();
+      }
+    },
     get description() {
       return `Archive of LBH3’s runs in ${this.year}.`;
     },
     get eventQuery() {
-      const currentDate = moment();
-      const currentYear = currentDate.year();
-      const endDate = (currentYear === this.year) ? currentDate.toDate() : moment().year(this.year).endOf('year').toDate();
-      const startDate = moment().year(this.year).startOf('year').toDate();
+      const endDate = (currentYear === this.year) ? this.currentTime : moment().tz(timeZone).year(this.year).endOf('year').toDate();
+      const startDate = moment().tz(timeZone).year(this.year).startOf('year').toDate();
       return {
         $limit: 100,
         startDatetime: {
