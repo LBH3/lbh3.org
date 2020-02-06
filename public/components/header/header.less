@@ -10,16 +10,18 @@ lbh3-header {
   }
 
   h1 a {
+    color: var(--lbh3-red);
     &:hover {
+      color: var(--lbh3-red-hover);
       text-decoration: none;
       svg {
-        fill: var(--link-color-hover);
+        fill: var(--lbh3-red-hover);
       }
     }
 
     svg {
       bottom: 4px;
-      fill: var(--link-color);
+      fill: var(--lbh3-red);
       position: relative;
     }
   }
@@ -38,6 +40,13 @@ lbh3-header {
     color: var(--facebook-blue);
     &:hover {
       color: var(--facebook-blue-hover);
+    }
+  }
+
+  .google {
+    color: var(--lbh3-red);
+    &:hover {
+      color: var(--lbh3-red-hover);
     }
   }
 

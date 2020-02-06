@@ -2,13 +2,16 @@
 
 body {
   background: var(--light);
-  color: var(--dark);
+  color: var(--text-color-main);
 
   @supports(padding: max(0px)) {
     padding-bottom: env(safe-area-inset-bottom);
   }
 }
 
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-color-heading);
+}
 h2 {
   text-align: center;
 }
@@ -164,7 +167,7 @@ mark {
 }
 
 .form-control-plaintext {
-  color: var(--text-color);
+  color: var(--text-color-main);
 }
 
 .close {
@@ -195,9 +198,9 @@ mark {
 
   .pac-item {
     border-top-color: var(--awesomplete-border-color);
-    color: var(--text-muted-color);
+    color: var(--text-color-muted);
 
-		&:active, &:hover, &.pac-item-selected {
+    &:active, &:hover, &.pac-item-selected {
       background-color: var(--blue);
       color: #fff;
 
@@ -208,7 +211,7 @@ mark {
   }
 
   .pac-item-query {
-    color: var(--text-color);
+    color: var(--text-color-main);
   }
 
   &.pac-logo {
@@ -226,26 +229,23 @@ mark {
 }
 
 .table {
-  color: var(--text-color);
+  color: var(--text-color-main);
 
   td, th, thead th {
     border-color: var(--table-cell-border-color);
   }
 }
 
-.table-danger, .table-danger > th, .table-danger > td {
-  background-color: var(--table-danger-background-color);
-}
-.table-danger th, .table-danger td, .table-danger thead th, .table-danger tbody + tbody {
-  border-color: var(--table-danger-border-color);
-}
-
 .table-striped tbody tr:nth-of-type(odd) {
   background-color: var(--table-striped-background-color);
 }
 
+.text-danger {
+  color: var(--lbh3-red) !important;
+}
+
 .text-muted {
-  color: var(--text-muted-color) !important;
+  color: var(--text-color-muted) !important;
 }
 
 /* Workaround for https://github.com/twbs/bootstrap/issues/21577 */
@@ -304,7 +304,7 @@ mark {
   --close-text-shadow: 0 1px 0 #fff;
   --facebook-blue: #4267B2;
   --facebook-blue-hover: darken(#4267B2, 10%);
-  --figure-caption-color: #6c757d;
+  --figure-caption-color: var(--text-color-muted);
   --form-control-background-color: #fff;
   --form-control-border-color: #ced4da;
   --form-control-text-color: #495057;
@@ -315,16 +315,17 @@ mark {
   --form-control-focus-border-color: #80bdff;
   --form-control-focus-text-color: #495057;
   --hr-color: rgba(0, 0, 0, 0.1);
-  --link-color: #dc3232;
-  --link-color-hover: darken(#dc3232, 10%);
+  --lbh3-red: #dc3232;
+  --lbh3-red-hover: darken(#dc3232, 10%);
+  --link-color: var(--lbh3-red);
+  --link-color-hover: var(--lbh3-red-hover);
   --mark-background-color: #fcf8e3;
   --nav-link-active-background-color: #000;
   --table-cell-border-color: #dee2e6;
-  --table-danger-background-color: #f5c6cb;
-  --table-danger-border-color: #f5c6cb;
   --table-striped-background-color: rgba(0, 0, 0, 0.05);
-  --text-color: #212529;
-  --text-muted-color: #6c757d;
+  --text-color-heading: var(--text-color-main);
+  --text-color-main: #212529;
+  --text-color-muted: #6c757d;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -362,15 +363,14 @@ mark {
     --button-color-primary-border-color: #0069d9;
     --button-color-primary-hover-background-color: #007bff;
     --button-color-primary-hover-border-color: #007bff;
-    --card-background-color: #111;
+    --card-background-color: rgba(255, 255, 255, 0.075);
     --card-border-color: rgba(255, 255, 255, 0.125);
-    --card-header-background-color: rgba(255, 255, 255, 0.1);
-    --card-header-border-color: rgba(255, 255, 255, 0.125);
+    --card-header-background-color: rgba(255, 255, 255, 0.125);
+    --card-header-border-color: var(--card-border-color);
     --close-color: #fff;
     --close-text-shadow: 0 1px 0 #000;
     --dark: #f8f9fa;
     --facebook-blue-hover: lighten(#4267B2, 10%);
-    --figure-caption-color: #bbb;
     --form-control-background-color: transparent;
     --form-control-border-color: #777;
     --form-control-text-color: #f8f9fa;
@@ -382,17 +382,17 @@ mark {
     --form-control-focus-box-shadow: 0 0 0 0.2rem rgba(60, 88, 128, 0.75);
     --form-control-focus-text-color: #f8f9fa;
     --hr-color: rgba(255, 255, 255, 0.5);
-    --link-color: #f03c32;
-    --link-color-hover: lighten(#f03c32, 5%);
-    --light: #000;
+    --lbh3-red-hover: lighten(#dc3232, 10%);
+    --link-color: #FF6567;
+    --link-color-hover: lighten(#FF6567, 10%);
+    --light: #121212;
     --mark-background-color: yellow;
     --nav-link-active-background-color: #666;
     --table-cell-border-color: #32383e;
-    --table-danger-background-color: #4d0d07;
-    --table-danger-border-color: #4d0d07;
     --table-striped-background-color: rgba(255, 255, 255, 0.075);
-    --text-color: #f8f9fa;
-    --text-muted-color: #bbb;
+    --text-color-heading: rgba(255, 255, 255, 0.9);
+    --text-color-main: rgba(255, 255, 255, 0.8);
+    --text-color-muted: rgba(255, 255, 255, 0.7);
     --white: #000;
   }
   option {

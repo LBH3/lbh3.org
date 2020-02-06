@@ -47,7 +47,7 @@
             Sign in with
             <a class="align-baseline border-0 btn btn-link facebook px-1" href="/auth/facebook" title="Facebook"><span class="fab fa-lg fa-facebook-square"></span></a>
             or
-            <a class="align-baseline border-0 btn btn-link pl-1 pr-0" href="/auth/google" title="Google"><span class="fab fa-lg fa-google"></span></a>
+            <a class="align-baseline border-0 btn btn-link google pl-1 pr-0" href="/auth/google" title="Google"><span class="fab fa-lg fa-google"></span></a>
           </li>
         {{/if}}
       </ul>

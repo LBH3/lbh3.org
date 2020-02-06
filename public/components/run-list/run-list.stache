@@ -221,7 +221,7 @@
             {{/if}}
           </tr>
         {{else}}
-          <tr {{^if event.haresHtml}}class="table-danger"{{/if}}>
+          <tr>
             {{#if showFutureTools}}
               {{#or(session.user.canEditFutureSpecialEvents, session.user.canEditFutureTrails)}}
                 <td class="d-print-none single-icon-column">
@@ -256,7 +256,7 @@
               {{/if}}
             </td>
             <td>{{{event.nameHtml}}}</td>
-            <td>
+            <td {{^if event.haresHtml}}class="text-danger"{{/if}}>
               {{#if event.haresHtml}}
                 {{{event.haresHtml}}}
               {{else}}
