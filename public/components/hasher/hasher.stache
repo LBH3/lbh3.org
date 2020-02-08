@@ -170,7 +170,7 @@
           {{/for}}
           {{#for(phone of hasher.phones)}}
             <dt class="col-sm-4 col-lg-5">Phone ({{phone.type}}):</dt>
-            <dd class="col-sm-8 col-lg-7">{{phone.value}}</dd>
+            <dd class="col-sm-8 col-lg-7"><a href="{{phone.url}}">{{phone.value}}</a></dd>
           {{/for}}
           {{#for(address of hasher.addresses)}}
             <dt class="col-sm-4 col-lg-5">Address:</dt>

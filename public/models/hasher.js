@@ -147,6 +147,9 @@ export const Phone = DefineMap.extend({
   type: {
     default: 'home'
   },
+  get url() {
+    return `tel:+1${this.value}`;
+  },
   value: 'string'
 });
 Phone.List = DefineList.extend({
