@@ -56,11 +56,10 @@ const SpecialEvent = DefineMap.extend({
       });
     }
   },
-  nameHtml: {
-    get: function() {
-      return this.title;
-    },
-    serialize: false
+  get nameHtml() {
+    const textContainer = document.createElement('div');
+    textContainer.innerHTML = this.descriptionHtml;
+    return textContainer.children[0].innerHTML;
   },
   nameMd: {
     get: function() {
@@ -126,14 +125,10 @@ const SpecialEvent = DefineMap.extend({
     },
     serialize: false
   },
-  title: {
-    get: function() {
-      const textContainer = document.createElement('div');
-      textContainer.innerHTML = this.descriptionHtml;
-      const lines = (textContainer.textContent) ? textContainer.textContent.split('\n') : [];
-      return lines.length > 0 ? lines[0].trim() : '';
-    },
-    serialize: false
+  get title() {
+    const textContainer = document.createElement('div');
+    textContainer.innerHTML = this.descriptionHtml;
+    return textContainer.children[0].textContent;
   },
   urlId: 'string',
   year: 'number'

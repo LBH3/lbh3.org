@@ -191,7 +191,7 @@
               </a>
             </td>
             <td class="trail-number-column">{{! # }}</td>
-            <td colspan="2">{{{event.title}}}</td>
+            <td colspan="2">{{{event.nameHtml}}}</td>
             <td>{{{event.shortLocationHtml}}}</td>
             {{#if session.user.hasherId}}
               {{#if showScribe}}
