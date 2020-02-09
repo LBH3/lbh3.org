@@ -68,7 +68,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   get ogTitle() {
-    return 'New boots';
+    return 'Attendance Records';
   },
 
   searchText: {
