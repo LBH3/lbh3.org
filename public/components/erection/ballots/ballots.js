@@ -2,7 +2,6 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Election from '~/models/election';
 import Hasher from '~/models/hasher';
-import moment from 'moment';
 import PaperBallot from '~/models/paper-ballot';
 import Session from '~/models/session';
 
@@ -30,7 +29,7 @@ export const ViewModel = DefineMap.extend({
 
   newPaperBallotDateTaken: {
     default() {
-      return moment().format('YYYY-MM-DD');
+      return new Date().toISOString().substring(0, 10);
     },
     type: 'string'
   },
