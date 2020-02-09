@@ -4,7 +4,6 @@ import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import './year.less';
-import moment from 'moment-timezone';
 import route from 'can-route';
 import view from './year.stache';
 
@@ -15,12 +14,18 @@ export const ViewModel = DefineMap.extend({
     const parts = [];
     if (hasher) {
       if (hasher.startDate !== year.startDate) {
-        const startDate = moment(hasher.startDate).tz(timeZone);
-        parts.push('starting in ' + startDate.format('MMMM'));
+        const startDateUTC = new Date(hasher.startDate);
+        const startDateFormatted = new Date(startDateUTC.getTime() + (60000 * startDateUTC.getTimezoneOffset())).toLocaleDateString(undefined, {
+          month: 'long'
+        });
+        parts.push(`starting in ${startDateFormatted}`);
       }
       if (hasher.endDate !== year.endDate) {
-        const endDate = moment(hasher.endDate).tz(timeZone);
-        parts.push('until ' + endDate.format('MMMM'));
+        const endDateUTC = new Date(hasher.endDate);
+        const endDateFormatted = new Date(endDateUTC.getTime() + (60000 * endDateUTC.getTimezoneOffset())).toLocaleDateString(undefined, {
+          month: 'long'
+        });
+        parts.push(`until ${endDateFormatted}`);
       }
     }
     return parts.join(' ');

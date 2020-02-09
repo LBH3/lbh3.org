@@ -15,14 +15,10 @@ testSauceLabs({
     deviceName: 'iPhone 7 Simulator',
     platform: 'iOS',
     version: '10.3'
-  }, /*{
-    browserName: 'internet explorer',
-    platform: 'Windows 7',
-    version: '11'
-  }, */{
+  }, {
     browserName: 'MicrosoftEdge',
     platform: 'Windows 10',
-    version: '14'
+    version: '18'
   }, {
     browserName: 'firefox',
     platform: 'Windows 7',
