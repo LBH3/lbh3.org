@@ -11,16 +11,8 @@ export const ViewModel = DefineMap.extend({
     default: ''
   },
   editErection: function() {
-    const erection = this.erection;
-    const endDatetime = moment.tz(`${this.endDate} ${this.endTime}`, 'America/Los_Angeles');
-    if (endDatetime.isSame(erection.endDateAsMoment) === false) {
-      erection.endDatetime = endDatetime.format();
-    }
-    const startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles');
-    if (startDatetime.isSame(erection.startDateAsMoment) === false) {
-      erection.startDatetime = startDatetime.format();
-    }
-    return this.editErectionPromise = erection.save();
+    this.updateElectionStartEndDateTimes();
+    return this.editErectionPromise = this.erection.save();
   },
   editErectionPromise: {},
   endDate: {
@@ -86,6 +78,17 @@ export const ViewModel = DefineMap.extend({
   },
   get title() {
     return `${this.ogTitle} | Erections | LBH3`;
+  },
+  updateElectionStartEndDateTimes() {
+    const erection = this.erection;
+    const endDatetime = moment.tz(`${this.endDate} ${this.endTime}`, 'America/Los_Angeles');
+    if (endDatetime.isSame(erection.endDateAsMoment) === false) {
+      erection.endDatetime = endDatetime.toISOString();
+    }
+    const startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles');
+    if (startDatetime.isSame(erection.startDateAsMoment) === false) {
+      erection.startDatetime = startDatetime.toISOString();
+    }
   },
   urlId: 'string'
 });
