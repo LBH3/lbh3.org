@@ -51,7 +51,7 @@
   {{/if}}
 </lbh3-no-ssr>
 
-{{#if isBeforeFebruary9}}
+{{#if isBeforeFebruary16}}
   <p class="border mt-3 py-3 rounded text-center"><a class="d-block" href="events/2020/founders/">Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;15<sup>th</sup></a></p>
 {{/if}}
 

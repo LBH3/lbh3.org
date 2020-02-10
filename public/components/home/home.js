@@ -29,8 +29,8 @@ export default Component.extend({
         });
       }
     },
-    get isBeforeFebruary9() {
-      return new Date() < new Date('Feb 9 2020 08:00:00 UTC');
+    get isBeforeFebruary16() {
+      return new Date() < new Date('Feb 16 2020 08:00:00 UTC');
     },
     get ogTitle() {
       return this.title;
