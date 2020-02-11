@@ -4,7 +4,6 @@ import CryptoJSCore from 'crypto-js/core';
 import CryptoJSLib from 'crypto-js/lib-typedarrays';
 import DefineMap from 'can-define/map/';
 import JSEncrypt from 'jsencrypt';
-import moment from 'moment';
 
 import Ballot from '~/models/ballot';
 import {Election, randomize} from '~/models/election';
@@ -19,8 +18,8 @@ import './erection.less';
 import view from './erection.stache';
 
 export const getAllRunsQuery = year => {
-  const endDate = moment().year(year + 1).startOf('year').toDate();
-  const startDate = moment().year(year).startOf('year').toDate();
+  const endDate = new Date(year + 1, 0, 1);
+  const startDate = new Date(year, 0, 1);
   return {
     $limit: 100,
     $sort: {
