@@ -1,7 +1,6 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import JSEncrypt from 'jsencrypt';
-import moment from 'moment';
 
 import Ballot from '~/models/ballot';
 import Election from '~/models/election';

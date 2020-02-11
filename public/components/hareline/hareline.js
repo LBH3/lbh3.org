@@ -4,7 +4,6 @@ import DefineMap from 'can-define/map/';
 import Event from '~/models/event';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
-import moment from 'moment';
 import loader from '@loader';
 import view from './hareline.stache';
 
@@ -21,11 +20,11 @@ export const ViewModel = DefineMap.extend({
   },
 
   get eventQuery() {
-    const startOfTheDay = moment(this.endDatetime).tz('America/Los_Angeles').startOf('day').format();
+    const now = new Date();
     return {
       $limit: 100,
       startDatetime: {
-        $gte: startOfTheDay
+        $gte: new Date(now.getFullYear(), now.getMonth(), now.getDate())
       }
     };
   },
