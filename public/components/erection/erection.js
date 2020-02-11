@@ -18,6 +18,21 @@ import UnencryptedBallot from '~/models/unencrypted-ballot';
 import './erection.less';
 import view from './erection.stache';
 
+export const getAllRunsQuery = year => {
+  const endDate = moment().year(year + 1).startOf('year').toDate();
+  const startDate = moment().year(year).startOf('year').toDate();
+  return {
+    $limit: 100,
+    $sort: {
+      trailNumber: 1
+    },
+    startDatetime: {
+      $gte: startDate,
+      $lte: endDate
+    }
+  };
+};
+
 const testPrivateKey = `-----BEGIN RSA PRIVATE KEY-----
 MIIJKAIBAAKCAgEAqRxHDMIkPN7xRPcXMs5nDyuBiiV+9aO+NwsyD9Euxnz/0wad
 rAwWSXAERLM/eQ2jTHZ9S9w6S2hy8v/5i5svOwI9veWUUKy50bh/2nwhHZXP0Nm9
@@ -97,19 +112,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   get allRunsPromise() {
     const election = this.election;
     if (election) {
-      const year = election.year;
-      const endDate = moment().year(year).endOf('year').toDate();
-      const startDate = moment().year(year).startOf('year').toDate();
-      return Event.getList({
-        $limit: 100,
-        $sort: {
-          trailNumber: 1
-        },
-        startDatetime: {
-          $gte: startDate,
-          $lte: endDate
-        }
-      });
+      return Event.getList(getAllRunsQuery(election.year));
     }
   },
   ballot: {

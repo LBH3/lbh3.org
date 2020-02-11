@@ -2,7 +2,6 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Election from '~/models/election';
 import ElectionEligibility from '~/models/election-eligibility';
-import moment from 'moment';
 import Session from '~/models/session';
 
 import './eligibility.less';
