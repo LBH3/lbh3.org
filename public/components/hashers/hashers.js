@@ -3,7 +3,6 @@ import DefineMap from 'can-define/map/';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import './hashers.less';
-import moment from 'moment';
 import route from 'can-route';
 import view from './hashers.stache';
 
@@ -66,8 +65,9 @@ export const ViewModel = DefineMap.extend({
       searchParams.hashName = {
         $nin: ['']
       };
+      const now = new Date();
       searchParams.lastTrailDate = {
-        $gte: moment().tz('America/Los_Angeles').subtract(1, 'year').startOf('day').toDate()
+        $gte: new Date(now.getFullYear() - 1, now.getMonth(), now.getDate())
       };
     }
 
