@@ -43,6 +43,9 @@ export default Component.extend({
       }
     },
     get eventPromise() {
+      return Event.getList(this.eventQuery);
+    },
+    get eventQuery() {
       let params;
       const trailNumber = this.trailNumber;
 
@@ -51,7 +54,7 @@ export default Component.extend({
           trailNumber
         };
       } else {
-        const startOfToday = moment(this.endDatetime).tz('America/Los_Angeles').startOf('day').format();
+        const startOfToday = moment().tz('America/Los_Angeles').startOf('day').toDate();
         params = {
           $sort: {
             startDatetime: 1
@@ -62,7 +65,7 @@ export default Component.extend({
         };
       }
 
-      return Event.getList(params);
+      return params;
     },
     hashers: {
       get: function(lastValue, setValue) {
