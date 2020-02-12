@@ -25,6 +25,9 @@ export const ViewModel = DefineMap.extend({
     }
   },
   get hashersPromise() {
+    return Hasher.getList(this.hashersQuery);
+  },
+  get hashersQuery() {
     const searchParams = {
       $limit
     };
@@ -64,11 +67,11 @@ export const ViewModel = DefineMap.extend({
         $nin: ['']
       };
       searchParams.lastTrailDate = {
-        $gte: moment().tz('America/Los_Angeles').subtract(1, 'year').startOf('day').format()
+        $gte: moment().tz('America/Los_Angeles').subtract(1, 'year').startOf('day').toDate()
       };
     }
 
-    return Hasher.getList(searchParams);
+    return searchParams;
   },
   get currentPage() {
     const hashers = this.hashers;
