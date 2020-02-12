@@ -12,7 +12,7 @@
 </form>
 
 {{#if hashersPromises.isPending}}
-  <lbh3-alert class="mt-3" message:from="'Fetching the Attendance Records…'" />
+  <lbh3-alert message:from="'Fetching the Attendance Records…'" />
 {{/if}}
 
 {{#if hashersPromises.isRejected}}
