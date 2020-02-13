@@ -5,7 +5,7 @@ import './add.less';
 import moment from 'moment-timezone';
 import view from './add.stache';
 
-const oneWeekFromDate = function(date) {
+export const oneWeekFromDate = function(date) {
   const dateAsMoment = moment(date);
   dateAsMoment.add(7, 'days');
   return dateAsMoment.format().substr(0, 10);
@@ -30,9 +30,11 @@ export const ViewModel = DefineMap.extend({
       if (lastValue) {
         return lastValue;
       }
-      this.lastTrailPromise.then(events => {
-        setValue(events[0]);
-      });
+      if (setValue) {
+        this.lastTrailPromise.then(events => {
+          setValue(events[0]);
+        });
+      }
     }
   },
   get lastTrailPromise() {
@@ -42,6 +44,13 @@ export const ViewModel = DefineMap.extend({
         startDatetime: -1
       }
     });
+  },
+  get newTrailData() {
+    const startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format();
+    return {
+      startDatetime: startDatetime,
+      trailNumber: this.trailNumber
+    };
   },
   get ogTitle() {
     return 'Add a new trail';
@@ -87,12 +96,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   createTrail: function() {
-    const startDatetime = moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format();
-    const newTrailData = {
-      startDatetime: startDatetime,
-      trailNumber: this.trailNumber
-    };
-    return this.creatingTrailPromise = new Event(newTrailData).save();
+    return this.creatingTrailPromise = new Event(this.newTrailData).save();
   }
 });
 
