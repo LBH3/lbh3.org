@@ -11,20 +11,7 @@ export const ViewModel = DefineMap.extend({
   advertise: 'boolean',
   advertisementMd: 'string',
   createElection: function() {
-    const newData = {
-      advertise: this.advertise,
-      advertisementMd: this.advertisementMd,
-      descriptionMd: this.descriptionMd,
-      endDatetime: moment.tz(`${this.endDate} ${this.endTime}`, 'America/Los_Angeles').format(),
-      endedNoticeMd: this.endedNoticeMd,
-      publicKey: this.publicKey,
-      schema: eval(`(${this.schema})`),
-      startDatetime: moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format(),
-      titleMd: this.titleMd,
-      urlId: this.urlId,
-      year: this.year
-    };
-    return this.creatingElectionPromise = new Election(newData).save();
+    return this.creatingElectionPromise = new Election(this.newElectionData).save();
   },
   creatingElectionPromise: {},
   description: {
@@ -41,6 +28,21 @@ export const ViewModel = DefineMap.extend({
   endTime: {
     default: '00:00:00',
     type: 'string'
+  },
+  get newElectionData() {
+    return {
+      advertise: this.advertise,
+      advertisementMd: this.advertisementMd,
+      descriptionMd: this.descriptionMd,
+      endDatetime: moment.tz(`${this.endDate} ${this.endTime}`, 'America/Los_Angeles').format(),
+      endedNoticeMd: this.endedNoticeMd,
+      publicKey: this.publicKey,
+      schema: eval(`(${this.schema})`),
+      startDatetime: moment.tz(`${this.startDate} ${this.startTime}`, 'America/Los_Angeles').format(),
+      titleMd: this.titleMd,
+      urlId: this.urlId,
+      year: this.year
+    };
   },
   get ogTitle() {
     return 'Erections';
