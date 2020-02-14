@@ -5,16 +5,9 @@
 
 <h2 class="sr-only">Past Runs</h2>
 
-{{#if yearsPromise.isPending}}
-  <lbh3-alert class="mt-3" message:from="'Fetching Past Runs…'" />
-{{/if}}
+{{#if yearsPromise.isPending}}<lbh3-alert class="mt-3" message:from="'Fetching Past Runs…'" />{{/if}}
 
-{{#if yearsPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
-    <strong>Fuck!</strong> The runs couldn’t be retrieved.
-    {{yearsPromise.reason.xhr.message}}
-  </div>
-{{/if}}
+{{#if yearsPromise.isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The runs couldn’t be retrieved. {{yearsPromise.reason.xhr.message}}</div>{{/if}}
 
 {{#if(years.length)}}
   {{#if(platform.isNode)}}
@@ -24,19 +17,19 @@
       {{/for}}
     </nav>
   {{else}}
-    <form class="align-items-baseline form-inline justify-content-center mb-2">
-      <div class="btn-group btn-group-toggle">
-        <label class="border btn {{#eq(view, 'map')}}btn-light{{else}}btn-danger{{/eq}}"><input checked:bind="equal(view, '')" id="listView" name="view" type="radio"> List</label>
-        <label class="border border-left-0 btn {{#eq(view, 'map')}}btn-danger{{else}}btn-light{{/eq}}"><input checked:bind="equal(view, 'map')" id="mapView" name="view" type="radio"> Map</label>
-      </div>
-    </form>
-    <form class="align-items-baseline form-inline">
-      <label class="font-weight-bold mr-2" for="year-selector">Year</label>
-      <select class="form-control w-auto" id="year-selector" value:bind="year">
-        {{#for(yearObject of years)}}
-          <option value="{{yearObject.id}}">{{yearObject.id}}</option>
-        {{/for}}
-      </select>
+    <form class="form-inline justify-content-between mb-2">
+        <div class="btn-group btn-group-toggle">
+          <label class="border btn {{#eq(view, 'map')}}btn-light{{else}}btn-danger{{/eq}}"><input checked:bind="equal(view, '')" id="listView" name="view" type="radio"> List</label>
+          <label class="border border-left-0 btn {{#eq(view, 'map')}}btn-danger{{else}}btn-light{{/eq}}"><input checked:bind="equal(view, 'map')" id="mapView" name="view" type="radio"> Map</label>
+        </div>
+        <div class="d-flex flex-row">
+          <label class="font-weight-bold mr-2" for="year-selector">Year</label>
+          <select class="form-control w-auto" id="year-selector" value:bind="year">
+            {{#for(yearObject of years)}}
+              <option value="{{yearObject.id}}">{{yearObject.id}}</option>
+            {{/for}}
+          </select>
+        </div>
     </form>
   {{/if}}
 
@@ -69,8 +62,6 @@
       </form>
     </details>
   {{/eq}}
-
-  <hr>
 
   {{#if allEventsPromise.isPending}}<lbh3-alert class="mt-3" message:from="'Fetching the runs…'" />{{/if}}
 
