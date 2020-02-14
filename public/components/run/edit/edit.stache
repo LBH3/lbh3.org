@@ -98,10 +98,10 @@
               {{/if}}
             {{/if}}
             {{#if event.locationPromise.value.placeId}}
-              <lbh3-map placeId:from="event.locationPromise.value.placeId" style="height: 208px" />
+              <lbh3-map placeId:from="event.locationPromise.value.placeId" style="height: 260px" />
             {{else}}
               {{#if event.locationMd}}
-                <lbh3-map q:from="event.locationMd" style="height: 208px" />
+                <lbh3-map q:from="event.locationMd" style="height: 260px" />
               {{/if}}
             {{/if}}
           </div>
@@ -136,7 +136,7 @@
               {{/if}}
             {{/if}}
             {{#if event.onOnPromise.value.placeId}}
-              <lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 208px" />
+              <lbh3-map placeId:from="event.onOnPromise.value.placeId" style="height: 260px" />
             {{/if}}
           </div>
         </div>
