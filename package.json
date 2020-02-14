@@ -158,7 +158,7 @@
     },
     {
       "path": "./public/dist/bundles/mismanagement-na-*.js",
-      "maxSize": "1 kB"
+      "maxSize": "2 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/index.css",

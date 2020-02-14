@@ -120,11 +120,23 @@ mark {
 
 .btn-danger {
   background-color: var(--button-color-danger-background-color);
-  border-color: var(--button-color-danger-border-color);
+  border-color: var(--button-color-danger-border-color) !important;
 
   &:hover {
     background-color: var(--button-color-danger-hover-background-color);
-    border-color: var(--button-color-danger-hover-border-color);
+    border-color: var(--button-color-danger-hover-border-color) !important;
+  }
+}
+
+.btn-light {
+  background-color: var(--button-color-light-background-color);
+  border-color: var(--button-color-light-border-color);
+  color: var(--button-color-light-color);
+
+  &:hover {
+    background-color: var(--button-color-light-hover-background-color);
+    border-color: var(--button-color-light-hover-border-color);
+    color: var(--button-color-light-hover-color);
   }
 }
 
@@ -292,6 +304,12 @@ mark {
   --button-color-danger-border-color: #dc3545;
   --button-color-danger-hover-background-color: #c82333;
   --button-color-danger-hover-border-color: #bd2130;
+  --button-color-light-background-color: var(--background-light-color);
+  --button-color-light-border-color: var(--background-light-color);
+  --button-color-light-color: var(--text-color-main);
+  --button-color-light-hover-background-color: #e2e6ea;
+  --button-color-light-hover-border-color: #dae0e5;
+  --button-color-light-hover-color: var(--text-color-main);
   --button-color-primary-background-color: #007bff;
   --button-color-primary-border-color: #007bff;
   --button-color-primary-hover-background-color: #0069d9;
@@ -310,7 +328,7 @@ mark {
   --form-control-text-color: #495057;
   --form-control-disabled-background-color: #e9ecef;
   --form-control-disabled-border-color: #ced4da;
-  --form-control-disabled-text-color: #212529;
+  --form-control-disabled-text-color: var(--text-color-main);
   --form-control-focus-background-color: #fff;
   --form-control-focus-border-color: #80bdff;
   --form-control-focus-text-color: #495057;
@@ -359,6 +377,12 @@ mark {
     --button-color-danger-border-color: #c82333;
     --button-color-danger-hover-background-color: #dc3545;
     --button-color-danger-hover-border-color: #dc3545;
+    --button-color-light-background-color: var(--background-light-color);
+    --button-color-light-border-color: var(--background-light-color);
+    --button-color-light-color: var(--text-color-main);
+    --button-color-light-hover-background-color: lighten(#343a40, 10%);
+    --button-color-light-hover-border-color: lighten(#343a40, 10%);
+    --button-color-light-hover-color: var(--text-color-main);
     --button-color-primary-background-color: #0062cc;
     --button-color-primary-border-color: #0069d9;
     --button-color-primary-hover-background-color: #007bff;
