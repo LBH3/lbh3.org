@@ -96,7 +96,7 @@ describe('\'hashers\' service', () => {
     });
 
     it('can find names with hyphens', () => {
-      return service.find({ query: {search: 'hi-', $sort: {lastTrailDate: -1}} }).then(result => {
+      return service.find({ query: {search: 'hi-s', $sort: {lastTrailDate: -1}} }).then(result => {
         assert.equal(result.data[0].hashName, 'Hi-Speed Copulator', 'Correct hash name');
         assert.equal(result.data[0].id, 25, 'Correct id');
       });
