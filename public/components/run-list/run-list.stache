@@ -3,6 +3,8 @@
 <can-import from="@fortawesome/fontawesome-free/css/regular.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 
+{{<availableTemplate}}<a href="mailto:trailmasters@lbh3.org?subject=I’d like to hare run #{{trailNumber}}">Available!</a>{{/availableTemplate}}
+
 {{#for(event of events)}}
   <div class="border-bottom d-block d-sm-none mb-2 pb-2 xs-layout">
     <div class="d-flex flex-row">
@@ -66,14 +68,14 @@
     <h4 class="h6 mb-0 {{^or(event.haresHtml, event.urlId)}}text-danger{{/or}}">
       {{#if event.nameHtml}}
         {{^or(event.haresHtml, event.urlId)}}
-          Available!
+          {{availableTemplate(event)}}
         {{/or}}
         {{{event.nameHtml}}}
       {{else}}
         {{#if event.haresHtml}}
           {{{event.haresHtml}}}
         {{else}}
-          Available!
+          {{availableTemplate(event)}}
         {{/if}}
       {{/if}}
     </h4>
@@ -260,7 +262,7 @@
               {{#if event.haresHtml}}
                 {{{event.haresHtml}}}
               {{else}}
-                Available!
+                {{availableTemplate(event)}}
               {{/if}}
             </td>
             <td>{{{event.shortLocationHtml}}}</td>
