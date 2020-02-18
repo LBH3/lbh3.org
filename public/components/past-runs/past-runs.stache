@@ -17,13 +17,13 @@
       {{/for}}
     </nav>
   {{else}}
-    <form class="form-inline justify-content-between mb-2">
+    <form class="d-flex justify-content-between my-3">
         <div class="btn-group btn-group-toggle">
           <label class="border btn {{#eq(view, 'map')}}btn-light{{else}}btn-danger{{/eq}}"><input checked:bind="equal(view, '')" id="listView" name="view" type="radio"> List</label>
           <label class="border border-left-0 btn {{#eq(view, 'map')}}btn-danger{{else}}btn-light{{/eq}}"><input checked:bind="equal(view, 'map')" id="mapView" name="view" type="radio"> Map</label>
         </div>
-        <div class="d-flex flex-row">
-          <label class="font-weight-bold mr-2" for="year-selector">Year</label>
+        <div class="align-items-center d-flex">
+          <label class="font-weight-bold mb-0 mr-2" for="year-selector">Year</label>
           <select class="form-control w-auto" id="year-selector" value:bind="year">
             {{#for(yearObject of years)}}
               <option value="{{yearObject.id}}">{{yearObject.id}}</option>
@@ -34,7 +34,7 @@
   {{/if}}
 
   {{^eq(view, "map")}}
-    <details class="mb-2 mt-2">
+    <details class="my-3">
       <summary>Display options</summary>
       <form>
         <div class="form-inline">
@@ -70,8 +70,8 @@
   {{#if(allEventsPromise.isResolved)}}
     {{#eq(view, "map")}}
       <can-import from="~/components/past-runs/map/">
-        {{#if isPending}}<lbh3-alert message:from="'Loading the map…'" />{{/if}}
-        {{#if isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The map failed to load.</div>{{/if}}
+        {{#if isPending}}<lbh3-alert class="my-3" message:from="'Loading the map…'" />{{/if}}
+        {{#if isRejected}}<div class="alert alert-danger my-3" role="alert"><strong>Fuck!</strong> The map failed to load.</div>{{/if}}
         {{#if isResolved}}<lbh3-past-runs-map allEvents:from="allEvents" session:from="session" />{{/if}}
       </can-import>
     {{else}}

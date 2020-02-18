@@ -6,7 +6,7 @@
 {{/if}}
 
 {{#if locationsPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger my-3" role="alert">
     <strong>Fuck!</strong> The run locations couldn’t be retrieved.
     {{locationsPromise.reason.xhr.message}}
   </div>
@@ -16,7 +16,7 @@
   {{#if(locationsPromise.value.length)}}
     <div class="map" lbh3-map-attr></div>
   {{else}}
-    <div class="alert alert-info" role="alert">
+    <div class="alert alert-info my-3" role="alert">
       <strong>No runs with locations were found.</strong>
     </div>
   {{/if}}
