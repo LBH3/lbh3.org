@@ -313,7 +313,7 @@
         {{#case "home"}}
           <can-import class="container d-block pl-0 pr-0" from="~/components/home/">
             {{#if isPending}}<lbh3-alert class="mt-3" message:from="'Loading the next run…'" />{{/if}}
-            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The next run failed to load. Check <a href="https://hash.beer" target="_blank">hash.beer</a> for the next run.</div>{{/if}}
+            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The next run failed to load. Check <a class="alert-link" href="https://hash.beer" target="_blank">hash.beer</a> for the next run.</div>{{/if}}
             {{#if isResolved}}<lbh3-home description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
           </can-import>
         {{/case}}
