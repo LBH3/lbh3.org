@@ -19,8 +19,8 @@
   {{else}}
     <form class="d-flex justify-content-between my-3">
         <div class="btn-group btn-group-toggle">
-          <label class="border btn {{#eq(view, 'map')}}btn-light{{else}}btn-danger{{/eq}}"><input checked:bind="equal(view, '')" id="listView" name="view" type="radio"> List</label>
-          <label class="border border-left-0 btn {{#eq(view, 'map')}}btn-danger{{else}}btn-light{{/eq}}"><input checked:bind="equal(view, 'map')" id="mapView" name="view" type="radio"> Map</label>
+          <label class="border btn {{#eq(view, 'map')}}btn-light{{else}}btn-primary{{/eq}}"><input checked:bind="equal(view, '')" id="listView" name="view" type="radio"> List</label>
+          <label class="border border-left-0 btn {{#eq(view, 'map')}}btn-primary{{else}}btn-light{{/eq}}"><input checked:bind="equal(view, 'map')" id="mapView" name="view" type="radio"> Map</label>
         </div>
         <div class="align-items-center d-flex">
           <label class="font-weight-bold mb-0 mr-2" for="year-selector">Year</label>

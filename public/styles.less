@@ -56,6 +56,10 @@ mark {
   border-color: var(--alert-danger-border-color);
   color: var(--alert-danger-text-color);
 
+  hr {
+    border-top-color: var(--alert-danger-text-color);
+  }
+
   .alert-link {
     color: var(--alert-danger-link-text-color);
   }
@@ -65,6 +69,10 @@ mark {
   background-color: var(--alert-info-background-color);
   border-color: var(--alert-info-border-color);
   color: var(--alert-info-text-color);
+
+  hr {
+    border-top-color: var(--alert-info-text-color);
+  }
 
   .alert-link {
     color: var(--alert-info-link-text-color);
@@ -76,6 +84,10 @@ mark {
   border-color: var(--alert-primary-border-color);
   color: var(--alert-primary-text-color);
 
+  hr {
+    border-top-color: var(--alert-primary-text-color);
+  }
+
   .alert-link {
     color: var(--alert-primary-link-text-color);
   }
@@ -85,6 +97,10 @@ mark {
   background-color: var(--alert-secondary-background-color);
   border-color: var(--alert-secondary-border-color);
   color: var(--alert-secondary-text-color);
+
+  hr {
+    border-top-color: var(--alert-secondary-text-color);
+  }
 
   .alert-link {
     color: var(--alert-secondary-link-text-color);
@@ -96,8 +112,26 @@ mark {
   border-color: var(--alert-success-border-color);
   color: var(--alert-success-text-color);
 
+  hr {
+    border-top-color: var(--alert-success-text-color);
+  }
+
   .alert-link {
     color: var(--alert-success-link-text-color);
+  }
+}
+
+.alert-warning {
+  background-color: var(--alert-warning-background-color);
+  border-color: var(--alert-warning-border-color);
+  color: var(--alert-warning-text-color);
+
+  hr {
+    border-top-color: var(--alert-warning-text-color);
+  }
+
+  .alert-link {
+    color: var(--alert-warning-link-text-color);
   }
 }
 
@@ -275,26 +309,30 @@ mark {
 }
 
 :root {
-  --alert-danger-background-color: var(--lbh3-red-lightest);
-  --alert-danger-border-color: var(--lbh3-red-lighter);
-  --alert-danger-link-text-color: var(--lbh3-red-darker);
-  --alert-danger-text-color: var(--lbh3-red-darkest);
-  --alert-info-background-color: #d1ecf1;
-  --alert-info-border-color: #bee5eb;
-  --alert-info-link-text-color: #062c33;
-  --alert-info-text-color: #0c5460;
-  --alert-primary-background-color: #cce5ff;
-  --alert-primary-border-color: #b8daff;
-  --alert-primary-link-text-color: #002752;
-  --alert-primary-text-color: #004085;
+  --alert-danger-background-color: var(--lbh3-orange-lightest);
+  --alert-danger-border-color: var(--lbh3-orange-lighter);
+  --alert-danger-link-text-color: var(--lbh3-orange-darker);
+  --alert-danger-text-color: var(--lbh3-orange-darkest);
+  --alert-info-background-color: var(--lbh3-blue-lightest);
+  --alert-info-border-color: var(--lbh3-blue-lighter);
+  --alert-info-link-text-color: var(--lbh3-blue-darker);
+  --alert-info-text-color: var(--lbh3-blue-darkest);
+  --alert-primary-background-color: var(--lbh3-red-lightest);
+  --alert-primary-border-color: var(--lbh3-red-lighter);
+  --alert-primary-link-text-color: var(--lbh3-red-darker);
+  --alert-primary-text-color: var(--lbh3-red-darkest);
   --alert-secondary-background-color: #e2e3e5;
   --alert-secondary-border-color: #d6d8db;
   --alert-secondary-link-text-color: #202326;
   --alert-secondary-text-color: #383d41;
-  --alert-success-background-color: #d4edda;
-  --alert-success-border-color: #c3e6cb;
-  --alert-success-link-text-color: #0b2e13;
-  --alert-success-text-color: #155724;
+  --alert-success-background-color: var(--lbh3-green-lightest);
+  --alert-success-border-color: var(--lbh3-green-lighter);
+  --alert-success-link-text-color: var(--lbh3-green-darker);
+  --alert-success-text-color: var(--lbh3-green-darkest);
+  --alert-warning-background-color: var(--lbh3-yellow-lightest);
+  --alert-warning-border-color: var(--lbh3-yellow-lighter);
+  --alert-warning-link-text-color: var(--lbh3-yellow-darker);
+  --alert-warning-text-color: var(--lbh3-yellow-darkest);
   --awesomplete-background-color: rgba(255, 255, 255, 0.9);
   --awesomplete-border-color: rgba(0, 0, 0, .15);
   --background-dark-color: #343a40;
@@ -310,10 +348,10 @@ mark {
   --button-color-light-hover-background-color: #e2e6ea;
   --button-color-light-hover-border-color: #dae0e5;
   --button-color-light-hover-color: var(--text-color-main);
-  --button-color-primary-background-color: #007bff;
-  --button-color-primary-border-color: #007bff;
-  --button-color-primary-hover-background-color: #0069d9;
-  --button-color-primary-hover-border-color: #0062cc;
+  --button-color-primary-background-color: var(--lbh3-red);
+  --button-color-primary-border-color: var(--lbh3-red);
+  --button-color-primary-hover-background-color: var(--lbh3-red-darker);
+  --button-color-primary-hover-border-color: var(--lbh3-red-darkest);
   --card-background-color: #fff;
   --card-border-color: rgba(0, 0, 0, 0.125);
   --card-header-background-color: rgba(0, 0, 0, 0.03);
