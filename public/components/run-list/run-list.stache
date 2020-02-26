@@ -65,7 +65,7 @@
         {{/if}}
       {{/if}}
     </div>
-    <h4 class="h6 mb-0 {{^or(event.haresHtml, event.urlId)}}text-danger{{/or}}">
+    <h4 class="h6 mb-0">
       {{#if event.nameHtml}}
         {{^or(event.haresHtml, event.urlId)}}
           {{availableTemplate(event)}}
@@ -258,7 +258,7 @@
               {{/if}}
             </td>
             <td>{{{event.nameHtml}}}</td>
-            <td {{^if event.haresHtml}}class="text-danger"{{/if}}>
+            <td>
               {{#if event.haresHtml}}
                 {{{event.haresHtml}}}
               {{else}}
