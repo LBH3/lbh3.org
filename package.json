@@ -106,7 +106,7 @@
     },
     {
       "path": "./public/dist/bundles/ballots-eligibil-*.js",
-      "maxSize": "7 kB"
+      "maxSize": "6 kB"
     },
     {
       "path": "./public/dist/bundles/edit-add-edit-edit.css",
@@ -166,7 +166,7 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/index.js",
-      "maxSize": "210 kB"
+      "maxSize": "213 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/erection/erection.css",
