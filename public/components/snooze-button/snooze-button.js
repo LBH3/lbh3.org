@@ -65,7 +65,7 @@ export const ViewModel = DefineMap.extend({
         $nin: ['']
       },
       startDatetime: {
-        $lte: this.event.startDateAsMoment.format()
+        $lt: this.event.startDateAsMoment.format()
       }
     });
   },
