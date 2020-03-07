@@ -1,0 +1,39 @@
+name: Lighthouse
+on: push
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Run review-app test
+        id: review_app_test  # `id` value is used to refer the outputs from the corresponding action
+        uses: LBH3/reviewapps-deploy-status@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          # Max time to be spent retrying for the build check, default is 120
+          deployments_timeout: 480
+
+          # Max time to be spent retrying for the response check, default is 120
+          publish_timeout: 480
+
+      # `steps.review_app_test.outputs.review_app_url` must be used in workflow to fetch the Review App URL
+      - name: Check review_app_url
+        run: |
+          echo "Outputs - ${{ steps.review_app_test.outputs.review_app_url }}"
+      - name: Audit URLs using Lighthouse
+        uses: treosh/lighthouse-ci-action@v2
+        with:
+          configPath: ./.lighthouserc.json
+          runs: 5
+          temporaryPublicStorage: true
+          urls: |
+            ${{ steps.review_app_test.outputs.review_app_url }}
+      - name: Save results
+        uses: actions/upload-artifact@v1
+        with:
+          name: lighthouse-results
+          path: '.lighthouseci' # This will save the Lighthouse results as .json files
