@@ -1,7 +1,9 @@
 import BoredHasher from '~/models/bored-hasher';
+import BoredPosition from '~/models/bored-position';
 import Component from 'can-component';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
+import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import './year.less';
 import route from 'can-route';
@@ -41,10 +43,35 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
-  get hashersByPosition() {
-    const hashers = this.hashers;
-    if (hashers) {
-      return BoredHasher.groupByPosition(hashers);
+  hashersByPosition: {
+    get(lastValue, resolve) {
+      const hashers = this.hashers;
+      if (hashers) {
+        Promise.all(hashers.map(hasher => {
+          return hasher.positionPromise;
+        })).then(positions => {
+          const positionsById = {};
+          positions.forEach(position => {
+            positionsById[position.id] = position
+          });
+
+          const hashersByPosition = {};
+          hashers.forEach(function(hasher) {
+            const positionId = hasher.positionId;
+            if (!hashersByPosition[positionId]) {
+              hashersByPosition[positionId] = {
+                hashers: [],
+                position: positionsById[positionId]
+              };
+            }
+            hashersByPosition[positionId].hashers.push(Hasher.get({id: hasher.hasherId}));
+          });
+
+          resolve(Object.values(hashersByPosition).sort((a, b) => {
+            return a.position.singularName.localeCompare(b.position.singularName);
+          }));
+        })
+      }
     }
   },
   get hashersPromise() {
