@@ -2,7 +2,6 @@ import BoredPosition from '~/models/bored-position';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import feathersModel from './feathers-model';
-import Hasher from '~/models/hasher';
 
 const BoredHasher = DefineMap.extend({
   seal: false
@@ -41,21 +40,5 @@ BoredHasher.connection = feathersModel('/api/bored-hashers', {
   List: BoredHasher.List,
   name: 'bored-hashers'
 });
-
-BoredHasher.groupByPosition = function(hashers) {
-  const hashersByPosition = {};
-  hashers.forEach(function(hasher) {
-    const positionId = hasher.positionId;
-    if (!hashersByPosition[positionId]) {
-      hashersByPosition[positionId] = {
-        hashers: [],
-        id: positionId,
-        promise: BoredPosition.get({id: positionId})
-      };
-    }
-    hashersByPosition[positionId].hashers.push(Hasher.get({id: hasher.hasherId}));
-  });
-  return Object.values(hashersByPosition);
-};
 
 export default BoredHasher;
