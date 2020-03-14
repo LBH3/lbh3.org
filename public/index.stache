@@ -26,6 +26,10 @@
 
     {{! Generic app metadata }}
     <link rel="manifest" href="{{joinBase 'assets/manifest.json'}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://maps.googleapis.com">
+    <link rel="preconnect" href="https://maps.gstatic.com">
     <meta name="application-name" content="LBH3">
     <meta name="theme-color" content="#dc3232">
   </head>

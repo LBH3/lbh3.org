@@ -36,7 +36,6 @@
         "uses-http2": "warn",
         "uses-long-cache-ttl": "warn",
         "uses-passive-event-listeners": "warn",
-        "uses-rel-preconnect": "warn",
         "uses-rel-preload": "warn",
         "uses-text-compression": "warn",
         "uses-webp-images": "warn",
