@@ -119,7 +119,7 @@ export default Component.extend({
         return;
       }
 
-      let map, marker;
+      let map, marker, observer;
       const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
 
       // Add a marker with an info window to the map
@@ -226,8 +226,24 @@ export default Component.extend({
       // Start listening for changes to dark mode
       mediaQueryList.addListener(mediaQueryListener);
 
-      // Immediately call the listener to initially set up the map
-      mediaQueryListener();
+      // Check if Intersection Observer is available
+      if ('IntersectionObserver' in window) {
+        observer = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              mediaQueryListener();
+              observer.disconnect();
+              observer = null;
+            }
+          });
+        }, {
+          threshold: 0.1
+        });
+        observer.observe(element);
+      } else {
+        // Immediately call the listener to initially set up the map
+        mediaQueryListener();
+      }
 
       return () => {
 
@@ -238,6 +254,11 @@ export default Component.extend({
 
         // Remove the dark mode media query listener
         mediaQueryList.removeListener(mediaQueryListener);
+
+        // Remove the Intersection Observer listener
+        if (observer) {
+          observer.disconnect();
+        }
       };
     }
   }
