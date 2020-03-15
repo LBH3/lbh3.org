@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /api/
+Disallow: /mismanage/
+Disallow: /pastruns/
+Disallow: /pics/
+Disallow: /snooze/

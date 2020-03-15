@@ -25,7 +25,6 @@
         "max-potential-fid": "warn",
         "offline-start-url": "warn",
         "render-blocking-resources": "warn",
-        "robots-txt": "warn",
         "service-worker": "warn",
         "speed-index": "warn",
         "tap-targets": "warn",
