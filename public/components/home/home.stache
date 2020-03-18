@@ -25,7 +25,7 @@
     </lbh3-no-ssr>
   {{/if}}
 {{else}}
-  <p><small> The Long Beach kennel was founded over 30 years ago. We run Thursday evening during Spring/Summer &amp; Sunday morning in the Fall/Winter. We often have an attendance of 75+. Visitors &amp; Virgins are always welcome! Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies. Please bring a vessel for your beverage. We hope to see you at LBH3. On On!!!</small></p>
+  <p><small> The Long Beach kennel was founded over 35 years ago. We run Thursday evening during Spring/Summer &amp; Sunday morning in the Fall/Winter. We often have an attendance of 75+. Visitors &amp; Virgins are always welcome! Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies. Please bring a vessel for your beverage. We hope to see you at LBH3. On On!!!</small></p>
 {{/if}}
 
 <lbh3-no-ssr>
@@ -51,8 +51,12 @@
   {{/if}}
 </lbh3-no-ssr>
 
-{{#if isBeforeFebruary16}}
-  <p class="border mt-3 py-3 rounded text-center"><a class="d-block" href="events/2020/founders/">Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;15<sup>th</sup></a></p>
+{{#if isBeforeApril10}}
+  <div class="alert alert-info" role="alert">
+    <p><strong>LBH3 is taking a few weeks off to help slow the spread of <a href="http://longbeach.gov/covid19" class="alert-link text-nowrap">COVID-19</a></strong></p>
+    <p>Our next scheduled run is listed below. This may change as the pandemic develops.</p>
+    <p class="mb-0">Please <a href="mailto:contact@lbh3.org">email us</a> if you have any questions.</p>
+  </div>
 {{/if}}
 
 <lbh3-run />
