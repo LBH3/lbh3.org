@@ -84,7 +84,7 @@
     "bundlesize": "^0.18.0",
     "eslint": "^6.5.1",
     "http-server": "^0.12.0",
-    "mocha": "^6.2.2",
+    "mocha": "^7.1.1",
     "request": "^2.81.0",
     "request-promise": "^4.2.1",
     "through": "^2.3.8",
