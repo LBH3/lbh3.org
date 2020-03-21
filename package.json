@@ -41,7 +41,7 @@
     "test": "npm run eslint && npm run build && bundlesize && npm run mocha && npm run testee",
     "test:ci": "npm run test:production && node public/test.sauce-labs.js",
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -U postgres && psql -c 'create database lbh3_test;' -U postgres && psql lbh3_test < ./test/lbh3_test.dump -U postgres -v ON_ERROR_STOP=1",
-    "test:production": "npm run eslint && npm run build && bundlesize && npm run build:tests && npm run mocha && npm run testee:production",
+    "test:production": "npm run eslint && npm run build && bundlesize && npm run build:tests && npm run sequelize:migrate && npm run mocha && npm run testee:production",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
     "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
   },
