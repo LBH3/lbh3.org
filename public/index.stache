@@ -236,6 +236,11 @@
         {{/case}}
 
         {{#case "hashers"}}
+          <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/nav/">
+            {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Directory nav…'" />{{/if}}
+            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Directory navigation failed to load.</div>{{/if}}
+            {{#if isResolved}}<lbh3-hashers-nav secondaryPage:from="secondaryPage" />{{/if}}
+          </can-import>
           {{#if id}}
             {{#if secondaryPage}}
               {{#switch secondaryPage}}
@@ -259,11 +264,6 @@
               </lbh3-no-ssr>
             {{/if}}
           {{else}}
-            <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/nav/">
-              {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Directory nav…'" />{{/if}}
-              {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Directory navigation failed to load.</div>{{/if}}
-              {{#if isResolved}}<lbh3-hashers-nav secondaryPage:from="secondaryPage" />{{/if}}
-            </can-import>
             {{#if secondaryPage}}
               {{#switch secondaryPage}}
                 {{#case "add"}}
