@@ -96,10 +96,6 @@
       "maxSize": "25 kB"
     },
     {
-      "path": "./public/dist/bundles/edit-add-edit-edit.css",
-      "maxSize": "1 kB"
-    },
-    {
       "path": "./public/dist/bundles/ballots-eligibil-*.css",
       "maxSize": "1 kB"
     },
@@ -152,11 +148,11 @@
       "maxSize": "6 kB"
     },
     {
-      "path": "./public/dist/bundles/mismanagement-na-*.css",
+      "path": "./public/dist/bundles/mismanagement-el-*.css",
       "maxSize": "1 kB"
     },
     {
-      "path": "./public/dist/bundles/mismanagement-na-*.js",
+      "path": "./public/dist/bundles/mismanagement-el-*.js",
       "maxSize": "2 kB"
     },
     {
@@ -166,10 +162,6 @@
     {
       "path": "./public/dist/bundles/lbh3/index.js",
       "maxSize": "213 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/erection/erection.css",
-      "maxSize": "1 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/erection/erection.js",
@@ -220,10 +212,6 @@
       "maxSize": "5 kB"
     },
     {
-      "path": "./public/dist/bundles/lbh3/components/home/home.css",
-      "maxSize": "1 kB"
-    },
-    {
       "path": "./public/dist/bundles/lbh3/components/home/home.js",
       "maxSize": "6 kB"
     },
@@ -242,10 +230,6 @@
     {
       "path": "./public/dist/bundles/lbh3/components/run/post/post.js",
       "maxSize": "8 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/special-event/special-event.css",
-      "maxSize": "1 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/special-event/special-event.js",

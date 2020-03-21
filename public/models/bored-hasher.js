@@ -1,4 +1,4 @@
-import BoredPosition from '~/models/bored-position';
+import BoredPosition from './bored-position';
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import feathersModel from './feathers-model';

@@ -2,7 +2,6 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
-import './special-events.less';
 import moment from 'moment-timezone';
 import view from './special-events.stache';
 

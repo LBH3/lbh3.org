@@ -4,7 +4,6 @@ import Election from '~/models/election';
 import ElectionEligibility from '~/models/election-eligibility';
 import Session from '~/models/session';
 
-import './eligibility.less';
 import view from './eligibility.stache';
 
 export const ViewModel = DefineMap.extend({

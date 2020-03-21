@@ -2,7 +2,6 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
-import './add.less';
 import view from './add.stache';
 
 export const ViewModel = DefineMap.extend({

@@ -4,7 +4,6 @@ import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import Year from '~/models/year';
 import moment from 'moment-timezone';
-import platform from 'steal-platform';
 import route from 'can-route';
 import view from './past-runs.stache';
 
@@ -59,11 +58,6 @@ export default Component.extend({
     },
     get ogTitle() {
       return 'Past Runs';
-    },
-    platform: {
-      default: () => {
-        return platform;
-      }
     },
     routeForYear: function(year) {
       const routeParams = {
@@ -124,7 +118,7 @@ export default Component.extend({
       default: () => {
         return Year.getList({
           $sort: {
-            id: 1
+            id: -1
           }
         });
       }

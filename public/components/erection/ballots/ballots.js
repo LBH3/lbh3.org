@@ -5,7 +5,6 @@ import Hasher from '~/models/hasher';
 import PaperBallot from '~/models/paper-ballot';
 import Session from '~/models/session';
 
-import './ballots.less';
 import view from './ballots.stache';
 
 export const ViewModel = DefineMap.extend({

@@ -14,7 +14,6 @@ import PaperBallot from '~/models/paper-ballot';
 import Session from '~/models/session';
 import UnencryptedBallot from '~/models/unencrypted-ballot';
 
-import './erection.less';
 import view from './erection.stache';
 
 export const getAllRunsQuery = year => {

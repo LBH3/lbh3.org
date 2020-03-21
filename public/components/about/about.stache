@@ -1,6 +1,6 @@
 <can-import from="can-stache-route-helpers" />
 
-<p>
+<p class="mt-3">
   The Long Beach kennel was founded over 35 years ago on
   <strong>January 6<sup>th</sup>, 1985</strong> by
   <strong>Dal “Jock” Trader, Jerry “Eject” Templeman, and Andy “Zapata” Limon</strong>.
@@ -12,22 +12,6 @@
 </p>
 
 <div class="row">
-  {{#if session.user.canManageUsers}}
-    <div class="col-sm">
-      <h3 class="mb-1">Admin</h3>
-      <ul class="list-unstyled">
-        <li><a class="d-block py-1" href="{{routeUrl page='erections'}}">
-          Erections
-        </a></li>
-        <li><a class="d-block py-1" href="{{routeUrl page='special-events'}}">
-          Special Events
-        </a></li>
-        <li><a class="d-block py-1" href="{{routeUrl page='users'}}">
-          Users
-        </a></li>
-      </ul>
-    </div>
-  {{/if}}
   <div class="col-sm">
     <h3 class="mb-1">Friends of LBH3</h3>
     <ul class="list-unstyled">
@@ -64,7 +48,7 @@
 {{#if session.user.canExportData}}
   <h3>Download data</h3>
   <p>Click on the links below to download parts of the database as CSV.</p>
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger mt-3" role="alert">
     This is sensitive, private data.
     Do not download it unnecessarily.
     Permanently delete it from your computer after using it.

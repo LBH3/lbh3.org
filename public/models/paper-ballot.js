@@ -1,7 +1,7 @@
 import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import feathersModel from './feathers-model';
-import Hasher from '~/models/hasher';
+import Hasher from './hasher';
 import moment from 'moment';
 
 const PaperBallot = DefineMap.extend({

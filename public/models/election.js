@@ -3,7 +3,7 @@ import DefineList from 'can-define/list/';
 import feathersModel from './feathers-model';
 import marked from 'marked';
 import moment from 'moment-timezone';
-import { oneLine } from '~/models/event';
+import { oneLine } from './event';
 
 export const randomize = (list) => {
   const array = [...list];

@@ -4,7 +4,6 @@ import Election from '~/models/election';
 import moment from 'moment-timezone';
 import Session from '~/models/session';
 
-import './erections.less';
 import view from './erections.stache';
 
 export const ViewModel = DefineMap.extend({

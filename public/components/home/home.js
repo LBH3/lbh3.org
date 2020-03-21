@@ -1,7 +1,6 @@
 import Component from 'can-component';
 import Election from '~/models/election';
 import Session from '~/models/session';
-import './home.less';
 import view from './home.stache';
 
 export default Component.extend({

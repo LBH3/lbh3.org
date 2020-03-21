@@ -8,11 +8,11 @@
 
 <lbh3-no-ssr>
   {{#if electionPromise.isPending}}
-    <lbh3-alert class="mt-3" message:from="'Fetching your ballot…'" />
+    <lbh3-alert class="d-block mt-3" message:from="'Fetching your ballot…'" />
   {{/if}}
 
   {{#if electionPromise.isRejected}}
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger mt-3" role="alert">
       <strong>Fuck!</strong> Your ballot couldn’t be fetched. {{electionPromise.reason.xhr.message}}
     </div>
     <p>
@@ -37,11 +37,11 @@
       {{#if session.user.hasherId}}
 
         {{#if electionEligibilityPromise.isPending}}
-          <lbh3-alert message:from="'Determining your eligibility to vote…'" />
+          <lbh3-alert class="d-block mt-3" message:from="'Determining your eligibility to vote…'" />
         {{/if}}
 
         {{#if electionEligibilityPromise.isRejected}}
-          <div class="alert alert-danger" role="alert">
+          <div class="alert alert-danger mt-3" role="alert">
             <strong>Fuck!</strong> Your run count couldn’t be checked. {{electionEligibilityPromise.reason.xhr.message}}
           </div>
           <p>
@@ -54,11 +54,11 @@
           {{#if electionEligibility.eligible}}
 
             {{#if paperBallotsPromise.isPending}}
-              <lbh3-alert message:from="'Determining your eligibility to vote…'" />
+              <lbh3-alert class="d-block mt-3" message:from="'Determining your eligibility to vote…'" />
             {{/if}}
 
             {{#if paperBallotsPromise.isRejected}}
-              <div class="alert alert-danger" role="alert">
+              <div class="alert alert-danger mt-3" role="alert">
                 <strong>Fuck!</strong> Your eligibility couldn’t be checked. {{paperBallotsPromise.reason.xhr.message}}
               </div>
               <p>
@@ -70,7 +70,7 @@
             {{#if paperBallotsPromise.isResolved}}
               {{#eq(paperBallotsPromise.value.length, 0)}}
                 {{#if testEncryptionError}}
-                  <div class="alert alert-danger" role="alert">
+                  <div class="alert alert-danger mt-3" role="alert">
                     <strong>Sorry, you are not able to vote with this browser.</strong>
                     {{testEncryptionError}}
                   </div>
@@ -90,11 +90,11 @@
                 {{else}}
 
                   {{#if savingPromise.isPending}}
-                    <lbh3-alert message:from="'Submitting your ballot…'" />
+                    <lbh3-alert class="d-block mt-3" message:from="'Submitting your ballot…'" />
                   {{/if}}
 
                   {{#if savingPromise.isRejected}}
-                    <div class="alert alert-danger" role="alert">
+                    <div class="alert alert-danger mt-3" role="alert">
                       <strong>Fuck!</strong> Your ballot couldn’t be submitted. {{savingPromise.reason.xhr.message}}
                     </div>
                     <p>
@@ -225,11 +225,11 @@
                     {{/if}}
 
                     {{#if ballotsPromise.isPending}}
-                      <lbh3-alert class="mt-3" message:from="'Fetching submitted ballots…'" />
+                      <lbh3-alert class="d-block mt-3" message:from="'Fetching submitted ballots…'" />
                     {{/if}}
 
                     {{#if ballotsPromise.isRejected}}
-                      <div class="alert alert-danger" role="alert">
+                      <div class="alert alert-danger mt-3" role="alert">
                         <strong>Fuck!</strong> The ballots you have already submitted couldn’t be fetched. {{ballotsPromise.reason.xhr.message}}
                       </div>
                       <p>
@@ -289,11 +289,11 @@
                     {{{election.descriptionHtml}}}
 
                     {{#if hashitsAndScribesPromise.isPending}}
-                      <lbh3-alert class="mt-3" message:from="'Fetching the ballot options…'" />
+                      <lbh3-alert class="d-block mt-3" message:from="'Fetching the ballot options…'" />
                     {{/if}}
 
                     {{#if hashitsAndScribesPromise.isRejected}}
-                      <div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The ballot options couldn’t be fetched. {{hashitsAndScribesPromise.reason.xhr.message}}</div>
+                      <div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The ballot options couldn’t be fetched. {{hashitsAndScribesPromise.reason.xhr.message}}</div>
                       <p>You may want to <a href="{{hashitsAndScribesFetchingFailedEmailLink}}">email I’m Fucking Matt Damon</a> to let him know about the issue.</p>
                       <p> If you’re concerned about running out of time before the erection is over, be sure to cum to a Sunday run to pick up a paper ballot.</p>
                     {{/if}}
@@ -541,7 +541,7 @@
                   {{/if}}
                 {{/if}}
               {{else}}
-                <div class="alert alert-danger" role="alert">
+                <div class="alert alert-danger mt-3" role="alert">
                   <strong>It looks like you already took a paper ballot.</strong>
                   Once you take a paper ballot, you are not eligible to vote online.
                 </div>
@@ -562,7 +562,7 @@
               {{/eq}}
             {{/if}}
           {{else}}
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger mt-3" role="alert">
               <strong>Sorry, it looks like you’re not eligible to vote.</strong>
               You must have at least six runs in the last year to vote.
             </div>
@@ -615,7 +615,7 @@
           </p>
 
           {{#if savingPromise.isPending}}
-            <lbh3-alert message:from="'Saving your request for access…'" />
+            <lbh3-alert class="d-block mt-3" message:from="'Saving your request for access…'" />
           {{else}}
             {{#if session.user.requestedName}}
               <div class="alert alert-success" role="alert">
@@ -625,7 +625,7 @@
           {{/if}}
 
           {{#if savingPromise.isRejected}}
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger mt-3" role="alert">
               <strong>Fuck!</strong> Something failed; you’ll need to try again.
               {{savingPromise.reason.xhr.message}}
             </div>

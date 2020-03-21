@@ -4,8 +4,6 @@ import EventsHashers from '~/models/events-hashers';
 import route from 'can-route';
 import view from './attendance-records.stache';
 
-import './attendance-records.less';
-
 export const ViewModel = DefineMap.extend({
   description: {
     default: ''
