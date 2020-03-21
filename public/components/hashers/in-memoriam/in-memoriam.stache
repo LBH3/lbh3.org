@@ -31,7 +31,7 @@
             </div>
             <div class="col p-0">
               <div class="mr-0 row">
-                <div class="col-sm-7 col-lg-5">
+                <div class="col-sm-7 col-lg-2">
                   <p class="h5 m-0">
                     {{hasher.hashName}}
                   </p>
@@ -44,42 +44,31 @@
                     {{/if}}
                   </p>
                 </div>
-                <div class="col-sm-5 col-lg-2">
+                <div class="col-sm-5 col-lg-4">
                   <dl class="mb-0 row">
                     <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Runs:</dt>
                     <dd class="col-9 col-sm-7 m-0">{{hasher.runCount}}</dd>
-                    <dt class="col-3 col-sm-5 d-none d-sm-block font-weight-normal m-0 px-sm-0 text-sm-right">Mileage:</dt>
-                    <dd class="col-9 col-sm-7 d-none d-sm-block m-0">{{hasher.runMileage}}</dd>
                     <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Hares:</dt>
                     <dd class="col-9 col-sm-7 m-0">{{hasher.hareCount}}</dd>
-                  </dl>
-                </div>
-                <div class="col-lg-5 d-none d-lg-block">
-                  <dl class="mb-0 row">
                     {{#if(hasher.firstTrailDate)}}
-                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">First trail:</dt>
-                      <dd class="col-7 m-0">
+                      <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">First trail:</dt>
+                      <dd class="col-9 col-sm-7 m-0">
                         {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
                       </dd>
                     {{/if}}
                     {{#if(hasher.motherHash)}}
-                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Mother hash:</dt>
-                      <dd class="col-7 m-0">{{hasher.motherHash}}</dd>
+                      <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Mother hash:</dt>
+                      <dd class="col-9 col-sm-7 m-0">{{hasher.motherHash}}</dd>
                     {{/if}}
-                    {{#or(hasher.namingTrailDate, hasher.namingTrailNumber)}}
-                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Naming trail:</dt>
-                      <dd class="col-7 m-0">
-                        {{#if(hasher.namingTrailDate)}}
-                          {{hasher.namingTrailDate}} {{#if hasher.namingTrailNumber}}(#{{hasher.namingTrailNumber}}){{/if}}
-                        {{else}}
-                          #{{hasher.namingTrailNumber}}
-                        {{/if}}
-                      </dd>
-                    {{/or}}
-                    {{#if(hasher.whoMadeYouCum)}}
-                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Who made ’em cum:</dt>
-                      <dd class="col-7 m-0">{{hasher.whoMadeYouCum}}</dd>
+                    {{#if(hasher.deathDate)}}
+                      <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Passed:</dt>
+                      <dd class="col-9 col-sm-7 m-0">{{hasher.deathDate}}</dd>
                     {{/if}}
+                  </dl>
+                </div>
+                <div class="col-lg-6 d-none d-lg-block">
+                  <dl class="mb-0 row">
+                    {{{hasher.obituaryHtml}}}
                   </dl>
                 </div>
               </div>
