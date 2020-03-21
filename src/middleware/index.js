@@ -266,8 +266,8 @@ module.exports = function (app) {
 
   app.get('/image', function(req, res) {
     const params = req.query;
-    const height = params.height ? Number(params.height) : null;
-    const width = params.width ? Number(params.width) : null;
+    const height = params.height ? Math.round(Number(params.height)) : null;
+    const width = params.width ? Math.round(Number(params.width)) : null;
 
     // Create the data folder if it doesn’t exist
     createCacheDirectory.then(() => {
