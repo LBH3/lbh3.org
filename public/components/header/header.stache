@@ -2,6 +2,8 @@
 <can-import from="@fortawesome/fontawesome-free/css/brands.css" />
 <can-import from="can-stache-route-helpers" />
 
+{{#eq(page, 'home')}}{{#if(hashersText)}}<a class="d-block in-memoriam text-center" href="{{routeUrl page='hashers' secondaryPage='in-memoriam'}}">{{hashersText}}</a>{{/if}}{{/eq}}
+
 <div class="border-bottom d-flex justify-content-between">
   <div>
     <h1 class="h2 m-0">
