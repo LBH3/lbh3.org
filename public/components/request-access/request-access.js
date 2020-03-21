@@ -1,7 +1,6 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
-import './request-access.less';
 import view from './request-access.stache';
 
 export const ViewModel = DefineMap.extend({

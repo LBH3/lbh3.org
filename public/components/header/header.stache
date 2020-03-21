@@ -2,7 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/brands.css" />
 <can-import from="can-stache-route-helpers" />
 
-<div class="d-flex justify-content-between">
+<div class="border-bottom d-flex justify-content-between">
   <div>
     <h1 class="h2 m-0">
       <a aria-label="Home page" href="{{routeUrl page='home'}}">

@@ -1,5 +1,4 @@
 import Component from 'can-component';
-import './alert.less';
 
 export default Component.extend({
   tag: 'lbh3-alert',

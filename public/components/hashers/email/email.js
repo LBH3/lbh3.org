@@ -2,7 +2,6 @@ import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
-import './email.less';
 import view from './email.stache';
 
 const $limit = 500;

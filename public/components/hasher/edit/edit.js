@@ -4,8 +4,6 @@ import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import view from './edit.stache';
 
-import './edit.less';
-
 export const ViewModel = DefineMap.extend({
 
   get canEditThisHasher() {

@@ -1,6 +1,5 @@
 import Component from 'can-component';
 import Session from '~/models/session';
-import './privacy.less';
 import view from './privacy.stache';
 
 export default Component.extend({

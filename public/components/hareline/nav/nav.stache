@@ -1,26 +1,10 @@
-<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
-<ul class="border-bottom justify-content-center mt-0 pb-2 nav nav-pills">
-  {{#if session.user.canAddTrails}}
-    <li class="nav-item">
-      <a
-        class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link"
-        href="{{routeUrl page='hareline' secondaryPage='add'}}"
-        title="Add a new trail"
-      >
-        <span class="fas fa-plus fa-lg"></span> Add Trail
-      </a>
-    </li>
-  {{/if}}
-  <li class="nav-item">
-    <a
-      class="{{#eq(secondaryPage, 'guidelines')}}active{{/eq}} nav-link"
-      href="{{routeUrl page='hareline' secondaryPage='guidelines'}}"
-      title="View the haring guidelines"
-    >
-      <span class="fas fa-scroll fa-lg"></span> Haring Guidelines
-    </a>
-  </li>
-</ul>
+<nav class="border-bottom d-flex">
+  <ul class="flex-row m-auto navbar-nav overflow-auto text-nowrap">
+    {{#if session.user.canAddTrails}}
+      <li class="nav-item"><a class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='add'}}" title="Add a new trail">Add Trail</a></li>
+    {{/if}}
+    <li class="nav-item"><a class="{{#eq(secondaryPage, 'guidelines')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='guidelines'}}" title="View the haring guidelines">Haring Guidelines</a></li>
+  </ul>
+</nav>

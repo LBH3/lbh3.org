@@ -2,11 +2,8 @@ import BoredYear from '~/models/bored-year';
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './mismanagement.less';
-import platform from 'steal-platform';
 import route from 'can-route';
 import view from './mismanagement.stache';
-
-import '~/components/about/mismanagement/year/';
 
 export const ViewModel = DefineMap.extend({
   get description() {
@@ -15,16 +12,11 @@ export const ViewModel = DefineMap.extend({
   get mostRecentYear() {
     const years = this.years;
     if (years && years.length) {
-      return years[years.length - 1].year;
+      return years[0].year;
     }
   },
   get ogTitle() {
     return `${this.year} Mismanagement`;
-  },
-  platform: {
-    default: () => {
-      return platform;
-    }
   },
   routeForYear: function(year) {
     const routeParams = {page: 'about', secondaryPage: 'mismanagement'};
@@ -34,12 +26,14 @@ export const ViewModel = DefineMap.extend({
     return route.url(routeParams);
   },
   get selectedYear() {
-    const year = this.year;
-    const years = this.years || [];
-    const filteredYears = years.filter(function(yearObject) {
-      return yearObject.year === year;
-    });
-    return (filteredYears && filteredYears.length) ? filteredYears[filteredYears.length - 1] : null;
+    const years = this.years;
+    if (years) {
+      const year = this.year;
+      const filteredYears = years.filter(function(yearObject) {
+        return yearObject.year === year;
+      });
+      return filteredYears[0];
+    }
   },
   get showEmailLink() {
     return this.mostRecentYear === this.year;
@@ -66,7 +60,7 @@ export const ViewModel = DefineMap.extend({
       return BoredYear.getList({
         $limit: 100,
         $sort: {
-          year: 1
+          year: -1
         }
       });
     }

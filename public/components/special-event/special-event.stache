@@ -3,11 +3,11 @@
 <can-import from="~/components/special-event/nav/" />
 
 {{#if specialEventPromise.isPending}}
-  <lbh3-alert class="mt-3" message:from="'Fetching the event…'" />
+  <lbh3-alert class="d-block mt-3" message:from="'Fetching the event…'" />
 {{/if}}
 
 {{#if specialEventPromise.isRejected}}
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger mt-3" role="alert">
     <strong>Fuck!</strong> The event couldn’t be retrieved. {{specialEventPromise.reason.xhr.message}}
   </div>
 {{/if}}

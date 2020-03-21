@@ -7,11 +7,11 @@
 
 {{#if session.user.canEditFutureSpecialEvents}}
   {{#if specialEventPromise.isPending}}
-    <lbh3-alert class="mt-3" message:from="'Fetching the event…'" />
+    <lbh3-alert class="d-block mt-3" message:from="'Fetching the event…'" />
   {{/if}}
 
   {{#if specialEventPromise.isRejected}}
-    <div class="alert alert-danger" role="alert">
+    <div class="alert alert-danger mt-3" role="alert">
       <strong>Fuck!</strong> The event failed to load. {{specialEventPromise.reason.xhr.message}}
     </div>
   {{/if}}
@@ -104,10 +104,10 @@
           </div>
 
           {{#if editSpecialEventPromise.isPending}}
-            <lbh3-alert message:from="'Saving the special event…'" />
+            <lbh3-alert class="d-block mt-3" message:from="'Saving the special event…'" />
           {{/if}}
           {{#if editSpecialEventPromise.isRejected}}
-            <div class="alert alert-danger" role="alert">
+            <div class="alert alert-danger mt-3" role="alert">
               <strong>Fuck!</strong> The special event failed to save. {{editSpecialEventPromise.reason.xhr.message}}
             </div>
           {{/if}}

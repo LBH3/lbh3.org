@@ -46,10 +46,10 @@
     </div>
 
     {{#if creatingSpecialEventPromise.isPending}}
-      <lbh3-alert message:from="'Saving the event…'" />
+      <lbh3-alert class="d-block mt-3" message:from="'Saving the event…'" />
     {{/if}}
     {{#if creatingSpecialEventPromise.isRejected}}
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-danger mt-3" role="alert">
         <strong>Fuck!</strong> The new special event failed to save. {{creatingSpecialEventPromise.reason.xhr.message}}
       </div>
     {{/if}}
@@ -68,7 +68,7 @@
   </form>
 
 {{else}}
-  <div class="alert alert-danger" role="alert">
+  <div class="alert alert-danger mt-3" role="alert">
     Sorry, you don’t have permission to see this page.
   </div>
 {{/if}}

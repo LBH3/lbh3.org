@@ -6,7 +6,7 @@
   {{#if session.user.hasherId}}
     {{#if session.user.hasher}}
       {{^if session.user.hasSharedInfo}}
-        <div class="alert alert-info" role="alert">
+        <div class="alert alert-info mt-3" role="alert">
           <p><strong>Hello {{session.user.hasher.hashName}}!</strong></p>
           <p>We have a new <a href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a> where you can find every hasher and some of their run stats.</p>
           <p class="mb-0">You can <a href="{{routeUrl page='hashers' id=session.user.hasherId secondaryPage='edit'}}">edit your profile</a> to share more of your info in our Directory.</p>
@@ -25,16 +25,16 @@
     </lbh3-no-ssr>
   {{/if}}
 {{else}}
-  <p><small> The Long Beach kennel was founded over 35 years ago. We run Thursday evening during Spring/Summer &amp; Sunday morning in the Fall/Winter. We often have an attendance of 75+. Visitors &amp; Virgins are always welcome! Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies. Please bring a vessel for your beverage. We hope to see you at LBH3. On On!!!</small></p>
+  <p class="mt-3"><small>The Long Beach kennel was founded over 35 years ago. We run Thursday evening during Spring/Summer &amp; Sunday morning in the Fall/Winter. We often have an attendance of 75+. Visitors &amp; Virgins are always welcome! Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies. Please bring a vessel for your beverage. We hope to see you at LBH3. On On!!!</small></p>
 {{/if}}
 
 <lbh3-no-ssr>
   {{#if electionsPromise}}
     {{#if electionsPromise.isPending}}
-      <lbh3-alert class="mt-3" message:from="'Fetching elections…'" />
+      <lbh3-alert class="d-block mt-3" message:from="'Fetching elections…'" />
     {{/if}}
     {{#if electionsPromise.isRejected}}
-      <div class="alert alert-danger" role="alert">
+      <div class="alert alert-danger mt-3" role="alert">
         <strong>Fuck!</strong> The upcumming erections couldn’t be fetched.
         {{electionsPromise.reason.xhr.message}}
       </div>
@@ -52,7 +52,7 @@
 </lbh3-no-ssr>
 
 {{#if isBeforeApril10}}
-  <div class="alert alert-info" role="alert">
+  <div class="alert alert-info mt-3" role="alert">
     <p><strong>LBH3 is taking a few weeks off to help slow the spread of <a href="http://longbeach.gov/covid19" class="alert-link text-nowrap">COVID-19</a></strong></p>
     <p>Our next scheduled run is listed below. This may change as the pandemic develops.</p>
     <p class="mb-0">Please <a href="mailto:contact@lbh3.org">email us</a> if you have any questions.</p>

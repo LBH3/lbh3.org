@@ -373,7 +373,7 @@
   {{/and}}
 
   {{#if editingHasherPromise.isPending}}
-    <lbh3-alert class="mt-3" message:from="'Saving the hasher…'" />
+    <lbh3-alert class="d-block mt-3" message:from="'Saving the hasher…'" />
   {{/if}}
 
   {{#if editingHasherPromise.isRejected}}

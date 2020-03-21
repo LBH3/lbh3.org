@@ -26,9 +26,9 @@
 </dl>
 
 {{#if canViewRunAttendance}}
-  {{#if hashersPromise.isPending}}<lbh3-alert class="mt-3" message:from="'Fetching the attendance sheet…'" />{{/if}}
+  {{#if hashersPromise.isPending}}<lbh3-alert class="d-block mt-3" message:from="'Fetching the attendance sheet…'" />{{/if}}
 
-  {{#if hashersPromise.isRejected}}<div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}</div>{{/if}}
+  {{#if hashersPromise.isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The attendance sheet couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}</div>{{/if}}
 
   {{#if hashersPromise.isResolved}}
     {{#if hashers.length}}

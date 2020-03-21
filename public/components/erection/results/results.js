@@ -10,7 +10,6 @@ import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import UnencryptedBallot from '~/models/unencrypted-ballot';
 
-import './results.less';
 import view from './results.stache';
 
 export const ViewModel = DefineMap.extend({

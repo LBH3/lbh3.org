@@ -5,7 +5,6 @@ import DefineList from 'can-define/list/';
 import DefineMap from 'can-define/map/';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
-import './year.less';
 import route from 'can-route';
 import view from './year.stache';
 
@@ -67,7 +66,7 @@ export const ViewModel = DefineMap.extend({
           });
 
           resolve(Object.values(hashersByPosition).sort((a, b) => {
-            return a.position.singularName.localeCompare(b.position.singularName);
+            return a.position && b.position ? a.position.singularName.localeCompare(b.position.singularName) : 0;
           }));
         })
       }

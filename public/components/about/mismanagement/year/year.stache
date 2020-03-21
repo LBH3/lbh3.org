@@ -3,16 +3,16 @@
 <can-import from="~/components/alert/" />
 
 {{#or(hashersPromise.isPending, positionsPromise.isPending)}}
-  <lbh3-alert message:from="'Fetching the Mismanagement…'" />
+  <lbh3-alert class="d-block mt-3" message:from="'Fetching the Mismanagement…'" />
 {{/or}}
 
 {{#or(hashersPromise.isRejected, positionsPromise.isRejected)}}
-  <div class="alert alert-danger" role="alert"><strong>Fuck!</strong> The Mismanagement list couldn’t be retrieved. {{hashersPromise.reason.xhr.message}} {{positionsPromise.reason.xhr.message}}</div>
+  <div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Mismanagement list couldn’t be retrieved. {{hashersPromise.reason.xhr.message}} {{positionsPromise.reason.xhr.message}}</div>
 {{/or}}
 
 {{#and(hashersPromise.isResolved, positionsPromise.isResolved)}}
   {{#if showEmailLink}}
-    <p class="d-print-none">Click the <span class="fas fa-envelope"></span> next to each position to email them directly, or <a href="mailto:bored@lbh3.org">send an email to the entire Bored and our regular volunteers (currently just Achey Breaky Fart)</a>.</p>
+    <p class="d-print-none mt-3">Click the <span class="fas fa-envelope"></span> next to each position to email them directly, or <a href="mailto:bored@lbh3.org">send an email to the entire Bored and our regular volunteers (currently just Achey Breaky Fart)</a>.</p>
   {{/if}}
 
   {{#for(hasherByPosition of hashersByPosition)}}
