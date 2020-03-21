@@ -49,7 +49,7 @@
                   {{patch.patchNumber}}
                 </td>
               </tr>
-            {{/each}}
+            {{/for}}
           </tbody>
         </table>
       </div>

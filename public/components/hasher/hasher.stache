@@ -182,20 +182,27 @@
     {{#if(hasher.hasDied)}}
       <div class="col-lg">
         <h3>In memoriam</h3>
-        <dl class="row">
-          {{#if(hasher.died)}}
-            <dt class="col-sm-4 col-lg-5">Died:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.died}}</dd>
-          {{/if}}
-          {{#if(hasher.passed)}}
-            <dt class="col-sm-4 col-lg-5">Passed:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.passed}}</dd>
-          {{/if}}
-          {{#if(hasher.inMemoriam)}}
-            <dt class="col-sm-4 col-lg-5">Notes:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.inMemoriam}}</dd>
-          {{/if}}
-        </dl>
+        <p><b>Passed:</b> {{hasher.deathDate}}</p>
+        {{{hasher.obituaryHtml}}}
+        {{#if(session.user.canEditHasherInfo)}}
+          {{#or(hasher.died, hasher.passed, hasher.inMemoriam)}}
+            <hr>
+            <dl class="row">
+              {{#if(hasher.died)}}
+                <dt class="col-sm-4 col-lg-5">Died:</dt>
+                <dd class="col-sm-8 col-lg-7">{{hasher.died}}</dd>
+              {{/if}}
+              {{#if(hasher.passed)}}
+                <dt class="col-sm-4 col-lg-5">Passed:</dt>
+                <dd class="col-sm-8 col-lg-7">{{hasher.passed}}</dd>
+              {{/if}}
+              {{#if(hasher.inMemoriam)}}
+                <dt class="col-sm-4 col-lg-5">Notes:</dt>
+                <dd class="col-sm-8 col-lg-7">{{hasher.inMemoriam}}</dd>
+              {{/if}}
+            </dl>
+          {{/or}}
+        {{/if}}
       </div>
     {{else}}
       {{>metadataColumn}}

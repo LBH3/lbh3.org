@@ -30,6 +30,7 @@ import 'lbh3/components/hasher-upload-headshot-button/hasher-upload-headshot-but
 import 'lbh3/components/hashers/add/add-test';
 import 'lbh3/components/hashers/attendance-records/attendance-records-test';
 import 'lbh3/components/hashers/early-warning/early-warning-test';
+import 'lbh3/components/hashers/in-memoriam/in-memoriam-test';
 import 'lbh3/components/hashers/email/email-test';
 import 'lbh3/components/hashers/hashers-test';
 import 'lbh3/components/hashers/nav/nav-test';

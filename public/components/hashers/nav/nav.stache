@@ -1,14 +1,15 @@
 <can-import from="can-stache-route-helpers" />
 
-{{#if session.user.canViewHashersEmailList}}
-  <nav class="border-bottom d-flex">
-    <ul class="border-bottom flex-row m-auto navbar-nav overflow-auto text-nowrap">
+<nav class="border-bottom d-flex">
+  <ul class="border-bottom flex-row m-auto navbar-nav overflow-auto text-nowrap">
+    {{#if session.user.canViewHashersEmailList}}
       {{#if session.user.canAddHashers}}
         <li class="nav-item"><a class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='add'}}" title="Add a new hasher">Add Hasher</a></li>
       {{/if}}
       <li class="nav-item"><a class="{{#eq(secondaryPage, 'attendance-records')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}" title="Go to the attendance records page">Attendance Records</a></li>
       <li class="nav-item"><a class="{{#eq(secondaryPage, 'early-warning')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='early-warning'}}" title="Go to the early warning page">Early Warning</a></li>
       <li class="nav-item"><a class="{{#eq(secondaryPage, 'email')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='email'}}" title="Go to the email list">Email List</a></li>
-    </ul>
-  </nav>
-{{/if}}
+    {{/if}}
+    <li class="nav-item"><a class="{{#eq(secondaryPage, 'in-memoriam')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='in-memoriam'}}" title="Go to the in memoriam page">In Memoriam</a></li>
+  </ul>
+</nav>

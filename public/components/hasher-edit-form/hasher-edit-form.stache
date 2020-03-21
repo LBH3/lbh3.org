@@ -337,37 +337,25 @@
         In memoriam
       </legend>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="died">
-          Died
-        </label>
-        <div class="col-sm-8 d-flex">
-          <input class="flex-grow-1 form-control mr-2" id="died" type="text" value:bind="hasher.died">
-          <select class="float-right form-control w-auto" value:bind="hasher.diedPrivacy">
-            {{>privacyOptionsTemplate}}
-          </select>
-        </div>
+        <label class="col-sm-4 col-form-label" for="deathDate">Date</label>
+        <div class="col-sm-8 d-flex"><input class="flex-grow-1 form-control mr-2" id="deathDate" type="date" value:bind="hasher.deathDate"></div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="passed">
-          Passed
-        </label>
-        <div class="col-sm-8 d-flex">
-          <input class="flex-grow-1 form-control mr-2" id="passed" type="text" value:bind="hasher.passed">
-          <select class="float-right form-control w-auto" value:bind="hasher.passedPrivacy">
-            {{>privacyOptionsTemplate}}
-          </select>
-        </div>
+        <label class="col-sm-4 col-form-label" for="obituaryMd">Public statement (this is visible to everyone)</label>
+        <div class="col-sm-8 d-flex"><textarea class="flex-grow-1 form-control mr-2" id="obituaryMd" value:bind="hasher.obituaryMd"></textarea></div>
+      </div>
+      <hr>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="died">Died</label>
+        <div class="col-sm-8 d-flex"><input class="flex-grow-1 form-control mr-2" disabled id="died" type="text" value:from="hasher.died"></div>
       </div>
       <div class="form-group row">
-        <label class="col-sm-4 col-form-label" for="inMemoriam">
-          Notes
-        </label>
-        <div class="col-sm-8 d-flex">
-          <textarea class="flex-grow-1 form-control mr-2" id="inMemoriam" value:bind="hasher.inMemoriam"></textarea>
-          <select class="float-right form-control w-auto" value:bind="hasher.inMemoriamPrivacy">
-            {{>privacyOptionsTemplate}}
-          </select>
-        </div>
+        <label class="col-sm-4 col-form-label" for="passed">Passed</label>
+        <div class="col-sm-8 d-flex"><input class="flex-grow-1 form-control mr-2" disabled id="passed" type="text" value:from="hasher.passed"></div>
+      </div>
+      <div class="form-group row">
+        <label class="col-sm-4 col-form-label" for="inMemoriam">Notes</label>
+        <div class="col-sm-8 d-flex"><textarea class="flex-grow-1 form-control mr-2" disabled id="inMemoriam" value:from="hasher.inMemoriam"></textarea></div>
       </div>
     </fieldset>
   {{/and}}

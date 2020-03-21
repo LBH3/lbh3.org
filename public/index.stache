@@ -302,6 +302,15 @@
                     </can-import>
                   </lbh3-no-ssr>
                 {{/case}}
+                {{#case "in-memoriam"}}
+                  <lbh3-no-ssr>
+                    <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/in-memoriam/">
+                      {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the In Memoriam page…'" />{{/if}}
+                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The In Memoriam page failed to load.</div>{{/if}}
+                      {{#if isResolved}}<lbh3-hashers-in-memoriam description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
+                    </can-import>
+                  </lbh3-no-ssr>
+                {{/case}}
               {{/switch}}
             {{else}}
               <lbh3-no-ssr>

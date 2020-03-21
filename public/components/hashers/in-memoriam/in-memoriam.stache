@@ -1,0 +1,115 @@
+<can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
+
+<h2 class="sr-only">In Memoriam</h2>
+
+<p class="mt-3">{{description}}</p>
+
+{{#if session.user.canViewDirectoryInfo}}
+
+  {{#if hashersPromise.isPending}}
+    <lbh3-alert class="d-block mt-3" message:from="'Fetching the In Memoriam report…'" />
+  {{/if}}
+
+  {{#if hashersPromise.isRejected}}
+    <div class="alert alert-danger mt-3" role="alert">
+      <strong>Fuck!</strong> The early warning report couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
+    </div>
+  {{/if}}
+
+  {{#if hashersPromise.isResolved}}
+    {{#if hashers.length}}
+      <div class="container hashers-list">
+        {{#for(hasher of hashers)}}
+          <a class="border-top mt-3 pt-3 row text-decoration-none" href="{{routeForHasher(hasher)}}">
+            <div class="align-items-center col col-auto d-flex headshot-container justify-content-center pl-0">
+              {{#if hasher.headshotUrl}}
+                <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrlForSize(112, 112)}}" />
+              {{else}}
+                <span class="fas fa-user-alt fa-3x"></span>
+              {{/if}}
+            </div>
+            <div class="col p-0">
+              <div class="mr-0 row">
+                <div class="col-sm-7 col-lg-5">
+                  <p class="h5 m-0">
+                    {{hasher.hashName}}
+                  </p>
+                  <p class="m-0">
+                    {{hasher.givenName}} {{hasher.familyName}}
+                  </p>
+                  <p class="d-none d-sm-block m-0 text-muted">
+                    {{#if(hasher.addresses[0])}}
+                      {{hasher.addresses[0].city}}
+                    {{/if}}
+                  </p>
+                </div>
+                <div class="col-sm-5 col-lg-2">
+                  <dl class="mb-0 row">
+                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Runs:</dt>
+                    <dd class="col-9 col-sm-7 m-0">{{hasher.runCount}}</dd>
+                    <dt class="col-3 col-sm-5 d-none d-sm-block font-weight-normal m-0 px-sm-0 text-sm-right">Mileage:</dt>
+                    <dd class="col-9 col-sm-7 d-none d-sm-block m-0">{{hasher.runMileage}}</dd>
+                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-sm-0 text-sm-right">Hares:</dt>
+                    <dd class="col-9 col-sm-7 m-0">{{hasher.hareCount}}</dd>
+                  </dl>
+                </div>
+                <div class="col-lg-5 d-none d-lg-block">
+                  <dl class="mb-0 row">
+                    {{#if(hasher.firstTrailDate)}}
+                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">First trail:</dt>
+                      <dd class="col-7 m-0">
+                        {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
+                      </dd>
+                    {{/if}}
+                    {{#if(hasher.motherHash)}}
+                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Mother hash:</dt>
+                      <dd class="col-7 m-0">{{hasher.motherHash}}</dd>
+                    {{/if}}
+                    {{#or(hasher.namingTrailDate, hasher.namingTrailNumber)}}
+                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Naming trail:</dt>
+                      <dd class="col-7 m-0">
+                        {{#if(hasher.namingTrailDate)}}
+                          {{hasher.namingTrailDate}} {{#if hasher.namingTrailNumber}}(#{{hasher.namingTrailNumber}}){{/if}}
+                        {{else}}
+                          #{{hasher.namingTrailNumber}}
+                        {{/if}}
+                      </dd>
+                    {{/or}}
+                    {{#if(hasher.whoMadeYouCum)}}
+                      <dt class="col-5 font-weight-normal m-0 px-0 text-right">Who made ’em cum:</dt>
+                      <dd class="col-7 m-0">{{hasher.whoMadeYouCum}}</dd>
+                    {{/if}}
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </a>
+        {{/for}}
+      </div>
+
+      {{#if pages}}
+        <nav class="nav nav-pills">
+          {{#for(page of pages)}}
+            <a
+              class="{{#is currentPage page}}active{{/is}} nav-link text-sm-center"
+              href="{{routeForPage(page)}}"
+            >
+              {{page}}
+            </a>
+          {{/for}}
+        </nav>
+      {{/if}}
+
+    {{else}}
+      <div class="alert alert-info mt-3" role="alert">
+        <strong>No hashers found.</strong>
+      </div>
+    {{/if}}
+  {{/if}}
+
+{{else}}
+  <div class="alert alert-danger mt-3" role="alert">
+    Sorry, you don’t have permission to see this page.
+  </div>
+{{/if}}

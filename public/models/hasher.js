@@ -198,6 +198,7 @@ export const Hasher = DefineMap.extend({
   cellPhone: 'string',
   cellPhonePrivate: 'string',
   createdBy: 'string',
+  deathDate: datePropDefinition,
   died: 'string',
   diedPrivacy: privacyDefault,
   emailAddresses: emailAddressesPropDefinition,
@@ -286,11 +287,8 @@ export const Hasher = DefineMap.extend({
   givenNamePrivacy: privacyDefault,
   givenNamePrivate: 'string',
   hareCount: 'number',
-  hasDied: {
-    serialize: false,
-    get: function() {
-      return !!this.died || !!this.inMemoriam || !!this.passed;
-    }
+  get hasDied() {
+    return !!this.deathDate || !!this.died || !!this.inMemoriam || !!this.obituaryMd || !!this.passed;
   },
   hasDirectoryInfo: {
     get: function() {
@@ -387,6 +385,10 @@ export const Hasher = DefineMap.extend({
     serialize: false
   },
   notesMd: 'string',
+  get obituaryHtml() {
+    return marked(this.obituaryMd || '');
+  },
+  obituaryMd: 'string',
   owes: 'string',
   passed: 'string',
   passedPrivacy: privacyDefault,

@@ -128,6 +128,7 @@ route.register('/hashers/add/', { page: 'hashers', secondaryPage: 'add'});
 route.register('/hashers/attendance-records/', { page: 'hashers', secondaryPage: 'attendance-records'});
 route.register('/hashers/early-warning/', { page: 'hashers', secondaryPage: 'early-warning'});
 route.register('/hashers/email/', { page: 'hashers', secondaryPage: 'email'});
+route.register('/hashers/in-memoriam/', { page: 'hashers', secondaryPage: 'in-memoriam'});
 route.register('/hashers/{id}/{secondaryPage}/', { page: 'hashers', id: 0, secondaryPage: ''});
 route.register('/hashers/{id}/', { page: 'hashers', id: 0 });
 route.register('/hashers/', { page: 'hashers', secondaryPage: '' });
