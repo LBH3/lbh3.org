@@ -48,7 +48,7 @@
       <div class="container hashers-list">
         {{#for(hasher of hashers)}}
           <a class="border-top mt-3 pt-3 row text-decoration-none" href="{{routeForHasher(hasher)}}">
-            <div class="align-items-center col col-auto d-flex headshot-container justify-content-center pl-0">
+            <div class="align-items-start col col-auto d-flex headshot-container justify-content-center pl-0">
               {{#if hasher.headshotUrl}}
                 <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrlForSize(112, 112)}}" />
               {{else}}
