@@ -135,58 +135,55 @@
           {{/if}}
         {{/case}}
         {{#case "events"}}
-          {{#if secondaryPage}}
-            {{#switch secondaryPage}}
-              {{#case "attendance"}}
-                <lbh3-no-ssr>
-                  <can-import from="~/components/run/attendance/">
-                    {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Run Attendance Sheet…'" />{{/if}}
-                    {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Run Attendance Sheet failed to load.</div>{{/if}}
-                    {{#if isResolved}}<lbh3-run-attendance day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
+          {{#switch whichEventsPage}}
+            {{#case "attendance"}}
+              <lbh3-no-ssr>
+                <can-import from="~/components/run/attendance/">
+                  {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Run Attendance Sheet…'" />{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Run Attendance Sheet failed to load.</div>{{/if}}
+                  {{#if isResolved}}<lbh3-run-attendance day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
+                </can-import>
+              </lbh3-no-ssr>
+            {{/case}}
+            {{#case "edit"}}
+              <lbh3-no-ssr>
+                {{#if urlId}}
+                  <can-import class="container d-block pl-0 pr-0" from="~/components/special-event/edit/">
+                    {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Edit Special Event page…'" />{{/if}}
+                    {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Special Event page failed to load.</div>{{/if}}
+                    {{#if isResolved}}<lbh3-special-event-edit description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" year:from="year" />{{/if}}
                   </can-import>
-                </lbh3-no-ssr>
-              {{/case}}
-              {{#case "edit"}}
-                <lbh3-no-ssr>
-                  {{#if urlId}}
-                    <can-import class="container d-block pl-0 pr-0" from="~/components/special-event/edit/">
-                      {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Edit Special Event page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Special Event page failed to load.</div>{{/if}}
-                      {{#if isResolved}}<lbh3-special-event-edit description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" year:from="year" />{{/if}}
-                    </can-import>
-                  {{else}}
-                    <can-import from="~/components/run/edit/">
-                      {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Edit Run page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Run page failed to load.</div>{{/if}}
-                      {{#if isResolved}}<lbh3-run-edit day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
-                    </can-import>
-                  {{/if}}
-                </lbh3-no-ssr>
-              {{/case}}
-            {{/switch}}
-          {{else}}
-            {{#if trailNumber}}
+                {{else}}
+                  <can-import from="~/components/run/edit/">
+                    {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Edit Run page…'" />{{/if}}
+                    {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Run page failed to load.</div>{{/if}}
+                    {{#if isResolved}}<lbh3-run-edit day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
+                  </can-import>
+                {{/if}}
+              </lbh3-no-ssr>
+            {{/case}}
+            {{#case "run"}}
               <can-import from="~/components/run/">
                 {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Run page…'" />{{/if}}
                 {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Run page failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-run day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
               </can-import>
-            {{else}}
-              {{#if urlId}}
-                <can-import class="container d-block pl-0 pr-0" from="~/components/special-event/">
-                  {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Special Event page…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Special Event page failed to load.</div>{{/if}}
-                  {{#if isResolved}}<lbh3-special-event description:to="description" ogTitle:to="ogTitle" title:to="title" urlId:from="urlId" year:from="year" />{{/if}}
-                </can-import>
-              {{else}}
-                <can-import from="~/components/past-runs/">
-                  {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading Past Runs…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Past Runs page failed to load.</div>{{/if}}
-                  {{#if isResolved}}<lbh3-past-runs description:to="description" ogTitle:to="ogTitle" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" title:to="title" view:bind="view" year:bind="year" />{{/if}}
-                </can-import>
-              {{/if}}
-            {{/if}}
-          {{/if}}
+            {{/case}}
+            {{#case "special-event"}}
+              <can-import class="container d-block pl-0 pr-0" from="~/components/special-event/">
+                {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Special Event page…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Special Event page failed to load.</div>{{/if}}
+                {{#if isResolved}}<lbh3-special-event description:to="description" ogTitle:to="ogTitle" title:to="title" urlId:from="urlId" year:from="year" />{{/if}}
+              </can-import>
+            {{/case}}
+            {{#default}}
+              <can-import from="~/components/past-runs/">
+                {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading Past Runs…'" />{{/if}}
+                {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Past Runs page failed to load.</div>{{/if}}
+                {{#if isResolved}}<lbh3-past-runs description:to="description" ogTitle:to="ogTitle" searchMissing:bind="searchMissing" secondaryPage:from="secondaryPage" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" skip:from="skip" title:to="title" view:bind="view" year:bind="year" />{{/if}}
+              </can-import>
+            {{/default}}
+          {{/switch}}
         {{/case}}
         {{#case "hareline"}}
           {{<harelineNav}}

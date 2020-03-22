@@ -14,6 +14,8 @@
   "steal": {
     "bundle": [
       "~/components/past-runs/map/map",
+      "~/components/past-runs/search/search",
+      "~/components/request-access/request-access",
       "~/components/run/post/post"
     ],
     "main": "lbh3/index.stache!done-autorender",

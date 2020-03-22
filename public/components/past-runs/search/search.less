@@ -1,0 +1,18 @@
+lbh3-past-runs-search {
+	display: block;
+
+	.search {
+		display: block;
+		height: ~'calc(100vh - 278px)';
+		min-height: 256px;
+		width: 100%;
+
+		@supports(padding: max(0px)) {
+			height: ~'calc(100vh - 278px - env(safe-area-inset-bottom) - env(safe-area-inset-top))';
+		}
+
+		.gm-style-iw.gm-style-iw-c {
+			color: #212529;
+		}
+	}
+}

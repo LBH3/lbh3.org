@@ -1,6 +1,6 @@
 <can-import from="~/components/run-list/" />
 
 {{#for(month of eventsByMonth)}}
-  <h3>{{month.name}} {{year}}</h3>
+  <h3>{{month.name}} {{month.year}}</h3>
   <lbh3-run-list events:from="month.events" showHashit:from="showHashit" showNotes:from="showNotes" showOnOn:from="showOnOn" showScribe:from="showScribe" />
 {{/for}}

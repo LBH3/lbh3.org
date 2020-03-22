@@ -129,7 +129,7 @@
     },
     {
       "path": "./public/dist/bundles/guidelines-edit-*.js",
-      "maxSize": "5 kB"
+      "maxSize": "4 kB"
     },
     {
       "path": "./public/dist/bundles/hareline-hasher-past-runs.css",
@@ -153,7 +153,7 @@
     },
     {
       "path": "./public/dist/bundles/mismanagement-el-*.js",
-      "maxSize": "2 kB"
+      "maxSize": "3 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/index.css",
@@ -216,12 +216,24 @@
       "maxSize": "6 kB"
     },
     {
+      "path": "./public/dist/bundles/lbh3/components/past-runs/map/map.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/past-runs/map/map.js",
+      "maxSize": "5 kB"
+    },
+    {
       "path": "./public/dist/bundles/lbh3/components/past-runs/past-runs.css",
       "maxSize": "1 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/past-runs/past-runs.js",
-      "maxSize": "8 kB"
+      "maxSize": "9 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/past-runs/search/search.js",
+      "maxSize": "6 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/run/post/post.css",

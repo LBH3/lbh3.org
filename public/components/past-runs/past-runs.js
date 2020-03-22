@@ -40,7 +40,7 @@ export default Component.extend({
       }
     },
     get description() {
-      return `Archive of LBH3’s runs in ${this.year}.`;
+      return this.secondaryPage === 'search' ? `Search through all of LBH3’s runs.` : `Archive of LBH3’s runs in ${this.year}.`;
     },
     get eventQuery() {
       const endDate = (currentYear === this.year) ? this.currentTime : moment().tz(timeZone).year(this.year).endOf('year').toDate();
@@ -57,7 +57,7 @@ export default Component.extend({
       return Event.getList(this.eventQuery);
     },
     get ogTitle() {
-      return 'Past Runs';
+      return this.secondaryPage === 'search' ? 'Search Past Runs' : 'Past Runs';
     },
     routeForYear: function(year) {
       const routeParams = {
@@ -67,6 +67,8 @@ export default Component.extend({
       };
       return route.url(routeParams);
     },
+    searchMissing: 'string',
+    secondaryPage: 'string',
     get session() {
       return Session.current;
     },
@@ -85,6 +87,14 @@ export default Component.extend({
     showScribe: {
       default: false,
       type: 'boolean'
+    },
+    get showSearchInNav() {
+      const session = this.session || {};
+      const user = session.user;
+      if (user) {
+        return user.canAddPhotos || user.canAddSnoozes || user.canEditPostTrailInfo || user.canManageUsers;
+      }
+      return false;
     },
     get specialEventsPromise() {
       return SpecialEvent.getList(this.eventQuery);
