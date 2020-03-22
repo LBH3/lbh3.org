@@ -17,17 +17,7 @@
   {{/if}}
 
   {{#if user}}
-    <div class="row">
-      <div class="col pt-2">
-        <a href="{{routeUrl page='users'}}" title="Go back to the users list">
-          <span class="fas fa-angle-double-left fa-lg"></span>
-        </a>
-      </div>
-      <div class="col-10">
-        <h2 class="h3">{{user.email}}</h2>
-      </div>
-      <div class="col"></div>
-    </div>
+    <h2 class="h3 my-3">{{user.email}}</h2>
 
     <div class="row">
       <div class="col-md-6">

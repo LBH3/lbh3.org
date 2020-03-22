@@ -342,7 +342,7 @@
             {{#switch secondaryPage}}
               {{#case "edit"}}
                 <lbh3-no-ssr>
-                  <can-import from="~/components/users/edit/">
+                  <can-import class="container d-block pl-0 pr-0" from="~/components/users/edit/">
                     {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Edit User page…'" />{{/if}}
                     {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit User page failed to load.</div>{{/if}}
                     {{#if isResolved}}<lbh3-user-edit description:to="description" id:from="id" ogTitle:to="ogTitle" title:to="title" />{{/if}}
@@ -351,7 +351,7 @@
               {{/case}}
             {{/switch}}
           {{else}}
-            <can-import from="~/components/users/">
+            <can-import class="container d-block pl-0 pr-0" from="~/components/users/">
               {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Users page…'" />{{/if}}
               {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Users page failed to load.</div>{{/if}}
               {{#if isResolved}}<lbh3-users description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" />{{/if}}

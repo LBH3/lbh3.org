@@ -5,7 +5,7 @@
 <can-import from="~/components/alert/" />
 
 {{#if session.user.canManageUsers}}
-  <h2 class="h3">Users</h2>
+  <h2 class="h3 my-3">Users</h2>
 
   {{#if usersPromise.isPending}}
     <lbh3-alert class="d-block mt-3" message:from="'Fetching the users…'" />
@@ -18,67 +18,40 @@
   {{/if}}
 
   {{#if users}}
-    <div class="table-responsive">
-      <table class="table table-sm table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Email</th>
-            <th scope="col">Display Name</th>
-            <th scope="col">Hash Name</th>
-            <th class="text-center" scope="col">Edit</th>
-          </tr>
-        </thead>
-        <tbody>
-          {{#for(user of users)}}
-            <tr>
-              <td>
-                {{#if user.facebookProfile}}
-                  <span class="fab fa-lg fa-facebook-square"></span>
-                {{/if}}
-                {{#if user.googleProfile}}
-                  <span class="fab fa-lg fa-google"></span>
-                {{/if}}
-                <a href="{{routeUrl page='hashers' search=user.email secondaryPage=''}}">
-                  {{user.email}}
-                </a>
-              </td>
-              <td>
-                {{#if user.displayName}}
-                  <a href="{{routeUrl page='hashers' search=user.displayName secondaryPage=''}}">
-                    {{user.displayName}}
-                  </a>
+    <ol class="list-unstyled">
+      {{#for(user of users)}}
+        <li class="{{^eq(scope.index, 0)}}border-top pt-3{{/eq}} row">
+          <div class="col-1">
+            {{#if user.facebookProfile}}<span class="fab fa-lg fa-facebook-square"></span>{{/if}}
+            {{#if user.googleProfile}}<span class="fab fa-lg fa-google"></span>{{/if}}
+          </div>
+          <div class="col">
+            <p class="mb-1"><a href="{{routeUrl page='hashers' search=user.email secondaryPage=''}}">{{user.email}}</a></p>
+            <p class="mb-1">
+              {{#if user.displayName}}
+                <a href="{{routeUrl page='hashers' search=user.displayName secondaryPage=''}}">{{user.displayName}}</a>
+              {{else}}
+                {{user.givenName}} {{user.familyName}}
+              {{/if}}
+            </p>
+            <p>
+              {{#if user.hasherPromise}}
+                {{#if user.hasherPromise.isResolved}}
+                  <a href="{{routeUrl page='hashers' id=user.hasher.id}}">{{user.hasher.hashOrJustName}}</a>
                 {{else}}
-                  {{user.givenName}} {{user.familyName}}
+                  <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
                 {{/if}}
-              </td>
-              <td>
-                {{#if user.hasherPromise}}
-                  {{#if user.hasherPromise.isResolved}}
-                    <a href="{{routeUrl page='hashers' id=user.hasher.id}}">
-                      {{user.hasher.hashOrJustName}}
-                    </a>
-                  {{else}}
-                    <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-                  {{/if}}
-                {{else}}
-                  {{#if user.requestedName}}
-                    Requested:
-                    <a href="{{routeUrl page='hashers' search=user.requestedName secondaryPage=''}}">
-                      <strong>{{user.requestedName}}</strong>
-                    </a>
-                  {{/if}}
+              {{else}}
+                {{#if user.requestedName}}
+                  Requested: <a href="{{routeUrl page='hashers' search=user.requestedName secondaryPage=''}}"><strong>{{user.requestedName}}</strong></a>
                 {{/if}}
-              </td>
-              <td class="text-center">
-                <a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}" title="Edit user">
-                  <span class="far fa-edit fa-lg"></span>
-                </a>
-              </td>
-            </tr>
-          {{/for}}
-        </tbody>
-      </table>
-    </div>
+              {{/if}}
+            </p>
+          </div>
+          <div class="col-auto pl-0"><a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}"><span class="far fa-edit fa-lg"></span></a></div>
+        </li>
+      {{/for}}
+    </ol>
   {{/if}}
 
 {{else}}
