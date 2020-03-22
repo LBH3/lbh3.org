@@ -4,7 +4,14 @@
 
 {{#if eventPromise.isPending}}<lbh3-alert class="d-block mt-3" message:from="'Fetching the run…'" />{{/if}}
 
-{{#if eventPromise.isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The run couldn’t be retrieved. {{eventPromise.reason.xhr.message}}</div>{{/if}}
+{{#if eventPromise.isRejected}}
+  <div class="alert alert-danger mt-3" role="alert">
+    <p {{#if(trailNumber)}}class="mb-0"{{/if}}><strong>Fuck!</strong> The run couldn’t be retrieved. {{eventPromise.reason.xhr.message}}</p>
+    {{^if(trailNumber)}}
+      <p class="mb-0">Check <a class="alert-link" href="https://hash.beer" target="_blank">hash.beer</a> for the next run.</p>
+    {{/if}}
+  </div>
+{{/if}}
 
 {{#if event}}
   <lbh3-run-nav event:from="event" secondaryPage:from="secondaryPage" session:from="session" />

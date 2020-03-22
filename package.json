@@ -145,7 +145,7 @@
     },
     {
       "path": "./public/dist/bundles/home-run.js",
-      "maxSize": "6 kB"
+      "maxSize": "7 kB"
     },
     {
       "path": "./public/dist/bundles/mismanagement-el-*.css",

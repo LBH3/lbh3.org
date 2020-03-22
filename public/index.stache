@@ -181,7 +181,7 @@
               {{else}}
                 <can-import from="~/components/past-runs/">
                   {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading Past Runs…'" />{{/if}}
-                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The map page failed to load.</div>{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Past Runs page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-past-runs description:to="description" ogTitle:to="ogTitle" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" title:to="title" view:bind="view" year:bind="year" />{{/if}}
                 </can-import>
               {{/if}}
