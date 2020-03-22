@@ -48,7 +48,7 @@ const beforeFindHook = function(hook) {
       })(hook);
     } else {
       return searchHook({
-        fields: ['hash_name'],
+        fields: ['death_date', 'hash_name'],
         oldOptions: {
           fields: ['hashName']
         }
@@ -268,11 +268,7 @@ const filterData = function(data, filterState, user) {
 module.exports = {
   before: {
     all: [],
-    find: [
-      jwtAuthentication,
-      attachAuthInfo,
-      beforeFindHook
-    ],
+    find: [ attachAuthInfo, beforeFindHook ],
     get: [ attachAuthInfo ],
     create: [ jwtAuthentication, authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
     update: [ jwtAuthentication, authHook.restrictToUserOrPositions({ idField: 'hasherId', ownerField: 'id' }, ...boredPositions), createAndUpdateFields, makeRaw ],

@@ -54,6 +54,11 @@ const AppViewModel = DefineMap.extend({
       return search || undefined;
     }
   },
+  searchMissing: {
+    serialize(searchMissing) {
+      return searchMissing || undefined;
+    }
+  },
   secondaryPage: 'string',
   skip: {
     default: 0,
@@ -97,12 +102,31 @@ const AppViewModel = DefineMap.extend({
   },
   trailNumber: 'number',
   urlId: 'string',
-  view: {
-    serialize: function(view) {
-      return view || undefined;
+  get whichEventsPage() {
+    if (this.secondaryPage === 'attendance') {
+      return 'attendance';
+    } else if (this.secondaryPage === 'edit') {
+      return 'edit';
+    } else if (this.secondaryPage === 'search') {
+      return 'past-runs';
+    } else if (this.trailNumber) {
+      return 'run';
+    } else if (this.urlId) {
+      return 'special-event';
+    } else {
+      return 'past-runs';
     }
   },
-  year: 'number'
+  view: {
+    serialize: function(view) {
+      return view === 'list' ? undefined : view;
+    }
+  },
+  year: {
+    serialize: function(year) {
+      return this.page === 'events' && this.secondaryPage === 'search' ? undefined : year;
+    }
+  }
 });
 
 route.urlData = new RoutePushstate();
@@ -115,6 +139,7 @@ route.register('/erections/{urlId}/', { page: 'erections', urlId: '' });
 route.register('/erections/', { page: 'erections' });
 route.register('/events/', { page: 'events' });
 route.register('/events/founders/', { page: 'events', secondaryPage: 'founders'});
+route.register('/events/search/', { page: 'events', secondaryPage: 'search'});
 route.register('/events/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
 route.register('/events/{year}/{month}/{day}/trail-{trailNumber}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0});
 route.register('/events/{year}/{urlId}/{secondaryPage}/', { page: 'events', secondaryPage: '', urlId: '', year: 0 });

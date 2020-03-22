@@ -10,7 +10,6 @@ export const ViewModel = DefineMap.extend({
   showNotes: 'boolean',
   showOnOn: 'boolean',
   showScribe: 'boolean',
-  year: 'number',
 
   get eventsByMonth() {
     const allEvents = this.allEvents;

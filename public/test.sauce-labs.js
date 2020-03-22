@@ -5,7 +5,7 @@ const testSauceLabs = require('test-saucelabs');
 testSauceLabs({
   platforms: [{
     'appium-version': '1.9.1',
-    browserName: 'Browser',
+    browserName: 'Chrome',
     deviceName: 'Android Emulator',
     platform: 'Android',
     version: '6.0'

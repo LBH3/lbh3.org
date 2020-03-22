@@ -1,0 +1,50 @@
+<can-import from="can-stache-converters" />
+<can-import from="can-stache-route-helpers" />
+<can-import from="~/components/alert/" />
+<can-import from="~/components/no-ssr/" />
+
+<h2 class="sr-only">Past Runs Search</h2>
+
+<form class="form-inline my-3">
+  <label class="font-weight-bold mr-2" for="searchMissing">Missing</label>
+  <select class="form-control" id="searchMissing" value:bind="searchMissing">
+    {{#if(session.user.canEditPostTrailInfo)}}
+      <option value="hares">Hares</option>
+    {{/if}}
+    {{#if(session.user.canEditPostTrailInfo)}}
+      <option value="hashit">Hashit</option>
+    {{/if}}
+    {{#if(session.user.canManageUsers)}}
+      <option value="location">Location</option>
+      <option value="on-on">On-on</option>
+    {{/if}}
+    {{#if(session.user.canAddPhotos)}}
+      <option value="photos">Photos</option>
+    {{/if}}
+    {{#if(session.user.canEditPostTrailInfo)}}
+      <option value="scribe">Scribe</option>
+    {{/if}}
+    {{#if(session.user.canAddSnoozes)}}
+      <option value="snooze">Snooze</option>
+    {{/if}}
+  </select>
+</form>
+
+{{#if eventsPromise.isPending}}<lbh3-alert class="d-block mt-3" message:from="'Fetching the runs…'" />{{/if}}
+
+{{#if eventsPromise.isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The runs couldn’t be retrieved. {{eventsPromise.reason.xhr.message}}</div>{{/if}}
+
+{{#if(eventsPromise.isResolved)}}
+  {{#if(events.length)}}
+    <lbh3-year allEvents:from="events" showHashit:from="showHashit" showOnOn:from="showOnOn" showScribe:from="showScribe" />
+    {{#if pages}}
+      <nav class="nav nav-pills">
+        {{#for(page of pages)}}
+          <a class="{{#is currentPage page}}active{{/is}} nav-link text-sm-center" href="{{routeForPage(page)}}">{{page}}</a>
+        {{/for}}
+      </nav>
+    {{/if}}
+  {{else}}
+      <div class="alert alert-info mt-3" role="alert"><strong>No runs found.</strong></div>
+  {{/if}}
+{{/if}}
