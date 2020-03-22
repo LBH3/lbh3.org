@@ -31,7 +31,7 @@ export const ViewModel = DefineMap.extend({
             setValue(`In memory of ${hashers[0].hashOrJustName} and ${hashers[1].hashOrJustName}`);
           } else if (hashers.length > 2) {
             const hasherNames = hashers.map(hasher => {
-              return hashOrJustName;
+              return hasher.hashOrJustName;
             });
             const lastName = hasherNames.pop();
             setValue(`In memory of ${hasherNames.join(', ')}, and ${lastName}`);
