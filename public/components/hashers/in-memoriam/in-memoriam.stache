@@ -3,98 +3,90 @@
 
 <h2 class="sr-only">In Memoriam</h2>
 
-<p class="mt-3">{{description}}</p>
-
 {{#if session.user.canViewDirectoryInfo}}
-
   {{#if hashersPromise.isPending}}
-    <lbh3-alert class="d-block mt-3" message:from="'Fetching the In Memoriam report…'" />
+    <lbh3-alert class="d-block mt-3" message:from="'Fetching our passed hashers…'" />
   {{/if}}
 
   {{#if hashersPromise.isRejected}}
     <div class="alert alert-danger mt-3" role="alert">
-      <strong>Fuck!</strong> The early warning report couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
+      <strong>Fuck!</strong> Our passed hashers couldn’t be retrieved. {{hashersPromise.reason.xhr.message}}
     </div>
   {{/if}}
 
   {{#if hashersPromise.isResolved}}
-    {{#if hashers.length}}
-      <div class="container hashers-list">
-        {{#for(hasher of hashers)}}
-          <a class="border-top mt-3 pt-3 row text-decoration-none" href="{{routeForHasher(hasher)}}">
-            <div class="align-items-start col col-auto d-flex headshot-container justify-content-center pl-0">
-              {{#if hasher.headshotUrl}}
-                <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrlForSize(112, 112)}}" />
-              {{else}}
-                <span class="fas fa-user-alt fa-3x"></span>
-              {{/if}}
-            </div>
-            <div class="col p-0">
-              <div class="mr-0 row">
-                <div class="col-md-6 col-lg-2">
-                  <p class="h5 m-0">{{hasher.hashName}}</p>
-                  <p class="m-0">{{hasher.givenName}} {{hasher.familyName}}</p>
-                  <p class="d-none d-md-block m-0 text-muted">{{#if(hasher.addresses[0])}}{{hasher.addresses[0].city}}{{/if}}</p>
-                </div>
-                <div class="col d-md-none">
-                  <p class="mb-0">Runs: {{hasher.runCount}}</p>
-                  <p class="mb-0">Passed: {{hasher.deathDate}}</p>
-                </div>
-                <div class="col-md-6 col-lg-5 d-none d-md-block">
-                  <dl class="mb-0 row">
-                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">Runs:</dt>
-                    <dd class="col-9 col-sm-7 m-0">{{hasher.runCount}}</dd>
-                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">Hares:</dt>
-                    <dd class="col-9 col-sm-7 m-0">{{hasher.hareCount}}</dd>
-                    {{#if(hasher.firstTrailDate)}}
-                      <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">First trail:</dt>
-                      <dd class="col-9 col-sm-7 m-0">
-                        {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
-                      </dd>
-                    {{/if}}
-                    {{#if(hasher.motherHash)}}
-                      <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">Mother hash:</dt>
-                      <dd class="col-9 col-sm-7 m-0">{{hasher.motherHash}}</dd>
-                    {{/if}}
-                    {{#if(hasher.deathDate)}}
-                      <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">Passed:</dt>
-                      <dd class="col-9 col-sm-7 m-0">{{hasher.deathDate}}</dd>
-                    {{/if}}
-                  </dl>
-                </div>
-                <div class="col-lg-5 d-none d-lg-block">
-                  <dl class="mb-0 row">
-                    {{{hasher.obituaryHtml}}}
-                  </dl>
-                </div>
+    <p class="mt-3">{{description}}</p>
+    <div class="container hashers-list">
+      {{#for(hasher of hashers)}}
+        <a class="border-top mt-3 pt-3 row text-decoration-none" href="{{routeForHasher(hasher)}}">
+          <div class="align-items-start col col-auto d-flex headshot-container justify-content-center pl-0">
+            {{#if hasher.headshotUrl}}
+              <img alt="" class="img-fluid rounded" src="{{hasher.headshotUrlForSize(112, 112)}}" />
+            {{else}}
+              <span class="fas fa-user-alt fa-3x"></span>
+            {{/if}}
+          </div>
+          <div class="col p-0">
+            <div class="mr-0 row">
+              <div class="col-md-6 col-lg-2 pr-0">
+                <p class="h5 m-0">{{hasher.hashName}}</p>
+                <p class="m-0">{{hasher.givenName}} {{hasher.familyName}}</p>
+                <p class="d-none d-md-block m-0 text-muted">{{#if(hasher.addresses[0])}}{{hasher.addresses[0].city}}{{/if}}</p>
+              </div>
+              <div class="col d-md-none pr-0">
+                <p class="mb-0">Runs: {{hasher.runCount}}</p>
+                <p class="mb-0">Passed: {{hasher.deathDate}}</p>
+              </div>
+              <div class="col-md-6 col-lg-5 d-none d-md-block pr-0">
+                <dl class="mb-0 row">
+                  <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">Runs:</dt>
+                  <dd class="col-9 col-sm-7 m-0">{{hasher.runCount}}</dd>
+                  <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">Hares:</dt>
+                  <dd class="col-9 col-sm-7 m-0">{{hasher.hareCount}}</dd>
+                  {{#if(hasher.firstTrailDate)}}
+                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">First trail:</dt>
+                    <dd class="col-9 col-sm-7 m-0">
+                      {{hasher.firstTrailDate}} {{#if hasher.firstTrailNumber}}(#{{hasher.firstTrailNumber}}){{/if}}
+                    </dd>
+                  {{/if}}
+                  {{#if(hasher.motherHash)}}
+                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">Mother hash:</dt>
+                    <dd class="col-9 col-sm-7 m-0">{{hasher.motherHash}}</dd>
+                  {{/if}}
+                  {{#if(hasher.deathDate)}}
+                    <dt class="col-3 col-sm-5 font-weight-normal m-0 px-md-0 text-md-right">Passed:</dt>
+                    <dd class="col-9 col-sm-7 m-0">{{hasher.deathDate}}</dd>
+                  {{/if}}
+                </dl>
+              </div>
+              <div class="col-lg-5 d-none d-lg-block pr-0">
+                <p class="mb-0">{{{hasher.obituaryHtml}}}</p>
               </div>
             </div>
-          </a>
+          </div>
+        </a>
+      {{/for}}
+    </div>
+
+    {{#if pages}}
+      <nav class="nav nav-pills">
+        {{#for(page of pages)}}
+          <a class="{{#is currentPage page}}active{{/is}} nav-link text-sm-center" href="{{routeForPage(page)}}">{{page}}</a>
         {{/for}}
-      </div>
-
-      {{#if pages}}
-        <nav class="nav nav-pills">
-          {{#for(page of pages)}}
-            <a
-              class="{{#is currentPage page}}active{{/is}} nav-link text-sm-center"
-              href="{{routeForPage(page)}}"
-            >
-              {{page}}
-            </a>
-          {{/for}}
-        </nav>
-      {{/if}}
-
-    {{else}}
-      <div class="alert alert-info mt-3" role="alert">
-        <strong>No hashers found.</strong>
-      </div>
+      </nav>
     {{/if}}
   {{/if}}
 
 {{else}}
-  <div class="alert alert-danger mt-3" role="alert">
-    Sorry, you don’t have permission to see this page.
-  </div>
+  <p class="mt-3">LBH3’s directory is available to hashers who have signed in, requested access, and had their identity verified.</p>
+  {{#if session.user}}
+    <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
+    <can-import class="d-block my-3" from="~/components/request-access/">
+      {{#if isResolved}}
+        <lbh3-request-access />
+      {{/if}}
+    </can-import>
+  {{else}}
+    <p>Get started by signing in with <a href="/auth/facebook">Facebook</a> or <a href="/auth/google">Google</a>, then <strong>cum back to this page</strong> to request access.</p>
+  {{/if}}
 {{/if}}
