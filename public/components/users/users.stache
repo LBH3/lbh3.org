@@ -1,7 +1,6 @@
-<can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
-<can-import from="@fortawesome/fontawesome-free/css/brands.css" />
-<can-import from="@fortawesome/fontawesome-free/css/regular.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
+<can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 
 {{#if session.user.canManageUsers}}
@@ -17,42 +16,48 @@
     </div>
   {{/if}}
 
-  {{#if users}}
-    <ol class="list-unstyled">
-      {{#for(user of users)}}
-        <li class="{{^eq(scope.index, 0)}}border-top pt-3{{/eq}} row">
-          <div class="col-1">
-            {{#if user.facebookProfile}}<span class="fab fa-lg fa-facebook-square"></span>{{/if}}
-            {{#if user.googleProfile}}<span class="fab fa-lg fa-google"></span>{{/if}}
-          </div>
-          <div class="col">
-            <p class="mb-1"><a href="{{routeUrl page='hashers' search=user.email secondaryPage=''}}">{{user.email}}</a></p>
-            <p class="mb-1">
-              {{#if user.displayName}}
-                <a href="{{routeUrl page='hashers' search=user.displayName secondaryPage=''}}">{{user.displayName}}</a>
-              {{else}}
-                {{user.givenName}} {{user.familyName}}
-              {{/if}}
-            </p>
-            <p>
-              {{#if user.hasherPromise}}
-                {{#if user.hasherPromise.isResolved}}
-                  <a href="{{routeUrl page='hashers' id=user.hasher.id}}">{{user.hasher.hashOrJustName}}</a>
-                {{else}}
-                  <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
-                {{/if}}
-              {{else}}
-                {{#if user.requestedName}}
-                  Requested: <a href="{{routeUrl page='hashers' search=user.requestedName secondaryPage=''}}"><strong>{{user.requestedName}}</strong></a>
-                {{/if}}
-              {{/if}}
-            </p>
-          </div>
-          <div class="col-auto pl-0"><a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}"><span class="far fa-edit fa-lg"></span></a></div>
-        </li>
-      {{/for}}
-    </ol>
-  {{/if}}
+  {{#for(user of users)}}
+    <div class="{{^eq(scope.index, 0)}}border-top pt-3{{/eq}} container mx-0 px-0 row">
+      <div class="align-items-start col col-auto d-flex headshot-container justify-content-center pl-0">
+        {{#if user.hasher.headshotUrl}}
+          <img alt="" class="img-fluid rounded" src="{{user.hasher.headshotUrlForSize(112, 112)}}" />
+        {{else}}
+          <span class="fas fa-user-alt fa-2x"></span>
+        {{/if}}
+      </div>
+      <div class="col px-0">
+        <h3 class="h5 mb-1 text-break">
+          {{#if user.hasherPromise}}
+            {{#if user.hasherPromise.isResolved}}
+              <a href="{{routeUrl page='hashers' id=user.hasher.id}}">{{user.hasher.hashOrJustName}}</a>
+            {{else}}
+              <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
+            {{/if}}
+          {{else}}
+            {{#if user.requestedName}}
+              Requested: <a href="{{routeUrl page='hashers' search=user.requestedName secondaryPage=''}}"><strong>{{user.requestedName}}</strong></a>
+            {{else}}
+              <a href="{{routeUrl page='hashers' search=user.email secondaryPage=''}}">{{user.email}}</a>
+            {{/if}}
+          {{/if}}
+        </h3>
+        <p class="mb-1">
+          <b>Name:</b>
+          {{#if user.displayName}}
+            <a href="{{routeUrl page='hashers' search=user.displayName secondaryPage=''}}">{{user.displayName}}</a>
+          {{else}}
+            {{user.givenName}} {{user.familyName}}
+          {{/if}}
+        </p>
+        <p class="mb-1">
+          <b>Provider:</b>
+          {{#if user.facebookProfile}}Facebook{{/if}}
+          {{#if user.googleProfile}}Google{{/if}}
+        </p>
+        <p><a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}">Edit this account</a></p>
+      </div>
+    </div>
+  {{/for}}
 
 {{else}}
   <div class="alert alert-danger mt-3" role="alert">

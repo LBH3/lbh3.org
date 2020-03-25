@@ -129,7 +129,7 @@
     },
     {
       "path": "./public/dist/bundles/guidelines-edit-*.js",
-      "maxSize": "4 kB"
+      "maxSize": "5 kB"
     },
     {
       "path": "./public/dist/bundles/hareline-hasher-past-runs.css",

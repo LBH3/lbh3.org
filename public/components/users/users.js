@@ -1,3 +1,4 @@
+import './users.less';
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
