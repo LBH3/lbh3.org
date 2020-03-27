@@ -19,7 +19,7 @@
       <ul class="border-bottom flex-row m-auto mb-3 navbar-nav overflow-auto text-nowrap">
         {{#for(yearObject of years)}}
           <li class="nav-item">
-            <a class="{{#eq(yearObject.year, year)}}active{{/eq}} nav-link {{#eq(scope.index, 0)}}pr-2{{else}}px-2{{/eq}} py-2" href="{{routeForYear(yearObject.year)}}">{{yearObject.year}}</a>
+            <a class="{{#eq(yearObject.year, year)}}active{{/eq}} nav-link px-2 py-2" href="{{routeForYear(yearObject.year)}}">{{yearObject.year}}</a>
           </li>
         {{/for}}
       </ul>
