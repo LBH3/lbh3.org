@@ -1,6 +1,4 @@
 import Component from 'can-component';
-
-import './nav.less';
 import view from './nav.stache';
 
 export default Component.extend({
