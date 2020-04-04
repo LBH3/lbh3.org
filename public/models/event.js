@@ -50,7 +50,12 @@ export const Event = DefineMap.extend({
   nameMd: 'string',
   onOnGooglePlaceId: 'string',
   onOnMd: 'string',
-  photosUrl: 'string',
+  photosUrl: {
+    set(photosUrl) {
+      this.photosUrlCheckedStatus = 0;
+      return photosUrl;
+    }
+  },
   savingPromise: {
     serialize: false
   },
