@@ -54,7 +54,7 @@
           {{#if user.facebookProfile}}Facebook{{/if}}
           {{#if user.googleProfile}}Google{{/if}}
         </p>
-        <p><a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}">Edit this account</a></p>
+        <p class="mb-0"><a href="{{routeUrl page='users' id=user.id secondaryPage='edit'}}">Edit this account</a></p>
       </div>
     </div>
   {{/for}}
