@@ -161,7 +161,7 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/index.js",
-      "maxSize": "214 kB"
+      "maxSize": "215 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/erection/erection.js",
@@ -180,14 +180,6 @@
       "maxSize": "14 kB"
     },
     {
-      "path": "./public/dist/bundles/lbh3/components/hareline/nav/nav.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hareline/nav/nav.js",
-      "maxSize": "4 kB"
-    },
-    {
       "path": "./public/dist/bundles/lbh3/components/hasher/hasher.css",
       "maxSize": "1 kB"
     },
@@ -202,14 +194,6 @@
     {
       "path": "./public/dist/bundles/lbh3/components/hashers/hashers.js",
       "maxSize": "9 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hashers/nav/nav.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hashers/nav/nav.js",
-      "maxSize": "5 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/home/home.js",

@@ -5,6 +5,7 @@ import Honeybadger from 'honeybadger-js';
 import loader from '@loader';
 import route from 'can-route';
 import RoutePushstate from 'can-route-pushstate';
+import Session from '~/models/session';
 
 const defaultPage = 'home';
 const environment = loader.getEnv();
@@ -60,6 +61,9 @@ const AppViewModel = DefineMap.extend({
     }
   },
   secondaryPage: 'string',
+  get session() {
+    return Session.current;
+  },
   skip: {
     default: 0,
     serialize(skip) {

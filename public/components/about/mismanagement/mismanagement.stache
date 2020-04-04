@@ -1,34 +1,21 @@
 <can-import from="~/components/about/mismanagement/year/" />
 <can-import from="~/components/alert/" />
+<can-import from="~/components/sub-nav/" />
 
 <h2 class="sr-only">Mismanagement</h2>
 
-{{#if yearsPromise.isPending}}
-  <lbh3-alert class="d-block mt-3" message:from="'Fetching the Mismanagement…'" />
-{{/if}}
+{{#if yearsPromise.isPending}}<lbh3-alert class="d-block mt-3" message:from="'Fetching the Mismanagement…'" />{{/if}}
 
-{{#if yearsPromise.isRejected}}
-  <div class="alert alert-danger mt-3" role="alert">
-    <strong>Fuck!</strong> The Mismanagement years couldn’t be retrieved. {{yearsPromise.reason.xhr.message}}
-  </div>
-{{/if}}
+{{#if yearsPromise.isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Mismanagement years couldn’t be retrieved. {{yearsPromise.reason.xhr.message}}</div>{{/if}}
 
-{{#if yearsPromise.isResolved}}
-  {{#if years.length}}
-    <nav class="d-flex">
-      <ul class="border-bottom flex-row m-auto mb-3 navbar-nav overflow-auto text-nowrap">
-        {{#for(yearObject of years)}}
-          <li class="nav-item">
-            <a class="{{#eq(yearObject.year, year)}}active{{/eq}} nav-link px-2 py-2" href="{{routeForYear(yearObject.year)}}">{{yearObject.year}}</a>
-          </li>
-        {{/for}}
-      </ul>
-    </nav>
-  {{else}}
-    <div class="alert alert-info" role="alert">
-      <strong>Hm, no Mismanagement found.</strong>
-    </div>
-  {{/if}}
+{{#if years.length}}
+  <lbh3-sub-nav>
+    {{#for(yearObject of years)}}
+      <li class="nav-item">
+        <a class="{{#eq(yearObject.year, year)}}active{{/eq}} nav-link px-2 py-2" href="{{routeForYear(yearObject.year)}}">{{yearObject.year}}</a>
+      </li>
+    {{/for}}
+  </lbh3-sub-nav>
 {{/if}}
 
 <lbh3-mismanagement-year showEmailLink:from="showEmailLink" year:from="selectedYear" />

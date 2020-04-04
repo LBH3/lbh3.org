@@ -34,12 +34,14 @@
     <meta name="theme-color" content="#dc3232">
   </head>
   <body>
+    <can-import from="can-stache-route-helpers" />
     <can-import from="~/styles.less" />
     <can-import from="~/app" export-as="viewModel" />
     <can-import from="~/components/alert/" />
     <can-import from="~/components/footer/" />
     <can-import from="~/components/header/" />
     <can-import from="~/components/nav/" />
+    <can-import from="~/components/sub-nav/" />
 
     <header>
       <lbh3-header id:from="id" page:from="page" secondaryPage:from="secondaryPage" />
@@ -49,11 +51,10 @@
     <main class="container-fluid {{page}}">
       {{#switch page}}
         {{#case "about"}}
-          <can-import class="container d-block pl-0 pr-0" from="~/components/about/nav/">
-            {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the About nav…'" />{{/if}}
-            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The About navigation failed to load.</div>{{/if}}
-            {{#if isResolved}}<lbh3-about-nav secondaryPage:from="secondaryPage" />{{/if}}
-          </can-import>
+          <lbh3-sub-nav class="secondary">
+            <li class="nav-item"><a class="{{#eq(secondaryPage, 'mismanagement')}}active{{/eq}} nav-link pr-2 py-2" href="{{routeUrl page='about' secondaryPage='mismanagement'}}" title="Go to the mismanagement page">Mismanagement</a></li>
+            <li class="nav-item"><a class="{{#eq(secondaryPage, 'privacy')}}active{{/eq}} nav-link pl-2 py-2" href="{{routeUrl page='about' secondaryPage='privacy'}}" title="Go to the privacy page">Privacy</a></li>
+          </lbh3-sub-nav>
           {{#switch secondaryPage}}
             {{#case "mismanagement"}}
               <can-import class="container d-block pl-0 pr-0" from="~/components/about/mismanagement/">
@@ -187,11 +188,12 @@
         {{/case}}
         {{#case "hareline"}}
           {{<harelineNav}}
-            <can-import from="~/components/hareline/nav/">
-              {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Hareline nav…'" />{{/if}}
-              {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Hareline navigation failed to load.</div>{{/if}}
-              {{#if isResolved}}<lbh3-hareline-nav secondaryPage:from="secondaryPage" />{{/if}}
-            </can-import>
+            <lbh3-sub-nav class="secondary">
+              {{#if session.user.canAddTrails}}
+                <li class="nav-item"><a class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='add'}}" title="Add a new trail">Add Trail</a></li>
+              {{/if}}
+              <li class="nav-item"><a class="{{#eq(secondaryPage, 'guidelines')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='guidelines'}}" title="View the haring guidelines">Haring Guidelines</a></li>
+            </lbh3-sub-nav>
           {{/harelineNav}}
           {{#switch secondaryPage}}
             {{#case "add"}}
@@ -233,11 +235,19 @@
         {{/case}}
 
         {{#case "hashers"}}
-          <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/nav/">
-            {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Directory nav…'" />{{/if}}
-            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Directory navigation failed to load.</div>{{/if}}
-            {{#if isResolved}}<lbh3-hashers-nav secondaryPage:from="secondaryPage" />{{/if}}
-          </can-import>
+          {{#if session.user}}
+            <lbh3-sub-nav class="secondary">
+              {{#if session.user.canViewHashersEmailList}}
+                {{#if session.user.canAddHashers}}
+                  <li class="nav-item"><a class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='add'}}" title="Add a new hasher">Add Hasher</a></li>
+                {{/if}}
+                <li class="nav-item"><a class="{{#eq(secondaryPage, 'attendance-records')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}" title="Go to the attendance records page">Attendance Records</a></li>
+                <li class="nav-item"><a class="{{#eq(secondaryPage, 'early-warning')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='early-warning'}}" title="Go to the early warning page">Early Warning</a></li>
+                <li class="nav-item"><a class="{{#eq(secondaryPage, 'email')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='email'}}" title="Go to the email list">Email List</a></li>
+              {{/if}}
+              <li class="nav-item"><a class="{{#eq(secondaryPage, 'in-memoriam')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='in-memoriam'}}" title="Go to the in memoriam page">In Memoriam</a></li>
+            </lbh3-sub-nav>
+          {{/if}}
           {{#if id}}
             {{#if secondaryPage}}
               {{#switch secondaryPage}}

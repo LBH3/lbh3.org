@@ -2,21 +2,20 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 <can-import from="~/components/no-ssr/" />
+<can-import from="~/components/sub-nav/" />
 
 <h2 class="sr-only">Past Runs</h2>
 
-<nav class="border-bottom d-flex">
-  <ul class="flex-row m-auto mb-3 navbar-nav overflow-auto text-nowrap">
-    {{#if(showSearchInNav)}}
-      <li class="nav-item"><a class="{{#eq(secondaryPage, 'search')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='search'}}">Search</a></li>
-    {{/if}}
-    {{#for(yearObject of years)}}
-      <li class="nav-item">
-        <a class="{{^eq(secondaryPage, 'search')}}{{#eq(yearObject.id, year)}}active{{/eq}}{{/eq}} nav-link px-2 py-2" href="{{routeForYear(yearObject.id)}}">{{yearObject.id}}</a>
-      </li>
-    {{/for}}
-  </ul>
-</nav>
+<lbh3-sub-nav class="secondary">
+  {{#if(showSearchInNav)}}
+    <li class="nav-item"><a class="{{#eq(secondaryPage, 'search')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='search'}}">Search</a></li>
+  {{/if}}
+  {{#for(yearObject of years)}}
+    <li class="nav-item">
+      <a class="{{^eq(secondaryPage, 'search')}}{{#eq(yearObject.id, year)}}active{{/eq}}{{/eq}} nav-link px-2 py-2" href="{{routeForYear(yearObject.id)}}">{{yearObject.id}}</a>
+    </li>
+  {{/for}}
+</lbh3-sub-nav>
 
 {{#eq(secondaryPage, 'search')}}
   <can-import from="~/components/past-runs/search/">
