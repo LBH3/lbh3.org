@@ -2,7 +2,6 @@ import Component from 'can-component';
 import Event from '~/models/event';
 import Session from '~/models/session';
 import Year from '~/models/year';
-import moment from 'moment-timezone';
 import route from 'can-route';
 import view from './search.stache';
 

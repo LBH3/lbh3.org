@@ -10,6 +10,7 @@
   {{#if(showSearchInNav)}}
     <li class="nav-item"><a class="{{#eq(secondaryPage, 'search')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='search'}}">Search</a></li>
   {{/if}}
+  <li class="nav-item"><a class="{{#eq(secondaryPage, 'special')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='special'}}">Special</a></li>
   {{#for(yearObject of years)}}
     <li class="nav-item">
       <a class="{{^eq(secondaryPage, 'search')}}{{#eq(yearObject.id, year)}}active{{/eq}}{{/eq}} nav-link px-2 py-2" href="{{routeForYear(yearObject.id)}}">{{yearObject.id}}</a>
@@ -23,8 +24,17 @@
     {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Past Runs search page failed to load.</div>{{/if}}
     {{#if isResolved}}<lbh3-past-runs-search searchMissing:bind="searchMissing" skip:from="skip" />{{/if}}
   </can-import>
+{{/eq}}
 
-{{else}}
+{{#eq(secondaryPage, 'special')}}
+  <can-import from="~/components/past-runs/special/">
+    {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading special events page…'" />{{/if}}
+    {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The special events page failed to load.</div>{{/if}}
+    {{#if isResolved}}<lbh3-past-runs-special />{{/if}}
+  </can-import>
+{{/eq}}
+
+{{^if(secondaryPage)}}
   {{#if yearsPromise.isPending}}<lbh3-alert class="d-block mt-3" message:from="'Fetching Past Runs…'" />{{/if}}
   {{#if yearsPromise.isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The runs couldn’t be retrieved. {{yearsPromise.reason.xhr.message}}</div>{{/if}}
 
@@ -104,4 +114,4 @@
       {{/eq}}
     {{/if}}
   {{/if}}
-{{/eq}}
+{{/if}}

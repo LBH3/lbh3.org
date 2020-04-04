@@ -1,0 +1,12 @@
+<can-import from="~/components/alert/" />
+<can-import from="~/components/run-list/" />
+
+<h2 class="sr-only">Special Events</h2>
+
+{{#if specialEventsPromise.isPending}}<lbh3-alert class="d-block mt-3" message:from="'Fetching the special events…'" />{{/if}}
+
+{{#if specialEventsPromise.isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The special events couldn’t be retrieved. {{specialEventsPromise.reason.xhr.message}}</div>{{/if}}
+
+{{#if(specialEventsPromise.isResolved)}}
+  <lbh3-run-list class="my-3" events:from="specialEventsPromise.value" showHares:from="false" showSnooze:from="false" showTrailNumber:from="false" showYear:from="true" />
+{{/if}}

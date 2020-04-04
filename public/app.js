@@ -144,6 +144,7 @@ route.register('/erections/', { page: 'erections' });
 route.register('/events/', { page: 'events' });
 route.register('/events/founders/', { page: 'events', secondaryPage: 'founders'});
 route.register('/events/search/', { page: 'events', secondaryPage: 'search'});
+route.register('/events/special/', { page: 'events', secondaryPage: 'special'});
 route.register('/events/{year}/{month}/{day}/trail-{trailNumber}/{secondaryPage}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0, secondaryPage: ''});
 route.register('/events/{year}/{month}/{day}/trail-{trailNumber}/', { page: 'events', year: 0, month: '', day: '', trailNumber: 0});
 route.register('/events/{year}/{urlId}/{secondaryPage}/', { page: 'events', secondaryPage: '', urlId: '', year: 0 });

@@ -125,6 +125,13 @@ const SpecialEvent = DefineMap.extend({
     },
     serialize: false
   },
+  startDateWithYearString: {
+    get: function() {
+      const options = {day: 'numeric', month: 'numeric', timeZone, weekday: 'short', year: '2-digit'};
+      return localizedStringForDate(this.startDate, defaultLocale, options);
+    },
+    serialize: false
+  },
   get title() {
     const textContainer = document.createElement('div');
     textContainer.innerHTML = this.descriptionHtml;

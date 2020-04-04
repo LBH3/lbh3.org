@@ -142,9 +142,13 @@
           {{/or}}
         {{/if}}
         <th class="date-column">Date</th>
-        <th class="trail-number-column">#</th>
+        {{#if showTrailNumber}}
+          <th class="trail-number-column">#</th>
+        {{/if}}
         <th>Name</th>
-        <th>Hares</th>
+        {{#if showHares}}
+          <th>Hares</th>
+        {{/if}}
         <th>Location</th>
         {{#if session.user.hasherId}}
           {{#if showScribe}}
@@ -163,7 +167,9 @@
         {{^if showFutureTools}}
           {{#if session.user.hasherId}}
             <th class="d-print-none single-icon-column"></th>
-            <th class="d-print-none single-icon-column"></th>
+            {{#if showSnooze}}
+              <th class="d-print-none single-icon-column"></th>
+            {{/if}}
           {{/if}}
         {{/if}}
       </tr>
@@ -192,8 +198,10 @@
                 {{/if}}
               </a>
             </td>
-            <td class="trail-number-column">{{! # }}</td>
-            <td colspan="2">{{{event.nameHtml}}}</td>
+            {{#if showTrailNumber}}
+              <td class="trail-number-column">{{! # }}</td>
+            {{/if}}
+            <td colspan="{{#if showHares}}2{{else}}1{{/if}}">{{{event.nameHtml}}}</td>
             <td>{{{event.shortLocationHtml}}}</td>
             {{#if session.user.hasherId}}
               {{#if showScribe}}
@@ -218,7 +226,9 @@
                     </a>
                   {{/if}}
                 </td>
-                <td class="d-print-none single-icon-column"></td>
+                {{#if showSnooze}}
+                  <td class="d-print-none single-icon-column"></td>
+                {{/if}}
               {{/if}}
             {{/if}}
           </tr>
@@ -252,19 +262,23 @@
                 {{/if}}
               {{/if}}
             </td>
-            <td class="trail-number-column">
-              {{#if event.trailNumber}}
-                {{event.trailNumber}}
-              {{/if}}
-            </td>
+            {{#if showTrailNumber}}
+              <td class="trail-number-column">
+                {{#if event.trailNumber}}
+                  {{event.trailNumber}}
+                {{/if}}
+              </td>
+            {{/if}}
             <td>{{{event.nameHtml}}}</td>
-            <td>
-              {{#if event.haresHtml}}
-                {{{event.haresHtml}}}
-              {{else}}
-                {{availableTemplate(event)}}
-              {{/if}}
-            </td>
+            {{#if showHares}}
+              <td>
+                {{#if event.haresHtml}}
+                  {{{event.haresHtml}}}
+                {{else}}
+                  {{availableTemplate(event)}}
+                {{/if}}
+              </td>
+            {{/if}}
             <td>{{{event.shortLocationHtml}}}</td>
             {{#if session.user.hasherId}}
               {{#if showScribe}}
@@ -305,13 +319,15 @@
                     </a>
                   {{/if}}
                 </td>
-                <td class="d-print-none single-icon-column">
-                  {{#if(event.snoozeUrlWithAuth)}}
-                    <a class="btn btn-link p-0" href="{{event.snoozeUrlWithAuth}}" target="_blank" title="View Snooze">
-                      <span class="far fa-lg fa-newspaper"></span>
-                    </a>
-                  {{/if}}
-                </td>
+                {{#if showSnooze}}
+                  <td class="d-print-none single-icon-column">
+                    {{#if(event.snoozeUrlWithAuth)}}
+                      <a class="btn btn-link p-0" href="{{event.snoozeUrlWithAuth}}" target="_blank" title="View Snooze">
+                        <span class="far fa-lg fa-newspaper"></span>
+                      </a>
+                    {{/if}}
+                  </td>
+                {{/if}}
               {{/if}}
             {{/if}}
           </tr>

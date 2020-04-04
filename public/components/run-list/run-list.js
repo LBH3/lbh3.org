@@ -10,14 +10,23 @@ export const ViewModel = DefineMap.extend({
     return Session.current;
   },
   showFutureTools: 'boolean',
-  showYear: 'boolean',
+  showHares: {
+    default: true
+  },
   showHashit: 'boolean',
   get showingAdditionalInfo() {
     return this.showHashit || this.showNotes || this.showOnOn || this.showScribe;
   },
   showNotes: 'boolean',
   showOnOn: 'boolean',
-  showScribe: 'boolean'
+  showScribe: 'boolean',
+  showSnooze: {
+    default: true
+  },
+  showTrailNumber: {
+    default: true
+  },
+  showYear: 'boolean'
 });
 
 export default Component.extend({

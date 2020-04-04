@@ -15,6 +15,7 @@
     "bundle": [
       "~/components/past-runs/map/map",
       "~/components/past-runs/search/search",
+      "~/components/past-runs/special/special",
       "~/components/request-access/request-access",
       "~/components/run/post/post"
     ],

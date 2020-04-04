@@ -131,14 +131,14 @@
     },
     {
       "path": "./public/dist/bundles/guidelines-edit-*.js",
-      "maxSize": "5 kB"
+      "maxSize": "4 kB"
     },
     {
-      "path": "./public/dist/bundles/hareline-hasher-past-runs.css",
+      "path": "./public/dist/bundles/hareline-hasher-*.css",
       "maxSize": "1 kB"
     },
     {
-      "path": "./public/dist/bundles/hareline-hasher-past-runs.js",
+      "path": "./public/dist/bundles/hareline-hasher-*.js",
       "maxSize": "6 kB"
     },
     {
@@ -220,6 +220,10 @@
     {
       "path": "./public/dist/bundles/lbh3/components/past-runs/search/search.js",
       "maxSize": "6 kB"
+    },
+    {
+      "path": "./public/dist/bundles/lbh3/components/past-runs/special/special.js",
+      "maxSize": "4 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/run/post/post.css",
