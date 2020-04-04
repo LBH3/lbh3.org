@@ -4,7 +4,7 @@
 <can-import from="~/components/alert/" />
 
 {{#if session.user.canManageUsers}}
-  <h2 class="h3 my-3">Users</h2>
+  <h2 class="sr-only">Users</h2>
 
   {{#if usersPromise.isPending}}
     <lbh3-alert class="d-block mt-3" message:from="'Fetching the users…'" />
@@ -17,7 +17,7 @@
   {{/if}}
 
   {{#for(user of users)}}
-    <div class="{{^eq(scope.index, 0)}}border-top pt-3{{/eq}} container mx-0 px-0 row">
+    <div class="{{^eq(scope.index, 0)}}border-top pt-3{{/eq}} container mx-0 my-3 px-0 row">
       <div class="align-items-start col col-auto d-flex headshot-container justify-content-center pl-0">
         {{#if user.hasher.headshotUrl}}
           <img alt="" class="img-fluid rounded" src="{{user.hasher.headshotUrlForSize(112, 112)}}" />

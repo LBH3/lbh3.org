@@ -16,7 +16,7 @@
   {{/if}}
 
   {{#for(hasherByPosition of hashersByPosition)}}
-    <h3>
+    <h3 class="mt-3">
       {{#is hasherByPosition.hashers.length 1}}
         {{hasherByPosition.position.singularName}}
       {{else}}

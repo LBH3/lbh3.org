@@ -3,20 +3,20 @@
 
 <h2 class="sr-only">Attendance Records</h2>
 
-<form class="d-flex mt-3" on:submit="scope.event.preventDefault()">
-  <div class="form-group mb-3">
+<form class="d-flex my-3" on:submit="scope.event.preventDefault()">
+  <div class="form-group my-0">
     <label class="sr-only" for="searchText">Role</label>
     <input autocomplete="off" autofocus class="form-control" id="searchText" placeholder="Role" type="text" value:bind="searchText">
   </div>
-  <button class="btn btn-primary mb-3 ml-2" type="submit">Search</button>
+  <button class="btn btn-primary ml-2" type="submit">Search</button>
 </form>
 
 {{#if hashersPromises.isPending}}
-  <lbh3-alert class="d-block mt-3" message:from="'Fetching the Attendance Records…'" />
+  <lbh3-alert class="d-block my-3" message:from="'Fetching the Attendance Records…'" />
 {{/if}}
 
 {{#if hashersPromises.isRejected}}
-  <div class="alert alert-danger mt-3" role="alert">
+  <div class="alert alert-danger my-3" role="alert">
     <strong>Fuck!</strong> The attendance records couldn’t be retrieved. {{hashersPromises.reason.xhr.message}}
   </div>
 {{/if}}

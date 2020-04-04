@@ -225,7 +225,7 @@
             {{/case}}
             {{#default}}
               {{>harelineNav}}
-              <can-import from="~/components/hareline/">
+              <can-import class="container d-block pl-0 pr-0" from="~/components/hareline/">
                 {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Hareline…'" />{{/if}}
                 {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Hareline failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-hareline description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
