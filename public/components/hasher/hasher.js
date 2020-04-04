@@ -175,6 +175,9 @@ export default Component.extend({
       if (hasherId && this.canViewDetailedInfo === true) {
         const query = {
           hasherId,
+          trailNumber: {
+            $gte: 1
+          },
           $limit,
           $skip: this.skip,
           $sort: {
