@@ -94,6 +94,8 @@ exports.getDefinitionsWithSequelize = function (Sequelize) {
       onOnMd: textType('on_on_md'),
       patchesMd: textType('patches_md'),
       photosUrl: textType('photos_url'),
+      photosUrlCheckedDatetime: currentTimestampType('photos_url_checked_datetime'),
+      photosUrlCheckedStatus: intType('photos_url_checked_status'),
       returnersMd: textType('returners_md'),
       scribesMd: textType('scribes_md'),
       startDatetime: timestampType('start_datetime'),

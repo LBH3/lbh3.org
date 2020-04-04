@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const crypto = require('crypto');
 const env = process.env.NODE_ENV || 'development';
 const eol = require('os').EOL;
+const fetch = require('node-fetch');
 const fs = require('fs');
 const json2csv = require('json2csv');
 const path = require('path');
@@ -434,4 +435,40 @@ module.exports = function (app) {
   }, {
     strategy: 'seo'
   }));
+
+  // Broken photo URLs
+  let brokenPhotoLinksPromise = Promise.resolve();
+  const eventsService = app.service('api/events');
+  const checkForBrokenPhotoLinks = () => {
+    brokenPhotoLinksPromise  = brokenPhotoLinksPromise.then(() => {
+      // Fetch the least recently checked trails
+      const query = {
+        $limit: 1,
+        $sort: {
+          photosUrlCheckedDatetime: 1,
+          startDatetime: 1
+        },
+        photosUrl: {
+          $nin: ['']
+        }
+      };
+      return eventsService.find({query}).then(events => {
+        return Promise.all(events.data.map(event => {
+          console.info(`Checking photo URL status for trail #${event.trailNumber}: ${event.photosUrl}`);
+          return fetch(event.photosUrl).then(response => {
+            console.info(`Received response for trail #${event.trailNumber}’s photo URL: ${event.photosUrl}
+- status: ${response.status}
+- url: ${response.url}`);
+            const photosUrlCheckedStatus = response.status === 200 && response.url.includes('accounts.google.com/ServiceLogin') ? 403 : response.status;
+            return eventsService.patch(event.id, {
+              photosUrlCheckedDatetime: new Date(),
+              photosUrlCheckedStatus
+            });
+          });
+        }));
+      });
+    });
+  };
+  setInterval(checkForBrokenPhotoLinks, 60 * 1000);// Every minute
+
 };

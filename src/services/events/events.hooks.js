@@ -93,9 +93,12 @@ const filterData = function(data) {
 };
 
 const filterFields = function(hook) {
-  const user = hook.params.user;
-  if (!user || !user.hasherId) {
-    hook.result = filterData(hook.result);
+  // Check if it’s an external call
+  if (hook.params.provider) {
+    const user = hook.params.user;
+    if (!user || !user.hasherId) {
+      hook.result = filterData(hook.result);
+    }
   }
 };
 

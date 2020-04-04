@@ -6,26 +6,27 @@
 <h2 class="sr-only">Past Runs Search</h2>
 
 <form class="form-inline my-3">
-  <label class="font-weight-bold mr-2" for="searchMissing">Missing</label>
+  <label class="font-weight-bold mr-2" for="searchMissing">Search for</label>
   <select class="form-control" id="searchMissing" value:bind="searchMissing">
-    {{#if(session.user.canEditPostTrailInfo)}}
-      <option value="hares">Hares</option>
+    {{#if(session.user.canAddPhotos)}}
+      <option value="broken-photo-url">Broken photo URL</option>
     {{/if}}
     {{#if(session.user.canEditPostTrailInfo)}}
-      <option value="hashit">Hashit</option>
-    {{/if}}
-    {{#if(session.user.canManageUsers)}}
-      <option value="location">Location</option>
-      <option value="on-on">On-on</option>
+      <option value="hares">Missing hare(s)</option>
+      <option value="hashit">Missing hashit</option>
     {{/if}}
     {{#if(session.user.canAddPhotos)}}
-      <option value="photos">Photos</option>
+      <option value="photos">Missing photo URL</option>
     {{/if}}
     {{#if(session.user.canEditPostTrailInfo)}}
-      <option value="scribe">Scribe</option>
+      <option value="scribe">Missing scribe</option>
     {{/if}}
     {{#if(session.user.canAddSnoozes)}}
-      <option value="snooze">Snooze</option>
+      <option value="snooze">Missing Snooze</option>
+    {{/if}}
+    {{#if(session.user.canManageUsers)}}
+      <option value="location">Unverified location</option>
+      <option value="on-on">Unverified on-on</option>
     {{/if}}
   </select>
 </form>

@@ -43,7 +43,15 @@ export default Component.extend({
 
       // Search for trails that are missing data
       const searchMissing = this.searchMissing;
-      if (searchMissing === 'hares') {
+      if (searchMissing === 'broken-photo-url') {
+        searchParams.photosUrl = {
+          $nin: ['']
+        };
+        searchParams.photosUrlCheckedStatus = {
+          $gte: 1,
+          $ne: 200
+        };
+      } else if (searchMissing === 'hares') {
         searchParams.haresMd = '';
       } else if (searchMissing === 'hashit') {
         searchParams.hashitReasonMd = '';
