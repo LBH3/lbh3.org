@@ -1,3 +1,4 @@
+<can-import from="can-stache-converters" />
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 
@@ -33,19 +34,18 @@
   {{#if hashersPromise.isResolved}}
     {{#if hashers.length}}
       {{#if session.user.canViewRunAttendance}}
-        <div class="align-items-center d-flex justify-content-between mb-2 mt-3">
-          <h3 class="mb-0">Attendance</h3>
-          <div class="form-inline">
-            <label class="font-weight-bold mb-0 pr-2" for="sort-by">Sort</label>
-            <select class="form-control mb-0 w-auto" id="sort-by" value:bind="sortAttendanceBy">
-              <option value="name">Name</option>
-              <option value="payment">Payment</option>
-            </select>
+        <div class="align-items-center d-sm-flex justify-content-sm-between mb-2 mt-3">
+          <h3 class="mb-sm-0">Attendance</h3>
+          <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-group btn-group-toggle">
+              <label class="border btn {{#eq(sortAttendanceBy, 'name')}}btn-primary{{else}}btn-light{{/eq}}"><input checked:bind="equal(sortAttendanceBy, 'name')" name="sortAttendanceBy" type="radio"> Hash name</label>
+              <label class="border border-left-0 btn {{#eq(sortAttendanceBy, 'payment')}}btn-primary{{else}}btn-light{{/eq}}"><input checked:bind="equal(sortAttendanceBy, 'payment')" name="sortAttendanceBy" type="radio"> Payment</label>
+            </div>
           </div>
         </div>
         <div class="table-responsive">
           <table class="table table-sm table-striped">
-            <thead><tr><th></th><th>Role</th><th>Pay</th><th></th><th>Hash Name</th><th>Last Name</th><th>First Name</th></tr></thead>
+            <thead><tr><th></th><th>Role</th><th>Pay</th><th></th><th class="text-nowrap">Hash name</th><th class="text-nowrap">Last name</th><th class="text-nowrap">First name</th></tr></thead>
             <tbody>
               {{#for(eventHasher of sortedHashers)}}
                 <tr>
