@@ -7,13 +7,13 @@
 <h2 class="sr-only">Past Runs</h2>
 
 <lbh3-sub-nav class="secondary">
+  <li class="nav-item"><a class="{{#eq(secondaryPage, 'special')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='special'}}">Events</a></li>
   {{#if(showSearchInNav)}}
     <li class="nav-item"><a class="{{#eq(secondaryPage, 'search')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='search'}}">Search</a></li>
   {{/if}}
-  <li class="nav-item"><a class="{{#eq(secondaryPage, 'special')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='special'}}">Special</a></li>
   {{#for(yearObject of years)}}
     <li class="nav-item">
-      <a class="{{^eq(secondaryPage, 'search')}}{{#eq(yearObject.id, year)}}active{{/eq}}{{/eq}} nav-link px-2 py-2" href="{{routeForYear(yearObject.id)}}">{{yearObject.id}}</a>
+      <a class="{{^if(secondaryPage)}}{{#eq(yearObject.id, year)}}active{{/eq}}{{/if}} nav-link px-2 py-2" href="{{routeForYear(yearObject.id)}}">{{yearObject.id}}</a>
     </li>
   {{/for}}
 </lbh3-sub-nav>
