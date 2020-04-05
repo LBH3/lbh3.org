@@ -162,7 +162,6 @@ route.register('/hashers/in-memoriam/', { page: 'hashers', secondaryPage: 'in-me
 route.register('/hashers/{id}/{secondaryPage}/', { page: 'hashers', id: 0, secondaryPage: ''});
 route.register('/hashers/{id}/', { page: 'hashers', id: 0 });
 route.register('/hashers/', { page: 'hashers', secondaryPage: '' });
-route.register('/special-events/', { page: 'special-events' });
 route.register('/users/{id}/{secondaryPage}/', { page: 'users', id: 0, secondaryPage: '' });
 route.register('/users/', { page: 'users' });
 route.register('/{page}', { page: defaultPage });

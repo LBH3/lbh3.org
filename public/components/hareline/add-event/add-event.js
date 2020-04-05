@@ -3,7 +3,7 @@ import DefineMap from 'can-define/map/';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import moment from 'moment-timezone';
-import view from './special-events.stache';
+import view from './add-event.stache';
 
 export const ViewModel = DefineMap.extend({
   createSpecialEvent: function() {
@@ -22,7 +22,7 @@ export const ViewModel = DefineMap.extend({
   },
   descriptionMd: 'string',
   get ogTitle() {
-    return 'Special Events';
+    return 'Add Event';
   },
   get session() {
     return Session.current;
@@ -30,7 +30,7 @@ export const ViewModel = DefineMap.extend({
   startDate: 'string',
   startTime: 'string',
   get title() {
-    return `${this.ogTitle} | LBH3`;
+    return `${this.ogTitle} | Hareline | LBH3`;
   },
   urlId: 'string',
   year: {
@@ -40,7 +40,7 @@ export const ViewModel = DefineMap.extend({
 });
 
 export default Component.extend({
-  tag: 'lbh3-special-events',
+  tag: 'lbh3-hareline-add-event',
   ViewModel,
   view,
   events: {

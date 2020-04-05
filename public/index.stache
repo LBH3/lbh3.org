@@ -189,6 +189,9 @@
         {{#case "hareline"}}
           {{<harelineNav}}
             <lbh3-sub-nav class="secondary">
+              {{#if session.user.canManageUsers}}
+                <li class="nav-item"><a class="{{#eq(secondaryPage, 'add-event')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='add-event'}}" title="Add a new event">Add Event</a></li>
+              {{/if}}
               {{#if session.user.canAddTrails}}
                 <li class="nav-item"><a class="{{#eq(secondaryPage, 'add')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='add'}}" title="Add a new trail">Add Trail</a></li>
               {{/if}}
@@ -203,6 +206,16 @@
                   {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Add Run page…'" />{{/if}}
                   {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Add Run page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-hareline-add description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
+                </can-import>
+              </lbh3-no-ssr>
+            {{/case}}
+            {{#case "add-event"}}
+              {{>harelineNav}}
+              <lbh3-no-ssr>
+                <can-import class="container d-block pl-0 pr-0" from="~/components/hareline/add-event/">
+                  {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Add Event page…'" />{{/if}}
+                  {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Add Event page failed to load.</div>{{/if}}
+                  {{#if isResolved}}<lbh3-hareline-add-event description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
                 </can-import>
               </lbh3-no-ssr>
             {{/case}}
@@ -335,13 +348,6 @@
             {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the next run…'" />{{/if}}
             {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The next run failed to load. Check <a class="alert-link" href="https://hash.beer" target="_blank">hash.beer</a> for the next run.</div>{{/if}}
             {{#if isResolved}}<lbh3-home description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
-          </can-import>
-        {{/case}}
-        {{#case "special-events"}}
-          <can-import from="~/components/special-events/">
-            {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Special Events page…'" />{{/if}}
-            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Special Events page failed to load.</div>{{/if}}
-            {{#if isResolved}}<lbh3-special-events description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
           </can-import>
         {{/case}}
         {{#case "users"}}

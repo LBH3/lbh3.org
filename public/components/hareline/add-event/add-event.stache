@@ -1,9 +1,9 @@
 <can-import from="~/components/alert/" />
 
-<h2 class="h3 my-3">Add a special event</h2>
+<h2 class="sr-only">Add a special event</h2>
 
 {{#if session.user.canManageUsers}}
-  <form on:submit="createSpecialEvent()">
+  <form class="my-3" on:submit="createSpecialEvent()">
     <div class="form-group row">
       <label class="col-3 col-form-label" for="year">
         Year

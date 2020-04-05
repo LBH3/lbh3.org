@@ -53,10 +53,11 @@ export default Component.extend({
         <li class="{{#if isActive('hashers')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a></li>
         {{#if session.user.canManageUsers}}
           <li class="{{#if isActive('users')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='users'}}">Users</a></li>
-          <li class="{{#if isActive('special-events')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='special-events'}}">Special Events</a></li>
-          <li class="{{#if isActive('erections')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='erections'}}">Erections</a></li>
         {{/if}}
-        <li class="{{#if isActive('about')}}active{{/if}} nav-item"><a class="nav-link pl-2 pr-3 py-2" href="{{routeUrl page='about'}}">About</a></li>
+        <li class="{{#if isActive('about')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='about'}}">About</a></li>
+        {{#if session.user.canManageUsers}}
+          <li class="{{#if isActive('erections')}}active{{/if}} nav-item"><a class="nav-link pl-2 pr-3 py-2" href="{{routeUrl page='erections'}}">Erections</a></li>
+        {{/if}}
       </ul>
     </nav>
   `
