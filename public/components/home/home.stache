@@ -1,4 +1,5 @@
 <can-import from="~/components/alert/" />
+<can-import from="~/components/emergency/" />
 <can-import from="~/components/no-ssr/" />
 <can-import from="~/components/run/" />
 
@@ -51,12 +52,6 @@
   {{/if}}
 </lbh3-no-ssr>
 
-{{#if isBeforeApril10}}
-  <div class="alert alert-info mt-3" role="alert">
-    <p><strong>LBH3 is taking a few weeks off to help slow the spread of <a href="http://longbeach.gov/covid19" class="alert-link text-nowrap">COVID-19</a></strong></p>
-    <p>Our next scheduled run is listed below. This may change as the pandemic develops.</p>
-    <p class="mb-0">Please <a href="mailto:contact@lbh3.org">email us</a> if you have any questions.</p>
-  </div>
-{{/if}}
+<lbh3-emergency />
 
 <lbh3-run />

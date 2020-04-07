@@ -8,6 +8,7 @@ import 'lbh3/components/about/mismanagement/mismanagement-test';
 import 'lbh3/components/about/mismanagement/year/year-test';
 import 'lbh3/components/about/privacy/privacy-test';
 import 'lbh3/components/alert/alert-test';
+import 'lbh3/components/emergency/emergency-test';
 import 'lbh3/components/erection/erection-test';
 import 'lbh3/components/erection/ballots/ballots-test';
 import 'lbh3/components/erection/edit/edit-test';
