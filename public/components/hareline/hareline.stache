@@ -1,11 +1,13 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/run-list/" />
 <can-import from="~/components/alert/" />
+<can-import from="~/components/emergency/" />
+<can-import from="~/components/run-list/" />
 
-<p class="d-print-none mt-3">
-  <a href="mailto:trailmasters@lbh3.org">Email our Trail Masters</a>
-  to hare a run.
-</p>
+<lbh3-emergency />
+
+{{#if session.user.canManageUsers}}
+
+<p class="d-print-none mt-3"><a href="mailto:trailmasters@lbh3.org">Email our Trail Masters</a> to hare a run.</p>
 
 {{#if allEventsPromise.isPending}}
   <lbh3-alert class="d-block mt-3" message:from="'Fetching upcumming runs…'" />
@@ -22,4 +24,6 @@
     <h3>{{month.name}} {{month.year}}</h3>
     <lbh3-run-list events:from="month.events" showFutureTools:from="true" />
   {{/for}}
+{{/if}}
+
 {{/if}}
