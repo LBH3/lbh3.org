@@ -73,7 +73,7 @@
     "node-fetch": "^2.6.0",
     "passport-facebook": "^2.1.1",
     "passport-google-oauth20": "^1.0.0",
-    "pg": "^8.0.0",
+    "pg": "^8.0.2",
     "raygun": "^0.10.0",
     "sequelize": "^4.31.2",
     "sequelize-cli": "^5.5.0",
