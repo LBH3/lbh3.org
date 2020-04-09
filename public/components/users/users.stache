@@ -36,19 +36,25 @@
           {{else}}
             {{#if user.requestedName}}
               Requested: <a href="{{routeUrl page='hashers' search=user.requestedName secondaryPage=''}}"><strong>{{user.requestedName}}</strong></a>
-            {{else}}
-              <a href="{{routeUrl page='hashers' search=user.email secondaryPage=''}}">{{user.email}}</a>
             {{/if}}
           {{/if}}
         </h3>
-        <p class="mb-1">
-          <b>Name:</b>
-          {{#if user.displayName}}
-            <a href="{{routeUrl page='hashers' search=user.displayName secondaryPage=''}}">{{user.displayName}}</a>
-          {{else}}
-            {{user.givenName}} {{user.familyName}}
-          {{/if}}
-        </p>
+        {{#if user.email}}
+          <p class="mb-1">
+            <b>Email:</b>
+            <a href="{{routeUrl page='hashers' search=user.email secondaryPage=''}}">{{user.email}}</a>
+          </p>
+        {{/if}}
+        {{#or(user.displayName, user.givenName, user.familyName)}}
+          <p class="mb-1">
+            <b>Name:</b>
+            {{#if user.displayName}}
+              <a href="{{routeUrl page='hashers' search=user.displayName secondaryPage=''}}">{{user.displayName}}</a>
+            {{else}}
+              {{user.givenName}} {{user.familyName}}
+            {{/if}}
+          </p>
+        {{/or}}
         <p class="mb-1">
           <b>Provider:</b>
           {{#if user.facebookProfile}}Facebook{{/if}}
