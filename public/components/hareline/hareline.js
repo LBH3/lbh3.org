@@ -20,7 +20,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   get eventQuery() {
-    const now = new Date();
+    const now = new Date(2020, 3, 1);
     return {
       $limit: 100,
       startDatetime: {
