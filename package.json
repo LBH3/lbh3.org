@@ -62,7 +62,7 @@
     "done-ssr": "^3.2.7",
     "done-ssr-middleware": "^3.0.0",
     "feathers-authentication-hooks": "^0.1.4",
-    "feathers-hooks-common": "^3.7.1",
+    "feathers-hooks-common": "^5.0.3",
     "feathers-sequelize": "^2.4.0",
     "googleapis": "^46.0.0",
     "helmet": "^3.8.1",
