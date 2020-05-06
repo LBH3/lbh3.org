@@ -44,7 +44,9 @@
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -U postgres && psql -c 'create database lbh3_test;' -U postgres && psql lbh3_test < ./test/lbh3_test.dump -U postgres -v ON_ERROR_STOP=1",
     "test:production": "npm run eslint && npm run build && bundlesize && npm run build:tests && npm run sequelize:migrate && npm run mocha && npm run testee:production",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
-    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
+    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.6",
@@ -80,7 +82,8 @@
     "serve-favicon": "^2.4.3",
     "sharp": "^0.25.2",
     "striptags": "^3.0.1",
-    "winston": "^2.3.1"
+    "winston": "^2.3.1",
+    "snyk": "^1.319.1"
   },
   "devDependencies": {
     "bundlesize": "^0.18.0",
@@ -229,5 +232,6 @@
       "path": "./public/dist/bundles/lbh3/components/special-event/special-event.js",
       "maxSize": "5 kB"
     }
-  ]
+  ],
+  "snyk": true
 }
