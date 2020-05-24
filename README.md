@@ -21,7 +21,7 @@ npm install
 To install [Homebrew](https://brew.sh) & PostgreSQL, run
 
 ```shell
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 brew install postgresql
 brew install postgis
 ```
