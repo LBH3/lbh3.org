@@ -1,22 +1,19 @@
-import Component from 'can-component';
-import DefineList from 'can-define/list/';
-import DefineMap from 'can-define/map/';
-import Event from '~/models/event';
-import Session from '~/models/session';
-import SpecialEvent from '~/models/special-event';
-import loader from '@loader';
-import view from './hareline.stache';
+import Component from "can-component";
+import DefineList from "can-define/list/";
+import DefineMap from "can-define/map/";
+import Event from "~/models/event";
+import Session from "~/models/session";
+import SpecialEvent from "~/models/special-event";
+import loader from "@loader";
+import view from "./hareline.stache";
 
 export const ViewModel = DefineMap.extend({
   get allEventsPromise() {
-    return Promise.all([
-      this.eventsPromise,
-      this.specialEventsPromise
-    ]);
+    return Promise.all([this.eventsPromise, this.specialEventsPromise]);
   },
 
   get description() {
-    return 'Check out our upcumming trails and sign up to hare for LBH3!';
+    return "Check out our upcumming trails and sign up to hare for LBH3!";
   },
 
   get eventQuery() {
@@ -24,8 +21,9 @@ export const ViewModel = DefineMap.extend({
     return {
       $limit: 100,
       startDatetime: {
-        $gte: new Date(now.getFullYear(), now.getMonth(), now.getDate())
-      }
+        $gte: new Date(now.getFullYear(), now.getMonth(), now.getDate()),
+        $lte: new Date(2020, 8, 30),
+      },
     };
   },
 
@@ -34,7 +32,10 @@ export const ViewModel = DefineMap.extend({
       let events, specialEvents;
 
       const combine = () => {
-        const allEvents = events && specialEvents ? [...events, ...specialEvents] : (events || specialEvents);
+        const allEvents =
+          events && specialEvents
+            ? [...events, ...specialEvents]
+            : events || specialEvents;
         allEvents.sort((a, b) => {
           const aStartDate = a.startDateAsMoment;
           const bStartDate = b.startDateAsMoment;
@@ -49,15 +50,15 @@ export const ViewModel = DefineMap.extend({
         property.resolve(eventsByMonth);
       };
 
-      this.eventsPromise.then(results => {
+      this.eventsPromise.then((results) => {
         events = results;
         combine();
       });
-      this.specialEventsPromise.then(results => {
+      this.specialEventsPromise.then((results) => {
         specialEvents = results;
         combine();
       });
-    }
+    },
   },
 
   get eventsPromise() {
@@ -65,7 +66,7 @@ export const ViewModel = DefineMap.extend({
   },
 
   get ogTitle() {
-    return 'Hareline';
+    return "Hareline";
   },
 
   get session() {
@@ -78,11 +79,11 @@ export const ViewModel = DefineMap.extend({
 
   get title() {
     return `${this.ogTitle} | LBH3`;
-  }
+  },
 });
 
 export default Component.extend({
-  tag: 'lbh3-hareline',
+  tag: "lbh3-hareline",
   ViewModel,
-  view
+  view,
 });
