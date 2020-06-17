@@ -1,14 +1,14 @@
 <can-import from="can-stache-route-helpers" />
 
 <p class="mt-3">
-  The Long Beach kennel was founded over 35 years ago on
-  <strong>January 6<sup>th</sup>, 1985</strong> by
-  <strong>Dal “Jock” Trader, Jerry “Eject” Templeman, and Andy “Zapata” Limon</strong>.
-  We run <strong>Thursday evening during Spring/Summer</strong> &amp;
-  <strong>Sunday morning in the Fall/Winter</strong>. We often have an attendance of 75+.
-  Visitors &amp; Virgins are always welcome! Your run donation covers Hare essentials,
-  pre– and post–run beer/soda/munchies. <strong>Please bring a vessel</strong> for your
-  beverage. We hope to see you at LBH3. On On!!!
+  The Long Beach kennel was founded over 35 years ago on <strong>January 6<sup>th</sup>, 1985</strong> by <strong>Dal “Jock” Trader, Jerry “Eject” Templeman, and Andy “Zapata” Limon</strong>.
+  We run <strong>Thursday evening during Spring/Summer</strong> &amp; <strong>Sunday morning in the Fall/Winter</strong>.
+  We often have an attendance of 75+.
+  Visitors &amp; Virgins are always welcome!
+  Your run donation covers Hare essentials, pre– and post–run beer/soda/munchies.
+  <strong>Please bring a vessel</strong> for your beverage.
+  We hope to see you at LBH3.
+  On On!!!
 </p>
 
 <div class="row">
