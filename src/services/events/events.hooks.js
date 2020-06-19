@@ -179,24 +179,24 @@ const getResourceForTrail = function (app, trailData) {
 If you’re feeling any <a href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html">symptoms</a>, <strong>please do not come to the hash.</strong>`);
     if (haresInline && nameText) {
       // If there’s a name for the trail, then we need to show the hares
-      descriptionParts.push(`Hares: ${haresInline}`);
+      descriptionParts.push(`<strong>Hares:</strong> ${haresInline}`);
     }
     if (fromTheHaresInline) {
       descriptionParts.push(fromTheHaresInline);
     }
     if (haresInline) {
       if (!trailData.specialEventId) {
-        descriptionParts.push("Donation: $5 for the run");
+        descriptionParts.push("<strong>Donation:</strong> $5 for the run");
       }
     }
     if (bringInline) {
-      descriptionParts.push(`Bring: ${bringInline}`);
+      descriptionParts.push(`<strong>Bring:</strong> ${bringInline}`);
     }
     if (directionsInline) {
-      descriptionParts.push(`Directions: ${directionsInline}`);
+      descriptionParts.push(`<strong>Directions:</strong> ${directionsInline}`);
     }
     if (onOnInline) {
-      descriptionParts.push(`On on: ${onOnInline}`);
+      descriptionParts.push(`<strong>On on:</strong> ${onOnInline}`);
     }
     const description = descriptionParts.join("\n\n");
 
