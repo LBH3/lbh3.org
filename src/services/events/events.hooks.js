@@ -1,31 +1,31 @@
 /*eslint no-console: ["error", { allow: ["info", "warn", "error"] }] */
-const { authenticate } = require("@feathersjs/authentication").hooks;
-const authHook = require("../../hooks/auth");
-const Entities = require("html-entities").AllHtmlEntities;
-const { google } = require("googleapis");
-const jwtAuthentication = authenticate("jwt");
-const makeRaw = require("../../utils/make-raw");
-const marked = require("marked");
-const striptags = require("striptags");
+const { authenticate } = require('@feathersjs/authentication').hooks;
+const authHook = require('../../hooks/auth');
+const Entities = require('html-entities').AllHtmlEntities;
+const { google } = require('googleapis');
+const jwtAuthentication = authenticate('jwt');
+const makeRaw = require('../../utils/make-raw');
+const marked = require('marked');
+const striptags = require('striptags');
 
 const allowedFields = [
-  "bringMd",
-  "directionsMd",
-  "fromTheHaresMd",
-  "haresMd",
-  "id",
-  "locationGooglePlaceId",
-  "locationMd",
-  "miles",
-  "nameMd",
-  "onOnGooglePlaceId",
-  "onOnMd",
-  "specialEventId",
-  "startDatetime",
-  "trailNumber",
+  'bringMd',
+  'directionsMd',
+  'fromTheHaresMd',
+  'haresMd',
+  'id',
+  'locationGooglePlaceId',
+  'locationMd',
+  'miles',
+  'nameMd',
+  'onOnGooglePlaceId',
+  'onOnMd',
+  'specialEventId',
+  'startDatetime',
+  'trailNumber',
 ];
-const calendar = google.calendar("v3");
-const calendarEmail = "lbh3-643@lbh3-171321.iam.gserviceaccount.com";
+const calendar = google.calendar('v3');
+const calendarEmail = 'lbh3-643@lbh3-171321.iam.gserviceaccount.com';
 const entities = new Entities();
 
 marked.setOptions({
@@ -51,8 +51,8 @@ const authorize = function () {
     const jwtClient = new google.auth.JWT(
       calendarEmail,
       null,
-      process.env.GOOGLE_OAUTH_PRIVATE_KEY.replace(/\\n/g, "\n"),
-      ["https://www.googleapis.com/auth/calendar"]
+      process.env.GOOGLE_OAUTH_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      ['https://www.googleapis.com/auth/calendar']
     );
     jwtClient.authorize(function (error) {
       if (error) {
@@ -121,16 +121,16 @@ const getEvent = function (auth, trailData) {
       auth,
       calendarId: process.env.GOOGLE_CALENDAR_ID,
       maxResults: 1,
-      orderBy: "startTime",
+      orderBy: 'startTime',
       singleEvents: true,
       timeMax,
       timeMin,
     };
-    console.info("Making calendar.events.list call with params:", params);
+    console.info('Making calendar.events.list call with params:', params);
 
     calendar.events.list(params, function (error, response) {
       console.info(
-        "calendar.events.list callback received arguments:",
+        'calendar.events.list callback received arguments:',
         error,
         response
       );
@@ -141,7 +141,7 @@ const getEvent = function (auth, trailData) {
           response && response.data && response.data.items
             ? response.data.items[0]
             : null;
-        console.info("Found matching event:", matchingEvent);
+        console.info('Found matching event:', matchingEvent);
         resolve(matchingEvent);
       }
     });
@@ -164,7 +164,7 @@ const getResourceForTrail = function (app, trailData) {
     const descriptionParts = [];
     if (!haresInline) {
       descriptionParts.push(
-        "<a href='mailto:trailmasters@lbh3.org'>Email our Trail Masters</a> to hare this run."
+        '<a href=\'mailto:trailmasters@lbh3.org\'>Email our Trail Masters</a> to hare this run.'
       );
     }
     descriptionParts.push(`LBH3 runs have tentatively restarted. Here’s how hashing with LBH3 will work until further notice:
@@ -186,7 +186,7 @@ If you’re feeling any <a href="https://www.cdc.gov/coronavirus/2019-ncov/sympt
     }
     if (haresInline) {
       if (!trailData.specialEventId) {
-        descriptionParts.push("<strong>Donation:</strong> $5 for the run");
+        descriptionParts.push('<strong>Donation:</strong> $5 for the run');
       }
     }
     if (bringInline) {
@@ -198,20 +198,20 @@ If you’re feeling any <a href="https://www.cdc.gov/coronavirus/2019-ncov/sympt
     if (onOnInline) {
       descriptionParts.push(`<strong>On on:</strong> ${onOnInline}`);
     }
-    const description = descriptionParts.join("\n\n");
+    const description = descriptionParts.join('\n\n');
 
     // End
     const endDate = new Date(trailData.startDatetime);
     endDate.setHours(endDate.getHours() + 3);
 
     // Summary
-    const summary = "LBH3—" + (nameText || haresText || `Run #${trailNumber}`);
+    const summary = 'LBH3—' + (nameText || haresText || `Run #${trailNumber}`);
 
     // Source
     const startDate = new Date(trailData.startDatetime);
     const year = startDate.getFullYear();
-    const month = ("0" + (startDate.getMonth() + 1)).slice(-2);
-    const day = ("0" + startDate.getDate()).slice(-2);
+    const month = ('0' + (startDate.getMonth() + 1)).slice(-2);
+    const day = ('0' + startDate.getDate()).slice(-2);
     const source = {
       title: summary,
       url: `https://www.lbh3.org/events/${year}/${month}/${day}/trail-${trailNumber}/`,
@@ -232,7 +232,7 @@ If you’re feeling any <a href="https://www.cdc.gov/coronavirus/2019-ncov/sympt
 
     // Location
     if (trailData.locationGooglePlaceId) {
-      const placeService = app.service("api/places");
+      const placeService = app.service('api/places');
       placeService
         .find({ query: { id: trailData.locationGooglePlaceId } })
         .then((foundPlaces) => {
@@ -254,12 +254,12 @@ If you’re feeling any <a href="https://www.cdc.gov/coronavirus/2019-ncov/sympt
 
 const markdownToInline = function (text) {
   return entities
-    .decode(striptags(marked(text || ""), ["a", "del", "em", "strong"]))
+    .decode(striptags(marked(text || ''), ['a', 'del', 'em', 'strong']))
     .trim();
 };
 
 const markdownToPlain = function (text) {
-  return entities.decode(striptags(marked(text || ""))).trim();
+  return entities.decode(striptags(marked(text || ''))).trim();
 };
 
 const updateEvent = function (auth, eventId, resource) {
@@ -317,9 +317,9 @@ module.exports = {
     all: [],
     find: [attachAuthInfo],
     get: [attachAuthInfo],
-    create: [authenticate("jwt"), authHook.restrictTo(authHook.WEBMASTERS)],
+    create: [authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS)],
     update: [
-      authenticate("jwt"),
+      authenticate('jwt'),
       authHook.restrictTo(
         authHook.HASH_FLASH,
         authHook.HASH_HISTORIANS,
@@ -330,8 +330,8 @@ module.exports = {
       ),
       makeRaw,
     ],
-    patch: [authenticate("jwt"), authHook.restrictTo()],
-    remove: [authenticate("jwt"), authHook.restrictTo(authHook.WEBMASTERS)],
+    patch: [authenticate('jwt'), authHook.restrictTo()],
+    remove: [authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS)],
   },
 
   after: {
