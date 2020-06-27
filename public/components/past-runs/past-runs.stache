@@ -11,6 +11,9 @@
   {{#if(showSearchInNav)}}
     <li class="nav-item"><a class="{{#eq(secondaryPage, 'search')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='search'}}">Search</a></li>
   {{/if}}
+  {{#if(session.user.canManageUsers)}}
+    <li class="nav-item"><a class="{{#eq(secondaryPage, 'sync')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='sync'}}">Sync</a></li>
+  {{/if}}
   {{#for(yearObject of years)}}
     <li class="nav-item">
       <a class="{{^if(secondaryPage)}}{{#eq(yearObject.id, year)}}active{{/eq}}{{/if}} nav-link px-2 py-2" href="{{routeForYear(yearObject.id)}}">{{yearObject.id}}</a>
@@ -31,6 +34,14 @@
     {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading special events page…'" />{{/if}}
     {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The special events page failed to load.</div>{{/if}}
     {{#if isResolved}}<lbh3-past-runs-special />{{/if}}
+  </can-import>
+{{/eq}}
+
+{{#eq(secondaryPage, 'sync')}}
+  <can-import class="container d-block" from="~/components/past-runs/sync/">
+    {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading sync page…'" />{{/if}}
+    {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The sync page failed to load.</div>{{/if}}
+    {{#if isResolved}}<lbh3-past-runs-sync session:from="session" />{{/if}}
   </can-import>
 {{/eq}}
 

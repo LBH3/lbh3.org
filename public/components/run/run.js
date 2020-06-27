@@ -1,14 +1,15 @@
-import './run.less';
+import "./run.less";
 
-import Component from 'can-component';
-import Event from '~/models/event';
-import EventsHashers from '~/models/events-hashers';
-import Session from '~/models/session';
-import moment from 'moment-timezone';
-import view from './run.stache';
+import Component from "can-component";
+import Event from "~/models/event";
+import EventsHashers from "~/models/events-hashers";
+import EventsRoutes from "~/models/events-routes";
+import Session from "~/models/session";
+import moment from "moment-timezone";
+import view from "./run.stache";
 
 export default Component.extend({
-  tag: 'lbh3-run',
+  tag: "lbh3-run",
   view,
   ViewModel: {
     get canViewRunAttendance() {
@@ -21,7 +22,7 @@ export default Component.extend({
       }
       return false;
     },
-    day: 'string',
+    day: "string",
     get description() {
       return `Details about LBH3 run #${this.trailNumber}.`;
     },
@@ -30,17 +31,17 @@ export default Component.extend({
       const user = this.session && this.session.user;
       if (hashers && user) {
         return hashers.some({
-          hasherId: user.hasherId
+          hasherId: user.hasherId,
         });
       }
       return false;
     },
     event: {
       get(lastSetValue, resolve) {
-        this.eventPromise.then(events => {
+        this.eventPromise.then((events) => {
           resolve(events[0]);
         });
-      }
+      },
     },
     get eventPromise() {
       return Event.getList(this.eventQuery);
@@ -51,43 +52,59 @@ export default Component.extend({
 
       if (trailNumber) {
         params = {
-          trailNumber
+          trailNumber,
         };
       } else {
-        const startOfToday = moment().tz('America/Los_Angeles').startOf('day').toDate();
+        const startOfToday = moment()
+          .tz("America/Los_Angeles")
+          .startOf("day")
+          .toDate();
         params = {
           $sort: {
-            startDatetime: 1
+            startDatetime: 1,
           },
           startDatetime: {
-            $gte: startOfToday
-          }
+            $gte: startOfToday,
+          },
         };
       }
 
       return params;
     },
     hashers: {
-      get: function(lastValue, setValue) {
+      get: function (lastValue, setValue) {
         const hashersPromise = this.hashersPromise;
         if (hashersPromise) {
           hashersPromise.then(setValue);
         }
-      }
+      },
     },
     get hashersPromise() {
-      if (this.event && this.event.hasStartedOrIsCloseToStarting && this.trailNumber) {
+      if (
+        this.event &&
+        this.event.hasStartedOrIsCloseToStarting &&
+        this.trailNumber
+      ) {
         return EventsHashers.getList({
           $limit: 500,
-          trailNumber: this.trailNumber
+          trailNumber: this.trailNumber,
         });
       }
     },
-    month: 'string',
+    month: "string",
     get ogTitle() {
       return `Run #${this.trailNumber}`;
     },
-    secondaryPage: 'string',
+    get routesPromise() {
+      const event = this.event;
+      if (event && event.hasProbablyEnded) {
+        return EventsRoutes.getList({
+          $limit: 500,
+          trailNumber: this.trailNumber,
+        });
+      }
+    },
+    secondaryPage: "string",
     get session() {
       return Session.current;
     },
@@ -104,7 +121,21 @@ export default Component.extend({
     get title() {
       return `${this.ogTitle} | LBH3`;
     },
-    trailNumber: 'number',
-    year: 'number'
+    trailNumber: "number",
+    visibleRoutes: {
+      default() {
+        return [];
+      }
+    },
+    get visibleSegments() {
+      const visibleSegments = this.visibleRoutes.reduce((accumulator, route) => {
+        route.segments.forEach(segment => {
+          accumulator.push(segment);
+        });
+        return accumulator;
+      }, []);
+      return visibleSegments;
+    },
+    year: "number",
   }
 });

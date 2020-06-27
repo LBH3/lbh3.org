@@ -16,6 +16,7 @@
       "~/components/past-runs/map/map",
       "~/components/past-runs/search/search",
       "~/components/past-runs/special/special",
+      "~/components/past-runs/sync/sync",
       "~/components/request-access/request-access",
       "~/components/run/post/post"
     ],

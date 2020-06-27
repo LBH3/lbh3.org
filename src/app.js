@@ -4,7 +4,7 @@ const compress = require('compression');
 const cors = require('cors');
 const helmet = require('helmet');
 const bodyParser = require('body-parser');
-const Honeybadger = require('honeybadger').configure({apiKey: 'a6a30ced'});
+const Honeybadger = require('honeybadger').configure({ apiKey: 'a6a30ced' });
 
 const feathers = require('@feathersjs/feathers');
 const express = require('@feathersjs/express');
@@ -31,11 +31,12 @@ app.configure(configuration());
 app.use(Honeybadger.requestHandler);
 
 // Enable CORS, security, compression, favicon and body parsing
+const limit = 1000000; // 1MB
 app.use(cors());
 app.use(helmet());
 app.use(compress());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ limit }));
+app.use(bodyParser.urlencoded({ extended: true, limit }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
 
 // Host the public folder
@@ -62,7 +63,9 @@ app.use(Honeybadger.errorHandler);
 
 // Raygun
 const raygun = require('raygun');
-const raygunClient = new raygun.Client().init({ apiKey: app.get('raygun').apiKey });
+const raygunClient = new raygun.Client().init({
+  apiKey: app.get('raygun').apiKey,
+});
 app.use(raygunClient.expressHandler);
 
 app.hooks(appHooks);

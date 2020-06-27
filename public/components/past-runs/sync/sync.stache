@@ -1,0 +1,100 @@
+<can-import from="~/components/alert/" />
+
+<h2 class="sr-only">Sync</h2>
+
+{{#if savePromise}}
+  {{#if savePromise.isPending}}
+    Saving all…
+  {{/if}}
+
+  {{#if savePromise.isRejected}}
+    Save all failed with error: {{savePromise.reason.xhr.message}}
+  {{/if}}
+
+  {{#if savePromise.isResolved}}
+    Saved all!
+  {{/if}}
+{{else}}
+  {{#if routes.length}}
+    <h3 class="my-3">Routes</h3>
+    <button class="btn btn-primary" {{^if(this.saveableFiles.length)}}disabled{{/if}} on:click="saveAll()" type="button">
+      Import ({{this.saveableFiles.length}}/{{routes.length}})
+    </button>
+    {{#for(route of routes)}}
+      <div class="alert alert-{{#if route.canSave}}primary{{else}}{{#if route.errors.length}}danger{{else}}secondary{{/if}}{{/if}} my-3 pb-0">
+        {{#for(error of route.errors)}}
+          <p><strong>{{error}}</strong></p>
+        {{else}}
+          <form class="form-inline">
+            <label class="font-weight-bold form-check-label">
+              <input
+                checked:from="route.shouldSave"
+                class="form-check-input"
+                on:click="route.toggleShouldSave()"
+                type="checkbox"
+              />
+              Import
+            </label>
+          </form>
+          <hr>
+        {{/for}}
+        {{#for(segment of route.segments)}}
+          <p><strong>Segment time:</strong> {{formatDate(segment[0][2])}}</p>
+          <p><strong>Points:</strong> {{segment.length}}</p>
+        {{/for}}
+        <p>
+          <strong>Trail number:</strong>
+          {{#if route.trailPromise.isPending}}
+            <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
+          {{/if}}
+
+          {{#if route.trailPromise.isRejected}}
+            Trail number search failed with error: {{route.trailPromise.reason.xhr.message}}
+          {{/if}}
+
+          {{#if(route.trailNumber)}}
+            {{route.trailNumber}}
+          {{/if}}
+        </p>
+        {{#and(route.trailPromise.isResolved, route.trailNumber)}}
+          <p>
+            <strong>Did attend:</strong>
+            {{#if route.didAttendPromise.isPending}}
+              <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
+            {{/if}}
+            {{#if route.didAttendPromise.isRejected}}
+              Attendance search failed with error: {{route.didAttendPromise.reason.xhr.message}}
+            {{/if}}
+            {{#if route.didAttendPromise.isResolved}}
+              {{#if route.didAttend}}
+                Yes
+              {{else}}
+                No
+              {{/if}}
+            {{/if}}
+          </p>
+        {{/and}}
+        {{#if route.didAttend}}
+          <p>
+            <strong>Distance:</strong>
+            {{route.distance}}
+          </p>
+          <p>
+            <strong>Metadata:</strong>
+            {{stringForObject(route.metadata)}}
+          </p>
+        {{/if}}
+      </div>
+    {{/for}}
+  {{else}}
+    <form class="my-3">
+      <div class="form-group">
+        <label class="btn btn-primary mb-0">
+          <span class="fas fa-upload"></span>
+          Upload GPX
+          <input accept="application/gpx" class="sr-only" multiple type="file" />
+        </label>
+      </div>
+    </form>
+  {{/if}}
+{{/if}}

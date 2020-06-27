@@ -1,10 +1,8 @@
-import canReflect from 'can-reflect';
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import Event from './event';
 import feathersModel from './feathers-model';
 import Hasher from './hasher';
-import loader from '@loader';
 import QueryLogic from 'can-query-logic';
 
 const EventsHashers = DefineMap.extend({

@@ -13,8 +13,9 @@ const elections = require('./elections/elections.service.js');
 const ballots = require('./ballots/ballots.service.js');
 const electionEligibility = require('./election-eligibility/election-eligibility.service.js');
 const paperBallots = require('./paper-ballots/paper-ballots.service.js');
+const eventsRoutes = require('./events-routes/events-routes.service.js');
 module.exports = function () {
-  const app = this; // eslint-disable-line no-unused-vars
+  const app = this;
   app.configure(users);
   app.configure(events);
   app.configure(eventYears);
@@ -30,4 +31,5 @@ module.exports = function () {
   app.configure(ballots);
   app.configure(electionEligibility);
   app.configure(paperBallots);
+  app.configure(eventsRoutes);
 };
