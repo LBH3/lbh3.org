@@ -30,7 +30,6 @@
             <div class="input-group">
               <input
                 class="form-control"
-                {{#if(event.hasStartedOrIsCloseToStarting)}}disabled{{/if}}
                 {{^if session.user.canAddTrails}}disabled{{/if}}
                 id="start-date"
                 type="date"
