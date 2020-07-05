@@ -21,7 +21,12 @@
     <dt class="col-sm-3 text-sm-right">Date:</dt><dd class="col-sm-9">{{event.startDateTimeString}}</dd>
     {{#if event.longLocationHtml}}<dt class="col-sm-3 text-sm-right">Start:</dt><dd class="col-sm-9">{{{event.longLocationHtml}}}</dd>{{/if}}
     {{#if event.haresHtml}}<dt class="col-sm-3 text-sm-right">Hares:</dt><dd class="col-sm-9">{{{event.haresHtml}}}</dd>{{/if}}
-    {{#if showDonation}}<dt class="col-sm-3 text-sm-right">Donation:</dt><dd class="col-sm-9">$5 for the run</dd>{{/if}}
+    {{#if showDonation}}<dt class="col-sm-3 text-sm-right">Donation:</dt><dd class="col-sm-9">
+      $5
+      {{^if(trailNumber)}}
+        exact change, <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a>, or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>
+      {{/if}}
+    </dd>{{/if}}
     {{#if event.bringHtml}}<dt class="col-sm-3 text-sm-right">Bring:</dt><dd class="col-sm-9">{{{event.bringHtml}}}</dd>{{/if}}
   </dl>
 
