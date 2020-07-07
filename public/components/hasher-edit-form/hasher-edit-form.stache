@@ -124,24 +124,27 @@
     </div>
   </div>
 
-  <div class="form-group row">
-    <label class="col-sm-4 col-form-label" for="emailing">
-      Email?
-    </label>
-    <div class="col-sm-8">
-      <select
-        class="form-control w-auto"
-        id="emailing"
-        value:bind="hasher.emailing"
-      >
-        {{#for(emailOption of emailOptions)}}
-          <option value="{{emailOption.key}}">
-            {{emailOption.value}}
-          </option>
-        {{/for}}
-      </select>
+  {{#if(hasher.id)}}
+    <div class="form-group row">
+      <label class="col-sm-4 col-form-label" for="emailing">
+        Email?
+      </label>
+      <div class="col-sm-8">
+        <select
+          class="form-control w-auto"
+          disabled
+          id="emailing"
+          value:bind="hasher.emailing"
+        >
+          {{#for(emailOption of emailOptions)}}
+            <option value="{{emailOption.key}}">
+              {{emailOption.value}}
+            </option>
+          {{/for}}
+        </select>
+      </div>
     </div>
-  </div>
+  {{/if}}
   {{#if(session.user.canEditHasherInfo)}}
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="payment">
