@@ -536,25 +536,4 @@ Hasher.connection = feathersModel('/api/hashers', {
   name: 'hasher'
 });
 
-export const emailingOptions = {
-  '': 'No',
-  'C': 'Death or special event',
-  '4': 'Snooze'
-};
-
-Hasher.groupByEmailing = function(hashers) {
-  let currentEmailing;
-  const hashersByEmailing = {};
-  hashers.forEach(function(hasher) {
-    const emailing = hasher.emailing;
-    hashersByEmailing[emailing] = hashersByEmailing[emailing] || {
-      group: emailing,
-      hashers: [],
-      label: emailingOptions[emailing]
-    };
-    hashersByEmailing[emailing].hashers.push(hasher);
-  });
-  return Object.values(hashersByEmailing);
-};
-
 export default Hasher;

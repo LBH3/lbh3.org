@@ -1,8 +1,7 @@
 import Component from 'can-component';
 import DefineMap from 'can-define/map/';
 import './hasher-upload-headshot-button.less';
-import { emailingOptions, Hasher } from '~/models/hasher';
-import { paymentRates } from '~/models/events-hashers';
+import { Hasher } from '~/models/hasher';
 import view from './hasher-upload-headshot-button.stache';
 
 function deleteHeadshotAtUrl(url) {
