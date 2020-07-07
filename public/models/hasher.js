@@ -203,21 +203,7 @@ export const Hasher = DefineMap.extend({
   diedPrivacy: privacyDefault,
   emailAddresses: emailAddressesPropDefinition,
   emailAddressesPrivate: emailAddressesPropDefinition,
-  emailing: {
-    get(lastSetValue) {
-      if (lastSetValue) {
-        const upperCased = lastSetValue.toUpperCase().trim();
-        if (['1', '2', '3', '4', '5', 'B', 'Y'].indexOf(upperCased) > -1 || upperCased.length > 2) {
-          return '4';
-        }
-        if (upperCased === 'C' || upperCased === 'R') {
-          return 'C';
-        }
-      }
-      return '';
-    },
-    serialize: true
-  },
+  emailing: 'string',
   emails: {
     get(lastSetValue) {
       return lastSetValue || new Email.List();

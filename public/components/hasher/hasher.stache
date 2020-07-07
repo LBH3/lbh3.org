@@ -57,10 +57,6 @@
           <dd class="col-sm-8 col-lg-7">{{hasher.formattedBirthday}}</dd>
         {{/if}}
         {{#if(session.user.canViewDirectoryInfo)}}
-          {{#if(hasher.emailing)}}
-            <dt class="col-sm-4 col-lg-5">Emailing:</dt>
-            <dd class="col-sm-8 col-lg-7">{{hasher.emailing}}</dd>
-          {{/if}}
           {{#if(hasher.payment)}}
             <dt class="col-sm-4 col-lg-5">Payment:</dt>
             <dd class="col-sm-8 col-lg-7">{{hasher.payment}}</dd>

@@ -160,7 +160,6 @@ const createAndUpdateFields = function(hook) {
         'birthMonthPrivacy',
         'birthYear',
         'birthYearPrivacy',
-        'emailing',
         'emails',
         'familyName',
         'familyNamePrivacy',
