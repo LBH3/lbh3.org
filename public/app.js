@@ -225,7 +225,6 @@ route.register("/hashers/early-warning/", {
   page: "hashers",
   secondaryPage: "early-warning",
 });
-route.register("/hashers/email/", { page: "hashers", secondaryPage: "email" });
 route.register("/hashers/in-memoriam/", {
   page: "hashers",
   secondaryPage: "in-memoriam",

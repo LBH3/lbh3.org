@@ -256,7 +256,6 @@
                 {{/if}}
                 <li class="nav-item"><a class="{{#eq(secondaryPage, 'attendance-records')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='attendance-records'}}" title="Go to the attendance records page">Attendance Records</a></li>
                 <li class="nav-item"><a class="{{#eq(secondaryPage, 'early-warning')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='early-warning'}}" title="Go to the early warning page">Early Warning</a></li>
-                <li class="nav-item"><a class="{{#eq(secondaryPage, 'email')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='email'}}" title="Go to the email list">Email List</a></li>
               {{/if}}
               <li class="nav-item"><a class="{{#eq(secondaryPage, 'in-memoriam')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage='in-memoriam'}}" title="Go to the in memoriam page">In Memoriam</a></li>
             </lbh3-sub-nav>
@@ -310,15 +309,6 @@
                       {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Early Warning page…'" />{{/if}}
                       {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Early Warning page failed to load.</div>{{/if}}
                       {{#if isResolved}}<lbh3-hashers-early-warning description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
-                    </can-import>
-                  </lbh3-no-ssr>
-                {{/case}}
-                {{#case "email"}}
-                  <lbh3-no-ssr>
-                    <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/email/">
-                      {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Email List page…'" />{{/if}}
-                      {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Email List page failed to load.</div>{{/if}}
-                      {{#if isResolved}}<lbh3-hashers-email description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
                     </can-import>
                   </lbh3-no-ssr>
                 {{/case}}
