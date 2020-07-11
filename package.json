@@ -111,7 +111,7 @@
     },
     {
       "path": "./public/dist/bundles/edit-add-edit-edit.js",
-      "maxSize": "34 kB"
+      "maxSize": "22 kB"
     },
     {
       "path": "./public/dist/bundles/erection-results.js",
@@ -171,7 +171,7 @@
     },
     {
       "path": "./public/dist/bundles/lbh3/components/hareline/guidelines/guidelines.js",
-      "maxSize": "14 kB"
+      "maxSize": "15 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/hasher/hasher.css",
