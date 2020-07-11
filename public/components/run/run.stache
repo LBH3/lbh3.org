@@ -60,7 +60,7 @@
     </form>
   {{/and}}
 
-  <dl class="row">
+  <dl class="mt-3 row">
     {{#if event.directionsHtml}}<dt class="col-sm-3 text-sm-right">Directions:</dt><dd class="col-sm-9">{{{event.directionsHtml}}}</dd>{{/if}}
     {{#if event.fromTheHaresHtml}}<dt class="col-sm-3 text-sm-right">From the hares:</dt><dd class="col-sm-9">{{{event.fromTheHaresHtml}}}</dd>{{/if}}
     {{#if event.longOnOnHtml}}<dt class="col-sm-3 text-sm-right">On-on:</dt><dd class="col-sm-9">{{{event.longOnOnHtml}}}</dd>{{/if}}
