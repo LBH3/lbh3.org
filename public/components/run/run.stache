@@ -34,7 +34,7 @@
     {{#if event.locationPromise.isPending}}<lbh3-alert class="d-block mt-3" message:from="'Fetching the location…'" />{{/if}}
     {{#and(event.locationPromise.isResolved, event.locationPromise.value.placeId)}}<lbh3-map placeId:from="event.locationPromise.value.placeId" segments:from="visibleSegments" />{{/and}}
   {{else}}
-    {{#if event.locationMd}}<lbh3-map q:from="event.locationMd" segments:from="routesPromise.value[0].segments" />{{/if}}
+    {{#if event.locationMd}}<lbh3-map q:from="event.locationMd" segments:from="visibleSegments" />{{/if}}
   {{/if}}
   
   {{#if routesPromise.isRejected}}<p class="text-danger"><small>Failed to load routes!</small></p>{{/if}}

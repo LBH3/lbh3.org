@@ -181,6 +181,7 @@ export default Component.extend({
                   zoom,
                 });
                 setUpMarker(place, position);
+                segmentsDidChange();
               });
             } else if (this.q) {
               // The undesirable case… have to create a map, query Google for the info, and then update the map
@@ -206,6 +207,7 @@ export default Component.extend({
                   map.setCenter(results[0].geometry.location);
                   map.setZoom(zoom);
                   setUpMarker(place, results[0].geometry.location);
+                  segmentsDidChange();
                 }
               });
             }
@@ -266,31 +268,35 @@ export default Component.extend({
       }
 
       // Listen for segments to change
-      this.listenTo("segments", () => {
+      const segmentsDidChange = () => {
         this.polylines.forEach(polyline => {
           polyline.setMap(null);
         });
         this.polylines = [];
-        this.segments.forEach((segment) => {
-          const path = Array.from(
-            segment.map((point) => {
-              return {
-                lat: parseFloat(point[0], 10),
-                lng: parseFloat(point[1], 10),
-              };
-            })
-          );
-          const polyline = new google.maps.Polyline({
-            geodesic: true,
-            path,
-            strokeColor: '#dc3232',
-            strokeOpacity: 0.75,
-            strokeWeight: 2
+        const segments = this.segments;
+        if (segments) {
+          segments.forEach((segment) => {
+            const path = Array.from(
+              segment.map((point) => {
+                return {
+                  lat: parseFloat(point[0], 10),
+                  lng: parseFloat(point[1], 10),
+                };
+              })
+            );
+            const polyline = new google.maps.Polyline({
+              geodesic: true,
+              path,
+              strokeColor: '#dc3232',
+              strokeOpacity: 0.75,
+              strokeWeight: 2
+            });
+            polyline.setMap(map);
+            this.polylines.push(polyline);
           });
-          polyline.setMap(map);
-          this.polylines.push(polyline);
-        });
-      });
+        }
+      };
+      this.listenTo("segments", segmentsDidChange);
 
       return () => {
         // Remove the marker click listener
@@ -305,6 +311,9 @@ export default Component.extend({
         if (observer) {
           observer.disconnect();
         }
+
+        // Remove any listeners on the component
+        this.stopListening();
       };
     },
   },

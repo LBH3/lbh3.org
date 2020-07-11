@@ -95,6 +95,14 @@ export default Component.extend({
     get ogTitle() {
       return `Run #${this.trailNumber}`;
     },
+    routes: {
+      get: function (lastValue, setValue) {
+        const routesPromise = this.routesPromise;
+        if (routesPromise) {
+          routesPromise.then(setValue);
+        }
+      },
+    },
     get routesPromise() {
       const event = this.event;
       if (event && event.hasProbablyEnded) {
@@ -123,18 +131,22 @@ export default Component.extend({
     },
     trailNumber: "number",
     visibleRoutes: {
-      default() {
-        return [];
+      get() {
+        const routes = this.routes;
+        return routes ? routes.slice() : undefined;
       }
     },
     get visibleSegments() {
-      const visibleSegments = this.visibleRoutes.reduce((accumulator, route) => {
-        route.segments.forEach(segment => {
-          accumulator.push(segment);
-        });
-        return accumulator;
-      }, []);
-      return visibleSegments;
+      const visibleRoutes = this.visibleRoutes;
+      console.log('visibleRoutes:', visibleRoutes);
+      if (visibleRoutes) {
+        return visibleRoutes.reduce((accumulator, route) => {
+          route.segments.forEach(segment => {
+            accumulator.push(segment);
+          });
+          return accumulator;
+        }, []);
+      }
     },
     year: "number",
   }
