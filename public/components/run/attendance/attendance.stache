@@ -1,7 +1,7 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 
-<h2 class="h3">Run #{{trailNumber}} Check-In Sheet</h2>
+<h2 class="h3 my-3">Run #{{trailNumber}} Check-In Sheet</h2>
 
 {{#or(hashersPromise.isPending, patchesPromise.isPending)}}
   <lbh3-alert class="d-block mt-3" message:from="'Fetching the check-in sheet. This may take a while…'" />
