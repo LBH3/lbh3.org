@@ -35,7 +35,7 @@ export const ViewModel = DefineMap.extend({
       return Hasher.getList({
         $limit: 500,
         lastTrailDate: {
-          $gte: trailDate.clone().subtract(17, 'weeks').toDate()
+          $gte: trailDate.clone().subtract(6, 'weeks').toDate()
         }
       });
     }
