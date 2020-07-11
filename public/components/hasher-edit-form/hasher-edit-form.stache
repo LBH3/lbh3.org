@@ -124,18 +124,6 @@
     </div>
   </div>
 
-  {{#if(hasher.id)}}
-    <div class="align-items-center form-group row">
-      <label class="col-sm-4 col-form-label" for="emailing">
-        Email?
-      </label>
-      <div class="col-sm-8">
-        <a href="http://eepurl.com/gWbzvH" target="_blank">
-          Manage with Mailchimp
-        </a>
-      </div>
-    </div>
-  {{/if}}
   {{#if(session.user.canEditHasherInfo)}}
     <div class="form-group row">
       <label class="col-sm-4 col-form-label" for="payment">
