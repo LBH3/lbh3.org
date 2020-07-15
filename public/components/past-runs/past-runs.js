@@ -43,7 +43,7 @@ export default Component.extend({
       return this.secondaryPage === 'search' ? `Search through all of LBH3’s runs.` : `Archive of LBH3’s runs in ${this.year}.`;
     },
     get eventQuery() {
-      const endDate = (currentYear === this.year) ? this.currentTime : moment().tz(timeZone).year(this.year).endOf('year').toDate();
+      const endDate = (currentYear === this.year) ? new Date(2020, 6, 14) : moment().tz(timeZone).year(this.year).endOf('year').toDate();
       const startDate = moment().tz(timeZone).year(this.year).startOf('year').toDate();
       return {
         $limit: 100,
