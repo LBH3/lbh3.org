@@ -111,7 +111,7 @@
     },
     {
       "path": "./public/dist/bundles/edit-add-edit-edit.js",
-      "maxSize": "22 kB"
+      "maxSize": "33 kB"
     },
     {
       "path": "./public/dist/bundles/erection-results.js",
@@ -134,12 +134,12 @@
       "maxSize": "7 kB"
     },
     {
-      "path": "./public/dist/bundles/home-sync-run-hareline.css",
+      "path": "./public/dist/bundles/home-run-hareline.css",
       "maxSize": "1 kB"
     },
     {
-      "path": "./public/dist/bundles/home-sync-run-hareline.js",
-      "maxSize": "10 kB"
+      "path": "./public/dist/bundles/home-run-hareline.js",
+      "maxSize": "9 kB"
     },
     {
       "path": "./public/dist/bundles/mismanagement-el-*.css",

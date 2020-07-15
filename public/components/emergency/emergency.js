@@ -10,6 +10,7 @@ export default Component.extend({
         return lastSetValue || localStorage.getItem('emergency-0-dismissed');
       }
     },
+    liveTrails: 'boolean',
     dismiss() {
       const now = new Date();
       localStorage.setItem('emergency-0-dismissed', now);

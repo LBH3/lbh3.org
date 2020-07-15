@@ -62,4 +62,6 @@
 
 <lbh3-emergency />
 
+{{#if session.user.canManageUsers}}
 <lbh3-run />
+{{/if}}
