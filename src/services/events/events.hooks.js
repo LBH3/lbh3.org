@@ -171,7 +171,7 @@ const getResourceForTrail = function (app, trailData) {
 
 - Trails are pre-laid before the start time.
 - Beer is available on trail on a first come, first served basis. No beer, munchies, or circle after trail.
-- Pay Hash Cash via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>. If you have a punch card, <a href="mailto:checkin@lbh3.org">email checkin@lbh3.org</a> to get credit.
+- Pay Hash Cash $5 via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>. If you have a punch card, <a href="mailto:checkin@lbh3.org">email checkin@lbh3.org</a> to get credit.
 - We don’t encourage groups on trail. Wear a mask while you’re not running. Don’t be an asshole.`);
     if (haresInline && nameText) {
       // If there’s a name for the trail, then we need to show the hares
