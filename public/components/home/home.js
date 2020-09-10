@@ -8,7 +8,7 @@ export default Component.extend({
   view,
   ViewModel: {
     description: {
-      default: 'The Long Beach kennel was founded over 30 years ago. We run Thursday evening during Spring/Summer & Sunday morning in the Fall/Winter. We often have an attendance of 75+. Visitors & Virgins are always welcome! Your run donation covers Hare essentials, pre– and post–run beer. Please bring a vessel for your beverage. We hope to see you at LBH3. On On!!!'
+      default: 'The Long Beach kennel was founded over 30 years ago. We run Thursday evening during Spring/Summer & Sunday morning in the Fall/Winter. We often have an attendance of 75+. Visitors & Virgins are always welcome! Your run donation covers Hare essentials and beer on trail. Please bring a vessel for your beverage. We hope to see you at LBH3. On On!!!'
     },
     get electionsPromise() {
       if (this.showUpcomingElections) {
