@@ -5,7 +5,6 @@
 
 <lbh3-emergency />
 
-{{#if session.user.canManageUsers}}
 <p class="d-print-none mt-3"><a href="mailto:trailmasters@lbh3.org">Email our Trail Masters</a> to hare a run. Note that LBH3 may suspend our trails at any time, so <strong>we might delay any run you sign up for.</strong></p>
 
 {{#if allEventsPromise.isPending}}
@@ -23,5 +22,4 @@
     <h3>{{month.name}} {{month.year}}</h3>
     <lbh3-run-list events:from="month.events" showFutureTools:from="true" />
   {{/for}}
-{{/if}}
 {{/if}}
