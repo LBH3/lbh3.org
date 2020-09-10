@@ -167,16 +167,12 @@ const getResourceForTrail = function (app, trailData) {
         '<a href=\'mailto:trailmasters@lbh3.org\'>Email our Trail Masters</a> to hare this run.'
       );
     }
-    descriptionParts.push(`LBH3 runs have tentatively restarted. Here’s how hashing with LBH3 will work until further notice:
+    descriptionParts.push(`LBH3 runs have tentatively restarted. Here’s how LBH3 hashing will work until further notice:
 
-- <strong>Masks are mandatory</strong> while not running. Bring your own face covering. If you do not have a mask, you will be asked to leave.
-- <strong>Bring a vessel</strong> for non-keg beer before, during, and after trail.
-- Maintain 6′ distance from others as much as possible and respect everyone’s boundaries.
-- Pay Hash Cash with exact change ($5), <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a>, or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>.
-- No munchies will be made available after trail.
-- No circle will be held after trail.
-
-If you’re feeling any <a href="https://www.cdc.gov/coronavirus/2019-ncov/symptoms-testing/symptoms.html" target="_blank">symptoms</a>, <strong>please do not come to the hash.</strong>`);
+- Trails are pre-laid before the start time.
+- Beer is available on trail on a first come, first served basis. No beer, munchies, or circle after trail.
+- Pay Hash Cash via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>. If you have a punch card, <a href="mailto:checkin@lbh3.org">email checkin@lbh3.org</a> to get credit.
+- We don’t encourage groups on trail. Wear a mask while you’re not running. Don’t be an asshole.`);
     if (haresInline && nameText) {
       // If there’s a name for the trail, then we need to show the hares
       descriptionParts.push(`<strong>Hares:</strong> ${haresInline}`);
