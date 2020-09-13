@@ -169,11 +169,11 @@ const getResourceForTrail = function (app, trailData) {
     }
     descriptionParts.push(`LBH3 runs have tentatively restarted every Sunday at 10 AM. Here’s how trails will work until further notice:
 
-- Trails are pre-laid before 10 AM. Please run trail any time after then.
+- Trails are pre-laid before 10 AM. Please run “virtual” trail any time after then.
 - Beer is available on trail on a first come, first served basis. No beer, munchies, or circle after trail.
-- Pay Hash Cash $5 via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>. If you have a punch card, <a href="mailto:checkin@lbh3.org">email checkin@lbh3.org</a> to get credit.
-- You will only receive LBH3 run credit toward patches if you pay Hash Cash (or email for punch cards).
-- We don’t encourage groups on trail. Wear a mask while you’re not running. Don’t be an asshole.`);
+- Pay Hash Cash $5 via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>. If you have a punch card, email <a href="mailto:checkin@lbh3.org">checkin@lbh3.org</a> to get credit.
+- You will receive LBH3 run credit toward patches only if you pay Hash Cash (or email for punch cards).
+- We don’t encourage groups on trail. Wear a mask. Don’t be an asshole.`);
     if (haresInline && nameText) {
       // If there’s a name for the trail, then we need to show the hares
       descriptionParts.push(`<strong>Hares:</strong> ${haresInline}`);
