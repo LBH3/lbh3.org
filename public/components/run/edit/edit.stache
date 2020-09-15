@@ -80,9 +80,7 @@
             </div>
             {{#if locationPromise.isRejected}}
               <span class="fas fa-exclamation-triangle"></span>
-              <small>
-                Save failed. Maybe try again?
-              </small>
+              <small>Save failed with error: {{locationPromise.reason.response.message}}</small>
             {{else}}
               {{#if locationPromise.isPending}}
                 <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
@@ -118,9 +116,7 @@
             </div>
             {{#if onOnPromise.isRejected}}
               <span class="fas fa-exclamation-triangle"></span>
-              <small>
-                Save failed. Maybe try again?
-              </small>
+              <small>Save failed with error: {{onOnPromise.reason.response.message}}</small>
             {{else}}
               {{#if onOnPromise.isPending}}
                 <div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div>
