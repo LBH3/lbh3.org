@@ -105,7 +105,7 @@ export default Component.extend({
     },
     get routesPromise() {
       const event = this.event;
-      if (event && event.hasProbablyEnded) {
+      if (event && event.hasProbablyEnded && this.trailNumber) {
         return EventsRoutes.getList({
           $limit: 500,
           trailNumber: this.trailNumber,
@@ -138,7 +138,6 @@ export default Component.extend({
     },
     get visibleSegments() {
       const visibleRoutes = this.visibleRoutes;
-      console.log('visibleRoutes:', visibleRoutes);
       if (visibleRoutes) {
         return visibleRoutes.reduce((accumulator, route) => {
           route.segments.forEach(segment => {
