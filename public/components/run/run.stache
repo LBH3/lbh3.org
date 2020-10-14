@@ -24,7 +24,8 @@
     {{#if showDonation}}<dt class="col-sm-3 text-sm-right">Donation:</dt><dd class="col-sm-9">
       $5
       {{^if(trailNumber)}}
-        via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>
+        via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>,
+        or email <a href="mailto:checkin@lbh3.org">checkin@lbh3.org</a> for punch
       {{/if}}
     </dd>{{/if}}
     {{#if event.bringHtml}}<dt class="col-sm-3 text-sm-right">Bring:</dt><dd class="col-sm-9">{{{event.bringHtml}}}</dd>{{/if}}
