@@ -199,7 +199,7 @@ const getResourceForTrail = function (app, trailData) {
 
     // End
     const endDate = new Date(trailData.startDatetime);
-    endDate.setHours(endDate.getHours() + 3);
+    endDate.setHours(endDate.getHours() + 2);// Set the calendar event end time to be + 2 hours from the start
 
     // Summary
     const summary = 'LBH3—' + (nameText || haresText || `Run #${trailNumber}`);
