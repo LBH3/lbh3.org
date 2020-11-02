@@ -122,7 +122,7 @@ export default Component.extend({
     get showDonation() {
       const event = this.event;
       if (event) {
-        return !event.hasProbablyEnded && !event.specialEventId;
+        return !event.hasEnded && !event.specialEventId;
       }
       return false;
     },
