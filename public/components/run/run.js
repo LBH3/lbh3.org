@@ -105,7 +105,8 @@ export default Component.extend({
     },
     get routesPromise() {
       const event = this.event;
-      if (event && event.hasProbablyEnded && this.trailNumber) {
+      const user = this.session && this.session.user;
+      if (event && event.hasProbablyEnded && user && user.hasherId && this.trailNumber) {
         return EventsRoutes.getList({
           $limit: 500,
           trailNumber: this.trailNumber,
