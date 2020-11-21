@@ -36,9 +36,10 @@
   {{else}}
     <label class="btn btn-primary mr-2 text-nowrap">
       <span class="fas fa-upload"></span>
-      Upload
+      Upload PDF
       <input accept="application/pdf" class="sr-only" type="file" />
     </label>
+    <input class="form-control mr-2" id="snooze-url" placeholder="Or enter a URL" type="text" value:bind="event.snoozeUrl">
     <select class="form-control" on:change:value:to="event.snoozeUrl">
       <option disabled selected>Or select a recent trail</option>
       {{#for(recentTrail of eventsPromise.value)}}
