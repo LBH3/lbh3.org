@@ -20,7 +20,7 @@
       </a>
     </li>
   {{/if}}
-  {{#and(event.hasProbablyEnded, session.user.hasherId)}}
+  {{#if(session.user.hasherId)}}
     {{#if(event.photosUrl)}}
       <li class="nav-item">
         <a class="nav-link" href="{{event.photosUrl}}" target="_blank">
@@ -35,5 +35,5 @@
         </a>
       </li>
     {{/if}}
-  {{/and}}
+  {{/if}}
 </ul>
