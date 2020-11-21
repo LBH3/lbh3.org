@@ -8,6 +8,26 @@
 <can-import from="~/components/run/nav/" />
 <can-import from="~/components/snooze-button/" />
 
+{{<specialEventColumn}}
+  <div class="form-group col-md-6">
+    <label for="special-event">
+      Special Event
+    </label>
+    <select
+      class="form-control"
+      id="special-event"
+      value:bind="event.specialEventId"
+    >
+      <option value="0"></option>
+      {{#for(specialEvent of specialEventPromise.value)}}
+        <option value="{{specialEvent.id}}">
+          {{specialEvent.urlId}} {{specialEvent.year}}
+        </option>
+      {{/for}}
+    </select>
+  </div>
+{{/specialEventColumn}}
+
 {{#if canEditEvent}}
 
   {{#if eventPromise.isPending}}
@@ -230,49 +250,38 @@
             </div>
           </div>
         {{/if}}
-        {{#or(session.user.canAddPhotos, session.user.canAddSnoozes)}}
-          <div class="form-row">
-            {{#if(session.user.canAddPhotos)}}
-              <div class="form-group col-md-{{#if(session.user.canAddSnoozes)}}6{{else}}12{{/if}}">
-                <label for="photos-url">
-                  Photos URL
-                </label>
-                <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
-              </div>
-            {{/if}}
-            {{#if(session.user.canAddSnoozes)}}
-              <div class="form-group col-md-{{#if(session.user.canAddPhotos)}}6{{else}}12{{/if}}">
-                <label for="snooze-url">
-                  Snooze
-                </label>
-                <lbh3-snooze-button event:from="event" />
-              </div>
-            {{/if}}
-          </div>
-        {{/or}}
-      {{else}}
-        {{#if session.user.canManageUsers}}
-          <div class="form-row">
-            <div class="form-group col-md-6">
-              <label for="special-event">
-                Special Event
-              </label>
-              <select
-                class="form-control"
-                id="special-event"
-                value:bind="event.specialEventId"
-              >
-                <option value="0"></option>
-                {{#for(specialEvent of specialEventPromise.value)}}
-                  <option value="{{specialEvent.id}}">
-                    {{specialEvent.urlId}} {{specialEvent.year}}
-                  </option>
-                {{/for}}
-              </select>
-            </div>
-          </div>
-        {{/if}}
       {{/if}}
+
+      {{#or(session.user.canAddPhotos, session.user.canAddSnoozes, session.user.canManageUsers)}}
+        <div class="form-row">
+          {{#if(session.user.canAddPhotos)}}
+            <div class="form-group col-md-6">
+              <label for="photos-url">
+                Photos URL
+              </label>
+              <input class="form-control" id="photos-url" type="text" value:bind="event.photosUrl">
+            </div>
+          {{/if}}
+          {{#and(event.hasStartedOrIsCloseToStarting, session.user.canAddSnoozes)}}
+            <div class="form-group col-md-6">
+              <label for="snooze-url">
+                Snooze
+              </label>
+              <lbh3-snooze-button event:from="event" />
+            </div>
+          {{else}}
+            {{#if session.user.canManageUsers}}
+              {{>specialEventColumn}}
+            {{/if}}
+          {{/and}}
+        </div>
+      {{/or}}
+
+      {{#and(event.hasStartedOrIsCloseToStarting, session.user.canAddSnoozes, session.user.canManageUsers)}}
+        <div class="form-row">
+          {{>specialEventColumn}}
+        </div>
+      {{/and}}
 
       {{#if event.savingPromise.isPending}}
         <lbh3-alert class="d-block mt-3" message:from="'Saving the run…'" />
