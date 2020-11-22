@@ -1,0 +1,19 @@
+{{#if session.user.hasherId}}
+  <content />
+
+{{else}}
+  {{#if session.user}}
+    <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
+    <can-import class="d-block my-3" from="~/components/request-access/">
+      {{#if isResolved}}
+        <lbh3-request-access />
+      {{/if}}
+    </can-import>
+  {{else}}
+    <p>
+      Get started by signing in with <a href="/auth/facebook">Facebook</a> or
+      <a href="/auth/google">Google</a>, then
+      <strong>cum back to this page</strong> to request access.
+    </p>
+  {{/if}}
+{{/if}}

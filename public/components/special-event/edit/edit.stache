@@ -3,6 +3,7 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/" />
 <can-import from="~/components/map/" />
+<can-import from="~/components/require-sign-in/" />
 <can-import from="~/components/special-event/nav/" />
 
 {{#if session.user.canEditFutureSpecialEvents}}

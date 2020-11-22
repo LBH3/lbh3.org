@@ -43,6 +43,7 @@ import 'lbh3/components/past-runs/search/search-test';
 import 'lbh3/components/past-runs/special/special-test';
 import 'lbh3/components/past-runs/sync/sync-test';
 import 'lbh3/components/request-access/request-access-test';
+import 'lbh3/components/require-sign-in/require-sign-in-test';
 import 'lbh3/components/run/attendance/attendance-test';
 import 'lbh3/components/run/edit/edit-test';
 import 'lbh3/components/run/nav/nav-test';

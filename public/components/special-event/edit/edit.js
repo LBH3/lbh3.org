@@ -6,6 +6,7 @@ import './edit.less';
 import { enableAutocompleteForInput, loadGoogleMapsPlacesAPI } from '~/components/run/edit/';
 import marked from 'marked';
 import moment from 'moment-timezone';
+import stache from 'can-stache';
 import view from './edit.stache';
 
 marked.setOptions({
@@ -20,7 +21,7 @@ export const ViewModel = DefineMap.extend({
   },
   editSpecialEventPromise: {},
   get descriptionHtml() {
-    return marked(this.specialEvent.descriptionMd || '');
+    return stache(this.specialEvent.descriptionHtml)();
   },
   locationPromise: Promise,
   get ogTitle() {

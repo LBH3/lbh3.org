@@ -22,7 +22,21 @@ const SpecialEvent = DefineMap.extend({
   updatedAt: 'any',
   descriptionHtml: {
     get: function() {
-      return marked(this.descriptionMd || '');
+      const tagName = 'lbh3-require-sign-in';
+
+      const endingTag = `</${tagName}>`;
+      const endingIndex = this.descriptionMd.indexOf(endingTag);
+      const startingTag = `<${tagName}>`;
+      const startingIndex = this.descriptionMd.indexOf(startingTag);
+
+      const innerContent = this.descriptionMd.substring(startingIndex + startingTag.length, endingIndex);
+      const replacedContent = `${startingTag}${innerContent}${endingTag}`;
+      const replacementContent = Math.random();
+
+      const descriptionMd = this.descriptionMd.replace(replacedContent, replacementContent);
+      const descriptionHtml = marked(descriptionMd || '');
+
+      return descriptionHtml.replace(`<p>${replacementContent}</p>`, replacedContent);
     },
     serialize: false
   },
