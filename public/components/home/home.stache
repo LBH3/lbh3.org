@@ -66,4 +66,6 @@
   <p class="border mt-3 py-3 rounded text-center"><a class="d-block" href="events/2020/11-22-down-downs/">Join us for our first Virtual Down&nbsp;Downs on Sunday, November&nbsp;22<sup>nd</sup></a></p>
 {{/if}}
 
-<lbh3-run />
+{{#if session.user.canManageUsers}}
+  <lbh3-run />
+{{/if}}

@@ -98,14 +98,6 @@
       "maxSize": "25 kB"
     },
     {
-      "path": "./public/dist/bundles/add-event-hareli-*.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/add-event-hareli-*.js",
-      "maxSize": "4 kB"
-    },
-    {
       "path": "./public/dist/bundles/ballots-eligibil-*.css",
       "maxSize": "1 kB"
     },
@@ -119,19 +111,27 @@
     },
     {
       "path": "./public/dist/bundles/edit-add-edit-edit.js",
-      "maxSize": "33 kB"
+      "maxSize": "22 kB"
+    },
+    {
+      "path": "./public/dist/bundles/edit-add-home-ed-*.js",
+      "maxSize": "4 kB"
+    },
+    {
+      "path": "./public/dist/bundles/edit-add.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/edit-add.js",
+      "maxSize": "12 kB"
     },
     {
       "path": "./public/dist/bundles/erection-results.js",
       "maxSize": "23 kB"
     },
     {
-      "path": "./public/dist/bundles/guidelines-edit-*.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/guidelines-edit-*.js",
-      "maxSize": "4 kB"
+      "path": "./public/dist/bundles/guidelines-harel-*.js",
+      "maxSize": "3 kB"
     },
     {
       "path": "./public/dist/bundles/hareline-hasher-*.css",
@@ -142,12 +142,12 @@
       "maxSize": "6 kB"
     },
     {
-      "path": "./public/dist/bundles/home-sync-run-hareline.css",
+      "path": "./public/dist/bundles/home-run.css",
       "maxSize": "1 kB"
     },
     {
-      "path": "./public/dist/bundles/home-sync-run-hareline.js",
-      "maxSize": "10 kB"
+      "path": "./public/dist/bundles/home-run.js",
+      "maxSize": "8 kB"
     },
     {
       "path": "./public/dist/bundles/mismanagement-el-*.css",
@@ -155,7 +155,7 @@
     },
     {
       "path": "./public/dist/bundles/mismanagement-el-*.js",
-      "maxSize": "1 kB"
+      "maxSize": "4 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/index.css",

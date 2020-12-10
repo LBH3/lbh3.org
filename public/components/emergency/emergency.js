@@ -13,7 +13,7 @@ export default Component.extend({
       }
     },
     liveTrails: {
-      default: true
+      default: false
     },
     dismiss() {
       const now = new Date();

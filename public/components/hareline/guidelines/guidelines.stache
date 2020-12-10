@@ -1,3 +1,7 @@
+<can-import from="~/components/emergency/" />
+
+<lbh3-emergency />
+
 <h2 class="sr-only">Haring Guidelines</h2>
 
 <h3 class="mt-3">Planning the Trail</h3>
