@@ -60,11 +60,13 @@
   {{/if}}
 </lbh3-no-ssr>
 
-<lbh3-emergency />
-
-{{#if isBeforeNovember23}}
-  <p class="border mt-3 py-3 rounded text-center"><a class="d-block" href="events/2020/11-22-down-downs/">Join us for our first Virtual Down&nbsp;Downs on Sunday, November&nbsp;22<sup>nd</sup></a></p>
+{{#if isBeforeJanuary5}}
+  <div class="alert alert-primary mt-3" role="alert">
+    <p class="mb-0 text-center"><a class="alert-link" href="https://forms.gle/2Sej6SWx9c446D7g7" target="_blank">Sign up to be on the 2021 Bored before Tuesday, January&nbsp;5<sup>th</sup></a></p>
+  </div>
 {{/if}}
+
+<lbh3-emergency />
 
 {{#if session.user.canManageUsers}}
   <lbh3-run />
