@@ -13,7 +13,7 @@ class Service {
           startDatetime: 1
         },
         startDatetime: {
-          $lte: new Date()
+          $lte: new Date(2020, 11, 12)
         }
       }
     };
