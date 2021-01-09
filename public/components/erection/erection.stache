@@ -332,6 +332,9 @@
                                   <div class="form-check mt-1">
                                     <label class="form-check-label">
                                       Write-in search
+                                      {{#eq(race.options.length, 0)}}
+                                        (please volunteer!)
+                                      {{/eq}}
                                       <lbh3-hasher-autocomplete
                                         on:selected="didSelectHasher(scope.element, ballot[race.id], race.hasherOptions, race.maxSelection, race.options)"
                                       >
