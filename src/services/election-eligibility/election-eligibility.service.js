@@ -1,6 +1,10 @@
 // Initializes the `election-eligibility` service on path `/api/election-eligibility`
 const hooks = require('./election-eligibility.hooks');
 
+function hasherIsEligibleWithRuns(runs) {
+  return runs.length >= 1; 
+}
+
 module.exports = function () {
   const app = this;
 
@@ -55,7 +59,7 @@ module.exports = function () {
               const runs = hashersToRuns.get(Number(params.query.hasherId)) || [];
               const lastRun = runs[runs.length - 1] || {};
               return [{
-                eligible: runs.length >= 6,
+                eligible: hasherIsEligibleWithRuns(runs),
                 familyName: lastRun.familyName,
                 givenName: lastRun.givenName,
                 hasherId: params.query.hasherId,
@@ -72,7 +76,7 @@ module.exports = function () {
               });
               const lastRun = runs[runs.length - 1];
               endResult.push({
-                eligible: runs.length >= 6,
+                eligible: hasherIsEligibleWithRuns(runs),
                 familyName: lastRun.familyName,
                 givenName: lastRun.givenName,
                 hasherId,
