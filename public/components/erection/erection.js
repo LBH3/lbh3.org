@@ -271,6 +271,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
   },
   savingUnencryptedBallot: UnencryptedBallot,
   savingPromise: Promise,
+  secondaryPage: 'string',
   get session() {
     return Session.current;
   },

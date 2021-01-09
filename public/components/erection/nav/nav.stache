@@ -1,6 +1,8 @@
+<can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+<can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
 
-<h2 class="h3">
+<h2 class="h3 mt-3">
   <a href="{{routeUrl page='erections' urlId=urlId}}">
     {{#if(election)}}
       {{{election.titleHtml}}}
@@ -18,6 +20,7 @@
           class="{{#eq(secondaryPage, 'edit')}}active{{/eq}} nav-link"
           href="{{routeUrl page='erections' secondaryPage='edit' urlId=urlId}}"
         >
+          <span class="fas fa-edit fa-lg"></span>
           Edit
         </a>
       </li>
@@ -28,6 +31,7 @@
         href="{{routeUrl page='erections' secondaryPage='eligibility' urlId=urlId}}"
         title="Go to the erection eligibility page"
       >
+        <span class="fas fa-vote-yea fa-lg"></span>
         Eligibility
       </a>
     </li>
@@ -37,6 +41,7 @@
         href="{{routeUrl page='erections' secondaryPage='ballots' urlId=urlId}}"
         title="Go to the paper ballots page"
       >
+        <span class="fas fa-scroll fa-lg"></span>
         Paper Ballots
       </a>
     </li>
@@ -46,6 +51,7 @@
         href="{{routeUrl page='erections' secondaryPage='results' urlId=urlId}}"
         title="Go to the erection results page"
       >
+        <span class="fas fa-poll fa-lg"></span>
         Results
       </a>
     </li>
