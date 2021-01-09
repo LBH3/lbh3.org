@@ -9,7 +9,7 @@ import Ballot from '~/models/ballot';
 import {Election, randomize} from '~/models/election';
 import ElectionEligibility from '~/models/election-eligibility';
 import Event from '~/models/event';
-import EventsHashers from '~/models/events-hashers';
+import { nonRealtimeConnection } from '~/models/events-hashers';
 import PaperBallot from '~/models/paper-ballot';
 import Session from '~/models/session';
 import UnencryptedBallot from '~/models/unencrypted-ballot';
@@ -213,7 +213,7 @@ export const ViewModel = DefineMap.extend('ErectionVM', {
     if (allRuns) {
       const firstTrailNumber = allRuns[0].trailNumber;
       const lastTrailNumber = allRuns[allRuns.length - 1].trailNumber;
-      return EventsHashers.getList({
+      return nonRealtimeConnection.getList({
         $limit: 500,
         role: {
           $iLike: {

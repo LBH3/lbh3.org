@@ -1,7 +1,7 @@
 import DefineMap from 'can-define/map/';
 import DefineList from 'can-define/list/';
 import Event from './event';
-import feathersModel from './feathers-model';
+import { allBehaviors, customFeathersModel, default as feathersModel } from './feathers-model';
 import Hasher from './hasher';
 import QueryLogic from 'can-query-logic';
 
@@ -187,6 +187,12 @@ EventsHashers.connection = feathersModel('/api/events-hashers', {
   List: EventsHashers.List,
   name: 'events-hashers'
 });
+
+export const nonRealtimeConnection = customFeathersModel('/api/events-hashers', {
+  Map: EventsHashers,
+  List: EventsHashers.List,
+  name: 'events-hashers'
+}, allBehaviors.slice(0, allBehaviors.length - 1));
 
 export const paymentRates = [
   {abbr: 'H', rate: 0, tier: 'hares', title: 'Hares (3 Run Free)'},
