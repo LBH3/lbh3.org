@@ -9,8 +9,14 @@ QUnit.test('Has title', function(assert) {
   assert.equal(vm.title, 'Erection | LBH3');
 });
 
-QUnit.test('getAllRunsQuery', function(assert) {
+QUnit.test('getAllRunsQuery for 2019', function(assert) {
+  const query = getAllRunsQuery(2019);
+  assert.equal(query.startDatetime.$gte.getTime(), new Date(2019, 0, 1).getTime(), '$gte is correct');
+  assert.equal(query.startDatetime.$lte.getTime(), new Date(2020, 0, 1).getTime(), '$lte is correct');
+});
+
+QUnit.test('getAllRunsQuery for 2020', function(assert) {
   const query = getAllRunsQuery(2020);
   assert.equal(query.startDatetime.$gte.getTime(), new Date(2020, 0, 1).getTime(), '$gte is correct');
-  assert.equal(query.startDatetime.$lte.getTime(), new Date(2021, 0, 1).getTime(), '$lte is correct');
+  assert.equal(query.startDatetime.$lte.getTime(), new Date(2020, 11, 12).getTime(), '$lte is correct');
 });
