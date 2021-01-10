@@ -704,13 +704,14 @@ You can submit this form until January 31<sup>st</sup>. Join us for a [“Virtua
             title: 'Hash Flash'
           },
           {
-            id: 'on-sec',
+            id: 'munchmeister',
             maxSelection: 2,
             options: [
-              {id: 44, name: 'Corn Hole Hussie'},
-              {id: 7303, name: 'Yoko Anal'}
+              {id: 134, name: 'Just Jam It'},
+              {id: 33, name: 'Kammonawannaleia'},
+              {id: 3435, name: 'Top Cum'}
             ],
-            title: 'On Sec'
+            title: 'Munchmeister'
           },
           {
             id: 'brewmeister',
@@ -747,16 +748,6 @@ You can submit this form until January 31<sup>st</sup>. Join us for a [“Virtua
             title: 'Hash Cash'
           },
           {
-            id: 'munchmeister',
-            maxSelection: 2,
-            options: [
-              {id: 134, name: 'Just Jam It'},
-              {id: 33, name: 'Kammonawannaleia'},
-              {id: 3435, name: 'Top Cum'}
-            ],
-            title: 'Munchmeister'
-          },
-          {
             id: 'on-disc',
             maxSelection: 2,
             options: [
@@ -764,6 +755,15 @@ You can submit this form until January 31<sup>st</sup>. Join us for a [“Virtua
               {id: 7559, name: 'Spitty Spitty Gangbang'}
             ],
             title: 'On Disc'
+          },
+          {
+            id: 'on-sec',
+            maxSelection: 2,
+            options: [
+              {id: 44, name: 'Corn Hole Hussie'},
+              {id: 7303, name: 'Yoko Anal'}
+            ],
+            title: 'On Sec'
           },
           {
             id: 'trailmaster',
