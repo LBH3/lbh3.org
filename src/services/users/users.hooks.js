@@ -66,7 +66,7 @@ const getBoredInfo = function(hook) {
         canViewOldData: false,
         canViewRunAttendance: false
       };
-      if ([977, 3435, 5908].indexOf(hasherId) > -1) {// Special exception
+      if ([38, 189, 7066].indexOf(hasherId) > -1) {// Special exception
         permission = Object.assign(permission, {
           canAdministerElections: true
         });
