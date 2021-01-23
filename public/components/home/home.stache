@@ -60,9 +60,9 @@
   {{/if}}
 </lbh3-no-ssr>
 
-{{#if isBeforeJanuary5}}
+{{#if isBeforeFebruary7}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="https://forms.gle/2Sej6SWx9c446D7g7" target="_blank">Sign up to be on the 2021 Bored before Tuesday, January&nbsp;5<sup>th</sup></a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2021/founders/">Join us for a “virtual” Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;6<sup>th</sup></a></p>
   </div>
 {{/if}}
 
