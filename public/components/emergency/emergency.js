@@ -1,7 +1,7 @@
 import Component from 'can-component';
 import view from './emergency.stache';
 
-const storageKey = 'emergency-0-dismissed';
+const storageKey = 'emergency-1-dismissed';
 
 export default Component.extend({
   tag: 'lbh3-emergency',
@@ -13,7 +13,7 @@ export default Component.extend({
       }
     },
     liveTrails: {
-      default: false
+      default: true
     },
     dismiss() {
       const now = new Date();
