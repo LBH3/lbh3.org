@@ -88,7 +88,8 @@ const getBoredInfo = function(hook) {
       }
       if (boredPositions.includes(authHook.HASH_FLASH)) {
         permission = Object.assign(permission, {
-          canAddPhotos: true
+          canAddPhotos: true,
+          canEditFutureTrails: true
         });
       }
       if (boredPositions.includes(authHook.HASH_HISTORIANS)) {
