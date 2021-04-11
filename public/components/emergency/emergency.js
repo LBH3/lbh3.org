@@ -9,7 +9,7 @@ export default Component.extend({
   ViewModel: {
     didDismiss: {
       get(lastSetValue) {
-        return lastSetValue || localStorage.getItem(storageKey);
+        return lastSetValue || typeof localStorage !== 'undefined' && localStorage.getItem(storageKey);
       }
     },
     liveTrails: {
@@ -17,7 +17,9 @@ export default Component.extend({
     },
     dismiss() {
       const now = new Date();
-      localStorage.setItem(storageKey, now);
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(storageKey, now);
+      }
       this.didDismiss = now;
     }
   }
