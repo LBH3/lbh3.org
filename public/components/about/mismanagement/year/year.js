@@ -19,7 +19,7 @@ export const ViewModel = DefineMap.extend({
         const startDateFormatted = new Date(startDateUTC.getTime() + (60000 * startDateUTC.getTimezoneOffset())).toLocaleDateString(undefined, {
           month: 'long'
         });
-        parts.push(`starting in ${startDateFormatted}`);
+        parts.push(`started in ${startDateFormatted}`);
       }
       if (hasher.endDate !== year.endDate) {
         const endDateUTC = new Date(hasher.endDate);
