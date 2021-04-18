@@ -28,8 +28,8 @@ export default Component.extend({
         });
       }
     },
-    get isBeforeFebruary7() {
-      return new Date() < new Date('Feb 7 2021 08:00:00 UTC');
+    get isBeforeJuly25() {
+      return new Date() < new Date('Jul 25 2021 07:00:00 UTC');
     },
     get ogTitle() {
       return this.title;
