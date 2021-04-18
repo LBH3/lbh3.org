@@ -13,7 +13,7 @@ export const ViewModel = DefineMap.extend({
     return Hasher.getList({
       $limit: 500,
       deathDate: {
-        $gte: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 7)
+        $gte: new Date(now.getFullYear(), now.getMonth(), now.getDate() - 21)
       },
       $sort: {
         deathDate: -1
