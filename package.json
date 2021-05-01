@@ -117,7 +117,7 @@
     },
     {
       "path": "./public/dist/bundles/erection-results.js",
-      "maxSize": "24 kB"
+      "maxSize": "44 kB"
     },
     {
       "path": "./public/dist/bundles/guidelines-edit-*.css",
