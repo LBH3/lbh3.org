@@ -79,7 +79,9 @@ const getBoredInfo = function(hook) {
       }
       if (boredPositions.includes(authHook.HASH_CASH)) {
         permission = Object.assign(permission, {
+          canAddHashers: true,
           canEditHasherInfo: true,
+          canEditPostTrailInfo: true,
           canExportData: true,
           canViewCashReport: true,
           canViewDirectoryInfo: true,
