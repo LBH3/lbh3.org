@@ -11,7 +11,6 @@ const json2csv = require('json2csv');
 const path = require('path');
 const request = require('request');
 const sharp = require('sharp');
-const ssr = require('done-ssr-middleware');
 
 const cacheDirectory = 'data';
 const createCacheDirectory = createDirectory(cacheDirectory);
@@ -429,12 +428,11 @@ module.exports = function (app) {
     s3.getObject(s3Params).createReadStream().pipe(res);
   });
 
-  app.use(ssr({
-    config: `${__dirname}/../../public/package.json!npm`,
-    main: 'lbh3/index.stache!done-autorender'
-  }, {
-    strategy: 'seo'
-  }));
+  // Host the app
+  const appPath = path.resolve(__dirname, `${__dirname}/../../public/${env === 'development' ? 'development.html' : 'production.html'}`);
+  app.use('/*', function (request, response) {
+    response.sendFile(appPath);
+  });
 
   // Broken photo URLs
   let brokenPhotoLinksPromise = Promise.resolve();
