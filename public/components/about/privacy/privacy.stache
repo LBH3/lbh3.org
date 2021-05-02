@@ -1,5 +1,4 @@
 <can-import from="~/components/alert/alert" />
-<can-import from="~/components/no-ssr/no-ssr" />
 
 <h2 class="sr-only">Privacy</h2>
 
@@ -60,35 +59,33 @@
   <li>Who made you cum</li>
 </ul>
 
-<lbh3-no-ssr>
-  <h4>Getting verified</h4>
+<h4>Getting verified</h4>
 
-  {{#if session.user.hasherId}}
-    <p>
-      Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
-      Go grab yourself a beer because you’ve done everything required to see
-      <a href="{{routeUrl page='hashers' id=session.user.hasherId}}">your&nbsp;profile</a>,
-      <a href="{{routeUrl page='hashers' secondaryPage=''}}">the&nbsp;Directory</a>,
-      and the photos &amp; Snoozes on the <a href="{{routeUrl page='events'}}">Past&nbsp;Runs</a> page.
-    </p>
+{{#if session.user.hasherId}}
+  <p>
+    Hello{{#if session.user.hasher}} <strong>{{session.user.hasher.hashOrJustName}}</strong>{{/if}}!
+    Go grab yourself a beer because you’ve done everything required to see
+    <a href="{{routeUrl page='hashers' id=session.user.hasherId}}">your&nbsp;profile</a>,
+    <a href="{{routeUrl page='hashers' secondaryPage=''}}">the&nbsp;Directory</a>,
+    and the photos &amp; Snoozes on the <a href="{{routeUrl page='events'}}">Past&nbsp;Runs</a> page.
+  </p>
 
+{{else}}
+  {{#if session.user}}
+    <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
+    <can-import class="d-block my-3" from="~/components/request-access/request-access">
+      {{#if isResolved}}
+        <lbh3-request-access />
+      {{/if}}
+    </can-import>
   {{else}}
-    {{#if session.user}}
-      <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
-      <can-import class="d-block my-3" from="~/components/request-access/request-access">
-        {{#if isResolved}}
-          <lbh3-request-access />
-        {{/if}}
-      </can-import>
-    {{else}}
-      <p>
-        Get started by signing in with <a href="/auth/facebook">Facebook</a> or
-        <a href="/auth/google">Google</a>, then
-        <strong>cum back to this page</strong> to request access.
-      </p>
-    {{/if}}
+    <p>
+      Get started by signing in with <a href="/auth/facebook">Facebook</a> or
+      <a href="/auth/google">Google</a>, then
+      <strong>cum back to this page</strong> to request access.
+    </p>
   {{/if}}
-</lbh3-no-ssr>
+{{/if}}
 
 <h3>Mismanagement</h3>
 

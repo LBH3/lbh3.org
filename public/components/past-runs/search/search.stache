@@ -1,7 +1,6 @@
 <can-import from="can-stache-converters" />
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/alert" />
-<can-import from="~/components/no-ssr/no-ssr" />
 
 <h2 class="sr-only">Past Runs Search</h2>
 

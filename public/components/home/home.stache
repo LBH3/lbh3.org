@@ -1,6 +1,5 @@
 <can-import from="~/components/alert/alert" />
 <can-import from="~/components/emergency/emergency" />
-<can-import from="~/components/no-ssr/no-ssr" />
 <can-import from="~/components/run/run" />
 
 {{#if session.user}}
@@ -15,15 +14,13 @@
       {{/if}}
     {{/if}}
   {{else}}
-    <lbh3-no-ssr class="d-print-none">
-      <can-import from="~/components/request-access/request-access">
-        {{#if isResolved}}
-          <p>Are you an LBH3 hasher? Provide your name to get special access to our site. <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a></p>
-          <lbh3-request-access />
-          <hr>
-        {{/if}}
-      </can-import>
-    </lbh3-no-ssr>
+    <can-import class="d-print-none" from="~/components/request-access/request-access">
+      {{#if isResolved}}
+        <p>Are you an LBH3 hasher? Provide your name to get special access to our site. <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a></p>
+        <lbh3-request-access />
+        <hr>
+      {{/if}}
+    </can-import>
   {{/if}}
 {{else}}
   <p class="mt-3"><small>
@@ -37,28 +34,26 @@
   </small></p>
 {{/if}}
 
-<lbh3-no-ssr>
-  {{#if electionsPromise}}
-    {{#if electionsPromise.isPending}}
-      <lbh3-alert class="d-block mt-3" message:from="'Fetching elections…'" />
-    {{/if}}
-    {{#if electionsPromise.isRejected}}
-      <div class="alert alert-danger mt-3" role="alert">
-        <strong>Fuck!</strong> The upcumming erections couldn’t be fetched.
-        {{electionsPromise.reason.xhr.message}}
-      </div>
-    {{/if}}
-    {{#if electionsPromise.isResolved}}
-      {{#for(election of electionsPromise.value)}}
-        <p class="border mt-3 py-3 rounded text-center">
-          <a class="d-block" href="erections/{{election.urlId}}/">
-            {{{election.advertisementHtml}}}
-          </a>
-        </p>
-      {{/for}}
-    {{/if}}
+{{#if electionsPromise}}
+  {{#if electionsPromise.isPending}}
+    <lbh3-alert class="d-block mt-3" message:from="'Fetching elections…'" />
   {{/if}}
-</lbh3-no-ssr>
+  {{#if electionsPromise.isRejected}}
+    <div class="alert alert-danger mt-3" role="alert">
+      <strong>Fuck!</strong> The upcumming erections couldn’t be fetched.
+      {{electionsPromise.reason.xhr.message}}
+    </div>
+  {{/if}}
+  {{#if electionsPromise.isResolved}}
+    {{#for(election of electionsPromise.value)}}
+      <p class="border mt-3 py-3 rounded text-center">
+        <a class="d-block" href="erections/{{election.urlId}}/">
+          {{{election.advertisementHtml}}}
+        </a>
+      </p>
+    {{/for}}
+  {{/if}}
+{{/if}}
 
 {{#if isBeforeJuly25}}
   <div class="alert alert-primary mt-3" role="alert">

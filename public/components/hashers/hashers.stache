@@ -2,7 +2,6 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/alert/alert" />
-<can-import from="~/components/no-ssr/no-ssr" />
 
 {{#if session.user.hasherId}}
   {{#if session.user.hasher}}
@@ -132,21 +131,19 @@
 
 {{else}}
   <p class="mt-3">LBH3’s directory is available to hashers who have signed in, requested access, and had their identity verified.</p>
-  <lbh3-no-ssr>
-    <h3 class="h4">How do I sign in and request access?</h3>
-    {{#if session.user}}
-      <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
-      <can-import from="~/components/request-access/request-access">
-        {{#if isResolved}}
-          <lbh3-request-access />
-        {{/if}}
-      </can-import>
-    {{else}}
-      <p>
-        Get started by signing in with <a href="/auth/facebook">Facebook</a> or
-        <a href="/auth/google">Google</a>, then
-        <strong>cum back to this page</strong> to request access.
-      </p>
-    {{/if}}
-  </lbh3-no-ssr>
+  <h3 class="h4">How do I sign in and request access?</h3>
+  {{#if session.user}}
+    <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
+    <can-import from="~/components/request-access/request-access">
+      {{#if isResolved}}
+        <lbh3-request-access />
+      {{/if}}
+    </can-import>
+  {{else}}
+    <p>
+      Get started by signing in with <a href="/auth/facebook">Facebook</a> or
+      <a href="/auth/google">Google</a>, then
+      <strong>cum back to this page</strong> to request access.
+    </p>
+  {{/if}}
 {{/if}}
