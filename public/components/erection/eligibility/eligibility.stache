@@ -8,13 +8,13 @@
 {{#if session.user.canAdministerElections}}
   {{#or(electionPromise.isPending, eligibilityPromise.isPending)}}
     <lbh3-alert class="d-block mt-3" message:from="'Fetching eligible hashers…'" />
-  {{/if}}
+  {{/or}}
 
   {{#or(electionPromise.isRejected, eligibilityPromise.isRejected)}}
     <div class="alert alert-danger mt-3" role="alert">
       <strong>Fuck!</strong> The eligible hashers couldn’t be retrieved. {{eligibilityPromise.reason.xhr.message}}
     </div>
-  {{/if}}
+  {{/or}}
 
   {{#if eligibilityPromise.isResolved}}
     <lbh3-erection-nav

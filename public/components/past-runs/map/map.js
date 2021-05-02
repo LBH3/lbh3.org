@@ -1,8 +1,6 @@
 import Component from 'can-component';
 import './map.less';
-import { darkModeStyles } from '~/components/map/map';
 import loader from '@loader';
-import platform from 'steal-platform';
 import view from './map.stache';
 
 export default Component.extend({
