@@ -2,7 +2,6 @@ import Component from "can-component";
 import Place from "~/models/place";
 import "./map.less";
 import loader from "@loader";
-import platform from "steal-platform";
 
 export const darkModeStyles = [
   { elementType: "geometry", stylers: [{ color: "#242f3e" }] },
@@ -122,10 +121,6 @@ export default Component.extend({
     segments: "any",
 
     connectedCallback(element) {
-      if (platform.isNode) {
-        return;
-      }
-
       let map, marker, observer;
       const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
 

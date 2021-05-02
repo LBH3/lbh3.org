@@ -1,5 +1,6 @@
 import F from 'funcunit';
 import QUnit from 'steal-qunit';
+import 'qunitjs/qunit/qunit.css';
 
 import 'lbh3/models/test';
 
@@ -70,3 +71,5 @@ QUnit.module('lbh3 functional smoke test', {
 QUnit.skip('lbh3 main page shows up', function() {
   F('title').text('LBH3', 'Title is set');
 });
+
+QUnit.start();

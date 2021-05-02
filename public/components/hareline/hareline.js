@@ -4,7 +4,6 @@ import DefineMap from 'can-define/map/map';
 import Event from '~/models/event';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
-import loader from '@loader';
 import view from './hareline.stache';
 
 export const ViewModel = DefineMap.extend({

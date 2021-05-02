@@ -1,6 +1,5 @@
 import { darkModeStyles } from '~/components/map/map';
 import callbacks from 'can-view-callbacks';
-import loader from '@loader';
 import platform from 'steal-platform';
 import route from 'can-route';
 
