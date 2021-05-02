@@ -1,5 +1,5 @@
-import DefineMap from 'can-define/map/';
-import DefineList from 'can-define/list/';
+import DefineMap from 'can-define/map/map';
+import DefineList from 'can-define/list/list';
 import Place from './place';
 import { defaultLocale, localizedStringForDate, timeZone } from './event';
 import feathersModel from './feathers-model';

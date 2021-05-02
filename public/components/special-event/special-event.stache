@@ -1,7 +1,7 @@
-<can-import from="~/components/alert/" />
-<can-import from="~/components/map/" />
-<can-import from="~/components/require-sign-in/" />
-<can-import from="~/components/special-event/nav/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/map/map" />
+<can-import from="~/components/require-sign-in/require-sign-in" />
+<can-import from="~/components/special-event/nav/nav" />
 
 {{#if specialEventPromise.isPending}}
   <lbh3-alert class="d-block mt-3" message:from="'Fetching the event…'" />

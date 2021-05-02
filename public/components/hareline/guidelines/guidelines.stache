@@ -1,4 +1,4 @@
-<can-import from="~/components/emergency/" />
+<can-import from="~/components/emergency/emergency" />
 
 <lbh3-emergency />
 

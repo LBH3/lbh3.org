@@ -1,5 +1,5 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Session from '~/models/session';
 import SpecialEvent from '~/models/special-event';
 import moment from 'moment-timezone';

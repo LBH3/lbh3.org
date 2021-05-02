@@ -1,6 +1,6 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
-<can-import from="~/components/alert/" />
+<can-import from="~/components/alert/alert" />
 
 {{#or(hashersPromise.isPending, positionsPromise.isPending)}}
   <lbh3-alert class="d-block mt-3" message:from="'Fetching the Mismanagement…'" />

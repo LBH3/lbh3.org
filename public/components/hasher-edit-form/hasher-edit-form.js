@@ -1,9 +1,9 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Session from '~/models/session';
 import './hasher-edit-form.less';
 import { Address, Email, Hasher, Phone } from '~/models/hasher';
-import { enableAutocompleteForInput, loadGoogleMapsPlacesAPI } from '~/components/run/edit/';
+import { enableAutocompleteForInput, loadGoogleMapsPlacesAPI } from '~/components/run/edit/edit';
 import { paymentRates } from '~/models/events-hashers';
 import view from './hasher-edit-form.stache';
 

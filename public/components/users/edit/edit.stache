@@ -1,8 +1,8 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/hasher-autocomplete/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/hasher-autocomplete/hasher-autocomplete" />
 
 {{#if session.user.canManageUsers}}
 

@@ -1,4 +1,4 @@
-<can-import from="~/components/alert/" />
+<can-import from="~/components/alert/alert" />
 
 {{#if(liveTrails)}}
   {{^if(didDismiss)}}

@@ -1,6 +1,6 @@
-<can-import from="~/components/about/mismanagement/year/" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/sub-nav/" />
+<can-import from="~/components/about/mismanagement/year/year" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/sub-nav/sub-nav" />
 
 <h2 class="sr-only">Mismanagement</h2>
 

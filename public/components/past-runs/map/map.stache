@@ -1,4 +1,4 @@
-<can-import from="~/components/alert/" />
+<can-import from="~/components/alert/alert" />
 <can-import from="~/components/past-runs/map/attr" />
 
 {{#if locationsPromise.isPending}}

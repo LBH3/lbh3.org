@@ -1,9 +1,9 @@
 import behaviors from './behaviors';
 import connect from 'can-connect';
-import DefineList from 'can-define/list/';
-import DefineMap from 'can-define/map/';
+import DefineList from 'can-define/list/list';
+import DefineMap from 'can-define/map/map';
 import feathersClient from './feathers-client';
-import feathersSessionBehavior from 'can-connect-feathers/session/';
+import feathersSessionBehavior from 'can-connect-feathers/session/session';
 import User from './user';
 
 export const Session = DefineMap.extend('Session', {

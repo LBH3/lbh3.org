@@ -1,5 +1,5 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Election from '~/models/election';
 import Hasher from '~/models/hasher';
 import PaperBallot from '~/models/paper-ballot';

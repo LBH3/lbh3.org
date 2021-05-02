@@ -1,5 +1,5 @@
-import DefineList from 'can-define/list/';
-import DefineMap from 'can-define/map/';
+import DefineList from 'can-define/list/list';
+import DefineMap from 'can-define/map/map';
 
 const serializeHasherOptions = function(currentValue) {
   return currentValue ? currentValue.map(hasher => {

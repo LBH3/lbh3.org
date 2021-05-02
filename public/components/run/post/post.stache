@@ -1,6 +1,6 @@
 <can-import from="can-stache-converters" />
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/alert/" />
+<can-import from="~/components/alert/alert" />
 
 <dl class="row">
   <dt class="col-sm-3 text-sm-right">Mileage:</dt><dd class="col-sm-9">{{#if event.miles}}{{event.miles}}{{else}}?{{/if}}</dd>

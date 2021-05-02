@@ -1,5 +1,5 @@
 import DefineList from 'can-define/list/list';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import feathersModel from './feathers-model';
 import Hasher from './hasher';
 

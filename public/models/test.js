@@ -1,4 +1,4 @@
-import "./fixtures/";
+import "./fixtures/fixtures";
 
 import "lbh3/models/ballot-test";
 import "lbh3/models/bored-hasher-test";

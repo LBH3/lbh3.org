@@ -1,7 +1,7 @@
 <can-import from="can-stache-converters" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/erection/nav/" />
-<can-import from="~/components/hasher-autocomplete/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/erection/nav/nav" />
+<can-import from="~/components/hasher-autocomplete/hasher-autocomplete" />
 
 {{#if session.user.canAdministerElections}}
   <lbh3-erection-nav election:from="election" secondaryPage:from="secondaryPage" session:from="session" urlId:from="urlId" />

@@ -1,5 +1,5 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Event from '~/models/event';
 import moment from 'moment-timezone';
 import view from './add.stache';

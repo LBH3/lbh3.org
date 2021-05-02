@@ -1,7 +1,7 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import './guidelines.less';
-import { darkModeStyles } from '~/components/map/';
+import { darkModeStyles } from '~/components/map/map';
 import loader from '@loader';
 import platform from 'steal-platform';
 import view from './guidelines.stache';

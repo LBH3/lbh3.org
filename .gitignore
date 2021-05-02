@@ -127,6 +127,7 @@ data/
 public/build/
 public/cache/
 public/dist/
+public/dist-webpack/
 public/docs/
 
 # Custom

@@ -1,7 +1,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/alert/" />
+<can-import from="~/components/alert/alert" />
 
 {{#if session.user.canManageUsers}}
   <h2 class="sr-only">Users</h2>

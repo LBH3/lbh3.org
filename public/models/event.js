@@ -1,13 +1,12 @@
-import DefineList from 'can-define/list/';
-import DefineMap from 'can-define/map/';
+import DefineList from 'can-define/list/list';
+import DefineMap from 'can-define/map/map';
 import feathersModel from './feathers-model';
 import marked from 'marked';
 import moment from 'moment-timezone';
 import Place from './place';
-import platform from 'steal-platform';
 import { sortByHashOrJustName } from '~/components/run/sort-hashers';
 
-export const defaultLocale = (platform.isNode) ? 'en-US' : undefined;
+export const defaultLocale = undefined;
 export const timeZone = 'America/Los_Angeles';
 
 marked.setOptions({

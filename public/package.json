@@ -11,6 +11,9 @@
   "files": [
     "."
   ],
+  "scripts": {
+    "build:tests:webpack": "webpack --progress --config test.webpack.config.js"
+  },
   "steal": {
     "bundle": [
       "~/components/past-runs/map/map",
@@ -92,14 +95,19 @@
     "steal-stache": "^4.1.2"
   },
   "devDependencies": {
+    "babel-loader": "^8.2.2",
     "can-debug": "^2.0.6",
     "can-fixture": "^3.0.5",
+    "can-stache-loader": "^3.0.0",
     "donejs-cli": "^3.0.0",
     "funcunit": "^3.6.1",
     "steal-conditional": "^1.0.0",
     "steal-qunit": "^1.0.1",
     "steal-tools": "^2.0.9",
     "test-saucelabs": "0.0.6",
-    "testee": "^0.9.1"
+    "testee": "^0.9.1",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0"
   }
 }

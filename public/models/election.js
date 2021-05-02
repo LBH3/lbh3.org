@@ -1,5 +1,5 @@
-import DefineMap from 'can-define/map/';
-import DefineList from 'can-define/list/';
+import DefineMap from 'can-define/map/map';
+import DefineList from 'can-define/list/list';
 import feathersModel from './feathers-model';
 import marked from 'marked';
 import moment from 'moment-timezone';

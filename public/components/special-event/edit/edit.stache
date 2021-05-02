@@ -1,10 +1,10 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/map/" />
-<can-import from="~/components/require-sign-in/" />
-<can-import from="~/components/special-event/nav/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/map/map" />
+<can-import from="~/components/require-sign-in/require-sign-in" />
+<can-import from="~/components/special-event/nav/nav" />
 
 {{#if session.user.canEditFutureSpecialEvents}}
   {{#if specialEventPromise.isPending}}

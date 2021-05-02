@@ -1,6 +1,6 @@
 import Component from 'can-component';
-import DefineList from 'can-define/list/';
-import DefineMap from 'can-define/map/';
+import DefineList from 'can-define/list/list';
+import DefineMap from 'can-define/map/map';
 import Event from '~/models/event';
 import view from './year.stache';
 

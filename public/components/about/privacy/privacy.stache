@@ -1,5 +1,5 @@
-<can-import from="~/components/alert/" />
-<can-import from="~/components/no-ssr/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/no-ssr/no-ssr" />
 
 <h2 class="sr-only">Privacy</h2>
 
@@ -75,7 +75,7 @@
   {{else}}
     {{#if session.user}}
       <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
-      <can-import class="d-block my-3" from="~/components/request-access/">
+      <can-import class="d-block my-3" from="~/components/request-access/request-access">
         {{#if isResolved}}
           <lbh3-request-access />
         {{/if}}

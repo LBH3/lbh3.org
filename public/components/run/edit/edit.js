@@ -1,7 +1,7 @@
 import 'can-event-dom-enter/add-global/add-global';
 
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Event from '~/models/event';
 import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';

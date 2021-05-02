@@ -1,8 +1,8 @@
 <can-import from="can-stache-converters" />
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/no-ssr/" />
-<can-import from="~/components/sub-nav/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/no-ssr/no-ssr" />
+<can-import from="~/components/sub-nav/sub-nav" />
 
 <h2 class="sr-only">Past Runs</h2>
 
@@ -22,7 +22,7 @@
 </lbh3-sub-nav>
 
 {{#eq(secondaryPage, 'search')}}
-  <can-import from="~/components/past-runs/search/">
+  <can-import from="~/components/past-runs/search/search">
     {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading Past Runs search page…'" />{{/if}}
     {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Past Runs search page failed to load.</div>{{/if}}
     {{#if isResolved}}<lbh3-past-runs-search searchMissing:bind="searchMissing" skip:from="skip" />{{/if}}
@@ -30,7 +30,7 @@
 {{/eq}}
 
 {{#eq(secondaryPage, 'special')}}
-  <can-import from="~/components/past-runs/special/">
+  <can-import from="~/components/past-runs/special/special">
     {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading special events page…'" />{{/if}}
     {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The special events page failed to load.</div>{{/if}}
     {{#if isResolved}}<lbh3-past-runs-special />{{/if}}
@@ -38,7 +38,7 @@
 {{/eq}}
 
 {{#eq(secondaryPage, 'sync')}}
-  <can-import class="container d-block" from="~/components/past-runs/sync/">
+  <can-import class="container d-block" from="~/components/past-runs/sync/sync">
     {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading sync page…'" />{{/if}}
     {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The sync page failed to load.</div>{{/if}}
     {{#if isResolved}}<lbh3-past-runs-sync session:from="session" />{{/if}}
@@ -93,7 +93,7 @@
 
     {{#if(allEventsPromise.isResolved)}}
       {{#eq(view, "map")}}
-        <can-import from="~/components/past-runs/map/">
+        <can-import from="~/components/past-runs/map/map">
           {{#if isPending}}<lbh3-alert class="my-3" message:from="'Loading the map…'" />{{/if}}
           {{#if isRejected}}<div class="alert alert-danger my-3" role="alert"><strong>Fuck!</strong> The map failed to load.</div>{{/if}}
           {{#if isResolved}}<lbh3-past-runs-map allEvents:from="allEvents" session:from="session" />{{/if}}
@@ -102,7 +102,7 @@
         {{^if session.user.hasherId}}
           {{#if session.user}}
             <lbh3-no-ssr class="d-print-none">
-              <can-import from="~/components/request-access/">
+              <can-import from="~/components/request-access/request-access">
                 {{#if isResolved}}
                   <p>Are you an LBH3 hasher? Provide your name to get special access to our site. <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a></p>
                   <lbh3-request-access />

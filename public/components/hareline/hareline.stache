@@ -1,7 +1,7 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/emergency/" />
-<can-import from="~/components/run-list/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/emergency/emergency" />
+<can-import from="~/components/run-list/run-list" />
 
 <lbh3-emergency />
 

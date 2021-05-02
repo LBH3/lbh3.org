@@ -1,9 +1,9 @@
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="can-stache-converters" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/erection/nav/" />
-<can-import from="~/components/hasher-autocomplete/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/erection/nav/nav" />
+<can-import from="~/components/hasher-autocomplete/hasher-autocomplete" />
 
 {{#if session.user.canAdministerElections}}
   {{#or(electionPromise.isPending, eligibilityPromise.isPending)}}

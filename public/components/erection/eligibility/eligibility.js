@@ -1,5 +1,5 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Election from '~/models/election';
 import ElectionEligibility from '~/models/election-eligibility';
 import Session from '~/models/session';

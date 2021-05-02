@@ -1,6 +1,6 @@
 import BoredYear from '~/models/bored-year';
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import route from 'can-route';
 import view from './mismanagement.stache';
 

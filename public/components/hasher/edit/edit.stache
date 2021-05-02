@@ -1,7 +1,7 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/hasher/nav/" />
-<can-import from="~/components/hasher-edit-form/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/hasher/nav/nav" />
+<can-import from="~/components/hasher-edit-form/hasher-edit-form" />
 
 {{#if canEditThisHasher}}
   {{#if hasherPromise.isPending}}
