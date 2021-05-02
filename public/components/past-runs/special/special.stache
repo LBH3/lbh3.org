@@ -1,5 +1,5 @@
-<can-import from="~/components/alert/" />
-<can-import from="~/components/run-list/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/run-list/run-list" />
 
 <h2 class="sr-only">Special Events</h2>
 

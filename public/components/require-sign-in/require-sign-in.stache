@@ -4,7 +4,7 @@
 {{else}}
   {{#if session.user}}
     <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
-    <can-import class="d-block my-3" from="~/components/request-access/">
+    <can-import class="d-block my-3" from="~/components/request-access/request-access">
       {{#if isResolved}}
         <lbh3-request-access />
       {{/if}}

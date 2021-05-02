@@ -1,6 +1,6 @@
 import './users.less';
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Session from '~/models/session';
 import User from '~/models/user';
 import view from './users.stache';

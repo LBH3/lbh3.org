@@ -1,5 +1,5 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/hasher-edit-form/" />
+<can-import from="~/components/hasher-edit-form/hasher-edit-form" />
 
 {{#if session.user.canAddHashers}}
   <h2 class="sr-only">Add a new hasher</h2>

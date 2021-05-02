@@ -1,5 +1,5 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Election from '~/models/election';
 import moment from 'moment-timezone';
 import Session from '~/models/session';

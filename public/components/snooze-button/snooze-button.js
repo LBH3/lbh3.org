@@ -1,5 +1,5 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Event from '~/models/event';
 import Session from '~/models/session';
 import './snooze-button.less';

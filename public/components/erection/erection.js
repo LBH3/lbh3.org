@@ -2,7 +2,7 @@ import Component from 'can-component';
 import CryptoJSAES from 'crypto-js/aes';
 import CryptoJSCore from 'crypto-js/core';
 import CryptoJSLib from 'crypto-js/lib-typedarrays';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import JSEncrypt from 'jsencrypt';
 
 import Ballot from '~/models/ballot';

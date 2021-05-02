@@ -2,7 +2,6 @@ import ajax from 'can-ajax';
 import auth from 'feathers-authentication-client';
 import feathers from 'feathers/client';
 import hooks from 'feathers-hooks';
-import loader from '@loader';
 import rest from 'feathers-rest/client';
 
 const jQueryReplacement = {
@@ -21,7 +20,7 @@ const jQueryReplacement = {
 };
 
 const feathersClient = feathers()
-  .configure(rest(loader.serviceBaseURL).jquery(jQueryReplacement))
+  .configure(rest('').jquery(jQueryReplacement))
   .configure(hooks())
   .configure(auth({
   }));

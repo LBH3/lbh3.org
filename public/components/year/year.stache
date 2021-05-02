@@ -1,4 +1,4 @@
-<can-import from="~/components/run-list/" />
+<can-import from="~/components/run-list/run-list" />
 
 {{#for(month of eventsByMonth)}}
   <h3>{{month.name}} {{month.year}}</h3>

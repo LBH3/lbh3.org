@@ -1,4 +1,4 @@
-<can-import from="~/components/alert/" />
+<can-import from="~/components/alert/alert" />
 
 <h2 class="sr-only">Add Trail</h2>
 

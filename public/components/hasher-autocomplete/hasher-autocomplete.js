@@ -3,7 +3,7 @@ import './hasher-autocomplete.less';
 
 import Awesomplete from 'awesomplete';
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Hasher from '~/models/hasher';
 import view from './hasher-autocomplete.stache';
 

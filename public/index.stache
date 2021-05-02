@@ -37,11 +37,11 @@
     <can-import from="can-stache-route-helpers" />
     <can-import from="~/styles.less" />
     <can-import from="~/app" export-as="viewModel" />
-    <can-import from="~/components/alert/" />
+    <can-import from="~/components/alert/alert" />
     <can-import from="~/components/footer/" />
     <can-import from="~/components/header/" />
     <can-import from="~/components/nav/" />
-    <can-import from="~/components/sub-nav/" />
+    <can-import from="~/components/sub-nav/sub-nav" />
 
     <header>
       <lbh3-header id:from="id" page:from="page" secondaryPage:from="secondaryPage" />
@@ -155,7 +155,7 @@
                     {{#if isResolved}}<lbh3-special-event-edit description:to="description" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" urlId:from="urlId" year:from="year" />{{/if}}
                   </can-import>
                 {{else}}
-                  <can-import from="~/components/run/edit/">
+                  <can-import from="~/components/run/edit/edit">
                     {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Edit Run page…'" />{{/if}}
                     {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Run page failed to load.</div>{{/if}}
                     {{#if isResolved}}<lbh3-run-edit day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
@@ -164,7 +164,7 @@
               </lbh3-no-ssr>
             {{/case}}
             {{#case "run"}}
-              <can-import from="~/components/run/">
+              <can-import from="~/components/run/run">
                 {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Run page…'" />{{/if}}
                 {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Run page failed to load.</div>{{/if}}
                 {{#if isResolved}}<lbh3-run day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}
@@ -221,7 +221,7 @@
             {{/case}}
             {{#case "edit"}}
               <lbh3-no-ssr>
-                <can-import from="~/components/run/edit/">
+                <can-import from="~/components/run/edit/edit">
                   {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Edit Run page…'" />{{/if}}
                   {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Edit Run page failed to load.</div>{{/if}}
                   {{#if isResolved}}<lbh3-run-edit day:from="day" description:to="description" month:from="month" ogTitle:to="ogTitle" secondaryPage:from="secondaryPage" title:to="title" trailNumber:from="trailNumber" year:from="year" />{{/if}}

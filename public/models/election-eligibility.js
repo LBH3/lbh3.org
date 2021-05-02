@@ -1,5 +1,5 @@
-import DefineList from 'can-define/list/';
-import DefineMap from 'can-define/map/';
+import DefineList from 'can-define/list/list';
+import DefineMap from 'can-define/map/map';
 import EventsHashers from './events-hashers';
 import feathersModel from './feathers-model';
 import { sortByHashOrJustName } from '~/components/run/sort-hashers';

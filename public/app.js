@@ -1,6 +1,6 @@
-import "~/components/no-ssr/";
+import "~/components/no-ssr/no-ssr";
 
-import DefineMap from "can-define/map/";
+import DefineMap from "can-define/map/map";
 import Honeybadger from "honeybadger-js";
 import loader from "@loader";
 import route from "can-route";

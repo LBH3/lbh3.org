@@ -8,7 +8,7 @@ import route from 'can-route';
 import view from './past-runs.stache';
 
 import './past-runs.less';
-import '~/components/year/';
+import '~/components/year/year';
 
 const currentYear = (new Date()).getFullYear();
 const timeZone = 'America/Los_Angeles';

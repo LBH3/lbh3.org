@@ -1,5 +1,5 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import EventsHashers from '~/models/events-hashers';
 import route from 'can-route';
 import view from './attendance-records.stache';

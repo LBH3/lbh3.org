@@ -1,5 +1,5 @@
 import Component from 'can-component';
-import DefineMap from 'can-define/map/';
+import DefineMap from 'can-define/map/map';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import view from './edit.stache';

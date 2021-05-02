@@ -2,11 +2,11 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/hasher-autocomplete/" />
-<can-import from="~/components/map/" />
-<can-import from="~/components/run/nav/" />
-<can-import from="~/components/snooze-button/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/hasher-autocomplete/hasher-autocomplete" />
+<can-import from="~/components/map/map" />
+<can-import from="~/components/run/nav/nav" />
+<can-import from="~/components/snooze-button/snooze-button" />
 
 {{<specialEventColumn}}
   <div class="form-group col-md-6">

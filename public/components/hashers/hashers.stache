@@ -1,8 +1,8 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/no-ssr/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/no-ssr/no-ssr" />
 
 {{#if session.user.hasherId}}
   {{#if session.user.hasher}}
@@ -136,7 +136,7 @@
     <h3 class="h4">How do I sign in and request access?</h3>
     {{#if session.user}}
       <p>Fill out the form below and I’m Fucking Matt Damon will verify your identity.</p>
-      <can-import from="~/components/request-access/">
+      <can-import from="~/components/request-access/request-access">
         {{#if isResolved}}
           <lbh3-request-access />
         {{/if}}

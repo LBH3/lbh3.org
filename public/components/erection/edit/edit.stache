@@ -1,6 +1,6 @@
 <can-import from="can-stache-route-helpers" />
-<can-import from="~/components/alert/" />
-<can-import from="~/components/erection/nav/" />
+<can-import from="~/components/alert/alert" />
+<can-import from="~/components/erection/nav/nav" />
 
 {{#if session.user.canManageUsers}}
   {{#if erectionPromise.isPending}}
