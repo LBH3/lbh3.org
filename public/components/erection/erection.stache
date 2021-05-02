@@ -4,675 +4,672 @@
 <can-import from="~/components/alert/alert" />
 <can-import from="~/components/erection/nav/nav" />
 <can-import from="~/components/hasher-autocomplete/hasher-autocomplete" />
-<can-import from="~/components/no-ssr/no-ssr" />
 
-<lbh3-no-ssr>
-  {{#if electionPromise.isPending}}
-    <lbh3-alert class="d-block mt-3" message:from="'Fetching your ballot…'" />
-  {{/if}}
+{{#if electionPromise.isPending}}
+  <lbh3-alert class="d-block mt-3" message:from="'Fetching your ballot…'" />
+{{/if}}
 
-  {{#if electionPromise.isRejected}}
-    <div class="alert alert-danger mt-3" role="alert">
-      <strong>Fuck!</strong> Your ballot couldn’t be fetched. {{electionPromise.reason.xhr.message}}
+{{#if electionPromise.isRejected}}
+  <div class="alert alert-danger mt-3" role="alert">
+    <strong>Fuck!</strong> Your ballot couldn’t be fetched. {{electionPromise.reason.xhr.message}}
+  </div>
+  <p>
+    If you’re concerned about running out of time before the erection is over,
+    be sure to cum to a Sunday run to pick up a paper ballot.
+  </p>
+{{/if}}
+
+{{#if electionPromise.isResolved}}
+  <lbh3-erection-nav
+    election:from="election"
+    secondaryPage:from="secondaryPage"
+    session:from="session"
+    urlId:from="urlId"
+  />
+  {{#if election.hasEnded}}
+    <div class="alert alert-info" role="alert">
+      <strong>This erection has ended.</strong>
     </div>
-    <p>
-      If you’re concerned about running out of time before the erection is over,
-      be sure to cum to a Sunday run to pick up a paper ballot.
-    </p>
-  {{/if}}
+    {{{election.endedNoticeHtml}}}
+  {{else}}
+    {{#if session.user.hasherId}}
 
-  {{#if electionPromise.isResolved}}
-    <lbh3-erection-nav
-      election:from="election"
-      secondaryPage:from="secondaryPage"
-      session:from="session"
-      urlId:from="urlId"
-    />
-    {{#if election.hasEnded}}
-      <div class="alert alert-info" role="alert">
-        <strong>This erection has ended.</strong>
-      </div>
-      {{{election.endedNoticeHtml}}}
-    {{else}}
-      {{#if session.user.hasherId}}
+      {{#if electionEligibilityPromise.isPending}}
+        <lbh3-alert class="d-block mt-3" message:from="'Determining your eligibility to vote…'" />
+      {{/if}}
 
-        {{#if electionEligibilityPromise.isPending}}
-          <lbh3-alert class="d-block mt-3" message:from="'Determining your eligibility to vote…'" />
-        {{/if}}
+      {{#if electionEligibilityPromise.isRejected}}
+        <div class="alert alert-danger mt-3" role="alert">
+          <strong>Fuck!</strong> Your run count couldn’t be checked. {{electionEligibilityPromise.reason.xhr.message}}
+        </div>
+        <p>
+          If you’re concerned about running out of time before the erection is over,
+          be sure to cum to a Sunday run to pick up a paper ballot.
+        </p>
+      {{/if}}
 
-        {{#if electionEligibilityPromise.isRejected}}
-          <div class="alert alert-danger mt-3" role="alert">
-            <strong>Fuck!</strong> Your run count couldn’t be checked. {{electionEligibilityPromise.reason.xhr.message}}
-          </div>
-          <p>
-            If you’re concerned about running out of time before the erection is over,
-            be sure to cum to a Sunday run to pick up a paper ballot.
-          </p>
-        {{/if}}
+      {{#if electionEligibilityPromise.isResolved}}
+        {{#if electionEligibility.eligible}}
 
-        {{#if electionEligibilityPromise.isResolved}}
-          {{#if electionEligibility.eligible}}
+          {{#if paperBallotsPromise.isPending}}
+            <lbh3-alert class="d-block mt-3" message:from="'Determining your eligibility to vote…'" />
+          {{/if}}
 
-            {{#if paperBallotsPromise.isPending}}
-              <lbh3-alert class="d-block mt-3" message:from="'Determining your eligibility to vote…'" />
-            {{/if}}
+          {{#if paperBallotsPromise.isRejected}}
+            <div class="alert alert-danger mt-3" role="alert">
+              <strong>Fuck!</strong> Your eligibility couldn’t be checked. {{paperBallotsPromise.reason.xhr.message}}
+            </div>
+            <p>
+              If you’re concerned about running out of time before the erection is over,
+              be sure to cum to a Sunday run to pick up a paper ballot.
+            </p>
+          {{/if}}
 
-            {{#if paperBallotsPromise.isRejected}}
-              <div class="alert alert-danger mt-3" role="alert">
-                <strong>Fuck!</strong> Your eligibility couldn’t be checked. {{paperBallotsPromise.reason.xhr.message}}
-              </div>
-              <p>
-                If you’re concerned about running out of time before the erection is over,
-                be sure to cum to a Sunday run to pick up a paper ballot.
-              </p>
-            {{/if}}
+          {{#if paperBallotsPromise.isResolved}}
+            {{#eq(paperBallotsPromise.value.length, 0)}}
+              {{#if testEncryptionError}}
+                <div class="alert alert-danger mt-3" role="alert">
+                  <strong>Sorry, you are not able to vote with this browser.</strong>
+                  {{testEncryptionError}}
+                </div>
+                <p>
+                  This is a technical issue you may be able to resolve by using a
+                  different browser, such as
+                  <a href="https://www.google.com/chrome/">Chrome</a> or
+                  <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>.
+                </p>
+                <p>
+                  You may want to
+                  <a href="{{encryptionFailedEmailLink}}">
+                    email I’m Fucking Matt Damon
+                  </a>
+                  to let him know about the issue.
+                </p>
+              {{else}}
 
-            {{#if paperBallotsPromise.isResolved}}
-              {{#eq(paperBallotsPromise.value.length, 0)}}
-                {{#if testEncryptionError}}
+                {{#if savingPromise.isPending}}
+                  <lbh3-alert class="d-block mt-3" message:from="'Submitting your ballot…'" />
+                {{/if}}
+
+                {{#if savingPromise.isRejected}}
                   <div class="alert alert-danger mt-3" role="alert">
-                    <strong>Sorry, you are not able to vote with this browser.</strong>
-                    {{testEncryptionError}}
+                    <strong>Fuck!</strong> Your ballot couldn’t be submitted. {{savingPromise.reason.xhr.message}}
                   </div>
                   <p>
-                    This is a technical issue you may be able to resolve by using a
-                    different browser, such as
-                    <a href="https://www.google.com/chrome/">Chrome</a> or
-                    <a href="https://www.mozilla.org/en-US/firefox/">Firefox</a>.
+                    If you’re concerned about running out of time before the erection is over,
+                    be sure to cum to a Sunday run to pick up a paper ballot.
                   </p>
-                  <p>
-                    You may want to
-                    <a href="{{encryptionFailedEmailLink}}">
-                      email I’m Fucking Matt Damon
-                    </a>
-                    to let him know about the issue.
-                  </p>
-                {{else}}
+                {{/if}}
 
-                  {{#if savingPromise.isPending}}
-                    <lbh3-alert class="d-block mt-3" message:from="'Submitting your ballot…'" />
+                {{#if savingPromise.isResolved}}
+                  <div class="alert alert-success pb-0" role="alert">
+                    <h4 class="alert-heading">Success!</h4>
+                    <p>The ballot below has been submitted. <span class="alert-link" onclick="print()">Print this page</span> for your records.</p>
+                    <hr>
+                    <div class="row">
+                      <div class="col-md">
+                        <h5>{{election.schema.positions.title}}</h5>
+                        {{#for(race of election.schema.positions.races)}}
+                          <hr>
+                          <h6>{{race.title}}</h6>
+                          {{#eq(savingUnencryptedBallot[race.id].length, 0)}}
+                            <p><i>None selected</i></p>
+                          {{else}}
+                            <ul>
+                              {{#for(option of savingUnencryptedBallot[race.id])}}
+                                <li>{{option.name}}</li>
+                              {{/for}}
+                            </ul>
+                          {{/eq}}
+                        {{/for}}
+                      </div>
+                      <div class="col-md">
+                        <h5>{{election.schema.awards.title}}</h5>
+                        {{#for(race of election.schema.awards.races)}}
+                          <hr>
+                          <h6>{{race.title}}</h6>
+                          {{#switch(race.type)}}
+                            {{#case('hasher')}}
+                              <p>
+                                {{#if(savingUnencryptedBallot[race.id])}}
+                                  {{#if(race.options)}}
+                                    {{hasherWithIdInOptions(savingUnencryptedBallot[race.id], race.options)}}
+                                  {{else}}
+                                    {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
+                                      {{./hashOrJustName}}
+                                    {{/with}}
+                                  {{/if}}
+                                {{else}}
+                                  <i>None selected</i>
+                                {{/if}}
+                              </p>
+                            {{/case}}
+                            {{#case('hashit')}}
+                              <p>
+                                {{#if(savingUnencryptedBallot[race.id])}}
+                                  {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
+                                    {{./hashOrJustName}}
+                                  {{/with}}
+                                {{else}}
+                                  <i>None selected</i>
+                                {{/if}}
+                              </p>
+                            {{/case}}
+                            {{#case('on-on')}}
+                              <p>
+                                {{#with(runWithTrailNumber(savingUnencryptedBallot[race.id]))}}
+                                  {{#if(trailNumber)}}
+                                    {{trailNumber}} — {{#if(onOnMd)}}{{onOnMd}}{{else}}?{{/if}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
+                                  {{else}}
+                                    <i>None selected</i>
+                                  {{/if}}
+                                {{/with}}
+                              </p>
+                            {{/case}}
+                            {{#case('run')}}
+                              <p>
+                                {{#with(runWithTrailNumber(savingUnencryptedBallot[race.id]))}}
+                                  {{#if(trailNumber)}}
+                                    {{trailNumber}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
+                                  {{else}}
+                                    <i>None selected</i>
+                                  {{/if}}
+                                {{/with}}
+                              </p>
+                            {{/case}}
+                            {{#case('scribe')}}
+                              <p>
+                                {{#if(savingUnencryptedBallot[race.id])}}
+                                  {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
+                                    {{./hashOrJustName}}
+                                  {{/with}}
+                                {{else}}
+                                  <i>None selected</i>
+                                {{/if}}
+                              </p>
+                            {{/case}}
+                            {{#case('textarea')}}
+                              {{#if(savingUnencryptedBallot[race.id])}}
+                                <p>
+                                  {{savingUnencryptedBallot[race.id]}}
+                                </p>
+                              {{else}}
+                                <p><i>None</i></p>
+                              {{/if}}
+                            {{/case}}
+                          {{/switch}}
+                        {{/for}}
+                      </div>
+                    </div>
+                    <hr>
+                    <p class="text-right">
+                      <small style="word-break: break-all">
+                        Encrypted hash: {{savingEncryptedBallot.sha256}}
+                      </small>
+                    </p>
+                  </div>
+                {{/if}}
+
+                {{^if savingPromise.isPending}}
+                  {{^if savingPromise}}
+                    <p>
+                      Hello{{#if(userHashName)}} <strong>{{userHashName}}</strong>{{/if}}!
+                    </p>
+                    <p><em><strong>
+                      If you already took a paper ballot, you are not eligible to vote online.
+                      If you take a paper ballot after submitting an online ballot, your online ballot will be discarded.
+                    </strong></em></p>
+                    <hr>
                   {{/if}}
 
-                  {{#if savingPromise.isRejected}}
+                  {{#if ballotsPromise.isPending}}
+                    <lbh3-alert class="d-block mt-3" message:from="'Fetching submitted ballots…'" />
+                  {{/if}}
+
+                  {{#if ballotsPromise.isRejected}}
                     <div class="alert alert-danger mt-3" role="alert">
-                      <strong>Fuck!</strong> Your ballot couldn’t be submitted. {{savingPromise.reason.xhr.message}}
+                      <strong>Fuck!</strong> The ballots you have already submitted couldn’t be fetched. {{ballotsPromise.reason.xhr.message}}
                     </div>
                     <p>
-                      If you’re concerned about running out of time before the erection is over,
-                      be sure to cum to a Sunday run to pick up a paper ballot.
+                      You may want to
+                      <a href="{{ballotFetchingFailedEmailLink}}">
+                        email I’m Fucking Matt Damon
+                      </a>
+                      to let him know about the issue.
                     </p>
                   {{/if}}
 
-                  {{#if savingPromise.isResolved}}
-                    <div class="alert alert-success pb-0" role="alert">
-                      <h4 class="alert-heading">Success!</h4>
-                      <p>The ballot below has been submitted. <span class="alert-link" onclick="print()">Print this page</span> for your records.</p>
-                      <hr>
-                      <div class="row">
-                        <div class="col-md">
-                          <h5>{{election.schema.positions.title}}</h5>
-                          {{#for(race of election.schema.positions.races)}}
-                            <hr>
-                            <h6>{{race.title}}</h6>
-                            {{#eq(savingUnencryptedBallot[race.id].length, 0)}}
-                              <p><i>None selected</i></p>
-                            {{else}}
-                              <ul>
-                                {{#for(option of savingUnencryptedBallot[race.id])}}
-                                  <li>{{option.name}}</li>
-                                {{/for}}
-                              </ul>
-                            {{/eq}}
-                          {{/for}}
-                        </div>
-                        <div class="col-md">
-                          <h5>{{election.schema.awards.title}}</h5>
-                          {{#for(race of election.schema.awards.races)}}
-                            <hr>
-                            <h6>{{race.title}}</h6>
-                            {{#switch(race.type)}}
-                              {{#case('hasher')}}
-                                <p>
-                                  {{#if(savingUnencryptedBallot[race.id])}}
-                                    {{#if(race.options)}}
-                                      {{hasherWithIdInOptions(savingUnencryptedBallot[race.id], race.options)}}
-                                    {{else}}
-                                      {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
-                                        {{./hashOrJustName}}
-                                      {{/with}}
-                                    {{/if}}
-                                  {{else}}
-                                    <i>None selected</i>
-                                  {{/if}}
-                                </p>
-                              {{/case}}
-                              {{#case('hashit')}}
-                                <p>
-                                  {{#if(savingUnencryptedBallot[race.id])}}
-                                    {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
-                                      {{./hashOrJustName}}
-                                    {{/with}}
-                                  {{else}}
-                                    <i>None selected</i>
-                                  {{/if}}
-                                </p>
-                              {{/case}}
-                              {{#case('on-on')}}
-                                <p>
-                                  {{#with(runWithTrailNumber(savingUnencryptedBallot[race.id]))}}
-                                    {{#if(trailNumber)}}
-                                      {{trailNumber}} — {{#if(onOnMd)}}{{onOnMd}}{{else}}?{{/if}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
-                                    {{else}}
-                                      <i>None selected</i>
-                                    {{/if}}
-                                  {{/with}}
-                                </p>
-                              {{/case}}
-                              {{#case('run')}}
-                                <p>
-                                  {{#with(runWithTrailNumber(savingUnencryptedBallot[race.id]))}}
-                                    {{#if(trailNumber)}}
-                                      {{trailNumber}} — {{#if(namePlaintext)}}{{namePlaintext}} —{{/if}} {{haresMd}} — {{locationMd}}
-                                    {{else}}
-                                      <i>None selected</i>
-                                    {{/if}}
-                                  {{/with}}
-                                </p>
-                              {{/case}}
-                              {{#case('scribe')}}
-                                <p>
-                                  {{#if(savingUnencryptedBallot[race.id])}}
-                                    {{#with(cachedHashers[savingUnencryptedBallot[race.id]])}}
-                                      {{./hashOrJustName}}
-                                    {{/with}}
-                                  {{else}}
-                                    <i>None selected</i>
-                                  {{/if}}
-                                </p>
-                              {{/case}}
-                              {{#case('textarea')}}
-                                {{#if(savingUnencryptedBallot[race.id])}}
-                                  <p>
-                                    {{savingUnencryptedBallot[race.id]}}
-                                  </p>
-                                {{else}}
-                                  <p><i>None</i></p>
-                                {{/if}}
-                              {{/case}}
-                            {{/switch}}
-                          {{/for}}
-                        </div>
+                  {{#if ballotsPromise.isResolved}}
+                    {{^eq(ballotsPromise.value.length, 0)}}
+                      <h3>Submitted ballots</h3>
+                      <p>
+                        Below are the ballots you have already submitted.
+                        {{#eq(ballotsPromise.value.length, 1)}}
+                          <span class="text-success">The ballot below will be counted in the erection.</span>
+                        {{else}}
+                          <strong class="text-success">The last ballot you submit will be counted in the erection.</strong>
+                        {{/eq}}
+                      </p>
+                      <div class="table-responsive">
+                        <table class="table table-sm">
+                          <thead>
+                            <tr>
+                              <th>Datetime submitted</th>
+                              <th>Encrypted hash</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {{#for(ballot of ballotsPromise.value)}}
+                              <tr class="{{#eq(scope.index, 0)}}text-success{{else}}text-muted{{/eq}}">
+                                <td class="text-nowrap">
+                                  {{ballot.createdAtFormatted}}
+                                </td>
+                                <td>
+                                  {{ballot.sha256}}
+                                </td>
+                              </tr>
+                            {{/for}}
+                          </tbody>
+                        </table>
                       </div>
                       <hr>
-                      <p class="text-right">
-                        <small style="word-break: break-all">
-                          Encrypted hash: {{savingEncryptedBallot.sha256}}
-                        </small>
-                      </p>
-                    </div>
+                    {{/eq}}
                   {{/if}}
 
-                  {{^if savingPromise.isPending}}
-                    {{^if savingPromise}}
-                      <p>
-                        Hello{{#if(userHashName)}} <strong>{{userHashName}}</strong>{{/if}}!
-                      </p>
-                      <p><em><strong>
-                        If you already took a paper ballot, you are not eligible to vote online.
-                        If you take a paper ballot after submitting an online ballot, your online ballot will be discarded.
-                      </strong></em></p>
-                      <hr>
-                    {{/if}}
+                  <h3>New ballot</h3>
+                  {{^eq(ballotsPromise.value.length, 0)}}
+                    <p>
+                      You have already submitted a ballot (see above).
+                      Ballots cannot be changed, but you can submit a new ballot to replace your old ballot.
+                      The last ballot you submit will be counted in the erection.
+                    </p>
+                  {{/eq}}
+                  {{{election.descriptionHtml}}}
 
-                    {{#if ballotsPromise.isPending}}
-                      <lbh3-alert class="d-block mt-3" message:from="'Fetching submitted ballots…'" />
-                    {{/if}}
+                  {{#if hashitsAndScribesPromise.isPending}}
+                    <lbh3-alert class="d-block mt-3" message:from="'Fetching the ballot options…'" />
+                  {{/if}}
 
-                    {{#if ballotsPromise.isRejected}}
-                      <div class="alert alert-danger mt-3" role="alert">
-                        <strong>Fuck!</strong> The ballots you have already submitted couldn’t be fetched. {{ballotsPromise.reason.xhr.message}}
-                      </div>
-                      <p>
-                        You may want to
-                        <a href="{{ballotFetchingFailedEmailLink}}">
-                          email I’m Fucking Matt Damon
-                        </a>
-                        to let him know about the issue.
-                      </p>
-                    {{/if}}
+                  {{#if hashitsAndScribesPromise.isRejected}}
+                    <div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The ballot options couldn’t be fetched. {{hashitsAndScribesPromise.reason.xhr.message}}</div>
+                    <p>You may want to <a href="{{hashitsAndScribesFetchingFailedEmailLink}}">email I’m Fucking Matt Damon</a> to let him know about the issue.</p>
+                    <p> If you’re concerned about running out of time before the erection is over, be sure to cum to a Sunday run to pick up a paper ballot.</p>
+                  {{/if}}
 
-                    {{#if ballotsPromise.isResolved}}
-                      {{^eq(ballotsPromise.value.length, 0)}}
-                        <h3>Submitted ballots</h3>
-                        <p>
-                          Below are the ballots you have already submitted.
-                          {{#eq(ballotsPromise.value.length, 1)}}
-                            <span class="text-success">The ballot below will be counted in the erection.</span>
-                          {{else}}
-                            <strong class="text-success">The last ballot you submit will be counted in the erection.</strong>
-                          {{/eq}}
-                        </p>
-                        <div class="table-responsive">
-                          <table class="table table-sm">
-                            <thead>
-                              <tr>
-                                <th>Datetime submitted</th>
-                                <th>Encrypted hash</th>
-                              </tr>
-                            </thead>
-                            <tbody>
-                              {{#for(ballot of ballotsPromise.value)}}
-                                <tr class="{{#eq(scope.index, 0)}}text-success{{else}}text-muted{{/eq}}">
-                                  <td class="text-nowrap">
-                                    {{ballot.createdAtFormatted}}
-                                  </td>
-                                  <td>
-                                    {{ballot.sha256}}
-                                  </td>
-                                </tr>
+                  {{#if hashitsAndScribesPromise.isResolved}}
+                    <form class="mb-4 mt-2" on:submit="save(ballot)">
+                      <div class="row">
+                        <div class="col-md">
+                          <h4>{{election.schema.positions.title}}</h4>
+                          {{#for(race of election.schema.positions.races)}}
+                            <fieldset class="form-group">
+                              <legend class="col-form-label col-form-label-lg pb-0">
+                                {{race.title}}
+                                <small class="text-muted">
+                                  {{#eq(race.maxSelection, 1)}}
+                                    Vote for one
+                                  {{else}}
+                                    Vote for two
+                                  {{/eq}}
+                                </small>
+                              </legend>
+                              {{#for(option of race.hasherOptions)}}
+                                <div class="form-check mt-1">
+                                  <label class="form-check-label">
+                                    <input
+                                      checked:from="hasherListContains(ballot[race.id], option.id)"
+                                      class="form-check-input"
+                                      on:click="toggleHasherInList(option, ballot[race.id], race.maxSelection, race.options, scope.element)"
+                                      type="checkbox"
+                                    />
+                                    {{option.name}}
+                                  </label>
+                                </div>
                               {{/for}}
-                            </tbody>
-                          </table>
-                        </div>
-                        <hr>
-                      {{/eq}}
-                    {{/if}}
-
-                    <h3>New ballot</h3>
-                    {{^eq(ballotsPromise.value.length, 0)}}
-                      <p>
-                        You have already submitted a ballot (see above).
-                        Ballots cannot be changed, but you can submit a new ballot to replace your old ballot.
-                        The last ballot you submit will be counted in the erection.
-                      </p>
-                    {{/eq}}
-                    {{{election.descriptionHtml}}}
-
-                    {{#if hashitsAndScribesPromise.isPending}}
-                      <lbh3-alert class="d-block mt-3" message:from="'Fetching the ballot options…'" />
-                    {{/if}}
-
-                    {{#if hashitsAndScribesPromise.isRejected}}
-                      <div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The ballot options couldn’t be fetched. {{hashitsAndScribesPromise.reason.xhr.message}}</div>
-                      <p>You may want to <a href="{{hashitsAndScribesFetchingFailedEmailLink}}">email I’m Fucking Matt Damon</a> to let him know about the issue.</p>
-                      <p> If you’re concerned about running out of time before the erection is over, be sure to cum to a Sunday run to pick up a paper ballot.</p>
-                    {{/if}}
-
-                    {{#if hashitsAndScribesPromise.isResolved}}
-                      <form class="mb-4 mt-2" on:submit="save(ballot)">
-                        <div class="row">
-                          <div class="col-md">
-                            <h4>{{election.schema.positions.title}}</h4>
-                            {{#for(race of election.schema.positions.races)}}
-                              <fieldset class="form-group">
-                                <legend class="col-form-label col-form-label-lg pb-0">
-                                  {{race.title}}
-                                  <small class="text-muted">
-                                    {{#eq(race.maxSelection, 1)}}
-                                      Vote for one
-                                    {{else}}
-                                      Vote for two
+                              {{#if(race.showWriteInOption)}}
+                                <div class="form-check mt-1">
+                                  <label class="form-check-label">
+                                    Write-in search
+                                    {{#eq(race.options.length, 0)}}
+                                      (please volunteer!)
                                     {{/eq}}
-                                  </small>
-                                </legend>
-                                {{#for(option of race.hasherOptions)}}
-                                  <div class="form-check mt-1">
-                                    <label class="form-check-label">
+                                    <lbh3-hasher-autocomplete
+                                      on:selected="didSelectHasher(scope.element, ballot[race.id], race.hasherOptions, race.maxSelection, race.options)"
+                                    >
                                       <input
-                                        checked:from="hasherListContains(ballot[race.id], option.id)"
-                                        class="form-check-input"
-                                        on:click="toggleHasherInList(option, ballot[race.id], race.maxSelection, race.options, scope.element)"
-                                        type="checkbox"
+                                        autocapitalize="off"
+                                        autocomplete="off"
+                                        autocorrect="off"
+                                        class="form-control"
+                                        placeholder="Type a hash name here"
+                                        type="text"
                                       />
-                                      {{option.name}}
+                                    </lbh3-hasher-autocomplete>
+                                  </label>
+                                </div>
+                              {{/if}}
+                            </fieldset>
+                          {{/for}}
+                        </div>
+                        <div class="col-md">
+                          <h4>{{election.schema.awards.title}}</h4>
+                          {{#for(race of election.schema.awards.races)}}
+                            {{#switch(race.type)}}
+                              {{#case('hasher')}}
+                                {{#if(race.options)}}
+                                  <fieldset class="form-group">
+                                    <legend class="col-form-label col-form-label-lg mb-0 w-100">
+                                      {{race.title}}
+                                      <small class="text-muted">
+                                        {{race.description}}
+                                      </small>
+                                    </legend>
+                                    <div class="table-responsive">
+                                      <table class="table">
+                                        <thead>
+                                          <tr>
+                                            <th>Hash Name</th>
+                                            <th>Runs</th>
+                                          </tr>
+                                        </thead>
+                                        <tbody>
+                                          {{#for(option of race.hasherOptions)}}
+                                            <tr>
+                                              <td>
+                                                <label class="form-check-label">
+                                                  <input
+                                                    checked:bind="equal(ballot[race.id], option.id)"
+                                                    name="{{race.id}}"
+                                                    type="radio"
+                                                  />
+                                                  {{option.name}}
+                                                </label>
+                                              </td>
+                                              <td class="text-nowrap">
+                                                {{option.runs}}
+                                              </td>
+                                            </tr>
+                                          {{/for}}
+                                        </tbody>
+                                      </table>
+                                    </div>
+                                  </fieldset>
+                                {{else}}
+                                  <div class="form-group">
+                                    <label class="col-form-label col-form-label-lg w-100" for="{{race.id}}">
+                                      {{race.title}}
                                     </label>
-                                  </div>
-                                {{/for}}
-                                {{#if(race.showWriteInOption)}}
-                                  <div class="form-check mt-1">
-                                    <label class="form-check-label">
-                                      Write-in search
-                                      {{#eq(race.options.length, 0)}}
-                                        (please volunteer!)
-                                      {{/eq}}
+                                    {{^if(ballot[race.id])}}
                                       <lbh3-hasher-autocomplete
-                                        on:selected="didSelectHasher(scope.element, ballot[race.id], race.hasherOptions, race.maxSelection, race.options)"
+                                        on:selected="selectHasherForAward(scope.element, race.id)"
+                                        showNameAfterSelection:from="false"
                                       >
                                         <input
                                           autocapitalize="off"
                                           autocomplete="off"
                                           autocorrect="off"
                                           class="form-control"
+                                          id="{{race.id}}"
                                           placeholder="Type a hash name here"
                                           type="text"
                                         />
                                       </lbh3-hasher-autocomplete>
-                                    </label>
+                                    {{/if}}
+                                    {{#if(ballot[race.id])}}
+                                      <div class="form-check">
+                                        <label class="form-check-label">
+                                          <input
+                                            checked:from="true"
+                                            class="form-check-input"
+                                            on:click="deselectHasherForAward(race.id)"
+                                            type="checkbox"
+                                          />
+                                          {{#with(cachedHashers[ballot[race.id]])}}
+                                            {{./hashOrJustName}}
+                                          {{/with}}
+                                        </label>
+                                      </div>
+                                    {{/if}}
                                   </div>
                                 {{/if}}
-                              </fieldset>
-                            {{/for}}
-                          </div>
-                          <div class="col-md">
-                            <h4>{{election.schema.awards.title}}</h4>
-                            {{#for(race of election.schema.awards.races)}}
-                              {{#switch(race.type)}}
-                                {{#case('hasher')}}
-                                  {{#if(race.options)}}
-                                    <fieldset class="form-group">
-                                      <legend class="col-form-label col-form-label-lg mb-0 w-100">
-                                        {{race.title}}
-                                        <small class="text-muted">
-                                          {{race.description}}
-                                        </small>
-                                      </legend>
-                                      <div class="table-responsive">
-                                        <table class="table">
-                                          <thead>
-                                            <tr>
-                                              <th>Hash Name</th>
-                                              <th>Runs</th>
-                                            </tr>
-                                          </thead>
-                                          <tbody>
-                                            {{#for(option of race.hasherOptions)}}
-                                              <tr>
-                                                <td>
-                                                  <label class="form-check-label">
-                                                    <input
-                                                      checked:bind="equal(ballot[race.id], option.id)"
-                                                      name="{{race.id}}"
-                                                      type="radio"
-                                                    />
-                                                    {{option.name}}
-                                                  </label>
-                                                </td>
-                                                <td class="text-nowrap">
-                                                  {{option.runs}}
-                                                </td>
-                                              </tr>
-                                            {{/for}}
-                                          </tbody>
-                                        </table>
-                                      </div>
-                                    </fieldset>
-                                  {{else}}
-                                    <div class="form-group">
-                                      <label class="col-form-label col-form-label-lg w-100" for="{{race.id}}">
-                                        {{race.title}}
-                                      </label>
-                                      {{^if(ballot[race.id])}}
-                                        <lbh3-hasher-autocomplete
-                                          on:selected="selectHasherForAward(scope.element, race.id)"
-                                          showNameAfterSelection:from="false"
-                                        >
-                                          <input
-                                            autocapitalize="off"
-                                            autocomplete="off"
-                                            autocorrect="off"
-                                            class="form-control"
-                                            id="{{race.id}}"
-                                            placeholder="Type a hash name here"
-                                            type="text"
-                                          />
-                                        </lbh3-hasher-autocomplete>
-                                      {{/if}}
-                                      {{#if(ballot[race.id])}}
-                                        <div class="form-check">
-                                          <label class="form-check-label">
-                                            <input
-                                              checked:from="true"
-                                              class="form-check-input"
-                                              on:click="deselectHasherForAward(race.id)"
-                                              type="checkbox"
-                                            />
-                                            {{#with(cachedHashers[ballot[race.id]])}}
-                                              {{./hashOrJustName}}
-                                            {{/with}}
-                                          </label>
-                                        </div>
-                                      {{/if}}
-                                    </div>
-                                  {{/if}}
-                                {{/case}}
-                                {{#case('hashit')}}
-                                  <div class="form-group">
-                                    <label class="col-form-label col-form-label-lg w-100">
-                                      {{race.title}}
-                                      <select
-                                        class="form-control"
-                                        id="{{race.id}}"
-                                        on:change="didSelectEventHasher(scope.element, hashits)"
-                                        value:bind="ballot[race.id]"
-                                      >
-                                        <option value="0">Select one</option>
-                                        {{#for(hashit of hashits)}}
-                                          <option value="{{hashit.hasherId}}">
-                                            {{hashit.hashOrJustName}}
-                                          </option>
-                                        {{/for}}
-                                      </select>
-                                    </label>
-                                  </div>
-                                {{/case}}
-                                {{#case('on-on')}}
-                                  <div class="form-group">
-                                    <label class="col-form-label col-form-label-lg w-100">
-                                      {{race.title}}
-                                      <select
-                                        class="form-control"
-                                        id="{{race.id}}"
-                                        value:bind="ballot[race.id]"
-                                      >
-                                        <option value="0">Select one</option>
-                                        {{#for(run of allRunsPromise.value)}}
-                                          <option value="{{run.trailNumber}}">
-                                            {{run.trailNumber}} — {{#if(run.onOnMd)}}{{run.onOnMd}}{{else}}?{{/if}} — {{#if(run.namePlaintext)}}{{run.namePlaintext}} —{{/if}} {{run.haresMd}} — {{run.locationMd}}
-                                          </option>
-                                        {{/for}}
-                                      </select>
-                                    </label>
-                                  </div>
-                                {{/case}}
-                                {{#case('run')}}
-                                  <div class="form-group">
-                                    <label class="col-form-label col-form-label-lg w-100">
-                                      {{race.title}}
-                                      <select
-                                        class="form-control"
-                                        id="{{race.id}}"
-                                        value:bind="ballot[race.id]"
-                                      >
-                                        <option value="0">Select one</option>
-                                        {{#for(run of allRunsPromise.value)}}
-                                          <option value="{{run.trailNumber}}">
-                                            {{run.trailNumber}} — {{#if(run.namePlaintext)}}{{run.namePlaintext}} —{{/if}} {{run.haresMd}} — {{run.locationMd}}
-                                          </option>
-                                        {{/for}}
-                                      </select>
-                                    </label>
-                                  </div>
-                                {{/case}}
-                                {{#case('scribe')}}
-                                  <div class="form-group">
-                                    <label class="col-form-label col-form-label-lg w-100">
-                                      {{race.title}}
-                                      <select
-                                        class="form-control"
-                                        id="{{race.id}}"
-                                        on:change="didSelectEventHasher(scope.element, scribes)"
-                                        value:bind="ballot[race.id]"
-                                      >
-                                        <option value="0">Select one</option>
-                                        {{#for(scribe of scribes)}}
-                                          <option value="{{scribe.hasherId}}">
-                                            {{scribe.hashOrJustName}}
-                                          </option>
-                                        {{/for}}
-                                      </select>
-                                    </label>
-                                  </div>
-                                {{/case}}
-                                {{#case('textarea')}}
-                                  <div class="form-group">
-                                    <label class="col-form-label col-form-label-lg w-100" for="{{race.id}}">
-                                      {{race.title}}
-                                      <small class="text-muted">
-                                        ({{race.description}})
-                                      </small>
-                                    </label>
-                                    <textarea
+                              {{/case}}
+                              {{#case('hashit')}}
+                                <div class="form-group">
+                                  <label class="col-form-label col-form-label-lg w-100">
+                                    {{race.title}}
+                                    <select
+                                      class="form-control"
+                                      id="{{race.id}}"
+                                      on:change="didSelectEventHasher(scope.element, hashits)"
+                                      value:bind="ballot[race.id]"
+                                    >
+                                      <option value="0">Select one</option>
+                                      {{#for(hashit of hashits)}}
+                                        <option value="{{hashit.hasherId}}">
+                                          {{hashit.hashOrJustName}}
+                                        </option>
+                                      {{/for}}
+                                    </select>
+                                  </label>
+                                </div>
+                              {{/case}}
+                              {{#case('on-on')}}
+                                <div class="form-group">
+                                  <label class="col-form-label col-form-label-lg w-100">
+                                    {{race.title}}
+                                    <select
                                       class="form-control"
                                       id="{{race.id}}"
                                       value:bind="ballot[race.id]"
-                                    ></textarea>
-                                  </div>
-                                {{/case}}
-                              {{/switch}}
-                            {{/for}}
-                          </div>
+                                    >
+                                      <option value="0">Select one</option>
+                                      {{#for(run of allRunsPromise.value)}}
+                                        <option value="{{run.trailNumber}}">
+                                          {{run.trailNumber}} — {{#if(run.onOnMd)}}{{run.onOnMd}}{{else}}?{{/if}} — {{#if(run.namePlaintext)}}{{run.namePlaintext}} —{{/if}} {{run.haresMd}} — {{run.locationMd}}
+                                        </option>
+                                      {{/for}}
+                                    </select>
+                                  </label>
+                                </div>
+                              {{/case}}
+                              {{#case('run')}}
+                                <div class="form-group">
+                                  <label class="col-form-label col-form-label-lg w-100">
+                                    {{race.title}}
+                                    <select
+                                      class="form-control"
+                                      id="{{race.id}}"
+                                      value:bind="ballot[race.id]"
+                                    >
+                                      <option value="0">Select one</option>
+                                      {{#for(run of allRunsPromise.value)}}
+                                        <option value="{{run.trailNumber}}">
+                                          {{run.trailNumber}} — {{#if(run.namePlaintext)}}{{run.namePlaintext}} —{{/if}} {{run.haresMd}} — {{run.locationMd}}
+                                        </option>
+                                      {{/for}}
+                                    </select>
+                                  </label>
+                                </div>
+                              {{/case}}
+                              {{#case('scribe')}}
+                                <div class="form-group">
+                                  <label class="col-form-label col-form-label-lg w-100">
+                                    {{race.title}}
+                                    <select
+                                      class="form-control"
+                                      id="{{race.id}}"
+                                      on:change="didSelectEventHasher(scope.element, scribes)"
+                                      value:bind="ballot[race.id]"
+                                    >
+                                      <option value="0">Select one</option>
+                                      {{#for(scribe of scribes)}}
+                                        <option value="{{scribe.hasherId}}">
+                                          {{scribe.hashOrJustName}}
+                                        </option>
+                                      {{/for}}
+                                    </select>
+                                  </label>
+                                </div>
+                              {{/case}}
+                              {{#case('textarea')}}
+                                <div class="form-group">
+                                  <label class="col-form-label col-form-label-lg w-100" for="{{race.id}}">
+                                    {{race.title}}
+                                    <small class="text-muted">
+                                      ({{race.description}})
+                                    </small>
+                                  </label>
+                                  <textarea
+                                    class="form-control"
+                                    id="{{race.id}}"
+                                    value:bind="ballot[race.id]"
+                                  ></textarea>
+                                </div>
+                              {{/case}}
+                            {{/switch}}
+                          {{/for}}
                         </div>
+                      </div>
 
-                        <button
-                          class="btn btn-primary mt-3"
-                          {{#if savingPromise.isPending}}disabled{{/if}}
-                          type="submit">
-                          Submit ballot
-                        </button>
-                      </form>
-                    {{/if}}
+                      <button
+                        class="btn btn-primary mt-3"
+                        {{#if savingPromise.isPending}}disabled{{/if}}
+                        type="submit">
+                        Submit ballot
+                      </button>
+                    </form>
                   {{/if}}
                 {{/if}}
-              {{else}}
-                <div class="alert alert-danger mt-3" role="alert">
-                  <strong>It looks like you already took a paper ballot.</strong>
-                  Once you take a paper ballot, you are not eligible to vote online.
-                </div>
-                <p><strong>
-                  On {{paperBallot.dateTakenString}}, {{paperBallot.addedByHasher.hashOrJustName}} recorded that you took a paper ballot.
-                </strong></p>
-                <p>
-                  If you believe this is inaccurate, please cum to a
-                  Sunday run before the erection is over or
-                  <a href="{{paperBallotEmailLink}}">
-                    email I’m Fucking Matt Damon
-                  </a>
-                  to ask him about it.
-                </p>
-                <p>
-                  Otherwise, be sure to fill out the paper ballot you took and return it before the erection is over.
-                </p>
-              {{/eq}}
-            {{/if}}
-          {{else}}
-            <div class="alert alert-danger mt-3" role="alert">
-              <strong>Sorry, it looks like you’re not eligible to vote.</strong>
-              You must have at least one run in the last year to vote.
-            </div>
-            {{#eq(electionEligibility.runs.length, 0)}}
-              <p><strong>It doesn’t look like you attended any runs last year.</strong></p>
+              {{/if}}
             {{else}}
-              <p><strong>Below is our record of the runs you’ve attended:</strong></p>
-              <div class="table-responsive">
-                <table class="table table-sm table-striped">
-                  <thead>
-                    <tr>
-                      <th>Date</th>
-                      <th class="text-center">#</th>
-                      <th>Name</th>
-                      <th>Hares</th>
-                      <th>Location</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {{#for(run of electionEligibility.runs)}}
-                      <tr>
-                        <td>{{run.event.startDateWithYearString}}</td>
-                        <td class="text-center">{{run.trailNumber}}</td>
-                        <td>{{{run.event.nameHtml}}}</td>
-                        <td>{{{run.event.haresHtml}}}</td>
-                        <td>{{{run.event.shortLocationHtml}}}</td>
-                      </tr>
-                    {{/for}}
-                  </tbody>
-                </table>
+              <div class="alert alert-danger mt-3" role="alert">
+                <strong>It looks like you already took a paper ballot.</strong>
+                Once you take a paper ballot, you are not eligible to vote online.
               </div>
+              <p><strong>
+                On {{paperBallot.dateTakenString}}, {{paperBallot.addedByHasher.hashOrJustName}} recorded that you took a paper ballot.
+              </strong></p>
+              <p>
+                If you believe this is inaccurate, please cum to a
+                Sunday run before the erection is over or
+                <a href="{{paperBallotEmailLink}}">
+                  email I’m Fucking Matt Damon
+                </a>
+                to ask him about it.
+              </p>
+              <p>
+                Otherwise, be sure to fill out the paper ballot you took and return it before the erection is over.
+              </p>
             {{/eq}}
-            <p>
-              If you believe you’ve attended more runs, please cum to a
-              Sunday run before the erection is over or
-              <a href="{{electionEligibilityEmailLink}}">
-                email On Disk
-              </a>
-              with the runs you’ve attended that we’re missing in our record.
-            </p>
           {{/if}}
-        {{/if}}
-
-      {{else}}
-
-        {{#if session.user}}
-          <p>
-            Get started by filling out the form below. I’m Fucking Matt Damon will
-            need to verify that it’s actually you before you get a ballot.
-          </p>
-
-          {{#if savingPromise.isPending}}
-            <lbh3-alert class="d-block mt-3" message:from="'Saving your request for access…'" />
-          {{else}}
-            {{#if session.user.requestedName}}
-              <div class="alert alert-success" role="alert">
-                You’ve requested access as <strong>{{session.user.requestedName}}</strong>.
-              </div>
-            {{/if}}
-          {{/if}}
-
-          {{#if savingPromise.isRejected}}
-            <div class="alert alert-danger mt-3" role="alert">
-              <strong>Fuck!</strong> Something failed; you’ll need to try again.
-              {{savingPromise.reason.xhr.message}}
-            </div>
-          {{/if}}
-
-          {{^if savingPromise.isResolved}}
-            <form class="mb-3" on:submit="save()">
-              <div class="form-group">
-                <label for="requestedName">
-                  Hash name <small>(or Just name if you’re not a named hasher)</small>
-                </label>
-                <input
-                  autocomplete="off"
-                  class="form-control"
-                  id="requestedName"
-                  placeholder="Your hash or “Just” name"
-                  type="text"
-                  value:bind="requestedName"
-                />
-              </div>
-              <button
-                class="btn btn-primary"
-                {{#if savingPromise.isPending}}disabled{{/if}}
-                type="submit">
-                Request access
-              </button>
-            </form>
-          {{/if}}
-
-          <p>
-            If you’re concerned about running out of time before the erection is over,
-            be sure to cum to a Sunday run to pick up a paper ballot.
-          </p>
-
         {{else}}
+          <div class="alert alert-danger mt-3" role="alert">
+            <strong>Sorry, it looks like you’re not eligible to vote.</strong>
+            You must have at least one run in the last year to vote.
+          </div>
+          {{#eq(electionEligibility.runs.length, 0)}}
+            <p><strong>It doesn’t look like you attended any runs last year.</strong></p>
+          {{else}}
+            <p><strong>Below is our record of the runs you’ve attended:</strong></p>
+            <div class="table-responsive">
+              <table class="table table-sm table-striped">
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th class="text-center">#</th>
+                    <th>Name</th>
+                    <th>Hares</th>
+                    <th>Location</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#for(run of electionEligibility.runs)}}
+                    <tr>
+                      <td>{{run.event.startDateWithYearString}}</td>
+                      <td class="text-center">{{run.trailNumber}}</td>
+                      <td>{{{run.event.nameHtml}}}</td>
+                      <td>{{{run.event.haresHtml}}}</td>
+                      <td>{{{run.event.shortLocationHtml}}}</td>
+                    </tr>
+                  {{/for}}
+                </tbody>
+              </table>
+            </div>
+          {{/eq}}
           <p>
-            Get started by signing in with <a href="/auth/facebook">Facebook</a> or
-            <a href="/auth/google">Google</a>, then <strong>cum back to this page.</strong>
-          </p>
-          <p>
-            Don’t have a Facebook or Google account? Cum to a Sunday run and ask for a ballot.
+            If you believe you’ve attended more runs, please cum to a
+            Sunday run before the erection is over or
+            <a href="{{electionEligibilityEmailLink}}">
+              email On Disk
+            </a>
+            with the runs you’ve attended that we’re missing in our record.
           </p>
         {{/if}}
       {{/if}}
+
+    {{else}}
+
+      {{#if session.user}}
+        <p>
+          Get started by filling out the form below. I’m Fucking Matt Damon will
+          need to verify that it’s actually you before you get a ballot.
+        </p>
+
+        {{#if savingPromise.isPending}}
+          <lbh3-alert class="d-block mt-3" message:from="'Saving your request for access…'" />
+        {{else}}
+          {{#if session.user.requestedName}}
+            <div class="alert alert-success" role="alert">
+              You’ve requested access as <strong>{{session.user.requestedName}}</strong>.
+            </div>
+          {{/if}}
+        {{/if}}
+
+        {{#if savingPromise.isRejected}}
+          <div class="alert alert-danger mt-3" role="alert">
+            <strong>Fuck!</strong> Something failed; you’ll need to try again.
+            {{savingPromise.reason.xhr.message}}
+          </div>
+        {{/if}}
+
+        {{^if savingPromise.isResolved}}
+          <form class="mb-3" on:submit="save()">
+            <div class="form-group">
+              <label for="requestedName">
+                Hash name <small>(or Just name if you’re not a named hasher)</small>
+              </label>
+              <input
+                autocomplete="off"
+                class="form-control"
+                id="requestedName"
+                placeholder="Your hash or “Just” name"
+                type="text"
+                value:bind="requestedName"
+              />
+            </div>
+            <button
+              class="btn btn-primary"
+              {{#if savingPromise.isPending}}disabled{{/if}}
+              type="submit">
+              Request access
+            </button>
+          </form>
+        {{/if}}
+
+        <p>
+          If you’re concerned about running out of time before the erection is over,
+          be sure to cum to a Sunday run to pick up a paper ballot.
+        </p>
+
+      {{else}}
+        <p>
+          Get started by signing in with <a href="/auth/facebook">Facebook</a> or
+          <a href="/auth/google">Google</a>, then <strong>cum back to this page.</strong>
+        </p>
+        <p>
+          Don’t have a Facebook or Google account? Cum to a Sunday run and ask for a ballot.
+        </p>
+      {{/if}}
     {{/if}}
   {{/if}}
-</lbh3-no-ssr>
+{{/if}}

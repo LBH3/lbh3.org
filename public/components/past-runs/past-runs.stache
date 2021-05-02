@@ -1,7 +1,6 @@
 <can-import from="can-stache-converters" />
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/alert" />
-<can-import from="~/components/no-ssr/no-ssr" />
 <can-import from="~/components/sub-nav/sub-nav" />
 
 <h2 class="sr-only">Past Runs</h2>
@@ -101,15 +100,13 @@
       {{else}}
         {{^if session.user.hasherId}}
           {{#if session.user}}
-            <lbh3-no-ssr class="d-print-none">
-              <can-import from="~/components/request-access/request-access">
-                {{#if isResolved}}
-                  <p>Are you an LBH3 hasher? Provide your name to get special access to our site. <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a></p>
-                  <lbh3-request-access />
-                  <hr />
-                {{/if}}
-              </can-import>
-            </lbh3-no-ssr>
+            <can-import class="d-print-none" from="~/components/request-access/request-access">
+              {{#if isResolved}}
+                <p>Are you an LBH3 hasher? Provide your name to get special access to our site. <a href="{{routeUrl page='about' secondaryPage='privacy'}}">Learn more →</a></p>
+                <lbh3-request-access />
+                <hr />
+              {{/if}}
+            </can-import>
           {{else}}
             <div class="alert alert-info d-print-none" role="alert">
               <p><strong>Looking for our photos or the Snooze?</strong></p>
