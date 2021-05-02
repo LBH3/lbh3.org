@@ -11,9 +11,6 @@
   "files": [
     "."
   ],
-  "scripts": {
-    "build:tests:webpack": "webpack --progress --config test.webpack.config.js"
-  },
   "steal": {
     "bundle": [
       "~/components/past-runs/map/map",

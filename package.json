@@ -23,6 +23,8 @@
   "scripts": {
     "build": "cd public && rm -rf ./dist && node build && cd ..",
     "build:tests": "cd public && node build-tests && cd ..",
+    "build:tests:webpack": "cd public && ./node_modules/.bin/webpack --progress --config test.webpack.config.js && cd ..",
+    "build:webpack": "cd public && rm -rf ./dist-webpack && ./node_modules/.bin/webpack --progress --config webpack.config.js && cd ..",
     "bundlesize": "node ./node_modules/.bin/bundlesize",
     "ci": "node install-ci",
     "eslint": "eslint src/. test/. --config .eslintrc.json --fix",
@@ -43,8 +45,10 @@
     "test:ci": "npm run test:production && node public/test.sauce-labs.js",
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -U postgres && psql -c 'create database lbh3_test;' -U postgres && psql lbh3_test < ./test/lbh3_test.dump -U postgres -v ON_ERROR_STOP=1",
     "test:production": "npm run eslint && npm run build && bundlesize && npm run build:tests && npm run sequelize:migrate && npm run mocha && npm run testee:production",
+    "test:production:webpack": "npm run eslint && npm run build:webpack && bundlesize && npm run build:tests:webpack && npm run sequelize:migrate && npm run mocha && npm run testee:production:webpack",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
-    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
+    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec",
+    "testee:production:webpack": "./public/node_modules/.bin/testee public/test.production.webpack.html --browsers firefox --reporter Spec"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.6",
