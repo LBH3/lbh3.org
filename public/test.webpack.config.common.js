@@ -5,10 +5,9 @@ const webpack = require("webpack");
 module.exports = {
     entry: "./test.webpack.js",
     output: {
-        filename: "test.bundle.js",
+        clean: true,
         path: path.resolve(__dirname, "dist-webpack")
     },
-    mode: "development",
     module: {
         rules: [
             {
