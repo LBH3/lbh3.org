@@ -169,10 +169,9 @@ const getResourceForTrail = function (app, trailData) {
     }
     descriptionParts.push(`LBH3 trails are now live. Here’s how our trails work:
 
-- Trails are now laid live or pre-laid. Join us at 10 AM for Hare Lies and the start of trail.
+- Trails are now laid live. Join us at 6:30 PM for Hare Lies and the start of trail.
 - Beer is available on trail and after trail for Down-Downs.
 - Pay Hash Cash $5 via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>. Email <a href="mailto:checkin@lbh3.org">checkin@lbh3.org</a> if you have a punch card.
-- You will receive LBH3 run credit toward patches only if you pay Hash Cash (or email for punch cards).
 - Please wear a mask while around others.`);
     if (haresInline && nameText) {
       // If there’s a name for the trail, then we need to show the hares
