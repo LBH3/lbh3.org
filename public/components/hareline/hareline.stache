@@ -1,9 +1,6 @@
 <can-import from="can-stache-route-helpers" />
 <can-import from="~/components/alert/alert" />
-<can-import from="~/components/emergency/emergency" />
 <can-import from="~/components/run-list/run-list" />
-
-<lbh3-emergency />
 
 <p class="d-print-none mt-3"><a href="mailto:trailmasters@lbh3.org">Email our Trail Masters</a> to hare a run. Note that LBH3 may suspend our trails at any time, so <strong>we might delay any run you sign up for.</strong></p>
 

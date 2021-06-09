@@ -97,7 +97,7 @@
     },
     {
       "path": "./public/dist/bundles/ballots-edit-eli-*.js",
-      "maxSize": "5 kB"
+      "maxSize": "3 kB"
     },
     {
       "path": "./public/dist/bundles/ballots-eligibil-*.css",
@@ -113,19 +113,11 @@
     },
     {
       "path": "./public/dist/bundles/edit-add-edit-edit.js",
-      "maxSize": "33 kB"
+      "maxSize": "22 kB"
     },
     {
       "path": "./public/dist/bundles/erection-results.js",
       "maxSize": "44 kB"
-    },
-    {
-      "path": "./public/dist/bundles/guidelines-edit-*.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/guidelines-edit-*.js",
-      "maxSize": "4 kB"
     },
     {
       "path": "./public/dist/bundles/hareline-hasher-*.css",
@@ -149,7 +141,7 @@
     },
     {
       "path": "./public/dist/bundles/mismanagement-ba-*.js",
-      "maxSize": "1 kB"
+      "maxSize": "4 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/index.css",
