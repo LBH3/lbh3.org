@@ -116,6 +116,18 @@
       "maxSize": "22 kB"
     },
     {
+      "path": "./public/dist/bundles/edit-add.css",
+      "maxSize": "1 kB"
+    },
+    {
+      "path": "./public/dist/bundles/edit-add.js",
+      "maxSize": "12 kB"
+    },
+    {
+      "path": "./public/dist/bundles/edit-special-eve-*.js",
+      "maxSize": "3 kB"
+    },
+    {
       "path": "./public/dist/bundles/erection-results.js",
       "maxSize": "44 kB"
     },
@@ -144,12 +156,12 @@
       "maxSize": "4 kB"
     },
     {
-      "path": "./public/dist/bundles/lbh3/index.css",
+      "path": "./public/dist/bundles/lbh3/main.css",
       "maxSize": "16 kB"
     },
     {
-      "path": "./public/dist/bundles/lbh3/index.js",
-      "maxSize": "216 kB"
+      "path": "./public/dist/bundles/lbh3/main.js",
+      "maxSize": "211 kB"
     },
     {
       "path": "./public/dist/bundles/lbh3/components/erection/erection.js",
