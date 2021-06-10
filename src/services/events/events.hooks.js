@@ -161,9 +161,7 @@ const getResourceForTrail = function (app, trailData) {
     const trailNumber = trailData.trailNumber;
 
     // Description
-    const descriptionParts = [
-      `<strong>Run:</strong> ${trailNumber}`
-    ];
+    const descriptionParts = [];
     if (!haresInline) {
       descriptionParts.push(
         '<a href=\'mailto:trailmasters@lbh3.org\'>Email our Trail Masters</a> to hare this run.'
@@ -176,11 +174,6 @@ const getResourceForTrail = function (app, trailData) {
     if (fromTheHaresInline) {
       descriptionParts.push(fromTheHaresInline);
     }
-    if (haresInline) {
-      if (!trailData.specialEventId) {
-        descriptionParts.push('<strong>Donation:</strong> $5 via <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a> or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>');
-      }
-    }
     if (bringInline) {
       descriptionParts.push(`<strong>Bring:</strong> ${bringInline}`);
     }
@@ -190,6 +183,12 @@ const getResourceForTrail = function (app, trailData) {
     if (onOnInline) {
       descriptionParts.push(`<strong>On on:</strong> ${onOnInline}`);
     }
+    if (haresInline) {
+      if (!trailData.specialEventId) {
+        descriptionParts.push('<strong>Donation:</strong> $5 via cash, <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a>, or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>');
+      }
+    }
+    descriptionParts.push(`<strong>Run:</strong> #${trailNumber}`);
     const description = descriptionParts.join('\n\n');
 
     // End
