@@ -15,31 +15,53 @@ Honeybadger.configure({
 });
 
 const AppViewModel = DefineMap.extend({
-  day: "string",
+  day: {
+    get() {
+      return this.routeData.day;
+    },
+    type: "string"
+  },
   description: {
     default: "",
     serialize: false,
   },
-  id: "number",
-  month: "string",
+  head: {
+    default() {
+      return document.head;
+    }
+  },
+  id: {
+    get() {
+      return this.routeData.id;
+    },
+    type: "number"
+  },
+  month: {
+    get() {
+      return this.routeData.month;
+    },
+    type: "string"
+  },
   noHeadshot: {
     default: false,
     serialize(noHeadshot) {
       return noHeadshot || undefined;
     },
   },
-  nodeEnv: {
-    get() {
-      return (this.env && this.env.NODE_ENV) || "development";
-    },
-    serialize: false,
-  },
   ogTitle: {
     default: "",
     serialize: false,
   },
   page: {
-    default: defaultPage,
+    get() {
+      return this.routeData.page || defaultPage;
+    }
+  },
+  routeData: {
+    default() {
+      route.start();
+      return route.data;
+    }
   },
   role: {
     default: "",
@@ -58,7 +80,6 @@ const AppViewModel = DefineMap.extend({
       return searchMissing || undefined;
     },
   },
-  secondaryPage: "string",
   get session() {
     return Session.current;
   },
@@ -102,14 +123,24 @@ const AppViewModel = DefineMap.extend({
     default: "LBH3",
     serialize: false,
   },
-  trailNumber: "number",
-  urlId: "string",
+  trailNumber: {
+    get() {
+      return this.routeData.trailNumber;
+    },
+    type: "number"
+  },
+  urlId: {
+    get() {
+      return this.routeData.urlId;
+    },
+    type: "string"
+  },
   get whichEventsPage() {
-    if (this.secondaryPage === "attendance") {
+    if (this.routeData.secondaryPage === "attendance") {
       return "attendance";
-    } else if (this.secondaryPage === "edit") {
+    } else if (this.routeData.secondaryPage === "edit") {
       return "edit";
-    } else if (this.secondaryPage === "search") {
+    } else if (this.routeData.secondaryPage === "search") {
       return "past-runs";
     } else if (this.trailNumber) {
       return "run";
@@ -125,8 +156,11 @@ const AppViewModel = DefineMap.extend({
     },
   },
   year: {
+    get() {
+      return this.routeData.year;
+    },
     serialize: function (year) {
-      return this.page === "events" && this.secondaryPage === "search"
+      return this.page === "events" && this.routeData.secondaryPage === "search"
         ? undefined
         : year;
     },
