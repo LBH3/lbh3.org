@@ -2,9 +2,6 @@
 
 [![Sauce Labs Test Status](https://saucelabs.com/browser-matrix/lbh3.svg)](https://saucelabs.com/u/lbh3)
 
-[![Build Status](https://travis-ci.org/LBH3/lbh3.org.svg?branch=master)](https://travis-ci.org/LBH3/lbh3.org)
-[![Greenkeeper badge](https://badges.greenkeeper.io/LBH3/lbh3.org.svg)](https://greenkeeper.io/)
-
 ## Getting started
 
 ### npm
