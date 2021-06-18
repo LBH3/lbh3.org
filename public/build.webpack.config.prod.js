@@ -5,6 +5,6 @@ module.exports = merge(common, {
     devtool: 'source-map',
     mode: 'production',
     output: {
-        filename: "test.production.js"
+        filename: "main.production.js"
     }
 });

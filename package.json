@@ -23,7 +23,10 @@
   "scripts": {
     "build": "cd public && rm -rf ./dist && node build && cd ..",
     "build:tests": "cd public && node build-tests && cd ..",
+    "build:tests:webpack": "cd public && npm run build:tests:production:webpack && cd ..",
+    "build:webpack": "cd public && npm run build:webpack:production && cd ..",
     "bundlesize": "node ./node_modules/.bin/bundlesize",
+    "bundlesize:webpack": "node ./node_modules/.bin/bundlesize --config config/bundlesize.webpack.json",
     "ci": "node install-ci",
     "eslint": "eslint src/. test/. --config .eslintrc.json --fix",
     "heroku-postbuild": "npm run build",
@@ -38,14 +41,16 @@
     "start:development": "node src/ --develop",
     "start:inspect": "node --inspect-brk src/",
     "start:production": "NODE_ENV=production PORT=8080 npm start",
-    "test": "npm run test:common && npm run testee",
+    "test": "npm run test:common && npm run testee && npm run testee:webpack",
     "test:ci": "npm run test:common && node public/test.sauce-labs.js",
-    "test:common": "npm run eslint && npm run build && npm run bundlesize && npm run test:db && npm run mocha && npm run build:tests",
+    "test:common": "npm run eslint && npm run build && npm run build:webpack && npm run bundlesize && npm run bundlesize:webpack && npm run test:db && npm run mocha && npm run build:tests && npm run build:tests:webpack",
     "test:db": "npm run test:db:create && npm run sequelize:migrate",
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -h localhost -U postgres && psql -c 'create database lbh3_test;' -h localhost -U postgres && psql lbh3_test < ./test/lbh3_test.dump -h localhost -U postgres -v ON_ERROR_STOP=1",
-    "test:production": "npm run test:common && npm run testee:production",
+    "test:production": "npm run test:common && npm run testee:production && npm run testee:production:webpack",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
-    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
+    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec",
+    "testee:production:webpack": "./public/node_modules/.bin/testee public/test.production.webpack.html --browsers firefox --reporter Spec",
+    "testee:webpack": "./public/node_modules/.bin/testee public/test.webpack.html --browsers firefox --reporter Spec"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.6",
