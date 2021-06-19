@@ -1,4 +1,4 @@
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import { Address, Hasher } from './hasher';
 
 QUnit.module('models/hasher');

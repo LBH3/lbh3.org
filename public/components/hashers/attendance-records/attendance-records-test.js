@@ -1,4 +1,4 @@
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import { ViewModel } from './attendance-records';
 
 // ViewModel unit tests

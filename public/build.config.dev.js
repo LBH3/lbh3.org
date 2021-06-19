@@ -1,14 +1,14 @@
 const { merge } = require('webpack-merge');
-const common = require('./webpack.config.common.js');
+const common = require('./config.common.js');
 
 module.exports = merge(common, {
     devServer: {
-        contentBase: './dist-webpack',
+        contentBase: './dist',
     },
     devtool: 'inline-source-map',
-    entry: "./test.webpack.js",
+    entry: "./main.js",
     mode: 'development',
     output: {
-        filename: "test.development.js"
+        filename: "main.development.js"
     }
 });

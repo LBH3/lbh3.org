@@ -1,5 +1,5 @@
 import BoredHasher from './bored-hasher';
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 
 QUnit.module('models/bored-hasher');
 

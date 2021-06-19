@@ -1,5 +1,5 @@
 import BoredYear from './bored-year';
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 
 QUnit.module('models/bored-year');
 

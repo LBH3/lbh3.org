@@ -3,7 +3,6 @@ import DefineMap from 'can-define/map/map';
 import './guidelines.less';
 import { darkModeStyles } from '~/components/map/map';
 import loader from '@loader';
-import platform from 'steal-platform';
 import view from './guidelines.stache';
 
 export const ViewModel = DefineMap.extend({
@@ -16,17 +15,12 @@ export const ViewModel = DefineMap.extend({
 	get ogTitle() {
 		return 'Haring Guidelines';
 	},
-	platform: {
-		default: () => {
-			return platform;
-		}
-	},
 	get title() {
 		return `${this.ogTitle} | LBH3`;
 	},
 
 	connectedCallback(element) {
-		if (platform.isNode) {
+		if (loader.isNode) {
 			return;
 		}
 

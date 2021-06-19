@@ -429,8 +429,7 @@ module.exports = function (app) {
   });
 
   // Host the app
-  const isWebpack = process.argv.includes('--webpack');
-  const appPath = path.resolve(__dirname, `${__dirname}/../../public/${env === 'development' ? `development${isWebpack ? '.webpack' : ''}.html` : `production${isWebpack ? '.webpack' : ''}.html`}`);
+  const appPath = path.resolve(__dirname, `${__dirname}/../../public/${env === 'development' ? 'development.html' : 'production.html'}`);
   app.use('/*', function (request, response) {
     response.sendFile(appPath);
   });

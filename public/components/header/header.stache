@@ -21,7 +21,7 @@
     </h1>
   </div>
   <div>
-    {{#eq platform.isNode true}}
+    {{#eq loader.isNode true}}
       <div class="align-items-center d-flex" style="height: 100%"><div aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></div></div>
     {{else}}
       <ul class="nav">

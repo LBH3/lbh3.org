@@ -1,7 +1,7 @@
 {
     "files": [
         {
-            "path": "./public/dist-webpack/main.production.js",
+            "path": "./public/dist/main.production.js",
             "maxSize": "494 kB"
         }
     ]

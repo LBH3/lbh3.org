@@ -1,4 +1,4 @@
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 
 // ViewModel unit tests
 QUnit.module('lbh3/components/hasher');

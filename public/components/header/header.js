@@ -3,7 +3,7 @@ import DefineMap from 'can-define/map/map';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
 import './header.less';
-import platform from 'steal-platform';
+import loader from '@loader';
 import view from './header.stache';
 
 export const ViewModel = DefineMap.extend({
@@ -40,12 +40,12 @@ export const ViewModel = DefineMap.extend({
       }
     }
   },
-  page: 'string',
-  platform: {
+  loader: {
     default: () => {
-      return platform;
+      return loader;
     }
   },
+  page: 'string',
   secondaryPage: 'string',
   get session() {
     return Session.current;

@@ -5,7 +5,7 @@ const webpack = require("webpack");
 module.exports = {
     output: {
         clean: true,
-        path: path.resolve(__dirname, "dist-webpack")
+        path: path.resolve(__dirname, "dist")
     },
     module: {
         rules: [
@@ -63,8 +63,7 @@ module.exports = {
         alias: {
             "@loader": path.resolve(__dirname, "./loader.js"),
             "~": path.resolve(__dirname, "./"),
-            lbh3: path.resolve(__dirname, "./"),
-            "steal-qunit": "qunitjs"
+            lbh3: path.resolve(__dirname, "./")
         },
         extensions: ["*", ".js"]
     }
