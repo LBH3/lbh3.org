@@ -1,5 +1,5 @@
 import Election from '~/models/election';
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import { ViewModel } from './edit';
 
 // ViewModel unit tests

@@ -1,12 +1,12 @@
 import { darkModeStyles } from '~/components/map/map';
 import callbacks from 'can-view-callbacks';
-import platform from 'steal-platform';
+import loader from '@loader';
 import route from 'can-route';
 
 const zoom = 9;
 
 callbacks.attr('lbh3-map-attr', (mapElement, data) => {
-  if (platform.isNode) {
+  if (loader.isNode) {
     return;
   }
 

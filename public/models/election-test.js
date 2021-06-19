@@ -1,4 +1,4 @@
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import Election from './election';
 
 QUnit.module('models/election');

@@ -1,2 +1,2 @@
 release: npm run sequelize:migrate
-web: npm run start -- --webpack
+web: npm run start

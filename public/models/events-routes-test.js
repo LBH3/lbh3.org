@@ -1,3 +1,3 @@
-import QUnit from "steal-qunit";
+import QUnit from "qunitjs";
 
 QUnit.module("models/events-routes");

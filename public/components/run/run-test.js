@@ -1,5 +1,5 @@
 import moment from 'moment-timezone';
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import Run from './run';
 
 // ViewModel unit tests

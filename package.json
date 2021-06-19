@@ -21,16 +21,13 @@
     "npm": "6.x"
   },
   "scripts": {
-    "build": "cd public && rm -rf ./dist && node build && cd ..",
-    "build:tests": "cd public && node build-tests && cd ..",
-    "build:tests:webpack": "cd public && npm run build:tests:production:webpack && cd ..",
-    "build:webpack": "cd public && npm run build:webpack:production && cd ..",
-    "build:webpack:watch": "cd public && npm run build:webpack:watch && cd ..",
-    "bundlesize": "node ./node_modules/.bin/bundlesize",
-    "bundlesize:webpack": "node ./node_modules/.bin/bundlesize --config config/bundlesize.webpack.json",
+    "build": "cd public && npm run build:production && cd ..",
+    "build:tests": "cd public && npm run build:tests:production && cd ..",
+    "build:watch": "cd public && npm run build:watch && cd ..",
+    "bundlesize": "node ./node_modules/.bin/bundlesize --config config/bundlesize.json",
     "ci": "node install-ci",
     "eslint": "eslint src/. test/. --config .eslintrc.json --fix",
-    "heroku-postbuild": "npm run build:webpack",
+    "heroku-postbuild": "npm run build",
     "install": "node install",
     "mocha": "mocha test/ --recursive --exit",
     "mocha:debug": "mocha test/ --recursive --inspect-brk --exit",
@@ -38,21 +35,17 @@
     "sequelize:migrate:rerun": "npm run sequelize:migrate:undo && npm run sequelize:migrate",
     "sequelize:migrate:undo": "npx sequelize-cli db:migrate:undo",
     "start": "node --optimize_for_size --max_old_space_size=460 src/",
-    "start:debug": "node --inspect src/",
-    "start:debug:webpack": "node --inspect src/ -- --webpack & sleep 1 && npm run build:webpack:watch",
-    "start:development": "node src/ --develop",
+    "start:debug": "node --inspect src/ & sleep 1 && npm run build:watch",
     "start:inspect": "node --inspect-brk src/",
     "start:production": "NODE_ENV=production PORT=8080 npm start",
-    "test": "npm run test:common && npm run testee && npm run testee:webpack",
+    "test": "npm run test:common && npm run testee && npm run testee",
     "test:ci": "npm run test:common && node public/test.sauce-labs.js",
-    "test:common": "npm run eslint && npm run build && npm run build:webpack && npm run bundlesize && npm run bundlesize:webpack && npm run test:db && npm run mocha && npm run build:tests && npm run build:tests:webpack",
+    "test:common": "npm run eslint && npm run build && npm run build && npm run bundlesize && npm run bundlesize && npm run test:db && npm run mocha && npm run build:tests && npm run build:tests",
     "test:db": "npm run test:db:create && npm run sequelize:migrate",
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -h localhost -U postgres && psql -c 'create database lbh3_test;' -h localhost -U postgres && psql lbh3_test < ./test/lbh3_test.dump -h localhost -U postgres -v ON_ERROR_STOP=1",
-    "test:production": "npm run test:common && npm run testee:production && npm run testee:production:webpack",
+    "test:production": "npm run test:common && npm run testee:production && npm run testee:production",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
-    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec",
-    "testee:production:webpack": "./public/node_modules/.bin/testee public/test.production.webpack.html --browsers firefox --reporter Spec",
-    "testee:webpack": "./public/node_modules/.bin/testee public/test.webpack.html --browsers firefox --reporter Spec"
+    "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
   },
   "dependencies": {
     "@feathersjs/authentication": "^2.1.6",
@@ -96,155 +89,5 @@
     "request-promise": "^4.2.1",
     "through": "^2.3.8",
     "xml-stream": "^0.4.5"
-  },
-  "bundlesize": [
-    {
-      "path": "./public/dist/steal.production.js",
-      "maxSize": "25 kB"
-    },
-    {
-      "path": "./public/dist/bundles/ballots-edit-eli-*.js",
-      "maxSize": "3 kB"
-    },
-    {
-      "path": "./public/dist/bundles/ballots-eligibil-*.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/ballots-eligibil-*.js",
-      "maxSize": "7 kB"
-    },
-    {
-      "path": "./public/dist/bundles/edit-add-edit-edit.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/edit-add-edit-edit.js",
-      "maxSize": "22 kB"
-    },
-    {
-      "path": "./public/dist/bundles/edit-add.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/edit-add.js",
-      "maxSize": "12 kB"
-    },
-    {
-      "path": "./public/dist/bundles/edit-special-eve-*.js",
-      "maxSize": "3 kB"
-    },
-    {
-      "path": "./public/dist/bundles/erection-results.js",
-      "maxSize": "44 kB"
-    },
-    {
-      "path": "./public/dist/bundles/hareline-hasher-*.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/hareline-hasher-*.js",
-      "maxSize": "6 kB"
-    },
-    {
-      "path": "./public/dist/bundles/home-run.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/home-run.js",
-      "maxSize": "8 kB"
-    },
-    {
-      "path": "./public/dist/bundles/mismanagement-ba-*.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/mismanagement-ba-*.js",
-      "maxSize": "4 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/main.css",
-      "maxSize": "16 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/main.js",
-      "maxSize": "211 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/erection/erection.js",
-      "maxSize": "21 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hareline/hareline.js",
-      "maxSize": "5 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hareline/guidelines/guidelines.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hareline/guidelines/guidelines.js",
-      "maxSize": "15 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hasher/hasher.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hasher/hasher.js",
-      "maxSize": "13 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hashers/hashers.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/hashers/hashers.js",
-      "maxSize": "9 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/home/home.js",
-      "maxSize": "6 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/past-runs/map/map.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/past-runs/map/map.js",
-      "maxSize": "5 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/past-runs/past-runs.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/past-runs/past-runs.js",
-      "maxSize": "9 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/past-runs/search/search.js",
-      "maxSize": "6 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/past-runs/special/special.js",
-      "maxSize": "4 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/past-runs/sync/sync.js",
-      "maxSize": "6 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/run/post/post.css",
-      "maxSize": "1 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/run/post/post.js",
-      "maxSize": "8 kB"
-    },
-    {
-      "path": "./public/dist/bundles/lbh3/components/special-event/special-event.js",
-      "maxSize": "5 kB"
-    }
-  ]
+  }
 }

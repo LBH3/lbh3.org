@@ -1,5 +1,5 @@
 import PastRuns from './past-runs';
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 
 // ViewModel unit tests
 QUnit.module('lbh3/components/past-runs');

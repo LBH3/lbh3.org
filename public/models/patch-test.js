@@ -1,4 +1,4 @@
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import Patch from './patch';
 
 QUnit.module('models/patch');

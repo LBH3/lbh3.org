@@ -1,4 +1,4 @@
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import Place from './place';
 
 QUnit.module('models/place');

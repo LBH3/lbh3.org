@@ -1,5 +1,5 @@
 import Hasher from '~/models/hasher';
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import { ViewModel } from './attendance';
 
 // ViewModel unit tests

@@ -1,5 +1,5 @@
 import Event from './event';
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 
 QUnit.module('models/event');
 

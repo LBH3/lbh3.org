@@ -1,6 +1,6 @@
 import BoredYear from '~/models/bored-year';
 import Hasher from '~/models/hasher';
-import QUnit from 'steal-qunit';
+import QUnit from 'qunitjs';
 import { ViewModel } from './year';
 
 // ViewModel unit tests
