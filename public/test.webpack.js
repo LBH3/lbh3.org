@@ -63,7 +63,7 @@ F.attach(QUnit);
 
 QUnit.module('lbh3 functional smoke test', {
   beforeEach() {
-    F.open('./development.html');
+    F.open('./development.webpack.html');
   }
 });
 

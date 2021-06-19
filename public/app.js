@@ -6,7 +6,7 @@ import RoutePushstate from "can-route-pushstate";
 import Session from "~/models/session";
 
 const defaultPage = "home";
-const environment = loader.getEnv();
+const environment = typeof loader.getEnv === 'undefined' ? process.env.NODE_ENV : loader.getEnv();
 
 Honeybadger.configure({
   apiKey: "ff6891e2",
