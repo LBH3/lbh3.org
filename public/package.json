@@ -12,10 +12,11 @@
     "."
   ],
   "scripts": {
-    "build:tests:production:webpack": "webpack --progress --config test.webpack.config.prod.js",
-    "build:tests:webpack": "webpack --progress --config test.webpack.config.dev.js",
-    "build:webpack": "rm -rf ./dist-webpack && webpack --progress --config build.webpack.config.dev.js",
-    "build:webpack:production": "rm -rf ./dist-webpack && webpack --progress --config build.webpack.config.prod.js"
+    "build:tests:production:webpack": "NODE_ENV=production webpack --progress --config test.webpack.config.prod.js",
+    "build:tests:webpack": "NODE_ENV=development webpack --progress --config test.webpack.config.dev.js",
+    "build:webpack": "rm -rf ./dist-webpack && NODE_ENV=development webpack --progress --config build.webpack.config.dev.js",
+    "build:webpack:production": "rm -rf ./dist-webpack && NODE_ENV=production webpack --progress --config build.webpack.config.prod.js",
+    "build:webpack:watch": "rm -rf ./dist-webpack && NODE_ENV=development webpack --progress --watch --config build.webpack.config.dev.js"
   },
   "steal": {
     "bundle": [

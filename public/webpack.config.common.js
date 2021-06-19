@@ -3,7 +3,6 @@ const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const webpack = require("webpack");
 
 module.exports = {
-    entry: "./test.webpack.js",
     output: {
         clean: true,
         path: path.resolve(__dirname, "dist-webpack")
@@ -53,6 +52,7 @@ module.exports = {
         ]
     },
     plugins: [
+        new webpack.EnvironmentPlugin(['NODE_ENV']),
         new webpack.optimize.SideEffectsFlagPlugin(),
         new UglifyJSPlugin({
             sourceMap: true,

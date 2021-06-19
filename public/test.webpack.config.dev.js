@@ -6,6 +6,7 @@ module.exports = merge(common, {
         contentBase: './dist-webpack',
     },
     devtool: 'inline-source-map',
+    entry: "./test.webpack.js",
     mode: 'development',
     output: {
         filename: "test.development.js"
