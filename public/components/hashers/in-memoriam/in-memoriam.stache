@@ -3,7 +3,7 @@
 
 <h2 class="sr-only">In Memoriam</h2>
 
-{{#if session.user.canViewDirectoryInfo}}
+{{#if session.user.hasherId}}
   {{#if hashersPromise.isPending}}
     <lbh3-alert class="d-block mt-3" message:from="'Fetching our passed hashers…'" />
   {{/if}}

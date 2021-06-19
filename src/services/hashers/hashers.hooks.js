@@ -232,7 +232,9 @@ const filterData = function(data, filterState, user) {
   } else {
     const filteredFields = {
       hashName: data.hashName,
-      id: data.id
+      deathDate: data.deathDate,
+      id: data.id,
+      obituaryMd: data.obituaryMd
     };
     if (filterState === filterStates.VERIFIED) {
       filteredFields.firstTrailDate = data.firstTrailDate;
