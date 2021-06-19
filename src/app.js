@@ -61,13 +61,6 @@ app.use(handler());
 
 app.use(Honeybadger.errorHandler);
 
-// Raygun
-const raygun = require('raygun');
-const raygunClient = new raygun.Client().init({
-  apiKey: app.get('raygun').apiKey,
-});
-app.use(raygunClient.expressHandler);
-
 app.hooks(appHooks);
 
 module.exports = app;
