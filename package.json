@@ -39,7 +39,7 @@
     "sequelize:migrate:undo": "npx sequelize-cli db:migrate:undo",
     "start": "node --optimize_for_size --max_old_space_size=460 src/",
     "start:debug": "node --inspect src/",
-    "start:debug:webpack": "node --inspect src/ -- --webpack && npm run build:webpack:watch",
+    "start:debug:webpack": "node --inspect src/ -- --webpack & sleep 1 && npm run build:webpack:watch",
     "start:development": "node src/ --develop",
     "start:inspect": "node --inspect-brk src/",
     "start:production": "NODE_ENV=production PORT=8080 npm start",
