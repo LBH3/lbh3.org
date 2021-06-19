@@ -30,7 +30,7 @@
     "bundlesize:webpack": "node ./node_modules/.bin/bundlesize --config config/bundlesize.webpack.json",
     "ci": "node install-ci",
     "eslint": "eslint src/. test/. --config .eslintrc.json --fix",
-    "heroku-postbuild": "npm run build",
+    "heroku-postbuild": "npm run build:webpack",
     "install": "node install",
     "mocha": "mocha test/ --recursive --exit",
     "mocha:debug": "mocha test/ --recursive --inspect-brk --exit",
