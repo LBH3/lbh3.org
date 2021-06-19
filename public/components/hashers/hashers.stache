@@ -23,6 +23,9 @@
     <div class="align-items-center d-flex form-group mb-sm-0 mr-sm-3">
       <label class="mb-0 mr-2" for="sort-by">Sort</label>
       <select class="form-control w-auto" id="sort-by" value:bind="searchSort">
+        {{#if(session.user.canViewDirectoryInfo)}}
+          <option value="firstTrail">First Trail</option>
+        {{/if}}
         <option value="">Name</option>
         <option value="runs">Runs</option>
       </select>

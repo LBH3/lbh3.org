@@ -48,6 +48,10 @@ export const ViewModel = DefineMap.extend({
         searchParams.$sort = {
           runCount: -1
         };
+      } else if (searchSort === 'firstTrail') {
+        searchParams.$sort = {
+          firstTrailDate: -1
+        };
       }
     } else {
       searchParams.$sort = {
@@ -62,9 +66,11 @@ export const ViewModel = DefineMap.extend({
     if (searchText) {
       searchParams.search = searchText;
     } else {
-      searchParams.hashName = {
-        $nin: ['']
-      };
+      if (searchSort !== 'firstTrail') {
+        searchParams.hashName = {
+          $nin: ['']
+        };
+      }
       const now = new Date();
       searchParams.lastTrailDate = {
         $gte: new Date(now.getFullYear() - 1, now.getMonth(), now.getDate())
