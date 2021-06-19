@@ -168,7 +168,7 @@
           <can-import from="~/components/past-runs/past-runs">
             {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading Past Runs…'" />{{/if}}
             {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Past Runs page failed to load.</div>{{/if}}
-            {{#if isResolved}}<lbh3-past-runs description:to="description" ogTitle:to="ogTitle" searchMissing:bind="searchMissing" secondaryPage:from="routeData.secondaryPage" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" skip:from="skip" title:to="title" view:bind="view" year:bind="year" />{{/if}}
+            {{#if isResolved}}<lbh3-past-runs description:to="description" ogTitle:to="ogTitle" searchMissing:bind="routeData.searchMissing" secondaryPage:from="routeData.secondaryPage" showHashit:bind="routeData.showHashit" showNotes:bind="routeData.showNotes" showOnOn:bind="routeData.showOnOn" showScribe:bind="routeData.showScribe" skip:from="routeData.skip" title:to="title" view:bind="routeData.view" year:bind="year" />{{/if}}
           </can-import>
         {{/default}}
       {{/switch}}
@@ -256,7 +256,7 @@
           <can-import from="~/components/hasher/hasher">
             {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Hasher page…'" />{{/if}}
             {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Hasher page failed to load.</div>{{/if}}
-            {{#if isResolved}}<lbh3-hasher description:to="description" id:from="id" ogTitle:to="ogTitle" role:bind="role" secondaryPage:from="routeData.secondaryPage" showHashit:bind="showHashit" showNotes:bind="showNotes" showOnOn:bind="showOnOn" showScribe:bind="showScribe" skip:from="skip" title:to="title" />{{/if}}
+            {{#if isResolved}}<lbh3-hasher description:to="description" id:from="id" ogTitle:to="ogTitle" role:bind="routeData.role" secondaryPage:from="routeData.secondaryPage" showHashit:bind="routeData.showHashit" showNotes:bind="routeData.showNotes" showOnOn:bind="routeData.showOnOn" showScribe:bind="routeData.showScribe" skip:from="routeData.skip" title:to="title" />{{/if}}
           </can-import>
         {{/if}}
       {{else}}
@@ -295,7 +295,7 @@
           <can-import class="container d-block pl-0 pr-0" from="~/components/hashers/hashers">
             {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Directory page…'" />{{/if}}
             {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Directory page failed to load.</div>{{/if}}
-            {{#if isResolved}}<lbh3-hashers description:to="description" ogTitle:to="ogTitle" searchNoHeadshot:bind="noHeadshot" searchSort:bind="sort" searchText:bind="search" skip:from="skip" title:to="title" />{{/if}}
+            {{#if isResolved}}<lbh3-hashers description:to="description" ogTitle:to="ogTitle" searchNoHeadshot:bind="routeData.noHeadshot" searchSort:bind="routeData.sort" searchText:bind="routeData.search" skip:from="routeData.skip" title:to="title" />{{/if}}
           </can-import>
         {{/if}}
       {{/if}}

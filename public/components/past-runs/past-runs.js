@@ -96,6 +96,7 @@ export default Component.extend({
       }
       return false;
     },
+    skip: 'number',
     get specialEventsPromise() {
       return SpecialEvent.getList(this.eventQuery);
     },

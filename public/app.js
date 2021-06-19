@@ -42,12 +42,6 @@ const AppViewModel = DefineMap.extend({
     },
     type: "string"
   },
-  noHeadshot: {
-    default: false,
-    serialize(noHeadshot) {
-      return noHeadshot || undefined;
-    },
-  },
   ogTitle: {
     default: "",
     serialize: false,
@@ -63,61 +57,8 @@ const AppViewModel = DefineMap.extend({
       return route.data;
     }
   },
-  role: {
-    default: "",
-    serialize(role) {
-      return role || undefined;
-    },
-  },
-  search: {
-    default: "",
-    serialize(search) {
-      return search || undefined;
-    },
-  },
-  searchMissing: {
-    serialize(searchMissing) {
-      return searchMissing || undefined;
-    },
-  },
   get session() {
     return Session.current;
-  },
-  skip: {
-    default: 0,
-    serialize(skip) {
-      return skip || undefined;
-    },
-  },
-  showHashit: {
-    default: false,
-    serialize(search) {
-      return search || undefined;
-    },
-  },
-  showNotes: {
-    default: false,
-    serialize(search) {
-      return search || undefined;
-    },
-  },
-  showOnOn: {
-    default: false,
-    serialize(search) {
-      return search || undefined;
-    },
-  },
-  showScribe: {
-    default: false,
-    serialize(search) {
-      return search || undefined;
-    },
-  },
-  sort: {
-    default: "",
-    serialize(sort) {
-      return sort || undefined;
-    },
   },
   title: {
     default: "LBH3",
@@ -150,11 +91,6 @@ const AppViewModel = DefineMap.extend({
       return "past-runs";
     }
   },
-  view: {
-    serialize: function (view) {
-      return view === "list" ? undefined : view;
-    },
-  },
   year: {
     get() {
       return this.routeData.year;
@@ -183,12 +119,24 @@ route.register("/erections/{urlId}/{secondaryPage}/", {
 });
 route.register("/erections/{urlId}/", { page: "erections", urlId: "" });
 route.register("/erections/", { page: "erections" });
-route.register("/events/", { page: "events" });
+route.register("/events/", {
+  page: "events",
+  showHashit: false,
+  showNotes: false,
+  showOnOn: false,
+  showScribe: false,
+  view: "list"
+});
 route.register("/events/founders/", {
   page: "events",
   secondaryPage: "founders",
 });
-route.register("/events/search/", { page: "events", secondaryPage: "search" });
+route.register("/events/search/", {
+  page: "events",
+  searchMissing: "broken-photo-url",
+  secondaryPage: "search",
+  skip: 0
+});
 route.register("/events/special/", {
   page: "events",
   secondaryPage: "special",
@@ -266,8 +214,22 @@ route.register("/hashers/{id}/{secondaryPage}/", {
   id: 0,
   secondaryPage: "",
 });
-route.register("/hashers/{id}/", { page: "hashers", id: 0 });
-route.register("/hashers/", { page: "hashers", secondaryPage: "" });
+route.register("/hashers/{id}/", {
+  id: 0,
+  page: "hashers",
+  role: "",
+  showHashit: false,
+  showNotes: false,
+  showOnOn: false,
+  showScribe: false
+});
+route.register("/hashers/", {
+  noHeadshot: false,
+  page: "hashers",
+  search: "",
+  secondaryPage: "",
+  sort: ""
+});
 route.register("/users/{id}/{secondaryPage}/", {
   page: "users",
   id: 0,
