@@ -35,13 +35,15 @@ jobs:
           tunnelIdentifier: ${{ steps.create-job-id.outputs.uuid }}
           scVersion: 4.6.4
       - run: npm ci
-      - run: npm run test:ci
+      - run: npm run test:common
         env:
           DATABASE_URL: postgresql://postgres:postgres@localhost:5432/lbh3_test
           POSTGRES_DB: postgres
           POSTGRES_HOST_AUTH_METHOD: trust
           POSTGRES_PASSWORD: postgres
           POSTGRES_USER: postgres
+      - run: node public/test.sauce-labs.js
+        env:
           SAUCE_ACCESS_KEY: ${{secrets.SAUCE_ACCESS_KEY}}
           SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
 

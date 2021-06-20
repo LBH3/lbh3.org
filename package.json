@@ -39,7 +39,6 @@
     "start:inspect": "node --inspect-brk src/",
     "start:production": "npm run build && NODE_ENV=production PORT=8080 npm start",
     "test": "npm run test:common && npm run testee",
-    "test:ci": "npm run test:common && node public/test.sauce-labs.js",
     "test:common": "npm run eslint && npm run build && npm run bundlesize && npm run test:db && npm run mocha && npm run build:tests",
     "test:db": "npm run test:db:create && npm run sequelize:migrate",
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -h localhost -U postgres && psql -c 'create database lbh3_test;' -h localhost -U postgres && psql lbh3_test < ./test/lbh3_test.dump -h localhost -U postgres -v ON_ERROR_STOP=1",
