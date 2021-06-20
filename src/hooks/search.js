@@ -66,6 +66,7 @@ module.exports = function (options) {
       if (query.$sort) {
         const mapping = {
           familyName: 'family_name',
+          firstTrailDate: 'first_trail_date',
           givenName: 'given_name',
           hashName: 'NULLIF(hash_name, \'\')',
           lastTrailDate: 'last_trail_date',
