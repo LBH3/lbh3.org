@@ -4,8 +4,5 @@ const common = require('./config.common.js');
 module.exports = merge(common, {
     devtool: 'source-map',
     entry: "./main.js",
-    mode: 'production',
-    output: {
-        filename: "main.production.js"
-    }
+    mode: 'production'
 });

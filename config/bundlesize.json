@@ -1,7 +1,7 @@
 {
     "files": [
         {
-            "path": "./public/dist/main.production.js",
+            "path": "./public/dist/main.*.js",
             "maxSize": "448 kB"
         }
     ]
