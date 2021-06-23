@@ -126,6 +126,7 @@ const getBoredInfo = function(hook) {
       if (boredPositions.includes(authHook.ON_SEC)) {
         permission = Object.assign(permission, {
           canAddSnoozes: true,
+          canEditHasherInfo: true,
           canViewDirectoryInfo: true,
           canViewRunAttendance: true
         });
