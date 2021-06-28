@@ -429,7 +429,7 @@ module.exports = function (app) {
   });
 
   // Host the app
-  const appPath = path.resolve(__dirname, `${__dirname}/../../public/${env === 'development' ? 'development.html' : 'production.html'}`);
+  const appPath = path.resolve(__dirname, `${__dirname}/../../public/dist/main.html`);
   app.use('/*', function (request, response) {
     response.sendFile(appPath);
   });

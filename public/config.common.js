@@ -1,3 +1,4 @@
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const UglifyJSPlugin = require("uglifyjs-webpack-plugin");
 const webpack = require("webpack");
@@ -5,6 +6,7 @@ const webpack = require("webpack");
 module.exports = {
     output: {
         clean: true,
+        filename: "[name].[contenthash].js",
         path: path.resolve(__dirname, "dist")
     },
     module: {
@@ -15,9 +17,9 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                      presets: ['@babel/preset-env']
+                        presets: ['@babel/preset-env']
                     }
-                  }
+                }
             },
             {
                 test: /\.((c|le)ss)$/i,
@@ -52,6 +54,11 @@ module.exports = {
         ]
     },
     plugins: [
+        new HtmlWebpackPlugin({
+            filename: '[name].html',
+            publicPath: '/dist/',
+            title: 'LBH3'
+        }),
         new webpack.EnvironmentPlugin(['NODE_ENV']),
         new webpack.optimize.SideEffectsFlagPlugin(),
         new UglifyJSPlugin({

@@ -7,8 +7,5 @@ module.exports = merge(common, {
     },
     devtool: 'inline-source-map',
     entry: "./test.js",
-    mode: 'development',
-    output: {
-        filename: "test.development.js"
-    }
+    mode: 'development'
 });
