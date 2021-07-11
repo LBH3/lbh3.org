@@ -1,0 +1,68 @@
+body {
+  background: var(--body-background-color);
+}
+
+.calendar a, .list a {
+  text-decoration: none;
+}
+.calendar a, .list a, .calendar a:hover, .list a:hover {
+  color: var(--link-color);
+}
+
+hr {
+  background-color: var(--hr-background-color);
+}
+
+.calendar {
+  color: var(--text-color);
+  display: grid;
+  font-size: 0.875rem;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.list dd {
+  margin: 0;
+  overflow: hidden;
+}
+
+.list dt {
+  -webkit-backdrop-filter: var(--table-header-backdrop-filter);
+  backdrop-filter: var(--table-header-backdrop-filter);
+  background: var(--table-header-background-color);
+  color: var(--table-header-color);
+  position: sticky;
+  top: -1px;
+}
+
+.one-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-muted {
+  color: var(--text-muted-color) !important;
+}
+
+:root {
+  --body-background-color: white;
+  --hr-background-color: black;
+  --link-color: black;
+  --table-header-backdrop-filter: saturate(180%) blur(20px);
+  --table-header-background-color: rgba(0, 0, 0, .6);
+  --table-header-color: white;
+  --text-color: black;
+  --text-muted-color: #6c757d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --body-background-color: #111;
+    --hr-background-color: #eee;
+    --link-color: #eee;
+    --table-header-background-color: rgba(255, 255, 255, .6);
+    --table-header-color: #111;
+    --text-color: #eee;
+    --text-muted-color: #bbb;
+  }
+}
