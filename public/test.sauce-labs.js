@@ -26,11 +26,6 @@ try {
         platform: 'iOS',
         version: '10.3'
       }, {
-        browserName: 'MicrosoftEdge',
-        commandTimeout: 60,
-        platform: 'Windows 10',
-        version: '18'
-      }, {
         browserName: 'firefox',
         commandTimeout: 60,
         platform: 'Windows 7',
