@@ -55,9 +55,9 @@
   {{/if}}
 {{/if}}
 
-{{#if isBeforeJuly25}}
+{{#if isBeforeOctober16}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2021/2000-run/">Join us for our 2000<sup>th</sup> run on Saturday, July&nbsp;24<sup>th</sup></a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2021/memorial-service/">Join us for our Hash Memorial Service on Friday, October&nbsp;15<sup>th</sup></a></p>
   </div>
 {{/if}}
 
