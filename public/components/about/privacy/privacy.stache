@@ -13,6 +13,7 @@
   <li>Whether a hasher has served on the Bored (Mismanagement)</li>
   <li>Photos from each run (hosted on Google Photos)</li>
   <li>“Snooze” newsletters for each run</li>
+  <li>“Sign in” information when you choose to sign in with Facebook or Google</li>
 </ul>
 
 <p>The sections below outline who can see what from the database.</p>
@@ -103,6 +104,21 @@
 
 <p>These Bored members are given access to everything to help them do their job.</p>
 
+<h4>“Sign in” data</h4>
+
+<p>When you sign in with Facebook or Google, we may collect your:</p>
+
+<ul>
+  <li>Display name</li>
+  <li>Email address</li>
+  <li>First &amp; last name</li>
+  <li>Unique identifier, e.g. the <code>id</code> returned by the service to identify your account</li>
+</ul>
+
+<p>These are stored in our database for us to associate with your hasher profile so that you can sign in and see your own info.</p>
+
+<p>We do not collect this unless you explicitly sign in and authorize our site to see this data. You may request this data to be removed by <a href="mailto:webmaster@lbh3.org">emailing us</a>.</p>
+
 <p>
   If you have any comments, concerns, or questions about this privacy policy, please
   <a href="mailto:webmaster@lbh3.org">email I’m Fucking Matt Damon</a>.
@@ -111,6 +127,10 @@
 <h3>Updates</h3>
 
 <dl>
+  <dt>2021-09-19</dt>
+  <dd>
+    Added information about what is collected when signing in with Facebook.
+  </dd>
   <dt>2019-10-31</dt>
   <dd>
     Previously, a hasher’s naming trail had a privacy option so it could be selectively shared with other verified hashers.
