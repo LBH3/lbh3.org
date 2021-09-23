@@ -55,6 +55,12 @@
   {{/if}}
 {{/if}}
 
+{{#if isBeforeOctober11}}
+  <div class="alert alert-primary mt-3" role="alert">
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2021/marathon/">Support our LB&nbsp;Marathon r*cists on Sunday, October&nbsp;10<sup>th</sup></a></p>
+  </div>
+{{/if}}
+
 {{#if isBeforeOctober16}}
   <div class="alert alert-primary mt-3" role="alert">
     <p class="mb-0 text-center"><a class="alert-link" href="events/2021/memorial-service/">Join us for our Hash Memorial Service on Friday, October&nbsp;15<sup>th</sup></a></p>

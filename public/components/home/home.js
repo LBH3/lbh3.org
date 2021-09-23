@@ -28,6 +28,9 @@ export default Component.extend({
         });
       }
     },
+    get isBeforeOctober11() {
+      return new Date() < new Date('Oct 10 2021 21:00:00 UTC');
+    },
     get isBeforeOctober16() {
       return new Date() < new Date('Oct 16 2021 07:00:00 UTC');
     },
