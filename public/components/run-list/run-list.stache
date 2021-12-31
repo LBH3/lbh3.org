@@ -162,7 +162,7 @@
           {{/if}}
         {{/if}}
         {{#if showOnOn}}
-          <th>On-on</th>
+          <th class="text-nowrap">On-on</th>
         {{/if}}
         {{^if showFutureTools}}
           {{#if session.user.hasherId}}
