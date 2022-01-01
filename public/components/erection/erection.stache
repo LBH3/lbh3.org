@@ -565,7 +565,7 @@
         {{else}}
           <div class="alert alert-danger mt-3" role="alert">
             <strong>Sorry, it looks like you’re not eligible to vote.</strong>
-            You must have at least one run in the last year to vote.
+            You must have at least six runs in the last year to vote.
           </div>
           {{#eq(electionEligibility.runs.length, 0)}}
             <p><strong>It doesn’t look like you attended any runs last year.</strong></p>

@@ -2,7 +2,7 @@
 const hooks = require('./election-eligibility.hooks');
 
 function hasherIsEligibleWithRuns(runs) {
-  return runs.length >= 1; 
+  return runs.length >= 6;
 }
 
 module.exports = function () {
