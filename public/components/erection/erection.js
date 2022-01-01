@@ -17,7 +17,7 @@ import UnencryptedBallot from '~/models/unencrypted-ballot';
 import view from './erection.stache';
 
 export const getAllRunsQuery = year => {
-  const endDate = (2020 <= year) ? new Date(2020, 11, 12) : new Date(year + 1, 0, 1);
+  const endDate = (2020 === year) ? new Date(2020, 11, 12) : new Date(year + 1, 0, 1);
   const startDate = new Date(year, 0, 1);
   return {
     $limit: 100,
