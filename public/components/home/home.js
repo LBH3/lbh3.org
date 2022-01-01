@@ -46,7 +46,7 @@ export default Component.extend({
     get showUpcomingElections() {
       const session = this.session || {};
       const user = session.user || {};
-      const allowedHashers = [] || [14, 16, 7164, 27, 7066, 6535, 3167, 25, 5425, 10, 33, 3435, 6143, 7559, 44, 7303, 70, 7186, 67, 6394, 38, 189];
+      const allowedHashers = [7313, 14, 7164, 27, 8234, 6535, 25, 81, 7931, 178, 10, 134, 33, 6143, 7559, 44, 7303, 70, 67, 148, 6394];
       const isBeforeElectionEnd = new Date() < new Date('Feb 1 2021 08:00:00 UTC');
       return isBeforeElectionEnd || allowedHashers.indexOf(user.hasherId) > -1;
     },
