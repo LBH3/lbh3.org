@@ -5,6 +5,7 @@ import DefineMap from 'can-define/map/map';
 import DefineList from 'can-define/list/list';
 import feathersModel from './feathers-model';
 import Hasher from './hasher';
+import JSEncrypt from 'jsencrypt';
 import moment from 'moment-timezone';
 import UnencryptedBallot from './unencrypted-ballot';
 

@@ -5,10 +5,8 @@ import JSEncrypt from 'jsencrypt';
 import Ballot from '~/models/ballot';
 import Election from '~/models/election';
 import Event from '~/models/event';
-import EventsHashers from '~/models/events-hashers';
 import Hasher from '~/models/hasher';
 import Session from '~/models/session';
-import UnencryptedBallot from '~/models/unencrypted-ballot';
 
 import view from './results.stache';
 
@@ -101,7 +99,7 @@ export const ViewModel = DefineMap.extend({
             vote.forEach(id => {
               hasherIds.add(id);
             });
-          } else {
+          } else if (vote > 0) {
             hasherIds.add(vote);
           }
         });
@@ -115,7 +113,9 @@ export const ViewModel = DefineMap.extend({
     get: function(lastSetValue, setValue) {
       const hashersPromise = this.hashersPromise;
       if (hashersPromise) {
-        hashersPromise.then(setValue);
+        hashersPromise.then(hashers => {
+          setValue(hashers);
+        });
       }
     }
   },
