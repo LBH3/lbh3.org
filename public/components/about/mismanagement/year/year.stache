@@ -12,7 +12,7 @@
 
 {{#and(hashersPromise.isResolved, positionsPromise.isResolved)}}
   {{#if showEmailLink}}
-    <p class="d-print-none mt-3">Click the <span class="fas fa-envelope"></span> next to each position to email them directly, or <a href="mailto:bored@lbh3.org">send an email to the entire Bored and our regular volunteers (currently just Achey Breaky Fart)</a>.</p>
+    <p class="d-print-none mt-3">Click the <span class="fas fa-envelope"></span> next to each position to email them directly, or <a href="mailto:bored@lbh3.org">send an email to the entire Bored</a>.</p>
   {{/if}}
 
   {{#for(hasherByPosition of hashersByPosition)}}
