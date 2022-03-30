@@ -185,7 +185,7 @@ const getResourceForTrail = function (app, trailData) {
     }
     if (haresInline) {
       if (!trailData.specialEventId) {
-        descriptionParts.push('<strong>Donation:</strong> $5 via cash, <a href="https://www.paypal.me/lbh3onon/5usd" target="_blank">PayPal (uncheck goods & services!)</a>, or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>');
+        descriptionParts.push('<strong>Donation:</strong> $5 via cash or <a href="https://venmo.com/code?user_id=3045394753781760363" target="_blank">Venmo</a>');
       }
     }
     descriptionParts.push(`<strong>Run:</strong> #${trailNumber}`);
