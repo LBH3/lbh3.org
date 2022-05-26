@@ -74,6 +74,7 @@ const getBoredInfo = function(hook) {
       if (boredPositions.includes(authHook.GRANDMASTERS)) {
         permission = Object.assign(permission, {
           canEditFutureSpecialEvents: true,
+          canEditHasherInfo: true,
           canViewDirectoryInfo: true
         });
       }
