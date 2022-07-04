@@ -120,3 +120,29 @@ In Unix environment, the production application can be started like this:
 ```
 npm run start:production
 ```
+
+## Dependencies
+
+[aws-sdk](https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/welcome.html) is used by the backend to communicate with S3.
+
+## Hosting
+
+The website is hosted on [Heroku](https://dashboard.heroku.com/apps/mighty-dawn-85924).
+
+### Config vars
+
+| Variable name | Source |
+| ------------- | ------ |
+| AWS_ACCESS_KEY_ID | https://us-east-1.console.aws.amazon.com/iam/home#/users/lbh3?section=security_credentials |
+| AWS_SECRET_ACCESS_KEY | https://us-east-1.console.aws.amazon.com/iam/home#/users/lbh3?section=security_credentials |
+| DATABASE_URL | https://data.heroku.com/datastores/587508e0-73b1-4537-bdad-1481dc893e1e#administration |
+| FACEBOOK_CLIENT_ID | https://developers.facebook.com/apps/857733227744669/settings/basic/ |
+| FACEBOOK_CLIENT_SECRET | https://developers.facebook.com/apps/857733227744669/settings/basic/ |
+| GOOGLE_CLIENT_ID | https://console.cloud.google.com/apis/credentials/oauthclient/809813510693-t2k44p14m42lfcq0ee9kd8quapbrudja.apps.googleusercontent.com?project=lbh3-171321 |
+| GOOGLE_CLIENT_SECRET | https://console.cloud.google.com/apis/credentials/oauthclient/809813510693-t2k44p14m42lfcq0ee9kd8quapbrudja.apps.googleusercontent.com?project=lbh3-171321 |
+| GOOGLE_OAUTH_PRIVATE_KEY | https://console.cloud.google.com/iam-admin/serviceaccounts/details/113142380371293899569;edit=true/keys?project=lbh3-171321 |
+| HEROKU_POSTGRESQL_MAROON_URL | https://data.heroku.com/datastores/587508e0-73b1-4537-bdad-1481dc893e1e#administration |
+
+### Storage
+
+Headshots, PDF Snoozes, and other files are stored on [Amazon S3](https://s3.console.aws.amazon.com/s3/buckets?region=us-west-1).
