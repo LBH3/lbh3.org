@@ -1,0 +1,91 @@
+body {
+  background: var(--body-background-color);
+}
+
+.calendar a, .list a {
+  text-decoration: none;
+}
+.calendar a, .list a, .calendar a:hover, .list a:hover {
+  color: var(--link-color);
+}
+
+hr {
+  background-color: var(--hr-background-color);
+}
+
+.before-today {
+  background: var(--before-today-background-color);
+}
+
+.calendar {
+  color: var(--text-color);
+  display: grid;
+  font-size: 0.875rem;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+.calendar.events li {
+  min-height: 8rem;
+  outline: 1px solid var(--list-separator-color);
+}
+.calendar.events li.filler {
+  outline: 0;
+}
+
+.frosted-background {
+  -webkit-backdrop-filter: var(--table-header-backdrop-filter);
+  backdrop-filter: var(--table-header-backdrop-filter);
+  background: var(--table-header-background-color);
+  border-bottom: 1px solid var(--table-header-border-color);
+  color: var(--table-header-color);
+}
+
+.list dd {
+  border-bottom: 1px solid var(--list-separator-color);
+  margin: 0;
+  overflow: hidden;
+}
+
+.list dt {
+  padding: .5rem .5rem .5rem .75rem;
+  position: sticky;
+  top: 0px;
+}
+
+.one-line {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.text-muted {
+  color: var(--text-muted-color) !important;
+}
+
+:root {
+  --before-today-background-color: #ddd;
+  --body-background-color: white;
+  --hr-background-color: black;
+  --link-color: black;
+  --list-separator-color: rgba(0, 0, 0, 0.1);
+  --table-header-backdrop-filter: saturate(180%) blur(20px);
+  --table-header-background-color: rgba(255, 255, 255, .75);
+  --table-header-border-color: rgba(0, 0, 0, 0.2);
+  --table-header-color: black;
+  --text-color: black;
+  --text-muted-color: #6c757d;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --before-today-background-color: #222;
+    --body-background-color: black;
+    --hr-background-color: #eee;
+    --link-color: #eee;
+    --list-separator-color: rgba(255, 255, 255, .1);
+    --table-header-background-color: rgba(0, 0, 0, 0.75);
+    --table-header-border-color: rgba(255, 255, 255, .2);
+    --table-header-color: white;
+    --text-color: #eee;
+    --text-muted-color: #bbb;
+  }
+}
