@@ -55,21 +55,21 @@
   {{/if}}
 {{/if}}
 
-{{#if isBeforeOctober11}}
+{{#if isBefore2022October10}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2021/marathon/">Support our LB&nbsp;Marathon r*cists on Sunday, October&nbsp;10<sup>th</sup>, 2021</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2022/marathon/">Support our LB&nbsp;Marathon r*cists on Sunday, October&nbsp;9<sup>th</sup>, 2022</a></p>
   </div>
 {{/if}}
 
-{{#if isBeforeOctober16}}
+{{#if isBefore2022November28}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2021/memorial-service/">Join us for our Hash Memorial Service on Friday, October&nbsp;15<sup>th</sup>, 2021</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2022/primm-and-improper/">Rego for Primm and Improper the weekend of Fri.&nbsp;November&nbsp;25<sup>th</sup> – Sun.&nbsp;November&nbsp;27&nbsp;15<sup>th</sup>, 2022</a></p>
   </div>
 {{/if}}
 
-{{#if isBeforeFebruary27}}
+{{#if isBefore2023February5}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2022/founders/">Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;26<sup>th</sup>, 2022</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2023/founders/">Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;4<sup>th</sup>, 2023</a></p>
   </div>
 {{/if}}
 
