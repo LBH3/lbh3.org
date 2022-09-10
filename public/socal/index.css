@@ -20,7 +20,6 @@ hr {
 .calendar {
   color: var(--text-color);
   display: grid;
-  font-size: 0.875rem;
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
 .calendar.events li {
@@ -30,7 +29,15 @@ hr {
 .calendar.events li.filler {
   outline: 0;
 }
+.calendar.events li a {
+  font-size: clamp(0.5rem, 2.5vw, 1rem);
+}
 
+@media (max-width: 767px) {
+  .calendar.events li a .one-line {
+    text-overflow: unset;
+  }
+}
 .frosted-background {
   -webkit-backdrop-filter: var(--table-header-backdrop-filter);
   backdrop-filter: var(--table-header-backdrop-filter);
