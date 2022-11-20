@@ -19,7 +19,7 @@
     "build:watch": "rm -rf ./dist && NODE_ENV=development webpack --progress --watch --config build.config.dev.js"
   },
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.10.2",
+    "@fortawesome/fontawesome-free": "^6.2.1",
     "awesomplete": "^1.1.2",
     "bootstrap": "^4.0.0",
     "can-ajax": "^2.2.1",

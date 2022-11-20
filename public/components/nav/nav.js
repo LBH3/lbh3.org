@@ -44,6 +44,8 @@ export default Component.extend({
   tag: 'lbh3-nav',
   ViewModel,
   view: `
+    <can-import from="@fortawesome/fontawesome-free/css/fontawesome.css" />
+    <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
     <can-import from="can-stache-route-helpers" />
     <nav class="border-bottom d-flex">
       <ul class="flex-row m-auto navbar-nav overflow-auto text-nowrap">
@@ -51,6 +53,7 @@ export default Component.extend({
         <li class="{{#if isActive('hareline')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='hareline'}}">Hareline</a></li>
         <li class="{{#if isActive('events')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='events'}}">Past Runs</a></li>
         <li class="{{#if isActive('hashers')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='hashers' secondaryPage=''}}">Directory</a></li>
+        <li class="nav-item"><a class="nav-link px-2 py-2" href="/socal/" target="_window">Calendar <span class="fas fa-arrow-up-right-from-square"></span></a></li>
         {{#if session.user.canManageUsers}}
           <li class="{{#if isActive('users')}}active{{/if}} nav-item"><a class="nav-link px-2 py-2" href="{{routeUrl page='users'}}">Users</a></li>
         {{/if}}
