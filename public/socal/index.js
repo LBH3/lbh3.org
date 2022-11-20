@@ -175,23 +175,17 @@ Promise.allSettled(promises).then((data) => {
       });
     });
 
-    function sortByStartDate(a, b) {
-      const aDate = new Date(a.start.dateTime || a.start.date);
-      const bDate = new Date(b.start.dateTime || b.start.date);
-      return aDate - bDate;
-    }
-
     // All-day events
     allEvents.filter(event => {
       return event[computedSymbol].startDay !== event[computedSymbol].endDay;
     }).forEach(event => {
-      const endDate = new Date(event.end.dateTime || `${event.end.date}T00:00:00-07:00`);
-      const startDate = new Date(event.start.dateTime || `${event.start.date}T00:00:00-07:00`);
+      const endDate = event.end.dateTime ? new Date(event.end.dateTime) : stringToDate(event.end.date);
+      const startDate = event.start.dateTime ? new Date(event.start.dateTime) : stringToDate(event.start.date);
       const mutableIterationDate = new Date(startDate);
       while (mutableIterationDate <= endDate) {
         mutableIterationDate.setDate(mutableIterationDate.getDate() + 1);
         const day = mutableIterationDate.toISOString().slice(0, 10);
-        const dayTime = new Date(`${day}T00:00:00-07:00`).getTime();
+        const dayTime = stringToDate(day).getTime();
         if (dayTime > new Date(startDate).getTime() && dayTime < new Date(endDate).getTime()) {
           if (eventsByDay[day] === undefined) {
             eventsByDay[day] = [];
@@ -202,7 +196,7 @@ Promise.allSettled(promises).then((data) => {
     });
 
     const filteredDays = Object.keys(eventsByDay).sort().filter(day => {
-      return new Date(`${day}T00:00:00-07:00`) >= startOfToday;
+      return stringToDate(day) >= startOfToday;
     });
     const days = filteredDays.map(day => {
       const events = eventsByDay[day].sort(sortByStartDate);
@@ -210,7 +204,7 @@ Promise.allSettled(promises).then((data) => {
         day,
         dayLocalized: new Intl.DateTimeFormat([], {
           dateStyle: 'full'
-        }).format(new Date(`${day}T00:00:00-07:00`)),
+        }).format(stringToDate(day)),
         events
       };
     });
@@ -369,6 +363,8 @@ Promise.allSettled(promises).then((data) => {
 
     document.body.innerHTML = `
       ${allEvents.map(event => {
+        const endDate = event.end.dateTime ? new Date(event.end.dateTime) : stringToDate(event.end.date);
+        const startDate = event.start.dateTime ? new Date(event.start.dateTime) : stringToDate(event.start.date);
       return `
           <div aria-hidden="true" aria-labelledby="event-${event.id}-title" class="fade modal" id="event-${event.id}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-lg-down modal-lg">
@@ -378,7 +374,7 @@ Promise.allSettled(promises).then((data) => {
                   <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
-                  <p>${new Intl.DateTimeFormat([], { dateStyle: 'full', timeStyle: 'short' }).formatRange(new Date(event.start.dateTime || `${event.start.date}T00:00:00-07:00`), new Date(event.end.dateTime || `${event.end.date}T00:00:00-07:00`))}</p>
+                  <p>${new Intl.DateTimeFormat([], { dateStyle: 'full', timeStyle: 'short' }).formatRange(startDate, endDate)}</p>
                   <hr>
                   <p>
                     ${event.location ? `
@@ -409,3 +405,17 @@ Promise.allSettled(promises).then((data) => {
     `;
   });
   });
+
+function sortByStartDate(a, b) {
+  const aDate = new Date(a.start.dateTime || a.start.date);
+  const bDate = new Date(b.start.dateTime || b.start.date);
+  return aDate - bDate;
+}
+
+function stringToDate(dateString) {
+  const split = dateString.split('-');
+  const year = Number(split[0]);
+  const month = Number(split[1]) - 1;
+  const day = Number(split[2]);
+  return new Date(year, month, day);
+}
