@@ -292,7 +292,9 @@ Promise.allSettled(promises).then((data) => {
     function getListView() {
       return `
         <dl class="list">
-        ${days.map(({ day, dayLocalized, events }) => {
+        ${days.filter(({ day }) => {
+          return stringToDate(day) >= startOfToday;
+        }).map(({ day, dayLocalized, events }) => {
       return `
               <div>
                 <dt class="frosted-background">${dayLocalized}</dt>
