@@ -108,12 +108,16 @@ const calendars = [
 ];
 
 const computedSymbol = Symbol('computed');
-const endOfNextYear = new Date((new Date()).getFullYear() + 2, 0);
-const startOfToday = new Date(new Intl.DateTimeFormat([], { dateStyle: 'full' }).format(new Date()));
+const today = new Date();
+
+const endOfNextYear = new Date((today).getFullYear() + 2, 0);
+const startOfToday = new Date(new Intl.DateTimeFormat([], { dateStyle: 'full' }).format(today));
 const startOfTodayTime = startOfToday.getTime();
 
+const beginningOfTheWeek = new Date((new Date(startOfToday)).setDate(startOfToday.getDate() - startOfToday.getDay()));
+
 const promises = calendars.map(calendar => {
-  return `https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events?calendarId=${calendar.id}&sanitizeHtml=true&timeMax=${endOfNextYear.toISOString()}&timeMin=${startOfToday.toISOString()}&key=AIzaSyBNlYH01_9Hc5S1J9vuFmu2nUqBZJNAXxs`;
+  return `https://www.googleapis.com/calendar/v3/calendars/${calendar.id}/events?calendarId=${calendar.id}&sanitizeHtml=true&timeMax=${endOfNextYear.toISOString()}&timeMin=${beginningOfTheWeek.toISOString()}&key=AIzaSyBNlYH01_9Hc5S1J9vuFmu2nUqBZJNAXxs`;
 }).map(url => {
   return fetch(url).then(response => response.json());
 });
@@ -143,12 +147,12 @@ Promise.allSettled(promises).then((data) => {
   const recurringEvents = allEvents.filter(event => {
     return event.recurrence;
   }).map(event => {
-    return `https://www.googleapis.com/calendar/v3/calendars/${event[computedSymbol].calendarData.id}/events/${event.id}/instances?calendarId=${event[computedSymbol].calendarData.id}&sanitizeHtml=true&timeMax=${endOfNextYear.toISOString()}&timeMin=${startOfToday.toISOString()}&key=AIzaSyBNlYH01_9Hc5S1J9vuFmu2nUqBZJNAXxs`;
+    return `https://www.googleapis.com/calendar/v3/calendars/${event[computedSymbol].calendarData.id}/events/${event.id}/instances?calendarId=${event[computedSymbol].calendarData.id}&sanitizeHtml=true&timeMax=${endOfNextYear.toISOString()}&timeMin=${beginningOfTheWeek.toISOString()}&key=AIzaSyBNlYH01_9Hc5S1J9vuFmu2nUqBZJNAXxs`;
   }).map(url => {
     return fetch(url).then(response => response.json());
   });
   Promise.allSettled(recurringEvents).then((data) => {
-    data.forEach(({ value: calendar }, index) => {
+    data.forEach(({ value: calendar }) => {
       calendar.items.forEach(item => {
         const endDay = item.end.dateTime ? item.end.dateTime.slice(0, 10) : item.end.date;
         const startDay = item.start.dateTime ? item.start.dateTime.slice(0, 10) : item.start.date;
@@ -196,7 +200,7 @@ Promise.allSettled(promises).then((data) => {
     });
 
     const filteredDays = Object.keys(eventsByDay).sort().filter(day => {
-      return stringToDate(day) >= startOfToday;
+      return stringToDate(day) >= beginningOfTheWeek;
     });
     const days = filteredDays.map(day => {
       const events = eventsByDay[day].sort(sortByStartDate);
@@ -209,7 +213,6 @@ Promise.allSettled(promises).then((data) => {
       };
     });
 
-    const beginningOfTheWeek = new Date((new Date(startOfToday)).setDate(startOfToday.getDate() - startOfToday.getDay()));
     const calendarDates = [beginningOfTheWeek];
     const mutableIterationDate = new Date(beginningOfTheWeek);
     const lastDay = new Date(filteredDays[filteredDays.length - 1]);
@@ -222,6 +225,7 @@ Promise.allSettled(promises).then((data) => {
       mutableIterationDate.setDate(mutableIterationDate.getDate() + 1);
       calendarDates.push(new Date(mutableIterationDate));
     }
+
     const calendarDatesByMonth = {};
     calendarDates.forEach(calendarDate => {
       const yearMonth = `${calendarDate.getFullYear()}-${calendarDate.getMonth()}`;
@@ -230,6 +234,7 @@ Promise.allSettled(promises).then((data) => {
       }
       calendarDatesByMonth[yearMonth].push(calendarDate);
     });
+
     const calendarDatesWithMonths = [];
     for (const yearMonth in calendarDatesByMonth) {
       calendarDatesWithMonths.push({
@@ -313,9 +318,25 @@ Promise.allSettled(promises).then((data) => {
     function getMonthView() {
       return `
         ${
-    calendarDatesWithMonths.map(({dates}) => {
-      const firstDate = dates[0];
-      const fillerDays = firstDate.getDay() === 0 ? [] : Array(firstDate.getDay()).fill(undefined);
+        calendarDatesWithMonths.filter(({ dates }) => {
+          // TODO: consider removing this filter
+          const firstDateWithEventsStartingToday = dates.find(calendarDate => {
+            if (calendarDate >= today) {
+              return true;
+            }
+            const day = calendarDate.toISOString().slice(0, 10);
+            const events = eventsByDay[day];
+            return events && events.length > 0 && events.find(event => {
+              const startDate = event.start.dateTime ? new Date(event.start.dateTime) : stringToDate(event.start.date);
+              return startDate >= today;
+            });
+          });
+          return firstDateWithEventsStartingToday;
+        }).map(({ dates }) => {
+          const firstDate = dates[0];
+          const lastDate = dates[dates.length - 1];
+          const endFillerDays = lastDate.getDay() === 6 ? [] : Array(6 - lastDate.getDay()).fill(undefined);
+          const startFillerDays = firstDate.getDay() === 0 ? [] : Array(firstDate.getDay()).fill(undefined);
       // TODO: consider getting the first day of the week with Intl.Locale.prototype.weekInfo
       return `
         <div>
@@ -332,16 +353,16 @@ Promise.allSettled(promises).then((data) => {
             </ol>
           </header>
           <ol class="calendar events list-unstyled m-0">
-          ${fillerDays.map(() => {
-      return `<li class="filler"></li>`;
+          ${startFillerDays.map(() => {
+            return `<li class="filler"></li>`;
     }).join('')}
           ${dates.map(calendarDate => {
       const day = calendarDate.toISOString().slice(0, 10);
       const events = eventsByDay[day];
       return `
-                          <li class="${calendarDate < startOfToday ? 'before-today' : ''}">
+                          <li class="${calendarDate < startOfToday ? 'filler' : ''}">
                             <p class="mb-1 one-line px-1 text-end"><span class="${calendarDate.getTime() === startOfTodayTime ? 'badge rounded-pill text-bg-danger' : ''}" ="">${new Intl.DateTimeFormat([], { day: 'numeric' }).format(calendarDate)}</span></p>
-                            ${events ? events.map(event => {
+                            ${events && events.length > 0 ? events.map(event => {
       return `
                               <a class="d-block pb-4" data-bs-target="#event-${event.id}" data-bs-toggle="modal" style="border-top: ${event[computedSymbol].startDay === event[computedSymbol].endDay ? '.25rem' : '.5rem'} solid ${event[computedSymbol].calendarData.color}">
                               <p class="my-0 one-line px-1 text-muted"><small>${event.start.dateTime ? startTimeForEvent(event, day) : 'All-day'}</small></p>
@@ -349,9 +370,12 @@ Promise.allSettled(promises).then((data) => {
                               ${event.location ? `<p class="my-0 one-line px-1 text-muted"><small>${event.location}</small></p>` : ''}
                             </a>
                               `;
-    }).join('') : ''}
+                            }).join('') : (calendarDate.getTime() === startOfTodayTime ? '<p class="mx-2">No trails today.</p>' : '')}
                           </li>
                         `;
+    }).join('')}
+    ${endFillerDays.map(() => {
+      return `<li class="filler"></li>`;
     }).join('')}
           </ol>
         </div>

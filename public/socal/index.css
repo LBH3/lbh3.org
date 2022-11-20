@@ -13,8 +13,11 @@ hr {
   background-color: var(--hr-background-color);
 }
 
-.before-today {
-  background: var(--before-today-background-color);
+.filler {
+  background: var(--filler-background-color);
+}
+.filler>* {
+  opacity: .5;
 }
 
 .calendar {
@@ -25,9 +28,6 @@ hr {
 .calendar.events li {
   min-height: 8rem;
   outline: 1px solid var(--list-separator-color);
-}
-.calendar.events li.filler {
-  outline: 0;
 }
 .calendar.events li a {
   font-size: clamp(0.5rem, 2.5vw, 1rem);
@@ -69,7 +69,7 @@ hr {
 }
 
 :root {
-  --before-today-background-color: #ddd;
+  --filler-background-color: #ddd;
   --body-background-color: white;
   --hr-background-color: black;
   --link-color: black;
@@ -84,7 +84,7 @@ hr {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --before-today-background-color: #222;
+    --filler-background-color: #222;
     --body-background-color: black;
     --hr-background-color: #eee;
     --link-color: #eee;
