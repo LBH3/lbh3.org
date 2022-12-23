@@ -294,11 +294,30 @@ Promise.allSettled(promises).then((data) => {
         <dl class="list">
         ${days.filter(({ day }) => {
           return stringToDate(day) >= startOfToday;
-        }).map(({ day, dayLocalized, events }) => {
-      return `
-              <div>
-                <dt class="frosted-background">${dayLocalized}</dt>
-                ${events.map(event => {
+        }).map(({ day, dayLocalized, events }, index) => {
+          const firstDayPrefix = (index === 0 && stringToDate(day).getTime() !== startOfTodayTime) ? `
+          <div>
+            <dt class="frosted-background">${new Intl.DateTimeFormat([], {
+            dateStyle: 'full'
+          }).format(today)}</dt>
+            <dd class="mx-2"></dd>
+            <dd class="py-1">
+              <p class="my-0 one-line px-2" style="border-left: .25rem solid rgb(220,53,69)">No trails today.</p>
+            </dd>
+          </div>
+        ` : '';
+          return `${firstDayPrefix}
+            <div>
+              <dt class="frosted-background">${dayLocalized}</dt>
+              ${events.map(event => { return getListEventView(day, event) }).join('')}
+            </div>
+          `;
+        }).join('')
+        }
+        </dl>
+      `;
+    }
+    function getListEventView(day, event) {
       return `
           <dd class="py-1">
             <a class="d-block" data-bs-target="#event-${event.id}" data-bs-toggle="modal" style="border-left: .25rem solid ${event[computedSymbol].calendarData.color}">
@@ -308,14 +327,6 @@ Promise.allSettled(promises).then((data) => {
             </a>
           </dd>
         `;
-    }).join('')
-  }
-              </div>
-            `;
-    }).join('')
-  }
-        </dl>
-      `;
     }
     function getMonthView() {
       return `
@@ -339,8 +350,8 @@ Promise.allSettled(promises).then((data) => {
           const lastDate = dates[dates.length - 1];
           const endFillerDays = lastDate.getDay() === 6 ? [] : Array(6 - lastDate.getDay()).fill(undefined);
           const startFillerDays = firstDate.getDay() === 0 ? [] : Array(firstDate.getDay()).fill(undefined);
-      // TODO: consider getting the first day of the week with Intl.Locale.prototype.weekInfo
-      return `
+          // TODO: consider getting the first day of the week with Intl.Locale.prototype.weekInfo
+          return `
         <div>
           <header class="frosted-background sticky-top">
             <h2 class="m-2">${new Intl.DateTimeFormat([], { month: 'long', year: 'numeric' }).format(dates[0])}</h2>
@@ -357,15 +368,15 @@ Promise.allSettled(promises).then((data) => {
           <ol class="calendar events list-unstyled m-0">
           ${startFillerDays.map(() => {
             return `<li class="filler"></li>`;
-    }).join('')}
+          }).join('')}
           ${dates.map(calendarDate => {
-      const day = calendarDate.toISOString().slice(0, 10);
-      const events = eventsByDay[day];
-      return `
+            const day = calendarDate.toISOString().slice(0, 10);
+            const events = eventsByDay[day];
+            return `
                           <li class="${calendarDate < startOfToday ? 'filler' : ''}">
                             <p class="mb-1 one-line px-1 text-end"><span class="${calendarDate.getTime() === startOfTodayTime ? 'badge rounded-pill text-bg-danger' : ''}" ="">${new Intl.DateTimeFormat([], { day: 'numeric' }).format(calendarDate)}</span></p>
                             ${events && events.length > 0 ? events.map(event => {
-      return `
+                              return `
                               <a class="d-block pb-4" data-bs-target="#event-${event.id}" data-bs-toggle="modal" style="border-top: ${event[computedSymbol].startDay === event[computedSymbol].endDay ? '.25rem' : '.5rem'} solid ${event[computedSymbol].calendarData.color}">
                               <p class="my-0 one-line px-1 text-muted"><small>${event.start.dateTime ? startTimeForEvent(event, day) : 'All-day'}</small></p>
                               <p class="my-0 one-line px-1">${event.summary}</p>
@@ -375,15 +386,15 @@ Promise.allSettled(promises).then((data) => {
                             }).join('') : (calendarDate.getTime() === startOfTodayTime ? '<p class="mx-2">No trails today.</p>' : '')}
                           </li>
                         `;
-    }).join('')}
+          }).join('')}
     ${endFillerDays.map(() => {
       return `<li class="filler"></li>`;
     }).join('')}
           </ol>
         </div>
       `;
-    }).join('')
-  }
+        }).join('')
+}
       `;
     }
 
@@ -391,7 +402,7 @@ Promise.allSettled(promises).then((data) => {
       ${allEvents.map(event => {
         const endDate = event.end.dateTime ? new Date(event.end.dateTime) : stringToDate(event.end.date);
         const startDate = event.start.dateTime ? new Date(event.start.dateTime) : stringToDate(event.start.date);
-      return `
+        return `
           <div aria-hidden="true" aria-labelledby="event-${event.id}-title" class="fade modal" id="event-${event.id}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-lg-down modal-lg">
               <div class="modal-content">
@@ -418,7 +429,7 @@ Promise.allSettled(promises).then((data) => {
             </div>
           </div>
         `;
-    }).join('')}
+      }).join('')}
       <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container-fluid">
           <h1><a class="navbar-brand" href="./">H3 in SoCal</a></h1>
@@ -430,7 +441,7 @@ Promise.allSettled(promises).then((data) => {
       <main>${getMainContents()}</main>
     `;
   });
-  });
+});
 
 function sortByStartDate(a, b) {
   const aDate = new Date(a.start.dateTime || a.start.date);
