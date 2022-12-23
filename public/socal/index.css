@@ -29,7 +29,8 @@ hr {
   min-height: 8rem;
   outline: 1px solid var(--list-separator-color);
 }
-.calendar.events li a {
+.calendar.events li a,
+.calendar.events li .no-trails {
   font-size: clamp(0.5rem, 2.5vw, 1rem);
 }
 

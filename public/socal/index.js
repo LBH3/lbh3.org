@@ -298,11 +298,12 @@ Promise.allSettled(promises).then((data) => {
           const firstDayPrefix = (index === 0 && stringToDate(day).getTime() !== startOfTodayTime) ? `
           <div>
             <dt class="frosted-background">${new Intl.DateTimeFormat([], {
-            dateStyle: 'full'
-          }).format(today)}</dt>
+              dateStyle: 'full'
+            }).format(today)}</dt>
             <dd class="mx-2"></dd>
-            <dd class="py-1">
-              <p class="my-0 one-line px-2" style="border-left: .25rem solid rgb(220,53,69)">No trails today.</p>
+            <dd class="py-1" style="border-left: .25rem solid rgb(220,53,69)">
+              <p class="my-0 one-line px-2 text-muted"><small>Today</small></p>
+              <p class="my-0 one-line px-2">No trails.</p>
             </dd>
           </div>
         ` : '';
@@ -313,7 +314,7 @@ Promise.allSettled(promises).then((data) => {
             </div>
           `;
         }).join('')
-        }
+}
         </dl>
       `;
     }
@@ -352,49 +353,50 @@ Promise.allSettled(promises).then((data) => {
           const startFillerDays = firstDate.getDay() === 0 ? [] : Array(firstDate.getDay()).fill(undefined);
           // TODO: consider getting the first day of the week with Intl.Locale.prototype.weekInfo
           return `
-        <div>
-          <header class="frosted-background sticky-top">
-            <h2 class="m-2">${new Intl.DateTimeFormat([], { month: 'long', year: 'numeric' }).format(dates[0])}</h2>
-            <ol class="calendar list-unstyled m-0 text-center">
-              <li class="one-line">Sun</li>
-              <li class="one-line">Mon</li>
-              <li class="one-line">Tue</li>
-              <li class="one-line">Wed</li>
-              <li class="one-line">Thu</li>
-              <li class="one-line">Fri</li>
-              <li class="one-line">Sat</li>
-            </ol>
-          </header>
-          <ol class="calendar events list-unstyled m-0">
-          ${startFillerDays.map(() => {
-            return `<li class="filler"></li>`;
-          }).join('')}
-          ${dates.map(calendarDate => {
-            const day = calendarDate.toISOString().slice(0, 10);
-            const events = eventsByDay[day];
-            return `
-                          <li class="${calendarDate < startOfToday ? 'filler' : ''}">
-                            <p class="mb-1 one-line px-1 text-end"><span class="${calendarDate.getTime() === startOfTodayTime ? 'badge rounded-pill text-bg-danger' : ''}" ="">${new Intl.DateTimeFormat([], { day: 'numeric' }).format(calendarDate)}</span></p>
-                            ${events && events.length > 0 ? events.map(event => {
-                              return `
-                              <a class="d-block pb-4" data-bs-target="#event-${event.id}" data-bs-toggle="modal" style="border-top: ${event[computedSymbol].startDay === event[computedSymbol].endDay ? '.25rem' : '.5rem'} solid ${event[computedSymbol].calendarData.color}">
-                              <p class="my-0 one-line px-1 text-muted"><small>${event.start.dateTime ? startTimeForEvent(event, day) : 'All-day'}</small></p>
-                              <p class="my-0 one-line px-1">${event.summary}</p>
-                              ${event.location ? `<p class="my-0 one-line px-1 text-muted"><small>${event.location}</small></p>` : ''}
-                            </a>
-                              `;
-                            }).join('') : (calendarDate.getTime() === startOfTodayTime ? '<p class="mx-2">No trails today.</p>' : '')}
-                          </li>
-                        `;
-          }).join('')}
-    ${endFillerDays.map(() => {
-      return `<li class="filler"></li>`;
-    }).join('')}
-          </ol>
-        </div>
-      `;
+            <div>
+              <header class="frosted-background sticky-top">
+                <h2 class="m-2">${new Intl.DateTimeFormat([], { month: 'long', year: 'numeric' }).format(dates[0])}</h2>
+                <ol class="calendar list-unstyled m-0 text-center">
+                  <li class="one-line">Sun</li>
+                  <li class="one-line">Mon</li>
+                  <li class="one-line">Tue</li>
+                  <li class="one-line">Wed</li>
+                  <li class="one-line">Thu</li>
+                  <li class="one-line">Fri</li>
+                  <li class="one-line">Sat</li>
+                </ol>
+              </header>
+              <ol class="calendar events list-unstyled m-0">
+                ${startFillerDays.map(() => {
+                  return `<li class="filler"></li>`;
+                }).join('')}
+                ${dates.map(getMonthDayView).join('')}
+                ${endFillerDays.map(() => {
+                  return `<li class="filler"></li>`;
+                }).join('')}
+              </ol>
+            </div>
+          `;
         }).join('')
-}
+        }
+      `;
+    }
+    function getMonthDayView(calendarDate) {
+      const day = calendarDate.toISOString().slice(0, 10);
+      const events = eventsByDay[day];
+      return `
+        <li class="${calendarDate < startOfToday ? 'filler' : ''}">
+          <p class="mb-1 one-line px-1 text-end"><span class="${calendarDate.getTime() === startOfTodayTime ? 'badge rounded-pill text-bg-danger' : ''}" ="">${new Intl.DateTimeFormat([], { day: 'numeric' }).format(calendarDate)}</span></p>
+          ${events && events.length > 0 ? events.map(event => {
+        return `
+            <a class="d-block pb-4" data-bs-target="#event-${event.id}" data-bs-toggle="modal" style="border-top: ${event[computedSymbol].startDay === event[computedSymbol].endDay ? '.25rem' : '.5rem'} solid ${event[computedSymbol].calendarData.color}">
+            <p class="my-0 one-line px-1 text-muted"><small>${event.start.dateTime ? startTimeForEvent(event, day) : 'All-day'}</small></p>
+            <p class="my-0 one-line px-1">${event.summary}</p>
+            ${event.location ? `<p class="my-0 one-line px-1 text-muted"><small>${event.location}</small></p>` : ''}
+          </a>
+            `;
+          }).join('') : (calendarDate.getTime() === startOfTodayTime ? '<p class="my-0 no-trails one-line px-1 text-muted" style="border-top: .25rem solid black"><small>Today</small></p><p class="px-1 no-trails">No trails.</p>' : '')}
+        </li>
       `;
     }
 
