@@ -2,10 +2,14 @@ body {
   background: var(--body-background-color);
 }
 
-.calendar a, .list a {
+.calendar a,
+.list a {
   text-decoration: none;
 }
-.calendar a, .list a, .calendar a:hover, .list a:hover {
+.calendar a,
+.list a,
+.calendar a:hover,
+.list a:hover {
   color: var(--link-color);
 }
 
@@ -16,6 +20,7 @@ hr {
 .filler {
   background: var(--filler-background-color);
 }
+
 .filler>* {
   opacity: .5;
 }
@@ -25,10 +30,12 @@ hr {
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
+
 .calendar.events li {
   min-height: 8rem;
   outline: 1px solid var(--list-separator-color);
 }
+
 .calendar.events li a,
 .calendar.events li .no-trails {
   font-size: clamp(0.5rem, 2.5vw, 1rem);
@@ -39,6 +46,7 @@ hr {
     text-overflow: unset;
   }
 }
+
 .frosted-background {
   -webkit-backdrop-filter: var(--table-header-backdrop-filter);
   backdrop-filter: var(--table-header-backdrop-filter);
@@ -85,15 +93,42 @@ hr {
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --filler-background-color: #222;
     --body-background-color: black;
+    --bs-body-color: #eee;
+    --filler-background-color: #222;
     --hr-background-color: #eee;
     --link-color: #eee;
+    --link-hover-color: rgba(255, 255, 255, .9);
     --list-separator-color: rgba(255, 255, 255, .1);
     --table-header-background-color: rgba(0, 0, 0, 0.75);
     --table-header-border-color: rgba(255, 255, 255, .2);
     --table-header-color: white;
     --text-color: #eee;
     --text-muted-color: #bbb;
+  }
+  .list-group {
+    --bs-list-group-action-active-bg: #111;
+    --bs-list-group-action-active-color: var(--text-color);
+    --bs-list-group-action-hover-bg: rgba(255, 255, 255, .1);
+    --bs-list-group-action-hover-color: var(--text-color);
+    --bs-list-group-bg: var(--body-background-color);
+    --bs-list-group-color: var(--text-color);
+  }
+  .modal {
+    --bs-modal-bg: #111;
+    --bs-modal-border-color: rgba(255, 255, 255, .25);
+    --bs-modal-color: var(--text-color);
+    --bs-modal-header-border-color: var(--bs-modal-border-color);
+  }
+  .modal-header .btn-close {
+    filter: invert(1) grayscale(100%) brightness(200%);
+  }
+  .navbar {
+    --bs-navbar-brand-color: var(--link-color);
+    --bs-navbar-brand-hover-color: var(--link-hover-color);
+  }
+  .nav-link {
+    --bs-nav-link-color: var(--link-color);
+    --bs-nav-link-hover-color: var(--link-hover-color);
   }
 }
