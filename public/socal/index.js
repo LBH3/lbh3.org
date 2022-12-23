@@ -180,9 +180,10 @@ Promise.allSettled(promises).then((data) => {
     });
 
     // All-day events
-    allEvents.filter(event => {
+    const allDayEvents = allEvents.filter(event => {
       return event[computedSymbol].startDay !== event[computedSymbol].endDay;
-    }).forEach(event => {
+    });
+    allDayEvents.forEach(event => {
       const endDate = event.end.dateTime ? new Date(event.end.dateTime) : stringToDate(event.end.date);
       const startDate = event.start.dateTime ? new Date(event.start.dateTime) : stringToDate(event.start.date);
       const mutableIterationDate = new Date(startDate);
@@ -277,7 +278,10 @@ Promise.allSettled(promises).then((data) => {
       localStorage.setItem('view', view);
     };
     function getMainContents() {
-      return currentView === 'list' ? getListView() : getMonthView();
+      return `
+        ${getUpcomingEventsView()}
+        ${currentView === 'list' ? getListView() : getMonthView()}
+      `;
     }
     function getNavContents() {
       return `
@@ -400,10 +404,30 @@ Promise.allSettled(promises).then((data) => {
       `;
     }
 
+    function getUpcomingEventsView() {
+      const filteredAllDayEvents = allDayEvents.filter(allDayEvent => {
+        const endDate = allDayEvent.end.dateTime ? new Date(allDayEvent.end.dateTime) : stringToDate(allDayEvent.end.date);
+        const hasEndedBeforeNow = endDate.getTime() < today.getTime();
+        return hasEndedBeforeNow === false && allDayEvent.summary.toLowerCase().includes('no oc hump') === false && allDayEvent.summary.toLowerCase().includes('no ochhh') === false;
+      });
+      return (filteredAllDayEvents.length > 0) ? `
+        <div class="list-group mx-2">
+          ${filteredAllDayEvents.sort(sortByStartDate).map(event => {
+        const description = [
+          `<small class="text-muted">${getRangeForEvent(event)}</small>`,
+          event.summary,
+          event.location ? `<small class="text-muted">${event.location}</small>` : ''
+        ].filter(part => part).join('<br>');
+        return `
+              <a class="list-group-item list-group-item-action" data-bs-target="#event-${event.id}" data-bs-toggle="modal">${description}</a>
+            `;
+      }).join('')}
+        </div>
+      ` : '';
+    }
+
     document.body.innerHTML = `
       ${allEvents.map(event => {
-        const endDate = event.end.dateTime ? new Date(event.end.dateTime) : stringToDate(event.end.date);
-        const startDate = event.start.dateTime ? new Date(event.start.dateTime) : stringToDate(event.start.date);
         return `
           <div aria-hidden="true" aria-labelledby="event-${event.id}-title" class="fade modal" id="event-${event.id}" tabindex="-1">
             <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-fullscreen-lg-down modal-lg">
@@ -413,7 +437,7 @@ Promise.allSettled(promises).then((data) => {
                   <button aria-label="Close" class="btn-close" data-bs-dismiss="modal" type="button"></button>
                 </div>
                 <div class="modal-body">
-                  <p>${new Intl.DateTimeFormat([], { dateStyle: 'full', timeStyle: 'short' }).formatRange(startDate, endDate)}</p>
+                  <p>${getRangeForEvent(event)}</p>
                   <hr>
                   <p>
                     ${event.location ? `
@@ -444,6 +468,18 @@ Promise.allSettled(promises).then((data) => {
     `;
   });
 });
+
+function getRangeForEvent(event) {
+  const endDate = event.end.dateTime ? new Date(event.end.dateTime) : stringToDate(event.end.date);
+  const startDate = event.start.dateTime ? new Date(event.start.dateTime) : stringToDate(event.start.date);
+  if (event.end.date && event.start.date) {
+    const realEndDate = new Date((new Date(endDate)).setDate(endDate.getDate() - 1));
+    if (startDate.getTime() === realEndDate.getTime()) {
+      return new Intl.DateTimeFormat([], { dateStyle: 'full' }).format(startDate);
+    }
+  }
+  return new Intl.DateTimeFormat([], { dateStyle: 'full', timeStyle: 'short' }).formatRange(startDate, endDate);
+}
 
 function sortByStartDate(a, b) {
   const aDate = new Date(a.start.dateTime || a.start.date);
