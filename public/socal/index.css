@@ -1,5 +1,5 @@
-body {
-  background: var(--body-background-color);
+.calendar a:hover, .list dd:hover {
+  background-color: var(--list-hover-bg);
 }
 
 .calendar a,
@@ -10,11 +10,7 @@ body {
 .list a,
 .calendar a:hover,
 .list a:hover {
-  color: var(--link-color);
-}
-
-hr {
-  background-color: var(--hr-background-color);
+  color: var(--bs-body-color);
 }
 
 .filler {
@@ -26,7 +22,6 @@ hr {
 }
 
 .calendar {
-  color: var(--text-color);
   display: grid;
   grid-template-columns: repeat(7, minmax(0, 1fr));
 }
@@ -52,7 +47,6 @@ hr {
   backdrop-filter: var(--table-header-backdrop-filter);
   background: var(--table-header-background-color);
   border-bottom: 1px solid var(--table-header-border-color);
-  color: var(--table-header-color);
 }
 
 .list dd {
@@ -78,57 +72,53 @@ hr {
 }
 
 :root {
+  --bs-list-group-action-hover-bg: var(--list-hover-bg);
   --filler-background-color: #ddd;
-  --body-background-color: white;
-  --hr-background-color: black;
-  --link-color: black;
+  --list-hover-bg: rgba(0, 0, 0, .03);
   --list-separator-color: rgba(0, 0, 0, 0.1);
   --table-header-backdrop-filter: saturate(180%) blur(20px);
   --table-header-background-color: rgba(255, 255, 255, .75);
   --table-header-border-color: rgba(0, 0, 0, 0.2);
-  --table-header-color: black;
-  --text-color: black;
   --text-muted-color: #6c757d;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --body-background-color: black;
+    --bs-body-bg: #000;
     --bs-body-color: #eee;
+    --bs-link-color: #6ea8fe;
+    --bs-link-hover-color: #0d6efd;
     --filler-background-color: #222;
-    --hr-background-color: #eee;
-    --link-color: #eee;
     --link-hover-color: rgba(255, 255, 255, .9);
+    --list-hover-bg: rgba(255, 255, 255, .075);
     --list-separator-color: rgba(255, 255, 255, .1);
     --table-header-background-color: rgba(0, 0, 0, 0.75);
     --table-header-border-color: rgba(255, 255, 255, .2);
-    --table-header-color: white;
-    --text-color: #eee;
     --text-muted-color: #bbb;
   }
   .list-group {
     --bs-list-group-action-active-bg: #111;
-    --bs-list-group-action-active-color: var(--text-color);
-    --bs-list-group-action-hover-bg: rgba(255, 255, 255, .1);
-    --bs-list-group-action-hover-color: var(--text-color);
-    --bs-list-group-bg: var(--body-background-color);
-    --bs-list-group-color: var(--text-color);
+    --bs-list-group-action-active-color: var(--bs-body-color);
+    --bs-list-group-action-hover-bg: var(--list-hover-bg);
+    --bs-list-group-action-hover-color: var(--bs-body-color);
+    --bs-list-group-bg: var(--bs-body-bg);
+    --bs-list-group-border-color: rgba(255, 255, 255, 0.125);
+    --bs-list-group-color: var(--bs-body-color);
   }
   .modal {
     --bs-modal-bg: #111;
     --bs-modal-border-color: rgba(255, 255, 255, .25);
-    --bs-modal-color: var(--text-color);
     --bs-modal-header-border-color: var(--bs-modal-border-color);
   }
   .modal-header .btn-close {
     filter: invert(1) grayscale(100%) brightness(200%);
   }
   .navbar {
-    --bs-navbar-brand-color: var(--link-color);
-    --bs-navbar-brand-hover-color: var(--link-hover-color);
+    --bs-navbar-brand-color: var(--bs-body-color);
+    --bs-navbar-brand-hover-color: var(--bs-body-color);
   }
   .nav-link {
-    --bs-nav-link-color: var(--link-color);
-    --bs-nav-link-hover-color: var(--link-hover-color);
+    --bs-nav-link-color: var(--bs-body-color);
+    --bs-nav-link-hover-color: var(--bs-body-color);
   }
 }
