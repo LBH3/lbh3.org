@@ -399,7 +399,7 @@ Promise.allSettled(promises).then((data) => {
             ${event.location ? `<p class="my-0 one-line px-1 text-muted"><small>${event.location}</small></p>` : ''}
           </a>
             `;
-          }).join('') : (calendarDate.getTime() === startOfTodayTime ? '<p class="my-0 no-trails one-line px-1 text-muted" style="border-top: .25rem solid black"><small>Today</small></p><p class="px-1 no-trails">No trails.</p>' : '')}
+          }).join('') : (calendarDate.getTime() === startOfTodayTime ? '<p class="my-0 no-trails one-line px-1 text-muted" style="border-top: .25rem solid var(--bs-body-color)"><small>Today</small></p><p class="px-1 no-trails">No trails.</p>' : '')}
         </li>
       `;
     }
