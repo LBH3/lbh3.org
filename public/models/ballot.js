@@ -82,6 +82,9 @@ const Ballot = DefineMap.extend({
 
       // Decrypt the secret key
       const decryptedSecretKey = decrypter.decrypt(this.encryptedKey);
+      if (!decryptedSecretKey) {
+        throw new Error('Could not decrypt the secret with the provided key');
+      }
 
       // Decrypt the message
       const decryptedBallotJSON = CryptoJSAES.decrypt(this.encryptedBallot, decryptedSecretKey).toString(CryptoJSCore.enc.Utf8);
