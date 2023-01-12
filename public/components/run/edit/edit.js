@@ -81,7 +81,7 @@ export const ViewModel = DefineMap.extend({
 
       // Update run info
       if (result.role) {
-        const needsSaving = this.event.updateWithHashers(this.hashers);
+        const needsSaving = this.event.updateWithHashers([...this.hashers, result]);
         if (needsSaving) {
           this.editRun();
         }
@@ -102,7 +102,7 @@ export const ViewModel = DefineMap.extend({
 
         // Update run info
         if (result.role) {
-          const needsSaving = this.event.updateWithHashers(this.hashers);
+          const needsSaving = this.event.updateWithHashers([...this.hashers, result]);
           if (needsSaving) {
             this.editRun();
           }
