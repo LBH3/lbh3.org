@@ -405,14 +405,17 @@ Promise.allSettled(promises).then((data) => {
     }
 
     function getUpcomingEventsView() {
-      const filteredAllDayEvents = allDayEvents.filter(allDayEvent => {
-        const endDate = allDayEvent.end.dateTime ? new Date(allDayEvent.end.dateTime) : stringToDate(allDayEvent.end.date);
-        const hasEndedBeforeNow = endDate.getTime() < today.getTime();
-        return hasEndedBeforeNow === false && allDayEvent.summary.toLowerCase().includes('no oc hump') === false && allDayEvent.summary.toLowerCase().includes('no ochhh') === false;
+      const regoEvents = allEvents.filter(event => {
+        return (event.description || '').toLowerCase().includes('rego');
       });
-      return (filteredAllDayEvents.length > 0) ? `
+      // const filteredAllDayEvents = allDayEvents.filter(allDayEvent => {
+      //   const endDate = allDayEvent.end.dateTime ? new Date(allDayEvent.end.dateTime) : stringToDate(allDayEvent.end.date);
+      //   const hasEndedBeforeNow = endDate.getTime() < today.getTime();
+      //   return hasEndedBeforeNow === false && allDayEvent.summary.toLowerCase().includes('no oc hump') === false && allDayEvent.summary.toLowerCase().includes('no ochhh') === false;
+      // });
+      return (regoEvents.length > 0) ? `
         <div class="list-group mx-2">
-          ${filteredAllDayEvents.sort(sortByStartDate).map(event => {
+          ${regoEvents.sort(sortByStartDate).map(event => {
         const description = [
           `<small class="text-muted">${getRangeForEvent(event)}</small>`,
           event.summary,
