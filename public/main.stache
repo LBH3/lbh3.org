@@ -29,13 +29,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://maps.googleapis.com">
   <link rel="preconnect" href="https://maps.gstatic.com">
-  <link rel="preconnect" href="https://www.google-analytics.com">
-  <link rel="preconnect" href="https://www.googletagmanager.com">
+  <link rel="preconnect" href="https://app.lbh3.org">
   <meta name="application-name" content="LBH3">
   <meta name="theme-color" content="#dc3232">
 
-  {{! Global Site Tag (gtag.js) - Google Analytics }}
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-91420608-1"></script>
+  <script src="https://app.lbh3.org/script.js" data-site="TWKJEWDG" defer></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
