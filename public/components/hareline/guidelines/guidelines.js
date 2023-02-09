@@ -1092,7 +1092,7 @@ export const ViewModel = DefineMap.extend({
 					});
 				};
 
-				const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${this.googleMapsKey}&libraries=places`;
+				const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${this.googleMapsKey}&libraries=places`;
 				const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
 
 				// Check if thet script’s already been loaded

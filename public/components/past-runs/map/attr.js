@@ -89,7 +89,7 @@ callbacks.attr('lbh3-map-attr', (mapElement, data) => {
         });
       };
 
-      const scriptSrc = `https://maps.googleapis.com/maps/api/js?key=${data.scope.vm.googleMapsKey}&libraries=places`;
+      const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${data.scope.vm.googleMapsKey}&libraries=places`;
       const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
 
       // Check if thet script’s already been loaded
