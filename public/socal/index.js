@@ -2,18 +2,68 @@
 const calendars = [
   {
     'color': '#777777',
+    'id': 'blj7esp5ns5sbirko1p7amr4ig@group.calendar.google.com',
+    'summary': 'San Luis Obispo H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'c_95c7557021b96e1c88a6df5a9132ac59082e1bfc2c2ba3eb4dc7f70b84155caa@group.calendar.google.com',
+    'summary': 'Stand Up Paddling H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'c_d4df77733f363a930426db4e78e11a4de74383a16027a2e134c4514c9ab4e310@group.calendar.google.com',
+    'summary': 'Whittier H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'hash.org_61a83meeg5us45g7fecufe1ig0@group.calendar.google.com',
+    'summary': 'San Diego H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'hash.org_92nnvc88c7r57nv7jp6pcf7mhk@group.calendar.google.com',
+    'summary': 'Inland Empire H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'hash.org_bhu8is1obunl6b0g1p9679dob4@group.calendar.google.com',
+    'summary': 'Jackalope, Lancaster, & Palmdale Valley H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'hash.org_ck3rfvpaupl5oieosvdpldu5co@group.calendar.google.com',
+    'summary': 'Santa Barbara H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'hash.org_cpeuq6vla0pbh7sp61t28ksrgg@group.calendar.google.com',
+    'summary': 'Westside Pirates H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'hash.org_di50tsjofkeh6024436u7fucso@group.calendar.google.com',
+    'summary': 'Santa Clarita Valley H3'
+  },
+  {
+    'color': '#777777',
+    'id': 'hash.org_gnqv4s36ufg7jq3rhjbe9956uo@group.calendar.google.com',
+    'summary': 'Randsburg H3'
+  },
+  {
+    'color': '#777777',
     'id': 'hash.org_vca9alu5cu5q2hkvip31fma6so@group.calendar.google.com',
-    'summary': 'GAL'
+    'summary': 'Get A Life H3'
   },
   {
     'color': '#dc3232',
     'id': 'hash.org_apdt0s7aam1mdl1ckc4n1rcc4k@group.calendar.google.com',
-    'summary': 'LBH3'
+    'summary': 'Long Beach H3'
   },
   {
     'color': '#cd6d40',
     'id': 'hash.org_gr8mpprvpgpiihhkfj0dd0ic4k@group.calendar.google.com',
-    'summary': 'OCH3'
+    'summary': 'Orange County H3'
   },
   {
     'color': '#777777',
@@ -23,37 +73,37 @@ const calendars = [
   {
     'color': '#349ce9',
     'id': 'hash.org_8er4h3q5qct5apu9nl2v7ic4c0@group.calendar.google.com',
-    'summary': 'LAH3'
+    'summary': 'Los Angeles H3'
   },
   {
     'color': '#777777',
     'id': 'hash.org_usu1t0e08b8pmgiub20vu3uh8o@group.calendar.google.com',
-    'summary': 'Hot Flash'
+    'summary': 'Hot Flash H3'
   },
   {
     'color': '#58d7e3',
     'id': 'hash.org_f9pd9rqdl9p4o5p2ierccb2dbk@group.calendar.google.com',
-    'summary': 'Ventura'
+    'summary': 'Ventura H3'
   },
   {
     'color': '#777777',
     'id': 'hash.org_vs1a87f9anqe0c66h2knc4nd14@group.calendar.google.com',
-    'summary': 'H5'
+    'summary': 'Happy Hour H3'
   },
   {
     'color': '#777777',
     'id': '529ih4iun7rs62rbdban4838i0@group.calendar.google.com',
-    'summary': 'Hashsc Calendar'
+    'summary': 'Hash Events'
   },
   {
     'color': '#7950df',
     'id': 'hash.org_8jis0j5k0hanmgq2c6inrf93ho@group.calendar.google.com',
-    'summary': 'OC Hump'
+    'summary': 'OC Hump H3'
   },
   {
     'color': '#457a51',
     'id': 'hash.org_qhs75uc6iedipkaopd5froa80k@group.calendar.google.com',
-    'summary': 'BOHICA'
+    'summary': 'BOHICA H3'
   },
   {
     'color': '#777777',
@@ -63,32 +113,32 @@ const calendars = [
   {
     'color': '#777777',
     'id': 'hash.org_atjdvmkhl2fa3n2cer8m9mlsv4@group.calendar.google.com',
-    'summary': 'SCVHHH'
+    'summary': 'SCV H3'
   },
   {
     'color': '#777777',
     'id': 'hash.org_6ocimc04ghdh7652dlvnjs5060@group.calendar.google.com',
-    'summary': 'Foothill'
+    'summary': 'Foothill H3'
   },
   {
     'color': '#777777',
     'id': 'hash.org_tgkkji1arc133kf0vsjofrsod8@group.calendar.google.com',
-    'summary': 'Full Moon'
+    'summary': 'Full Moon H3'
   },
   {
     'color': '#777777',
     'id': 'hash.org_t8of6q45k4cki650d97m0b80dc@group.calendar.google.com',
-    'summary': 'SH4'
+    'summary': 'Signal Hill H3'
   },
   {
     'color': '#ff69b4',
     'id': 'hash.org_a92amemeo3ulb9lso3kog1k0jg@group.calendar.google.com',
-    'summary': 'PMS'
+    'summary': 'PMS H3'
   },
   {
     'color': '#fbf052',
     'id': 'hash.org_0si8oud4j5upnojfbimg60snag@group.calendar.google.com',
-    'summary': 'Humpin\' Hash: Posted on Hash.org'
+    'summary': 'Humpin’ H3'
   },
   {
     'color': '#777777',
@@ -103,7 +153,7 @@ const calendars = [
   {
     'color': '#777777',
     'id': 'hash.org_t92ud36ad0jbao70f22d2eptuc@group.calendar.google.com',
-    'summary': 'ELH3'
+    'summary': 'East LA H3'
   }
 ];
 
