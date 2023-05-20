@@ -61,9 +61,9 @@
   </div>
 {{/if}}
 
-{{#if isBefore2022November28}}
+{{#if isBefore2023September17}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2022/primm-and-improper/">Rego for Primm and Improper the weekend of Fri.&nbsp;November&nbsp;25<sup>th</sup> – Sun.&nbsp;November&nbsp;27&nbsp;15<sup>th</sup>, 2022</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2023/mystery/">Rego for the Mystery Bus Tour on Sat.&nbsp;September&nbsp;16<sup>th</sup>, 2023</a></p>
   </div>
 {{/if}}
 
