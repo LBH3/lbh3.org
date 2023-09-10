@@ -455,17 +455,25 @@ Promise.allSettled(promises).then((data) => {
     }
 
     function getUpcomingEventsView() {
-      const regoEvents = allEvents.filter(event => {
-        return (event.description || '').toLowerCase().includes('rego');
+      const filteredAllDayEvents = allDayEvents.filter(allDayEvent => {
+        const endDate = allDayEvent.end.dateTime ? new Date(allDayEvent.end.dateTime) : stringToDate(allDayEvent.end.date);
+        const startDate = allDayEvent.start.dateTime ? new Date(allDayEvent.start.dateTime) : stringToDate(allDayEvent.start.date);
+        const hasEndedBeforeNow = endDate.getTime() < today.getTime();
+        const isMoreThanOneDay = endDate.getTime() - startDate.getTime() > 86400000;
+        return hasEndedBeforeNow === false && isMoreThanOneDay === true && allDayEvent.summary.toLowerCase().includes('no oc hump') === false && allDayEvent.summary.toLowerCase().includes('no ochhh') === false;
       });
-      // const filteredAllDayEvents = allDayEvents.filter(allDayEvent => {
-      //   const endDate = allDayEvent.end.dateTime ? new Date(allDayEvent.end.dateTime) : stringToDate(allDayEvent.end.date);
-      //   const hasEndedBeforeNow = endDate.getTime() < today.getTime();
-      //   return hasEndedBeforeNow === false && allDayEvent.summary.toLowerCase().includes('no oc hump') === false && allDayEvent.summary.toLowerCase().includes('no ochhh') === false;
-      // });
-      return (regoEvents.length > 0) ? `
+      const regoEvents = allEvents.filter(event => {
+        const endDate = event.end.dateTime ? new Date(event.end.dateTime) : stringToDate(event.end.date);
+        const hasEndedBeforeNow = endDate.getTime() < today.getTime();
+        return hasEndedBeforeNow === false && (event.description || '').toLowerCase().includes('rego');
+      });
+      const topOfPageEvents = Array.from(new Set([
+        ...filteredAllDayEvents,
+        ...regoEvents,
+      ]));
+      return (topOfPageEvents.length > 0) ? `
         <div class="list-group mx-2">
-          ${regoEvents.sort(sortByStartDate).map(event => {
+          ${topOfPageEvents.sort(sortByStartDate).map(event => {
         const description = [
           `<small class="text-muted">${getRangeForEvent(event)}</small>`,
           event.summary,
