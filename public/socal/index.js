@@ -386,20 +386,11 @@ Promise.allSettled(promises).then((data) => {
     function getMonthView() {
       return `
         ${
-        calendarDatesWithMonths.filter(({ dates }) => {
-          // TODO: consider removing this filter
-          const firstDateWithEventsStartingToday = dates.find(calendarDate => {
-            if (calendarDate >= today) {
-              return true;
-            }
-            const day = calendarDate.toISOString().slice(0, 10);
-            const events = eventsByDay[day];
-            return events && events.length > 0 && events.find(event => {
-              const startDate = event.start.dateTime ? new Date(event.start.dateTime) : stringToDate(event.start.date);
-              return startDate >= today;
-            });
-          });
-          return firstDateWithEventsStartingToday;
+        calendarDatesWithMonths.filter(({ yearMonth }) => {
+          const [year, month] = yearMonth.split('-');
+          const firstDay = new Date(year, month, 1);
+          const thisMonthFirstDay = new Date(today.getFullYear(), today.getMonth(), 1);
+          return firstDay >= thisMonthFirstDay;
         }).map(({ dates }) => {
           const firstDate = dates[0];
           const lastDate = dates[dates.length - 1];
