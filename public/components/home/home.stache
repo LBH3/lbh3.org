@@ -55,9 +55,9 @@
   {{/if}}
 {{/if}}
 
-{{#if isBefore2022October10}}
+{{#if isBefore2023October15}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2022/marathon/">Support our LB&nbsp;Marathon r*cists on Sunday, October&nbsp;9<sup>th</sup>, 2022</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2023/marathon/">Support our LB&nbsp;Marathon r*cists on Sunday, October&nbsp;15<sup>th</sup>, 2023</a></p>
   </div>
 {{/if}}
 
