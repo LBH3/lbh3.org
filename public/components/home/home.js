@@ -31,8 +31,8 @@ export default Component.extend({
     get isBefore2023October15() {
       return new Date() < new Date('Oct 15 2023 19:00:00 UTC');
     },
-    get isBefore2022November28() {
-      return new Date() < new Date('Nov 28 2022 08:00:00 UTC');
+    get isBefore2023October23() {
+      return new Date() < new Date('Oct 23 2023 07:00:00 UTC');
     },
     get isBefore2023September17() {
       return new Date() < new Date('Sept 17 2023 07:00:00 UTC');

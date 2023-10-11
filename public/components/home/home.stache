@@ -61,9 +61,9 @@
   </div>
 {{/if}}
 
-{{#if isBefore2023September17}}
+{{#if isBefore2023October23}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2023/mystery/">Rego for the Mystery Bus Tour on Sat.&nbsp;September&nbsp;16<sup>th</sup>, 2023</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="https://docs.google.com/forms/d/e/1FAIpQLSc8QIQv59ZRa5_-rF3lvNlPJvsEzFgWdzsKArP_evNkQZmErQ/viewform?fbclid=IwAR0Hiex_k7VZQ-UwOXmOIJB2st5O5AJf_R26aGKc2JWZnDgnIrIE2ys5R1Y&pli=1">Order an LBH3 Happi Coat before Sunday, October&nbsp;22<sup>nd</sup>, 2023</a></p>
   </div>
 {{/if}}
 
