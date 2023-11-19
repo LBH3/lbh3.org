@@ -29,11 +29,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://maps.googleapis.com">
   <link rel="preconnect" href="https://maps.gstatic.com">
-  <link rel="preconnect" href="https://app.lbh3.org">
   <meta name="application-name" content="LBH3">
   <meta name="theme-color" content="#dc3232">
 
-  <script src="https://app.lbh3.org/script.js" data-site="TWKJEWDG" defer></script>
+  <script defer data-domain="lbh3.org" src="https://plausible.io/js/script.outbound-links.js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
