@@ -9,7 +9,6 @@
 To install all dependencies, (e.g. after cloning it from a Git repository) run
 
 ```
-npm install donejs -g
 npm install
 ```
 
@@ -53,6 +52,10 @@ After running that command, something similar to the following should be shown:
 You can now start the database server using:
     pg_ctl -D /usr/local/var/postgres -l logfile start
 ```
+
+### Python
+
+Install [Python 2](https://www.python.org/downloads/release/python-2718/).
 
 ## Database
 
