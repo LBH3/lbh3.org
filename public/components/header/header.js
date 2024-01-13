@@ -8,6 +8,9 @@ import view from './header.stache';
 
 export const ViewModel = DefineMap.extend({
   id: 'number',
+  facebookWarning() {
+    alert('Unfortunately Facebook no longer allows non-business entities to offer Facebook Login.\n\nPlease sign in with Google and I’m Fucking Matt Damon will verify your account.')
+  },
   get hashersPromise() {
     const now = new Date();
     return Hasher.getList({
