@@ -15,7 +15,7 @@ const data = [
 - Vote for the number of positions as noted in each category.
 - Select the checkbox or radio button next to your choice.
 - You don’t have to vote in every race.
-- <a href="https://www.lbh3.org/events/2017/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Use the Past Runs page to write in your nominations for the Best and Worst of 2017.</a>
+- <a href="https://www.lbh3.org/events/2017/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Visit the Past Runs page to refresh your memory of the Best and Worst of 2017.</a>
 
 ##### Write-in candidates
 
@@ -220,7 +220,7 @@ You can submit this form until February 4<sup>th</sup>. Cum to Found ’er Balls
 - Vote for the number of positions as noted in each category.
 - Select the checkbox or radio button next to your choice.
 - You don’t have to vote in every race.
-- <a href="https://www.lbh3.org/events/2018/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Use the Past Runs page to write in your nominations for the Best and Worst of 2018.</a>
+- <a href="https://www.lbh3.org/events/2018/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Visit the Past Runs page to refresh your memory of the Best and Worst of 2018.</a>
 
 ##### Write-in candidates
 
@@ -427,7 +427,7 @@ You can submit this form until February 3<sup>rd</sup>. Cum to [Found ’er Ball
 - Vote for the number of positions as noted in each category.
 - Select the checkbox or radio button next to your choice.
 - You don’t have to vote in every race.
-- <a href="https://www.lbh3.org/events/2019/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Use the Past Runs page to write in your nominations for the Best and Worst of 2019.</a>
+- <a href="https://www.lbh3.org/events/2019/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Visit the Past Runs page to refresh your memory of the Best and Worst of 2019.</a>
 
 ##### Write-in candidates
 
@@ -619,7 +619,7 @@ You can submit this form until February 2<sup>nd</sup>. Cum to [Found ’er Ball
 - Vote for the number of positions as noted in each category.
 - Select the checkbox or radio button next to your choice.
 - You don’t have to vote in every race.
-- <a href="https://www.lbh3.org/events/2020/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Use the Past Runs page to write in your nominations for the Best and Worst of 2020.</a>
+- <a href="https://www.lbh3.org/events/2020/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Visit the Past Runs page to refresh your memory of the Best and Worst of 2020.</a>
 
 ##### Write-in candidates
 
@@ -795,7 +795,7 @@ You can submit this form until January 31<sup>st</sup>. Join us for a [“Virtua
 - Vote for the number of positions as noted in each category.
 - Select the checkbox or radio button next to your choice.
 - You don’t have to vote in every race.
-- <a href="https://www.lbh3.org/events/2021/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Use the Past Runs page to write in your nominations for the Best and Worst of 2021.</a>
+- <a href="https://www.lbh3.org/events/2021/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Visit the Past Runs page to refresh your memory of the Best and Worst of 2021.</a>
 
 ##### Write-in candidates
 
@@ -1002,7 +1002,7 @@ You can submit this form until February 13<sup>th</sup>. Cum to [Found ’er Bal
 - Vote for the number of positions as noted in each category.
 - Select the checkbox or radio button next to your choice.
 - You don’t have to vote in every race.
-- <a href="https://www.lbh3.org/events/2022/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Use the Past Runs page to write in your nominations for the Best and Worst of 2022.</a>
+- <a href="https://www.lbh3.org/events/2022/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Visit the Past Runs page to refresh your memory of the Best and Worst of 2022.</a>
 
 ##### Write-in candidates
 
@@ -1204,7 +1204,7 @@ You can submit this form until January 29<sup>th</sup> at 6 PM. Cum to [Found �
 - Vote for the number of positions as noted in each category.
 - Select the checkbox or radio button next to your choice.
 - You don’t have to vote in every race.
-- <a href="https://www.lbh3.org/events/2023/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Use the Past Runs page to write in your nominations for the Best and Worst of 2023.</a>
+- <a href="https://www.lbh3.org/events/2023/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Visit the Past Runs page to refresh your memory of the Best and Worst of 2023.</a>
 
 ##### Write-in candidates
 
