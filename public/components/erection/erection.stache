@@ -663,11 +663,10 @@
 
       {{else}}
         <p>
-          Get started by signing in with <a href="/auth/facebook">Facebook</a> or
-          <a href="/auth/google">Google</a>, then <strong>cum back to this page.</strong>
+          Get started by signing in with <a href="/auth/google">Google</a>, then <strong>cum back to this page.</strong>
         </p>
         <p>
-          Don’t have a Facebook or Google account? Cum to a Sunday run and ask for a ballot.
+          Don’t have a Google account? Cum to a Sunday run and ask for a ballot.
         </p>
       {{/if}}
     {{/if}}

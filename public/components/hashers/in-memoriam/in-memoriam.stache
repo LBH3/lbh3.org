@@ -87,6 +87,6 @@
       {{/if}}
     </can-import>
   {{else}}
-    <p>Get started by signing in with <a href="/auth/facebook">Facebook</a> or <a href="/auth/google">Google</a>, then <strong>cum back to this page</strong> to request access.</p>
+    <p>Get started by signing in with <a href="/auth/google">Google</a>, then <strong>cum back to this page</strong> to request access.</p>
   {{/if}}
 {{/if}}

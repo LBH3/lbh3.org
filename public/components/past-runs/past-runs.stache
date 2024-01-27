@@ -110,7 +110,7 @@
           {{else}}
             <div class="alert alert-info d-print-none" role="alert">
               <p><strong>Looking for our photos or the Snooze?</strong></p>
-              <p class="mb-0">Get started by signing in with <a href="/auth/facebook">Facebook</a> or <a href="/auth/google">Google</a>, then <strong>cum back to this page</strong> to request access.</p>
+              <p class="mb-0">Get started by signing in with <a href="/auth/google">Google</a>, then <strong>cum back to this page</strong> to request access.</p>
             </div>
           {{/if}}
         {{/if}}
