@@ -89,7 +89,7 @@ callbacks.attr('lbh3-map-attr', (mapElement, data) => {
         });
       };
 
-      const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${data.scope.vm.googleMapsKey}&libraries=places`;
+      const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${data.scope.vm.googleMapsKey}&libraries=places&loading=async`;
       const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
 
       // Check if thet script’s already been loaded
@@ -108,6 +108,7 @@ callbacks.attr('lbh3-map-attr', (mapElement, data) => {
         }
       } else {
         const mapsScript = document.createElement('script');
+        mapsScript.async = true;
         mapsScript.onload = onloadHandler;
         mapsScript.src = scriptSrc;
         mapsScript.type = 'text/javascript';

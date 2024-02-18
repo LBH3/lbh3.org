@@ -208,7 +208,7 @@ export default Component.extend({
             }
           };
 
-          const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${this.googleMapsKey}&libraries=places`;
+          const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${this.googleMapsKey}&libraries=places&loading=async`;
           const existingScript = document.querySelector(
             `script[src='${scriptSrc}']`
           );
@@ -229,6 +229,7 @@ export default Component.extend({
             }
           } else {
             const mapsScript = document.createElement("script");
+            mapsScript.async = true;
             mapsScript.onload = onloadHandler;
             mapsScript.src = scriptSrc;
             mapsScript.type = "text/javascript";

@@ -1092,7 +1092,7 @@ export const ViewModel = DefineMap.extend({
 					});
 				};
 
-				const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${this.googleMapsKey}&libraries=places`;
+				const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${this.googleMapsKey}&libraries=places&loading=async`;
 				const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
 
 				// Check if thet script’s already been loaded
@@ -1111,6 +1111,7 @@ export const ViewModel = DefineMap.extend({
 					}
 				} else {
 					const mapsScript = document.createElement('script');
+					mapsScript.async = true;
 					mapsScript.onload = onloadHandler;
 					mapsScript.src = scriptSrc;
 					mapsScript.type = 'text/javascript';

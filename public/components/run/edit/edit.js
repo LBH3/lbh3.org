@@ -41,7 +41,7 @@ export const enableAutocompleteForInput = (id, viewModel, vmProperty, callback) 
 };
 
 export const loadGoogleMapsPlacesAPI = (callback) => {
-  const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${loader.googleMapsKey}&libraries=places`;
+  const scriptSrc = `https://maps.googleapis.com/maps/api/js?callback=Function.prototype&key=${loader.googleMapsKey}&libraries=places&loading=async`;
   const existingScript = document.querySelector(`script[src='${scriptSrc}']`);
 
   if (existingScript) {
@@ -56,6 +56,7 @@ export const loadGoogleMapsPlacesAPI = (callback) => {
     }
   } else {
     const mapsScript = document.createElement('script');
+    mapsScript.async = true;
     mapsScript.onload = callback;
     mapsScript.src = scriptSrc;
     mapsScript.type = 'text/javascript';
