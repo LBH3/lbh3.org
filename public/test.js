@@ -21,6 +21,7 @@ import 'lbh3/components/hareline/add/add-test';
 import 'lbh3/components/hareline/add-event/add-event-test';
 import 'lbh3/components/hareline/guidelines/guidelines-test';
 import 'lbh3/components/hareline/hareline-test';
+import 'lbh3/components/hareline/scribing/scribing-test';
 import 'lbh3/components/hasher/edit/edit-test';
 import 'lbh3/components/hasher/hasher-test';
 import 'lbh3/components/hasher/nav/nav-test';

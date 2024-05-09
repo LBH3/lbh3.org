@@ -191,6 +191,7 @@
             <li class="nav-item"><a class="{{#eq(routeData.secondaryPage, 'add')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='add'}}" title="Add a new trail">Add Trail</a></li>
           {{/if}}
           <li class="nav-item"><a class="{{#eq(routeData.secondaryPage, 'guidelines')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='guidelines'}}" title="View the haring guidelines">Haring Guidelines</a></li>
+          <li class="nav-item"><a class="{{#eq(routeData.secondaryPage, 'scribing')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='hareline' secondaryPage='scribing'}}" title="View the scribing guidelines">Scribing Guidelines</a></li>
         </lbh3-sub-nav>
       {{/harelineNav}}
       {{#switch routeData.secondaryPage}}
@@ -223,6 +224,14 @@
             {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Haring Guidelines…'" />{{/if}}
             {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Haring Guidelines failed to load.</div>{{/if}}
             {{#if isResolved}}<lbh3-hareline-guidelines description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
+          </can-import>
+        {{/case}}
+        {{#case "scribing"}}
+          {{>harelineNav}}
+          <can-import class="container d-block pl-0 pr-0" from="~/components/hareline/scribing/scribing">
+            {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Scribing Guidelines…'" />{{/if}}
+            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Scribing Guidelines failed to load.</div>{{/if}}
+            {{#if isResolved}}<lbh3-hareline-scribing description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
           </can-import>
         {{/case}}
         {{#default}}
