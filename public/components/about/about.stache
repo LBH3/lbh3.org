@@ -41,6 +41,13 @@
       <li><a class="d-block py-1" href="https://lbh3-miscellaneous.s3.amazonaws.com/pdfs/Whosleptwithbigpink-2024-02-25.pdf">
         Who Slept With Big Pink
       </a></li>
+      <li>
+        <lbh3-require-sign-in>
+          <a class="d-block py-1" href="https://lbh3-miscellaneous.s3.us-west-2.amazonaws.com/pdfs/analversary-book-20th.pdf">
+            20<sup>th</sup> Analversary Book
+          </a>
+        </lbh3-require-sign-in>
+      </li>
     </ul>
   </div>
 </div>
