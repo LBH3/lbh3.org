@@ -73,4 +73,8 @@
   </div>
 {{/if}}
 
+<div class="alert alert-primary mt-3" role="alert">
+  <p class="mb-0 text-center"><a class="alert-link" href="https://forms.gle/TQFi8ikjL1oUoSw18">Submit your info to be a part of the LBH3 40<sup>th</sup> Analversary yearbook!</a></p>
+</div>
+
 <lbh3-run />
