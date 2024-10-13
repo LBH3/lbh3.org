@@ -132,6 +132,16 @@ const getBoredInfo = function(hook) {
           canViewRunAttendance: true
         });
       }
+      if (boredPositions.includes(authHook.RECYCLEMEISTERS)) {
+        permission = Object.assign(permission, {
+          canAddPhotos: true,
+          canEditHasherInfo: true,
+          canViewDirectoryInfo: true,
+          canViewHashersEmailList: true,
+          canViewOldData: true,
+          canViewRunAttendance: true
+        });
+      }
       if (boredPositions.includes(authHook.TRAILMASTERS)) {
         permission = Object.assign(permission, {
           canEditFutureTrails: true,

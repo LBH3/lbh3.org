@@ -20,6 +20,7 @@ const positions = {
   HASH_HISTORIANS: 6,
   ON_DISK: 14,
   ON_SEC: 15,
+  RECYCLEMEISTERS: 23,
   TRAILMASTERS: 19,
   WEBMASTERS: 20
 };
