@@ -20,7 +20,7 @@ import view from './edit.stache';
 export const enableAutocompleteForInput = (id, viewModel, vmProperty, callback) => {
   const interval = setInterval(() => {// Make sure the element is in the DOM
     const locationInput = document.getElementById(id);
-    if (locationInput) {
+    if (google.maps.places && locationInput) {
       clearInterval(interval);
       locationInput.disabled = false;
       const autocomplete = new google.maps.places.Autocomplete(locationInput, {
@@ -37,7 +37,7 @@ export const enableAutocompleteForInput = (id, viewModel, vmProperty, callback) 
         promise.then(callback);
       });
     }
-  }, 10);
+  }, 16);
 };
 
 export const loadGoogleMapsPlacesAPI = (callback) => {
