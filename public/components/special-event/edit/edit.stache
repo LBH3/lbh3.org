@@ -76,10 +76,6 @@
           {{/if}}
           {{#if specialEvent.locationPromise.value.placeId}}
             <lbh3-map placeId:from="specialEvent.locationPromise.value.placeId" style="height: 260px" />
-          {{else}}
-            {{#if specialEvent.locationMd}}
-              <lbh3-map q:from="specialEvent.locationMd" style="height: 260px" />
-            {{/if}}
           {{/if}}
         </div>
         <div class="form-group col-md-6">
