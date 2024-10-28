@@ -67,9 +67,9 @@
   </div>
 {{/if}}
 
-{{#if isBefore2024February11}}
+{{#if isBefore2025February2}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2024/founders/">Join us for our annual Found&nbsp;’er&nbsp;Balls on Saturday, February&nbsp;10<sup>th</sup>, 2024</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2025/founders/">Join us for our 40<sup>th</sup> Found&nbsp;’er&nbsp;Balls Weekend Extravaganza on Friday, January 31<sup>st</sup> – Sunday, February 2<sup>nd</sup>, 2025</a></p>
   </div>
 {{/if}}
 
