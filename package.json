@@ -57,7 +57,7 @@
     "aws-sdk": "^2.99.0",
     "body-parser": "^1.17.2",
     "compression": "^1.7.0",
-    "cookie-parser": "^1.4.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.4",
     "feathers-authentication-hooks": "^0.1.4",
     "feathers-hooks-common": "^3.7.1",
