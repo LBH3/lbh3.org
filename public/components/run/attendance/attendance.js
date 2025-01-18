@@ -100,9 +100,12 @@ export const ViewModel = DefineMap.extend({
 
     let birthYear = this.year;
     if (rangeMaxMonth === 0) {
-      if (hasher.birthMonth === 1) {
+      const trailMonth = this.trailDateAsMoment.month();
+      if (hasher.birthMonth === 1 && trailMonth === 11) {
+        // If trail year is 2024, this fixes 2025-01 birthdays
         birthYear = this.year + 1;
-      } else if (hasher.birthMonth === 12) {
+      } else if (hasher.birthMonth === 12 && trailMonth === 0) {
+        // If trail year is 2025, this fixes 2024-12 birthdays
         birthYear = this.year - 1;
       }
     }
