@@ -137,8 +137,6 @@ const getBoredInfo = function(hook) {
           canAddPhotos: true,
           canEditHasherInfo: true,
           canViewDirectoryInfo: true,
-          canViewHashersEmailList: true,
-          canViewOldData: true,
           canViewRunAttendance: true
         });
       }

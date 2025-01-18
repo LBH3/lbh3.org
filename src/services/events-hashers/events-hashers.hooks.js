@@ -26,6 +26,7 @@ const boredPositions = [
   authHook.HASH_HISTORIANS,
   authHook.ON_DISK,
   authHook.ON_SEC,
+  authHook.RECYCLEMEISTERS,
   authHook.TRAILMASTERS,
   authHook.WEBMASTERS
 ];
