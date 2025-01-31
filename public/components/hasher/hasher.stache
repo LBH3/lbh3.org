@@ -330,7 +330,7 @@
           <summary>Display options</summary>
           <form>
             <div class="form-inline">
-              {{#if session.user.hasherId}}
+              {{#if hasherIsSignedIn}}
                 <div class="form-check ml-3">
                   <input class="form-check-input" id="showHashit" type="checkbox" checked:bind="showHashit">
                   <label class="form-check-label" for="showHashit">Show hashit</label>
@@ -344,7 +344,7 @@
                 <input class="form-check-input" id="showOnOn" type="checkbox" checked:bind="showOnOn">
                 <label class="form-check-label" for="showOnOn">Show on-on</label>
               </div>
-              {{#if session.user.hasherId}}
+              {{#if hasherIsSignedIn}}
                 <div class="form-check ml-3">
                   <input class="form-check-input" id="showScribe" type="checkbox" checked:bind="showScribe">
                   <label class="form-check-label" for="showScribe">Show scribe</label>

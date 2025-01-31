@@ -6,6 +6,9 @@ import view from './run-list.stache';
 
 export const ViewModel = DefineMap.extend({
   events: {},
+  get hasherIsSignedIn() {
+    return this.session && this.session.user && this.session.user.hasherId && [7121].indexOf(this.session.user.hasherId) === -1;
+  },
   get session() {
     return Session.current;
   },

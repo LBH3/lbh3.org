@@ -56,6 +56,9 @@ export default Component.extend({
     get eventsPromise() {
       return Event.getList(this.eventQuery);
     },
+    get hasherIsSignedIn() {
+      return this.session && this.session.user && this.session.user.hasherId && [7121].indexOf(this.session.user.hasherId) === -1;
+    },
     get ogTitle() {
       return this.secondaryPage === 'search' ? 'Search Past Runs' : 'Past Runs';
     },

@@ -51,7 +51,7 @@
           {{/if}}
         {{/if}}
       {{else}}
-        {{#if session.user.hasherId}}
+        {{#if hasherIsSignedIn}}
           {{#if(event.photosUrl)}}
             <a class="btn btn-link p-0" href="{{event.photosUrl}}" target="_blank" title="View photos">
               <span class="fas fa-camera"></span>
@@ -92,7 +92,7 @@
         </small>
       </p>
     {{/and}}
-    {{#if session.user.hasherId}}
+    {{#if hasherIsSignedIn}}
       {{#if showScribe}}
         {{#if event.scribesMd}}
           <p class="hares">
@@ -150,7 +150,7 @@
           <th>Hares</th>
         {{/if}}
         <th>Location</th>
-        {{#if session.user.hasherId}}
+        {{#if hasherIsSignedIn}}
           {{#if showScribe}}
             <th>Scribe</th>
           {{/if}}
@@ -165,7 +165,7 @@
           <th class="text-nowrap">On-on</th>
         {{/if}}
         {{^if showFutureTools}}
-          {{#if session.user.hasherId}}
+          {{#if hasherIsSignedIn}}
             <th class="d-print-none single-icon-column"></th>
             {{#if showSnooze}}
               <th class="d-print-none single-icon-column"></th>
@@ -203,7 +203,7 @@
             {{/if}}
             <td colspan="{{#if showHares}}2{{else}}1{{/if}}">{{{event.nameHtml}}}</td>
             <td>{{{event.shortLocationHtml}}}</td>
-            {{#if session.user.hasherId}}
+            {{#if hasherIsSignedIn}}
               {{#if showScribe}}
                 <td></td>
               {{/if}}
@@ -218,7 +218,7 @@
               <td></td>
             {{/if}}
             {{^if showFutureTools}}
-              {{#if session.user.hasherId}}
+              {{#if hasherIsSignedIn}}
                 <td class="d-print-none single-icon-column">
                   {{#if(event.photosUrl)}}
                     <a class="btn btn-link p-0" href="{{event.photosUrl}}" target="_blank" title="View photos">
@@ -280,7 +280,7 @@
               </td>
             {{/if}}
             <td>{{{event.shortLocationHtml}}}</td>
-            {{#if session.user.hasherId}}
+            {{#if hasherIsSignedIn}}
               {{#if showScribe}}
                 <td>
                   {{#if event.scribesHtml}}
@@ -311,7 +311,7 @@
               </td>
             {{/if}}
             {{^if showFutureTools}}
-              {{#if session.user.hasherId}}
+              {{#if hasherIsSignedIn}}
                 <td class="d-print-none single-icon-column">
                   {{#if(event.photosUrl)}}
                     <a class="btn btn-link p-0" href="{{event.photosUrl}}" target="_blank" title="View photos">

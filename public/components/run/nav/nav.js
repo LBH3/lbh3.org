@@ -5,6 +5,9 @@ import view from './nav.stache';
 
 export const ViewModel = DefineMap.extend({
   event: 'any',
+  get hasherIsSignedIn() {
+    return this.session && this.session.user && this.session.user.hasherId && [7121].indexOf(this.session.user.hasherId) === -1;
+  },
   secondaryPage: 'string',
   session: 'any',
   get shouldShowEditButton() {
