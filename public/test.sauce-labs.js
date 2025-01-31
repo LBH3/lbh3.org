@@ -9,7 +9,8 @@ try {
     root: __dirname
   });
   server.listen(3000, function() {
-    // https://github.com/SeleniumHQ/selenium/wiki/DesiredCapabilities
+    // https://www.selenium.dev/documentation/legacy/desired_capabilities/
+    // https://saucelabs.com/products/supported-browsers-devices
     testSauceLabs({
       platforms: [{
         'appium-version': '1.9.1',
@@ -29,7 +30,7 @@ try {
         browserName: 'firefox',
         commandTimeout: 60,
         platform: 'Windows 7',
-        version: '47'
+        version: '48'
       }, {
         browserName: 'googlechrome',
         commandTimeout: 60,
