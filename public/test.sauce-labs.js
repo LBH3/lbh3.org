@@ -34,8 +34,8 @@ try {
       }, {
         browserName: 'googlechrome',
         commandTimeout: 60,
-        platform: 'Windows 7',
-        version: '46'
+        platform: 'Windows 10',
+        version: '70'
       }, {
         browserName: 'safari',
         commandTimeout: 60,
