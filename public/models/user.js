@@ -26,6 +26,7 @@ var User = DefineMap.extend('User', {
   canEditPostTrailInfo: doNotSerializeBooleanType,
   canEditPreTrailInfo: doNotSerializeBooleanType,
   canExportData: doNotSerializeBooleanType,
+  canManageBored: doNotSerializeBooleanType,
   canManageUsers: doNotSerializeBooleanType,
   canViewCashReport: doNotSerializeBooleanType,
   canViewDirectoryInfo: doNotSerializeBooleanType,

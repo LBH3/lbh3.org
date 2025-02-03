@@ -59,10 +59,20 @@
   {{#switch page}}
     {{#case "about"}}
       <lbh3-sub-nav class="secondary">
+        {{#if session.user.canManageBored}}
+          <li class="nav-item"><a class="{{#eq(routeData.secondaryPage, 'add')}}active{{/eq}} nav-link pr-2 py-2" href="{{routeUrl page='about' secondaryPage='add'}}">Add New Bored</a></li>
+        {{/if}}
         <li class="nav-item"><a class="{{#eq(routeData.secondaryPage, 'mismanagement')}}active{{/eq}} nav-link pr-2 py-2" href="{{routeUrl page='about' secondaryPage='mismanagement'}}" title="Go to the mismanagement page">Mismanagement</a></li>
         <li class="nav-item"><a class="{{#eq(routeData.secondaryPage, 'privacy')}}active{{/eq}} nav-link pl-2 py-2" href="{{routeUrl page='about' secondaryPage='privacy'}}" title="Go to the privacy page">Privacy</a></li>
       </lbh3-sub-nav>
       {{#switch routeData.secondaryPage}}
+        {{#case "add"}}
+          <can-import class="container d-block pl-0 pr-0" from="~/components/about/add/add">
+            {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Add New Bored page…'" />{{/if}}
+            {{#if isRejected}}<div class="alert alert-danger mt-3" role="alert"><strong>Fuck!</strong> The Add New Bored page failed to load.</div>{{/if}}
+            {{#if isResolved}}<lbh3-about-add description:to="description" ogTitle:to="ogTitle" title:to="title" />{{/if}}
+          </can-import>
+        {{/case}}
         {{#case "mismanagement"}}
           <can-import class="container d-block pl-0 pr-0" from="~/components/about/mismanagement/mismanagement">
             {{#if isPending}}<lbh3-alert class="d-block mt-3" message:from="'Loading the Mismanagement page…'" />{{/if}}
