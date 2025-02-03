@@ -30,6 +30,19 @@ export const ViewModel = DefineMap.extend({
     return 'Add hasher to Bored year';
   },
   positionId: 'string',
+  positions: {
+    get: function(lastSetValue, setValue) {
+      const positionsPromise = this.positionsPromise;
+      if (positionsPromise) {
+        positionsPromise.then(results => {
+          const currentPositions = results.filter(position => {
+            return [6, 7, 8, 9, 10, 12, 13, 16, 17, 18, 21, 22].indexOf(position.id) === -1;
+          });
+          setValue(currentPositions);
+        });
+      }
+    }
+  },
   get positionsPromise() {
     return BoredPosition.getList({
       $limit: 100,

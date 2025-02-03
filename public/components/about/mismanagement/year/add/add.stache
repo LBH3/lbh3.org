@@ -15,7 +15,7 @@
         value:bind="positionId"
       >
         <option value="0"></option>
-        {{#for(position of positionsPromise.value)}}
+        {{#for(position of positions)}}
           <option value="{{position.id}}">
             {{position.singularName}}
           </option>
