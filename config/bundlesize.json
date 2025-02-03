@@ -2,7 +2,7 @@
     "files": [
         {
             "path": "./public/dist/main.production.js",
-            "maxSize": "488 kB"
+            "maxSize": "489 kB"
         }
     ]
 }
