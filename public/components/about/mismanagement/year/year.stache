@@ -36,22 +36,24 @@
           {{#if hasherPromise.isResolved}}
             <a href="{{routeForHasher(hasherPromise.value)}}">{{hasherPromise.value.hashName}}</a>
             {{addendum(year, positionForHasher(hasherPromise.value))}}
-            <button
-              class="btn {{#if hasherPromise.value.savingPromise.isRejected}}btn-link{{else}}btn-link{{/if}} btn-sm prevent-default"
-              {{#if hasherPromise.value.savingPromise.isPending}}disabled{{/if}}
-              on:click="removeHasher(hasherPromise.value)"
-              type="button"
-            >
-              {{#if hasherPromise.value.savingPromise.isRejected}}
-                <span class="fas fa-exclamation-triangle" title="{{hasherPromise.value.savingPromise.reason.xhr.message}}"></span>
-              {{else}}
-                {{#if(hasherPromise.value.savingPromise.isPending)}}
-                  <span aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></span>
+            {{#if session.user.canManageBored}}
+              <button
+                class="btn {{#if hasherPromise.value.savingPromise.isRejected}}btn-link{{else}}btn-link{{/if}} btn-sm prevent-default"
+                {{#if hasherPromise.value.savingPromise.isPending}}disabled{{/if}}
+                on:click="removeHasher(hasherPromise.value)"
+                type="button"
+              >
+                {{#if hasherPromise.value.savingPromise.isRejected}}
+                  <span class="fas fa-exclamation-triangle" title="{{hasherPromise.value.savingPromise.reason.xhr.message}}"></span>
                 {{else}}
-                  <span class="fas fa-times"></span>
+                  {{#if(hasherPromise.value.savingPromise.isPending)}}
+                    <span aria-hidden="true" class="spinner-border spinner-border-sm" role="status"></span>
+                  {{else}}
+                    <span class="fas fa-times"></span>
+                  {{/if}}
                 {{/if}}
-              {{/if}}
-            </button>
+              </button>
+            {{/if}}
           {{/if}}
         </li>
       {{/for}}
