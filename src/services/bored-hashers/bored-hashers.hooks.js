@@ -9,7 +9,7 @@ module.exports = {
     create: [ authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS) ],
     update: [ authenticate('jwt'), authHook.restrictTo() ],
     patch: [ authenticate('jwt'), authHook.restrictTo() ],
-    remove: [ authenticate('jwt'), authHook.restrictTo() ]
+    remove: [ authenticate('jwt'), authHook.restrictTo(authHook.WEBMASTERS) ]
   },
 
   after: {

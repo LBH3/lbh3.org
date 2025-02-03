@@ -107,6 +107,13 @@ export const ViewModel = DefineMap.extend({
       }));
     }
   },
+  removeHasher: function(hasher) {
+    const boredHasher = this.positionForHasher(hasher);
+    boredHasher.savingPromise = boredHasher.destroy();
+    boredHasher.savingPromise.then(boredHasher => {
+      boredHasher.savingPromise = null;
+    });
+  },
   routeForHasher: function(hasher) {
     const routeParams = {
       id: hasher.id,
