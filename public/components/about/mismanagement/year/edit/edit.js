@@ -47,22 +47,15 @@ export const ViewModel = DefineMap.extend({
 
   editYear: function() {
     return this.updatingYearPromise = this.hashersPromise.then(hashers => {
-      console.log('hashers:', hashers);
-      console.log('this.year.endDate:', this.year.endDate);
       const hashersToUpdate = hashers.filter(hasher => {
         return hasher.endDate === this.year.endDate
       })
-      console.log('hashersToUpdate:', hashersToUpdate);
       const updateHashersPromise = Promise.all(hashersToUpdate.map(hasher => {
         hasher.endDate = this.endDate;
         return hasher.save()
       }));
-      console.log('updateHashersPromise:', updateHashersPromise);
       return updateHashersPromise.then(updatedHashers => {
-        console.log('updatedHashers:', updatedHashers);
         this.year.endDate = this.endDate;
-        console.log('this.year:', this.year);
-        debugger;
         return this.year.save();
       });
     })
