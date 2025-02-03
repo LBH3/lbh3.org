@@ -2,6 +2,7 @@
 <can-import from="@fortawesome/fontawesome-free/css/solid.css" />
 <can-import from="~/components/alert/alert" />
 <can-import from="~/components/about/mismanagement/year/add/add" />
+<can-import from="~/components/about/mismanagement/year/edit/edit" />
 
 {{#or(hashersPromise.isPending, positionsPromise.isPending)}}
   <lbh3-alert class="d-block mt-3" message:from="'Fetching the Mismanagement…'" />
@@ -62,5 +63,7 @@
   {{#if session.user.canManageBored}}
     <hr>
     <lbh3-mismanagement-year-add year:from="year" />
+    <hr>
+    <lbh3-mismanagement-year-edit year:from="year" />
   {{/if}}
 {{/and}}
