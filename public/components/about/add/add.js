@@ -9,9 +9,6 @@ export const ViewModel = DefineMap.extend({
     set: function(creatingBoredPromise) {
       return creatingBoredPromise.then((createdBored) => {
         this.createdBored = createdBored;
-        this.endDate = '';
-        this.startDate = '';
-        this.year = '';
       });
     }
   },
@@ -38,6 +35,7 @@ export const ViewModel = DefineMap.extend({
     return `${this.ogTitle} | About | LBH3`;
   },
   year: {
+    default: new Date().getFullYear(),
     type: 'number',
   },
 
