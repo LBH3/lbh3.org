@@ -10,7 +10,7 @@
   {{#if(showSearchInNav)}}
     <li class="nav-item"><a class="{{#eq(secondaryPage, 'search')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='search'}}">Search</a></li>
   {{/if}}
-  {{#if(session.user.canManageUsers)}}
+  {{#if(session.user.canEditFutureTrails)}}
     <li class="nav-item"><a class="{{#eq(secondaryPage, 'sync')}}active{{/eq}} nav-link px-2 py-2" href="{{routeUrl page='events' secondaryPage='sync'}}">Sync</a></li>
   {{/if}}
   {{#for(yearObject of years)}}
