@@ -20,12 +20,12 @@ try {
         platform: 'Android',
         version: '6.0'
       }, {
-        'appium-version': '1.9.1',
+        'appium-version': '1.22.3',
         browserName: 'Safari',
         commandTimeout: 60,
-        deviceName: 'iPhone 7 Simulator',
+        deviceName: 'iPhone Simulator',
         platform: 'iOS',
-        version: '10.3'
+        version: '15.5'
       }, {
         browserName: 'firefox',
         commandTimeout: 60,
