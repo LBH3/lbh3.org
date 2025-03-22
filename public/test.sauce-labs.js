@@ -39,8 +39,8 @@ try {
       }, {
         browserName: 'safari',
         commandTimeout: 60,
-        platform: 'OS X 10.12',
-        version: '10'
+        platform: 'OS X 11.00',
+        version: '14'
       }],
       runInParallel: false,
       urls: [{
