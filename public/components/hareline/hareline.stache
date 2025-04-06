@@ -2,7 +2,7 @@
 <can-import from="~/components/alert/alert" />
 <can-import from="~/components/run-list/run-list" />
 
-<p class="d-print-none mt-3"><a href="mailto:trailmasters@lbh3.org">Email our Trail Masters</a> to hare a run. Note that LBH3 may suspend our trails at any time, so <strong>we might delay any run you sign up for.</strong></p>
+<p class="d-print-none mt-3"><a href="mailto:trailmasters@lbh3.org">Email our Trail Masters</a> to hare a run.</p>
 
 {{#if allEventsPromise.isPending}}
   <lbh3-alert class="d-block mt-3" message:from="'Fetching upcumming runs…'" />
