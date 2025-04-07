@@ -3,7 +3,7 @@ on: push
 jobs:
 
   test:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     strategy:
       matrix:
         node-version: [12.x]
@@ -48,7 +48,7 @@ jobs:
           SAUCE_USERNAME: ${{secrets.SAUCE_USERNAME}}
 
   lighthouse:
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-22.04
     needs: test
     if: github.ref != 'refs/heads/master'
     steps:
