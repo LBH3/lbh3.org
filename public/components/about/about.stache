@@ -48,6 +48,13 @@
           </a>
         </lbh3-require-sign-in>
       </li>
+      <li>
+        <lbh3-require-sign-in>
+          <a class="d-block py-1" href="https://lbh3-miscellaneous.s3.us-west-2.amazonaws.com/pdfs/analversary-book-40th.pdf">
+            40<sup>th</sup> Analversary Book
+          </a>
+        </lbh3-require-sign-in>
+      </li>
     </ul>
   </div>
 </div>
