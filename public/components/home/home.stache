@@ -55,15 +55,15 @@
   {{/if}}
 {{/if}}
 
-{{#if isBefore2024October6}}
+{{#if isBefore2025September28}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2024/marathon/">Support our LB&nbsp;Marathon r*cists on Sunday, October&nbsp;6<sup>th</sup>, 2024</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2025/wasted-tour/">Join us for The Wasted Tour on Saturday, September&nbsp;27<sup>th</sup>, 2025</a></p>
   </div>
 {{/if}}
 
-{{#if isBefore2023October23}}
+{{#if isBefore2025September29}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="https://docs.google.com/forms/d/e/1FAIpQLSc8QIQv59ZRa5_-rF3lvNlPJvsEzFgWdzsKArP_evNkQZmErQ/viewform?fbclid=IwAR0Hiex_k7VZQ-UwOXmOIJB2st5O5AJf_R26aGKc2JWZnDgnIrIE2ys5R1Y&pli=1">Order an LBH3 Happi Coat before Sunday, October&nbsp;22<sup>nd</sup>, 2023</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2025/memorial-service/">Remember our fallen hashers at our Hash Memorial Service on Sunday, September&nbsp;28<sup>th</sup>, 2025</a></p>
   </div>
 {{/if}}
 
