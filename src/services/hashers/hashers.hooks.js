@@ -272,7 +272,7 @@ module.exports = {
     all: [],
     find: [ attachAuthInfo, beforeFindHook ],
     get: [ attachAuthInfo ],
-    create: [ jwtAuthentication, authHook.restrictTo(authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
+    create: [ jwtAuthentication, authHook.restrictTo(authHook.GRANDMASTERS, authHook.HASH_HISTORIANS, authHook.ON_DISK, authHook.WEBMASTERS), createAndUpdateFields ],
     update: [ jwtAuthentication, authHook.restrictToUserOrPositions({ idField: 'hasherId', ownerField: 'id' }, ...boredPositions), createAndUpdateFields, makeRaw ],
     patch: [ jwtAuthentication, authHook.restrictTo() ],
     remove: [ jwtAuthentication, authHook.restrictTo() ]

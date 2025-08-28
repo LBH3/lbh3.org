@@ -74,10 +74,17 @@ const getBoredInfo = function(hook) {
       }
       if (boredPositions.includes(authHook.GRANDMASTERS)) {
         permission = Object.assign(permission, {
+          canAddHashers: true,
           canEditFutureSpecialEvents: true,
           canEditHasherInfo: true,
+          canEditPostTrailInfo: true,
+          canEditPreTrailInfo: true,
+          canExportData: true,
+          canViewCashReport: true,
           canViewDirectoryInfo: true,
-          canViewHashersEmailList: true
+          canViewHashersEmailList: true,
+          canViewOldData: true,
+          canViewRunAttendance: true
         });
       }
       if (boredPositions.includes(authHook.HASH_CASH)) {
@@ -144,6 +151,7 @@ const getBoredInfo = function(hook) {
       }
       if (boredPositions.includes(authHook.TRAILMASTERS)) {
         permission = Object.assign(permission, {
+          canEditFutureSpecialEvents: true,
           canEditFutureTrails: true,
           canEditPreTrailInfo: true,
           canExportData: true,

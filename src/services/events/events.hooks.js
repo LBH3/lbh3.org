@@ -312,6 +312,7 @@ module.exports = {
     update: [
       authenticate('jwt'),
       authHook.restrictTo(
+        authHook.GRANDMASTERS,
         authHook.HASH_FLASH,
         authHook.HASH_HISTORIANS,
         authHook.ON_DISK,
