@@ -218,7 +218,7 @@ const restrictHook = function(hook) {
   return restrictToBored(hook);
 };
 
-const restrictToBored = authHook.restrictToUserOrPositions(...boredPositions);
+const restrictToBored = authHook.restrictToUserOrPositions({}, ...boredPositions);
 
 const shouldFilterData = function(hook) {
   return new Promise(function(resolve) {

@@ -12,7 +12,7 @@ const boredPositions = [
   authHook.TRAILMASTERS,
   authHook.WEBMASTERS
 ];
-const restrictToBored = authHook.restrictToUserOrPositions(...boredPositions);
+const restrictToBored = authHook.restrictToUserOrPositions({}, ...boredPositions);
 
 const restrictHook = function(hook) {
 
