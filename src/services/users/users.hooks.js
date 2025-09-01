@@ -77,7 +77,8 @@ const getBoredInfo = function(hook) {
           canEditFutureSpecialEvents: true,
           canEditHasherInfo: true,
           canViewDirectoryInfo: true,
-          canViewHashersEmailList: true
+          canViewHashersEmailList: true,
+          canViewRunAttendance: true
         });
       }
       if (boredPositions.includes(authHook.HASH_CASH)) {
