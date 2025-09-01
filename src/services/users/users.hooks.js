@@ -144,6 +144,7 @@ const getBoredInfo = function(hook) {
       }
       if (boredPositions.includes(authHook.TRAILMASTERS)) {
         permission = Object.assign(permission, {
+          canEditFutureSpecialEvents: true,
           canEditFutureTrails: true,
           canEditPreTrailInfo: true,
           canExportData: true,
