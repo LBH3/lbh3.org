@@ -29,8 +29,8 @@ try {
       }, {
         browserName: 'firefox',
         commandTimeout: 60,
-        platform: 'Windows 7',
-        version: '48'
+        platform: 'Windows 10',
+        version: '67'
       }, {
         browserName: 'googlechrome',
         commandTimeout: 60,
