@@ -28,8 +28,8 @@ export default Component.extend({
         });
       }
     },
-    get isBefore2025September28() {
-      return new Date() < new Date('Sep 28 2025 07:00:00 UTC');
+    get isBefore2025October5() {
+      return new Date() < new Date('Oct 5 2025 19:00:00 UTC');
     },
     get isBefore2025September29() {
       return new Date() < new Date('Sep 29 2025 07:00:00 UTC');

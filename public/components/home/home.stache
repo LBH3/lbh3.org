@@ -55,9 +55,9 @@
   {{/if}}
 {{/if}}
 
-{{#if isBefore2025September28}}
+{{#if isBefore2025October5}}
   <div class="alert alert-primary mt-3" role="alert">
-    <p class="mb-0 text-center"><a class="alert-link" href="events/2025/wasted-tour/">Join us for The Wasted Tour on Saturday, September&nbsp;27<sup>th</sup>, 2025</a></p>
+    <p class="mb-0 text-center"><a class="alert-link" href="events/2025/marathon/">Support our LB&nbsp;Marathon r*cists on Sunday, October&nbsp;5<sup>th</sup>, 2025</a></p>
   </div>
 {{/if}}
 
