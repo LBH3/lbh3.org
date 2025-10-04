@@ -13,10 +13,10 @@ try {
     // https://saucelabs.com/products/supported-browsers-devices
     testSauceLabs({
       platforms: [{
-        'appium-version': '1.9.1',
+        'appium-version': '1.22.3',
         browserName: 'Chrome',
         commandTimeout: 60,
-        deviceName: 'Android Emulator',
+        deviceName: 'Android GoogleAPI Emulator',
         platform: 'Android',
         version: '6.0'
       }, {
