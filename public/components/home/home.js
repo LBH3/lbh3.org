@@ -34,8 +34,8 @@ export default Component.extend({
     get isBefore2025September29() {
       return new Date() < new Date('Sep 29 2025 07:00:00 UTC');
     },
-    get isBefore2025February2() {
-      return new Date() < new Date('Feb 2 2025 08:00:00 UTC');
+    get isBefore2026February8() {
+      return new Date() < new Date('Feb 8 2026 08:00:00 UTC');
     },
     get ogTitle() {
       return this.title;
