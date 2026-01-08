@@ -1597,6 +1597,212 @@ You can submit this form until January 26<sup>th</sup> at 6 PM. Cum to [Found �
         ]
       }
     }
+  },
+  {
+    id: 7,
+    createdAt: '2025-12-27T15:22:19.890Z',
+    updatedAt: '2025-12-27T15:22:19.890Z',
+    advertise: true,
+    advertisementMd: 'It’s erection time! Vote for members of the 2026 Bored. 🗳',
+    descriptionMd: `#### Instructions
+
+- Vote for the number of positions as noted in each category.
+- Select the checkbox or radio button next to your choice.
+- You don’t have to vote in every race.
+- <a href="https://www.lbh3.org/events/2025/?showHashit=true&showNotes=true&showOnOn=true&showScribe=true" target="_blank">Visit the Past Runs page to refresh your memory of the Best and Worst of 2025.</a>
+
+##### Write-in candidates
+
+- To add a candidate, use the search text box to find your candidate, then select their name.
+- Once their name appears next to the other candidates, select the checkbox next to their name (if it is not already checked).
+- Do not write-in a candidate whose name already appears on the ballot.
+
+You can submit this form until January 25<sup>th</sup> at 6 PM. Cum to [Found ’er Balls on February 7<sup>th</sup>](https://www.lbh3.org/events/2026/founders/) to find out the results of the Bored Erection and to celebrate the ups & downs of 2025!`,
+    endDatetime: tomorrow,
+    endedNoticeMd: 'This erection ended on January 25<sup>th</sup>. Cum to [Found ’er Balls on February 7<sup>th</sup>](https://www.lbh3.org/events/2026/founders/) to find out the results and to celebrate the ups & downs of 2025!',
+    publicKey: `
+      -----BEGIN PUBLIC KEY-----
+      MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAzs4jXfo7MUy15xt1oPDp
+      J+x9EF39rPwUiKthzPQfs+1oe/k9ccztKQo+wLvTE0VvQzsSk2qk2fklSpyASLCV
+      Mu3u2WbfblwLQItS+lOeKtH9ylIDUpASX0VaBK95VXtxELnbMvoAkCNmo9E/uMZf
+      NP+IPQULyt0D9lumrw4yl3vssetA3gmf2x5FuSdClj5wsVVbQojH8M054Agt3L80
+      AlIV5SAOrGypn8LswaZIgLc6BtnS8bPXYSSriFDF7Z8FSXga5wAHyEcXjBzrYa04
+      wGoDlPhUeBf8LVx+qUwefIbgeSt29MMaLvS7u6drkwLOwm1opsfYZcnxA30qmPhI
+      gO2UvZWMsVJLyshgx1OVg2QJ02UgKA0Erw8cUY68iBVDm5nPNYsqJx3QS53m7W7M
+      HWEZ7fN0raTWWOX+CgrzxQgreOd9L+JDmw/LkYV0uSUNXCYw8HXzbp6nZu9gjobf
+      7nINxD6WwOkttCKRljTrftPkQvBOt8VmlAG/pILF4Z1b6vteuUP0rSb4RRjI/XdS
+      wv2rqKEV4QyaO7bTAZmPl4dVvALkJ22OouuL2xQ0rWiizN32XHZaor5cUlrpbJUP
+      Y7ugiaEg+ikseA71xDSbuZSb94KoAlr2E6bkIvuZpEd9MDP2xG1HQ73h+CUtPe1o
+      9+oFFyfxSvLfXDtawwYqXHECAwEAAQ==
+      -----END PUBLIC KEY-----
+    `,
+    startDatetime: '2025-12-27T15:22:19.890Z',
+    titleMd: '2025&nbsp;Awards & 2026&nbsp;Bored&nbsp;Positions',
+    urlId: '2025',
+    year: 2025,
+    schema: {
+      awards: {
+        title: 'Awards for 2025',
+        races: [
+          {
+            id: 'best-trail',
+            title: 'Best Trail (Run) of 2025',
+            type: 'run'
+          },
+          {
+            id: 'worst-trail',
+            title: 'Worst Trail (Run) of 2025',
+            type: 'run'
+          },
+          {
+            id: 'best-on-on',
+            title: 'Best On-On of 2025',
+            type: 'on-on'
+          },
+          {
+            id: 'most-deserved-hashit',
+            title: 'Most Deserved Hashit of 2025',
+            type: 'hashit'
+          },
+          {
+            id: 'biggest-whiner',
+            title: 'Biggest Whiner of 2025',
+            type: 'hasher'
+          },
+          {
+            id: 'best-scribe',
+            title: 'Best Scribe Write-Up of 2025',
+            type: 'scribe'
+          },
+          {
+            description: 'Select one',
+            id: 'best-rookie',
+            options: [
+              { id: 9144, name: 'And The Horse You Rode In On', runs: '41' },
+              { id: 9576, name: 'Cervix-A-Lot', runs: '40 + 2 Hares' },
+              { id: 9011, name: 'Dingle all the Way', runs: '12' },
+              { id: 9642, name: 'Fuzzy Wuzzy Fucks A Bear', runs: '25' },
+              { id: 6262, name: 'Iggy Pop', runs: '43' },
+              { id: 10232, name: 'Knuckle Deep', runs: '38 + 5 Hares' }
+            ],
+            title: 'Best Rookie of 2025',
+            type: 'hasher'
+          },
+          {
+            description: 'Up to the GMs’ discretion—so be clever and fun',
+            id: 'write-in-awards',
+            title: 'Write-in Awards',
+            type: 'textarea'
+          }
+        ]
+      },
+      positions: {
+        title: '2026 Mismanagement Positions',
+        races: [
+          {
+            id: 'grandmaster',
+            maxSelection: 2,
+            options: [
+              { id: 7273, name: 'Lick Me Tender Lick Me Deep'},
+              { id: 6143, name: 'Mounds of Joy' },
+              { id: 27, name: 'Sin D Bare'},
+            ],
+            title: 'Grandmaster'
+          },
+          {
+            id: 'hash-flash',
+            maxSelection: 2,
+            options: [
+              { id: 9576, name: 'Cervix-A-Lot' },
+              { id: 5239, name: 'Hairy Twatter' },
+              { id: 18, name: 'Passing Wind' },
+            ],
+            title: 'Hash Flash'
+          },
+          {
+            id: 'on-disc',
+            maxSelection: 2,
+            options: [
+              { id: 219, name: 'Satan' }
+            ],
+            title: 'On Disc'
+          },
+          {
+            id: 'trailmaster',
+            maxSelection: 2,
+            options: [
+              { id: 7931, name: 'Don’t A Salt Me' },
+              { id: 10232, name: 'Knuckle Deep' },
+              { id: 67, name: 'Pillsbury Blow Boy' },
+            ],
+            title: 'Trailmaster'
+          },
+          {
+            id: 'brewmeister',
+            maxSelection: 2,
+            options: [
+              { id: 14, name: 'Last Train To Cuntsville' },
+              { id: 5451, name: 'You’re the Dung That I Want' }
+            ],
+            title: 'Brewmeister'
+          },
+          {
+            id: 'haberdasher',
+            maxSelection: 2,
+            options: [
+              { id: 189, name: 'Special Head'},
+              { id: 6535, name: 'Transcuntinental' },
+            ],
+            title: 'Haberdasher'
+          },
+          {
+            id: 'hash-cash',
+            maxSelection: 2,
+            options: [
+              { id: 81, name: 'Achey Breaky Fart' },
+              { id: 25, name: 'Hi-Speed Copulator' }
+            ],
+            title: 'Hash Cash'
+          },
+          {
+            id: 'munchmeister',
+            maxSelection: 2,
+            options: [
+              { id: 33, name: 'Kammonawannaleia'},
+              { id: 386, name: 'Screw Loose' },
+            ],
+            title: 'Munchmeister'
+          },
+          {
+            id: 'on-sec',
+            maxSelection: 2,
+            options: [
+              { id: 301, name: 'Snatch of the Day' },
+              { id: 7303, name: 'Yoko Anal' }
+            ],
+            title: 'On Sec'
+          },
+          {
+            id: 'recyclemeister',
+            maxSelection: 2,
+            options: [
+              { id: 3167, name: 'Dr. Strange Glove'},
+              { id: 269, name: 'Necrofishiac' },
+            ],
+            title: 'Recyclemeister'
+          },
+          {
+            id: 'webmeister',
+            maxSelection: 2,
+            options: [
+              { id: 6394, name: 'I’m Fucking Matt Damon' },
+              { id: 9011, name: 'The Looove Goat' }
+            ],
+            title: 'Webmeister'
+          }
+        ]
+      }
+    }
   }
 ];
 
