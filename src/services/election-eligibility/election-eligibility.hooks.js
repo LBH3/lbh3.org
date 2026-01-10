@@ -8,8 +8,8 @@ const beforeFindHook = function(hook) {
     return hook;
   }
 
-  // Special exception
-  if ([33, 178, 189].indexOf(hook.params.user.hasherId) > -1) {
+  // Volunteer exception
+  if ([134, 309, 6216].indexOf(hook.params.user.hasherId) > -1) {
     return hook;
   }
 
