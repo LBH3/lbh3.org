@@ -124,9 +124,10 @@
                   <p class="mb-0 text-danger">Hasher took a paper ballot (this online ballot is not counted in the results above)</p>
                 {{else}}
                   {{#if(ballot.decryptionError)}}
-                    <p class="mb-0 text-danger">{{ballot.decryptionError}}</p>
+                    <p class="mb-0 text-danger">Decryption error: {{ballot.decryptionError}}</p>
                   {{else}}
                     {{#if(ballot.decryptedBallot.errors)}}
+                      <p class="mb-0 text-danger">Decrypted ballot errors:</p>
                       <ul class="text-danger">
                         {{#for(error of decryptedBallot.errors)}}
                           <li>{{error.value}}</li>
