@@ -19,7 +19,7 @@ try {
         commandTimeout: 300,
         deviceName: 'Android GoogleAPI Emulator',
         platform: 'Android',
-        version: '8.0'
+        version: '10.0'
       }, {
         'appium-version': '1.22.3',
         browserName: 'Safari',
