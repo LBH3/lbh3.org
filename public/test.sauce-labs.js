@@ -14,12 +14,12 @@ try {
     // https://saucelabs.com/products/platform-configurator
     testSauceLabs({
       platforms: [{
-        'appium-version': '2.0.0',
+        'appium-version': '1.22.3',
         browserName: 'Chrome',
         commandTimeout: 60,
-        deviceName: 'Google Pixel 3 GoogleAPI Emulator',
+        deviceName: 'Android GoogleAPI Emulator',
         platform: 'Android',
-        version: '12.0'
+        version: '11.0'
       }, {
         'appium-version': '1.22.3',
         browserName: 'Safari',
