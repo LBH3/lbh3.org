@@ -13,6 +13,7 @@
   ],
   "scripts": {
     "build:tests": "NODE_ENV=development webpack --progress --config test.config.dev.js",
+    "build:tests:coverage": "NODE_ENV=development webpack --progress --config test.config.coverage.js",
     "build:tests:production": "NODE_ENV=production webpack --progress --config test.config.prod.js",
     "build": "rm -rf ./dist && NODE_ENV=development webpack --progress --config build.config.dev.js",
     "build:production": "rm -rf ./dist && NODE_ENV=production webpack --progress --config build.config.prod.js",
