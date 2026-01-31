@@ -23,17 +23,15 @@ jobs:
           --health-timeout 5s
           --health-retries 5
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
-      - uses: saucelabs/sauce-connect-action@v1
+      - uses: saucelabs/sauce-connect-action@v2
         with:
           username: ${{ secrets.SAUCE_USERNAME }}
           accessKey: ${{ secrets.SAUCE_ACCESS_KEY }}
-          tunnelIdentifier: ${{ steps.create-job-id.outputs.uuid }}
-          scVersion: 4.6.4
       - run: npm ci
       - run: npm run test:common
         env:
@@ -53,7 +51,7 @@ jobs:
     if: github.ref != 'refs/heads/master'
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
         with:
           fetch-depth: 1
       - name: Run review-app test
@@ -81,7 +79,7 @@ jobs:
           urls: |
             ${{ steps.review_app_test.outputs.review_app_url }}
       - name: Save results
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v4
         with:
           name: lighthouse-results
           path: '.lighthouseci' # This will save the Lighthouse results as .json files
