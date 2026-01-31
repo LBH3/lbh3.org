@@ -15,13 +15,6 @@ try {
     testSauceLabs({
       platforms: [{
         'appium-version': '1.22.3',
-        browserName: 'Chrome',
-        commandTimeout: 60,
-        deviceName: 'Android GoogleAPI Emulator',
-        platform: 'Android',
-        version: '11.0'
-      }, {
-        'appium-version': '1.22.3',
         browserName: 'Safari',
         commandTimeout: 60,
         deviceName: 'iPhone Simulator',
