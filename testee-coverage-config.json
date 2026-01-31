@@ -1,0 +1,9 @@
+{
+    "coverage": {
+      "dir": "coverage/",
+      "reporters": ["text", "html"],
+      "ignore": ["node_modules"]
+    },
+    "browsers": ["firefox"]
+  }
+  

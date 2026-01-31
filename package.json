@@ -23,6 +23,7 @@
   "scripts": {
     "build": "cd public && npm run build:production && cd ..",
     "build:tests": "cd public && npm run build:tests:production && cd ..",
+    "build:tests:coverage": "cd public && npm run build:tests:coverage && cd ..",
     "build:watch": "cd public && npm run build:watch && cd ..",
     "bundlesize": "node ./node_modules/.bin/bundlesize --config config/bundlesize.json",
     "ci": "node install-ci",
@@ -40,10 +41,13 @@
     "start:production": "npm run build && NODE_ENV=production PORT=8080 npm start",
     "test": "npm run test:common && npm run testee",
     "test:common": "npm run eslint && npm run build && npm run bundlesize && npm run test:db && npm run mocha && npm run build:tests",
+    "test:coverage": "npm run test:common:coverage && npm run testee:coverage",
+    "test:common:coverage": "npm run eslint && npm run build && npm run bundlesize && npm run test:db && npm run mocha && npm run build:tests:coverage",
     "test:db": "npm run test:db:create && npm run sequelize:migrate",
     "test:db:create": "psql -c 'drop database if exists lbh3_test;' -h localhost -U postgres && psql -c 'create database lbh3_test;' -h localhost -U postgres && psql lbh3_test < ./test/lbh3_test.dump -h localhost -U postgres -v ON_ERROR_STOP=1",
     "test:production": "npm run test:common && npm run testee:production",
     "testee": "./public/node_modules/.bin/testee public/test.html --browsers firefox --reporter Spec",
+    "testee:coverage": "./public/node_modules/.bin/testee public/test.coverage.html --coverage --config=testee-coverage-config.json",
     "testee:production": "./public/node_modules/.bin/testee public/test.production.html --browsers firefox --reporter Spec"
   },
   "dependencies": {
