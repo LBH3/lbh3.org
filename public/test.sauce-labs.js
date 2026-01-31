@@ -11,14 +11,15 @@ try {
   server.listen(3000, function() {
     // https://www.selenium.dev/documentation/legacy/desired_capabilities/
     // https://saucelabs.com/products/supported-browsers-devices
+    // https://saucelabs.com/products/platform-configurator
     testSauceLabs({
       platforms: [{
-        'appium-version': '1.22.3',
+        'appium-version': '2.0.0',
         browserName: 'Chrome',
         commandTimeout: 60,
-        deviceName: 'Android GoogleAPI Emulator',
+        deviceName: 'Google Pixel 3 GoogleAPI Emulator',
         platform: 'Android',
-        version: '6.0'
+        version: '12.0'
       }, {
         'appium-version': '1.22.3',
         browserName: 'Safari',
