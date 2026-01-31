@@ -14,11 +14,12 @@ try {
     // https://saucelabs.com/products/platform-configurator
     testSauceLabs({
       platforms: [{
+        'appium-version': '1.22.3',
         browserName: 'Chrome',
         commandTimeout: 300,
-        deviceName: 'Google Pixel.*',
-        platformName: 'Android',
-        platformVersion: '12',
+        deviceName: 'Android GoogleAPI Emulator',
+        platform: 'Android',
+        version: '6.0'
       }, {
         'appium-version': '1.22.3',
         browserName: 'Safari',
@@ -45,7 +46,7 @@ try {
       runInParallel: false,
       urls: [{
         name: 'lbh3-webpack',
-        url: 'http://localhost:3000/test.production.html?hidepassed'
+        url: 'http://127.0.0.1:3000/test.production.html?hidepassed'
       }],
       zeroAssertionsPass: false
     });
