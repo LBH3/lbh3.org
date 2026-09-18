@@ -55,19 +55,19 @@
   {{/if}}
 {{/if}}
 
-{{#if isBefore2026September27}}
+{{#if showJockMemorial}}
   <div class="alert alert-primary mt-3" role="alert">
     <p class="mb-0 text-center"><a class="alert-link" href="events/2026/jock-memorial/">Celebrate the life of Jock at his Memorial Hash and Service on Saturday, September&nbsp;26<sup>th</sup>, 2026</a></p>
   </div>
 {{/if}}
 
-{{#if isBefore2026October11}}
+{{#if showMarathon}}
   <div class="alert alert-primary mt-3" role="alert">
     <p class="mb-0 text-center"><a class="alert-link" href="events/2026/marathon/">Support our LB&nbsp;Marathon r*cists on Sunday, October&nbsp;11<sup>th</sup>, 2026</a></p>
   </div>
 {{/if}}
 
-{{#if isBefore2027February14}}
+{{#if showFoundersBalls}}
   <div class="alert alert-primary mt-3" role="alert">
     <p class="mb-0 text-center"><a class="alert-link" href="events/2027/founders/">Join us for our 42<sup>nd</sup> Found&nbsp;’er&nbsp;Balls on Saturday, February 13<sup>th</sup>, 2027</a></p>
   </div>
