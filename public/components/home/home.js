@@ -28,14 +28,14 @@ export default Component.extend({
         });
       }
     },
-    get isBefore2025October5() {
-      return new Date() < new Date('Oct 5 2025 19:00:00 UTC');
+    get isBefore2026October11() {
+      return new Date() < new Date('Oct 11 2026 19:00:00 UTC');
     },
-    get isBefore2025September29() {
-      return new Date() < new Date('Sep 29 2025 07:00:00 UTC');
+    get isBefore2026September27() {
+      return new Date() < new Date('Sep 27 2026 07:00:00 UTC');
     },
-    get isBefore2026February8() {
-      return new Date() < new Date('Feb 8 2026 08:00:00 UTC');
+    get isBefore2027February14() {
+      return new Date() < new Date('Feb 14 2027 08:00:00 UTC');
     },
     get ogTitle() {
       return this.title;
