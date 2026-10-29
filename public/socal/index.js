@@ -171,10 +171,26 @@ const promises = calendars.map(calendar => {
 }).map(url => {
   return fetch(url).then(response => response.json());
 });
+// Returns the calendar response if it loaded, or null (with a warning) if it
+// didn’t, so one deleted or private calendar can’t blank the whole page.
+function loadedCalendar(result, label) {
+  const value = result.status === 'fulfilled' ? result.value : null;
+  if (value && Array.isArray(value.items)) {
+    return value;
+  }
+  const reason = result.status === 'rejected' ? result.reason : (value && value.error && value.error.message);
+  console.warn(`Skipping calendar “${label}”:`, reason || 'no items in response');
+  return null;
+}
+
 Promise.allSettled(promises).then((data) => {
   const allEvents = [];
   const eventsByDay = {};
-  data.forEach(({ value: calendar }, index) => {
+  data.forEach((result, index) => {
+    const calendar = loadedCalendar(result, calendars[index].summary);
+    if (!calendar) {
+      return;
+    }
     calendar.items.filter(item => {
       // Filter out canceled events that don’t have start dates
       return !!item.start;
@@ -194,24 +210,33 @@ Promise.allSettled(promises).then((data) => {
       eventsByDay[startDay].push(item);
     });
   });
-  const recurringEvents = allEvents.filter(event => {
+  const recurringParents = allEvents.filter(event => {
     return event.recurrence;
-  }).map(event => {
+  });
+  const recurringEvents = recurringParents.map(event => {
     return `https://www.googleapis.com/calendar/v3/calendars/${event[computedSymbol].calendarData.id}/events/${event.id}/instances?calendarId=${event[computedSymbol].calendarData.id}&sanitizeHtml=true&timeMax=${endOfNextYear.toISOString()}&timeMin=${beginningOfTheWeek.toISOString()}&key=AIzaSyBNlYH01_9Hc5S1J9vuFmu2nUqBZJNAXxs`;
   }).map(url => {
     return fetch(url).then(response => response.json());
   });
   Promise.allSettled(recurringEvents).then((data) => {
-    data.forEach(({ value: calendar }) => {
-      calendar.items.forEach(item => {
+    data.forEach((result, index) => {
+      const parentData = recurringParents[index][computedSymbol].calendarData;
+      const calendar = loadedCalendar(result, `${parentData.summary} (recurring)`);
+      if (!calendar) {
+        return;
+      }
+      calendar.items.filter(item => {
+        // Filter out canceled instances that don’t have start dates
+        return !!item.start;
+      }).forEach(item => {
         const endDay = item.end.dateTime ? item.end.dateTime.slice(0, 10) : item.end.date;
         const startDay = item.start.dateTime ? item.start.dateTime.slice(0, 10) : item.start.date;
         if (eventsByDay[startDay] === undefined) {
           eventsByDay[startDay] = [];
         }
         const calendarData = calendars.find(calendarItem => {
-          return item.organizer.email === calendarItem.id;
-        });
+          return item.organizer && item.organizer.email === calendarItem.id;
+        }) || parentData;
         item[computedSymbol] = {
           calendar,
           calendarData,
